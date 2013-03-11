@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mijn eenvoudige hobby enquête</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0-beta.1/jquery.mobile-1.3.0-beta.1.css" />
+<link rel='stylesheet' href='/theme.css'>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.0-beta.1/jquery.mobile-1.3.0-beta.1.js"></script>
+<script src='/js/jquery.flexibleArea.js'></script>
+<script type="text/javascript" src="/js/jquery.jqplot.min.js"></script>
+<script class="include" type="text/javascript" src="/js/jqBarGraph.js"></script>
+<!-- jQuery.event.props.push('dataTransfer'); -->
+<script>
+	$(document).ready(function() { $.getScript('/ajax/'); });
+</script>
+</head>
+<body>
+	<div data-role="page" id="dashboard">
+		<div data-role="header">
+			<h1>Mijn eenvoudige hobby enquête</h1>
+		</div>
+		<!-- /header -->
+		<div data-role="content" id='y-body'></div>
+		<!-- /content -->
+		<div data-role="footer" data-theme="e">
+			<h1>Copyright &copy; 2013</h1>
+		</div>
+        <!-- /footer -->
+	</div>
+	<!-- /page -->
+</body>
+</html>
