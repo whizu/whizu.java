@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/whiz&apos;ui-client"/>
 	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-webapp-9.0.0.M3.jar"/>
 	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-server-9.0.0.M3.jar"/>
 	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-annotations-9.0.0.M3.jar"/>
@@ -21,7 +20,6 @@
 	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-util-9.0.0.M3.jar"/>
 	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-xml-9.0.0.M3.jar"/>
 	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/servlet-api-3.0.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/whiz&apos;ui-server"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
