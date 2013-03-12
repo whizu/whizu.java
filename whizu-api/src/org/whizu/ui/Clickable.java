@@ -25,6 +25,7 @@ package org.whizu.ui;
 
 /**
  * @author Rudy D'hauwe
+ * $
  */
 public interface Clickable {
 

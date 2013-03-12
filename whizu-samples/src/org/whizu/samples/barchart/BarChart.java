@@ -25,13 +25,13 @@ package org.whizu.samples.barchart;
 
 import java.util.Date;
 
-import org.whizu.Application;
-import org.whizu.ClickListener;
-import org.whizu.Document;
-import org.whizu.Form;
-import org.whizu.Label;
-import org.whizu.Layout;
-import org.whizu.UI;
+import org.whizu.ui.Application;
+import org.whizu.ui.ClickListener;
+import org.whizu.ui.Document;
+import org.whizu.ui.Form;
+import org.whizu.ui.Label;
+import org.whizu.ui.Layout;
+import org.whizu.ui.UI;
 import org.whizu.value.StringValue;
 
 public class BarChart implements Application {
