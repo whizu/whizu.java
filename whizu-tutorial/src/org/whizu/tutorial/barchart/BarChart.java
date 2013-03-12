@@ -38,7 +38,7 @@ public class BarChart implements Application {
 
 	@Override
 	public String getTitle() {
-		return "Mijn eenvoudige hobby enquête!";
+		return "My barchart tutorial";
 	}
 
 	@Override
