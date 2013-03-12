@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.samples.barchart;
+package org.whizu.tutorial.helloworld;
 
 import java.util.Date;
 
@@ -34,7 +34,14 @@ import org.whizu.ui.Layout;
 import org.whizu.ui.UI;
 import org.whizu.value.StringValue;
 
-public class BarChart implements Application {
+public class HelloWorld implements Application {
+
+	public static void main(String[] args) {
+		try {
+			new MyServer().run();
+		} finally {
+		}
+	}
 
 	@Override
 	public String getTitle() {
@@ -43,25 +50,23 @@ public class BarChart implements Application {
 
 	@Override
 	public void init(final UI ui) {
-		// model
+		//model
 		final StringValue antwoord = new StringValue("Mijn hobby is...");
 		final StringValue aantal = new StringValue("aantal");
 		aantal.setValue("0");
-
-		// user interface
+		
+		//user interface
 		Document document = ui.getDocument();
 		Layout layout = ui.createHorizontalLayout();
-
+		
 		Layout left = ui.createCssLayout();
 		left.css("left-column");
-		left.add(ui.createLabel("Welkom op deze eenvoudige rondvraag.").css(
-				"tekst"));
-		left.add(ui.createLabel("Het aantal reeds ontvangen antwoorden is:")
-				.css("tekst"));
+		left.add(ui.createLabel("Welkom op deze eenvoudige rondvraag.").css("tekst"));
+		left.add(ui.createLabel("Het aantal reeds ontvangen antwoorden is:").css("tekst"));
 		left.add(ui.createLabel(aantal).css("highlight"));
 		final Layout graph = ui.createCssLayout();
 		left.add(graph);
-
+		
 		final Layout history = ui.createVerticalLayout();
 		Layout right = ui.createCssLayout();
 		right.css("right-column");
@@ -77,34 +82,29 @@ public class BarChart implements Application {
 			@Override
 			public void click() {
 				/*
-				 * for (int i=0; i<400; i++) {
-				 * history.add(ui.createLabel("het domme Vaadin-killertje")); }
-				 */
-				aantal.inc();
-				if (antwoord.getValue().length() > 10) {
-					lang++;
-				} else {
-					kort++;
+				for (int i=0; i<400; i++) {
+					history.add(ui.createLabel("het domme Vaadin-killertje"));
 				}
+				*/
+				aantal.inc();
+				if (antwoord.getValue().length() > 10) { lang++; } else { kort++; }
 				Layout detail = ui.createVerticalLayout();
-				detail.add(ui.createLabel(new Date().toString()).css(
-						"detail-date"));
+				detail.add(ui.createLabel(new Date().toString()).css("detail-date"));
 				detail.add(ui.createLabel(antwoord.getValue()));
 				detail.css("detail");
 				history.prepend(detail);
 				antwoord.clear();
 				graph.empty();
-				graph.add(ui.createBarChart(new String[] { "So cool",
-						"So not cool" }, new Integer[] { kort, lang }));
+				graph.add(ui.createBarChart(new String[] { "So cool", "So not cool" }, new Integer[] { kort, lang }));
 			}
 		});
 		form.add(button);
 		right.add(form);
 		right.add(history);
-
+		
 		layout.add(left);
 		layout.add(right);
-
+		
 		document.add(layout);
 	}
 }
