@@ -21,11 +21,21 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.ui;
+package org.whizu.runtime;
+
+import org.whizu.html.Html;
+import org.whizu.html.NonVoid;
+import org.whizu.ui.Form;
 
 
-/**
- * @author Rudy D'hauwe
- */
-public interface Page {
+
+class FormImpl extends CompositeImpl implements Form {
+
+	public Html create() {
+		//isRendered = true;
+		Html result = NonVoid.form(getId()).css(style).attr("action", "").add(componentList);
+		String fct= "'submit', function(e) { e.stopPropagation(); e.preventDefault(); $(this).children().last().trigger('click'); }";
+		jQuery(this).callunquoted("bind", fct);
+		return result;
+	}
 }
