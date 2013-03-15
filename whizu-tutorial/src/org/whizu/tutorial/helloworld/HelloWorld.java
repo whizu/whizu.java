@@ -34,6 +34,9 @@ import org.whizu.ui.Layout;
 import org.whizu.ui.UI;
 import org.whizu.value.StringValue;
 
+/**
+ * @author Rudy D'hauwe
+ */
 public class HelloWorld implements Application {
 
 	public static void main(String[] args) {
