@@ -22,5 +22,6 @@
 	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/servlet-api-3.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-api"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/whizu-server"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
