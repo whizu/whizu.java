@@ -53,7 +53,7 @@ public class StringValue extends AbstractValue<String> {
 		setValue("");
 	}
 
-	public void inc() {
+	public void increment() {
 		setValue(""+(Integer.parseInt(getValue())+1));
 	}	
 }

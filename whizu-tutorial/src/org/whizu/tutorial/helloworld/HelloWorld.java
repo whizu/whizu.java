@@ -41,56 +41,49 @@ public class HelloWorld implements Application {
 
 	@Override
 	public String getTitle() {
-		return "Mijn eenvoudige hobby enquête";
+		return "Hello World";
 	}
 
 	@Override
 	public void init(final UI ui) {
 		//model
-		final StringValue antwoord = new StringValue("Mijn hobby is...");
+		final StringValue message = new StringValue("message");
 		final StringValue aantal = new StringValue("aantal");
 		aantal.setValue("0");
-		
+
+
 		//user interface
 		Document document = ui.getDocument();
+		final Layout history = ui.createVerticalLayout();
 		Layout layout = ui.createHorizontalLayout();
 		
-		Layout left = ui.createCssLayout();
+		Layout left = ui.createVerticalLayout();
 		left.css("left-column");
-		left.add(ui.createLabel("Welkom op deze eenvoudige rondvraag.").css("tekst"));
-		left.add(ui.createLabel("Het aantal reeds ontvangen antwoorden is:").css("tekst"));
-		left.add(ui.createLabel(aantal).css("highlight"));
-		final Layout graph = ui.createCssLayout();
-		left.add(graph);
-		
-		final Layout history = ui.createVerticalLayout();
-		Layout right = ui.createCssLayout();
-		right.css("right-column");
-		right.add(ui.createLabel("Wat is jouw favoriete hobby?"));
+		left.add(ui.createLabel("Welcome to your very first meet and greet with Whizu."));
+		left.add(ui.createLabel("Say hello and allow for Whizu to echo your words..."));
 		Form form = ui.createForm();
-		form.add(ui.createTextField(antwoord));
+		form.add(ui.createTextField(message).css("message"));
 		form.css("form");
-		Label button = ui.createLabel("Verzenden").css("submit-button");
+		Label button = ui.createLabel("Submit").css("submit-button");
 		button.addClickListener(new ClickListener() {
-			int kort = 0;
-			int lang = 0;
 
 			@Override
 			public void click() {
-				aantal.inc();
-				if (antwoord.getValue().length() > 10) { lang++; } else { kort++; }
+				aantal.increment();
 				Layout detail = ui.createVerticalLayout();
 				detail.add(ui.createLabel(new Date().toString()).css("detail-date"));
-				detail.add(ui.createLabel(antwoord.getValue()));
+				detail.add(ui.createLabel(message.getValue()));
 				detail.css("detail");
 				history.prepend(detail);
-				antwoord.clear();
-				graph.empty();
-				graph.add(ui.createBarChart(new String[] { "So cool", "So not cool" }, new Integer[] { kort, lang }));
+				message.clear();
 			}
 		});
 		form.add(button);
-		right.add(form);
+		left.add(form);
+
+		Layout right = ui.createVerticalLayout();
+		right.css("right-column");
+		right.add(ui.createLabel("Thank you for submitting $1 comments.", aantal).css("tekst"));
 		right.add(history);
 		
 		layout.add(left);

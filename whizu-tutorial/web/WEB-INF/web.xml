@@ -7,7 +7,7 @@
 		<init-param>
 			<description>Script application class to start</description>
 			<param-name>application</param-name>
-			<param-value>org.whizu.tutorial.helloworld.HelloWorld</param-value>
+			<param-value>org.whizu.tutorial.barchart.BarChart</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>

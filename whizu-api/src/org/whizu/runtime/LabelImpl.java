@@ -30,6 +30,7 @@ import org.whizu.html.NonVoid;
 import org.whizu.script.Function;
 import org.whizu.script.JQuery;
 import org.whizu.ui.ClickListener;
+import org.whizu.ui.Component;
 import org.whizu.ui.Label;
 import org.whizu.value.StringValue;
 
@@ -61,6 +62,13 @@ class LabelImpl extends ComponentImpl implements Label {
 				jQuery(LabelImpl.this).empty().append(text);
 			}
 		});
+	}
+
+	public LabelImpl(String t, Component arg) {
+		ComponentImpl impl = (ComponentImpl) arg;
+		//System.out.println("replacing $1 " + impl.getMarkup());
+		t = t.replace("$1", impl.getMarkup());
+		this.text = t;
 	}
 
 	public void addClickListener(ClickListener listener) {

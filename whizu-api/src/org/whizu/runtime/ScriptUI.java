@@ -29,6 +29,7 @@ import org.whizu.script.Session;
 import org.whizu.ui.BarChart;
 import org.whizu.ui.Button;
 import org.whizu.ui.ClickListener;
+import org.whizu.ui.Component;
 import org.whizu.ui.Dialog;
 import org.whizu.ui.Document;
 import org.whizu.ui.Form;
@@ -47,6 +48,7 @@ import org.whizu.ui.VirtualContainer;
 import org.whizu.ui.Widget;
 import org.whizu.ui.Window;
 import org.whizu.value.StringValue;
+import org.whizu.value.Value;
 
 /**
  * @author Rudy D'hauwe
@@ -196,5 +198,16 @@ public class ScriptUI implements UI {
 	@Override
 	public void openWindow(View wnd) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Label createLabel(String text, StringValue arg) {
+		Label valueLabel = createLabel(arg);
+		valueLabel.css("teller");
+		return createLabel(text, valueLabel);
+	}
+
+	private Label createLabel(String text, Component arg) {
+		return new LabelImpl(text, arg);
 	}
 }

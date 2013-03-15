@@ -42,4 +42,6 @@ public interface UI extends ViewFactory {
 	public Label createLabel(StringValue aantal);
 
 	public BarChart createBarChart(String[] x, Integer[] y);
+
+	public Label createLabel(String text, StringValue arg);
 }

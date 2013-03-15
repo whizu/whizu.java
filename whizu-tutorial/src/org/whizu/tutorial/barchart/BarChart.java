@@ -77,7 +77,7 @@ public class BarChart implements Application {
 
 			@Override
 			public void click() {
-				aantal.inc();
+				aantal.increment();
 				if (antwoord.getValue().length() > 10) { lang++; } else { kort++; }
 				Layout detail = ui.createVerticalLayout();
 				detail.add(ui.createLabel(new Date().toString()).css("detail-date"));
