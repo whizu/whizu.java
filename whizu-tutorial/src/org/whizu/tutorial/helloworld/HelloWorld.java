@@ -39,13 +39,6 @@ import org.whizu.value.StringValue;
  */
 public class HelloWorld implements Application {
 
-	public static void main(String[] args) {
-		try {
-			new MyServer().run();
-		} finally {
-		}
-	}
-
 	@Override
 	public String getTitle() {
 		return "Mijn eenvoudige hobby enquête";
@@ -84,11 +77,6 @@ public class HelloWorld implements Application {
 
 			@Override
 			public void click() {
-				/*
-				for (int i=0; i<400; i++) {
-					history.add(ui.createLabel("het domme Vaadin-killertje"));
-				}
-				*/
 				aantal.inc();
 				if (antwoord.getValue().length() > 10) { lang++; } else { kort++; }
 				Layout detail = ui.createVerticalLayout();
