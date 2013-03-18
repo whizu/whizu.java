@@ -38,7 +38,7 @@ class TableImpl extends ComponentImpl implements Table {
 
 	private String title;
 
-	private List<String> columnList = new ArrayList<>();
+	private List<String> columnList = new ArrayList<String>();
 
 	private Map<Object, Widget[]> rows = new HashMap<Object, Widget[]>();
 
