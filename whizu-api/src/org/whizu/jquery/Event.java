@@ -88,7 +88,7 @@ public class Event {
 
 	public static final Event UNLOAD = new Event("unload");
 
-	private final String name;
+	private String name;
 
 	public Event(String name) {
 		this.name = name;
