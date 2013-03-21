@@ -24,7 +24,7 @@
 package org.whizu.runtime;
 
 import org.whizu.html.Html;
-import org.whizu.script.Function;
+import org.whizu.jquery.Function;
 
 class AbsoluteLayoutImpl extends LayoutImpl {
 

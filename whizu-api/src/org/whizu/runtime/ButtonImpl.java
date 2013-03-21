@@ -24,8 +24,8 @@
 package org.whizu.runtime;
 
 import org.whizu.html.NonVoid;
-import org.whizu.script.Function;
-import org.whizu.script.JQuery;
+import org.whizu.jquery.Function;
+import org.whizu.jquery.JQuery;
 import org.whizu.ui.Button;
 import org.whizu.ui.ClickListener;
 

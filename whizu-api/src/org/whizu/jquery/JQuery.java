@@ -21,17 +21,53 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.script;
+package org.whizu.jquery;
 
-/**
- */
-public interface EventHandler {
+public interface JQuery {
 
-	public String getId();
+	public abstract JQuery addClass(String style);
 
-	public void handleEvent();
-	
-	//public void handleEvent(Event event);
-	
-	//public Element this();
+	public abstract JQuery append(String arg);
+
+	public abstract JQuery button();
+
+	public abstract JQuery call(String function);
+
+	public abstract JQuery call(String function, String arg);
+
+	public abstract JQuery call(String function, String arg0, String... args);
+
+	public abstract JQuery callunquoted(String function, String arglist);
+
+	public abstract JQuery click(Function function);
+
+	public abstract JQuery closest(String name);
+
+	public abstract JQuery concat(String... js);
+
+	public abstract JQuery document();
+
+	public abstract JQuery empty();
+
+	public abstract JQuery find(String selector);
+
+	public abstract JQuery get(String url, Function data, Function callback, String type);
+
+	public abstract JQuery html(String arg);
+
+	public abstract JQuery prepend(String arg);
+
+	public abstract JQuery remove();
+
+	public abstract JQuery serialize();
+
+	public abstract JQuery text(String arg);
+
+	public abstract JQuery toggle();
+
+	public abstract String toJavaScript();
+
+	public abstract JQuery trigger(String event);
+
+	public abstract JQuery val(String arg);
 }

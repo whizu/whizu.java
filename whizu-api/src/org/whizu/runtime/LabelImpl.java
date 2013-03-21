@@ -27,8 +27,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.whizu.html.NonVoid;
-import org.whizu.script.Function;
-import org.whizu.script.JQuery;
+import org.whizu.jquery.Function;
+import org.whizu.jquery.JQuery;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Component;
 import org.whizu.ui.Label;

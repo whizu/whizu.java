@@ -21,14 +21,12 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.script;
+package org.whizu.jquery;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Input {
+public interface Identity {
 
 	public String getId();
-
-	public void parseString(String value);
 }

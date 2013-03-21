@@ -28,7 +28,7 @@ import java.beans.PropertyChangeListener;
 
 import org.whizu.html.Html;
 import org.whizu.html.NonVoid;
-import org.whizu.script.Input;
+import org.whizu.jquery.Input;
 import org.whizu.ui.TextField;
 import org.whizu.value.StringValue;
 

@@ -21,8 +21,25 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.script;
+package org.whizu.jquery;
 
-public interface Element {
+public interface Session {
 
+	public abstract void addClickListener(EventHandler listener);
+
+	public abstract void addInput(Input input);
+
+	public abstract Object getAttribute(String name);
+
+	public abstract EventHandler getEventHandler(String id);
+
+	public abstract Input getInput(String id);
+
+	public abstract int getSessionCount();
+
+	public abstract void handleEvent(String id);
+
+	public abstract String next();
+
+	public abstract void setAttribute(String name, Object value);
 }

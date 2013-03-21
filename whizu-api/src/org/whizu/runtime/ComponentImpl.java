@@ -26,11 +26,11 @@ package org.whizu.runtime;
 import org.whizu.html.Html;
 import org.whizu.html.NonVoid;
 import org.whizu.html.Renderable;
-import org.whizu.script.Identity;
-import org.whizu.script.JQuery;
-import org.whizu.script.Request;
-import org.whizu.script.RequestContext;
-import org.whizu.script.Session;
+import org.whizu.jquery.Identity;
+import org.whizu.jquery.JQuery;
+import org.whizu.jquery.Request;
+import org.whizu.jquery.RequestContext;
+import org.whizu.jquery.Session;
 import org.whizu.ui.Component;
 
 /**

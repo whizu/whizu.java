@@ -23,6 +23,128 @@
  *******************************************************************************/
 package org.whizu.server;
 
-public class WhizuServlet {
+import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.whizu.jquery.Input;
+import org.whizu.jquery.Request;
+import org.whizu.jquery.RequestContext;
+import org.whizu.jquery.Session;
+import org.whizu.runtime.ScriptUI;
+import org.whizu.ui.Application;
+import org.whizu.ui.UI;
+
+/**
+ * 
+ */
+public class WhizuServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 520182899630886403L;
+
+	private static final String WHIZ_SESSION = "whiz-session";
+
+	// must be in session (per user)
+	private UI ui;
+
+	// not in session (shared across users)
+	private Application application;
+
+	// session.getAttribute("ui") == null ?
+	private boolean setup = false;
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		try {
+			RequestContext.init(new RequestContext() {
+				
+				@Override
+				protected final Request getRequestImpl() {
+					return RequestImpl.get();
+				}
+			});
+			String className = config.getInitParameter("application");
+			@SuppressWarnings("unchecked")
+			Class<Application> clazz = (Class<Application>) Class.forName(className);
+			this.application = clazz.newInstance();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} finally {
+		}
+	}
+
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
+		long start = System.currentTimeMillis();
+		try {
+			HttpSession session = request.getSession();
+			Session userSession = assureUserSession(session);
+			show(request.getParameterMap());
+			String id = request.getParameter("id");
+			if (id == null) {
+				System.out.println("running setup:" + request.getRequestURI());
+				this.setup();
+			} else {
+				userSession.handleEvent(id);
+			}
+		} finally {
+			try {
+				String script = RequestImpl.get().finish();
+				long end = System.currentTimeMillis();
+				System.out.println("Server side completed in " + (end - start) + "ms");
+				System.out.println("Sending script- " + script);
+				response.getWriter().print(script);
+				response.getWriter().close();
+			} catch (Exception exc) {
+				exc.printStackTrace();
+			}
+		}
+	}
+
+	private Session assureUserSession(HttpSession session) {
+		Session us = (Session) session.getAttribute(WHIZ_SESSION);
+		if (us == null) {
+			us = new SessionImpl();
+			session.setAttribute(WHIZ_SESSION, us);
+		}
+		RequestImpl.get().setSession(us);
+		return us;
+	}
+
+	private void show(Map<String, String[]> parameterMap) {
+		Set<String> keys = parameterMap.keySet();
+		for (String key : keys) {
+			System.out.println("P:" + key + "=" + parameterMap.get(key)[0]);
+			Session userSession = RequestImpl.get().getSession();
+			Input editable = userSession.getInput(key);
+			if (editable != null) {
+				System.out.println("updating editable server-side " + editable);
+				editable.parseString(parameterMap.get(key)[0]);
+			}
+		}
+	}
+
+	private void setup() {
+		if (!setup) {
+			ui = new ScriptUI();
+			application.init(ui);
+			//setup = true;
+		} else {
+			// another user session
+			throw new IllegalStateException("Application already setup"); //recreate user interface?
+			//TODO exceptions should be visible in browser window in development mode
+		}
+	}
 }

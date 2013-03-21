@@ -21,25 +21,19 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.script;
+package org.whizu.jquery;
 
-public interface Session {
+public abstract class RequestContext {
 
-	public abstract void addClickListener(EventHandler listener);
+	private static RequestContext INSTANCE;
 
-	public abstract void addInput(Input input);
-
-	public abstract Object getAttribute(String name);
-
-	public abstract EventHandler getEventHandler(String id);
-
-	public abstract Input getInput(String id);
-
-	public abstract int getSessionCount();
-
-	public abstract void handleEvent(String id);
-
-	public abstract String next();
-
-	public abstract void setAttribute(String name, Object value);
+	public static void init(RequestContext instance) {
+		INSTANCE = instance;
+	}
+	
+	public static final Request getRequest() {
+		return INSTANCE.getRequestImpl();
+	}
+	
+	protected abstract Request getRequestImpl();
 }

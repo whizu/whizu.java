@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.whizu.html.Html;
-import org.whizu.script.Identity;
+import org.whizu.jquery.Identity;
 import org.whizu.ui.Composite;
 import org.whizu.ui.Widget;
 

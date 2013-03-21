@@ -21,19 +21,17 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.script;
+package org.whizu.jquery;
 
-public abstract class Function {
+/**
+ */
+public interface EventHandler {
 
-	public String params;
+	public String getId();
 
-	public Function() {
-		this.params = "event";
-	}
+	public void handleEvent();
 	
-	public Function(String params) {
-		this.params = params;
-	}
-
-	public abstract void execute();
+	//public void handleEvent(Event event);
+	
+	//public Element this();
 }

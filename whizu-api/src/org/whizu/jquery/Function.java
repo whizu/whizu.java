@@ -21,12 +21,19 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.script;
+package org.whizu.jquery;
 
-/**
- * @author Rudy D'hauwe
- */
-public interface Identity {
+public abstract class Function {
 
-	public String getId();
+	public String params;
+
+	public Function() {
+		this.params = "event";
+	}
+	
+	public Function(String params) {
+		this.params = params;
+	}
+
+	public abstract void execute();
 }

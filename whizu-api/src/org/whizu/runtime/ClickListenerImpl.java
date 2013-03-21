@@ -23,10 +23,10 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
-import org.whizu.script.EventHandler;
-import org.whizu.script.Request;
-import org.whizu.script.RequestContext;
-import org.whizu.script.Session;
+import org.whizu.jquery.EventHandler;
+import org.whizu.jquery.Request;
+import org.whizu.jquery.RequestContext;
+import org.whizu.jquery.Session;
 import org.whizu.ui.ClickListener;
 
 /**

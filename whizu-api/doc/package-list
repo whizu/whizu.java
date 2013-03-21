@@ -1,5 +1,6 @@
 org.whizu.html
+org.whizu.jquery
 org.whizu.runtime
-org.whizu.script
+org.whizu.server
 org.whizu.ui
 org.whizu.value

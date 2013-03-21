@@ -21,19 +21,14 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.script;
+package org.whizu.jquery;
 
-public abstract class RequestContext {
+/**
+ * @author Rudy D'hauwe
+ */
+public interface Input {
 
-	private static RequestContext INSTANCE;
+	public String getId();
 
-	public static void init(RequestContext instance) {
-		INSTANCE = instance;
-	}
-	
-	public static final Request getRequest() {
-		return INSTANCE.getRequestImpl();
-	}
-	
-	protected abstract Request getRequestImpl();
+	public void parseString(String value);
 }
