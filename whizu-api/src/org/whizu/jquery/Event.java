@@ -88,7 +88,7 @@ public class Event {
 
 	public static final Event UNLOAD = new Event("unload");
 
-	public final String name;
+	private final String name;
 
 	public Event(String name) {
 		this.name = name;
@@ -105,12 +105,12 @@ public class Event {
 	}
 
 	/**
-	 * For key or mouse events, the event.which property indicates the specific
-	 * key or button that was pressed. It normalizes event.keyCode and
-	 * event.charCode. It is recommended to watch event.which for keyboard key
-	 * input. The event.which property also normalizes button presses (mousedown
-	 * and mouseup events), reporting 1 for left button, 2 for middle, and 3 for
-	 * right. Use event.which instead of event.button.
+	 * For key or mouse events, the specific key or button that was pressed. It
+	 * normalizes event.keyCode and event.charCode. It is recommended to watch
+	 * event.which for keyboard key input. The event.which property also
+	 * normalizes button presses (mousedown and mouseup events), reporting 1 for
+	 * left button, 2 for middle, and 3 for right. Use event.which instead of
+	 * event.button.
 	 * 
 	 * @see <a href='http://api.jquery.com/event.which'>jQuery's event.which</a>
 	 */
