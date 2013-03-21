@@ -24,11 +24,15 @@
 package org.whizu.script;
 
 /**
- * @author Rudy D'hauwe
+ * 
  */
 public interface EventHandler {
 
 	public void handleEvent();
 	
+	//public void handleEvent(Event event);
+	
 	public String getId();
+	
+	//public Element this();
 }

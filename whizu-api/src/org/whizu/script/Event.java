@@ -28,11 +28,8 @@ package org.whizu.script;
  * The event object is guaranteed to be passed to the event handler (no checks
  * for window.event required). It normalizes the target, relatedTarget, which,
  * metaKey and pageX/Y properties and provides both stopPropagation() and
- * preventDefault() methods.
- * 
- * Those properties are all documented, and accompanied by examples, on jQuery's
- * <a href="http://api.jquery.com/category/events/event-object">Event object</a>
- * page.
+ * preventDefault() methods. Those properties are all documented, and
+ * accompanied by examples, on jQuery's Event Object page.
  * 
  * The standard events in the Document Object Model are: blur, focus, load,
  * resize, scroll, unload, beforeunload, click, dblclick, mousedown, mouseup,
@@ -43,8 +40,8 @@ package org.whizu.script;
  * element, and it is propagated up the DOM tree to which that element belongs,
  * if any.
  * 
- * @see http://api.jquery.com/Types/#Event
- * @see http://api.jquery.com/category/events/event-object
+ * @see <a href='http://api.jquery.com/category/events/event-object'>jQuery's
+ *      Event Object</a>
  */
 public class Event {
 
@@ -96,5 +93,30 @@ public class Event {
 
 	public Event(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * The current DOM element within the event bubbling phase. This property
+	 * will typically be equal to the <i>this</i> of the function.
+	 * 
+	 * @see <a href='http://api.jquery.com/event.currentTarget'>jQuery's
+	 *      event.currentTarget</a>
+	 */
+	public Element currentTarget() {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * For key or mouse events, the event.which property indicates the specific
+	 * key or button that was pressed. It normalizes event.keyCode and
+	 * event.charCode. It is recommended to watch event.which for keyboard key
+	 * input. The event.which property also normalizes button presses (mousedown
+	 * and mouseup events), reporting 1 for left button, 2 for middle, and 3 for
+	 * right. Use event.which instead of event.button.
+	 * 
+	 * @see <a href='http://api.jquery.com/event.which'>jQuery's event.which</a>
+	 */
+	public Number which() {
+		throw new UnsupportedOperationException();
 	}
 }
