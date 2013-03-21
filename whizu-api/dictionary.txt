@@ -1,0 +1,14 @@
+mousedown
+mouseup
+beforeunload
+dblclick
+mousemove
+mouseover
+mouseenter
+mouseout
+mouseleave
+keydown
+keypress
+keyup
+rudy
+whizu
