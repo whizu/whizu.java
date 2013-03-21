@@ -31,8 +31,8 @@ package org.whizu.script;
  * preventDefault() methods.
  * 
  * Those properties are all documented, and accompanied by examples, on jQuery's
- * <a href="http://api.jquery.com/category/events/event-object">Event object
- * page</a>.
+ * <a href="http://api.jquery.com/category/events/event-object">Event object</a>
+ * page.
  * 
  * The standard events in the Document Object Model are: blur, focus, load,
  * resize, scroll, unload, beforeunload, click, dblclick, mousedown, mouseup,
@@ -45,8 +45,6 @@ package org.whizu.script;
  * 
  * @see http://api.jquery.com/Types/#Event
  * @see http://api.jquery.com/category/events/event-object
- * @author Rudy D'hauwe <rdhauwe@whizu.org>
- * @version $Rev$
  */
 public class Event {
 
