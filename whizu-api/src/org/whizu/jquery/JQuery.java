@@ -217,7 +217,7 @@ public interface JQuery extends Content {
 	 * @see <a href='http://api.jquery.com/remove'>jQuery's .remove()</a>
 	 */
 	public abstract JQuery remove();
-	
+
 	/**
 	 * Remove the set of matched elements from the DOM. Similar to .empty(), the
 	 * .remove() method takes elements out of the DOM. Use .remove() when you
@@ -229,6 +229,64 @@ public interface JQuery extends Content {
 	 * @see <a href='http://api.jquery.com/remove'>jQuery's .remove()</a>
 	 */
 	public abstract JQuery remove(String selector);
+
+	/**
+	 * Replace each target element with the set of matched elements. The
+	 * .replaceAll() method is corollary to .replaceWith(), but with the source
+	 * and target reversed.
+	 * 
+	 * @see <a href='http://api.jquery.com/replaceAll'>jQuery's
+	 *      .replaceAll()</a>
+	 */
+	public abstract JQuery replaceAll(String target);
+
+	/**
+	 * Replace each element in the set of matched elements with the provided new
+	 * content and return the set of elements that was removed. The
+	 * .replaceWith() method removes content from the DOM and inserts new
+	 * content in its place with a single call.
+	 * 
+	 * @see <a href='http://api.jquery.com/replaceWith'>jQuery's
+	 *      .replaceWith()</a>
+	 */
+	public abstract JQuery replaceWith(String wrappingElement);
+
+	/**
+	 * Wrap an HTML structure around each element in the set of matched
+	 * elements. The .wrap() function can take any string or object that could
+	 * be passed to the $() factory function to specify a DOM structure. This
+	 * structure may be nested several levels deep, but should contain only one
+	 * inmost element. A copy of this structure will be wrapped around each of
+	 * the elements in the set of matched elements. This method returns the
+	 * original set of elements for chaining purposes.
+	 * 
+	 * @see <a href='http://api.jquery.com/wrap'>jQuery's .wrap()</a>
+	 */
+	public abstract JQuery wrap(String wrappingElement);
+
+	/**
+	 * Wrap an HTML structure around all elements in the set of matched
+	 * elements. The .wrapAll() function can take any string or object that
+	 * could be passed to the $() function to specify a DOM structure. This
+	 * structure may be nested several levels deep, but should contain only one
+	 * inmost element. The structure will be wrapped around all of the elements
+	 * in the set of matched elements, as a single group.
+	 * 
+	 * @see <a href='http://api.jquery.com/wrapAll'>jQuery's .wrapAll()</a>
+	 */
+	public abstract JQuery wrapAll(String wrappingElement);
+
+	/**
+	 * Wrap an HTML structure around the content of each element in the set of
+	 * matched elements. The .wrapInner() function can take any string or object
+	 * that could be passed to the $() factory function to specify a DOM
+	 * structure. This structure may be nested several levels deep, but should
+	 * contain only one inmost element. The structure will be wrapped around the
+	 * content of each of the elements in the set of matched elements.
+	 * 
+	 * @see <a href='http://api.jquery.com/wrapInner'>jQuery's .wrapInner()</a>
+	 */
+	public abstract JQuery wrapInner(String wrappingElement);
 
 	public abstract JQuery serialize();
 
