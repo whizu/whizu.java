@@ -141,6 +141,13 @@ public interface JQuery extends Content {
 	 */
 	public abstract JQuery empty();
 
+	public abstract JQuery find(String selector);
+
+	public abstract JQuery get(String url, Function data, Function callback,
+			String type);
+
+	public abstract JQuery html(String arg);
+
 	/**
 	 * Insert every element in the set of matched elements after the target. The
 	 * .after() and .insertAfter() methods perform the same task. The major
@@ -170,13 +177,6 @@ public interface JQuery extends Content {
 	 *      .insertBefore()</a>
 	 */
 	public abstract JQuery insertBefore(String target);
-
-	public abstract JQuery find(String selector);
-
-	public abstract JQuery get(String url, Function data, Function callback,
-			String type);
-
-	public abstract JQuery html(String arg);
 
 	/**
 	 * Insert content, specified by the parameter, to the beginning of each
@@ -251,6 +251,37 @@ public interface JQuery extends Content {
 	 */
 	public abstract JQuery replaceWith(String wrappingElement);
 
+	public abstract JQuery serialize();
+
+	public abstract JQuery text(String arg);
+
+	public abstract JQuery toggle();
+
+	public abstract String toJavaScript();
+
+	public abstract JQuery trigger(String event);
+
+	public abstract JQuery val(String arg);
+
+	/**
+	 * Set the CSS width of each element in the set of matched elements.
+	 * 
+	 * When calling .width("value"), the value can be either a string (number
+	 * and unit) or a number. If only a number is provided for the value, jQuery
+	 * assumes a pixel unit. If a string is provided, however, any valid CSS
+	 * measurement may be used for the width (such as 100px, 50%, or auto). Note
+	 * that in modern browsers, the CSS width property does not include padding,
+	 * border, or margin, unless the box-sizing CSS property is used.
+	 * 
+	 * If no explicit unit is specified (like "em" or "%") then "px" is assumed.
+	 * 
+	 * Note that .width("value") sets the content width of the box regardless of
+	 * the value of the CSS box-sizing property.
+	 * 
+	 * @see <a href='http://api.jquery.com/width'>jQuery's .width()</a>
+	 */
+	public abstract JQuery width(String value);
+
 	/**
 	 * Wrap an HTML structure around each element in the set of matched
 	 * elements. The .wrap() function can take any string or object that could
@@ -287,16 +318,4 @@ public interface JQuery extends Content {
 	 * @see <a href='http://api.jquery.com/wrapInner'>jQuery's .wrapInner()</a>
 	 */
 	public abstract JQuery wrapInner(String wrappingElement);
-
-	public abstract JQuery serialize();
-
-	public abstract JQuery text(String arg);
-
-	public abstract JQuery toggle();
-
-	public abstract String toJavaScript();
-
-	public abstract JQuery trigger(String event);
-
-	public abstract JQuery val(String arg);
 }
