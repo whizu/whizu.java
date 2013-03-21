@@ -97,6 +97,21 @@ public interface JQuery extends Content {
 	 */
 	public abstract String attr(String attributeName);
 
+	/**
+	 * Insert content, specified by the parameter, before each element in the
+	 * set of matched elements. The .before() and .insertBefore() methods
+	 * perform the same task. The major difference is in the
+	 * syntax-specifically, in the placement of the content and target. With
+	 * .before(), the selector expression preceding the method is the container
+	 * before which the content is inserted. With .insertBefore(), on the other
+	 * hand, the content precedes the method, either as a selector expression or
+	 * as markup created on the fly, and it is inserted before the target
+	 * container.
+	 * 
+	 * @see <a href='http://api.jquery.com/before'>jQuery's .before()</a>
+	 */
+	public abstract JQuery before(String... content);
+
 	public abstract JQuery button();
 
 	public abstract JQuery call(String function);
@@ -115,7 +130,31 @@ public interface JQuery extends Content {
 
 	public abstract JQuery document();
 
+	/**
+	 * Remove all child nodes of the set of matched elements from the DOM. This
+	 * method removes not only child (and other descendant) elements, but also
+	 * any text within the set of matched elements. This is because, according
+	 * to the DOM specification, any string of text within an element is
+	 * considered a child node of that element.
+	 * 
+	 * @see <a href='http://api.jquery.com/empty'>jQuery's .empty()</a>
+	 */
 	public abstract JQuery empty();
+
+	/**
+	 * Insert every element in the set of matched elements after the target. The
+	 * .after() and .insertAfter() methods perform the same task. The major
+	 * difference is in the syntax-specifically, in the placement of the content
+	 * and target. With .after(), the selector expression preceding the method
+	 * is the container after which the content is inserted. With
+	 * .insertAfter(), on the other hand, the content precedes the method,
+	 * either as a selector expression or as markup created on the fly, and it
+	 * is inserted after the target container.
+	 * 
+	 * @see <a href='http://api.jquery.com/insertAfter'>jQuery's
+	 *      .insertAfter()</a>
+	 */
+	public abstract JQuery insertAfter(String target);
 
 	public abstract JQuery find(String selector);
 
