@@ -156,6 +156,21 @@ public interface JQuery extends Content {
 	 */
 	public abstract JQuery insertAfter(String target);
 
+	/**
+	 * Insert every element in the set of matched elements before the target.
+	 * The .before() and .insertBefore() methods perform the same task. The
+	 * major difference is in the syntax-specifically, in the placement of the
+	 * content and target. With .before(), the selector expression preceding the
+	 * method is the container before which the content is inserted. With
+	 * .insertBefore(), on the other hand, the content precedes the method,
+	 * either as a selector expression or as markup created on the fly, and it
+	 * is inserted before the target container.
+	 * 
+	 * @see <a href='http://api.jquery.com/insertBefore'>jQuery's
+	 *      .insertBefore()</a>
+	 */
+	public abstract JQuery insertBefore(String target);
+
 	public abstract JQuery find(String selector);
 
 	public abstract JQuery get(String url, Function data, Function callback,
@@ -183,7 +198,37 @@ public interface JQuery extends Content {
 	 */
 	public abstract JQuery prepend(String... content);
 
+	/**
+	 * Insert every element in the set of matched elements to the beginning of
+	 * the target.
+	 * 
+	 * @see <a href='http://api.jquery.com/prependTo'>jQuery's .prependTo()</a>
+	 */
+	public abstract JQuery prependTo(String target);
+
+	/**
+	 * Remove the set of matched elements from the DOM. Similar to .empty(), the
+	 * .remove() method takes elements out of the DOM. Use .remove() when you
+	 * want to remove the element itself, as well as everything inside it. In
+	 * addition to the elements themselves, all bound events and jQuery data
+	 * associated with the elements are removed. To remove the elements without
+	 * removing data and events, use .detach() instead.
+	 * 
+	 * @see <a href='http://api.jquery.com/remove'>jQuery's .remove()</a>
+	 */
 	public abstract JQuery remove();
+	
+	/**
+	 * Remove the set of matched elements from the DOM. Similar to .empty(), the
+	 * .remove() method takes elements out of the DOM. Use .remove() when you
+	 * want to remove the element itself, as well as everything inside it. In
+	 * addition to the elements themselves, all bound events and jQuery data
+	 * associated with the elements are removed. To remove the elements without
+	 * removing data and events, use .detach() instead.
+	 * 
+	 * @see <a href='http://api.jquery.com/remove'>jQuery's .remove()</a>
+	 */
+	public abstract JQuery remove(String selector);
 
 	public abstract JQuery serialize();
 
