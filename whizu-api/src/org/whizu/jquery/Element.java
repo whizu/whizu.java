@@ -23,6 +23,17 @@
  *******************************************************************************/
 package org.whizu.jquery;
 
-public interface Element {
+/**
+ * An element in the Document Object Model (DOM) has attributes, text and
+ * children. It provides methods to traverse the parent and children and to get
+ * access to its attributes. Due to a lot of flaws in DOM API specifications and
+ * implementations, those methods are no fun to use. jQuery provides a wrapper
+ * around those elements to help interacting with the DOM. But often enough you
+ * will be working directly with DOM elements, or see methods that (also) accept
+ * DOM elements as arguments.
+ * 
+ * @see <a href='http://api.jquery.com/Types/#Element'>jQuery's Element type</a>
+ */
+public interface Element extends Content {
 
 }

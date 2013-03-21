@@ -23,6 +23,14 @@
  *******************************************************************************/
 package org.whizu.jquery;
 
+/**
+ * A function in JavaScript can be either named or anonymous. Any function can
+ * be assigned to a variable or passed to a method, but passing member functions
+ * this way can cause them to be called in the context of another object (i.e.
+ * with a different "this" object).
+ * 
+ * @see <a href='http://api.jquery.com/Types/#Function'>jQuery's Function type</a>
+ */
 public abstract class Function {
 
 	public String params;
@@ -30,7 +38,7 @@ public abstract class Function {
 	public Function() {
 		this.params = "event";
 	}
-	
+
 	public Function(String params) {
 		this.params = params;
 	}

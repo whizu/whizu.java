@@ -48,7 +48,6 @@ import org.whizu.ui.VirtualContainer;
 import org.whizu.ui.Widget;
 import org.whizu.ui.Window;
 import org.whizu.value.StringValue;
-import org.whizu.value.Value;
 
 /**
  * @author Rudy D'hauwe

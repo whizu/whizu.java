@@ -12,3 +12,5 @@ keypress
 keyup
 rudy
 whizu
+markup
+attr

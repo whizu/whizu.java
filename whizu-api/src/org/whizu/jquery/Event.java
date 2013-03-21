@@ -29,7 +29,7 @@ package org.whizu.jquery;
  * for window.event required). It normalizes the target, relatedTarget, which,
  * metaKey and pageX/Y properties and provides both stopPropagation() and
  * preventDefault() methods. Those properties are all documented, and
- * accompanied by examples, on jQuery's Event Object page.
+ * accompanied by examples, on jQuery's Event object page.
  * 
  * The standard events in the Document Object Model are: blur, focus, load,
  * resize, scroll, unload, beforeunload, click, dblclick, mousedown, mouseup,
@@ -40,7 +40,7 @@ package org.whizu.jquery;
  * element, and it is propagated up the DOM tree to which that element belongs,
  * if any.
  * 
- * @see <a href='http://api.jquery.com/category/events/event-object'>jQuery's Event Object</a>
+ * @see <a href='http://api.jquery.com/category/events/event-object'>jQuery's Event object</a>
  */
 public class Event {
 
