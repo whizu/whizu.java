@@ -60,11 +60,11 @@ public class HelloWorld implements Application {
 		Layout left = ui.createVerticalLayout();
 		left.css("left-column");
 		left.add(ui.createLabel("Welcome to your very first meet and greet with Whizu."));
-		left.add(ui.createLabel("Say hello and allow for Whizu to echo your words..."));
+		left.add(ui.createLabel("Share a thought and allow for Whizu to echo your words."));
 		Form form = ui.createForm();
 		form.add(ui.createTextField(message).css("message"));
 		form.css("form");
-		Label button = ui.createLabel("Submit").css("submit-button");
+		Label button = ui.createLabel("Share").css("submit-button");
 		button.addClickListener(new ClickListener() {
 
 			@Override
@@ -83,7 +83,7 @@ public class HelloWorld implements Application {
 
 		Layout right = ui.createVerticalLayout();
 		right.css("right-column");
-		right.add(ui.createLabel("Thank you for submitting $1 comments.", aantal).css("tekst"));
+		right.add(ui.createLabel("Thank you for sharing $1 comments.", aantal).css("tekst"));
 		right.add(history);
 		
 		layout.add(left);

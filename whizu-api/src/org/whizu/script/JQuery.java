@@ -51,8 +51,7 @@ public interface JQuery {
 
 	public abstract JQuery find(String selector);
 
-	public abstract JQuery get(String url, Function data, Function callback,
-			String type);
+	public abstract JQuery get(String url, Function data, Function callback, String type);
 
 	public abstract JQuery html(String arg);
 
