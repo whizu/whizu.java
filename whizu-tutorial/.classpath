@@ -1,27 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-webapp-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-server-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-annotations-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-client-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-continuation-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-deploy-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-http-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-io-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-jaas-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-jmx-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-jndi-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-plus-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-rewrite-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-security-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-servlet-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-servlets-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-util-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/jetty-xml-9.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="C:/Java/tools/jetty-distribution-9.0.0.M3/lib/servlet-api-3.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-api"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-server"/>
+	<classpathentry kind="lib" path="lib/jetty-all-9.0.0.v20130308.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api-3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
