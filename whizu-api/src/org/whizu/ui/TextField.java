@@ -27,4 +27,6 @@ package org.whizu.ui;
  * @author Rudy D'hauwe
  */
 public interface TextField extends Component {
+	
+	public String getText();
 }

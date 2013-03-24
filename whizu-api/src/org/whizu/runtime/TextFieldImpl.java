@@ -72,6 +72,7 @@ class TextFieldImpl extends ComponentImpl implements TextField, Input {
 		// @formatter:on
 	}
 
+	@Override
 	public String getText() {
 		return text;
 	}
