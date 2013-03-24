@@ -28,8 +28,5 @@ package org.whizu.ui;
  */
 public interface TextField extends Component {
 	
-	/**
-	 * 
-	 */
 	public String getText();
 }
