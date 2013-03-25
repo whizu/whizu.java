@@ -20,3 +20,4 @@ em
 plugins
 controlgroup
 collapsible
+merchantability
