@@ -17,3 +17,6 @@ attr
 inmost
 px
 em
+plugins
+controlgroup
+collapsible
