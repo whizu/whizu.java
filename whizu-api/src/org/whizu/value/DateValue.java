@@ -23,10 +23,23 @@
  *******************************************************************************/
 package org.whizu.value;
 
+import java.util.Date;
+
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractValueObject implements ValueObject {
+public class DateValue extends AbstractValue<Date> {
 
-	public abstract Value<?>[] getColumns();
+	public DateValue(String name) {
+		super(name);
+	}
+
+	/**
+	 * @throws UnsupportedOperationException
+	 */
+	@Override
+	public void parse(String s) {
+		throw new UnsupportedOperationException();
+
+	}
 }

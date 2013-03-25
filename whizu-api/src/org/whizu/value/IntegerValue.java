@@ -36,7 +36,7 @@ public class IntegerValue extends AbstractValue<Integer> {
 		setValue(null);
 	}
 
-	public void inc() {
+	public void increment() {
 		setValue(getValue() + 1);
 	}
 

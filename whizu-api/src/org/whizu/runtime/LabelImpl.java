@@ -32,7 +32,7 @@ import org.whizu.jquery.JQuery;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Component;
 import org.whizu.ui.Label;
-import org.whizu.value.StringValue;
+import org.whizu.value.Value;
 
 class LabelImpl extends ComponentImpl implements Label {
 
@@ -40,7 +40,7 @@ class LabelImpl extends ComponentImpl implements Label {
 
 	private String text;
 
-	private StringValue value;
+	private Value<?> value;
 
 	LabelImpl(String text) {
 		this.text = text;
@@ -51,14 +51,14 @@ class LabelImpl extends ComponentImpl implements Label {
 		addClickListener(clickListener);
 	}
 
-	public LabelImpl(StringValue value) {
-		this(value.getValue());
+	public LabelImpl(Value<?> value) {
+		this(value.toString());
 		this.value = value;
 		value.addPropertyChangeListener(new PropertyChangeListener() {
 			
 			@Override
 			public void propertyChange(PropertyChangeEvent event) {
-				text=LabelImpl.this.value.getValue();
+				text=LabelImpl.this.value.toString();
 				jQuery(LabelImpl.this).empty().append(text);
 			}
 		});

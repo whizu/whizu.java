@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.value.StringValue;
+import org.whizu.value.Value;
 
 /**
  * @author Rudy D'hauwe
@@ -39,9 +39,9 @@ public interface UI extends ViewFactory {
 	@Deprecated //smarter way of programming this?
 	public VirtualContainer createVirtualContainer();
 
-	public Label createLabel(StringValue aantal);
+	public Label createLabel(Value<?> aantal);
 
 	public BarChart createBarChart(String[] x, Integer[] y);
 
-	public Label createLabel(String text, StringValue arg);
+	public Label createLabel(String text, Value<?> arg);
 }

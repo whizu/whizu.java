@@ -48,6 +48,7 @@ import org.whizu.ui.VirtualContainer;
 import org.whizu.ui.Widget;
 import org.whizu.ui.Window;
 import org.whizu.value.StringValue;
+import org.whizu.value.Value;
 
 /**
  * @author Rudy D'hauwe
@@ -122,8 +123,19 @@ public class ScriptUI implements UI {
 		return new LabelImpl(text);
 	}
 
+	private Label createLabel(String text, Component arg) {
+		return new LabelImpl(text, arg);
+	}
+
 	@Override
-	public Label createLabel(StringValue value) {
+	public Label createLabel(String text, Value<?> arg) {
+		Label valueLabel = createLabel(arg);
+		valueLabel.css("teller");
+		return createLabel(text, valueLabel);
+	}
+
+	@Override
+	public Label createLabel(Value<?> value) {
 		return new LabelImpl(value);
 	}
 
@@ -146,7 +158,7 @@ public class ScriptUI implements UI {
 	public TextField createTextField(String text) {
 		return new TextFieldImpl(text);
 	}
-
+	
 	@Override
 	public TextField createTextField(StringValue value) {
 		return new TextFieldImpl(value);
@@ -161,10 +173,6 @@ public class ScriptUI implements UI {
 	public VirtualContainer createVirtualContainer() {
 		return new VirtualContainerImpl();
 	}
-	
-	public Request getRequest() {
-		return RequestContext.getRequest();
-	}
 
 	@Override
 	public Document getDocument() {
@@ -172,12 +180,14 @@ public class ScriptUI implements UI {
 		Session session = request.getSession();
 		Document document = (Document) session.getAttribute("document");
 		if (document == null) {
-			System.out.println("Create new document");
 			document = new DocumentImpl();
 			session.setAttribute("document", document);
 		}
-		System.out.println("Return document " + document);
 		return document;
+	}
+
+	public Request getRequest() {
+		return RequestContext.getRequest();
 	}
 
 	@Override
@@ -197,16 +207,5 @@ public class ScriptUI implements UI {
 	@Override
 	public void openWindow(View wnd) {
 		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Label createLabel(String text, StringValue arg) {
-		Label valueLabel = createLabel(arg);
-		valueLabel.css("teller");
-		return createLabel(text, valueLabel);
-	}
-
-	private Label createLabel(String text, Component arg) {
-		return new LabelImpl(text, arg);
 	}
 }

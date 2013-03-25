@@ -24,8 +24,6 @@
 package org.whizu.value;
 
 /**
- *
- *
  * @author Rudy D'hauwe
  */
 public class StringValue extends AbstractValue<String> {
@@ -52,8 +50,4 @@ public class StringValue extends AbstractValue<String> {
 	public void clear() {
 		setValue("");
 	}
-
-	public void increment() {
-		setValue(""+(Integer.parseInt(getValue())+1));
-	}	
 }

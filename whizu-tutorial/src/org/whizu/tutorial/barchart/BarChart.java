@@ -32,6 +32,7 @@ import org.whizu.ui.Form;
 import org.whizu.ui.Label;
 import org.whizu.ui.Layout;
 import org.whizu.ui.UI;
+import org.whizu.value.IntegerValue;
 import org.whizu.value.StringValue;
 
 /**
@@ -48,8 +49,8 @@ public class BarChart implements Application {
 	public void init(final UI ui) {
 		//model
 		final StringValue antwoord = new StringValue("Mijn hobby is...");
-		final StringValue aantal = new StringValue("aantal");
-		aantal.setValue("0");
+		final IntegerValue aantal = new IntegerValue("aantal");
+		aantal.setValue(0);
 		
 		//user interface
 		Document document = ui.getDocument();
