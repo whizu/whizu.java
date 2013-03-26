@@ -21,3 +21,12 @@ plugins
 controlgroup
 collapsible
 merchantability
+seamlessly
+listview
+autodividers
+uppercased
+programmatically
+autocomplete
+filterable
+inset
+ajax

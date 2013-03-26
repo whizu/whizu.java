@@ -32,7 +32,7 @@ package org.whizu.jquery;
  * 
  * @see <a href='http://api.jquery.com/Types/#jQuery'>jQuery's jQuery object</a>
  */
-public interface JQuery extends Content {
+public interface JQuery {
 
 	/**
 	 * Adds the specified classes to each of the set of matched elements. It's

@@ -38,7 +38,7 @@ package org.whizu.jquery.mobile;
 public class Listview {
 
 	/**
-	 * Adds a search filter bar to listviews.
+	 * Adds a search filter bar to the listview.
 	 * 
 	 * @throws UnsupportedOperationException
 	 */

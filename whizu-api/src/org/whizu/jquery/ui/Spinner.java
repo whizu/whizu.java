@@ -21,8 +21,8 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.jquery.ui;
 
-public interface Content {
-	
+public class Spinner {
+
 }
