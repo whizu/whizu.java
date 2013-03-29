@@ -47,7 +47,7 @@ class ImageImpl extends ComponentImpl implements Image {
 	public Html create() {
 		String script = "";
 		if (listenerId != null) {
-			String ajaxCall = "$.get('http://localhost:8090/ajax?id=" + listenerId
+			String ajaxCall = "$.get('/whizu?id=" + listenerId
 					+ "', function(data) { ; }, 'script');";
 			script += ".click(function(event) { event.preventDefault(); " + ajaxCall + "})";
 			script += ".mouseenter(function(event) { event.preventDefault(); " + ajaxCall + "})";
@@ -55,7 +55,7 @@ class ImageImpl extends ComponentImpl implements Image {
 
 		//use event.originalEvent.dataTransfer
 		if (droplistenerId != null) {
-			String ajaxCall = "$.get('http://localhost:8090/ajax?id=" + droplistenerId
+			String ajaxCall = "$.get('/whizu?id=" + droplistenerId
 					+ "', function(data) { ; }, 'script');";
 			script += ".bind ('dragover', function(event) { event.stopPropagation(); event.preventDefault(); event.dataTransfer.dropEffect = 'move'; return false; } )";
 			script += ".bind ('dragenter', function(event) { event.stopPropagation(); event.preventDefault(); event.dataTransfer.dropEffect = 'copy'; return false; } )";

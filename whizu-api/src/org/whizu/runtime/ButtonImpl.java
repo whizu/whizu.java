@@ -56,7 +56,7 @@ class ButtonImpl extends ComponentImpl implements Button {
 		if (listener != null) {
 			jQuery.click(new Function() {
 				public void execute() {
-					String url = "http://localhost:8090/ajax?id=" + listener.getId();
+					String url = "http://localhost:8090/whizu?id=" + listener.getId();
 
 					Function data = new Function() {
 						@Override

@@ -21,37 +21,21 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.runtime;
+package org.whizu.jquery.mobile;
 
-import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
-import org.whizu.ui.ClickListener;
+import org.whizu.ui.Application;
+import org.whizu.ui.UI;
 
+public class JQueryMobileApp implements Application {
 
-class Hyperlink extends ComponentImpl {
-
-	private String caption;
-	private ClickListenerImpl listener;
-
-	Hyperlink(String caption, ClickListener listener) {
-		this.caption = caption;
-		addClickListener(listener);
-	}
-	
 	@Override
-	public Html create() {
-		String href = "/whizu?id=" + listener.getId();
-		return NonVoid.div(getId()).add(NonVoid.a().attr("href", href).add(caption));
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	private void addClickListener(ClickListener listener) {
-		this.listener = new ClickListenerImpl(listener);
-		getSession().addClickListener(this.listener);
-	}
-	
+
 	@Override
-	public Hyperlink css(String clazz) {
-		setStyleName(clazz);
-		return this;
+	public void init(UI ui) {
+		// TODO Auto-generated method stub
 	}
 }

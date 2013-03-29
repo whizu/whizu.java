@@ -87,7 +87,7 @@ class LabelImpl extends ComponentImpl implements Label {
 			jQuery.click(new Function() {
 				public void execute() {
 
-					String url = "http://localhost:8090/ajax?id=" + listener.getId();
+					String url = "/whizu?id=" + listener.getId();
 
 					Function data = new Function() {
 
