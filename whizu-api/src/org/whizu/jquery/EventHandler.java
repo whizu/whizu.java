@@ -24,6 +24,7 @@
 package org.whizu.jquery;
 
 /**
+ * @author Rudy D'hauwe
  */
 public interface EventHandler {
 

@@ -33,7 +33,7 @@ import org.whizu.ui.TextField;
 import org.whizu.value.StringValue;
 
 
-class TextFieldImpl extends ComponentImpl implements TextField, Input {
+class TextFieldImpl extends AbstractComponent implements TextField, Input {
 
 	private String text;
 	

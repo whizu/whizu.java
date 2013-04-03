@@ -41,6 +41,7 @@ package org.whizu.jquery;
  * if any.
  * 
  * @see <a href='http://api.jquery.com/category/events/event-object'>jQuery's Event object</a>
+ * @author Rudy D'hauwe
  */
 public class Event {
 
@@ -98,7 +99,8 @@ public class Event {
 	 * The current DOM element within the event bubbling phase. This property
 	 * will typically be equal to the <i>this</i> of the function.
 	 * 
-	 * @see <a href='http://api.jquery.com/event.currentTarget'>jQuery's event.currentTarget</a>
+	 * @see <a href='http://api.jquery.com/event.currentTarget'>jQuery's
+	 *      event.currentTarget</a>
 	 */
 	public Element currentTarget() {
 		throw new UnsupportedOperationException();

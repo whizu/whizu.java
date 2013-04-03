@@ -38,7 +38,7 @@ import org.whizu.ui.Widget;
  * @author Rudy D'hauwe
  * @param <T>
  */
-class CompositeImpl extends ComponentImpl implements Composite {
+class CompositeImpl extends AbstractComponent implements Composite {
 
 	@Override
 	public CompositeImpl css(String clazz) {
@@ -46,7 +46,7 @@ class CompositeImpl extends ComponentImpl implements Composite {
 		return this;
 	}
 
-	protected List<ComponentImpl> componentList = new ArrayList<ComponentImpl>();
+	protected List<AbstractComponent> componentList = new ArrayList<AbstractComponent>();
 
 	/*
 	 * (non-Javadoc)
@@ -55,7 +55,7 @@ class CompositeImpl extends ComponentImpl implements Composite {
 	 */
 	@Override
 	public void add(Widget component) {
-		ComponentImpl impl = (ComponentImpl) component;
+		AbstractComponent impl = (AbstractComponent) component;
 		this.componentList.add(impl);
 
 		if (this.isRendered()) {
@@ -65,7 +65,7 @@ class CompositeImpl extends ComponentImpl implements Composite {
 
 	@Override
 	public void prepend(Widget component) {
-		ComponentImpl impl = (ComponentImpl) component;
+		AbstractComponent impl = (AbstractComponent) component;
 		this.componentList.add(impl);
 
 		if (isRendered()) {

@@ -30,7 +30,7 @@ import org.whizu.ui.BarChart;
 /**
  * @author Rudy D'hauwe
  */
-public class BarChartImpl extends ComponentImpl implements BarChart {
+public class BarChartImpl extends AbstractComponent implements BarChart {
 
 	private String[] x;
 	

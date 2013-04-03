@@ -51,7 +51,7 @@ public class JQueryMobileApp implements Application {
 	}
 
 	public void addHeader(String title) {
-		add(new Header(title));
+		add(new Header("<h2>" + title + "</h2>"));
 	}
 	
 	protected void add(Widget widget) {
@@ -59,6 +59,6 @@ public class JQueryMobileApp implements Application {
 	}
 
 	public void addFooter(String title) {
-		add(new Footer(title));
+		//add(new Footer(title));
 	}
 }

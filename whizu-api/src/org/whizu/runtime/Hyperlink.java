@@ -28,7 +28,7 @@ import org.whizu.html.NonVoid;
 import org.whizu.ui.ClickListener;
 
 
-class Hyperlink extends ComponentImpl {
+class Hyperlink extends AbstractComponent {
 
 	private String caption;
 	private ClickListenerImpl listener;

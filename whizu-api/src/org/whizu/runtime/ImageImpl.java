@@ -29,7 +29,7 @@ import org.whizu.ui.ClickListener;
 import org.whizu.ui.Image;
 
 
-class ImageImpl extends ComponentImpl implements Image {
+class ImageImpl extends AbstractComponent implements Image {
 
 	private String src;
 

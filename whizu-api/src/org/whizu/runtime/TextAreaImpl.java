@@ -29,7 +29,7 @@ import org.whizu.jquery.Input;
 import org.whizu.ui.TextArea;
 
 
-class TextAreaImpl extends ComponentImpl implements TextArea, Input {
+class TextAreaImpl extends AbstractComponent implements TextArea, Input {
 
 	private String text;
 

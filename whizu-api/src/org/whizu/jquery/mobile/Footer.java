@@ -25,6 +25,9 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.ui.Widget;
 
+/**
+ * @author Rudy D'hauwe
+ */
 public class Footer implements Widget {
 
 	private String title;

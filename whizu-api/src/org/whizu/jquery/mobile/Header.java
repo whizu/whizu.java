@@ -23,13 +23,30 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.ui.Widget;
+import org.whizu.html.Html;
+import org.whizu.html.NonVoid;
+import org.whizu.runtime.AbstractComponent;
 
-public class Header implements Widget {
+/**
+ * @author Rudy D'hauwe
+ */
+public class Header extends AbstractComponent {
 
 	private String title;
 	
 	public Header(String title) {
 		this.title = title;
+	}
+
+	@Override
+	public Header css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
+
+	@Override
+	public Html create() {
+		jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
+		return NonVoid.div(this.getId()).attr("data-role", "header").add(title);
 	}
 }

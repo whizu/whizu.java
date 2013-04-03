@@ -36,7 +36,7 @@ import org.whizu.ui.Component;
 /**
  * @author Rudy D'hauwe
  */
-public abstract class ComponentImpl implements Component, Renderable, Identity {
+public abstract class AbstractComponent implements Component, Renderable, Identity {
 
 	private final String id;
 
@@ -46,7 +46,7 @@ public abstract class ComponentImpl implements Component, Renderable, Identity {
 
 	protected String width = null;
 
-	protected ComponentImpl() {
+	protected AbstractComponent() {
 		this.id = getSession().next();
 	}
 

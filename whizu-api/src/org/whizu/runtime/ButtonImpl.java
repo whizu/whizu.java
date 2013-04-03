@@ -33,7 +33,7 @@ import org.whizu.ui.ClickListener;
 /**
  * @author Rudy D'hauwe
  */
-class ButtonImpl extends ComponentImpl implements Button {
+class ButtonImpl extends AbstractComponent implements Button {
 
 	private String caption;
 

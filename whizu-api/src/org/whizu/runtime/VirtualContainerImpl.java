@@ -30,7 +30,7 @@ import org.whizu.ui.VirtualContainer;
 //@Deprecated //more intelligent way of programming this?
 class VirtualContainerImpl extends CompositeImpl implements VirtualContainer {
 
-	public void add(ComponentImpl component) {
+	public void add(AbstractComponent component) {
 		this.componentList.add(component);
 
 		if (this.isRendered()) {

@@ -34,7 +34,7 @@ import org.whizu.html.NonVoid;
 import org.whizu.ui.Table;
 import org.whizu.ui.Widget;
 
-class TableImpl extends ComponentImpl implements Table {
+class TableImpl extends AbstractComponent implements Table {
 
 	private String title;
 
@@ -58,7 +58,7 @@ class TableImpl extends ComponentImpl implements Table {
 		if (isRendered()) {
 			NonVoid tr = NonVoid.tr().width(width).style("word-wrap", "break-word");
 			for (Widget value : components) {
-				Html m = ((ComponentImpl) value).render();
+				Html m = ((AbstractComponent) value).render();
 				tr.add(NonVoid.td().style("word-wrap", "break-word").add(m));
 			}
 			jQuery(this).find("tbody").prepend(tr.toString());
@@ -103,7 +103,7 @@ class TableImpl extends ComponentImpl implements Table {
 				     						.width(width)
 				     						.style("word-wrap", "break-word");
 				     			for (Widget value : item) {
-				     				Html m = ((ComponentImpl) value).render();
+				     				Html m = ((AbstractComponent) value).render();
 				     				tr.add(
 				     					NonVoid.td()
 				     						.style("word-wrap", "break-word")

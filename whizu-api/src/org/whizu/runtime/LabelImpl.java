@@ -34,7 +34,7 @@ import org.whizu.ui.Component;
 import org.whizu.ui.Label;
 import org.whizu.value.Value;
 
-class LabelImpl extends ComponentImpl implements Label {
+class LabelImpl extends AbstractComponent implements Label {
 
 	private ClickListenerImpl listener;
 
@@ -65,7 +65,7 @@ class LabelImpl extends ComponentImpl implements Label {
 	}
 
 	public LabelImpl(String t, Component arg) {
-		ComponentImpl impl = (ComponentImpl) arg;
+		AbstractComponent impl = (AbstractComponent) arg;
 		//System.out.println("replacing $1 " + impl.getMarkup());
 		t = t.replace("$1", impl.getMarkup());
 		this.text = t;

@@ -32,10 +32,10 @@ class LayoutImpl extends CompositeImpl implements Layout {
 
 	protected Html create(String css, final String itemClass) {
 		// isRendered = true;
-		return div(this).css(style).css(css).width(width).add(new Foreach<ComponentImpl>(componentList) {
+		return div(this).css(style).css(css).width(width).add(new Foreach<AbstractComponent>(componentList) {
 
 			@Override
-			public Html render(ComponentImpl item) {
+			public Html render(AbstractComponent item) {
 				return item.render().css(itemClass);
 			}
 		});

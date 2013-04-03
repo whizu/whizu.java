@@ -35,7 +35,7 @@ class AbsoluteLayoutImpl extends LayoutImpl {
 
 	//TODO move to some test case
 	public static void main(String[] args) {
-		final ComponentImpl impl = new AbsoluteLayoutImpl();
+		final AbstractComponent impl = new AbsoluteLayoutImpl();
 		System.out.println(impl.getId());
 		System.out.println(impl.getSelector());
 		System.out.println(impl.jQuery(impl));
