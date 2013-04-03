@@ -256,8 +256,8 @@ public interface JQuery {
 	 * method creates a text string in standard URL-encoded notation. It operates
 	 * on a jQuery object representing a set of form elements. The .serialize()
 	 * method can act on a jQuery object that has selected individual form
-	 * elements, such as <input>, <textarea>, and <select>. However, it is
-	 * typically easier to select the <form> tag itself for serialization.
+	 * elements, such as input, textarea, and select. However, it is
+	 * typically easier to select the form tag itself for serialization.
 	 * 
 	 * @see <a href='http://api.jquery.com/serialize'>jQuery's .serialize()</a>
 	 */

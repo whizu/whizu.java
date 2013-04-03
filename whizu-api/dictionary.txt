@@ -30,3 +30,4 @@ autocomplete
 filterable
 inset
 ajax
+textarea
