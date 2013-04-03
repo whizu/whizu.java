@@ -23,42 +23,13 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.runtime.ScriptUI;
-import org.whizu.ui.Application;
-import org.whizu.ui.UI;
 import org.whizu.ui.Widget;
 
-/**
- * @author Rudy D'hauwe
- */
-public class JQueryMobileApp implements Application {
+public class Header implements Widget {
 
-	private UI ui = new ScriptUI();
-
-	@Override
-	public String getTitle() {
-		return "jQuery Mobile";
-	}
-
-	@Override
-	public void init(UI ui) {
-		this.ui = ui;
-		ui.getDocument().add(ui.createLabel("hello there"));
-	}
-
-	public void addLabel(String label) {
-		ui.getDocument().add(ui.createLabel(label));
-	}
-
-	public void addHeader(String title) {
-		add(new Header(title));
-	}
+	private String title;
 	
-	protected void add(Widget widget) {
-		ui.getDocument().add(widget);
-	}
-
-	public void addFooter(String title) {
-		add(new Footer(title));
+	public Header(String title) {
+		this.title = title;
 	}
 }
