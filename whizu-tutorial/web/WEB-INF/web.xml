@@ -9,6 +9,11 @@
 			<param-name>application</param-name>
 			<param-value>org.whizu.tutorial.barchart.BarChart</param-value>
 		</init-param>
+		<init-param>
+			<description>Whizu configuration class</description>
+			<param-name>config</param-name>
+			<param-value>org.whizu.tutorial.WhizuConfiguration</param-value>
+		</init-param>
 	</servlet>
 	<!-- 
 	<servlet-mapping>

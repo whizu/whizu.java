@@ -31,3 +31,4 @@ filterable
 inset
 ajax
 textarea
+config

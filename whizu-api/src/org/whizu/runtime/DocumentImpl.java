@@ -37,6 +37,6 @@ class DocumentImpl extends CompositeImpl implements Document {
 
 	@Override
 	public String getId() {
-		return "y-body";
+		return "whizu";
 	}
 }

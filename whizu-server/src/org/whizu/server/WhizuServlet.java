@@ -23,7 +23,10 @@
  *******************************************************************************/
 package org.whizu.server;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Set;
 
@@ -34,52 +37,71 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Session;
 import org.whizu.runtime.ScriptUI;
 import org.whizu.ui.Application;
-import org.whizu.ui.UI;
 
 /**
- * 
+ * @author Rudy D'hauwe
  */
 public class WhizuServlet extends HttpServlet {
 
+	private static final String INIT_PARAM_CONFIG = "config";
+
 	private static final long serialVersionUID = 520182899630886403L;
 
-	private static final String WHIZ_SESSION = "whiz-session";
-
-	// must be in session (per user)
-	private UI ui;
+	private static final String WHIZU_SESSION = "whizu-session";
 
 	// not in session (shared across users)
+	@Deprecated
 	private Application application;
 
-	// session.getAttribute("ui") == null ?
-	private boolean setup = false;
+	private Configuration config;
+
+	private Session assureUserSession(HttpSession session) {
+		Session userSession = (Session) session.getAttribute(WHIZU_SESSION);
+		if (userSession == null) {
+			userSession = new SessionImpl();
+			session.setAttribute(WHIZU_SESSION, userSession);
+		}
+		RequestImpl.get().setSession(userSession);
+		return userSession;
+	}
+
+	private void debug(String message) {
+		System.out.println(message);
+	}
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
+		RequestContext.init(new RequestContext() {
+
+			@Override
+			protected final Request getRequestImpl() {
+				return RequestImpl.get();
+			}
+		});
+
+		this.application = newInstance(config, "application");
+		this.config = newInstance(config, INIT_PARAM_CONFIG);
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T> T newInstance(ServletConfig config, String param) {
 		try {
-			RequestContext.init(new RequestContext() {
-				
-				@Override
-				protected final Request getRequestImpl() {
-					return RequestImpl.get();
-				}
-			});
-			String className = config.getInitParameter("application");
-			@SuppressWarnings("unchecked")
-			Class<Application> clazz = (Class<Application>) Class.forName(className);
-			this.application = clazz.newInstance();
+			String className = config.getInitParameter(param);
+			Class<T> clazz = (Class<T>) Class.forName(className);
+			return clazz.newInstance();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			throw new IllegalArgumentException(e);
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			throw new IllegalArgumentException(e);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			throw new IllegalArgumentException(e);
 		} finally {
 		}
 	}
@@ -88,24 +110,23 @@ public class WhizuServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException {
 		long start = System.currentTimeMillis();
+		String content = "--";
 		try {
-			HttpSession session = request.getSession();
-			Session userSession = assureUserSession(session);
-			show(request.getParameterMap());
+			Session session = startRequest(request);
 			String id = request.getParameter("id");
 			if (id == null) {
-				System.out.println("running setup:" + request.getRequestURI());
-				this.setup();
+				debug("running setup:" + request.getRequestURI());
+				content = this.setup(request);
 			} else {
-				userSession.handleEvent(id);
+				session.handleEvent(id);
+				content = RequestImpl.get().finish();
 			}
 		} finally {
 			try {
-				String script = RequestImpl.get().finish();
 				long end = System.currentTimeMillis();
-				System.out.println("Server side completed in " + (end - start) + "ms");
-				System.out.println("Sending script- " + script);
-				response.getWriter().print(script);
+				debug("Server side completed in " + (end - start) + "ms");
+				debug("Sending script- " + content);
+				response.getWriter().print(content);
 				response.getWriter().close();
 			} catch (Exception exc) {
 				exc.printStackTrace();
@@ -113,38 +134,66 @@ public class WhizuServlet extends HttpServlet {
 		}
 	}
 
-	private Session assureUserSession(HttpSession session) {
-		Session us = (Session) session.getAttribute(WHIZ_SESSION);
-		if (us == null) {
-			us = new SessionImpl();
-			session.setAttribute(WHIZ_SESSION, us);
+	public static String fromStream(InputStream in) throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		StringBuilder out = new StringBuilder();
+		String line;
+		while ((line = reader.readLine()) != null) {
+			out.append(line);
 		}
-		RequestImpl.get().setSession(us);
-		return us;
+		in.close();
+		return out.toString();
 	}
 
-	private void show(Map<String, String[]> parameterMap) {
+	private String setup(HttpServletRequest request) {
+		String uri = request.getRequestURI();
+		debug("uri:" + uri);
+		final Application app = config.getApplication(uri);
+		if (app != null) {
+			debug("Application to setup found:" + app);
+			// String content = app.create();
+			InputStream in = getClass().getResourceAsStream("/org/whizu/jquery/mobile/page.html");
+			// request.getServletContext().getResourceAsStream("/org/whizu/jquery/mobile/page.html");
+			debug("inputstream " + in);
+			try {
+				String content = fromStream(in);
+				final String id = app.getClass().getName();
+				content = content.replace("${id}", id);
+				RequestImpl.get().getSession().addClickListener(new EventHandler() {
+					
+					@Override
+					public void handleEvent() {
+						app.init(new ScriptUI());
+					}
+					
+					@Override
+					public String getId() {
+						return id;
+					}
+				});
+				return content;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		application.init(new ScriptUI());
+		return RequestImpl.get().finish();
+	}
+
+	private Session startRequest(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Session userSession = assureUserSession(session);
+		Map<String, String[]> parameterMap = request.getParameterMap();
 		Set<String> keys = parameterMap.keySet();
 		for (String key : keys) {
-			System.out.println("P:" + key + "=" + parameterMap.get(key)[0]);
-			Session userSession = RequestImpl.get().getSession();
+			debug("P:" + key + "=" + parameterMap.get(key)[0]);
 			Input editable = userSession.getInput(key);
 			if (editable != null) {
-				System.out.println("updating editable server-side " + editable);
+				debug("updating editable server-side " + editable);
 				editable.parseString(parameterMap.get(key)[0]);
 			}
 		}
-	}
-
-	private void setup() {
-		if (!setup) {
-			ui = new ScriptUI();
-			application.init(ui);
-			//setup = true;
-		} else {
-			// another user session
-			throw new IllegalStateException("Application already setup"); //recreate user interface?
-			//TODO exceptions should be visible in browser window in development mode
-		}
+		return userSession;
 	}
 }

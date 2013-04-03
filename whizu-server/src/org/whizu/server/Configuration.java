@@ -21,23 +21,32 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.server;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.whizu.ui.Application;
-import org.whizu.ui.UI;
 
 /**
  * @author Rudy D'hauwe
  */
-public class JQueryMobileApp implements Application {
+public abstract class Configuration {
 
-	@Override
-	public String getTitle() {
-		return "jQuery Mobile";
+	private Map<String, Application> applicationMap = new HashMap<String, Application>();
+	
+	public Configuration() {
+		init();
+	}
+	
+	public void addApplication(String uri, Application application) {
+		applicationMap.put(uri, application);
+		applicationMap.put(uri+"/", application);
+	}
+	
+	public Application getApplication(String uri) {
+		return applicationMap.get(uri);
 	}
 
-	@Override
-	public void init(UI ui) {
-		ui.getDocument().add(ui.createLabel("hello there"));
-	}
+	protected abstract void init();
 }
