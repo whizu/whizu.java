@@ -115,7 +115,7 @@ class LabelImpl extends AbstractComponent implements Label {
 		}
 		
 		//isRendered = true;
-		return NonVoid.div(getId()).css(style).add(text);
+		return div(this).css(style).add(text);
 	}
 
 	public String getText() {
