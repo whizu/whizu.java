@@ -9,6 +9,6 @@ public class WhizuConfiguration extends Configuration {
 	@Override
 	public void init() {
 		addApplication("/whizu/jquery/mobile/helloworld", new JQueryMobileApp());
-		addApplication("/whizu/mobile/helloworld", new HelloWorldApp());
+		addApplication("/whizu/jqm/helloworld", new HelloWorldApp());
 	}
 }

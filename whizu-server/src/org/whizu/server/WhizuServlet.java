@@ -134,7 +134,7 @@ public class WhizuServlet extends HttpServlet {
 		}
 	}
 
-	public static String fromStream(InputStream in) throws IOException {
+	private static String fromStream(InputStream in) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		StringBuilder out = new StringBuilder();
 		String line;
@@ -173,7 +173,6 @@ public class WhizuServlet extends HttpServlet {
 				});
 				return content;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

@@ -50,6 +50,12 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		this.id = getSession().next();
 	}
 
+	public abstract Html create();
+
+	protected NonVoid div(AbstractComponent element) {
+		return NonVoid.div(element.getId());
+	}
+
 	public NonVoid div(Identity identity) {
 		return NonVoid.div(identity.getId());
 	}
@@ -66,6 +72,10 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		}
 	}
 
+	public Request getRequest() {
+		return RequestContext.getRequest();
+	}
+	
 	protected String getSelector() {
 		return "$(\"#" + getId() + "\")";
 	}
@@ -74,10 +84,6 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		return getRequest().getSession();
 	}
 
-	public Request getRequest() {
-		return RequestContext.getRequest();
-	}
-	
 	public boolean isRendered() {
 		return rendered;
 	}
@@ -89,7 +95,7 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 	public JQuery jQuery(Identity... components) {
 		return getRequest().select(components);
 	}
-
+	
 	public JQuery jQuery(String selector) {
 		return getRequest().select(selector);
 	}
@@ -106,8 +112,6 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 			}
 		}
 	}
-	
-	public abstract Html create();
 
 	private void setRendered(boolean rendered) {
 		this.rendered = rendered;
@@ -116,7 +120,7 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 	public void setStyleName(String style) {
 		this.style = style;
 	}
-
+	
 	public void setWidth(String width) {
 		this.width = width;
 	}

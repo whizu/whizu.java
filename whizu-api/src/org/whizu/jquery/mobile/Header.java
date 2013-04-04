@@ -24,7 +24,6 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
 import org.whizu.runtime.AbstractComponent;
 
 /**
@@ -47,6 +46,6 @@ public class Header extends AbstractComponent {
 	@Override
 	public Html create() {
 		jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
-		return NonVoid.div(this.getId()).attr("data-role", "header").add(title);
+		return div(this).attr("data-role", "header").add(title);
 	}
 }

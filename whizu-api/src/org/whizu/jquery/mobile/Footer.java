@@ -23,16 +23,29 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.ui.Widget;
+import org.whizu.html.Html;
+import org.whizu.runtime.AbstractComponent;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Footer implements Widget {
+public class Footer extends AbstractComponent {
 
 	private String title;
-	
+
 	public Footer(String title) {
 		this.title = title;
+	}
+
+	@Override
+	public Footer css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
+
+	@Override
+	public Html create() {
+		jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
+		return div(this).attr("data-role", "footer").attr("data-theme", "e").add(title);
 	}
 }

@@ -106,6 +106,10 @@ public class Event {
 		throw new UnsupportedOperationException();
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	/**
 	 * For key or mouse events, the specific key or button that was pressed. It
 	 * normalizes event.keyCode and event.charCode. It is recommended to watch

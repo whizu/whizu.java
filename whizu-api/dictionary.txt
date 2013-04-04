@@ -32,3 +32,4 @@ inset
 ajax
 textarea
 config
+eupl
