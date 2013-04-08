@@ -28,40 +28,7 @@ import org.whizu.html.NonVoid;
 /**
  * @author Rudy D'hauwe
  */
-public enum Icon implements Decorator {
+public interface Decorator {
 
-	// @formatter:off
-	ALERT("alert"), 
-	BACK("back"), 
-	BARS("bars"), 
-	CHECK("check"), 
-	DELETE("delete"), 
-	DOWN_ARROW("arrow-d"), 
-	EDIT("edit"), 
-	FORWARD("forward"), 
-	GEAR("gear"), 
-	GRID("grid"), 
-	HOME("home"), 
-	INFO("info"), 
-	LEFT_ARROW("arrow-l"), 
-	MINUS("minus"), 
-	PLUS("plus"), 
-	REFRESH("refresh"), 
-	RIGHT_ARROW("arrow-r"), 
-	SEARCH("search"), 
-	STAR("star"), 
-	UP_ARROW("arrow-u");
-	// @formatter:on
-
-	private static final String DATA_ICON = "data-icon";
-
-	private String value;
-
-	private Icon(String value) {
-		this.value = value;
-	}
-
-	public void decorate(NonVoid element) {
-		element.attr(DATA_ICON, value);
-	}
+	public void decorate(NonVoid element);
 }

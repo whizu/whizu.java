@@ -52,7 +52,7 @@ public class Button extends AbstractComponent {
 		}
 	};
 
-	public enum Mini {
+	public enum Mini implements Decorator {
 		TRUE("true"), FALSE("false");
 
 		protected String value;
@@ -60,20 +60,10 @@ public class Button extends AbstractComponent {
 		Mini(String value) {
 			this.value = value;
 		}
-	};
-	
-	public enum Theme {
-		a("a"), b("b"), C("c"), d("d"), e("e");
 
-		protected String value;
-
-		Theme(String value) {
-			this.value = value;
-		}
-		
-		@SuppressWarnings("unchecked")
-		protected <T extends NonVoid> T apply(T element) {
-			return (T) element.attr("data-theme", value);
+		@Override
+		public void decorate(NonVoid element) {
+			element.attr("data-mini", value);
 		}
 	};
 
@@ -82,15 +72,15 @@ public class Button extends AbstractComponent {
 	private Inline inline = Inline.FALSE;
 
 	private Mini mini = Mini.FALSE;
-	
+
 	private Theme theme = Theme.C;
-	
+
 	private Icon icon;
 
 	public Button(String title) {
 		this.title = title;
 	}
-	
+
 	public Button(String title, Type type, Inline inline, Mini mini) {
 		this.title = title;
 		this.type = type;
@@ -108,16 +98,15 @@ public class Button extends AbstractComponent {
 		this.icon = icon;
 		return this;
 	}
-	
+
 	@Override
 	public Html create() {
 		jQuery(this).trigger("create");
 		switch (type) {
 			case INPUT :
-				NonVoid button = input(this).attr("type", "button").attr("value", title).attr("data-inline", inline.value)
-						.attr("data-mini", mini.value);
-				theme.apply(button);
-				decorate(button, icon);
+				NonVoid button = input(this).attr("type", "button").attr("value", title)
+						.attr("data-inline", inline.value).attr("data-mini", mini.value);
+				decorate(button, icon, theme);
 				return button;
 			case SUBMIT :
 				return input(this).attr("type", "submit").attr("value", title).attr("data-inline", inline.value)
@@ -135,9 +124,12 @@ public class Button extends AbstractComponent {
 		}
 	}
 
-	private void decorate(NonVoid element, Icon icon) {
-		if (icon != null) {
-			icon.decorate(element);
+	private Button decorate(NonVoid element, Decorator... decorators) {
+		for (Decorator d : decorators) {
+			if (d != null) {
+				d.decorate(element);
+			}
 		}
+		return this;
 	}
 }
