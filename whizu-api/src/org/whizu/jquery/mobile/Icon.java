@@ -23,6 +23,11 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.html.NonVoid;
+
+/**
+ * @author Rudy D'hauwe
+ */
 public enum Icon {
 
 	// @formatter:off
@@ -48,10 +53,16 @@ public enum Icon {
 	UP_ARROW("arrow-u");
 	// @formatter:on
 
+	private static final String DATA_ICON = "data-icon";
+
 	private String value;
 
-	Icon(String value) {
+	private Icon(String value) {
 		this.value = value;
+	}
+
+	public void decorate(NonVoid element) {
+		element.attr(DATA_ICON, value);
 	}
 
 	public String getValue() {

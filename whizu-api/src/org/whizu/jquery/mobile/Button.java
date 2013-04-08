@@ -84,6 +84,8 @@ public class Button extends AbstractComponent {
 	private Mini mini = Mini.FALSE;
 	
 	private Theme theme = Theme.C;
+	
+	private Icon icon;
 
 	public Button(String title) {
 		this.title = title;
@@ -102,6 +104,11 @@ public class Button extends AbstractComponent {
 		return this;
 	}
 
+	public Button icon(Icon icon) {
+		this.icon = icon;
+		return this;
+	}
+	
 	@Override
 	public Html create() {
 		jQuery(this).trigger("create");
@@ -110,6 +117,7 @@ public class Button extends AbstractComponent {
 				NonVoid button = input(this).attr("type", "button").attr("value", title).attr("data-inline", inline.value)
 						.attr("data-mini", mini.value);
 				theme.apply(button);
+				decorate(button, icon);
 				return button;
 			case SUBMIT :
 				return input(this).attr("type", "submit").attr("value", title).attr("data-inline", inline.value)
@@ -124,6 +132,12 @@ public class Button extends AbstractComponent {
 						.attr("data-mini", mini.value).add(title);
 			default :
 				throw new IllegalArgumentException("Unsupported button type: " + type);
+		}
+	}
+
+	private void decorate(NonVoid element, Icon icon) {
+		if (icon != null) {
+			icon.decorate(element);
 		}
 	}
 }
