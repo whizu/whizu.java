@@ -52,21 +52,6 @@ public class Button extends AbstractComponent {
 		}
 	};
 
-	public enum Mini implements Decorator {
-		TRUE("true"), FALSE("false");
-
-		protected String value;
-
-		Mini(String value) {
-			this.value = value;
-		}
-
-		@Override
-		public void decorate(NonVoid element) {
-			element.attr("data-mini", value);
-		}
-	};
-
 	private Type type = Type.INPUT;
 
 	private Inline inline = Inline.FALSE;
@@ -105,12 +90,14 @@ public class Button extends AbstractComponent {
 		switch (type) {
 			case INPUT :
 				NonVoid button = input(this).attr("type", "button").attr("value", title)
-						.attr("data-inline", inline.value).attr("data-mini", mini.value);
-				decorate(button, icon, theme);
+						.attr("data-inline", inline.value);
+				decorate(button, icon, theme, mini);
 				return button;
 			case SUBMIT :
-				return input(this).attr("type", "submit").attr("value", title).attr("data-inline", inline.value)
+				NonVoid submit = input(this).attr("type", "submit").attr("value", title).attr("data-inline", inline.value)
 						.attr("data-mini", mini.value);
+				decorate(submit, icon, theme, mini);
+				return submit;
 			case RESET :
 				return input(this).attr("type", "reset").attr("value", title).attr("data-inline", inline.value)
 						.attr("data-mini", mini.value);
