@@ -24,6 +24,7 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.html.Html;
+import org.whizu.html.NonVoid;
 import org.whizu.runtime.AbstractComponent;
 
 /**
@@ -60,12 +61,29 @@ public class Button extends AbstractComponent {
 			this.value = value;
 		}
 	};
+	
+	public enum Theme {
+		a("a"), b("b"), C("c"), d("d"), e("e");
+
+		protected String value;
+
+		Theme(String value) {
+			this.value = value;
+		}
+		
+		@SuppressWarnings("unchecked")
+		protected <T extends NonVoid> T apply(T element) {
+			return (T) element.attr("data-theme", value);
+		}
+	};
 
 	private Type type = Type.INPUT;
 
-	private Inline inline = Inline.TRUE;
+	private Inline inline = Inline.FALSE;
 
-	private Mini mini = Mini.TRUE;
+	private Mini mini = Mini.FALSE;
+	
+	private Theme theme = Theme.C;
 
 	public Button(String title) {
 		this.title = title;
@@ -89,8 +107,10 @@ public class Button extends AbstractComponent {
 		jQuery(this).trigger("create");
 		switch (type) {
 			case INPUT :
-				return input(this).attr("type", "button").attr("value", title).attr("data-inline", inline.value)
+				NonVoid button = input(this).attr("type", "button").attr("value", title).attr("data-inline", inline.value)
 						.attr("data-mini", mini.value);
+				theme.apply(button);
+				return button;
 			case SUBMIT :
 				return input(this).attr("type", "submit").attr("value", title).attr("data-inline", inline.value)
 						.attr("data-mini", mini.value);
