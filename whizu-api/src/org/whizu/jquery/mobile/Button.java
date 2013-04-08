@@ -39,7 +39,7 @@ public class Button extends AbstractComponent {
 	private String title;
 
 	public enum Type {
-		INPUT, BUTTON, SUBMIT, RESET, ANCHOR;
+		INPUT, BUTTON, SUBMIT, RESET, ANCHOR, ICON_ONLY;
 	};
 
 	public enum Inline {
