@@ -23,6 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.html.Html;
+import org.whizu.runtime.AbstractComponent;
+
 /**
  * Buttons are core widgets in jQuery Mobile and are used within a wide range of
  * other plugins. The button markup is flexible and can be created from links or
@@ -30,6 +33,77 @@ package org.whizu.jquery.mobile;
  * 
  * @author Rudy D'hauwe
  */
-public class Button {
+public class Button extends AbstractComponent {
 
+	private String title;
+
+	public enum Type {
+		INPUT, BUTTON, SUBMIT, RESET, ANCHOR;
+	};
+
+	public enum Inline {
+		TRUE("true"), FALSE("false");
+
+		protected String value;
+
+		Inline(String value) {
+			this.value = value;
+		}
+	};
+
+	public enum Mini {
+		TRUE("true"), FALSE("false");
+
+		protected String value;
+
+		Mini(String value) {
+			this.value = value;
+		}
+	};
+
+	private Type type = Type.INPUT;
+
+	private Inline inline = Inline.TRUE;
+
+	private Mini mini = Mini.TRUE;
+
+	public Button(String title) {
+		this.title = title;
+	}
+	
+	public Button(String title, Type type, Inline inline, Mini mini) {
+		this.title = title;
+		this.type = type;
+		this.inline = inline;
+		this.mini = mini;
+	}
+
+	@Override
+	public Button css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
+
+	@Override
+	public Html create() {
+		jQuery(this).trigger("create");
+		switch (type) {
+			case INPUT :
+				return input(this).attr("type", "button").attr("value", title).attr("data-inline", inline.value)
+						.attr("data-mini", mini.value);
+			case SUBMIT :
+				return input(this).attr("type", "submit").attr("value", title).attr("data-inline", inline.value)
+						.attr("data-mini", mini.value);
+			case RESET :
+				return input(this).attr("type", "reset").attr("value", title).attr("data-inline", inline.value)
+						.attr("data-mini", mini.value);
+			case BUTTON :
+				return button(this).attr("data-inline", inline.value).attr("data-mini", mini.value).add(title);
+			case ANCHOR :
+				return a(this).attr("data-role", "button").attr("data-inline", inline.value)
+						.attr("data-mini", mini.value).add(title);
+			default :
+				throw new IllegalArgumentException("Unsupported button type: " + type);
+		}
+	}
 }

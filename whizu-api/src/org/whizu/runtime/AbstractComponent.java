@@ -55,6 +55,18 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 	protected NonVoid div(AbstractComponent element) {
 		return NonVoid.div(element.getId());
 	}
+	
+	protected NonVoid input(AbstractComponent element) {
+		return NonVoid.input(element.getId());
+	}
+	
+	protected NonVoid button(AbstractComponent element) {
+		return NonVoid.button(element.getId());
+	}
+	
+	protected NonVoid a(AbstractComponent element) {
+		return NonVoid.a(element.getId());
+	}
 
 	public NonVoid div(Identity identity) {
 		return NonVoid.div(identity.getId());

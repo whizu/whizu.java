@@ -53,6 +53,14 @@ public class NonVoid implements Html {
 	public static NonVoid div() {
 		return tag("div");
 	}
+	
+	public static NonVoid input() {
+		return tag("input");
+	}
+	
+	public static NonVoid button() {
+		return tag("button");
+	}
 
 	public static NonVoid div(String id) {
 		return div().id(id);
@@ -364,5 +372,17 @@ public class NonVoid implements Html {
 	public NonVoid wrap(String name) {
 		NonVoid n = tag(name);
 		return n.add(this);
+	}
+
+	public static NonVoid input(String id) {
+		return input().id(id);
+	}
+
+	public static NonVoid button(String id) {
+		return button().id(id);
+	}
+
+	public static NonVoid a(String id) {
+		return a().id(id);
 	}
 }

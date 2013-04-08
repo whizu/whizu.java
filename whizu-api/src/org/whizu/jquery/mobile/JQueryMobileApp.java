@@ -61,4 +61,8 @@ public class JQueryMobileApp implements Application {
 	public void addFooter(String title) {
 		add(new Footer("<h2>" + title + "</h2>"));
 	}
+	
+	public void addButton(String title) {
+		add(new Button(title));
+	}
 }

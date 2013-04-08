@@ -35,6 +35,8 @@ public class HelloWorldApp extends JQueryMobileApp {
 	public void init(UI ui) {
 		addHeader("My jQuery Mobile header");
 		addLabel("Hello world!");
+		addButton("My first button");
+		addButton("My second button");
 		addFooter("My jQuery Mobile footer");
 	}
 }
