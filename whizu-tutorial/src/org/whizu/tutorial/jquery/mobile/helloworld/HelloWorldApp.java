@@ -40,6 +40,7 @@ public class HelloWorldApp extends JQueryMobileApp {
 		addButton("My second button");
 		Form form = addForm();
 		form.addText();
+		form.addTextarea();
 		addFooter("My jQuery Mobile footer");
 	}
 }

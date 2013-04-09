@@ -50,4 +50,9 @@ public class Form extends AbstractComponent {
 		Text text = new Text();
 		jQuery(this).append(text.create().toString());
 	}
+
+	public void addTextarea() {
+		Textarea text = new Textarea();
+		jQuery(this).append(text.create().toString());
+	}
 }
