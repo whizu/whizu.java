@@ -54,8 +54,9 @@ public class JQueryMobileApp implements Application {
 		add(new Header("<h2>" + title + "</h2>"));
 	}
 	
-	protected void add(Widget widget) {
+	protected <T extends Widget> T add(T widget) {
 		ui.getDocument().add(widget);
+		return widget;
 	}
 
 	public void addFooter(String title) {
@@ -64,5 +65,9 @@ public class JQueryMobileApp implements Application {
 	
 	public void addButton(String title) {
 		add(new Button(title));
+	}
+	
+	public Form addForm() {
+		return add(new Form());
 	}
 }

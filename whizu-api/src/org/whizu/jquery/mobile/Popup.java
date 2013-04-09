@@ -15,34 +15,17 @@
  * intellectual property rights other than copyright. This disclaimer 
  * of warranty is an essential part of the License and a condition for 
  * the grant of any rights to this Software.
- *  
+ *   
  * For more  details, see <http://joinup.ec.europa.eu/software/page/eupl>.
  *
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.tutorial.jquery.mobile.helloworld;
-
-import org.whizu.jquery.mobile.Form;
-import org.whizu.jquery.mobile.JQueryMobileApp;
-import org.whizu.ui.UI;
+package org.whizu.jquery.mobile;
 
 /**
  * @author Rudy D'hauwe
  */
-public class HelloWorldApp extends JQueryMobileApp {
+public class Popup {
 
-	@Override
-	public void init(UI ui) {
-		addHeader("My jQuery Mobile header");
-		addLabel("Hello world!");
-		addButton("My first button");
-		addButton("My second button");
-		Form form = addForm();
-		form.addText();
-		addFooter("My jQuery Mobile footer");
-	}
 }
-
-
-

@@ -225,6 +225,8 @@ public class NonVoid implements Html {
 	
 	private Map<String, String> styleMap = new HashMap<String, String>();
 
+	private String id;
+
 	public NonVoid(String name) {
 		this.name = name;
 	}
@@ -312,6 +314,7 @@ public class NonVoid implements Html {
 	}
 
 	NonVoid id(String id) {
+		this.id = id;
 		return attr("id", id);
 	}
 
@@ -384,5 +387,9 @@ public class NonVoid implements Html {
 
 	public static NonVoid a(String id) {
 		return a().id(id);
+	}
+
+	public String getId() {
+		return id;
 	}
 }

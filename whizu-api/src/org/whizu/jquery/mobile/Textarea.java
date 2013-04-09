@@ -23,6 +23,22 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-public class Textarea {
+import org.whizu.html.Html;
+import org.whizu.html.NonVoid;
+import org.whizu.runtime.AbstractComponent;
 
+public class Textarea extends AbstractComponent {
+	
+	@Override
+	public Textarea css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
+
+	@Override
+	public Html create() {
+		NonVoid textarea = textarea(this).attr("name", "label");
+		NonVoid label = NonVoid.tag("label").attr("for", textarea.getId()).add("label");
+		return label.after(textarea);
+	}
 }

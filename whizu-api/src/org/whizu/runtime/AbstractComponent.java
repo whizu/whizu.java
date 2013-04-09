@@ -60,6 +60,14 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		return NonVoid.input(element.getId());
 	}
 	
+	protected NonVoid textarea(AbstractComponent element) {
+		return NonVoid.textarea(element.getId());
+	}
+	
+	protected NonVoid form(AbstractComponent element) {
+		return NonVoid.form(element.getId());
+	}
+	
 	protected NonVoid button(AbstractComponent element) {
 		return NonVoid.button(element.getId());
 	}

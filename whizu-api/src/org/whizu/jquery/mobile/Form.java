@@ -23,9 +23,31 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.html.Html;
+import org.whizu.runtime.AbstractComponent;
+
 /**
  * @author Rudy D'hauwe
  */
-public class Form {
+public class Form extends AbstractComponent {
 
+	@Override
+	public Form css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
+
+	@Override
+	public Html create() {
+		// @formatter:off
+		return form(this)
+				.attr("method", "post")
+				.attr("action", "form.php");
+		// @formatter:on
+	}
+
+	public void addText() {
+		Text text = new Text();
+		jQuery(this).append(text.create().toString());
+	}
 }

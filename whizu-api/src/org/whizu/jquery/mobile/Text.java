@@ -23,6 +23,25 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-public class Text {
+import org.whizu.html.Html;
+import org.whizu.html.NonVoid;
+import org.whizu.runtime.AbstractComponent;
 
+/**
+ * @author Rudy D'hauwe
+ */
+public class Text extends AbstractComponent {
+
+	@Override
+	public Text css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
+
+	@Override
+	public Html create() {
+		NonVoid input = input(this).attr("type", "text").attr("name", "label").attr("value", "");
+		NonVoid label = NonVoid.tag("label").attr("for", input.getId()).add("label");
+		return label.after(input);
+	}
 }
