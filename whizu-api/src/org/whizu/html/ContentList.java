@@ -54,9 +54,9 @@ class ContentList implements Content {
 	}
 
 	
-	@Override
-	public final String toString() {
-		return stream();
+	public <T extends Content> ContentList add(List<T> content) {
+		this.contentList.addAll(content);
+		return this;
 	}
 
 	@Override
@@ -68,8 +68,8 @@ class ContentList implements Content {
 		return markup;
 	}
 
-	public <T extends Content> ContentList add(List<T> content) {
-		this.contentList.addAll(content);
-		return this;
+	@Override
+	public final String toString() {
+		return stream();
 	}
 }
