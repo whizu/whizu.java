@@ -42,9 +42,4 @@ public class Literal implements Content {
 	public String getText() {
 		return text;
 	}
-	
-	@Override
-	public String toString() {
-		return text;
-	}
 }
