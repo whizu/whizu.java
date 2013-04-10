@@ -3,9 +3,8 @@
  */
 package org.whizu.dom;
 
-
 /**
- * A bunch of convenience methods for generating HTML elements.
+ * A bunch of convenience methods for generating HTML content.
  * 
  * @author Rudy D'hauwe
  */
