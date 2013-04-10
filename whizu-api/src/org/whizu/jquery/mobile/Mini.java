@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.html.Decorator;
 import org.whizu.html.NonVoid;
 
 /**
@@ -35,7 +36,7 @@ public enum Mini implements Decorator {
 	FALSE("false");
 	// @formatter:on
 
-	private static final String DATA_MINI = "data-mini";
+	private static final String ATTRIBUTE_NAME = "data-mini";
 
 	//TODO make private
 	public String value;
@@ -45,6 +46,11 @@ public enum Mini implements Decorator {
 	}
 
 	public void decorate(NonVoid element) {
-		element.attr(DATA_MINI, value);
+		decorate(ATTRIBUTE_NAME, element);
+	}
+	
+	@Override
+	public void decorate(String name, NonVoid element) {
+		element.attr(name, value);
 	}
 }

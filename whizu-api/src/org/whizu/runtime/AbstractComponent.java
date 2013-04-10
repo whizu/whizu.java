@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
+import org.whizu.html.Decorator;
 import org.whizu.html.Html;
 import org.whizu.html.NonVoid;
 import org.whizu.html.Renderable;
@@ -50,34 +51,35 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		this.id = getSession().next();
 	}
 
-	public abstract Html create();
-
-	protected NonVoid div(AbstractComponent element) {
-		return NonVoid.div(element.getId());
-	}
-	
-	protected NonVoid input(AbstractComponent element) {
-		return NonVoid.input(element.getId());
-	}
-	
-	protected NonVoid textarea(AbstractComponent element) {
-		return NonVoid.textarea(element.getId());
-	}
-	
-	protected NonVoid form(AbstractComponent element) {
-		return NonVoid.form(element.getId());
-	}
-	
-	protected NonVoid button(AbstractComponent element) {
-		return NonVoid.button(element.getId());
-	}
-	
 	protected NonVoid a(AbstractComponent element) {
 		return NonVoid.a(element.getId());
 	}
 
+	protected NonVoid button(AbstractComponent element) {
+		return NonVoid.button(element.getId());
+	}
+	
+	public abstract Html create();
+	
+	protected <T extends NonVoid> T decorate(T element, Decorator... decorators) {
+		for (Decorator d : decorators) {
+			if (d != null) {
+				d.decorate(element);
+			}
+		}
+		return element;
+	}
+	
+	protected NonVoid div(AbstractComponent element) {
+		return NonVoid.div(element.getId());
+	}
+	
 	public NonVoid div(Identity identity) {
 		return NonVoid.div(identity.getId());
+	}
+	
+	protected NonVoid form(AbstractComponent element) {
+		return NonVoid.form(element.getId());
 	}
 
 	public String getId() {
@@ -95,13 +97,17 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 	public Request getRequest() {
 		return RequestContext.getRequest();
 	}
-	
+
 	protected String getSelector() {
 		return "$(\"#" + getId() + "\")";
 	}
-
+	
 	public Session getSession() {
 		return getRequest().getSession();
+	}
+
+	protected NonVoid input(AbstractComponent element) {
+		return NonVoid.input(element.getId());
 	}
 
 	public boolean isRendered() {
@@ -143,5 +149,10 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 	
 	public void setWidth(String width) {
 		this.width = width;
+	}
+	
+
+	protected NonVoid textarea(AbstractComponent element) {
+		return NonVoid.textarea(element.getId());
 	}
 }

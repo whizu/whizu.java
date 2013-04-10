@@ -29,6 +29,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * @author Rudy D'hauwe
  */
@@ -391,5 +392,23 @@ public class NonVoid implements Html {
 
 	public String getId() {
 		return id;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends NonVoid> T decorate(Decorator... decorators) {
+		for (Decorator d : decorators) {
+			if (d != null) {
+				d.decorate(this);
+			}
+		}
+		return (T) this;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends NonVoid> T  decorate(String name, Decorator decorator) {
+		if (decorator != null) {
+			decorator.decorate(name, this);
+		}
+		return (T) this;
 	}
 }

@@ -23,6 +23,81 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-public class Slider {
+import org.whizu.html.Html;
+import org.whizu.html.NonVoid;
+import org.whizu.runtime.AbstractComponent;
 
+/**
+ * @author Rudy D'hauwe
+ */
+public class Slider extends AbstractComponent {
+
+	private String min;
+
+	private String max;
+
+	private Theme theme;
+
+	private Theme track;
+
+	private Mini mini;
+
+	public Slider(int min, int max) {
+		this.min = "" + min;
+		this.max = "" + max;
+	}
+
+	public Slider(int min, int max, Theme theme) {
+		this(min, max);
+		this.theme = theme;
+	}
+	
+	@Override
+	public Slider css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
+
+	@Override
+	public Html create() {
+		// @formatter:off
+		NonVoid input = input(this)
+				.attr("type", "range")
+				.attr("name", "label")
+				.attr("value", min)
+				.attr("min", min)
+				.attr("max", max)
+				.decorate(theme)
+				.decorate("data-track-theme", track)
+				.decorate(mini);
+		NonVoid label = NonVoid.tag("label")
+				.attr("for", input.getId())
+				.add("label");
+		// @formatter:on
+		return label.after(input);
+	}
+
+	public Theme getTheme() {
+		return theme;
+	}
+
+	public void setTheme(Theme theme) {
+		this.theme = theme;
+	}
+
+	public Theme getTrack() {
+		return track;
+	}
+
+	public void setTrack(Theme track) {
+		this.track = track;
+	}
+
+	public Mini getMini() {
+		return mini;
+	}
+
+	public void setMini(Mini mini) {
+		this.mini = mini;
+	}
 }

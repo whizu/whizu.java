@@ -55,4 +55,14 @@ public class Form extends AbstractComponent {
 		Textarea text = new Textarea();
 		jQuery(this).append(text.create().toString());
 	}
+
+	public void addSlider(int min, int max) {
+		Slider slider = new Slider(min, max);
+		jQuery(this).append(slider.create().toString());
+	}
+
+	public void addSlider(int min, int max, Theme theme) {
+		Slider slider = new Slider(min, max, theme);
+		jQuery(this).append(slider.create().toString());
+	}
 }

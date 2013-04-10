@@ -25,6 +25,7 @@ package org.whizu.tutorial.jquery.mobile.helloworld;
 
 import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.Theme;
 import org.whizu.ui.UI;
 
 /**
@@ -41,6 +42,7 @@ public class HelloWorldApp extends JQueryMobileApp {
 		Form form = addForm();
 		form.addText();
 		form.addTextarea();
+		form.addSlider(0, 100, Theme.B);
 		addFooter("My jQuery Mobile footer");
 	}
 }

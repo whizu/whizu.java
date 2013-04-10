@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.html.Decorator;
 import org.whizu.html.NonVoid;
 
 /**
@@ -38,7 +39,7 @@ public enum Theme implements Decorator {
 	E("e");
 	// @formatter:on
 
-	private static final String DATA_THEME = "data-theme";
+	private static final String ATTRIBUTE_NAME = "data-theme";
 
 	private String value;
 
@@ -47,6 +48,11 @@ public enum Theme implements Decorator {
 	}
 
 	public void decorate(NonVoid element) {
-		element.attr(DATA_THEME, value);
+		decorate(ATTRIBUTE_NAME, element);
+	}
+	
+	@Override
+	public void decorate(String name, NonVoid element) {
+		element.attr(name, value);
 	}
 }

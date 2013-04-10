@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.html.Decorator;
 import org.whizu.html.NonVoid;
 
 /**
@@ -53,7 +54,7 @@ public enum Icon implements Decorator {
 	UP_ARROW("arrow-u");
 	// @formatter:on
 
-	private static final String DATA_ICON = "data-icon";
+	private static final String ATTRIBUTE_NAME = "data-icon";
 
 	private String value;
 
@@ -62,6 +63,11 @@ public enum Icon implements Decorator {
 	}
 
 	public void decorate(NonVoid element) {
-		element.attr(DATA_ICON, value);
+		decorate(ATTRIBUTE_NAME, element);
+	}
+
+	@Override
+	public void decorate(String name, NonVoid element) {
+		element.attr(name, value);
 	}
 }

@@ -110,13 +110,4 @@ public class Button extends AbstractComponent {
 				throw new IllegalArgumentException("Unsupported button type: " + type);
 		}
 	}
-
-	private Button decorate(NonVoid element, Decorator... decorators) {
-		for (Decorator d : decorators) {
-			if (d != null) {
-				d.decorate(element);
-			}
-		}
-		return this;
-	}
 }

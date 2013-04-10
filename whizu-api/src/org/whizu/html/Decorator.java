@@ -21,9 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
-
-import org.whizu.html.NonVoid;
+package org.whizu.html;
 
 /**
  * @author Rudy D'hauwe
@@ -31,4 +29,6 @@ import org.whizu.html.NonVoid;
 public interface Decorator {
 
 	public void decorate(NonVoid element);
+
+	public void decorate(String name, NonVoid nonVoid);
 }
