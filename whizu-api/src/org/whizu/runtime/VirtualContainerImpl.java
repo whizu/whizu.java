@@ -26,8 +26,11 @@ package org.whizu.runtime;
 import org.whizu.html.Html;
 import org.whizu.ui.VirtualContainer;
 
-
-//@Deprecated //more intelligent way of programming this?
+//more intelligent way of programming this?
+/**
+ * @author Rudy D'hauwe
+ */
+// @Deprecated
 class VirtualContainerImpl extends CompositeImpl implements VirtualContainer {
 
 	public void add(AbstractComponent component) {

@@ -23,6 +23,8 @@
  *******************************************************************************/
 package org.whizu.jquery;
 
+import org.whizu.content.Element;
+
 /**
  * jQuery's event system normalizes the event object according to W3C standards.
  * The event object is guaranteed to be passed to the event handler (no checks

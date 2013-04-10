@@ -21,33 +21,16 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.runtime;
+package org.whizu.content;
 
-import org.whizu.html.Foreach;
-import org.whizu.html.Html;
-import org.whizu.ui.Layout;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Rudy D'hauwe
  */
-class LayoutImpl extends CompositeImpl implements Layout {
+public class Composite implements Content {
 
-	protected Html create(String css, final String itemClass) {
-		// isRendered = true;
-		return div(this).css(style).css(css).width(width).add(new Foreach<AbstractComponent>(componentList) {
-
-			@Override
-			public Html render(AbstractComponent item) {
-				item.css(itemClass); //to be tested
-				return item.render(); 
-				//return item.render().css(itemClass); //this works
-			}
-		});
-	}
-
-	@Override
-	public Html create() {
-//		isRendered = true;
-		return div(this).css(style).width(width).add(componentList);
-	}
+	private List<Content> contentList = new ArrayList<Content>();
+	
 }

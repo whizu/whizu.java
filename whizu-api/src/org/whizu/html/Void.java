@@ -39,7 +39,7 @@ class Void implements Html {
 	/**
 	 * @throws UnsupportedOperationException
 	 */
-	@Override
+	@Deprecated
 	public Html css(String className) {
 		throw new UnsupportedOperationException();
 	}

@@ -21,33 +21,20 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.runtime;
-
-import org.whizu.html.Foreach;
-import org.whizu.html.Html;
-import org.whizu.ui.Layout;
+package org.whizu.content;
 
 /**
+ * An element in the Document Object Model (DOM) has attributes, text and
+ * children. It provides methods to traverse the parent and children and to get
+ * access to its attributes. Due to a lot of flaws in DOM API specifications and
+ * implementations, those methods are no fun to use. jQuery provides a wrapper
+ * around those elements to help interacting with the DOM. But often enough you
+ * will be working directly with DOM elements, or see methods that (also) accept
+ * DOM elements as arguments.
+ * 
  * @author Rudy D'hauwe
+ * @see <a href='http://api.jquery.com/Types/#Element'>jQuery's Element type</a>
  */
-class LayoutImpl extends CompositeImpl implements Layout {
+public interface Element extends Content {
 
-	protected Html create(String css, final String itemClass) {
-		// isRendered = true;
-		return div(this).css(style).css(css).width(width).add(new Foreach<AbstractComponent>(componentList) {
-
-			@Override
-			public Html render(AbstractComponent item) {
-				item.css(itemClass); //to be tested
-				return item.render(); 
-				//return item.render().css(itemClass); //this works
-			}
-		});
-	}
-
-	@Override
-	public Html create() {
-//		isRendered = true;
-		return div(this).css(style).width(width).add(componentList);
-	}
 }

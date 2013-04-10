@@ -23,15 +23,21 @@
  *******************************************************************************/
 package org.whizu.html;
 
+import org.whizu.content.Content;
+
 /**
+ * To be replaced by org.whizu.content.Content.
+ * 
  * @author Rudy D'hauwe
  */
-public interface Html {
+@Deprecated
+public interface Html extends Content {
 
+	@Deprecated
 	public Html add(Html html);
 
-	public Html css(String className);
-
+	/**
+	 * Generates and returns the corresponding HTML markup.
+	 */
 	public String toString();
-
 }

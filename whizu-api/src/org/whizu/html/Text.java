@@ -35,7 +35,7 @@ class Text implements Html {
 	}
 
 	/**
-	 * @throws UnsupportedOperationException();
+	 * @throws UnsupportedOperationException
 	 */
 	@Override
 	public NonVoid add(Html create) {
@@ -43,9 +43,9 @@ class Text implements Html {
 	}
 
 	/**
-	 * @throws UnsupportedOperationException();
+	 * @throws UnsupportedOperationException
 	 */
-	@Override
+	@Deprecated
 	public NonVoid css(String className) {
 		throw new UnsupportedOperationException();
 	}

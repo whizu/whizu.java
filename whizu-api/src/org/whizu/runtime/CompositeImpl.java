@@ -33,10 +33,7 @@ import org.whizu.ui.Widget;
 
 
 /**
- * 
- * 
  * @author Rudy D'hauwe
- * @param <T>
  */
 class CompositeImpl extends AbstractComponent implements Composite {
 
@@ -48,11 +45,6 @@ class CompositeImpl extends AbstractComponent implements Composite {
 
 	protected List<AbstractComponent> componentList = new ArrayList<AbstractComponent>();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.whizu.ui.Composite#add(org.whizu.ui.Widget)
-	 */
 	@Override
 	public void add(Widget component) {
 		AbstractComponent impl = (AbstractComponent) component;
@@ -77,22 +69,12 @@ class CompositeImpl extends AbstractComponent implements Composite {
 		return div(this).add(componentList);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.whizu.ui.Composite#remove(org.whizu.ui.Widget)
-	 */
 	@Override
 	public void remove(Widget component) {
 		Identity element = (Identity) component;
 		jQuery(element).remove();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.whizu.ui.Composite#empty()
-	 */
 	@Override
 	public void empty() {
 		jQuery(this).empty();

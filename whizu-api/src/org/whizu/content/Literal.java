@@ -21,8 +21,11 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.content;
 
-public interface Content {
-	
+/**
+ * @author Rudy D'hauwe
+ */
+public class Literal implements Content {
+
 }

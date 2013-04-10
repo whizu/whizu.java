@@ -37,15 +37,18 @@ public class Grid extends AbstractComponent {
 
 	public enum Type {
 		// @formatter:off
-		TWO_COLUMNS("ui-grid-a"),
-		THREE_COLUMNS("ui-grid-b"),
-		FOUR_COLUMNS("ui-grid-c"),
-		FIVE_COLUMNS("ui-grid-d"); 
+		TWO_COLUMNS(2, "ui-grid-a"),
+		THREE_COLUMNS(3, "ui-grid-b"),
+		FOUR_COLUMNS(4, "ui-grid-c"),
+		FIVE_COLUMNS(5, "ui-grid-d"); 
 		// @formatter:on
 
-		protected String value;
+		protected final int columns;
+		
+		protected final String value;
 
-		Type(String value) {
+		Type(int columns, String value) {
+			this.columns = columns;
 			this.value = value;
 		}
 	}

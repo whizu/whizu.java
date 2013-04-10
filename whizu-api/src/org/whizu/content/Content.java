@@ -21,19 +21,15 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.content;
 
 /**
- * An element in the Document Object Model (DOM) has attributes, text and
- * children. It provides methods to traverse the parent and children and to get
- * access to its attributes. Due to a lot of flaws in DOM API specifications and
- * implementations, those methods are no fun to use. jQuery provides a wrapper
- * around those elements to help interacting with the DOM. But often enough you
- * will be working directly with DOM elements, or see methods that (also) accept
- * DOM elements as arguments.
- * 
- * @see <a href='http://api.jquery.com/Types/#Element'>jQuery's Element type</a>
+ * @author Rudy D'hauwe
  */
-public interface Element extends Content {
-
+public interface Content {
+	
+	/**
+	 * Generates and returns the corresponding HTML markup.
+	 */
+	public String toString();
 }
