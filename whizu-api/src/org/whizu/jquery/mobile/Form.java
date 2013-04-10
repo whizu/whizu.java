@@ -40,7 +40,7 @@ public class Form extends Container {
 	}
 
 	@Override
-	public Content create() {
+	protected Content create() {
 		// @formatter:off
 		return Html.form(this)
 				.attr("method", "post")

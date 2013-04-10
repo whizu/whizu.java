@@ -71,7 +71,7 @@ public class Container extends Widget implements Composite {
 	}
 
 	@Override
-	public Content create() {
+	protected Content create() {
 		return Html.div(this).add(componentList);
 	}
 

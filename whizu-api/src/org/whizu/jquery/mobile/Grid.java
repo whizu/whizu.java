@@ -67,7 +67,7 @@ public class Grid extends Widget {
 	}
 
 	@Override
-	public Content create() {
+	protected Content create() {
 		Element grid = Html.div(this).css(type.value);
 		return grid;
 	}

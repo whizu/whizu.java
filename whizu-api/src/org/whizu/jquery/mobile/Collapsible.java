@@ -35,7 +35,7 @@ public class Collapsible extends Widget {
 	}
 
 	@Override
-	public Content create() {
+	protected Content create() {
 		throw new UnsupportedOperationException();
 	}
 }

@@ -40,7 +40,7 @@ public class Text extends Widget {
 	}
 
 	@Override
-	public Content create() {
+	protected Content create() {
 		Element input = Html.input(this).attr("type", "text").attr("name", "label").attr("value", "");
 		Element label = Html.tag("label").attr("for", input.getId()).add("label");
 		return input.after(label);

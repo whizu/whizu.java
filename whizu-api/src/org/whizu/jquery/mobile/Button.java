@@ -86,7 +86,7 @@ public class Button extends Widget {
 	}
 
 	@Override
-	public Content create() {
+	protected Content create() {
 		jQuery(this).trigger("create");
 		switch (type) {
 			case INPUT :
