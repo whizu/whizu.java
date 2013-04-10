@@ -66,9 +66,4 @@ class ContentList implements Content {
 		}
 		return markup;
 	}
-
-	@Override
-	public final String toString() {
-		return stream();
-	}
 }

@@ -29,7 +29,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * @author Rudy D'hauwe
  */
@@ -110,8 +109,6 @@ class ElementImpl implements Element {
 		// @formatter:on
 	}
 
-	// private List<Content> afterList = new ArrayList<Content>();
-
 	private static void print(Element element) {
 		System.out.println(element.toString());
 	}
@@ -180,8 +177,6 @@ class ElementImpl implements Element {
 	@Override
 	public Content after(Content element) {
 		return new ContentList(element, this);
-		// afterList.add(element);
-		// return this;
 	}
 
 	@Override
@@ -279,11 +274,6 @@ class ElementImpl implements Element {
 	}
 
 	@Override
-	public final String toString() {
-		return stream();
-	}
-
-	@Override
 	public Element style(String name, String style) {
 		return addStyle(name, style);
 	}
@@ -309,19 +299,8 @@ class ElementImpl implements Element {
 		}
 
 		markup += ">";
-
 		markup += contents.stream();
-
-		/*
-		 * for (Content element : contents) { markup += element.toString(); }
-		 */
-
 		markup += "</" + name + ">";
-
-		/*
-		 * for (Content n : afterList) { markup += n.toString(); }
-		 */
-
 		return markup;
 	}
 
