@@ -29,6 +29,7 @@ import org.whizu.ui.Layout;
 
 class FlowLayoutImpl extends LayoutImpl implements Layout {
 
+	@Override
 	public Content create() {
 		return create("flow-layout", "flow-layout-element");
 	}

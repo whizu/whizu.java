@@ -60,6 +60,7 @@ public class ClickListenerImpl implements EventHandler {
 		return id;
 	}
 
+	@Override
 	public void handleEvent() {
 		clicked();
 	}

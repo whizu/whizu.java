@@ -31,5 +31,5 @@ public interface Content {
 	/**
 	 * Generates and returns the corresponding HTML markup.
 	 */
-	public String stream();
+	public String render();
 }

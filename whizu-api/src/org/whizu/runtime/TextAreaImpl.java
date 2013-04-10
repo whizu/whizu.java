@@ -54,6 +54,7 @@ class TextAreaImpl extends Widget implements TextArea, Input {
 		// @formatter:on
 	}
 
+	@Override
 	public String getText() {
 		return text;
 	}

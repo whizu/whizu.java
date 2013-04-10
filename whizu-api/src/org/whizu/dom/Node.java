@@ -284,7 +284,7 @@ class Node implements Element {
 	}
 
 	@Override
-	public String stream() {
+	public String render() {
 		String markup = "<" + name;
 		for (String key : attrs.keySet()) {
 			markup += " " + key + "=" + quote(attrs.get(key));
@@ -299,7 +299,7 @@ class Node implements Element {
 		}
 
 		markup += ">";
-		markup += contents.stream();
+		markup += contents.render();
 		markup += "</" + name + ">";
 		return markup;
 	}

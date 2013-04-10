@@ -36,9 +36,13 @@ import org.whizu.jquery.Session;
  */
 public abstract class Widget implements Component {
 
+	private enum State {
+		NEW, RENDERED
+	}
+
 	private final String id;
 
-	private boolean rendered = false;
+	private State state = State.NEW;
 
 	protected String style = null;
 
@@ -52,7 +56,7 @@ public abstract class Widget implements Component {
 	 * Initial creation and rendering of this widget by compiling this widget
 	 * into a combination of static HTML markup and javascript to be executed.
 	 */
-	public abstract Content create();
+	protected abstract Content create();
 
 	@Override
 	public String getId() {
@@ -72,7 +76,7 @@ public abstract class Widget implements Component {
 	}
 
 	protected final boolean isRendered() {
-		return rendered;
+		return State.RENDERED.equals(state);
 	}
 
 	protected JQuery jQuery() {
@@ -87,10 +91,6 @@ public abstract class Widget implements Component {
 		return getRequest().select(selector);
 	}
 
-	protected final void setRendered(boolean rendered) {
-		this.rendered = rendered;
-	}
-
 	public void setStyleName(String style) {
 		this.style = style;
 	}
@@ -101,15 +101,16 @@ public abstract class Widget implements Component {
 	}
 
 	@Override
-	public final String stream() {
+	public final String render() {
 		try {
 			if (isRendered()) {
 				throw new IllegalStateException("This component is already rendered: " + this);
+			} else {
+				Content content = create();
+				return (content == null) ? "" : content.render();
 			}
-
-			return create().stream();
 		} finally {
-			setRendered(true);
+			this.state = State.RENDERED;
 		}
 	}
 }

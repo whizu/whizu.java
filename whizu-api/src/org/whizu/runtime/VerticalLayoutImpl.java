@@ -30,6 +30,7 @@ import org.whizu.dom.Content;
  */
 class VerticalLayoutImpl extends LayoutImpl {
 
+	@Override
 	public Content create() {
 		return super.create("vertical-layout", "vertical-layout-element");
 	}

@@ -29,7 +29,7 @@ package org.whizu.dom;
 public class Literal implements Content {
 
 	@Override
-	public String stream() {
+	public String render() {
 		return text;
 	}
 

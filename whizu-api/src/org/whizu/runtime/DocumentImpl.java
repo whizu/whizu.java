@@ -32,7 +32,8 @@ import org.whizu.widget.Container;
 class DocumentImpl extends Container implements Document {
 
 	DocumentImpl() {
-		setRendered(true);
+		render();
+		//setRendered(true);
 		//render();
 	}
 

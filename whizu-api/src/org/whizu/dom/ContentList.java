@@ -59,10 +59,10 @@ class ContentList implements Content {
 	}
 
 	@Override
-	public String stream() {
+	public String render() {
 		String markup = "";
 		for (Content element : contentList) {
-			markup += element.stream();
+			markup += element.render();
 		}
 		return markup;
 	}

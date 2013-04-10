@@ -67,10 +67,11 @@ class LabelImpl extends Widget implements Label {
 
 	public LabelImpl(String t, Content arg) {
 		//AbstractWidget impl = (AbstractWidget) arg;
-		t = t.replace("$1", arg.stream());
+		t = t.replace("$1", arg.render());
 		this.text = t;
 	}
 
+	@Override
 	public void addClickListener(ClickListener listener) {
 		//System.out.println("THIS LABEL " + text + " is rendered: " + isRendered);
 		//if not rendered, remember that this script must be added after rendering !
@@ -79,12 +80,14 @@ class LabelImpl extends Widget implements Label {
 		getSession().addClickListener(this.listener);
 	}
 
+	@Override
 	public Content create() {
 		String script = "";
 		JQuery jQuery = jQuery(this);
 		
 		if (listener != null) {
 			jQuery.click(new Function() {
+				@Override
 				public void execute() {
 
 					String url = "/whizu?id=" + listener.getId();
@@ -118,10 +121,12 @@ class LabelImpl extends Widget implements Label {
 		return Html.div(this).css(style).add(text);
 	}
 
+	@Override
 	public String getText() {
 		return text;
 	}
 
+	@Override
 	public void setText(String text) {
 		//if (this.value != null) value.setValue(text);
 		this.text = text;
@@ -141,6 +146,7 @@ class LabelImpl extends Widget implements Label {
 		}
 	}
 
+	@Override
 	public Label css(String clazz) {
 		setStyleName(clazz);
 		return this;

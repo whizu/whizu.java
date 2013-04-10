@@ -33,6 +33,7 @@ import org.whizu.widget.Container;
  */
 class FormImpl extends Container implements Form {
 
+	@Override
 	public Content create() {
 		//isRendered = true;
 		Content result = Html.form(getId()).css(style).attr("action", "").add(componentList);

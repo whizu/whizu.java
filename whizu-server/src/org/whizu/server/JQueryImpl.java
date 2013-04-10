@@ -65,7 +65,7 @@ class JQueryImpl extends Expression implements JQuery {
 
 	@Override
 	public JQuery append(Content content) {
-		return append(content.stream());
+		return append(content.render());
 	}
 
 	@Override
@@ -290,6 +290,6 @@ class JQueryImpl extends Expression implements JQuery {
 
 	@Override
 	public JQuery prepend(Content content) {
-		return prepend(content.stream());
+		return prepend(content.render());
 	}
 }

@@ -57,6 +57,7 @@ class ButtonImpl extends Widget implements Button {
 
 		if (listener != null) {
 			jQuery.click(new Function() {
+				@Override
 				public void execute() {
 					String url = "http://localhost:8090/whizu?id=" + listener.getId();
 
@@ -81,6 +82,7 @@ class ButtonImpl extends Widget implements Button {
 		return markup;
 	}
 
+	@Override
 	public void addClickListener(ClickListener listener) {
 		if (this.listener != null) {
 			throw new IllegalStateException();
