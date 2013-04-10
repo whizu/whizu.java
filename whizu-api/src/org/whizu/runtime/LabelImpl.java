@@ -27,7 +27,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.whizu.content.Content;
-import org.whizu.content.Component;
 import org.whizu.jquery.AbstractWidget;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
@@ -65,10 +64,9 @@ class LabelImpl extends AbstractWidget implements Label {
 		});
 	}
 
-	public LabelImpl(String t, Component arg) {
-		AbstractWidget impl = (AbstractWidget) arg;
-		//System.out.println("replacing $1 " + impl.getMarkup());
-		t = t.replace("$1", impl.stream());
+	public LabelImpl(String t, Content arg) {
+		//AbstractWidget impl = (AbstractWidget) arg;
+		t = t.replace("$1", arg.stream());
 		this.text = t;
 	}
 

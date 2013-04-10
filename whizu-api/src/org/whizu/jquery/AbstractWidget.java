@@ -47,11 +47,11 @@ public abstract class AbstractWidget implements Component /*,  Renderable, Ident
 		this.id = getSession().next();
 	}
 
-	protected Element a(AbstractWidget element) {
+	protected Element a(Identity element) {
 		return Html.a(element.getId());
 	}
 
-	protected Element button(AbstractWidget element) {
+	protected Element button(Identity element) {
 		return Html.button(element.getId());
 	}
 	
@@ -66,15 +66,11 @@ public abstract class AbstractWidget implements Component /*,  Renderable, Ident
 		return element;
 	}
 	
-	protected Element div(AbstractWidget element) {
+	protected Element div(Identity element) {
 		return Html.div(element.getId());
 	}
 	
-	protected Element div(Identity identity) {
-		return Html.div(identity.getId());
-	}
-	
-	protected Element form(AbstractWidget element) {
+	protected Element form(Identity element) {
 		return Html.form(element.getId());
 	}
 
@@ -94,11 +90,11 @@ public abstract class AbstractWidget implements Component /*,  Renderable, Ident
 		return getRequest().getSession();
 	}
 
-	protected Element input(AbstractWidget element) {
+	protected Element input(Identity element) {
 		return Html.input(element.getId());
 	}
 	
-	protected Element select(AbstractWidget element) {
+	protected Element select(Identity element) {
 		return Html.select(element.getId());
 	}
 
@@ -143,7 +139,7 @@ public abstract class AbstractWidget implements Component /*,  Renderable, Ident
 		this.width = width;
 	}
 	
-	protected Element textarea(AbstractWidget element) {
+	protected Element textarea(Identity element) {
 		return Html.textarea(element.getId());
 	}
 
