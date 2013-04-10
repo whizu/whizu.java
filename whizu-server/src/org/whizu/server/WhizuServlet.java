@@ -50,7 +50,15 @@ import org.whizu.ui.Application;
  */
 public class WhizuServlet extends HttpServlet {
 
-	private static final String INIT_PARAM_CONFIG = "config";
+	/**
+	 * The class name of hte Application implementation class.
+	 */
+	public static final String INIT_PARAM_APPLICATION = "application";
+
+	/**
+	 * The class name of the Configuration implementation class.
+	 */
+	public static final String INIT_PARAM_CONFIG = "config";
 
 	private static final long serialVersionUID = 520182899630886403L;
 
@@ -86,7 +94,7 @@ public class WhizuServlet extends HttpServlet {
 			}
 		});
 
-		this.application = newInstance(config, "application");
+		this.application = newInstance(config, INIT_PARAM_APPLICATION);
 		this.config = newInstance(config, INIT_PARAM_CONFIG);
 	}
 
