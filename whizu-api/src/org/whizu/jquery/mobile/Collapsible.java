@@ -23,6 +23,19 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-public class Collapsible {
+import org.whizu.html.Html;
+import org.whizu.runtime.AbstractComponent;
 
+public class Collapsible extends AbstractComponent {
+
+	@Override
+	public Collapsible css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
+
+	@Override
+	public Html create() {
+		throw new UnsupportedOperationException();
+	}
 }

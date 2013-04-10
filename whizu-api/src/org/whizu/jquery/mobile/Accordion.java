@@ -23,11 +23,24 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.html.Html;
+import org.whizu.runtime.AbstractComponent;
+
 /**
  * Creates a collapsible set of collapsible blocks of content.
  * 
  * @author Rudy D'hauwe
  */
-public class Accordion {
+public class Accordion extends AbstractComponent {
 
+	@Override
+	public Accordion css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
+
+	@Override
+	public Html create() {
+		throw new UnsupportedOperationException();
+	}
 }

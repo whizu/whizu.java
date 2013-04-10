@@ -23,9 +23,22 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.html.Html;
+import org.whizu.runtime.AbstractComponent;
+
 /**
  * @author Rudy D'hauwe
  */
-public class Dialog {
+public class Dialog extends AbstractComponent {
 
+	@Override
+	public Dialog css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
+
+	@Override
+	public Html create() {
+		throw new UnsupportedOperationException();
+	}
 }

@@ -23,6 +23,54 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-public class Grid {
+import org.whizu.html.Html;
+import org.whizu.html.NonVoid;
+import org.whizu.runtime.AbstractComponent;
 
+/**
+ * The jQuery Mobile framework provides a simple way to build CSS-based columns
+ * that can also be responsive.
+ * 
+ * @author Rudy D'hauwe
+ */
+public class Grid extends AbstractComponent {
+
+	public enum Type {
+		// @formatter:off
+		TWO_COLUMNS("ui-grid-a"),
+		THREE_COLUMNS("ui-grid-b"),
+		FOUR_COLUMNS("ui-grid-c"),
+		FIVE_COLUMNS("ui-grid-d"); 
+		// @formatter:on
+
+		protected String value;
+
+		Type(String value) {
+			this.value = value;
+		}
+	}
+
+	private static final Type DEFAULT_GRID_TYPE = Type.TWO_COLUMNS;;
+
+	private Type type = DEFAULT_GRID_TYPE;
+
+	public Grid() {
+		this(DEFAULT_GRID_TYPE);
+	}
+
+	public Grid(Type type) {
+		this.type = type;
+	}
+
+	@Override
+	public Html create() {
+		NonVoid grid = div(this).css(type.value);
+		return grid;
+	}
+
+	@Override
+	public Grid css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
 }
