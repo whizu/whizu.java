@@ -29,7 +29,7 @@ import java.util.Map;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
 import org.whizu.jquery.Session;
-import org.whizu.runtime.ScriptUI;
+import org.whizu.jquery.ui.WhizuUI;
 import org.whizu.ui.Application;
 
 /**
@@ -92,7 +92,7 @@ class SessionImpl implements Session {
 				@SuppressWarnings("unchecked")
 				Class<Application> clazz = (Class<Application>) Class.forName(id);
 				Application app = clazz.newInstance();
-				app.init(new ScriptUI()); //TODO don't create static UI here
+				app.init(new WhizuUI()); //TODO don't create static UI here
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (InstantiationException e) {

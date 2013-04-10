@@ -24,7 +24,7 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Component;
-import org.whizu.runtime.ScriptUI;
+import org.whizu.jquery.ui.WhizuUI;
 import org.whizu.ui.Application;
 import org.whizu.ui.UI;
 
@@ -33,7 +33,7 @@ import org.whizu.ui.UI;
  */
 public class JQueryMobileApp implements Application {
 
-	private UI ui = new ScriptUI();
+	private UI ui = new WhizuUI();
 
 	@Override
 	public String getTitle() {

@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.runtime;
+package org.whizu.jquery.ui;
 
 import org.whizu.dom.Component;
 import org.whizu.jquery.Request;
@@ -51,9 +51,9 @@ import org.whizu.value.Value;
 /**
  * @author Rudy D'hauwe
  */
-public class ScriptUI implements UI {
+public class WhizuUI implements UI {
 
-	public ScriptUI() {
+	public WhizuUI() {
 	}
 
 	@Override

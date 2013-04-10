@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.runtime;
+package org.whizu.jquery.ui;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;

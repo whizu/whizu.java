@@ -21,39 +21,37 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.runtime;
+package org.whizu.jquery.ui;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Html;
-import org.whizu.ui.BarChart;
+import org.whizu.ui.ClickListener;
 import org.whizu.widget.Widget;
 
-/**
- * @author Rudy D'hauwe
- */
-public class BarChartImpl extends Widget implements BarChart {
+class Hyperlink extends Widget {
 
-	private String[] x;
+	private String caption;
 	
-	private Integer[] y;
+	private ClickListenerImpl listener;
 
-	public BarChartImpl(String[] x, Integer[] y) {
-		this.x = x;
-		this.y = y;
+	Hyperlink(String caption, ClickListener listener) {
+		this.caption = caption;
+		addClickListener(listener);
 	}
 
 	@Override
 	public Content create() {
-		jQuery(this)
-				.callunquoted(
-						"jqBarGraph",
-						"{ data: new Array([" + y[0] + ",'" + x[0] + "','#333333'], [" + y[1] + ",'" + x[1]
-								+ "','#666666']) }");
-		return Html.div(getId());
+		String href = "/whizu?id=" + listener.getId();
+		return Html.div(getId()).add(Html.a().attr("href", href).add(caption));
+	}
+
+	private void addClickListener(ClickListener listener) {
+		this.listener = new ClickListenerImpl(listener);
+		getSession().addClickListener(this.listener);
 	}
 
 	@Override
-	public BarChartImpl css(String clazz) {
+	public Hyperlink css(String clazz) {
 		setStyleName(clazz);
 		return this;
 	}

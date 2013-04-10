@@ -21,16 +21,14 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.runtime;
+package org.whizu.jquery.ui;
 
-import org.whizu.dom.Content;
 import org.whizu.ui.Layout;
 
-
-class FlowLayoutImpl extends LayoutImpl implements Layout {
-
-	@Override
-	public Content create() {
-		return create("flow-layout", "flow-layout-element");
-	}
+/**
+ * 
+ * 
+ * @author Rudy D'hauwe <rudy.dhauwe@whizui.com>
+ */
+class CssLayoutImpl extends LayoutImpl implements Layout {
 }

@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.runtime;
+package org.whizu.jquery.ui;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

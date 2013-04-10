@@ -42,7 +42,7 @@ import org.whizu.jquery.Input;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Session;
-import org.whizu.runtime.ScriptUI;
+import org.whizu.jquery.ui.WhizuUI;
 import org.whizu.ui.Application;
 
 /**
@@ -171,7 +171,7 @@ public class WhizuServlet extends HttpServlet {
 					
 					@Override
 					public void handleEvent() {
-						app.init(new ScriptUI());
+						app.init(new WhizuUI());
 					}
 					
 					@Override
@@ -184,7 +184,7 @@ public class WhizuServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		application.init(new ScriptUI());
+		application.init(new WhizuUI());
 		return RequestImpl.get().finish();
 	}
 

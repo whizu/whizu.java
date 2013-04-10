@@ -21,36 +21,40 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.runtime;
+package org.whizu.jquery.ui;
 
-import org.whizu.dom.Component;
 import org.whizu.dom.Content;
-import org.whizu.dom.Foreach;
 import org.whizu.dom.Html;
-import org.whizu.ui.Layout;
-import org.whizu.widget.Container;
+import org.whizu.ui.BarChart;
+import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-class LayoutImpl extends Container implements Layout {
+class BarChartImpl extends Widget implements BarChart {
 
-	protected Content create(String css, final String itemClass) {
-		// isRendered = true;
-		return Html.div(this).css(style).css(css).width(width).add(new Foreach<Component>(componentList) {
+	private String[] x;
+	
+	private Integer[] y;
 
-			@Override
-			public Content render(Component item) {
-				item.css(itemClass); // to be tested
-				return item;
-				// return item.render();
-				// return item.render().css(itemClass); //this works
-			}
-		});
+	public BarChartImpl(String[] x, Integer[] y) {
+		this.x = x;
+		this.y = y;
 	}
 
 	@Override
 	public Content create() {
-		return Html.div(this).css(style).width(width).add(componentList);
+		jQuery(this)
+				.callunquoted(
+						"jqBarGraph",
+						"{ data: new Array([" + y[0] + ",'" + x[0] + "','#333333'], [" + y[1] + ",'" + x[1]
+								+ "','#666666']) }");
+		return Html.div(getId());
+	}
+
+	@Override
+	public BarChartImpl css(String clazz) {
+		setStyleName(clazz);
+		return this;
 	}
 }

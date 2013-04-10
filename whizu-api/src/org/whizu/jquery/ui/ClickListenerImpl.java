@@ -21,14 +21,47 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.runtime;
+package org.whizu.jquery.ui;
 
-import org.whizu.ui.Layout;
+import org.whizu.jquery.EventHandler;
+import org.whizu.jquery.Request;
+import org.whizu.jquery.RequestContext;
+import org.whizu.jquery.Session;
+import org.whizu.ui.ClickListener;
 
 /**
- * 
- * 
- * @author Rudy D'hauwe <rudy.dhauwe@whizui.com>
+ * @author Rudy D'hauwe
  */
-class CssLayoutImpl extends LayoutImpl implements Layout {
+class ClickListenerImpl implements EventHandler {
+
+	private String id;
+	
+	private ClickListener listener;
+
+	public ClickListenerImpl(ClickListener listener) {
+		this.id = getSession().next();
+		this.listener = listener;
+	}
+	
+	private Session getSession() {
+		return getRequest().getSession();
+	}
+
+	private Request getRequest() {
+		return RequestContext.getRequest();
+	}
+
+	private void clicked() {
+		listener.click();
+	}
+	
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
+	public void handleEvent() {
+		clicked();
+	}
 }

@@ -21,47 +21,16 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.runtime;
+package org.whizu.jquery.ui;
 
-import org.whizu.jquery.EventHandler;
-import org.whizu.jquery.Request;
-import org.whizu.jquery.RequestContext;
-import org.whizu.jquery.Session;
-import org.whizu.ui.ClickListener;
+import org.whizu.dom.Content;
+import org.whizu.ui.Layout;
 
-/**
- * @author Rudy D'hauwe
- */
-public class ClickListenerImpl implements EventHandler {
 
-	private String id;
-	
-	private ClickListener listener;
-
-	public ClickListenerImpl(ClickListener listener) {
-		this.id = getSession().next();
-		this.listener = listener;
-	}
-	
-	private Session getSession() {
-		return getRequest().getSession();
-	}
-
-	private Request getRequest() {
-		return RequestContext.getRequest();
-	}
-
-	private void clicked() {
-		listener.click();
-	}
-	
-	@Override
-	public String getId() {
-		return id;
-	}
+class FlowLayoutImpl extends LayoutImpl implements Layout {
 
 	@Override
-	public void handleEvent() {
-		clicked();
+	public Content create() {
+		return create("flow-layout", "flow-layout-element");
 	}
 }
