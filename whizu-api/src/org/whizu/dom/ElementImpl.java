@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.html;
+package org.whizu.dom;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,11 +29,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Decorator;
-import org.whizu.dom.Element;
-import org.whizu.dom.Foreach;
-import org.whizu.dom.Literal;
 
 /**
  * @author Rudy D'hauwe

@@ -21,12 +21,11 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.html;
+package org.whizu.dom;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.whizu.dom.Content;
 
 /**
  * @author Rudy D'hauwe
