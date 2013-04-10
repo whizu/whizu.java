@@ -25,6 +25,7 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.content.Content;
 import org.whizu.content.Element;
+import org.whizu.html.Html;
 import org.whizu.jquery.AbstractComponent;
 
 /**
@@ -67,7 +68,7 @@ public class Grid extends AbstractComponent {
 
 	@Override
 	public Content create() {
-		Element grid = div(this).css(type.value);
+		Element grid = Html.div(this).css(type.value);
 		return grid;
 	}
 

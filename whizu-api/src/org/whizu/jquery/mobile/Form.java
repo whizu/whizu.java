@@ -24,6 +24,7 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.content.Content;
+import org.whizu.html.Html;
 import org.whizu.jquery.AbstractComponent;
 import org.whizu.value.PasswordValue;
 
@@ -41,7 +42,7 @@ public class Form extends AbstractComponent {
 	@Override
 	public Content create() {
 		// @formatter:off
-		return form(this)
+		return Html.form(this)
 				.attr("method", "post")
 				.attr("action", "form.php");
 		// @formatter:on

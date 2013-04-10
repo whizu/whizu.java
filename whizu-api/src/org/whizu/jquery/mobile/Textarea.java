@@ -38,7 +38,7 @@ public class Textarea extends AbstractComponent {
 
 	@Override
 	public Content create() {
-		Element textarea = textarea(this).attr("name", "label");
+		Element textarea = Html.textarea(this).attr("name", "label");
 		Element label = Html.tag("label").attr("for", textarea.getId()).add("label");
 		return label.after(textarea);
 	}

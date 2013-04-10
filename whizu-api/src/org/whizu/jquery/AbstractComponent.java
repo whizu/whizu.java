@@ -23,12 +23,11 @@
  *******************************************************************************/
 package org.whizu.jquery;
 
+import org.whizu.content.Component;
 import org.whizu.content.Content;
 import org.whizu.content.Decorator;
 import org.whizu.content.Element;
 import org.whizu.content.Identity;
-import org.whizu.content.Component;
-import org.whizu.html.Html;
 
 /**
  * @author Rudy D'hauwe
@@ -46,14 +45,6 @@ public abstract class AbstractComponent implements Component {
 	protected AbstractComponent() {
 		this.id = getSession().next();
 	}
-
-	protected Element a(Identity element) {
-		return Html.a(element.getId());
-	}
-
-	protected Element button(Identity element) {
-		return Html.button(element.getId());
-	}
 	
 	public abstract Content create();
 	
@@ -66,14 +57,6 @@ public abstract class AbstractComponent implements Component {
 		return element;
 	}
 	
-	protected Element div(Identity element) {
-		return Html.div(element.getId());
-	}
-	
-	protected Element form(Identity element) {
-		return Html.form(element.getId());
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -90,10 +73,6 @@ public abstract class AbstractComponent implements Component {
 		return getRequest().getSession();
 	}
 
-	protected Element input(Identity element) {
-		return Html.input(element.getId());
-	}
-	
 	public boolean isRendered() {
 		return rendered;
 	}
@@ -132,10 +111,6 @@ public abstract class AbstractComponent implements Component {
 	
 	public void width(String width) {
 		this.width = width;
-	}
-	
-	protected Element textarea(Identity element) {
-		return Html.textarea(element.getId());
 	}
 
 	@Override

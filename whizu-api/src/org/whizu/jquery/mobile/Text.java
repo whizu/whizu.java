@@ -41,7 +41,7 @@ public class Text extends AbstractComponent {
 
 	@Override
 	public Content create() {
-		Element input = input(this).attr("type", "text").attr("name", "label").attr("value", "");
+		Element input = Html.input(this).attr("type", "text").attr("name", "label").attr("value", "");
 		Element label = Html.tag("label").attr("for", input.getId()).add("label");
 		return label.after(input);
 	}

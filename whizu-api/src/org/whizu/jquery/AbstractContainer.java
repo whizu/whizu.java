@@ -29,6 +29,7 @@ import java.util.List;
 import org.whizu.content.Component;
 import org.whizu.content.Container;
 import org.whizu.content.Content;
+import org.whizu.html.Html;
 
 /**
  * @author Rudy D'hauwe
@@ -64,7 +65,7 @@ public class AbstractContainer extends AbstractComponent implements Container {
 
 	public Content create() {
 		System.out.println("Creating " + this + " with components " + componentList.size());
-		return div(this).add(componentList);
+		return Html.div(this).add(componentList);
 	}
 
 	@Override

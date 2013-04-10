@@ -26,6 +26,7 @@ package org.whizu.runtime;
 import org.whizu.content.Component;
 import org.whizu.content.Content;
 import org.whizu.content.Foreach;
+import org.whizu.html.Html;
 import org.whizu.jquery.AbstractContainer;
 import org.whizu.ui.Layout;
 
@@ -36,21 +37,20 @@ class LayoutImpl extends AbstractContainer implements Layout {
 
 	protected Content create(String css, final String itemClass) {
 		// isRendered = true;
-		return div(this).css(style).css(css).width(width).add(new Foreach<Component>(componentList) {
+		return Html.div(this).css(style).css(css).width(width).add(new Foreach<Component>(componentList) {
 
 			@Override
 			public Content render(Component item) {
-				item.css(itemClass); //to be tested
+				item.css(itemClass); // to be tested
 				return item;
-				//return item.render(); 
-				//return item.render().css(itemClass); //this works
+				// return item.render();
+				// return item.render().css(itemClass); //this works
 			}
 		});
 	}
 
 	@Override
 	public Content create() {
-//		isRendered = true;
-		return div(this).css(style).width(width).add(componentList);
+		return Html.div(this).css(style).width(width).add(componentList);
 	}
 }

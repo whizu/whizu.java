@@ -25,6 +25,7 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.content.Content;
 import org.whizu.content.Element;
+import org.whizu.html.Html;
 import org.whizu.jquery.AbstractComponent;
 
 /**
@@ -89,22 +90,22 @@ public class Button extends AbstractComponent {
 		jQuery(this).trigger("create");
 		switch (type) {
 			case INPUT :
-				Element button = input(this).attr("type", "button").attr("value", title)
+				Element button = Html.input(this).attr("type", "button").attr("value", title)
 						.attr("data-inline", inline.value);
 				decorate(button, icon, theme, mini);
 				return button;
 			case SUBMIT :
-				Element submit = input(this).attr("type", "submit").attr("value", title).attr("data-inline", inline.value)
+				Element submit = Html.input(this).attr("type", "submit").attr("value", title).attr("data-inline", inline.value)
 						.attr("data-mini", mini.value);
 				decorate(submit, icon, theme, mini);
 				return submit;
 			case RESET :
-				return input(this).attr("type", "reset").attr("value", title).attr("data-inline", inline.value)
+				return Html.input(this).attr("type", "reset").attr("value", title).attr("data-inline", inline.value)
 						.attr("data-mini", mini.value);
 			case BUTTON :
-				return button(this).attr("data-inline", inline.value).attr("data-mini", mini.value).add(title);
+				return Html.button(this).attr("data-inline", inline.value).attr("data-mini", mini.value).add(title);
 			case ANCHOR :
-				return a(this).attr("data-role", "button").attr("data-inline", inline.value)
+				return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
 						.attr("data-mini", mini.value).add(title);
 			default :
 				throw new IllegalArgumentException("Unsupported button type: " + type);

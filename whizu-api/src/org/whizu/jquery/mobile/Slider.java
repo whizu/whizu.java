@@ -58,7 +58,7 @@ public class Slider extends AbstractComponent {
 	@Override
 	public Content create() {
 		// @formatter:off
-		Element input = input(this)
+		Element input = Html.input(this)
 				.attr("type", "range")
 				.attr("name", "label")
 				.attr("value", min)

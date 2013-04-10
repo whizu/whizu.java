@@ -15,6 +15,10 @@ public class Html {
 		return tag("a");
 	}
 
+	public static Element a(Identity element) {
+		return a(element.getId());
+	}
+
 	public static Element a(String id) {
 		return a().id(id);
 	}
@@ -35,12 +39,20 @@ public class Html {
 		return tag("button");
 	}
 
+	public static Element button(Identity element) {
+		return button(element.getId());
+	}
+
 	public static Element button(String id) {
 		return button().id(id);
 	}
 
 	public static Element div() {
 		return tag("div");
+	}
+
+	public static Element div(Identity element) {
+		return div(element.getId());
 	}
 
 	public static Element div(String id) {
@@ -50,7 +62,6 @@ public class Html {
 	public static Element form(String id) {
 		return tag("form").id(id);
 	}
-
 	public static Element h1() {
 		return tag("h1");
 	}
@@ -62,12 +73,17 @@ public class Html {
 	public static Element hr() {
 		return new ElementImpl("hr");
 	}
+
 	public static Element img(String id) {
 		return tag("img").id(id);
 	}
 
 	public static Element input() {
 		return tag("input");
+	}
+
+	public static Element input(Identity element) {
+		return input(element.getId());
 	}
 
 	public static Element input(String id) {
@@ -102,6 +118,10 @@ public class Html {
 		return td().add(item);
 	}
 
+	public static Element textarea(Identity element) {
+		return textarea(element.getId());
+	}
+
 	public static Element textarea(String id) {
 		return tag("textarea").id(id);
 	}
@@ -132,5 +152,9 @@ public class Html {
 
 	public static Element tr(Element td) {
 		return tr().add(td);
+	}
+
+	public static Element form(Identity element) {
+		return form(element.getId());
 	}
 }

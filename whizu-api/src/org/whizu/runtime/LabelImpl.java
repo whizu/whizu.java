@@ -27,6 +27,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.whizu.content.Content;
+import org.whizu.html.Html;
 import org.whizu.jquery.AbstractComponent;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
@@ -114,7 +115,7 @@ class LabelImpl extends AbstractComponent implements Label {
 		}
 		
 		//isRendered = true;
-		return div(this).css(style).add(text);
+		return Html.div(this).css(style).add(text);
 	}
 
 	public String getText() {
