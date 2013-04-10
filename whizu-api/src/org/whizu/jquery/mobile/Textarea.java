@@ -38,8 +38,8 @@ public class Textarea extends Widget {
 
 	@Override
 	public Content create() {
-		Element textarea = Html.textarea(this).attr("name", "label");
-		Element label = Html.tag("label").attr("for", textarea.getId()).add("label");
-		return label.after(textarea);
+		Element field = Html.textarea(this).attr("name", "label");
+		Element label = Html.tag("label").attr("for", field.getId()).add("label");
+		return field.after(label);
 	}
 }

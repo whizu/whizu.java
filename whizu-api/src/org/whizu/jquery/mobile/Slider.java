@@ -58,7 +58,7 @@ public class Slider extends Widget {
 	@Override
 	public Content create() {
 		// @formatter:off
-		Element input = Html.input(this)
+		Element field = Html.input(this)
 				.attr("type", "range")
 				.attr("name", "label")
 				.attr("value", min)
@@ -69,10 +69,10 @@ public class Slider extends Widget {
 				.decorate("data-track-theme", track)
 				.decorate(mini);
 		Element label = Html.tag("label")
-				.attr("for", input.getId())
+				.attr("for", field.getId())
 				.add("label");
 		// @formatter:on
-		return label.after(input);
+		return field.after(label);
 	}
 
 	@Override

@@ -59,6 +59,6 @@ public class FlipSwitch extends Widget {
 				.attr("for", field.getId())
 				.add("label");
 		// @formatter:on
-		return label.after(field);
+		return field.after(label);
 	}
 }
