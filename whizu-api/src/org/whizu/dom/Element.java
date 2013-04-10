@@ -26,7 +26,7 @@ package org.whizu.dom;
 import java.util.List;
 
 /**
- * An element in the Document Object Model (DOM) has attributes, text and
+ * An element in the Document Object Model (DOM) having attributes, text and
  * children. It provides methods to traverse the parent and children and to get
  * access to its attributes. Due to a lot of flaws in DOM API specifications and
  * implementations, those methods are no fun to use. jQuery provides a wrapper
@@ -50,7 +50,7 @@ public interface Element extends Identity {
 	 * @return this
 	 */
 	public <T extends Content> Element add(List<T> content);
-	
+
 	/**
 	 * Add content to this element.
 	 * 
