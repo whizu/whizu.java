@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * @author Rudy D'hauwe
  */
-class ElementImpl implements Element {
+class Node implements Element {
 
 	public static void main(String[] args) {
 		print(Html.tag("div").attr("id", "my-div").attr("class", "my-class"));
@@ -125,7 +125,7 @@ class ElementImpl implements Element {
 
 	private String id;
 
-	ElementImpl(String name) {
+	Node(String name) {
 		this.name = name;
 	}
 
@@ -311,7 +311,7 @@ class ElementImpl implements Element {
 
 	@Override
 	public Element wrap(String name) {
-		ElementImpl n = new ElementImpl(name);
+		Node n = new Node(name);
 		return n.add(this);
 	}
 }

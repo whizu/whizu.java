@@ -32,7 +32,7 @@ public class Html {
 	}
 
 	public static Element br() {
-		return new ElementImpl("br");
+		return new Node("br");
 	}
 
 	public static Element button() {
@@ -75,7 +75,7 @@ public class Html {
 	}
 
 	public static Element hr() {
-		return new ElementImpl("hr");
+		return new Node("hr");
 	}
 
 	public static Element img(String id) {
@@ -107,7 +107,7 @@ public class Html {
 	}
 
 	public static Element tag(String name) {
-		return new ElementImpl(name);
+		return new Node(name);
 	}
 
 	public static Element tbody() {
