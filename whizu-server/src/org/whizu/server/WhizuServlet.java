@@ -42,8 +42,8 @@ import org.whizu.jquery.Input;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Session;
-import org.whizu.jquery.ui.WhizuUI;
 import org.whizu.ui.Application;
+import org.whizu.ui.WhizuUI;
 
 /**
  * @author Rudy D'hauwe

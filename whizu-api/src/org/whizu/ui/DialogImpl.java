@@ -21,74 +21,40 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+package org.whizu.ui;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Html;
-import org.whizu.jquery.Input;
-import org.whizu.ui.TextField;
-import org.whizu.value.StringValue;
-import org.whizu.widget.Widget;
+import org.whizu.widget.Container;
 
+class DialogImpl extends Container implements Dialog {
 
-class TextFieldImpl extends Widget implements TextField, Input {
+	private String caption;
 
-	private String text;
-	
-	private StringValue value;
-
-	TextFieldImpl(String text) {
-		this.text = text;
-	}
-
-	TextFieldImpl(StringValue value) {
-		this.text = value.getValue();
-		this.value = value;
-		this.value.addPropertyChangeListener(new PropertyChangeListener() {
-
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				text = TextFieldImpl.this.value.getValue();
-				jQuery(TextFieldImpl.this).val(text);
-			}
-		});
+	protected DialogImpl(String caption) {
+		this.caption = caption;
 	}
 
 	@Override
 	public Content create() {
-		getSession().addInput(this);
-
-		// @formatter:off
-		return Html.tag("input")
-						.attr("id", getId())
-						.attr("type", "text")
-						.width("300px")
-						.attr("name", getId())
-						.css(style)
-						.style("display","inline-block")
-						.add(text);
-		// @formatter:on
-	}
-
-	@Override
-	public String getText() {
-		return text;
-	}
-
-	@Override
-	public void parseString(String value) {
-		this.text = value;
-		if (this.value != null) {
-			this.value.setValue(value);
+		String script = null;
+		if (width == null) {
+			script = ".popup('open');";
+			// jQuery(this).dialog();
+		} else {
+			script = ".popup({ width:" + width + " });";
+			// jQuery(this).dialog(width);
 		}
+		jQuery(this).concat(script); // todo further refactoring
+
+		// isRendered = true;
+		jQuery(this).trigger("create");
+		return Html.div(getId()).attr("data-role", "content").attr("title", caption).add(componentList);
 	}
 
-	@Override
-	public TextField css(String clazz) {
-		setStyleName(clazz);
-		return this;
+	public void close() {
+		if (isRendered()) {
+			jQuery(this).call("dialog", "close");
+		}
 	}
 }

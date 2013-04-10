@@ -21,30 +21,12 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
 
 import org.whizu.dom.Component;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Session;
-import org.whizu.ui.BarChart;
-import org.whizu.ui.Button;
-import org.whizu.ui.ClickListener;
-import org.whizu.ui.Dialog;
-import org.whizu.ui.Document;
-import org.whizu.ui.Form;
-import org.whizu.ui.Html;
-import org.whizu.ui.HtmlEditor;
-import org.whizu.ui.Image;
-import org.whizu.ui.Label;
-import org.whizu.ui.Layout;
-import org.whizu.ui.Table;
-import org.whizu.ui.Text;
-import org.whizu.ui.TextArea;
-import org.whizu.ui.TextField;
-import org.whizu.ui.UI;
-import org.whizu.ui.View;
-import org.whizu.ui.Window;
 import org.whizu.value.StringValue;
 import org.whizu.value.Value;
 

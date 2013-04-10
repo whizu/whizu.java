@@ -21,41 +21,23 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Html;
-import org.whizu.ui.Dialog;
 import org.whizu.widget.Container;
 
-class DialogImpl extends Container implements Dialog {
+/**
+ * @author Rudy D'hauwe
+ */
+class DocumentImpl extends Container implements Document {
 
-	private String caption;
-
-	protected DialogImpl(String caption) {
-		this.caption = caption;
+	DocumentImpl() {
+		render();
+		//setRendered(true);
+		//render();
 	}
 
 	@Override
-	public Content create() {
-		String script = null;
-		if (width == null) {
-			script = ".popup('open');";
-			// jQuery(this).dialog();
-		} else {
-			script = ".popup({ width:" + width + " });";
-			// jQuery(this).dialog(width);
-		}
-		jQuery(this).concat(script); // todo further refactoring
-
-		// isRendered = true;
-		jQuery(this).trigger("create");
-		return Html.div(getId()).attr("data-role", "content").attr("title", caption).add(componentList);
-	}
-
-	public void close() {
-		if (isRendered()) {
-			jQuery(this).call("dialog", "close");
-		}
+	public String getId() {
+		return "whizu";
 	}
 }

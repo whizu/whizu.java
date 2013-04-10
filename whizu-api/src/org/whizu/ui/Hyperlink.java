@@ -21,51 +21,36 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Html;
-import org.whizu.jquery.Input;
-import org.whizu.ui.TextArea;
 import org.whizu.widget.Widget;
 
+class Hyperlink extends Widget {
 
-class TextAreaImpl extends Widget implements TextArea, Input {
+	private String caption;
+	
+	private ClickListenerImpl listener;
 
-	private String text;
-
-	TextAreaImpl(String text) {
-		this.text = text;
+	Hyperlink(String caption, ClickListener listener) {
+		this.caption = caption;
+		addClickListener(listener);
 	}
 
 	@Override
 	public Content create() {
-		getSession().addInput(this);
+		String href = "/whizu?id=" + listener.getId();
+		return Html.div(getId()).add(Html.a().attr("href", href).add(caption));
+	}
 
-		jQuery(this).closest("div").trigger("create").call("flexible");
-
-		// @formatter:off
-		return Html.textarea(getId())
-						.css("textarea")
-						.width("100%")
-						.style("overflow", "hidden")
-						.attr("name", getId())
-						.add(text);
-		// @formatter:on
+	private void addClickListener(ClickListener listener) {
+		this.listener = new ClickListenerImpl(listener);
+		getSession().addClickListener(this.listener);
 	}
 
 	@Override
-	public String getText() {
-		return text;
-	}
-
-	@Override
-	public void parseString(String value) {
-		this.text = value;
-	}
-
-	@Override
-	public TextArea css(String clazz) {
+	public Hyperlink css(String clazz) {
 		setStyleName(clazz);
 		return this;
 	}

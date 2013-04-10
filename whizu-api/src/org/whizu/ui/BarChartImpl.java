@@ -21,17 +21,39 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
 
 import org.whizu.dom.Content;
+import org.whizu.dom.Html;
+import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-class HorizontalLayoutImpl extends LayoutImpl {
+class BarChartImpl extends Widget implements BarChart {
+
+	private String[] x;
+	
+	private Integer[] y;
+
+	public BarChartImpl(String[] x, Integer[] y) {
+		this.x = x;
+		this.y = y;
+	}
 
 	@Override
 	public Content create() {
-		return super.create("horizontal-layout", "horizontal-layout-element");
+		jQuery(this)
+				.callunquoted(
+						"jqBarGraph",
+						"{ data: new Array([" + y[0] + ",'" + x[0] + "','#333333'], [" + y[1] + ",'" + x[1]
+								+ "','#666666']) }");
+		return Html.div(getId());
+	}
+
+	@Override
+	public BarChartImpl css(String clazz) {
+		setStyleName(clazz);
+		return this;
 	}
 }

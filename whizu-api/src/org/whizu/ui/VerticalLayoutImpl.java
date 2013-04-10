@@ -21,24 +21,17 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
 
 import org.whizu.dom.Content;
-import org.whizu.dom.Html;
-import org.whizu.ui.Form;
-import org.whizu.widget.Container;
 
 /**
  * @author Rudy D'hauwe
  */
-class FormImpl extends Container implements Form {
+class VerticalLayoutImpl extends LayoutImpl {
 
 	@Override
 	public Content create() {
-		//isRendered = true;
-		Content result = Html.form(getId()).css(style).attr("action", "").add(componentList);
-		String fct= "'submit', function(e) { e.stopPropagation(); e.preventDefault(); $(this).children().last().trigger('click'); }";
-		jQuery(this).callunquoted("bind", fct);
-		return result;
+		return super.create("vertical-layout", "vertical-layout-element");
 	}
 }

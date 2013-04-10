@@ -29,8 +29,8 @@ import java.util.Map;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
 import org.whizu.jquery.Session;
-import org.whizu.jquery.ui.WhizuUI;
 import org.whizu.ui.Application;
+import org.whizu.ui.WhizuUI;
 
 /**
  * @author Rudy D'hauwe

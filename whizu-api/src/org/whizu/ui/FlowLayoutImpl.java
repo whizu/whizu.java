@@ -21,36 +21,15 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
 
-import org.whizu.dom.Component;
 import org.whizu.dom.Content;
-import org.whizu.dom.Foreach;
-import org.whizu.dom.Html;
-import org.whizu.ui.Layout;
-import org.whizu.widget.Container;
 
-/**
- * @author Rudy D'hauwe
- */
-class LayoutImpl extends Container implements Layout {
 
-	protected Content create(String css, final String itemClass) {
-		// isRendered = true;
-		return Html.div(this).css(style).css(css).width(width).add(new Foreach<Component>(componentList) {
-
-			@Override
-			public Content render(Component item) {
-				item.css(itemClass); // to be tested
-				return item;
-				// return item.render();
-				// return item.render().css(itemClass); //this works
-			}
-		});
-	}
+class FlowLayoutImpl extends LayoutImpl implements Layout {
 
 	@Override
 	public Content create() {
-		return Html.div(this).css(style).width(width).add(componentList);
+		return create("flow-layout", "flow-layout-element");
 	}
 }

@@ -21,38 +21,13 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Html;
-import org.whizu.ui.ClickListener;
-import org.whizu.widget.Widget;
 
-class Hyperlink extends Widget {
-
-	private String caption;
-	
-	private ClickListenerImpl listener;
-
-	Hyperlink(String caption, ClickListener listener) {
-		this.caption = caption;
-		addClickListener(listener);
-	}
-
-	@Override
-	public Content create() {
-		String href = "/whizu?id=" + listener.getId();
-		return Html.div(getId()).add(Html.a().attr("href", href).add(caption));
-	}
-
-	private void addClickListener(ClickListener listener) {
-		this.listener = new ClickListenerImpl(listener);
-		getSession().addClickListener(this.listener);
-	}
-
-	@Override
-	public Hyperlink css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
+/**
+ * 
+ * 
+ * @author Rudy D'hauwe <rudy.dhauwe@whizui.com>
+ */
+class CssLayoutImpl extends LayoutImpl implements Layout {
 }

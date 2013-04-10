@@ -21,31 +21,35 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
 
+import org.whizu.dom.Component;
 import org.whizu.dom.Content;
+import org.whizu.dom.Foreach;
 import org.whizu.dom.Html;
-import org.whizu.ui.Window;
 import org.whizu.widget.Container;
 
-class WindowImpl extends Container implements Window {
+/**
+ * @author Rudy D'hauwe
+ */
+class LayoutImpl extends Container implements Layout {
 
-	private String caption;
+	protected Content create(String css, final String itemClass) {
+		// isRendered = true;
+		return Html.div(this).css(style).css(css).width(width).add(new Foreach<Component>(componentList) {
 
-	WindowImpl(String caption) {
-		this.caption = caption;
+			@Override
+			public Content render(Component item) {
+				item.css(itemClass); // to be tested
+				return item;
+				// return item.render();
+				// return item.render().css(itemClass); //this works
+			}
+		});
 	}
 
 	@Override
 	public Content create() {
-		jQuery(this).call("dialog");
-		// isRendered = true;
-		return Html.div(getId()).attr("title", caption).add(componentList);
-	}
-
-	public void close() {
-		if (isRendered()) {
-			jQuery(this).call("dialog", "close");
-		}
+		return Html.div(this).css(style).width(width).add(componentList);
 	}
 }

@@ -21,17 +21,51 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
 
 import org.whizu.dom.Content;
+import org.whizu.dom.Html;
+import org.whizu.jquery.Input;
+import org.whizu.widget.Widget;
 
-/**
- * @author Rudy D'hauwe
- */
-class VerticalLayoutImpl extends LayoutImpl {
+
+class TextAreaImpl extends Widget implements TextArea, Input {
+
+	private String text;
+
+	TextAreaImpl(String text) {
+		this.text = text;
+	}
 
 	@Override
 	public Content create() {
-		return super.create("vertical-layout", "vertical-layout-element");
+		getSession().addInput(this);
+
+		jQuery(this).closest("div").trigger("create").call("flexible");
+
+		// @formatter:off
+		return Html.textarea(getId())
+						.css("textarea")
+						.width("100%")
+						.style("overflow", "hidden")
+						.attr("name", getId())
+						.add(text);
+		// @formatter:on
+	}
+
+	@Override
+	public String getText() {
+		return text;
+	}
+
+	@Override
+	public void parseString(String value) {
+		this.text = value;
+	}
+
+	@Override
+	public TextArea css(String clazz) {
+		setStyleName(clazz);
+		return this;
 	}
 }

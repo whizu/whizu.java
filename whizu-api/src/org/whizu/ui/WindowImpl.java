@@ -21,14 +21,30 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
 
-import org.whizu.ui.Layout;
+import org.whizu.dom.Content;
+import org.whizu.dom.Html;
+import org.whizu.widget.Container;
 
-/**
- * 
- * 
- * @author Rudy D'hauwe <rudy.dhauwe@whizui.com>
- */
-class CssLayoutImpl extends LayoutImpl implements Layout {
+class WindowImpl extends Container implements Window {
+
+	private String caption;
+
+	WindowImpl(String caption) {
+		this.caption = caption;
+	}
+
+	@Override
+	public Content create() {
+		jQuery(this).call("dialog");
+		// isRendered = true;
+		return Html.div(getId()).attr("title", caption).add(componentList);
+	}
+
+	public void close() {
+		if (isRendered()) {
+			jQuery(this).call("dialog", "close");
+		}
+	}
 }

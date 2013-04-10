@@ -21,12 +21,10 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Html;
-import org.whizu.ui.ClickListener;
-import org.whizu.ui.Image;
 import org.whizu.widget.Widget;
 
 

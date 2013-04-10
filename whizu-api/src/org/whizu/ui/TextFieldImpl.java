@@ -21,39 +21,72 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Html;
-import org.whizu.ui.BarChart;
+import org.whizu.jquery.Input;
+import org.whizu.value.StringValue;
 import org.whizu.widget.Widget;
 
-/**
- * @author Rudy D'hauwe
- */
-class BarChartImpl extends Widget implements BarChart {
 
-	private String[] x;
+class TextFieldImpl extends Widget implements TextField, Input {
+
+	private String text;
 	
-	private Integer[] y;
+	private StringValue value;
 
-	public BarChartImpl(String[] x, Integer[] y) {
-		this.x = x;
-		this.y = y;
+	TextFieldImpl(String text) {
+		this.text = text;
+	}
+
+	TextFieldImpl(StringValue value) {
+		this.text = value.getValue();
+		this.value = value;
+		this.value.addPropertyChangeListener(new PropertyChangeListener() {
+
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				text = TextFieldImpl.this.value.getValue();
+				jQuery(TextFieldImpl.this).val(text);
+			}
+		});
 	}
 
 	@Override
 	public Content create() {
-		jQuery(this)
-				.callunquoted(
-						"jqBarGraph",
-						"{ data: new Array([" + y[0] + ",'" + x[0] + "','#333333'], [" + y[1] + ",'" + x[1]
-								+ "','#666666']) }");
-		return Html.div(getId());
+		getSession().addInput(this);
+
+		// @formatter:off
+		return Html.tag("input")
+						.attr("id", getId())
+						.attr("type", "text")
+						.width("300px")
+						.attr("name", getId())
+						.css(style)
+						.style("display","inline-block")
+						.add(text);
+		// @formatter:on
 	}
 
 	@Override
-	public BarChartImpl css(String clazz) {
+	public String getText() {
+		return text;
+	}
+
+	@Override
+	public void parseString(String value) {
+		this.text = value;
+		if (this.value != null) {
+			this.value.setValue(value);
+		}
+	}
+
+	@Override
+	public TextField css(String clazz) {
 		setStyleName(clazz);
 		return this;
 	}

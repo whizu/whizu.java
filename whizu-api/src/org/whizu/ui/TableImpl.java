@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +33,6 @@ import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Foreach;
 import org.whizu.dom.Html;
-import org.whizu.ui.Table;
 import org.whizu.widget.Widget;
 
 class TableImpl extends Widget implements Table {

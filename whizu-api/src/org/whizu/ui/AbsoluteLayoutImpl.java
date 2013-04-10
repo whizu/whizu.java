@@ -21,16 +21,31 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.ui;
+package org.whizu.ui;
 
 import org.whizu.dom.Content;
-import org.whizu.ui.Layout;
 
-
-class FlowLayoutImpl extends LayoutImpl implements Layout {
+class AbsoluteLayoutImpl extends LayoutImpl {
 
 	@Override
 	public Content create() {
-		return create("flow-layout", "flow-layout-element");
+		return create("absolute-layout", "absolute-layout-element");
 	}
+
+	/*
+	//TODO move to some test case
+	public static void main(String[] args) {
+		final AbstractWidget impl = new AbsoluteLayoutImpl();
+		System.out.println(impl.getId());
+		System.out.println(impl.getSelector());
+		System.out.println(impl.jQuery(impl));
+		System.out.println(impl.jQuery(impl).addClass("mystyle").click(new Function() {
+
+			@Override
+			public void execute() {
+				impl.jQuery(impl).addClass("test in function").empty();
+			}
+		}).button());
+	}
+	*/
 }
