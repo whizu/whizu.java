@@ -32,15 +32,17 @@ import org.whizu.runtime.AbstractComponent;
  */
 public class Slider extends AbstractComponent {
 
-	private String min;
-
 	private String max;
+
+	private String min;
+	
+	private Mini mini;
+
+	private String step;
 
 	private Theme theme;
 
 	private Theme track;
-
-	private Mini mini;
 
 	public Slider(int min, int max) {
 		this.min = "" + min;
@@ -50,12 +52,6 @@ public class Slider extends AbstractComponent {
 	public Slider(int min, int max, Theme theme) {
 		this(min, max);
 		this.theme = theme;
-	}
-	
-	@Override
-	public Slider css(String clazz) {
-		setStyleName(clazz);
-		return this;
 	}
 
 	@Override
@@ -67,6 +63,7 @@ public class Slider extends AbstractComponent {
 				.attr("value", min)
 				.attr("min", min)
 				.attr("max", max)
+				.attr("step", step)
 				.decorate(theme)
 				.decorate("data-track-theme", track)
 				.decorate(mini);
@@ -77,27 +74,57 @@ public class Slider extends AbstractComponent {
 		return label.after(input);
 	}
 
-	public Theme getTheme() {
-		return theme;
+	@Override
+	public Slider css(String clazz) {
+		setStyleName(clazz);
+		return this;
 	}
 
-	public void setTheme(Theme theme) {
-		this.theme = theme;
+	public String getMax() {
+		return max;
 	}
 
-	public Theme getTrack() {
-		return track;
-	}
-
-	public void setTrack(Theme track) {
-		this.track = track;
+	public String getMin() {
+		return min;
 	}
 
 	public Mini getMini() {
 		return mini;
 	}
 
+	public String getStep() {
+		return step;
+	}
+	
+	public Theme getTheme() {
+		return theme;
+	}
+
+	public Theme getTrack() {
+		return track;
+	}
+
+	public void setMax(String max) {
+		this.max = max;
+	}
+
+	public void setMin(String min) {
+		this.min = min;
+	}
+
 	public void setMini(Mini mini) {
 		this.mini = mini;
+	}
+
+	public void setStep(String step) {
+		this.step = step;
+	}
+
+	public void setTheme(Theme theme) {
+		this.theme = theme;
+	}
+
+	public void setTrack(Theme track) {
+		this.track = track;
 	}
 }

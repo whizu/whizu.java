@@ -29,7 +29,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * @author Rudy D'hauwe
  */
@@ -54,11 +53,11 @@ public class NonVoid implements Html {
 	public static NonVoid div() {
 		return tag("div");
 	}
-	
+
 	public static NonVoid input() {
 		return tag("input");
 	}
-	
+
 	public static NonVoid button() {
 		return tag("button");
 	}
@@ -221,9 +220,9 @@ public class NonVoid implements Html {
 	private List<Html> contents = new ArrayList<Html>();
 
 	private List<String> cssList = new ArrayList<String>();
-	
+
 	private String name;
-	
+
 	private Map<String, String> styleMap = new HashMap<String, String>();
 
 	private String id;
@@ -252,7 +251,7 @@ public class NonVoid implements Html {
 		}
 		return this;
 	}
-	
+
 	public <T extends Renderable> NonVoid add(List<T> list) {
 		Iterator<T> it = list.iterator();
 		while (it.hasNext()) {
@@ -275,14 +274,16 @@ public class NonVoid implements Html {
 		styleMap.put(name, style);
 		return this;
 	}
-	
+
 	public NonVoid after(Html element) {
 		afterList.add(element);
 		return this;
 	}
 
 	public NonVoid attr(String name, String value) {
-		attrs.put(name, value);
+		if (value != null) {
+			attrs.put(name, value);
+		}
 		return this;
 	}
 
@@ -309,7 +310,7 @@ public class NonVoid implements Html {
 		}
 		return style;
 	}
-	
+
 	public NonVoid height(String height) {
 		return style("height", height);
 	}
@@ -349,11 +350,11 @@ public class NonVoid implements Html {
 		if (!styleMap.isEmpty()) {
 			markup += " " + "style=" + quote(getStyle());
 		}
-		
+
 		if (!cssList.isEmpty()) {
 			markup += " " + "class=" + quote(getCss());
 		}
-		
+
 		markup += ">";
 
 		for (Html element : contents) {
@@ -361,11 +362,11 @@ public class NonVoid implements Html {
 		}
 
 		markup += "</" + name + ">";
-		
+
 		for (Html n : afterList) {
 			markup += n.toString();
 		}
-		
+
 		return markup;
 	}
 
@@ -405,10 +406,14 @@ public class NonVoid implements Html {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T extends NonVoid> T  decorate(String name, Decorator decorator) {
+	public <T extends NonVoid> T decorate(String name, Decorator decorator) {
 		if (decorator != null) {
 			decorator.decorate(name, this);
 		}
 		return (T) this;
+	}
+
+	public static NonVoid select(String id) {
+		return tag("select").id(id);
 	}
 }

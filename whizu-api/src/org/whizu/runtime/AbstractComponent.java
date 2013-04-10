@@ -109,6 +109,10 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 	protected NonVoid input(AbstractComponent element) {
 		return NonVoid.input(element.getId());
 	}
+	
+	protected NonVoid select(AbstractComponent element) {
+		return NonVoid.select(element.getId());
+	}
 
 	public boolean isRendered() {
 		return rendered;

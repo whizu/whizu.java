@@ -23,6 +23,41 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-public class FlipSwitch {
+import org.whizu.html.Html;
+import org.whizu.html.NonVoid;
+import org.whizu.runtime.AbstractComponent;
 
+/**
+ * @author Rudy D'hauwe
+ */
+public class FlipSwitch extends AbstractComponent {
+
+	private Theme theme;
+	
+	private Theme track;
+	
+	private Mini mini;
+	
+	@Override
+	public FlipSwitch css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
+
+	@Override
+	public Html create() {
+		// @formatter:off
+		NonVoid field = select(this)
+				.attr("data-role", "slider")
+				.attr("name", "label")
+				.decorate(theme)
+				.decorate("data-track-theme", track)
+				.decorate(mini)
+				.add("<option value='off'>Off</option><option value='off'>Off</option>");
+		NonVoid label = NonVoid.tag("label")
+				.attr("for", field.getId())
+				.add("label");
+		// @formatter:on
+		return label.after(field);
+	}
 }

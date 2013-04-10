@@ -47,22 +47,31 @@ public class Form extends AbstractComponent {
 	}
 
 	public void addText() {
-		Text text = new Text();
-		jQuery(this).append(text.create().toString());
+		AbstractComponent text = new Text();
+		add(text);
 	}
 
 	public void addTextarea() {
-		Textarea text = new Textarea();
-		jQuery(this).append(text.create().toString());
+		AbstractComponent text = new Textarea();
+		add(text);
 	}
 
 	public void addSlider(int min, int max) {
-		Slider slider = new Slider(min, max);
-		jQuery(this).append(slider.create().toString());
+		AbstractComponent slider = new Slider(min, max);
+		add(slider);
 	}
 
 	public void addSlider(int min, int max, Theme theme) {
-		Slider slider = new Slider(min, max, theme);
-		jQuery(this).append(slider.create().toString());
+		AbstractComponent slider = new Slider(min, max, theme);
+		add(slider);
+	}
+
+	public void addFlipSwitch() {
+		AbstractComponent field = new FlipSwitch();
+		add(field);
+	}
+
+	private void add(AbstractComponent field) {
+		jQuery(this).append(field.create().toString());
 	}
 }
