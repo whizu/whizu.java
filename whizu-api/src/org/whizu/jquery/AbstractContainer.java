@@ -29,7 +29,7 @@ import java.util.List;
 import org.whizu.dom.Component;
 import org.whizu.dom.Container;
 import org.whizu.dom.Content;
-import org.whizu.html.Html;
+import org.whizu.dom.Html;
 
 /**
  * @author Rudy D'hauwe

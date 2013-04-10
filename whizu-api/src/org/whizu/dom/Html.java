@@ -1,10 +1,8 @@
 /**
  * 
  */
-package org.whizu.html;
+package org.whizu.dom;
 
-import org.whizu.dom.Element;
-import org.whizu.dom.Identity;
 
 /**
  * A bunch of convenience methods for generating HTML elements.
@@ -61,9 +59,13 @@ public class Html {
 		return div().id(id);
 	}
 
+	public static Element form(Identity element) {
+		return form(element.getId());
+	}
 	public static Element form(String id) {
 		return tag("form").id(id);
 	}
+
 	public static Element h1() {
 		return tag("h1");
 	}
@@ -154,9 +156,5 @@ public class Html {
 
 	public static Element tr(Element td) {
 		return tr().add(td);
-	}
-
-	public static Element form(Identity element) {
-		return form(element.getId());
 	}
 }
