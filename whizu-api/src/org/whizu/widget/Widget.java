@@ -107,7 +107,13 @@ public abstract class Widget implements Component {
 				throw new IllegalStateException("This component is already rendered: " + this);
 			} else {
 				Content content = create();
-				return (content == null) ? "" : content.render();
+				if (content == null) {
+					return "";
+				} else if (content.equals(this)) {
+					throw new IllegalStateException("Widget.create() must not return this - causes infinite loop");
+				} else {
+					return content.render();
+				}
 			}
 		} finally {
 			this.state = State.RENDERED;
