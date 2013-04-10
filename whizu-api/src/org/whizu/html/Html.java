@@ -7,6 +7,8 @@ import org.whizu.dom.Element;
 import org.whizu.dom.Identity;
 
 /**
+ * A bunch of convenience methods for generating HTML elements.
+ * 
  * @author Rudy D'hauwe
  */
 public class Html {
