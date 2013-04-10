@@ -21,14 +21,18 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.content;
+package org.whizu.dom;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Component extends Identity {
-	
-	public Component css(String clazz);
+public interface Container extends Component {
 
-	public void width(String width);
+	public void add(Component component);
+
+	public void empty();
+
+	public void prepend(Component component);
+
+	public void remove(Component component);
 }

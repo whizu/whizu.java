@@ -26,7 +26,7 @@ package org.whizu.runtime;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.whizu.content.Content;
+import org.whizu.dom.Content;
 import org.whizu.html.Html;
 import org.whizu.jquery.AbstractComponent;
 import org.whizu.jquery.Function;

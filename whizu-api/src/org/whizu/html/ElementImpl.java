@@ -29,11 +29,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.whizu.content.Content;
-import org.whizu.content.Decorator;
-import org.whizu.content.Element;
-import org.whizu.content.Foreach;
-import org.whizu.content.Literal;
+import org.whizu.dom.Content;
+import org.whizu.dom.Decorator;
+import org.whizu.dom.Element;
+import org.whizu.dom.Foreach;
+import org.whizu.dom.Literal;
 
 /**
  * @author Rudy D'hauwe

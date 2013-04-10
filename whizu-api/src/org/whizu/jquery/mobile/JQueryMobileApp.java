@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.content.Component;
+import org.whizu.dom.Component;
 import org.whizu.runtime.ScriptUI;
 import org.whizu.ui.Application;
 import org.whizu.ui.UI;

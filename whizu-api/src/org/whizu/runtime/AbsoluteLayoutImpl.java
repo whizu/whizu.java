@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
-import org.whizu.content.Content;
+import org.whizu.dom.Content;
 
 class AbsoluteLayoutImpl extends LayoutImpl {
 

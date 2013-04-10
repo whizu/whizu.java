@@ -26,7 +26,7 @@ package org.whizu.html;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.whizu.content.Content;
+import org.whizu.dom.Content;
 
 /**
  * @author Rudy D'hauwe

@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
-import org.whizu.content.Component;
-import org.whizu.content.Content;
-import org.whizu.content.Foreach;
+import org.whizu.dom.Component;
+import org.whizu.dom.Content;
+import org.whizu.dom.Foreach;
 import org.whizu.html.Html;
 import org.whizu.jquery.AbstractContainer;
 import org.whizu.ui.Layout;

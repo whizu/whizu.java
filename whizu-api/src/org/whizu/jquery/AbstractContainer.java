@@ -26,9 +26,9 @@ package org.whizu.jquery;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.whizu.content.Component;
-import org.whizu.content.Container;
-import org.whizu.content.Content;
+import org.whizu.dom.Component;
+import org.whizu.dom.Container;
+import org.whizu.dom.Content;
 import org.whizu.html.Html;
 
 /**

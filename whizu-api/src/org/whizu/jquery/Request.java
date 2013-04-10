@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery;
 
-import org.whizu.content.Identity;
+import org.whizu.dom.Identity;
 
 public interface Request {
 

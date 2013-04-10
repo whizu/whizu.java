@@ -21,18 +21,14 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.content;
+package org.whizu.dom;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Container extends Component {
+public interface Decorator {
 
-	public void add(Component component);
+	public void decorate(Element element);
 
-	public void empty();
-
-	public void prepend(Component component);
-
-	public void remove(Component component);
+	public void decorate(String name, Element element);
 }

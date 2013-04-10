@@ -23,11 +23,11 @@
  *******************************************************************************/
 package org.whizu.jquery;
 
-import org.whizu.content.Component;
-import org.whizu.content.Content;
-import org.whizu.content.Decorator;
-import org.whizu.content.Element;
-import org.whizu.content.Identity;
+import org.whizu.dom.Component;
+import org.whizu.dom.Content;
+import org.whizu.dom.Decorator;
+import org.whizu.dom.Element;
+import org.whizu.dom.Identity;
 
 /**
  * @author Rudy D'hauwe

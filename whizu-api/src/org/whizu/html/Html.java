@@ -3,8 +3,8 @@
  */
 package org.whizu.html;
 
-import org.whizu.content.Element;
-import org.whizu.content.Identity;
+import org.whizu.dom.Element;
+import org.whizu.dom.Identity;
 
 /**
  * @author Rudy D'hauwe

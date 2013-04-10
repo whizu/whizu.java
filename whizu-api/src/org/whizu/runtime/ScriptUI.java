@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
-import org.whizu.content.Component;
+import org.whizu.dom.Component;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Session;

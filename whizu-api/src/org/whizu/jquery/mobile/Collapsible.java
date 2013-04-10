@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.content.Content;
+import org.whizu.dom.Content;
 import org.whizu.jquery.AbstractComponent;
 
 public class Collapsible extends AbstractComponent {

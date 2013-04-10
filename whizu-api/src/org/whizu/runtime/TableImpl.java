@@ -28,10 +28,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.whizu.content.Content;
-import org.whizu.content.Element;
-import org.whizu.content.Foreach;
-import org.whizu.content.Component;
+import org.whizu.dom.Component;
+import org.whizu.dom.Content;
+import org.whizu.dom.Element;
+import org.whizu.dom.Foreach;
 import org.whizu.html.Html;
 import org.whizu.jquery.AbstractComponent;
 import org.whizu.ui.Table;

@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.content.Container;
+import org.whizu.dom.Container;
 
 /**
  * @author Rudy D'hauwe

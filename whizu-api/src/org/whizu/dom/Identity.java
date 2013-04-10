@@ -21,15 +21,12 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.content;
+package org.whizu.dom;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Content {
-	
-	/**
-	 * Generates and returns the corresponding HTML markup.
-	 */
-	public String stream();
+public interface Identity extends Content {
+
+	public String getId();
 }

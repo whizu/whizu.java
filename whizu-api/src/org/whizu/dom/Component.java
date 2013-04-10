@@ -21,14 +21,14 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.content;
+package org.whizu.dom;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Decorator {
+public interface Component extends Identity {
+	
+	public Component css(String clazz);
 
-	public void decorate(Element element);
-
-	public void decorate(String name, Element element);
+	public void width(String width);
 }
