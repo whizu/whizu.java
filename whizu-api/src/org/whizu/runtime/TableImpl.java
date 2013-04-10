@@ -60,9 +60,12 @@ class TableImpl extends AbstractComponent implements Table {
 		if (isRendered()) {
 			Element tr = Html.tr().width(width).style("word-wrap", "break-word");
 			for (Component value : components) {
-				//TODO remove cast
-				Content m = ((AbstractComponent) value).render();
-				tr.add(Html.td().style("word-wrap", "break-word").add(m));
+				tr.add(Html.td().style("word-wrap", "break-word").add(value));
+				/*
+				 * //TODO remove cast Content m = ((AbstractComponent)
+				 * value).render(); tr.add(Html.td().style("word-wrap",
+				 * "break-word").add(m));
+				 */
 			}
 			jQuery(this).find("tbody").prepend(tr);
 		}
@@ -103,15 +106,20 @@ class TableImpl extends AbstractComponent implements Table {
 				     		@Override
 				     		public Content render(Component[] item) {
 				     			Element tr = Html.tr()
-				     						.width(width)
-				     						.style("word-wrap", "break-word");
+				     							.width(width)
+				     							.style("word-wrap", "break-word");
 				     			for (Component value : item) {
+				     				tr.add(Html.td()
+					     						.style("word-wrap", "break-word")
+					     						.add(value));
+				     				/*
 				     				//todo remove cast
 				     				Content m = ((AbstractComponent) value).render();
 				     				tr.add(
 				     					Html.td()
 				     						.style("word-wrap", "break-word")
 				     						.add(m));
+				     						*/
 				     			}
 				     			return tr;
 				     		}

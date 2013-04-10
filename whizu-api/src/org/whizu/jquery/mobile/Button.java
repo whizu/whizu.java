@@ -92,12 +92,12 @@ public class Button extends AbstractComponent {
 			case INPUT :
 				Element button = Html.input(this).attr("type", "button").attr("value", title)
 						.attr("data-inline", inline.value);
-				decorate(button, icon, theme, mini);
+				button.decorate(icon, theme, mini);
 				return button;
 			case SUBMIT :
 				Element submit = Html.input(this).attr("type", "submit").attr("value", title).attr("data-inline", inline.value)
 						.attr("data-mini", mini.value);
-				decorate(submit, icon, theme, mini);
+				submit.decorate(icon, theme, mini);
 				return submit;
 			case RESET :
 				return Html.input(this).attr("type", "reset").attr("value", title).attr("data-inline", inline.value)

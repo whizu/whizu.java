@@ -32,8 +32,8 @@ import org.whizu.ui.Document;
 class DocumentImpl extends AbstractContainer implements Document {
 
 	DocumentImpl() {
-		//setRendered(true);
-		render();
+		setRendered(true);
+		//render();
 	}
 
 	@Override

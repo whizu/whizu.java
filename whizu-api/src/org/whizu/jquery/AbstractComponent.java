@@ -25,8 +25,6 @@ package org.whizu.jquery;
 
 import org.whizu.dom.Component;
 import org.whizu.dom.Content;
-import org.whizu.dom.Decorator;
-import org.whizu.dom.Element;
 import org.whizu.dom.Identity;
 
 /**
@@ -47,15 +45,6 @@ public abstract class AbstractComponent implements Component {
 	}
 	
 	public abstract Content create();
-	
-	protected <T extends Element> T decorate(T element, Decorator... decorators) {
-		for (Decorator d : decorators) {
-			if (d != null) {
-				d.decorate(element);
-			}
-		}
-		return element;
-	}
 	
 	public String getId() {
 		return id;
@@ -89,19 +78,7 @@ public abstract class AbstractComponent implements Component {
 		return getRequest().select(selector);
 	}
 
-	public final Content render() {
-		if (isRendered()) {
-			throw new IllegalStateException("This component is already rendered: " + this);
-		} else {
-			try {
-				return create();
-			} finally {
-				setRendered(true);
-			}
-		}
-	}
-
-	private void setRendered(boolean rendered) {
+	protected void setRendered(boolean rendered) {
 		this.rendered = rendered;
 	}
 
@@ -116,7 +93,11 @@ public abstract class AbstractComponent implements Component {
 	@Override
 	public String stream() {
 		try {
-			return render().stream();
+			if (isRendered()) {
+				throw new IllegalStateException("This component is already rendered: " + this);
+			}
+			
+			return create().stream();
 		} finally {
 			setRendered(true);
 		}
