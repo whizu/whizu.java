@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.ui.sencha;
+package org.whizu.sencha;
 
 /**
  * @author Rudy D'hauwe
