@@ -23,6 +23,25 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-public class Password {
+import org.whizu.html.Html;
+import org.whizu.html.NonVoid;
+import org.whizu.runtime.AbstractComponent;
 
+/**
+ * @author Rudy D'hauwe
+ */
+public class Password extends AbstractComponent {
+
+	@Override
+	public Password css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
+
+	@Override
+	public Html create() {
+		NonVoid field = input(this).attr("type", "password").attr("name", "label").attr("value", "");
+		NonVoid label = NonVoid.tag("label").attr("for", field.getId()).add("label");
+		return label.after(field);
+	}
 }

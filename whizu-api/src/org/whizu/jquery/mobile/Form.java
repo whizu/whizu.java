@@ -25,6 +25,7 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.html.Html;
 import org.whizu.runtime.AbstractComponent;
+import org.whizu.value.PasswordValue;
 
 /**
  * @author Rudy D'hauwe
@@ -69,6 +70,10 @@ public class Form extends AbstractComponent {
 	public void addFlipSwitch() {
 		AbstractComponent field = new FlipSwitch();
 		add(field);
+	}
+	
+	public void add(PasswordValue value) {
+		throw new UnsupportedOperationException();
 	}
 
 	private void add(AbstractComponent field) {
