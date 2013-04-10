@@ -26,7 +26,7 @@ package org.whizu.dom;
 /**
  * @author Rudy D'hauwe
  */
-public interface Container extends Component {
+public interface Composite extends Component {
 
 	public void add(Component component);
 

@@ -26,7 +26,7 @@ package org.whizu.jquery.mobile;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Html;
-import org.whizu.jquery.AbstractComponent;
+import org.whizu.widget.Widget;
 
 /**
  * Buttons are core widgets in jQuery Mobile and are used within a wide range of
@@ -35,7 +35,7 @@ import org.whizu.jquery.AbstractComponent;
  * 
  * @author Rudy D'hauwe
  */
-public class Button extends AbstractComponent {
+public class Button extends Widget {
 
 	private String title;
 

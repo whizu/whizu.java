@@ -25,10 +25,10 @@ package org.whizu.runtime;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Html;
-import org.whizu.jquery.AbstractContainer;
 import org.whizu.ui.Window;
+import org.whizu.widget.Container;
 
-class WindowImpl extends AbstractContainer implements Window {
+class WindowImpl extends Container implements Window {
 
 	private String caption;
 

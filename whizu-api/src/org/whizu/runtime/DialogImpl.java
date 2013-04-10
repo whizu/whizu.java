@@ -25,10 +25,10 @@ package org.whizu.runtime;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Html;
-import org.whizu.jquery.AbstractContainer;
 import org.whizu.ui.Dialog;
+import org.whizu.widget.Container;
 
-class DialogImpl extends AbstractContainer implements Dialog {
+class DialogImpl extends Container implements Dialog {
 
 	private String caption;
 

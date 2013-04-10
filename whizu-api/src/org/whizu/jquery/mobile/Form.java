@@ -25,13 +25,13 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Html;
-import org.whizu.jquery.AbstractComponent;
 import org.whizu.value.PasswordValue;
+import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Form extends AbstractComponent {
+public class Form extends Widget {
 
 	@Override
 	public Form css(String clazz) {

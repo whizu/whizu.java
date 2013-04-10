@@ -26,16 +26,16 @@ package org.whizu.runtime;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Html;
-import org.whizu.jquery.AbstractComponent;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
 import org.whizu.ui.Button;
 import org.whizu.ui.ClickListener;
+import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-class ButtonImpl extends AbstractComponent implements Button {
+class ButtonImpl extends Widget implements Button {
 
 	private String caption;
 

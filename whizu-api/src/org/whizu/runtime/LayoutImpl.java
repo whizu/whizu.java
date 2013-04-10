@@ -27,13 +27,13 @@ import org.whizu.dom.Component;
 import org.whizu.dom.Content;
 import org.whizu.dom.Foreach;
 import org.whizu.dom.Html;
-import org.whizu.jquery.AbstractContainer;
 import org.whizu.ui.Layout;
+import org.whizu.widget.Container;
 
 /**
  * @author Rudy D'hauwe
  */
-class LayoutImpl extends AbstractContainer implements Layout {
+class LayoutImpl extends Container implements Layout {
 
 	protected Content create(String css, final String itemClass) {
 		// isRendered = true;

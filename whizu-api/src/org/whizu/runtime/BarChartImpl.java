@@ -25,13 +25,13 @@ package org.whizu.runtime;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Html;
-import org.whizu.jquery.AbstractComponent;
 import org.whizu.ui.BarChart;
+import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class BarChartImpl extends AbstractComponent implements BarChart {
+public class BarChartImpl extends Widget implements BarChart {
 
 	private String[] x;
 	

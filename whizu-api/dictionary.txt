@@ -33,3 +33,4 @@ ajax
 textarea
 config
 eupl
+javascript

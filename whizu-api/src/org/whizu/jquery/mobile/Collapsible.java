@@ -24,9 +24,9 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Content;
-import org.whizu.jquery.AbstractComponent;
+import org.whizu.widget.Widget;
 
-public class Collapsible extends AbstractComponent {
+public class Collapsible extends Widget {
 
 	@Override
 	public Collapsible css(String clazz) {

@@ -23,13 +23,13 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
-import org.whizu.jquery.AbstractContainer;
 import org.whizu.ui.Document;
+import org.whizu.widget.Container;
 
 /**
  * @author Rudy D'hauwe
  */
-class DocumentImpl extends AbstractContainer implements Document {
+class DocumentImpl extends Container implements Document {
 
 	DocumentImpl() {
 		setRendered(true);

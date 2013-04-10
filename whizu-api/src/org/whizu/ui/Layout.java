@@ -23,10 +23,10 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.dom.Container;
+import org.whizu.dom.Composite;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Layout extends Container {
+public interface Layout extends Composite {
 }

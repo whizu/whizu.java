@@ -26,12 +26,12 @@ package org.whizu.jquery.mobile;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Html;
-import org.whizu.jquery.AbstractComponent;
+import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Text extends AbstractComponent {
+public class Text extends Widget {
 
 	@Override
 	public Text css(String clazz) {

@@ -24,12 +24,12 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Content;
-import org.whizu.jquery.AbstractComponent;
+import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Dialog extends AbstractComponent {
+public class Dialog extends Widget {
 
 	@Override
 	public Dialog css(String clazz) {
