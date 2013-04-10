@@ -54,7 +54,7 @@ public abstract class Widget implements Component {
 
 	/**
 	 * Initial creation and rendering of this widget by compiling this widget
-	 * into a combination of static HTML markup and javascript to be executed.
+	 * into a combination of static HTML markup and javascript.
 	 */
 	protected abstract Content create();
 
