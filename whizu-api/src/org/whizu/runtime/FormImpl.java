@@ -25,12 +25,13 @@ package org.whizu.runtime;
 
 import org.whizu.content.Content;
 import org.whizu.html.Html;
+import org.whizu.jquery.AbstractContainer;
 import org.whizu.ui.Form;
 
 /**
  * @author Rudy D'hauwe
  */
-class FormImpl extends CompositeImpl implements Form {
+class FormImpl extends AbstractContainer implements Form {
 
 	public Content create() {
 		//isRendered = true;

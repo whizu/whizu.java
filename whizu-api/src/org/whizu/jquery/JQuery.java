@@ -23,6 +23,8 @@
  *******************************************************************************/
 package org.whizu.jquery;
 
+import org.whizu.content.Content;
+
 /**
  * A jQuery object contains a collection of Document Object Model (DOM) elements
  * that have been created from an HTML string or selected from a document. Since
@@ -63,6 +65,15 @@ public interface JQuery {
 	 */
 	public abstract JQuery after(String... content);
 
+	/**
+	 * Insert content, specified by the parameter, to the end of each element in
+	 * the set of matched elements. The .append() method inserts the specified
+	 * content as the last child of each element in the jQuery collection.
+	 * 
+	 * @see <a href='http://api.jquery.com/append'>jQuery's .append()</a>
+	 */
+	public abstract JQuery append(Content content);
+	
 	/**
 	 * Insert content, specified by the parameter, to the end of each element in
 	 * the set of matched elements. The .append() method inserts the specified
@@ -175,6 +186,16 @@ public interface JQuery {
 	 *      .insertBefore()</a>
 	 */
 	public abstract JQuery insertBefore(String target);
+
+	/**
+	 * Insert content, specified by the parameter, to the beginning of each element
+	 * in the set of matched elements. The .prepend() method inserts the specified
+	 * content as the first child of each element in the jQuery collection.
+	 * @return 
+	 * 
+	 * @see <a href='http://api.jquery.com/prepend'>jQuery's .prepend()</a>
+	 */
+	public abstract JQuery prepend(Content content);
 
 	/**
 	 * Insert content, specified by the parameter, to the beginning of each element

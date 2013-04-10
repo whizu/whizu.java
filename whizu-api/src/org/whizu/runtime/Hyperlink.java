@@ -25,10 +25,10 @@ package org.whizu.runtime;
 
 import org.whizu.content.Content;
 import org.whizu.html.Html;
-import org.whizu.jquery.AbstractWidget;
+import org.whizu.jquery.AbstractComponent;
 import org.whizu.ui.ClickListener;
 
-class Hyperlink extends AbstractWidget {
+class Hyperlink extends AbstractComponent {
 
 	private String caption;
 	

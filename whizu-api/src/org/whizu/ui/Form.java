@@ -23,8 +23,10 @@
  *******************************************************************************/
 package org.whizu.ui;
 
+import org.whizu.content.Container;
+
 /**
  * @author Rudy D'hauwe
  */
-public interface Form extends CompositeWidget {
+public interface Form extends Container {
 }

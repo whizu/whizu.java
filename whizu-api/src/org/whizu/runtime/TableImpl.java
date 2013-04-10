@@ -33,10 +33,10 @@ import org.whizu.content.Element;
 import org.whizu.content.Foreach;
 import org.whizu.content.Component;
 import org.whizu.html.Html;
-import org.whizu.jquery.AbstractWidget;
+import org.whizu.jquery.AbstractComponent;
 import org.whizu.ui.Table;
 
-class TableImpl extends AbstractWidget implements Table {
+class TableImpl extends AbstractComponent implements Table {
 
 	private String title;
 
@@ -60,10 +60,11 @@ class TableImpl extends AbstractWidget implements Table {
 		if (isRendered()) {
 			Element tr = Html.tr().width(width).style("word-wrap", "break-word");
 			for (Component value : components) {
-				Content m = ((AbstractWidget) value).render();
+				//TODO remove cast
+				Content m = ((AbstractComponent) value).render();
 				tr.add(Html.td().style("word-wrap", "break-word").add(m));
 			}
-			jQuery(this).find("tbody").prepend(tr.toString());
+			jQuery(this).find("tbody").prepend(tr);
 		}
 	}
 
@@ -105,7 +106,8 @@ class TableImpl extends AbstractWidget implements Table {
 				     						.width(width)
 				     						.style("word-wrap", "break-word");
 				     			for (Component value : item) {
-				     				Content m = ((AbstractWidget) value).render();
+				     				//todo remove cast
+				     				Content m = ((AbstractComponent) value).render();
 				     				tr.add(
 				     					Html.td()
 				     						.style("word-wrap", "break-word")

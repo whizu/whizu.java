@@ -27,14 +27,14 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.whizu.content.Content;
-import org.whizu.jquery.AbstractWidget;
+import org.whizu.jquery.AbstractComponent;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Label;
 import org.whizu.value.Value;
 
-class LabelImpl extends AbstractWidget implements Label {
+class LabelImpl extends AbstractComponent implements Label {
 
 	private ClickListenerImpl listener;
 

@@ -23,24 +23,26 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
+import org.whizu.content.Component;
 import org.whizu.content.Content;
 import org.whizu.content.Foreach;
-import org.whizu.jquery.AbstractWidget;
+import org.whizu.jquery.AbstractContainer;
 import org.whizu.ui.Layout;
 
 /**
  * @author Rudy D'hauwe
  */
-class LayoutImpl extends CompositeImpl implements Layout {
+class LayoutImpl extends AbstractContainer implements Layout {
 
 	protected Content create(String css, final String itemClass) {
 		// isRendered = true;
-		return div(this).css(style).css(css).width(width).add(new Foreach<AbstractWidget>(componentList) {
+		return div(this).css(style).css(css).width(width).add(new Foreach<Component>(componentList) {
 
 			@Override
-			public Content render(AbstractWidget item) {
+			public Content render(Component item) {
 				item.css(itemClass); //to be tested
-				return item.render(); 
+				return item;
+				//return item.render(); 
 				//return item.render().css(itemClass); //this works
 			}
 		});

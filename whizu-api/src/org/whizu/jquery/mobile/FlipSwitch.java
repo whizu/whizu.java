@@ -26,12 +26,12 @@ package org.whizu.jquery.mobile;
 import org.whizu.content.Content;
 import org.whizu.content.Element;
 import org.whizu.html.Html;
-import org.whizu.jquery.AbstractWidget;
+import org.whizu.jquery.AbstractComponent;
 
 /**
  * @author Rudy D'hauwe
  */
-public class FlipSwitch extends AbstractWidget {
+public class FlipSwitch extends AbstractComponent {
 
 	private Theme theme;
 	
@@ -48,7 +48,7 @@ public class FlipSwitch extends AbstractWidget {
 	@Override
 	public Content create() {
 		// @formatter:off
-		Element field = select(this)
+		Element field = Html.select(this)
 				.attr("data-role", "slider")
 				.attr("name", "label")
 				.decorate(theme)

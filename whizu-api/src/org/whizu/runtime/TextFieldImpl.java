@@ -28,13 +28,13 @@ import java.beans.PropertyChangeListener;
 
 import org.whizu.content.Content;
 import org.whizu.html.Html;
-import org.whizu.jquery.AbstractWidget;
+import org.whizu.jquery.AbstractComponent;
 import org.whizu.jquery.Input;
 import org.whizu.ui.TextField;
 import org.whizu.value.StringValue;
 
 
-class TextFieldImpl extends AbstractWidget implements TextField, Input {
+class TextFieldImpl extends AbstractComponent implements TextField, Input {
 
 	private String text;
 	

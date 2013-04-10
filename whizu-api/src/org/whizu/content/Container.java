@@ -21,60 +21,18 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.runtime;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.whizu.content.Component;
-import org.whizu.content.Content;
-import org.whizu.jquery.AbstractWidget;
-import org.whizu.ui.CompositeWidget;
+package org.whizu.content;
 
 /**
  * @author Rudy D'hauwe
  */
-class CompositeImpl extends AbstractWidget implements CompositeWidget {
+public interface Container extends Component {
 
-	@Override
-	public CompositeImpl css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
+	public void add(Component component);
 
-	protected List<AbstractWidget> componentList = new ArrayList<AbstractWidget>();
+	public void empty();
 
-	@Override
-	public void add(Component component) {
-		AbstractWidget impl = (AbstractWidget) component;
-		this.componentList.add(impl);
+	public void prepend(Component component);
 
-		if (this.isRendered()) {
-			jQuery(this).append(impl.render().toString());
-		}
-	}
-
-	@Override
-	public void prepend(Component component) {
-		AbstractWidget impl = (AbstractWidget) component;
-		this.componentList.add(impl);
-
-		if (isRendered()) {
-			jQuery(this).prepend(impl.stream());
-		}
-	}
-
-	public Content create() {
-		return div(this).add(componentList);
-	}
-
-	@Override
-	public void remove(Component element) {
-		jQuery(element).remove();
-	}
-
-	@Override
-	public void empty() {
-		jQuery(this).empty();
-	}
+	public void remove(Component component);
 }

@@ -25,12 +25,12 @@ package org.whizu.runtime;
 
 import org.whizu.content.Content;
 import org.whizu.html.Html;
-import org.whizu.jquery.AbstractWidget;
+import org.whizu.jquery.AbstractComponent;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Image;
 
 
-class ImageImpl extends AbstractWidget implements Image {
+class ImageImpl extends AbstractComponent implements Image {
 
 	private String src;
 
@@ -51,7 +51,7 @@ class ImageImpl extends AbstractWidget implements Image {
 			String ajaxCall = "$.get('/whizu?id=" + listenerId
 					+ "', function(data) { ; }, 'script');";
 			script += ".click(function(event) { event.preventDefault(); " + ajaxCall + "})";
-			script += ".mouseenter(function(event) { event.preventDefault(); " + ajaxCall + "})";
+			//script += ".mouseenter(function(event) { event.preventDefault(); " + ajaxCall + "})";
 		}
 
 		//use event.originalEvent.dataTransfer

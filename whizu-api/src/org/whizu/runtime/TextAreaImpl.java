@@ -25,12 +25,12 @@ package org.whizu.runtime;
 
 import org.whizu.content.Content;
 import org.whizu.html.Html;
-import org.whizu.jquery.AbstractWidget;
+import org.whizu.jquery.AbstractComponent;
 import org.whizu.jquery.Input;
 import org.whizu.ui.TextArea;
 
 
-class TextAreaImpl extends AbstractWidget implements TextArea, Input {
+class TextAreaImpl extends AbstractComponent implements TextArea, Input {
 
 	private String text;
 

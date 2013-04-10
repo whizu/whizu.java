@@ -24,13 +24,13 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.content.Content;
-import org.whizu.jquery.AbstractWidget;
+import org.whizu.jquery.AbstractComponent;
 import org.whizu.value.PasswordValue;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Form extends AbstractWidget {
+public class Form extends AbstractComponent {
 
 	@Override
 	public Form css(String clazz) {
@@ -48,27 +48,27 @@ public class Form extends AbstractWidget {
 	}
 
 	public void addText() {
-		AbstractWidget text = new Text();
+		Content text = new Text();
 		add(text);
 	}
 
 	public void addTextarea() {
-		AbstractWidget text = new Textarea();
+		Content text = new Textarea();
 		add(text);
 	}
 
 	public void addSlider(int min, int max) {
-		AbstractWidget slider = new Slider(min, max);
+		Content slider = new Slider(min, max);
 		add(slider);
 	}
 
 	public void addSlider(int min, int max, Theme theme) {
-		AbstractWidget slider = new Slider(min, max, theme);
+		Content slider = new Slider(min, max, theme);
 		add(slider);
 	}
 
 	public void addFlipSwitch() {
-		AbstractWidget field = new FlipSwitch();
+		Content field = new FlipSwitch();
 		add(field);
 	}
 	
@@ -76,7 +76,7 @@ public class Form extends AbstractWidget {
 		throw new UnsupportedOperationException();
 	}
 
-	private void add(AbstractWidget field) {
-		jQuery(this).append(field.create().toString());
+	private void add(Content field) {
+		jQuery(this).append(field);
 	}
 }

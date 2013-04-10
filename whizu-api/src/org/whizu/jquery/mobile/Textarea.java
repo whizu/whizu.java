@@ -26,9 +26,9 @@ package org.whizu.jquery.mobile;
 import org.whizu.content.Content;
 import org.whizu.content.Element;
 import org.whizu.html.Html;
-import org.whizu.jquery.AbstractWidget;
+import org.whizu.jquery.AbstractComponent;
 
-public class Textarea extends AbstractWidget {
+public class Textarea extends AbstractComponent {
 	
 	@Override
 	public Textarea css(String clazz) {

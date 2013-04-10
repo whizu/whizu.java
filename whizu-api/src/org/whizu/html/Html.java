@@ -4,7 +4,7 @@
 package org.whizu.html;
 
 import org.whizu.content.Element;
-
+import org.whizu.content.Identity;
 
 /**
  * @author Rudy D'hauwe
@@ -25,10 +25,6 @@ public class Html {
 
 	public static Element body(String id) {
 		return body().id(id);
-	}
-
-	public static Element img(String id) {
-		return tag("img").id(id);
 	}
 
 	public static Element br() {
@@ -62,10 +58,14 @@ public class Html {
 	public static Element h1(String text) {
 		return h1().add(text);
 	}
+
 	public static Element hr() {
 		return new ElementImpl("hr");
 	}
-	
+	public static Element img(String id) {
+		return tag("img").id(id);
+	}
+
 	public static Element input() {
 		return tag("input");
 	}
@@ -73,7 +73,11 @@ public class Html {
 	public static Element input(String id) {
 		return input().id(id);
 	}
-	
+
+	public static Element select(Identity element) {
+		return select(element.getId());
+	}
+
 	public static Element select(String id) {
 		return tag("select").id(id);
 	}
@@ -113,7 +117,7 @@ public class Html {
 	public static Element thead() {
 		return tag("thead");
 	}
-	
+
 	public static Element thead(Element... elements) {
 		return thead().add(elements);
 	}

@@ -33,7 +33,7 @@ import org.whizu.html.Html;
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractWidget implements Component /*,  Renderable, Identity*/ {
+public abstract class AbstractComponent implements Component {
 
 	private final String id;
 
@@ -43,7 +43,7 @@ public abstract class AbstractWidget implements Component /*,  Renderable, Ident
 
 	protected String width = null;
 
-	protected AbstractWidget() {
+	protected AbstractComponent() {
 		this.id = getSession().next();
 	}
 
@@ -94,10 +94,6 @@ public abstract class AbstractWidget implements Component /*,  Renderable, Ident
 		return Html.input(element.getId());
 	}
 	
-	protected Element select(Identity element) {
-		return Html.select(element.getId());
-	}
-
 	public boolean isRendered() {
 		return rendered;
 	}
@@ -115,7 +111,6 @@ public abstract class AbstractWidget implements Component /*,  Renderable, Ident
 	}
 
 	public final Content render() {
-		//return NonVoid.div(getId());
 		if (isRendered()) {
 			throw new IllegalStateException("This component is already rendered: " + this);
 		} else {

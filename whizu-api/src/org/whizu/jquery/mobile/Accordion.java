@@ -24,14 +24,14 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.content.Content;
-import org.whizu.jquery.AbstractWidget;
+import org.whizu.jquery.AbstractComponent;
 
 /**
  * Creates a collapsible set of collapsible blocks of content.
  * 
  * @author Rudy D'hauwe
  */
-public class Accordion extends AbstractWidget {
+public class Accordion extends AbstractComponent {
 
 	@Override
 	public Accordion css(String clazz) {

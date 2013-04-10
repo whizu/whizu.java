@@ -21,20 +21,59 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.ui;
+package org.whizu.jquery;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.whizu.content.Component;
+import org.whizu.content.Container;
+import org.whizu.content.Content;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface CompositeWidget extends Component {
+public class AbstractContainer extends AbstractComponent implements Container {
 
-	public void add(Component component);
+	@Override
+	public AbstractContainer css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
 
-	public void empty();
+	protected List<Component> componentList = new ArrayList<Component>();
 
-	public void prepend(Component component);
+	@Override
+	public void add(Component impl) {
+		System.out.println("Adding " + impl + " to " + this + " " + this.isRendered());
+		this.componentList.add(impl);
 
-	public void remove(Component component);
+		if (this.isRendered()) {
+			jQuery(this).append(impl);
+		}
+	}
+
+	@Override
+	public void prepend(Component impl) {
+		this.componentList.add(impl);
+
+		if (isRendered()) {
+			jQuery(this).prepend(impl);
+		}
+	}
+
+	public Content create() {
+		System.out.println("Creating " + this + " with components " + componentList.size());
+		return div(this).add(componentList);
+	}
+
+	@Override
+	public void remove(Component element) {
+		jQuery(element).remove();
+	}
+
+	@Override
+	public void empty() {
+		jQuery(this).empty();
+	}
 }
