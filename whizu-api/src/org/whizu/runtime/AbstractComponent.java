@@ -74,7 +74,7 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		return NonVoid.div(element.getId());
 	}
 	
-	public NonVoid div(Identity identity) {
+	protected NonVoid div(Identity identity) {
 		return NonVoid.div(identity.getId());
 	}
 	
@@ -94,7 +94,7 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		}
 	}
 
-	public Request getRequest() {
+	protected Request getRequest() {
 		return RequestContext.getRequest();
 	}
 
@@ -102,7 +102,7 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		return "$(\"#" + getId() + "\")";
 	}
 	
-	public Session getSession() {
+	protected Session getSession() {
 		return getRequest().getSession();
 	}
 
@@ -118,15 +118,15 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		return rendered;
 	}
 
-	public JQuery jQuery() {
+	protected JQuery jQuery() {
 		return getRequest().select("$");
 	}
 
-	public JQuery jQuery(Identity... components) {
+	protected JQuery jQuery(Identity... components) {
 		return getRequest().select(components);
 	}
 	
-	public JQuery jQuery(String selector) {
+	protected JQuery jQuery(String selector) {
 		return getRequest().select(selector);
 	}
 
@@ -155,7 +155,6 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		this.width = width;
 	}
 	
-
 	protected NonVoid textarea(AbstractComponent element) {
 		return NonVoid.textarea(element.getId());
 	}
