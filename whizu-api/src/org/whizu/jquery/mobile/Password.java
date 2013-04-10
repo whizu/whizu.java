@@ -42,7 +42,7 @@ public class Password extends Widget {
 	@Override
 	public Content create() {
 		Element field = Html.input(this).attr("type", "password").attr("name", "label").attr("value", "");
-		Element label = Html.tag("label").attr("for", field.getId()).add("label");
+		Element label = Html.label().attr("for", field.getId()).add("label");
 		return label.after(field);
 	}
 }

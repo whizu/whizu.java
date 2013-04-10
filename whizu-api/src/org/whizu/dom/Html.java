@@ -93,6 +93,10 @@ public class Html {
 		return input().id(id);
 	}
 
+	public static Element label() {
+		return tag("label");
+	}
+
 	public static Element select(Identity element) {
 		return select(element.getId());
 	}
