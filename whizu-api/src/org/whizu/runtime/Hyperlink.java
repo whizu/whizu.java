@@ -23,32 +23,33 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
+import org.whizu.content.Content;
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
+import org.whizu.jquery.AbstractWidget;
 import org.whizu.ui.ClickListener;
 
-
-class Hyperlink extends AbstractComponent {
+class Hyperlink extends AbstractWidget {
 
 	private String caption;
+	
 	private ClickListenerImpl listener;
 
 	Hyperlink(String caption, ClickListener listener) {
 		this.caption = caption;
 		addClickListener(listener);
 	}
-	
+
 	@Override
-	public Html create() {
+	public Content create() {
 		String href = "/whizu?id=" + listener.getId();
-		return NonVoid.div(getId()).add(NonVoid.a().attr("href", href).add(caption));
+		return Html.div(getId()).add(Html.a().attr("href", href).add(caption));
 	}
-	
+
 	private void addClickListener(ClickListener listener) {
 		this.listener = new ClickListenerImpl(listener);
 		getSession().addClickListener(this.listener);
 	}
-	
+
 	@Override
 	public Hyperlink css(String clazz) {
 		setStyleName(clazz);

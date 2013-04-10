@@ -1,43 +1,132 @@
-/*******************************************************************************
- * Copyright (c) 2013 Rudy D'hauwe @ Whizu
- * Licensed under the EUPL V.1.1
- *   
- * This Software is provided to You under the terms of the European 
- * Union Public License (the “EUPL”) version 1.1 as published by the 
- * European Union. Any use of this Software, other than as authorized 
- * under this License is strictly prohibited (to the extent such use 
- * is covered by a right of the copyright holder of this Software).
- *
- * This Software is provided under the License on an “AS IS” basis and 
- * without warranties of any kind concerning the Software, including 
- * without limitation merchantability, fitness for a particular purpose, 
- * absence of defects or errors, accuracy, and non-infringement of 
- * intellectual property rights other than copyright. This disclaimer 
- * of warranty is an essential part of the License and a condition for 
- * the grant of any rights to this Software.
- *   
- * For more  details, see <http://joinup.ec.europa.eu/software/page/eupl>.
- *
- * Contributors:
- *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
- *******************************************************************************/
+/**
+ * 
+ */
 package org.whizu.html;
 
-import org.whizu.content.Content;
+import org.whizu.content.Element;
+
 
 /**
- * To be replaced by org.whizu.content.Content.
- * 
  * @author Rudy D'hauwe
  */
-@Deprecated
-public interface Html extends Content {
+public class Html {
 
-	@Deprecated
-	public Html add(Html html);
+	public static Element a() {
+		return tag("a");
+	}
 
-	/**
-	 * Generates and returns the corresponding HTML markup.
-	 */
-	public String toString();
+	public static Element a(String id) {
+		return a().id(id);
+	}
+
+	public static Element body() {
+		return tag("body");
+	}
+
+	public static Element body(String id) {
+		return body().id(id);
+	}
+
+	public static Element img(String id) {
+		return tag("img").id(id);
+	}
+
+	public static Element br() {
+		return new ElementImpl("br");
+	}
+
+	public static Element button() {
+		return tag("button");
+	}
+
+	public static Element button(String id) {
+		return button().id(id);
+	}
+
+	public static Element div() {
+		return tag("div");
+	}
+
+	public static Element div(String id) {
+		return div().id(id);
+	}
+
+	public static Element form(String id) {
+		return tag("form").id(id);
+	}
+
+	public static Element h1() {
+		return tag("h1");
+	}
+
+	public static Element h1(String text) {
+		return h1().add(text);
+	}
+	public static Element hr() {
+		return new ElementImpl("hr");
+	}
+	
+	public static Element input() {
+		return tag("input");
+	}
+
+	public static Element input(String id) {
+		return input().id(id);
+	}
+	
+	public static Element select(String id) {
+		return tag("select").id(id);
+	}
+
+	public static Element table(String id) {
+		return tag("table").id(id);
+	}
+
+	public static Element tag(String name) {
+		return new ElementImpl(name);
+	}
+
+	public static Element tbody() {
+		return tag("tbody");
+	}
+
+	public static Element td() {
+		return tag("td");
+	}
+
+	public static Element td(String item) {
+		return td().add(item);
+	}
+
+	public static Element textarea(String id) {
+		return tag("textarea").id(id);
+	}
+
+	public static Element th() {
+		return tag("th");
+	}
+
+	public static Element th(String text) {
+		return th().add(text);
+	}
+
+	public static Element thead() {
+		return tag("thead");
+	}
+	
+	public static Element thead(Element... elements) {
+		return thead().add(elements);
+	}
+
+	public static Element tr() {
+		return tag("tr");
+	}
+
+	public static Element tr(Element... elements) {
+		return tr().add(elements);
+	}
+
+	public static Element tr(Element td) {
+		return tr().add(td);
+	}
 }

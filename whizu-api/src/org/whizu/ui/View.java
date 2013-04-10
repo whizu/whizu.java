@@ -23,12 +23,14 @@
  *******************************************************************************/
 package org.whizu.ui;
 
+import org.whizu.content.Component;
+
 /**
  * @author Rudy D'hauwe
  */
 public interface View {
 
-	public Widget createView(final ViewFactory factory);
+	public Component createView(final ViewFactory factory);
 
 	public String getTitle();
 	

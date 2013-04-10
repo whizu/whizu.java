@@ -23,11 +23,12 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.content.Content;
+import org.whizu.content.Element;
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
-import org.whizu.runtime.AbstractComponent;
+import org.whizu.jquery.AbstractWidget;
 
-public class Textarea extends AbstractComponent {
+public class Textarea extends AbstractWidget {
 	
 	@Override
 	public Textarea css(String clazz) {
@@ -36,9 +37,9 @@ public class Textarea extends AbstractComponent {
 	}
 
 	@Override
-	public Html create() {
-		NonVoid textarea = textarea(this).attr("name", "label");
-		NonVoid label = NonVoid.tag("label").attr("for", textarea.getId()).add("label");
+	public Content create() {
+		Element textarea = textarea(this).attr("name", "label");
+		Element label = Html.tag("label").attr("for", textarea.getId()).add("label");
 		return label.after(textarea);
 	}
 }

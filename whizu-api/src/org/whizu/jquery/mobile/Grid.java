@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
-import org.whizu.runtime.AbstractComponent;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
+import org.whizu.jquery.AbstractWidget;
 
 /**
  * The jQuery Mobile framework provides a simple way to build CSS-based columns
@@ -33,7 +33,7 @@ import org.whizu.runtime.AbstractComponent;
  * 
  * @author Rudy D'hauwe
  */
-public class Grid extends AbstractComponent {
+public class Grid extends AbstractWidget {
 
 	public enum Type {
 		// @formatter:off
@@ -66,8 +66,8 @@ public class Grid extends AbstractComponent {
 	}
 
 	@Override
-	public Html create() {
-		NonVoid grid = div(this).css(type.value);
+	public Content create() {
+		Element grid = div(this).css(type.value);
 		return grid;
 	}
 

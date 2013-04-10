@@ -23,13 +23,13 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
-import org.whizu.html.Html;
+import org.whizu.content.Content;
 import org.whizu.ui.Layout;
 
 
 class FlowLayoutImpl extends LayoutImpl implements Layout {
 
-	public Html create() {
+	public Content create() {
 		return create("flow-layout", "flow-layout-element");
 	}
 }

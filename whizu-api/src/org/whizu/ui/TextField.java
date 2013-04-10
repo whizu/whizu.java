@@ -23,10 +23,12 @@
  *******************************************************************************/
 package org.whizu.ui;
 
+import org.whizu.content.Component;
+
 /**
  * @author Rudy D'hauwe
  */
 public interface TextField extends Component {
-	
+
 	public String getText();
 }

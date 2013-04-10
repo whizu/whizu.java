@@ -21,43 +21,12 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.html;
+package org.whizu.content;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Img extends NonVoid {
+public interface Identity extends Content {
 
-	public Img() {
-		super("img");
-	}
-	
-	public Img(String id) {
-		super("img");
-		this.id(id);
-	}
-	
-	public Img height(String height) {
-		return (Img) attr("height", height);
-	}
-	
-	public Img margin(String arg) {
-		return (Img) attr("margin", arg);
-	}
-	
-	public Img src(String src) {
-		return (Img) attr("src", src);
-	}
-
-	public Img title(String tooltip) {
-		if (tooltip != null) {
-			attr("title", tooltip);
-		} 
-		
-		return this;
-	}
-
-	public Img width(String width) {
-		return (Img) attr("width", width);
-	}
+	public String getId();
 }

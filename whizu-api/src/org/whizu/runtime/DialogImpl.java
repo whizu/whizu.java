@@ -23,10 +23,9 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
+import org.whizu.content.Content;
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
 import org.whizu.ui.Dialog;
-
 
 class DialogImpl extends CompositeImpl implements Dialog {
 
@@ -37,20 +36,20 @@ class DialogImpl extends CompositeImpl implements Dialog {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		String script = null;
 		if (width == null) {
 			script = ".popup('open');";
-			//jQuery(this).dialog();
+			// jQuery(this).dialog();
 		} else {
 			script = ".popup({ width:" + width + " });";
-			//jQuery(this).dialog(width);
+			// jQuery(this).dialog(width);
 		}
 		jQuery(this).concat(script); // todo further refactoring
 
-		//isRendered = true;
+		// isRendered = true;
 		jQuery(this).trigger("create");
-		return NonVoid.div(getId()).attr("data-role", "content").attr("title", caption).add(componentList);
+		return Html.div(getId()).attr("data-role", "content").attr("title", caption).add(componentList);
 	}
 
 	public void close() {

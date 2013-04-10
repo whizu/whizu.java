@@ -23,10 +23,10 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.html.Html;
-import org.whizu.runtime.AbstractComponent;
+import org.whizu.content.Content;
+import org.whizu.jquery.AbstractWidget;
 
-public class Collapsible extends AbstractComponent {
+public class Collapsible extends AbstractWidget {
 
 	@Override
 	public Collapsible css(String clazz) {
@@ -35,7 +35,7 @@ public class Collapsible extends AbstractComponent {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		throw new UnsupportedOperationException();
 	}
 }

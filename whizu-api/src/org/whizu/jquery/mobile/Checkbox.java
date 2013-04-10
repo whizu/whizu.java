@@ -23,6 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+/**
+ * @author Rudy D'hauwe
+ */
 public class Checkbox {
 
 }

@@ -23,14 +23,14 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
-import org.whizu.html.Html;
+import org.whizu.content.Content;
 
 /**
  * @author Rudy D'hauwe
  */
 class VerticalLayoutImpl extends LayoutImpl {
 
-	public Html create() {
+	public Content create() {
 		return super.create("vertical-layout", "vertical-layout-element");
 	}
 }

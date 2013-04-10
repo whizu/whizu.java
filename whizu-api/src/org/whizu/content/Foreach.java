@@ -21,14 +21,25 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.html;
+package org.whizu.content;
+
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Decorator {
+public abstract class Foreach<T> {
 
-	public void decorate(NonVoid element);
+	private Collection<T> list;
 
-	public void decorate(String name, NonVoid nonVoid);
+	public Foreach(Collection<T> list) {
+		this.list = list;
+	}
+
+	public Iterator<T> iterator() {
+		return list.iterator();
+	}
+
+	public abstract Content render(T item);
 }

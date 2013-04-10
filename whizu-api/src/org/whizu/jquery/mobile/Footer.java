@@ -23,13 +23,13 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.html.Html;
-import org.whizu.runtime.AbstractComponent;
+import org.whizu.content.Content;
+import org.whizu.jquery.AbstractWidget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Footer extends AbstractComponent {
+public class Footer extends AbstractWidget {
 
 	private String title;
 
@@ -44,7 +44,7 @@ public class Footer extends AbstractComponent {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
 		return div(this).attr("data-role", "footer").attr("data-theme", "e").add(title);
 	}

@@ -26,5 +26,5 @@ package org.whizu.ui;
 /**
  * @author Rudy D'hauwe
  */
-public interface Layout extends Composite {
+public interface Layout extends CompositeWidget {
 }

@@ -23,13 +23,14 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
+import org.whizu.content.Content;
 import org.whizu.html.Html;
-import org.whizu.html.Img;
+import org.whizu.jquery.AbstractWidget;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Image;
 
 
-class ImageImpl extends AbstractComponent implements Image {
+class ImageImpl extends AbstractWidget implements Image {
 
 	private String src;
 
@@ -44,7 +45,7 @@ class ImageImpl extends AbstractComponent implements Image {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		String script = "";
 		if (listenerId != null) {
 			String ajaxCall = "$.get('/whizu?id=" + listenerId
@@ -67,7 +68,7 @@ class ImageImpl extends AbstractComponent implements Image {
 		}
 
 		
-		return new Img(getId()).src(src).title(tooltip).width("48px").height("48px").margin("2px").css(style)
+		return Html.img(this.getId()).src(src).title(tooltip).width("48px").attr("height", "48px").margin("2px").css(style)
 				.css("link");
 		/*
 		 * if (tooltip != null) { imgNode.attr("title", tooltip); }

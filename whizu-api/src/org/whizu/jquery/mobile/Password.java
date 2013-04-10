@@ -23,14 +23,15 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.content.Content;
+import org.whizu.content.Element;
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
-import org.whizu.runtime.AbstractComponent;
+import org.whizu.jquery.AbstractWidget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Password extends AbstractComponent {
+public class Password extends AbstractWidget {
 
 	@Override
 	public Password css(String clazz) {
@@ -39,9 +40,9 @@ public class Password extends AbstractComponent {
 	}
 
 	@Override
-	public Html create() {
-		NonVoid field = input(this).attr("type", "password").attr("name", "label").attr("value", "");
-		NonVoid label = NonVoid.tag("label").attr("for", field.getId()).add("label");
+	public Content create() {
+		Element field = input(this).attr("type", "password").attr("name", "label").attr("value", "");
+		Element label = Html.tag("label").attr("for", field.getId()).add("label");
 		return label.after(field);
 	}
 }

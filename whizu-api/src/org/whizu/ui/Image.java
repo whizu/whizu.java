@@ -23,6 +23,8 @@
  *******************************************************************************/
 package org.whizu.ui;
 
+import org.whizu.content.Component;
+
 /**
  * @author Rudy D'hauwe
  */

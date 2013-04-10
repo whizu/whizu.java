@@ -26,15 +26,16 @@ package org.whizu.runtime;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.whizu.html.NonVoid;
+import org.whizu.content.Content;
+import org.whizu.content.Component;
+import org.whizu.jquery.AbstractWidget;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
 import org.whizu.ui.ClickListener;
-import org.whizu.ui.Component;
 import org.whizu.ui.Label;
 import org.whizu.value.Value;
 
-class LabelImpl extends AbstractComponent implements Label {
+class LabelImpl extends AbstractWidget implements Label {
 
 	private ClickListenerImpl listener;
 
@@ -65,9 +66,9 @@ class LabelImpl extends AbstractComponent implements Label {
 	}
 
 	public LabelImpl(String t, Component arg) {
-		AbstractComponent impl = (AbstractComponent) arg;
+		AbstractWidget impl = (AbstractWidget) arg;
 		//System.out.println("replacing $1 " + impl.getMarkup());
-		t = t.replace("$1", impl.getMarkup());
+		t = t.replace("$1", impl.stream());
 		this.text = t;
 	}
 
@@ -79,7 +80,7 @@ class LabelImpl extends AbstractComponent implements Label {
 		getSession().addClickListener(this.listener);
 	}
 
-	public NonVoid create() {
+	public Content create() {
 		String script = "";
 		JQuery jQuery = jQuery(this);
 		

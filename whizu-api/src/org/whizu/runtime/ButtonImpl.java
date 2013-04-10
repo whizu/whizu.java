@@ -23,17 +23,19 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
-import org.whizu.html.NonVoid;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
+import org.whizu.html.Html;
+import org.whizu.jquery.AbstractWidget;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
 import org.whizu.ui.Button;
 import org.whizu.ui.ClickListener;
 
-
 /**
  * @author Rudy D'hauwe
  */
-class ButtonImpl extends AbstractComponent implements Button {
+class ButtonImpl extends AbstractWidget implements Button {
 
 	private String caption;
 
@@ -49,8 +51,8 @@ class ButtonImpl extends AbstractComponent implements Button {
 	}
 
 	@Override
-	public NonVoid create() {
-		NonVoid markup = NonVoid.div(getId()).css(style).add(caption);
+	public Content create() {
+		Element markup = Html.div(getId()).css(style).add(caption);
 		JQuery jQuery = jQuery(this).button();
 
 		if (listener != null) {

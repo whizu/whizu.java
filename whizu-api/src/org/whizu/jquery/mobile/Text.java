@@ -23,14 +23,15 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.content.Content;
+import org.whizu.content.Element;
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
-import org.whizu.runtime.AbstractComponent;
+import org.whizu.jquery.AbstractWidget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Text extends AbstractComponent {
+public class Text extends AbstractWidget {
 
 	@Override
 	public Text css(String clazz) {
@@ -39,9 +40,9 @@ public class Text extends AbstractComponent {
 	}
 
 	@Override
-	public Html create() {
-		NonVoid input = input(this).attr("type", "text").attr("name", "label").attr("value", "");
-		NonVoid label = NonVoid.tag("label").attr("for", input.getId()).add("label");
+	public Content create() {
+		Element input = input(this).attr("type", "text").attr("name", "label").attr("value", "");
+		Element label = Html.tag("label").attr("for", input.getId()).add("label");
 		return label.after(input);
 	}
 }

@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
-import org.whizu.runtime.AbstractComponent;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
+import org.whizu.jquery.AbstractWidget;
 
 /**
  * Buttons are core widgets in jQuery Mobile and are used within a wide range of
@@ -34,7 +34,7 @@ import org.whizu.runtime.AbstractComponent;
  * 
  * @author Rudy D'hauwe
  */
-public class Button extends AbstractComponent {
+public class Button extends AbstractWidget {
 
 	private String title;
 
@@ -85,16 +85,16 @@ public class Button extends AbstractComponent {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		jQuery(this).trigger("create");
 		switch (type) {
 			case INPUT :
-				NonVoid button = input(this).attr("type", "button").attr("value", title)
+				Element button = input(this).attr("type", "button").attr("value", title)
 						.attr("data-inline", inline.value);
 				decorate(button, icon, theme, mini);
 				return button;
 			case SUBMIT :
-				NonVoid submit = input(this).attr("type", "submit").attr("value", title).attr("data-inline", inline.value)
+				Element submit = input(this).attr("type", "submit").attr("value", title).attr("data-inline", inline.value)
 						.attr("data-mini", mini.value);
 				decorate(submit, icon, theme, mini);
 				return submit;

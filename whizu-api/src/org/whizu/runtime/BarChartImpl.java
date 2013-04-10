@@ -23,14 +23,15 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
+import org.whizu.content.Content;
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
+import org.whizu.jquery.AbstractWidget;
 import org.whizu.ui.BarChart;
 
 /**
  * @author Rudy D'hauwe
  */
-public class BarChartImpl extends AbstractComponent implements BarChart {
+public class BarChartImpl extends AbstractWidget implements BarChart {
 
 	private String[] x;
 	
@@ -42,13 +43,13 @@ public class BarChartImpl extends AbstractComponent implements BarChart {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		jQuery(this)
 				.callunquoted(
 						"jqBarGraph",
 						"{ data: new Array([" + y[0] + ",'" + x[0] + "','#333333'], [" + y[1] + ",'" + x[1]
 								+ "','#666666']) }");
-		return NonVoid.div(getId());
+		return Html.div(getId());
 	}
 
 	@Override

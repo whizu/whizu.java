@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.html.Decorator;
-import org.whizu.html.NonVoid;
+import org.whizu.content.Decorator;
+import org.whizu.content.Element;
 
 /**
  * @author Rudy D'hauwe
@@ -62,12 +62,12 @@ public enum Icon implements Decorator {
 		this.value = value;
 	}
 
-	public void decorate(NonVoid element) {
+	public void decorate(Element element) {
 		decorate(ATTRIBUTE_NAME, element);
 	}
 
 	@Override
-	public void decorate(String name, NonVoid element) {
+	public void decorate(String name, Element element) {
 		element.attr(name, value);
 	}
 }

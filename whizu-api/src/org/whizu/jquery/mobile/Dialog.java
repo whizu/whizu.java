@@ -23,13 +23,13 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.html.Html;
-import org.whizu.runtime.AbstractComponent;
+import org.whizu.content.Content;
+import org.whizu.jquery.AbstractWidget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Dialog extends AbstractComponent {
+public class Dialog extends AbstractWidget {
 
 	@Override
 	public Dialog css(String clazz) {
@@ -38,7 +38,7 @@ public class Dialog extends AbstractComponent {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		throw new UnsupportedOperationException();
 	}
 }

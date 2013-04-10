@@ -23,23 +23,53 @@
  *******************************************************************************/
 package org.whizu.html;
 
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.whizu.content.Content;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class Foreach<T> {
+class ContentList implements Content {
 
-	private Collection<T> list;
+	private List<Content> contentList = new ArrayList<Content>();
 
-	public Foreach(Collection<T> list) {
-		this.list = list;
+	public ContentList() {
 	}
 	
-	public Iterator<T> iterator() {
-		return list.iterator();
+	public ContentList(Content... content) {
+		for (Content c : content) {
+			add(c);
+		}
 	}
 
-	public abstract Html render(T item);
+	/**
+	 * @return this
+	 */
+	public ContentList add(Content content) {
+		assert (content != null);
+		this.contentList.add(content);
+		return this;
+	}
+
+	
+	@Override
+	public final String toString() {
+		return stream();
+	}
+
+	@Override
+	public String stream() {
+		String markup = "";
+		for (Content element : contentList) {
+			markup += element.stream();
+		}
+		return markup;
+	}
+
+	public <T extends Content> ContentList add(List<T> content) {
+		this.contentList.addAll(content);
+		return this;
+	}
 }

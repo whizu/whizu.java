@@ -26,14 +26,15 @@ package org.whizu.runtime;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import org.whizu.content.Content;
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
+import org.whizu.jquery.AbstractWidget;
 import org.whizu.jquery.Input;
 import org.whizu.ui.TextField;
 import org.whizu.value.StringValue;
 
 
-class TextFieldImpl extends AbstractComponent implements TextField, Input {
+class TextFieldImpl extends AbstractWidget implements TextField, Input {
 
 	private String text;
 	
@@ -57,11 +58,11 @@ class TextFieldImpl extends AbstractComponent implements TextField, Input {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		getSession().addInput(this);
 
 		// @formatter:off
-		return NonVoid.tag("input")
+		return Html.tag("input")
 						.attr("id", getId())
 						.attr("type", "text")
 						.width("300px")

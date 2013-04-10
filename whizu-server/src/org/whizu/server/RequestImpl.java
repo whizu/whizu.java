@@ -25,7 +25,7 @@ package org.whizu.server;
 
 import java.util.Stack;
 
-import org.whizu.jquery.Identity;
+import org.whizu.content.Identity;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.Script;

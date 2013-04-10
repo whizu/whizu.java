@@ -21,23 +21,19 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.runtime;
+package org.whizu.jquery;
 
-import org.whizu.html.Decorator;
+import org.whizu.content.Content;
+import org.whizu.content.Decorator;
+import org.whizu.content.Element;
+import org.whizu.content.Identity;
+import org.whizu.content.Component;
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
-import org.whizu.html.Renderable;
-import org.whizu.jquery.Identity;
-import org.whizu.jquery.JQuery;
-import org.whizu.jquery.Request;
-import org.whizu.jquery.RequestContext;
-import org.whizu.jquery.Session;
-import org.whizu.ui.Component;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractComponent implements Component, Renderable, Identity {
+public abstract class AbstractWidget implements Component /*,  Renderable, Identity*/ {
 
 	private final String id;
 
@@ -47,21 +43,21 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 
 	protected String width = null;
 
-	protected AbstractComponent() {
+	protected AbstractWidget() {
 		this.id = getSession().next();
 	}
 
-	protected NonVoid a(AbstractComponent element) {
-		return NonVoid.a(element.getId());
+	protected Element a(AbstractWidget element) {
+		return Html.a(element.getId());
 	}
 
-	protected NonVoid button(AbstractComponent element) {
-		return NonVoid.button(element.getId());
+	protected Element button(AbstractWidget element) {
+		return Html.button(element.getId());
 	}
 	
-	public abstract Html create();
+	public abstract Content create();
 	
-	protected <T extends NonVoid> T decorate(T element, Decorator... decorators) {
+	protected <T extends Element> T decorate(T element, Decorator... decorators) {
 		for (Decorator d : decorators) {
 			if (d != null) {
 				d.decorate(element);
@@ -70,28 +66,20 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		return element;
 	}
 	
-	protected NonVoid div(AbstractComponent element) {
-		return NonVoid.div(element.getId());
+	protected Element div(AbstractWidget element) {
+		return Html.div(element.getId());
 	}
 	
-	protected NonVoid div(Identity identity) {
-		return NonVoid.div(identity.getId());
+	protected Element div(Identity identity) {
+		return Html.div(identity.getId());
 	}
 	
-	protected NonVoid form(AbstractComponent element) {
-		return NonVoid.form(element.getId());
+	protected Element form(AbstractWidget element) {
+		return Html.form(element.getId());
 	}
 
 	public String getId() {
 		return id;
-	}
-
-	public final String getMarkup() {
-		try {
-			return render().toString();
-		} finally {
-			setRendered(true);
-		}
 	}
 
 	protected Request getRequest() {
@@ -106,12 +94,12 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		return getRequest().getSession();
 	}
 
-	protected NonVoid input(AbstractComponent element) {
-		return NonVoid.input(element.getId());
+	protected Element input(AbstractWidget element) {
+		return Html.input(element.getId());
 	}
 	
-	protected NonVoid select(AbstractComponent element) {
-		return NonVoid.select(element.getId());
+	protected Element select(AbstractWidget element) {
+		return Html.select(element.getId());
 	}
 
 	public boolean isRendered() {
@@ -130,7 +118,7 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		return getRequest().select(selector);
 	}
 
-	public final Html render() {
+	public final Content render() {
 		//return NonVoid.div(getId());
 		if (isRendered()) {
 			throw new IllegalStateException("This component is already rendered: " + this);
@@ -151,11 +139,20 @@ public abstract class AbstractComponent implements Component, Renderable, Identi
 		this.style = style;
 	}
 	
-	public void setWidth(String width) {
+	public void width(String width) {
 		this.width = width;
 	}
 	
-	protected NonVoid textarea(AbstractComponent element) {
-		return NonVoid.textarea(element.getId());
+	protected Element textarea(AbstractWidget element) {
+		return Html.textarea(element.getId());
+	}
+
+	@Override
+	public String stream() {
+		try {
+			return render().stream();
+		} finally {
+			setRendered(true);
+		}
 	}
 }

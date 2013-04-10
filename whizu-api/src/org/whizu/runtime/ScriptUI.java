@@ -23,13 +23,13 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
+import org.whizu.content.Component;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Session;
 import org.whizu.ui.BarChart;
 import org.whizu.ui.Button;
 import org.whizu.ui.ClickListener;
-import org.whizu.ui.Component;
 import org.whizu.ui.Dialog;
 import org.whizu.ui.Document;
 import org.whizu.ui.Form;
@@ -44,8 +44,6 @@ import org.whizu.ui.TextArea;
 import org.whizu.ui.TextField;
 import org.whizu.ui.UI;
 import org.whizu.ui.View;
-import org.whizu.ui.VirtualContainer;
-import org.whizu.ui.Widget;
 import org.whizu.ui.Window;
 import org.whizu.value.StringValue;
 import org.whizu.value.Value;
@@ -170,11 +168,6 @@ public class ScriptUI implements UI {
 	}
 
 	@Override
-	public VirtualContainer createVirtualContainer() {
-		return new VirtualContainerImpl();
-	}
-
-	@Override
 	public Document getDocument() {
 		Request request = getRequest();
 		Session session = request.getSession();
@@ -192,9 +185,9 @@ public class ScriptUI implements UI {
 
 	@Override
 	public void openDialog(View wnd) {
-		Widget component = wnd.createView(this);
+		Component component = wnd.createView(this);
 		Dialog dialog = createDialog(wnd.getTitle());
-		dialog.setWidth(wnd.getWidth());
+		dialog.width(wnd.getWidth());
 		dialog.add(component);
 		getDocument().add(dialog);
 	}

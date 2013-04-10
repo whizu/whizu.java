@@ -26,5 +26,5 @@ package org.whizu.ui;
 /**
  * @author Rudy D'hauwe
  */
-public interface Form extends Composite {
+public interface Form extends CompositeWidget {
 }

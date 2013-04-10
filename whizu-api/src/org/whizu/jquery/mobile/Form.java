@@ -23,14 +23,14 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.html.Html;
-import org.whizu.runtime.AbstractComponent;
+import org.whizu.content.Content;
+import org.whizu.jquery.AbstractWidget;
 import org.whizu.value.PasswordValue;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Form extends AbstractComponent {
+public class Form extends AbstractWidget {
 
 	@Override
 	public Form css(String clazz) {
@@ -39,7 +39,7 @@ public class Form extends AbstractComponent {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		// @formatter:off
 		return form(this)
 				.attr("method", "post")
@@ -48,27 +48,27 @@ public class Form extends AbstractComponent {
 	}
 
 	public void addText() {
-		AbstractComponent text = new Text();
+		AbstractWidget text = new Text();
 		add(text);
 	}
 
 	public void addTextarea() {
-		AbstractComponent text = new Textarea();
+		AbstractWidget text = new Textarea();
 		add(text);
 	}
 
 	public void addSlider(int min, int max) {
-		AbstractComponent slider = new Slider(min, max);
+		AbstractWidget slider = new Slider(min, max);
 		add(slider);
 	}
 
 	public void addSlider(int min, int max, Theme theme) {
-		AbstractComponent slider = new Slider(min, max, theme);
+		AbstractWidget slider = new Slider(min, max, theme);
 		add(slider);
 	}
 
 	public void addFlipSwitch() {
-		AbstractComponent field = new FlipSwitch();
+		AbstractWidget field = new FlipSwitch();
 		add(field);
 	}
 	
@@ -76,7 +76,7 @@ public class Form extends AbstractComponent {
 		throw new UnsupportedOperationException();
 	}
 
-	private void add(AbstractComponent field) {
+	private void add(AbstractWidget field) {
 		jQuery(this).append(field.create().toString());
 	}
 }

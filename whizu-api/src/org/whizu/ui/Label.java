@@ -23,6 +23,8 @@
  *******************************************************************************/
 package org.whizu.ui;
 
+import org.whizu.content.Component;
+
 /**
  * @author Rudy D'hauwe
  */
@@ -33,6 +35,6 @@ public interface Label extends Component, Clickable {
 	public String getText();
 
 	public void setText(String text);
-	
+
 	public void toggle();
 }

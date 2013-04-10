@@ -28,4 +28,23 @@ package org.whizu.content;
  */
 public class Literal implements Content {
 
+	@Override
+	public String stream() {
+		return text;
+	}
+
+	private String text;
+	
+	public Literal(String text) {
+		this.text = text;
+	}
+
+	public String getText() {
+		return text;
+	}
+	
+	@Override
+	public String toString() {
+		return text;
+	}
 }

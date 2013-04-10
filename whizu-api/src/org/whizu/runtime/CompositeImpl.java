@@ -26,16 +26,15 @@ package org.whizu.runtime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.whizu.html.Html;
-import org.whizu.jquery.Identity;
-import org.whizu.ui.Composite;
-import org.whizu.ui.Widget;
-
+import org.whizu.content.Component;
+import org.whizu.content.Content;
+import org.whizu.jquery.AbstractWidget;
+import org.whizu.ui.CompositeWidget;
 
 /**
  * @author Rudy D'hauwe
  */
-class CompositeImpl extends AbstractComponent implements Composite {
+class CompositeImpl extends AbstractWidget implements CompositeWidget {
 
 	@Override
 	public CompositeImpl css(String clazz) {
@@ -43,11 +42,11 @@ class CompositeImpl extends AbstractComponent implements Composite {
 		return this;
 	}
 
-	protected List<AbstractComponent> componentList = new ArrayList<AbstractComponent>();
+	protected List<AbstractWidget> componentList = new ArrayList<AbstractWidget>();
 
 	@Override
-	public void add(Widget component) {
-		AbstractComponent impl = (AbstractComponent) component;
+	public void add(Component component) {
+		AbstractWidget impl = (AbstractWidget) component;
 		this.componentList.add(impl);
 
 		if (this.isRendered()) {
@@ -56,22 +55,21 @@ class CompositeImpl extends AbstractComponent implements Composite {
 	}
 
 	@Override
-	public void prepend(Widget component) {
-		AbstractComponent impl = (AbstractComponent) component;
+	public void prepend(Component component) {
+		AbstractWidget impl = (AbstractWidget) component;
 		this.componentList.add(impl);
 
 		if (isRendered()) {
-			jQuery(this).prepend(impl.getMarkup());
+			jQuery(this).prepend(impl.stream());
 		}
 	}
 
-	public Html create() {
+	public Content create() {
 		return div(this).add(componentList);
 	}
 
 	@Override
-	public void remove(Widget component) {
-		Identity element = (Identity) component;
+	public void remove(Component element) {
 		jQuery(element).remove();
 	}
 

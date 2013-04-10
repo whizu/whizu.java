@@ -23,6 +23,8 @@
  *******************************************************************************/
 package org.whizu.jquery;
 
+import org.whizu.content.Identity;
+
 public interface Request {
 
 	public abstract Session getSession();

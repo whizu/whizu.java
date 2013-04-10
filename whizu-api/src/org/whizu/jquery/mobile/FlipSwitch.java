@@ -23,14 +23,15 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.content.Content;
+import org.whizu.content.Element;
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
-import org.whizu.runtime.AbstractComponent;
+import org.whizu.jquery.AbstractWidget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class FlipSwitch extends AbstractComponent {
+public class FlipSwitch extends AbstractWidget {
 
 	private Theme theme;
 	
@@ -45,16 +46,16 @@ public class FlipSwitch extends AbstractComponent {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		// @formatter:off
-		NonVoid field = select(this)
+		Element field = select(this)
 				.attr("data-role", "slider")
 				.attr("name", "label")
 				.decorate(theme)
 				.decorate("data-track-theme", track)
 				.decorate(mini)
-				.add("<option value='off'>Off</option><option value='off'>Off</option>");
-		NonVoid label = NonVoid.tag("label")
+				.add("<option value='off'>Off</option><option value='on'>On</option>");
+		Element label = Html.tag("label")
 				.attr("for", field.getId())
 				.add("label");
 		// @formatter:on

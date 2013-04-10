@@ -23,11 +23,9 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
+import org.whizu.content.Content;
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
 import org.whizu.ui.Window;
-
-
 
 class WindowImpl extends CompositeImpl implements Window {
 
@@ -38,10 +36,10 @@ class WindowImpl extends CompositeImpl implements Window {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		jQuery(this).call("dialog");
-		//isRendered = true;
-		return NonVoid.div(getId()).attr("title", caption).add(componentList);
+		// isRendered = true;
+		return Html.div(getId()).attr("title", caption).add(componentList);
 	}
 
 	public void close() {

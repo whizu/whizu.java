@@ -26,5 +26,5 @@ package org.whizu.ui;
 /**
  * @author Rudy D'hauwe
  */
-public interface Dialog extends Composite {
+public interface Dialog extends CompositeWidget {
 }

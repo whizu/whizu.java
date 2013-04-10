@@ -36,9 +36,6 @@ public interface UI extends ViewFactory {
 
 	public Document getDocument();
 
-	@Deprecated //smarter way of programming this?
-	public VirtualContainer createVirtualContainer();
-
 	public Label createLabel(Value<?> aantal);
 
 	public BarChart createBarChart(String[] x, Integer[] y);

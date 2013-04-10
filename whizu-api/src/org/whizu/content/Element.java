@@ -23,6 +23,8 @@
  *******************************************************************************/
 package org.whizu.content;
 
+import java.util.List;
+
 /**
  * An element in the Document Object Model (DOM) has attributes, text and
  * children. It provides methods to traverse the parent and children and to get
@@ -35,6 +37,127 @@ package org.whizu.content;
  * @author Rudy D'hauwe
  * @see <a href='http://api.jquery.com/Types/#Element'>jQuery's Element type</a>
  */
-public interface Element extends Content {
+public interface Element extends Identity {
 
+	/**
+	 * Add content to this element.
+	 * 
+	 * @return this
+	 */
+	public Element add(Content content);
+
+	/**
+	 * @return this
+	 */
+	public <T extends Content> Element add(List<T> content);
+	
+	/**
+	 * Add content to this element.
+	 * 
+	 * @return this
+	 */
+	public Element add(Content... contents);
+
+	/**
+	 * Add content to this element.
+	 * 
+	 * @return this
+	 */
+	public <T> Element add(Foreach<T> factory);
+
+	/**
+	 * Add text content to this element.
+	 * 
+	 * @return this
+	 */
+	public Element add(String literal);
+
+	/**
+	 * Set the value of an attribute of this element.
+	 * 
+	 * @return this
+	 */
+	public Element attr(String name, String value);
+
+	/**
+	 * @return this
+	 */
+	public Element border(String border);
+
+	/**
+	 * @return this
+	 */
+	public Element css(String clazz);
+
+	/**
+	 * @return this
+	 */
+	public <T extends Element> T decorate(Decorator... decorators);
+
+	/**
+	 * @return this
+	 */
+	public <T extends Element> T decorate(String name, Decorator decorator);
+
+	/**
+	 * @return the id of this element
+	 */
+	public String getId();
+
+	/**
+	 * Set the id of this element.
+	 * 
+	 * @return this
+	 */
+	public Element id(String id);
+
+	/**
+	 * @return this
+	 */
+	public Element padding(String padding);
+
+	/**
+	 * @return this
+	 */
+	public Element size(String size);
+
+	/**
+	 * @return the wrapping element
+	 */
+	public Element wrap(String name);
+
+	/**
+	 * @return a composite containing this after element
+	 */
+	public Content after(Content element);
+
+	/**
+	 * @return this
+	 */
+	public Element width(String width);
+
+	/**
+	 * @return this
+	 */
+	public Element style(String name, String value);
+
+	/**
+	 * @return this
+	 */
+	public Element title(String title);
+
+	/**
+	 * @return this
+	 */
+	public Element height(String height);
+
+	/**
+	 * @return this
+	 */
+	public Element margin(String margin);
+
+	/**
+	 * @return this
+	 */
+	public Element src(String src);
 }

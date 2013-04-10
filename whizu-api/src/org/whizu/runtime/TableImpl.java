@@ -28,19 +28,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.whizu.html.Foreach;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
+import org.whizu.content.Foreach;
+import org.whizu.content.Component;
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
+import org.whizu.jquery.AbstractWidget;
 import org.whizu.ui.Table;
-import org.whizu.ui.Widget;
 
-class TableImpl extends AbstractComponent implements Table {
+class TableImpl extends AbstractWidget implements Table {
 
 	private String title;
 
 	private List<String> columnList = new ArrayList<String>();
 
-	private Map<Object, Widget[]> rows = new HashMap<Object, Widget[]>();
+	private Map<Object, Component[]> rows = new HashMap<Object, Component[]>();
 
 	TableImpl(String title) {
 		this.title = title;
@@ -52,14 +54,14 @@ class TableImpl extends AbstractComponent implements Table {
 	}
 
 	@Override
-	public void addRow(Object key, Widget... components) {
+	public void addRow(Object key, Component... components) {
 		this.rows.put(key, components);
 
 		if (isRendered()) {
-			NonVoid tr = NonVoid.tr().width(width).style("word-wrap", "break-word");
-			for (Widget value : components) {
-				Html m = ((AbstractComponent) value).render();
-				tr.add(NonVoid.td().style("word-wrap", "break-word").add(m));
+			Element tr = Html.tr().width(width).style("word-wrap", "break-word");
+			for (Component value : components) {
+				Content m = ((AbstractWidget) value).render();
+				tr.add(Html.td().style("word-wrap", "break-word").add(m));
 			}
 			jQuery(this).find("tbody").prepend(tr.toString());
 		}
@@ -70,12 +72,12 @@ class TableImpl extends AbstractComponent implements Table {
 	}
 
 	@Override
-	public Html create() {
-		//isRendered = true;
+	public Content create() {
+		// isRendered = true;
 		jQuery(this).closest("div").trigger("create");
 
 		// @formatter:off
-		return NonVoid.table(getId())
+		return Html.table(getId())
 				.attr("data-role", "table")
 				.css("ui-responsive")
 				.css("table-stroke")
@@ -84,28 +86,28 @@ class TableImpl extends AbstractComponent implements Table {
 				.attr("data-mode", "columntoggle")
 				.width(width)
 				.style("word-wrap", "break-word")
-				.add(NonVoid.thead()
-						.add(NonVoid.tr()
+				.add(Html.thead()
+						.add(Html.tr()
 								.add(new Foreach<String>(columnList) {
 
 									@Override
-									public Html render(String item) {
-										return NonVoid.th(item);
+									public Content render(String item) {
+										return Html.th(item);
 									}
 								})
 							), 
-				     NonVoid.tbody()
-				     	.add(new Foreach<Widget[]>(rows.values()) {
+						Html.tbody()
+				     	.add(new Foreach<Component[]>(rows.values()) {
 
 				     		@Override
-				     		public Html render(Widget[] item) {
-				     			NonVoid tr = NonVoid.tr()
+				     		public Content render(Component[] item) {
+				     			Element tr = Html.tr()
 				     						.width(width)
 				     						.style("word-wrap", "break-word");
-				     			for (Widget value : item) {
-				     				Html m = ((AbstractComponent) value).render();
+				     			for (Component value : item) {
+				     				Content m = ((AbstractWidget) value).render();
 				     				tr.add(
-				     					NonVoid.td()
+				     					Html.td()
 				     						.style("word-wrap", "break-word")
 				     						.add(m));
 				     			}
@@ -114,8 +116,10 @@ class TableImpl extends AbstractComponent implements Table {
 				     	}));
 		// @formatter:on
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.whizu.ui.Component#css(java.lang.String)
 	 */
 	@Override

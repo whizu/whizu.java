@@ -23,8 +23,9 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
-import org.whizu.html.Foreach;
-import org.whizu.html.Html;
+import org.whizu.content.Content;
+import org.whizu.content.Foreach;
+import org.whizu.jquery.AbstractWidget;
 import org.whizu.ui.Layout;
 
 /**
@@ -32,12 +33,12 @@ import org.whizu.ui.Layout;
  */
 class LayoutImpl extends CompositeImpl implements Layout {
 
-	protected Html create(String css, final String itemClass) {
+	protected Content create(String css, final String itemClass) {
 		// isRendered = true;
-		return div(this).css(style).css(css).width(width).add(new Foreach<AbstractComponent>(componentList) {
+		return div(this).css(style).css(css).width(width).add(new Foreach<AbstractWidget>(componentList) {
 
 			@Override
-			public Html render(AbstractComponent item) {
+			public Content render(AbstractWidget item) {
 				item.css(itemClass); //to be tested
 				return item.render(); 
 				//return item.render().css(itemClass); //this works
@@ -46,7 +47,7 @@ class LayoutImpl extends CompositeImpl implements Layout {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 //		isRendered = true;
 		return div(this).css(style).width(width).add(componentList);
 	}

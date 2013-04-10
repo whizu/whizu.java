@@ -23,13 +23,14 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
+import org.whizu.content.Content;
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
+import org.whizu.jquery.AbstractWidget;
 import org.whizu.jquery.Input;
 import org.whizu.ui.TextArea;
 
 
-class TextAreaImpl extends AbstractComponent implements TextArea, Input {
+class TextAreaImpl extends AbstractWidget implements TextArea, Input {
 
 	private String text;
 
@@ -38,13 +39,13 @@ class TextAreaImpl extends AbstractComponent implements TextArea, Input {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		getSession().addInput(this);
 
 		jQuery(this).closest("div").trigger("create").call("flexible");
 
 		// @formatter:off
-		return NonVoid.textarea(getId())
+		return Html.textarea(getId())
 						.css("textarea")
 						.width("100%")
 						.style("overflow", "hidden")

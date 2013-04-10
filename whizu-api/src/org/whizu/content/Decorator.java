@@ -21,16 +21,14 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.ui;
+package org.whizu.content;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Component extends Widget {
+public interface Decorator {
 
-	public Component css(String clazz);
+	public void decorate(Element element);
 
-	public String getId();
-	
-	public void setWidth(String width);
+	public void decorate(String name, Element element);
 }

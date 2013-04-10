@@ -23,15 +23,15 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.html.Html;
-import org.whizu.runtime.AbstractComponent;
+import org.whizu.content.Content;
+import org.whizu.jquery.AbstractWidget;
 
 /**
  * Creates a collapsible set of collapsible blocks of content.
  * 
  * @author Rudy D'hauwe
  */
-public class Accordion extends AbstractComponent {
+public class Accordion extends AbstractWidget {
 
 	@Override
 	public Accordion css(String clazz) {
@@ -40,7 +40,7 @@ public class Accordion extends AbstractComponent {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		throw new UnsupportedOperationException();
 	}
 }

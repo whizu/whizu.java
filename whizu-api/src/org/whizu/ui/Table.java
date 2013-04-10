@@ -23,12 +23,14 @@
  *******************************************************************************/
 package org.whizu.ui;
 
+import org.whizu.content.Component;
+
 /**
  * @author Rudy D'hauwe
  */
 public interface Table extends Component {
 
 	public void addColumn(String name);
-	
-	public void addRow(Object key, Widget... components);
+
+	public void addRow(Object key, Component... components);
 }

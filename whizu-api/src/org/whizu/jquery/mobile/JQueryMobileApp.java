@@ -23,10 +23,10 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.content.Component;
 import org.whizu.runtime.ScriptUI;
 import org.whizu.ui.Application;
 import org.whizu.ui.UI;
-import org.whizu.ui.Widget;
 
 /**
  * @author Rudy D'hauwe
@@ -54,7 +54,7 @@ public class JQueryMobileApp implements Application {
 		add(new Header("<h2>" + title + "</h2>"));
 	}
 	
-	protected <T extends Widget> T add(T widget) {
+	protected <T extends Component> T add(T widget) {
 		ui.getDocument().add(widget);
 		return widget;
 	}

@@ -23,19 +23,19 @@
  *******************************************************************************/
 package org.whizu.runtime;
 
-import org.whizu.html.Html;
-import org.whizu.jquery.Function;
+import org.whizu.content.Content;
 
 class AbsoluteLayoutImpl extends LayoutImpl {
 
 	@Override
-	public Html create() {
+	public Content create() {
 		return create("absolute-layout", "absolute-layout-element");
 	}
 
+	/*
 	//TODO move to some test case
 	public static void main(String[] args) {
-		final AbstractComponent impl = new AbsoluteLayoutImpl();
+		final AbstractWidget impl = new AbsoluteLayoutImpl();
 		System.out.println(impl.getId());
 		System.out.println(impl.getSelector());
 		System.out.println(impl.jQuery(impl));
@@ -47,4 +47,5 @@ class AbsoluteLayoutImpl extends LayoutImpl {
 			}
 		}).button());
 	}
+	*/
 }

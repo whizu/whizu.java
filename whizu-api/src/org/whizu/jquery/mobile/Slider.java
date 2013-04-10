@@ -23,14 +23,15 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.content.Content;
+import org.whizu.content.Element;
 import org.whizu.html.Html;
-import org.whizu.html.NonVoid;
-import org.whizu.runtime.AbstractComponent;
+import org.whizu.jquery.AbstractWidget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Slider extends AbstractComponent {
+public class Slider extends AbstractWidget {
 
 	private String max;
 
@@ -55,9 +56,9 @@ public class Slider extends AbstractComponent {
 	}
 
 	@Override
-	public Html create() {
+	public Content create() {
 		// @formatter:off
-		NonVoid input = input(this)
+		Element input = input(this)
 				.attr("type", "range")
 				.attr("name", "label")
 				.attr("value", min)
@@ -67,7 +68,7 @@ public class Slider extends AbstractComponent {
 				.decorate(theme)
 				.decorate("data-track-theme", track)
 				.decorate(mini);
-		NonVoid label = NonVoid.tag("label")
+		Element label = Html.tag("label")
 				.attr("for", input.getId())
 				.add("label");
 		// @formatter:on

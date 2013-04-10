@@ -21,37 +21,20 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.html;
+package org.whizu.ui;
+
+import org.whizu.content.Component;
 
 /**
  * @author Rudy D'hauwe
  */
-class Text implements Html {
+public interface CompositeWidget extends Component {
 
-	private String text;
+	public void add(Component component);
 
-	Text(String html) {
-		this.text = html;
-	}
+	public void empty();
 
-	/**
-	 * @throws UnsupportedOperationException
-	 */
-	@Override
-	public NonVoid add(Html create) {
-		throw new UnsupportedOperationException();
-	}
+	public void prepend(Component component);
 
-	/**
-	 * @throws UnsupportedOperationException
-	 */
-	@Deprecated
-	public NonVoid css(String className) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public String toString() {
-		return text;
-	}
+	public void remove(Component component);
 }

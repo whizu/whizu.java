@@ -21,14 +21,14 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.html;
-
-import org.whizu.content.Content;
+package org.whizu.content;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Renderable {
+public interface Component extends Identity {
+	
+	public Component css(String clazz);
 
-	public Html render();
+	public void width(String width);
 }
