@@ -37,7 +37,7 @@ class DocumentImpl extends Container implements Document {
 	}
 
 	@Override
-	public String getId() {
+	public String id() {
 		return "whizu";
 	}
 }

@@ -33,6 +33,7 @@ import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Foreach;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Widget;
 
 class TableImpl extends Widget implements Table {
@@ -75,12 +76,12 @@ class TableImpl extends Widget implements Table {
 	}
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		// isRendered = true;
 		jQuery(this).closest("div").trigger("create");
 
 		// @formatter:off
-		return Html.table(getId())
+		return Html.table(id())
 				.attr("data-role", "table")
 				.css("ui-responsive")
 				.css("table-stroke")

@@ -58,7 +58,7 @@ class SessionImpl implements Session {
 
 	@Override
 	public void addInput(Input input) {
-		inputMap.put(input.getId(), input);
+		inputMap.put(input.id(), input);
 	}
 
 	@Override

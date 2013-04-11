@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Widget;
 
 public class Collapsible extends Widget {
@@ -35,7 +35,7 @@ public class Collapsible extends Widget {
 	}
 
 	@Override
-	protected Content create() {
+	protected Markup compile() {
 		throw new UnsupportedOperationException();
 	}
 }

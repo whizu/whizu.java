@@ -28,8 +28,8 @@ import java.util.List;
 
 import org.whizu.dom.Component;
 import org.whizu.dom.Composite;
-import org.whizu.dom.Content;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 
 /**
  * @author Rudy D'hauwe
@@ -71,7 +71,7 @@ public class Container extends Widget implements Composite {
 	}
 
 	@Override
-	protected Content create() {
+	protected Markup compile() {
 		return Html.div(this).add(componentList);
 	}
 

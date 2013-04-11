@@ -26,7 +26,7 @@ package org.whizu.dom;
 /**
  * @author Rudy D'hauwe
  */
-public class Literal implements Content {
+public class Literal implements Markup {
 
 	@Override
 	public String render() {

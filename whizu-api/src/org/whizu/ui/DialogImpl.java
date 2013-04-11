@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.dom.Content;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Container;
 
 class DialogImpl extends Container implements Dialog {
@@ -36,7 +36,7 @@ class DialogImpl extends Container implements Dialog {
 	}
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		String script = null;
 		if (width == null) {
 			script = ".popup('open');";
@@ -49,7 +49,7 @@ class DialogImpl extends Container implements Dialog {
 
 		// isRendered = true;
 		jQuery(this).trigger("create");
-		return Html.div(getId()).attr("data-role", "content").attr("title", caption).add(componentList);
+		return Html.div(id()).attr("data-role", "content").attr("title", caption).add(componentList);
 	}
 
 	public void close() {

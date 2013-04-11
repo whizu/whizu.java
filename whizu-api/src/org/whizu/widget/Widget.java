@@ -24,8 +24,8 @@
 package org.whizu.widget;
 
 import org.whizu.dom.Component;
-import org.whizu.dom.Content;
 import org.whizu.dom.Identity;
+import org.whizu.dom.Markup;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
@@ -53,13 +53,13 @@ public abstract class Widget implements Component {
 	}
 
 	/**
-	 * Initial creation and rendering of this widget by compiling this widget
-	 * into a combination of static HTML markup and javascript.
+	 * Initial creation and rendering of this widget by compiling it into a
+	 * combination of static HTML markup and javascript.
 	 */
-	protected abstract Content create();
+	protected abstract Markup compile();
 
 	@Override
-	public String getId() {
+	public String id() {
 		return id;
 	}
 
@@ -68,7 +68,7 @@ public abstract class Widget implements Component {
 	}
 
 	protected String getSelector() {
-		return "$(\"#" + getId() + "\")";
+		return "$(\"#" + id() + "\")";
 	}
 
 	protected Session getSession() {
@@ -106,13 +106,13 @@ public abstract class Widget implements Component {
 			if (isRendered()) {
 				throw new IllegalStateException("This component is already rendered: " + this);
 			} else {
-				Content content = create();
-				if (content == null) {
+				Markup markup = compile();
+				if (markup == null) {
 					return "";
-				} else if (content.equals(this)) {
+				} else if (markup.equals(this)) {
 					throw new IllegalStateException("Widget.create() must not return this - causes infinite loop");
 				} else {
-					return content.render();
+					return markup.render();
 				}
 			}
 		} finally {

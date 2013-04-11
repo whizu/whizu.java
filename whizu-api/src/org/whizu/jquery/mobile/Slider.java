@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Widget;
 
 /**
@@ -56,7 +56,7 @@ public class Slider extends Widget {
 	}
 
 	@Override
-	protected Content create() {
+	protected Markup compile() {
 		// @formatter:off
 		Element field = Html.input(this)
 				.attr("type", "range")
@@ -69,7 +69,7 @@ public class Slider extends Widget {
 				.decorate("data-track-theme", track)
 				.decorate(mini);
 		Element label = Html.tag("label")
-				.attr("for", field.getId())
+				.attr("for", field.id())
 				.add("label");
 		// @formatter:on
 		return field.after(label);

@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.dom.Content;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.jquery.Input;
 import org.whizu.widget.Widget;
 
@@ -38,17 +38,17 @@ class TextAreaImpl extends Widget implements TextArea, Input {
 	}
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		getSession().addInput(this);
 
 		jQuery(this).closest("div").trigger("create").call("flexible");
 
 		// @formatter:off
-		return Html.textarea(getId())
+		return Html.textarea(id())
 						.css("textarea")
 						.width("100%")
 						.style("overflow", "hidden")
-						.attr("name", getId())
+						.attr("name", id())
 						.add(text);
 		// @formatter:on
 	}

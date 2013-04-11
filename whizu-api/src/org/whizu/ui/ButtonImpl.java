@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
 import org.whizu.widget.Widget;
@@ -49,8 +49,8 @@ class ButtonImpl extends Widget implements Button {
 	}
 
 	@Override
-	public Content create() {
-		Element markup = Html.div(getId()).css(style).add(caption);
+	public Markup compile() {
+		Element markup = Html.div(id()).css(style).add(caption);
 		JQuery jQuery = jQuery(this).button();
 
 		if (listener != null) {

@@ -37,7 +37,7 @@ import java.util.List;
  * @author Rudy D'hauwe
  * @see <a href='http://api.jquery.com/Types/#Element'>jQuery's Element type</a>
  */
-public interface Element extends Identity {
+public interface Element extends Markup, Identity {
 
 	/**
 	 * Add content to this element.
@@ -102,7 +102,7 @@ public interface Element extends Identity {
 	/**
 	 * @return the id of this element
 	 */
-	public String getId();
+	public String id();
 
 	/**
 	 * Set the id of this element.
@@ -129,7 +129,7 @@ public interface Element extends Identity {
 	/**
 	 * @return a composite containing this after element
 	 */
-	public Content after(Content element);
+	public Markup after(Content element);
 
 	/**
 	 * @return this

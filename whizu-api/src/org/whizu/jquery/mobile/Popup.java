@@ -26,6 +26,7 @@ package org.whizu.jquery.mobile;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Container;
 
 /**
@@ -46,13 +47,13 @@ public class Popup extends Container {
 	}
 
 	@Override
-	protected Content create() {
+	protected Markup compile() {
 		// @formatter:off
 		Element popup = Html.div(this)
 						 .attr("data-rel", "popup")
 						 .add(componentList);
 		Content link = Html.a()
-						 .attr("href", "#" + popup.getId())
+						 .attr("href", "#" + popup.id())
 						 .attr("data-role", "button")
 						 .attr("data-inline", "true")
 						 .attr("data-transition", "pop")

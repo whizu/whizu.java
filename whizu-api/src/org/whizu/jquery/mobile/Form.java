@@ -25,6 +25,7 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.value.PasswordValue;
 import org.whizu.widget.Container;
 
@@ -40,7 +41,7 @@ public class Form extends Container {
 	}
 
 	@Override
-	protected Content create() {
+	protected Markup compile() {
 		// @formatter:off
 		return Html.form(this)
 				.attr("method", "post")

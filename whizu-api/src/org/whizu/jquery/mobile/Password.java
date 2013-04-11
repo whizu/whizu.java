@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Widget;
 
 /**
@@ -40,9 +40,9 @@ public class Password extends Widget {
 	}
 
 	@Override
-	protected Content create() {
+	protected Markup compile() {
 		Element field = Html.input(this).attr("type", "password").attr("name", "label").attr("value", "");
-		Element label = Html.label().attr("for", field.getId()).add("label");
+		Element label = Html.label().attr("for", field.id()).add("label");
 		return label.after(field);
 	}
 }

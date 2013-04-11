@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Widget;
 
 public class Textarea extends Widget {
@@ -37,9 +37,9 @@ public class Textarea extends Widget {
 	}
 
 	@Override
-	protected Content create() {
+	protected Markup compile() {
 		Element field = Html.textarea(this).attr("name", "label");
-		Element label = Html.tag("label").attr("for", field.getId()).add("label");
+		Element label = Html.tag("label").attr("for", field.id()).add("label");
 		return field.after(label);
 	}
 }

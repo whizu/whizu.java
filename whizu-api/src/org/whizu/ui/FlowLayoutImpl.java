@@ -23,13 +23,13 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.dom.Content;
+import org.whizu.dom.Markup;
 
 
 class FlowLayoutImpl extends LayoutImpl implements Layout {
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		return create("flow-layout", "flow-layout-element");
 	}
 }

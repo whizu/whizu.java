@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Widget;
 
 /**
@@ -67,7 +67,7 @@ public class Grid extends Widget {
 	}
 
 	@Override
-	protected Content create() {
+	protected Markup compile() {
 		Element grid = Html.div(this).css(type.value);
 		return grid;
 	}

@@ -26,8 +26,8 @@ package org.whizu.ui;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.whizu.dom.Content;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.jquery.Input;
 import org.whizu.value.StringValue;
 import org.whizu.widget.Widget;
@@ -57,15 +57,15 @@ class TextFieldImpl extends Widget implements TextField, Input {
 	}
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		getSession().addInput(this);
 
 		// @formatter:off
 		return Html.tag("input")
-						.attr("id", getId())
+						.attr("id", id())
 						.attr("type", "text")
 						.width("300px")
-						.attr("name", getId())
+						.attr("name", id())
 						.css(style)
 						.style("display","inline-block")
 						.add(text);

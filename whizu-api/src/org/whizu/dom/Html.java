@@ -15,7 +15,7 @@ public class Html {
 	}
 
 	public static Element a(Identity element) {
-		return a(element.getId());
+		return a(element.id());
 	}
 
 	public static Element a(String id) {
@@ -39,7 +39,7 @@ public class Html {
 	}
 
 	public static Element button(Identity element) {
-		return button(element.getId());
+		return button(element.id());
 	}
 
 	public static Element button(String id) {
@@ -51,7 +51,7 @@ public class Html {
 	}
 
 	public static Element div(Identity element) {
-		return div(element.getId());
+		return div(element.id());
 	}
 
 	public static Element div(String id) {
@@ -59,7 +59,7 @@ public class Html {
 	}
 
 	public static Element form(Identity element) {
-		return form(element.getId());
+		return form(element.id());
 	}
 	public static Element form(String id) {
 		return tag("form").id(id);
@@ -86,7 +86,7 @@ public class Html {
 	}
 
 	public static Element input(Identity element) {
-		return input(element.getId());
+		return input(element.id());
 	}
 
 	public static Element input(String id) {
@@ -98,7 +98,7 @@ public class Html {
 	}
 
 	public static Element select(Identity element) {
-		return select(element.getId());
+		return select(element.id());
 	}
 
 	public static Element select(String id) {
@@ -126,7 +126,7 @@ public class Html {
 	}
 
 	public static Element textarea(Identity element) {
-		return textarea(element.getId());
+		return textarea(element.id());
 	}
 
 	public static Element textarea(String id) {

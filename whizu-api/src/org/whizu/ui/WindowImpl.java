@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.dom.Content;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Container;
 
 class WindowImpl extends Container implements Window {
@@ -36,10 +36,10 @@ class WindowImpl extends Container implements Window {
 	}
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		jQuery(this).call("dialog");
 		// isRendered = true;
-		return Html.div(getId()).attr("title", caption).add(componentList);
+		return Html.div(id()).attr("title", caption).add(componentList);
 	}
 
 	public void close() {

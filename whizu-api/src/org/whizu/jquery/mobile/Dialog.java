@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Widget;
 
 /**
@@ -38,7 +38,7 @@ public class Dialog extends Widget {
 	}
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		throw new UnsupportedOperationException();
 	}
 }

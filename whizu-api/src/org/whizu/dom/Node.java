@@ -175,7 +175,7 @@ class Node implements Element {
 	}
 
 	@Override
-	public Content after(Content element) {
+	public Markup after(Content element) {
 		return new ContentList(element, this);
 	}
 
@@ -226,7 +226,7 @@ class Node implements Element {
 	}
 
 	@Override
-	public String getId() {
+	public String id() {
 		return id;
 	}
 

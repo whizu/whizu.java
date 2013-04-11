@@ -191,7 +191,6 @@ public interface JQuery {
 	 * Insert content, specified by the parameter, to the beginning of each element
 	 * in the set of matched elements. The .prepend() method inserts the specified
 	 * content as the first child of each element in the jQuery collection.
-	 * @return 
 	 * 
 	 * @see <a href='http://api.jquery.com/prepend'>jQuery's .prepend()</a>
 	 */

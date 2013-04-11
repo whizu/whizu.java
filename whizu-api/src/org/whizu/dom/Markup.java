@@ -21,44 +21,10 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
-
-import org.whizu.dom.Element;
-import org.whizu.dom.Html;
-import org.whizu.dom.Markup;
-import org.whizu.widget.Widget;
+package org.whizu.dom;
 
 /**
  * @author Rudy D'hauwe
  */
-public class FlipSwitch extends Widget {
-
-	private Theme theme;
-	
-	private Theme track;
-	
-	private Mini mini;
-	
-	@Override
-	public FlipSwitch css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
-
-	@Override
-	protected Markup compile() {
-		// @formatter:off
-		Element field = Html.select(this)
-				.attr("data-role", "slider")
-				.attr("name", "label")
-				.decorate(theme)
-				.decorate("data-track-theme", track)
-				.decorate(mini)
-				.add("<option value='off'>Off</option><option value='on'>On</option>");
-		Element label = Html.tag("label")
-				.attr("for", field.id())
-				.add("label");
-		// @formatter:on
-		return field.after(label);
-	}
+public interface Markup extends Content {
 }

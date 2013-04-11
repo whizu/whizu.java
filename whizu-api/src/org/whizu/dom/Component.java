@@ -26,7 +26,7 @@ package org.whizu.dom;
 /**
  * @author Rudy D'hauwe
  */
-public interface Component extends Identity {
+public interface Component extends Content, Identity {
 	
 	public Component css(String clazz);
 

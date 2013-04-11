@@ -28,6 +28,7 @@ import java.beans.PropertyChangeListener;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
 import org.whizu.value.Value;
@@ -79,7 +80,7 @@ class LabelImpl extends Widget implements Label {
 	}
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		String script = "";
 		JQuery jQuery = jQuery(this);
 		

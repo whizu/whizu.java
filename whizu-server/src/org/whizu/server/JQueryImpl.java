@@ -171,7 +171,7 @@ class JQueryImpl extends Expression implements JQuery {
 			if (i > 0) {
 				selector += ",";
 			}
-			selector += "#" + component.getId();
+			selector += "#" + component.id();
 			i++;
 		}
 		selector += "\")";

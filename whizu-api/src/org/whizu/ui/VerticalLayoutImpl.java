@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.dom.Content;
+import org.whizu.dom.Markup;
 
 /**
  * @author Rudy D'hauwe
@@ -31,7 +31,7 @@ import org.whizu.dom.Content;
 class VerticalLayoutImpl extends LayoutImpl {
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		return super.create("vertical-layout", "vertical-layout-element");
 	}
 }

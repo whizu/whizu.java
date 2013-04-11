@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.dom.Content;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Widget;
 
 /**
@@ -42,13 +42,13 @@ class BarChartImpl extends Widget implements BarChart {
 	}
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		jQuery(this)
 				.callunquoted(
 						"jqBarGraph",
 						"{ data: new Array([" + y[0] + ",'" + x[0] + "','#333333'], [" + y[1] + ",'" + x[1]
 								+ "','#666666']) }");
-		return Html.div(getId());
+		return Html.div(id());
 	}
 
 	@Override

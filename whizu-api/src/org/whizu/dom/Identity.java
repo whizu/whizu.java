@@ -26,7 +26,10 @@ package org.whizu.dom;
 /**
  * @author Rudy D'hauwe
  */
-public interface Identity extends Content {
+public interface Identity {
 
-	public String getId();
+	/**
+	 * @return the id
+	 */
+	public String id();
 }

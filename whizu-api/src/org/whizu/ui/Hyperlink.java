@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.dom.Content;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Widget;
 
 class Hyperlink extends Widget {
@@ -39,9 +39,9 @@ class Hyperlink extends Widget {
 	}
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		String href = "/whizu?id=" + listener.getId();
-		return Html.div(getId()).add(Html.a().attr("href", href).add(caption));
+		return Html.div(id()).add(Html.a().attr("href", href).add(caption));
 	}
 
 	private void addClickListener(ClickListener listener) {

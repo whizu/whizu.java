@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.dom.Content;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Container;
 
 /**
@@ -33,9 +33,9 @@ import org.whizu.widget.Container;
 class FormImpl extends Container implements Form {
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		//isRendered = true;
-		Content result = Html.form(getId()).css(style).attr("action", "").add(componentList);
+		Markup result = Html.form(id()).css(style).attr("action", "").add(componentList);
 		String fct= "'submit', function(e) { e.stopPropagation(); e.preventDefault(); $(this).children().last().trigger('click'); }";
 		jQuery(this).callunquoted("bind", fct);
 		return result;

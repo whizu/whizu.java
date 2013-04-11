@@ -27,6 +27,7 @@ import org.whizu.dom.Component;
 import org.whizu.dom.Content;
 import org.whizu.dom.Foreach;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Container;
 
 /**
@@ -34,7 +35,7 @@ import org.whizu.widget.Container;
  */
 class LayoutImpl extends Container implements Layout {
 
-	protected Content create(String css, final String itemClass) {
+	protected Markup create(String css, final String itemClass) {
 		// isRendered = true;
 		return Html.div(this).css(style).css(css).width(width).add(new Foreach<Component>(componentList) {
 
@@ -49,7 +50,7 @@ class LayoutImpl extends Container implements Layout {
 	}
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		return Html.div(this).css(style).width(width).add(componentList);
 	}
 }

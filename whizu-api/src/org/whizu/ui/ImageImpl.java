@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.dom.Content;
 import org.whizu.dom.Html;
+import org.whizu.dom.Markup;
 import org.whizu.widget.Widget;
 
 
@@ -43,7 +43,7 @@ class ImageImpl extends Widget implements Image {
 	}
 
 	@Override
-	public Content create() {
+	public Markup compile() {
 		String script = "";
 		if (listenerId != null) {
 			String ajaxCall = "$.get('/whizu?id=" + listenerId
@@ -66,7 +66,7 @@ class ImageImpl extends Widget implements Image {
 		}
 
 		
-		return Html.img(this.getId()).src(src).title(tooltip).width("48px").attr("height", "48px").margin("2px").css(style)
+		return Html.img(this.id()).src(src).title(tooltip).width("48px").attr("height", "48px").margin("2px").css(style)
 				.css("link");
 		/*
 		 * if (tooltip != null) { imgNode.attr("title", tooltip); }
