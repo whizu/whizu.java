@@ -34,11 +34,13 @@ import org.whizu.widget.Container;
  */
 public class Form extends Container {
 
+	/*
 	@Override
 	public Form css(String clazz) {
 		setStyleName(clazz);
 		return this;
 	}
+	*/
 
 	@Override
 	public Markup compile() {

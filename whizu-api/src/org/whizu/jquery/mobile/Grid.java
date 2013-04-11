@@ -38,14 +38,29 @@ public class Grid extends Widget {
 
 	public enum Type {
 		// @formatter:off
+		/**
+		 * Two column grid
+		 */
 		TWO_COLUMNS(2, "ui-grid-a"),
+		
+		/**
+		 * Three column grid
+		 */
 		THREE_COLUMNS(3, "ui-grid-b"),
+		
+		/**
+		 * Four column grid 
+		 */
 		FOUR_COLUMNS(4, "ui-grid-c"),
+		
+		/**
+		 * Five column grid 
+		 */
 		FIVE_COLUMNS(5, "ui-grid-d"); 
 		// @formatter:on
 
 		protected final int columns;
-		
+
 		protected final String value;
 
 		Type(int columns, String value) {

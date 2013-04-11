@@ -52,17 +52,12 @@ public abstract class Widget implements Component {
 		this.id = getSession().next();
 	}
 
-	/**
-	 * Initial creation and rendering of this widget by compiling it into a
-	 * combination of static HTML markup and javascript.
-	 */
-	//protected abstract Markup compile();
-
 	@Override
-	public String id() {
-		return id;
+	public Component css(String clazz) {
+		setStyleName(clazz);
+		return this;
 	}
-
+	
 	protected Request getRequest() {
 		return RequestContext.getRequest();
 	}
@@ -73,6 +68,17 @@ public abstract class Widget implements Component {
 
 	protected Session getSession() {
 		return getRequest().getSession();
+	}
+
+	/**
+	 * Initial creation and rendering of this widget by compiling it into a
+	 * combination of static HTML markup and javascript.
+	 */
+	//protected abstract Markup compile();
+
+	@Override
+	public String id() {
+		return id;
 	}
 
 	protected final boolean isRendered() {
@@ -89,15 +95,6 @@ public abstract class Widget implements Component {
 
 	protected JQuery jQuery(String selector) {
 		return getRequest().select(selector);
-	}
-
-	public void setStyleName(String style) {
-		this.style = style;
-	}
-
-	@Override
-	public void width(String width) {
-		this.width = width;
 	}
 
 	@Override
@@ -118,5 +115,14 @@ public abstract class Widget implements Component {
 		} finally {
 			this.state = State.RENDERED;
 		}
+	}
+
+	public void setStyleName(String style) {
+		this.style = style;
+	}
+
+	@Override
+	public void width(String width) {
+		this.width = width;
 	}
 }

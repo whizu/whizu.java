@@ -37,6 +37,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
 import org.whizu.jquery.Request;
@@ -63,6 +64,24 @@ public class WhizuServlet extends HttpServlet {
 	private static final long serialVersionUID = 520182899630886403L;
 
 	private static final String WHIZU_SESSION = "whizu-session";
+
+	private static final Configuration DEFAULT_CONFIG = new Configuration() {
+		
+		@Override
+		protected void init() {
+		}
+	};
+	
+	private static String fromStream(InputStream in) throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		StringBuilder out = new StringBuilder();
+		String line;
+		while ((line = reader.readLine()) != null) {
+			out.append(line);
+		}
+		in.close();
+		return out.toString();
+	}
 
 	// not in session (shared across users)
 	@Deprecated
@@ -94,16 +113,20 @@ public class WhizuServlet extends HttpServlet {
 			}
 		});
 
-		this.application = newInstance(config, INIT_PARAM_APPLICATION);
-		this.config = newInstance(config, INIT_PARAM_CONFIG);
+		this.application = newInstance(config, INIT_PARAM_APPLICATION, null);
+		this.config = newInstance(config, INIT_PARAM_CONFIG, DEFAULT_CONFIG);
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T> T newInstance(ServletConfig config, String param) {
+	private <T> T newInstance(ServletConfig config, String param, T defaultValue) {
 		try {
 			String className = config.getInitParameter(param);
-			Class<T> clazz = (Class<T>) Class.forName(className);
-			return clazz.newInstance();
+			if (!StringUtils.isEmpty(className)) {
+				Class<T> clazz = (Class<T>) Class.forName(className);
+				return clazz.newInstance();
+			} else {
+				return defaultValue;
+			}
 		} catch (ClassNotFoundException e) {
 			throw new IllegalArgumentException(e);
 		} catch (InstantiationException e) {
@@ -142,17 +165,6 @@ public class WhizuServlet extends HttpServlet {
 		}
 	}
 
-	private static String fromStream(InputStream in) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-		StringBuilder out = new StringBuilder();
-		String line;
-		while ((line = reader.readLine()) != null) {
-			out.append(line);
-		}
-		in.close();
-		return out.toString();
-	}
-
 	private String setup(HttpServletRequest request) {
 		String uri = request.getRequestURI();
 		debug("uri:" + uri);
@@ -168,15 +180,15 @@ public class WhizuServlet extends HttpServlet {
 				final String id = app.getClass().getName();
 				content = content.replace("${id}", id);
 				RequestImpl.get().getSession().addClickListener(new EventHandler() {
-					
-					@Override
-					public void handleEvent() {
-						app.init(new WhizuUI());
-					}
-					
+
 					@Override
 					public String getId() {
 						return id;
+					}
+
+					@Override
+					public void handleEvent() {
+						app.init(new WhizuUI());
 					}
 				});
 				return content;

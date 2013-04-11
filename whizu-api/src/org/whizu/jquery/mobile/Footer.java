@@ -33,6 +33,8 @@ import org.whizu.widget.Widget;
 public class Footer extends Widget {
 
 	private String title;
+	
+	private Theme theme = Theme.E;
 
 	public Footer(String title) {
 		this.title = title;
@@ -47,6 +49,6 @@ public class Footer extends Widget {
 	@Override
 	public Markup compile() {
 		jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
-		return Html.div(this).attr("data-role", "footer").attr("data-theme", "e").add(title);
+		return Html.div(this).attr("data-role", "footer").decorate(theme).add(title);
 	}
 }

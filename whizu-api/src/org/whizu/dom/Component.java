@@ -30,7 +30,7 @@ public interface Component extends Content, Identity {
 
 	/**
 	 * Initial creation and rendering of this component by compiling it into a
-	 * combination of static HTML markup and javascript.
+	 * combination of static HTML markup and dynamic javascript.
 	 */
 	public Markup compile();
 

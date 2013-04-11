@@ -74,11 +74,12 @@ public class Button extends Widget {
 		this.mini = mini;
 	}
 
+	/*
 	@Override
 	public Button css(String clazz) {
-		setStyleName(clazz);
-		return this;
+		return (Button) super.css(clazz);
 	}
+	*/
 
 	public Button icon(Icon icon) {
 		this.icon = icon;
