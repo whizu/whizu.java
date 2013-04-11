@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.ui;
 
+import org.whizu.jquery.Function;
 import org.whizu.value.Value;
 
 /**
@@ -41,4 +42,6 @@ public interface UI extends ViewFactory {
 	public BarChart createBarChart(String[] x, Integer[] y);
 
 	public Label createLabel(String text, Value<?> arg);
+
+	public void delay(int milliseconds, Function action);
 }

@@ -24,6 +24,7 @@
 package org.whizu.ui;
 
 import org.whizu.dom.Component;
+import org.whizu.jquery.Function;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Session;
@@ -182,5 +183,10 @@ public class WhizuUI implements UI {
 	@Override
 	public void openWindow(View wnd) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void delay(int milliseconds, Function action) {
+		new Timeout(milliseconds, action);
 	}
 }

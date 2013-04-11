@@ -25,6 +25,7 @@ package org.whizu.tutorial.barchart;
 
 import java.util.Date;
 
+import org.whizu.jquery.Function;
 import org.whizu.ui.Application;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Document;
@@ -47,15 +48,15 @@ public class BarChart implements Application {
 
 	@Override
 	public void init(final UI ui) {
-		//model
+		// model
 		final StringValue antwoord = new StringValue("Mijn hobby is...");
 		final IntegerValue aantal = new IntegerValue("aantal");
 		aantal.setValue(0);
-		
-		//user interface
+
+		// user interface
 		Document document = ui.getDocument();
 		Layout layout = ui.createHorizontalLayout();
-		
+
 		Layout left = ui.createCssLayout();
 		left.css("left-column");
 		left.add(ui.createLabel("Welkom op deze eenvoudige rondvraag.").css("tekst"));
@@ -63,7 +64,7 @@ public class BarChart implements Application {
 		left.add(ui.createLabel(aantal).css("highlight"));
 		final Layout graph = ui.createCssLayout();
 		left.add(graph);
-		
+
 		final Layout history = ui.createVerticalLayout();
 		Layout right = ui.createCssLayout();
 		right.css("right-column");
@@ -79,7 +80,11 @@ public class BarChart implements Application {
 			@Override
 			public void click() {
 				aantal.increment();
-				if (antwoord.getValue().length() > 10) { lang++; } else { kort++; }
+				if (antwoord.getValue().length() > 10) {
+					lang++;
+				} else {
+					kort++;
+				}
 				Layout detail = ui.createVerticalLayout();
 				detail.add(ui.createLabel(new Date().toString()).css("detail-date"));
 				detail.add(ui.createLabel(antwoord.getValue()));
@@ -87,16 +92,24 @@ public class BarChart implements Application {
 				history.prepend(detail);
 				antwoord.clear();
 				graph.empty();
-				graph.add(ui.createBarChart(new String[] { "So cool", "So not cool" }, new Integer[] { kort, lang }));
+				graph.add(ui.createBarChart(new String[]{"So cool", "So not cool"}, new Integer[]{kort, lang}));
+				ui.delay(500, new Function() {
+
+					@Override
+					public void execute() {
+						aantal.increment();
+						antwoord.setValue("Wat is jouw hobby?");
+					}
+				});
 			}
 		});
 		form.add(button);
 		right.add(form);
 		right.add(history);
-		
+
 		layout.add(left);
 		layout.add(right);
-		
+
 		document.add(layout);
 	}
 }

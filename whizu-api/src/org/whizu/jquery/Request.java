@@ -32,4 +32,8 @@ public interface Request {
 	public abstract JQuery select(Identity... objs);
 
 	public abstract JQuery select(String selector);
+
+	public abstract Script compile(Function function);
+
+	public abstract void execute(String js);
 }

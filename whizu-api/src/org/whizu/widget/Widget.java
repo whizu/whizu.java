@@ -26,9 +26,11 @@ package org.whizu.widget;
 import org.whizu.dom.Component;
 import org.whizu.dom.Identity;
 import org.whizu.dom.Markup;
+import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
+import org.whizu.jquery.Script;
 import org.whizu.jquery.Session;
 
 /**
@@ -124,5 +126,9 @@ public abstract class Widget implements Component {
 	@Override
 	public void width(String width) {
 		this.width = width;
+	}
+	
+	public Script compile(Function function) {
+		return getRequest().compile(function); 
 	}
 }

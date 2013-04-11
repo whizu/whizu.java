@@ -26,6 +26,7 @@ package org.whizu.server;
 import java.util.Stack;
 
 import org.whizu.dom.Identity;
+import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.Script;
@@ -112,5 +113,15 @@ final class RequestImpl implements Request {
 
 	protected final void setSession(Session session) {
 		this.session = session;
+	}
+
+	@Override
+	public Script compile(Function function) {
+		return FunctionWorker.compile(function);
+	}
+
+	@Override
+	public void execute(String js) {
+		addExpression(js);
 	}
 }
