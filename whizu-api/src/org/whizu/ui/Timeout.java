@@ -34,6 +34,7 @@ import org.whizu.widget.Widget;
 class Timeout extends Widget {
 
 	private Function action;
+
 	private int milliseconds;
 
 	public Timeout(int milliseconds, Function action) {
