@@ -40,7 +40,7 @@ public class Text extends Widget {
 	}
 
 	@Override
-	protected Markup compile() {
+	public Markup compile() {
 		Element input = Html.input(this).attr("type", "text").attr("name", "label").attr("value", "");
 		Element label = Html.tag("label").attr("for", input.id()).add("label");
 		return input.after(label);

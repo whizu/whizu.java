@@ -86,7 +86,7 @@ public class Button extends Widget {
 	}
 
 	@Override
-	protected Markup compile() {
+	public Markup compile() {
 		jQuery(this).trigger("create");
 		switch (type) {
 			case INPUT :

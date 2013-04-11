@@ -45,7 +45,7 @@ public class Header extends Widget {
 	}
 
 	@Override
-	protected Markup compile() {
+	public Markup compile() {
 		jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
 		return Html.div(this).attr("data-role", "header").add(title);
 	}

@@ -35,7 +35,7 @@ public class Collapsible extends Widget {
 	}
 
 	@Override
-	protected Markup compile() {
+	public Markup compile() {
 		throw new UnsupportedOperationException();
 	}
 }

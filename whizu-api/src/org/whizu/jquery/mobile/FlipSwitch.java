@@ -46,7 +46,7 @@ public class FlipSwitch extends Widget {
 	}
 
 	@Override
-	protected Markup compile() {
+	public Markup compile() {
 		// @formatter:off
 		Element field = Html.select(this)
 				.attr("data-role", "slider")

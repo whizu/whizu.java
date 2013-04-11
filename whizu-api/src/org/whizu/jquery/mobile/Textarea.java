@@ -37,7 +37,7 @@ public class Textarea extends Widget {
 	}
 
 	@Override
-	protected Markup compile() {
+	public Markup compile() {
 		Element field = Html.textarea(this).attr("name", "label");
 		Element label = Html.tag("label").attr("for", field.id()).add("label");
 		return field.after(label);

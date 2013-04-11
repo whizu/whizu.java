@@ -67,7 +67,7 @@ public class Grid extends Widget {
 	}
 
 	@Override
-	protected Markup compile() {
+	public Markup compile() {
 		Element grid = Html.div(this).css(type.value);
 		return grid;
 	}

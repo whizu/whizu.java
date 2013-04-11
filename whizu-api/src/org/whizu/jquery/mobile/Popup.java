@@ -47,7 +47,7 @@ public class Popup extends Container {
 	}
 
 	@Override
-	protected Markup compile() {
+	public Markup compile() {
 		// @formatter:off
 		Element popup = Html.div(this)
 						 .attr("data-rel", "popup")

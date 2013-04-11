@@ -56,7 +56,7 @@ public abstract class Widget implements Component {
 	 * Initial creation and rendering of this widget by compiling it into a
 	 * combination of static HTML markup and javascript.
 	 */
-	protected abstract Markup compile();
+	//protected abstract Markup compile();
 
 	@Override
 	public String id() {

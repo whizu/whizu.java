@@ -27,7 +27,13 @@ package org.whizu.dom;
  * @author Rudy D'hauwe
  */
 public interface Component extends Content, Identity {
-	
+
+	/**
+	 * Initial creation and rendering of this component by compiling it into a
+	 * combination of static HTML markup and javascript.
+	 */
+	public Markup compile();
+
 	public Component css(String clazz);
 
 	public void width(String width);

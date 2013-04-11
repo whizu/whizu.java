@@ -40,7 +40,7 @@ public class Password extends Widget {
 	}
 
 	@Override
-	protected Markup compile() {
+	public Markup compile() {
 		Element field = Html.input(this).attr("type", "password").attr("name", "label").attr("value", "");
 		Element label = Html.label().attr("for", field.id()).add("label");
 		return label.after(field);

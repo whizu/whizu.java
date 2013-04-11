@@ -40,7 +40,7 @@ public class Accordion extends Widget {
 	}
 
 	@Override
-	protected Markup compile() {
+	public Markup compile() {
 		throw new UnsupportedOperationException();
 	}
 }

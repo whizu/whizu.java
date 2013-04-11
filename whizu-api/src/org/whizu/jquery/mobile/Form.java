@@ -41,7 +41,7 @@ public class Form extends Container {
 	}
 
 	@Override
-	protected Markup compile() {
+	public Markup compile() {
 		// @formatter:off
 		return Html.form(this)
 				.attr("method", "post")
