@@ -21,31 +21,12 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.ui;
+package org.whizu.layout;
 
-import org.whizu.dom.Markup;
+import org.whizu.dom.Composite;
 
-class AbsoluteLayoutImpl extends LayoutImpl {
-
-	@Override
-	public Markup compile() {
-		return create("absolute-layout", "absolute-layout-element");
-	}
-
-	/*
-	//TODO move to some test case
-	public static void main(String[] args) {
-		final AbstractWidget impl = new AbsoluteLayoutImpl();
-		System.out.println(impl.getId());
-		System.out.println(impl.getSelector());
-		System.out.println(impl.jQuery(impl));
-		System.out.println(impl.jQuery(impl).addClass("mystyle").click(new Function() {
-
-			@Override
-			public void execute() {
-				impl.jQuery(impl).addClass("test in function").empty();
-			}
-		}).button());
-	}
-	*/
+/**
+ * @author Rudy D'hauwe
+ */
+public interface Layout extends Composite {
 }

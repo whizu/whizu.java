@@ -25,12 +25,12 @@ package org.whizu.tutorial.helloworld;
 
 import java.util.Date;
 
+import org.whizu.layout.Layout;
 import org.whizu.ui.Application;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Document;
 import org.whizu.ui.Form;
 import org.whizu.ui.Label;
-import org.whizu.ui.Layout;
 import org.whizu.ui.UI;
 import org.whizu.value.IntegerValue;
 import org.whizu.value.StringValue;

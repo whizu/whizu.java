@@ -21,15 +21,35 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.ui;
+package org.whizu.layout;
 
+import org.whizu.dom.Component;
+import org.whizu.dom.Content;
+import org.whizu.dom.Foreach;
+import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
+import org.whizu.widget.Container;
 
+/**
+ * @author Rudy D'hauwe
+ */
+class AbstractLayout extends Container implements Layout {
 
-class FlowLayoutImpl extends LayoutImpl implements Layout {
+	protected Markup create(String css, final String itemClass) {
+		return Html.div(this).css(style).css(css).width(width).add(new Foreach<Component>(componentList) {
+
+			@Override
+			public Content render(Component item) {
+				item.css(itemClass); // to be tested
+				return item;
+				// return item.render();
+				// return item.render().css(itemClass); //this works
+			}
+		});
+	}
 
 	@Override
 	public Markup compile() {
-		return create("flow-layout", "flow-layout-element");
+		return Html.div(this).css(style).width(width).add(componentList);
 	}
 }

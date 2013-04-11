@@ -28,6 +28,12 @@ import org.whizu.jquery.Function;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Session;
+import org.whizu.layout.AbsoluteLayout;
+import org.whizu.layout.CssLayout;
+import org.whizu.layout.FlowLayout;
+import org.whizu.layout.HorizontalLayout;
+import org.whizu.layout.Layout;
+import org.whizu.layout.VerticalLayout;
 import org.whizu.value.StringValue;
 import org.whizu.value.Value;
 
@@ -41,7 +47,7 @@ public class WhizuUI implements UI {
 
 	@Override
 	public Layout createAbsoluteLayout() {
-		return new AbsoluteLayoutImpl();
+		return new AbsoluteLayout();
 	}
 
 	@Override
@@ -61,7 +67,7 @@ public class WhizuUI implements UI {
 
 	@Override
 	public Layout createCssLayout() {
-		return new CssLayoutImpl();
+		return new CssLayout();
 	}
 
 	@Override
@@ -71,7 +77,7 @@ public class WhizuUI implements UI {
 
 	@Override
 	public Layout createFlowLayout() {
-		return new FlowLayoutImpl();
+		return new FlowLayout();
 	}
 
 	@Override
@@ -81,7 +87,7 @@ public class WhizuUI implements UI {
 
 	@Override
 	public Layout createHorizontalLayout() {
-		return new HorizontalLayoutImpl();
+		return new HorizontalLayout();
 	}
 
 	@Override
@@ -147,7 +153,7 @@ public class WhizuUI implements UI {
 
 	@Override
 	public Layout createVerticalLayout() {
-		return new VerticalLayoutImpl();
+		return new VerticalLayout();
 	}
 
 	@Override

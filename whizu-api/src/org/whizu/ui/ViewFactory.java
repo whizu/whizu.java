@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.ui;
 
+import org.whizu.layout.Layout;
 import org.whizu.value.StringValue;
 /**
  * @author Rudy D'hauwe

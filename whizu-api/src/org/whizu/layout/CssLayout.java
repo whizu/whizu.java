@@ -21,17 +21,10 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.ui;
-
-import org.whizu.dom.Markup;
+package org.whizu.layout;
 
 /**
  * @author Rudy D'hauwe
  */
-class VerticalLayoutImpl extends LayoutImpl {
-
-	@Override
-	public Markup compile() {
-		return super.create("vertical-layout", "vertical-layout-element");
-	}
+public class CssLayout extends AbstractLayout implements Layout {
 }
