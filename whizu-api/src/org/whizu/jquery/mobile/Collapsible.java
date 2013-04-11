@@ -23,11 +23,18 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
-import org.whizu.widget.Widget;
+import org.whizu.widget.Container;
 
-public class Collapsible extends Widget {
+public class Collapsible extends Container {
 
+	private String title;
+	
+	public Collapsible(String title) {
+		this.title = title;
+	}
+	
 	@Override
 	public Collapsible css(String clazz) {
 		setStyleName(clazz);
@@ -36,6 +43,6 @@ public class Collapsible extends Widget {
 
 	@Override
 	public Markup compile() {
-		throw new UnsupportedOperationException();
+		return Html.div(this).attr("data-role", "collapsible").add(Html.h3(title)).add(componentList); 
 	}
 }

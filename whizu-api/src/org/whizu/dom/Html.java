@@ -72,6 +72,14 @@ public class Html {
 	public static Element h1(String text) {
 		return h1().add(text);
 	}
+	
+	public static Element h3() {
+		return tag("h3");
+	}
+
+	public static Content h3(String text) {
+		return h3().add(text);
+	}
 
 	public static Element hr() {
 		return new Node("hr");

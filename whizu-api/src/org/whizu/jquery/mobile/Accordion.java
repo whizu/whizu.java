@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
 import org.whizu.widget.Widget;
 
@@ -33,14 +34,22 @@ import org.whizu.widget.Widget;
  */
 public class Accordion extends Widget {
 
-	@Override
-	public Accordion css(String clazz) {
-		setStyleName(clazz);
-		return this;
+	private Theme theme;
+	
+	private Theme contentTheme;
+	
+	public void addCollapsible(Collapsible element) {
+		jQuery(this).append(element);
 	}
 
 	@Override
 	public Markup compile() {
-		throw new UnsupportedOperationException();
+		return Html.div(this).attr("data-role", "collapsible-set").decorate(theme);
+	}
+	
+	@Override
+	public Accordion css(String clazz) {
+		setStyleName(clazz);
+		return this;
 	}
 }
