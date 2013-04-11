@@ -28,16 +28,18 @@ import org.whizu.dom.Markup;
 import org.whizu.widget.Widget;
 
 /**
- * Creates a collapsible set of collapsible blocks of content.
+ * An accordion is created in jQuery Mobile by grouping a series of individual
+ * collapsibles into a set. An accordion creates a collapsible set of
+ * collapsible blocks of content.
  * 
  * @author Rudy D'hauwe
  */
 public class Accordion extends Widget {
 
 	private Theme theme;
-	
+
 	private Theme contentTheme;
-	
+
 	public void addCollapsible(Collapsible element) {
 		jQuery(this).append(element);
 	}
@@ -46,7 +48,7 @@ public class Accordion extends Widget {
 	public Markup compile() {
 		return Html.div(this).attr("data-role", "collapsible-set").decorate(theme);
 	}
-	
+
 	@Override
 	public Accordion css(String clazz) {
 		setStyleName(clazz);

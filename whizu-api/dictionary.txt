@@ -34,3 +34,4 @@ textarea
 config
 eupl
 javascript
+collapsibles
