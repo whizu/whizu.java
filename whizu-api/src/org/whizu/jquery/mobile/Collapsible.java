@@ -27,14 +27,21 @@ import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
 import org.whizu.widget.Container;
 
+/**
+ * Collapsibles are simple widgets that allow you to expand or collapse content
+ * when tapped and are useful in mobile to provide a compact presentation of
+ * content.
+ * 
+ * @author Rudy D'hauwe
+ */
 public class Collapsible extends Container {
 
 	private String title;
-	
+
 	public Collapsible(String title) {
 		this.title = title;
 	}
-	
+
 	@Override
 	public Collapsible css(String clazz) {
 		setStyleName(clazz);
@@ -43,6 +50,6 @@ public class Collapsible extends Container {
 
 	@Override
 	public Markup compile() {
-		return Html.div(this).attr("data-role", "collapsible").add(Html.h3(title)).add(componentList); 
+		return Html.div(this).attr("data-role", "collapsible").add(Html.h3(title)).add(componentList);
 	}
 }
