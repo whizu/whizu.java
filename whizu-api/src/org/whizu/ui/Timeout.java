@@ -26,7 +26,7 @@ class Timeout extends Widget {
 	public Markup compile() {
 		Script script = compile(action);
 		String text = "setTimeout('" + script.toJavaScript() + "'," + milliseconds + ")";
-		System.out.println("timeout script" + text);
+		System.out.println("Timeout script: " + text);
 		getRequest().execute(text);
 		return null;
 	}
