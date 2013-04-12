@@ -169,7 +169,7 @@ public class GridLayoutTest {
 			}
 		});
 	}
-	
+
 	@Test
 	public void runTest1() {
 		initRequestContext();
@@ -201,6 +201,22 @@ public class GridLayoutTest {
 		String markup = grid.render();
 		assertEquals(
 				"<table cellpadding='0' cellspacing='0' style='width:100%;'><tbody><tr><td>myComponent</td><td>myComponent</td></tr><tr><td>myComponent</td><td>myComponent</td></tr><tr><td>myComponent</td></tr></tbody></table>",
+				markup);
+	}
+
+	@Test
+	public void runTest3() {
+		initRequestContext();
+		Component myComponent = getDefaultComponent();
+
+		GridLayout grid = new GridLayout(1);
+		grid.add(myComponent);
+		grid.add(myComponent);
+		grid.add(myComponent);
+
+		String markup = grid.render();
+		assertEquals(
+				"<table cellpadding='0' cellspacing='0' style='width:100%;'><tbody><tr><td>myComponent</td></tr><tr><td>myComponent</td></tr><tr><td>myComponent</td></tr></tbody></table>",
 				markup);
 	}
 }

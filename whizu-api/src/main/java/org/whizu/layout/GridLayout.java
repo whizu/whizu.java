@@ -46,6 +46,10 @@ public class GridLayout extends Widget implements Layout {
 	
 	private Element row;
 
+	public GridLayout() {
+		this(1);
+	}
+	
 	public GridLayout(int numberOfColumns) {
 		this.numberOfColumns = numberOfColumns;
 		
