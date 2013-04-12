@@ -3,6 +3,7 @@
  */
 package org.whizu.dom;
 
+
 /**
  * A bunch of convenience methods for generating HTML content.
  * 
@@ -111,6 +112,10 @@ public class Html {
 
 	public static Element select(String id) {
 		return tag("select").id(id);
+	}
+
+	public static Element table(Identity element) {
+		return table(element.id());
 	}
 
 	public static Element table(String id) {
