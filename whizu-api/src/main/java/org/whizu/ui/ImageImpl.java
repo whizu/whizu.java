@@ -66,7 +66,7 @@ class ImageImpl extends Widget implements Image {
 		}
 
 		
-		return Html.img(this.id()).src(src).title(tooltip).width("48px").attr("height", "48px").margin("2px").css(style)
+		return Html.img(this.id()).src(src).title(tooltip).width("48px").attr("height", "48px").margin("0px").css(style)
 				.css("link");
 		/*
 		 * if (tooltip != null) { imgNode.attr("title", tooltip); }
