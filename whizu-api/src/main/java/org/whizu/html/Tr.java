@@ -28,13 +28,13 @@ import org.whizu.dom.Node;
 /**
  * @author Rudy D'hauwe
  */
-public class Tbody extends Node {
+public class Tr extends Node {
 
-	Tbody() {
-		super("tbody");
+	Tr() {
+		super("tr");
 	}
 	
-	public Tr tr() {
-		return new Tr();
+	public Td td() {
+		return new Td();
 	}
 }

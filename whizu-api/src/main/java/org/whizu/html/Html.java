@@ -131,12 +131,12 @@ public class Html {
 		return new Node(name);
 	}
 
-	public static Element tbody() {
-		return tag("tbody");
+	public static Tbody tbody() {
+		return new Tbody();
 	}
 
-	public static Element td() {
-		return tag("td");
+	public static Td td() {
+		return new Td();
 	}
 
 	public static Element td(String item) {
@@ -167,8 +167,8 @@ public class Html {
 		return thead().add(elements);
 	}
 
-	public static Element tr() {
-		return tag("tr");
+	public static Tr tr() {
+		return new Tr();
 	}
 
 	public static Element tr(Element... elements) {
