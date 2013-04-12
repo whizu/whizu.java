@@ -28,7 +28,7 @@ package org.whizu.dom;
  */
 public interface Composite extends Component {
 
-	public void add(Component component);
+	public Composite add(Component component);
 
 	public void empty();
 

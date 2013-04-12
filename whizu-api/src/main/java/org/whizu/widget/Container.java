@@ -45,12 +45,14 @@ public class Container extends Widget implements Composite {
 	protected List<Component> componentList = new ArrayList<Component>();
 
 	@Override
-	public final void add(Component impl) {
+	public final Container add(Component impl) {
 		this.componentList.add(impl);
 
 		if (this.isRendered()) {
 			jQuery(this).append(impl);
 		}
+		
+		return this;
 	}
 	
 	/*

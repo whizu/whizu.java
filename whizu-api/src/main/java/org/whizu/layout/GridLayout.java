@@ -60,7 +60,7 @@ public class GridLayout extends Widget implements Layout {
 	}
 
 	@Override
-	public void add(Component component) {
+	public GridLayout add(Component component) {
 		if (isRendered()) {
 			throw new UnsupportedOperationException();
 		} else {
@@ -74,6 +74,8 @@ public class GridLayout extends Widget implements Layout {
 			
 			row.add(Html.td().add(component));
 		}
+		
+		return this;
 	}
 
 	@Override
