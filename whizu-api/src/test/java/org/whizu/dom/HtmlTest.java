@@ -23,12 +23,24 @@
  *******************************************************************************/
 package org.whizu.dom;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 /**
  * @author Rudy D'hauwe
  */
+@RunWith(JUnit4.class)
 public class HtmlTest {
 
 	//private Log log = LogFactory.getLog(HtmlTest.class);
 	
+	@Test
+	public void testTd() {
+		Element td = Html.td();
+		String markup = td.render();
+		assertEquals("<td></td>", markup);
+	}
 }
