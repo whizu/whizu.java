@@ -49,12 +49,7 @@ import org.whizu.jquery.Session;
 @RunWith(JUnit4.class)
 public class GridLayoutTest {
 
-	/*
-	public static void main(String[] args) {
-		GridLayoutTest test = new GridLayoutTest();
-		test.runTest1();
-	}
-	*/
+	// private Log log = LogFactory.getLog(GridLayoutTest.class);
 
 	@Test
 	public void runTest1() {
@@ -63,6 +58,17 @@ public class GridLayoutTest {
 			@Override
 			protected Request getRequestImpl() {
 				return new Request() {
+
+					@Override
+					public Script compile(Function function) {
+						// TODO Auto-generated method stub
+						return null;
+					}
+
+					@Override
+					public void execute(String js) {
+						// TODO Auto-generated method stub
+					}
 
 					@Override
 					public Session getSession() {
@@ -115,7 +121,8 @@ public class GridLayoutTest {
 							@Override
 							public void setAttribute(String name, Object value) {
 								// TODO Auto-generated method stub
-							}};
+							}
+						};
 					}
 
 					@Override
@@ -129,30 +136,11 @@ public class GridLayoutTest {
 						// TODO Auto-generated method stub
 						return null;
 					}
+				};
+			}
+		});
 
-					@Override
-					public Script compile(Function function) {
-						// TODO Auto-generated method stub
-						return null;
-					}
-
-					@Override
-					public void execute(String js) {
-						// TODO Auto-generated method stub
-					}};
-			}});
-		
 		Component myComponent = new Component() {
-
-			@Override
-			public String render() {
-				return "myComponent";
-			}
-
-			@Override
-			public String id() {
-				return "myID";
-			}
 
 			@Override
 			public Markup compile() {
@@ -165,16 +153,28 @@ public class GridLayoutTest {
 			}
 
 			@Override
+			public String id() {
+				return "myID";
+			}
+
+			@Override
+			public String render() {
+				return "myComponent";
+			}
+
+			@Override
 			public void width(String width) {
 			}
 		};
-		
+
 		GridLayout grid = new GridLayout(2);
 		grid.add(myComponent);
 		grid.add(myComponent);
 		grid.add(myComponent);
 
 		String markup = grid.render();
-		assertEquals("<table style='width:100%;'><tbody><tr><td>myComponent</td><td>myComponent</td></tr><tr><td>myComponent</td></tr></tbody></table>", markup);
+		assertEquals(
+				"<table style='width:100%;'><tbody><tr><td>myComponent</td><td>myComponent</td></tr><tr><td>myComponent</td></tr></tbody></table>",
+				markup);
 	}
 }
