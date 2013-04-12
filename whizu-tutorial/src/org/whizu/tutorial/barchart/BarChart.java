@@ -93,7 +93,8 @@ public class BarChart implements Application {
 				antwoord.clear();
 				graph.empty();
 				graph.add(ui.createBarChart(new String[]{"So cool", "So not cool"}, new Integer[]{kort, lang}));
-				ui.delay(2500, new Function() {
+				//ui.delay(2500, new Function() {
+				ui.schedule(2500, new Function() {
 
 					@Override
 					public void execute() {

@@ -23,27 +23,43 @@
  *******************************************************************************/
 package org.whizu.ui;
 
+import org.whizu.dom.Markup;
 import org.whizu.jquery.Function;
-import org.whizu.value.Value;
+import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface UI extends ViewFactory {
+class Schedule extends Widget {
 
-	public Window openWindow(String title);
+	private Function action;
 
-	public void openWindow(View view);
+	private int milliseconds;
 
-	public Document getDocument();
+	public Schedule(int milliseconds, Function action) {
+		this.milliseconds = milliseconds;
+		this.action = action;
+		compile();
+	}
 
-	public Label createLabel(Value<?> aantal);
+	@Override
+	public Markup compile() {
+		ClickListenerImpl impl = new ClickListenerImpl(new ClickListener() {
 
-	public BarChart createBarChart(String[] x, Integer[] y);
+			@Override
+			public void click() {
+				System.out.println("running scheduled action");
+				action.execute();
+			}
+		});
+		getSession().addClickListener(impl);
+		String listenerId = impl.getId();
 
-	public Label createLabel(String text, Value<?> arg);
+		String script = "$.get('/whizu?id=" + listenerId + "', function(data) { ; }, 'script');";
+		String text = "setTimeout(function(){" + script + "}," + milliseconds + ")";
+		System.out.println("Timeout script: " + text);
+		getRequest().execute(text);
 
-	public void delay(int milliseconds, Function action);
-	
-	public void schedule(int milliseconds, Function action);
+		return null;
+	}
 }
