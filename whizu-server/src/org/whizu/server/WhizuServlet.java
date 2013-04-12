@@ -56,7 +56,7 @@ public class WhizuServlet extends HttpServlet {
 	private Log log = LogFactory.getLog(WhizuServlet.class);
 
 	/**
-	 * The class name of hte Application implementation class.
+	 * The class name of the Application implementation class.
 	 */
 	public static final String INIT_PARAM_APPLICATION = "application";
 
