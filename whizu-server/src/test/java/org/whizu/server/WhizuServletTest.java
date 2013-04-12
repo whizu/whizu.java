@@ -21,14 +21,11 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.dom;
-
+package org.whizu.server;
 
 /**
  * @author Rudy D'hauwe
  */
-public class HtmlTest {
+public class WhizuServletTest {
 
-	//private Log log = LogFactory.getLog(HtmlTest.class);
-	
 }

@@ -23,10 +23,10 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
+import org.whizu.jquery.mobile.Collapsible;
+import org.whizu.jquery.mobile.Theme;
 import org.whizu.widget.Widget;
 
 /**
@@ -38,7 +38,7 @@ import org.whizu.widget.Widget;
  */
 public class Accordion extends Widget {
 
-	private Log log = LogFactory.getLog(Accordion.class);
+	//private Log log = LogFactory.getLog(Accordion.class);
 	
 	private Theme theme;
 

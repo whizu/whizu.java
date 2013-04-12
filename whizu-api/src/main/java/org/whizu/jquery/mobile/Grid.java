@@ -23,8 +23,6 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.whizu.dom.Element;
 import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
@@ -38,7 +36,7 @@ import org.whizu.widget.Widget;
  */
 public class Grid extends Widget {
 
-	private Log log = LogFactory.getLog(Grid.class);
+	//private Log log = LogFactory.getLog(Grid.class);
 	
 	public enum Type {
 		// @formatter:off
