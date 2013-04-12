@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.whizu.jquery.Script;
+import org.whizu.js.Expression;
 
 /**
  * @author Rudy D'hauwe

@@ -31,6 +31,7 @@ import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.Script;
 import org.whizu.jquery.Session;
+import org.whizu.js.Expression;
 
 /**
  * @author Rudy D'hauwe

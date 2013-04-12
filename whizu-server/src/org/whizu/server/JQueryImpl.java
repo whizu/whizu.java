@@ -29,6 +29,7 @@ import org.whizu.dom.Identity;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Script;
+import org.whizu.js.Expression;
 
 /**
  * @author Rudy D'hauwe

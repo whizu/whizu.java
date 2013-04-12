@@ -21,19 +21,19 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.server;
+package org.whizu.js;
 
 /**
  * @author Rudy D'hauwe
  */
-class Expression {
+public class Expression {
 
 	protected String expression = "";
 	
-	Expression() {
+	public Expression() {
 	}
 	
-	Expression(String expr) {
+	public Expression(String expr) {
 		this.expression = expr;
 	}
 	

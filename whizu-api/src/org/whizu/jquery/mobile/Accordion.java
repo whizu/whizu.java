@@ -38,7 +38,7 @@ public class Accordion extends Widget {
 
 	private Theme theme;
 
-	private Theme contentTheme;
+	//private Theme contentTheme;
 
 	public void addCollapsible(Collapsible element) {
 		jQuery(this).append(element);
