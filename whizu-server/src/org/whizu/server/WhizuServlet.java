@@ -38,6 +38,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
 import org.whizu.jquery.Request;
@@ -50,6 +52,8 @@ import org.whizu.ui.WhizuUI;
  * @author Rudy D'hauwe
  */
 public class WhizuServlet extends HttpServlet {
+
+	private Log log = LogFactory.getLog(WhizuServlet.class);
 
 	/**
 	 * The class name of hte Application implementation class.
@@ -100,6 +104,7 @@ public class WhizuServlet extends HttpServlet {
 	}
 
 	private void debug(String message) {
+		log.debug(message);
 		System.out.println(message);
 	}
 

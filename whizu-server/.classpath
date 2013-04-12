@@ -5,5 +5,10 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-api"/>
 	<classpathentry kind="lib" path="lib/servlet-api-3.0.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/spring-core-3.2.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-context-3.2.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-beans-3.2.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/spring-expression-3.2.2.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
