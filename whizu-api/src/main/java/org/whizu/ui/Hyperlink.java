@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.ui;
 
-import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
+import org.whizu.html.Html;
 import org.whizu.widget.Widget;
 
 class Hyperlink extends Widget {

@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
+import org.whizu.html.Html;
 import org.whizu.jquery.mobile.Collapsible;
 import org.whizu.jquery.mobile.Theme;
 import org.whizu.widget.Widget;

@@ -27,8 +27,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.whizu.dom.Content;
-import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
+import org.whizu.html.Html;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
 import org.whizu.value.Value;

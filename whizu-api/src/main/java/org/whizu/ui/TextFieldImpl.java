@@ -26,8 +26,8 @@ package org.whizu.ui;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
+import org.whizu.html.Html;
 import org.whizu.jquery.Input;
 import org.whizu.value.StringValue;
 import org.whizu.widget.Widget;

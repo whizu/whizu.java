@@ -24,8 +24,8 @@
 package org.whizu.ui;
 
 import org.whizu.dom.Element;
-import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
+import org.whizu.html.Html;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
 import org.whizu.widget.Widget;

@@ -25,8 +25,8 @@ package org.whizu.layout;
 
 import org.whizu.dom.Component;
 import org.whizu.dom.Element;
-import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
+import org.whizu.html.Html;
 import org.whizu.widget.Widget;
 
 /**

@@ -21,26 +21,17 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.dom;
+package org.whizu.html;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.whizu.dom.Node;
 
 /**
  * @author Rudy D'hauwe
  */
-@RunWith(JUnit4.class)
-public class HtmlTest {
+public class Tbody extends Node {
 
-	//private Log log = LogFactory.getLog(HtmlTest.class);
-	
-	@Test
-	public void testTd() {
-		Element td = Html.td();
-		String markup = td.render();
-		assertEquals("<td></td>", markup);
+	Tbody() {
+		super("tbody");
 	}
+
 }

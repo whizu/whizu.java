@@ -1,7 +1,12 @@
 /**
  * 
  */
-package org.whizu.dom;
+package org.whizu.html;
+
+import org.whizu.dom.Content;
+import org.whizu.dom.Element;
+import org.whizu.dom.Identity;
+import org.whizu.dom.Node;
 
 
 /**

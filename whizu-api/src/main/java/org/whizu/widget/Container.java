@@ -28,8 +28,8 @@ import java.util.List;
 
 import org.whizu.dom.Component;
 import org.whizu.dom.Composite;
-import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
+import org.whizu.html.Html;
 
 /**
  * @author Rudy D'hauwe

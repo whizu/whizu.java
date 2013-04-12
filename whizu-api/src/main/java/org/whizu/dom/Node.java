@@ -32,86 +32,7 @@ import java.util.Map;
 /**
  * @author Rudy D'hauwe
  */
-class Node implements Element {
-
-	public static void main(String[] args) {
-		print(Html.tag("div").attr("id", "my-div").attr("class", "my-class"));
-		print(Html.tag("div").id("my-div").css("my-class"));
-
-		// @formatter:off
-		Element div = Html.div().id("my-div")
-						.css("my-class")
-						.border("solid 1px black")
-						.padding("10px")
-  						.add(Html.h1().add("my-title"));
-		
-		Element body = div.wrap("body").id("my-body")
-						 			.add(Html.br(), 
-						 					Html.hr().size("1px"))
-						 			.border("solid 1px black");
-		// @formatter:on
-		print(body);
-
-		// @formatter:off
-		Element body2 = Html.body().id("my-body")
-						   .border("solid 1px black")
-						   .add(div, 
-								Html.br(), 
-								Html.hr().size("1px")); 
-						   
-		// @formatter:on
-		print(body2);
-
-		// @formatter:off
-		Element body3 = Html.body("my-body")
-						   .border("solid 1px black")
-						   .add(Html.div("my-div")
-								   .css("my-class")
-								   .border("solid 1px black")
-								   .padding("10px")
-								   .add(Html.h1("my-title")), 
-								   Html.br(), 
-								Html.hr().size("1px")); 
-								   
-		// @formatter:on
-		print(body3);
-
-		// @formatter:off
-		print(Html.body("my-body").border("solid 1px black").add(
-			Html.div("my-div").css("my-class").border("solid 1px black").padding("10px").add(
-				Html.h1().add("my-title"),
-				Html.br(), 
-				Html.hr().size("1px")
-			)
-		)); 
-		// @formatter:on
-
-		List<String> list = new ArrayList<String>();
-		list.add("item 1");
-		list.add("item 2");
-
-		// @formatter:off
-		print(Html.table("my-table").add(
-			Html.thead(
-				Html.th("column1"),
-				Html.th("column2")
-			),
-			Html.tbody().add(new Foreach<String>(list) {
-				@Override
-				public Content render(String item) {	return 
-						Html.tr(
-							Html.td(item),
-							Html.td(item)
-						);
-				}}
-			)
-		));
-		// @formatter:on
-	}
-
-	private static void print(Element element) {
-		System.out.println(element.toString());
-	}
+public class Node implements Element {
 
 	private Map<String, String> attrs = new HashMap<String, String>();
 
@@ -125,7 +46,7 @@ class Node implements Element {
 
 	private String id;
 
-	Node(String name) {
+	public Node(String name) {
 		this.name = name;
 	}
 
