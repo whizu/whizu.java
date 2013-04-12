@@ -35,6 +35,8 @@ public class Tbody extends Node {
 	}
 	
 	public Tr tr() {
-		return new Tr();
+		Tr tr = new Tr();
+		add(tr);
+		return tr;
 	}
 }

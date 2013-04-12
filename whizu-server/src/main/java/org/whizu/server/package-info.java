@@ -1,4 +1,6 @@
 /**
+  The core Whizu server and runtime engine.
+  
   Copyright (c) 2013 Rudy D'hauwe @ Whizu
   Licensed under the EUPL V.1.1
   <p>  

@@ -1,4 +1,6 @@
 /**
+  Convenience classes for generating HTML markup.
+  
   Copyright (c) 2013 Rudy D'hauwe @ Whizu
   Licensed under the EUPL V.1.1
   <p>  

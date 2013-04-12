@@ -27,6 +27,7 @@ import org.whizu.dom.Component;
 import org.whizu.dom.Element;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
+import org.whizu.html.Tbody;
 import org.whizu.widget.Widget;
 
 /**
@@ -42,7 +43,7 @@ public class GridLayout extends Widget implements Layout {
 
 	private Element grid;
 
-	private Element tbody;
+	private Tbody tbody;
 	
 	private Element row;
 
@@ -69,8 +70,8 @@ public class GridLayout extends Widget implements Layout {
 			throw new UnsupportedOperationException();
 		} else {
 			if ((column == 0) || (column == numberOfColumns)) {
-				row = Html.tr();
-				tbody.add(row);
+				//row = Html.tr(); tbody.add(row);
+				row = tbody.tr();
 				column = 1;
 			} else {
 				column++;
