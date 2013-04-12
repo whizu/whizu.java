@@ -67,7 +67,7 @@ public class GridLayout extends Widget implements Layout {
 			if ((column == 0) || (column == numberOfColumns)) {
 				row = Html.tr();
 				tbody.add(row);
-				column++;
+				column = 1;
 			} else {
 				column++;
 			}
