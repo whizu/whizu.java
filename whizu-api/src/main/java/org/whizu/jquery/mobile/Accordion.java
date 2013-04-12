@@ -23,72 +23,38 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Element;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.whizu.dom.Html;
 import org.whizu.dom.Markup;
 import org.whizu.widget.Widget;
 
 /**
- * The jQuery Mobile framework provides a simple way to build CSS-based columns
- * that can also be responsive.
+ * An accordion is created in jQuery Mobile by grouping a series of individual
+ * collapsibles into a set. An accordion creates a collapsible set of
+ * collapsible blocks of content.
  * 
  * @author Rudy D'hauwe
  */
-public class Grid extends Widget {
+public class Accordion extends Widget {
 
-	public enum Type {
-		// @formatter:off
-		/**
-		 * Two column grid
-		 */
-		TWO_COLUMNS(2, "ui-grid-a"),
-		
-		/**
-		 * Three column grid
-		 */
-		THREE_COLUMNS(3, "ui-grid-b"),
-		
-		/**
-		 * Four column grid 
-		 */
-		FOUR_COLUMNS(4, "ui-grid-c"),
-		
-		/**
-		 * Five column grid 
-		 */
-		FIVE_COLUMNS(5, "ui-grid-d"); 
-		// @formatter:on
+	private Log log = LogFactory.getLog(Accordion.class);
+	
+	private Theme theme;
 
-		protected final int columns;
+	//private Theme contentTheme;
 
-		protected final String value;
-
-		Type(int columns, String value) {
-			this.columns = columns;
-			this.value = value;
-		}
-	}
-
-	private static final Type DEFAULT_GRID_TYPE = Type.TWO_COLUMNS;;
-
-	private Type type = DEFAULT_GRID_TYPE;
-
-	public Grid() {
-		this(DEFAULT_GRID_TYPE);
-	}
-
-	public Grid(Type type) {
-		this.type = type;
+	public void addCollapsible(Collapsible element) {
+		jQuery(this).append(element);
 	}
 
 	@Override
 	public Markup compile() {
-		Element grid = Html.div(this).css(type.value);
-		return grid;
+		return Html.div(this).attr("data-role", "collapsible-set").decorate(theme);
 	}
 
 	@Override
-	public Grid css(String clazz) {
+	public Accordion css(String clazz) {
 		setStyleName(clazz);
 		return this;
 	}
