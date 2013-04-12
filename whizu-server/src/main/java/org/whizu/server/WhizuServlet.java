@@ -120,6 +120,7 @@ public class WhizuServlet extends HttpServlet {
 
 		this.application = newInstance(config, INIT_PARAM_APPLICATION, null);
 		this.config = newInstance(config, INIT_PARAM_CONFIG, DEFAULT_CONFIG);
+		new AnnotationScanner().scan(this.config);
 	}
 
 	@SuppressWarnings("unchecked")

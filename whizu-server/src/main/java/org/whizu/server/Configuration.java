@@ -37,8 +37,6 @@ public abstract class Configuration {
 	
 	public Configuration() {
 		init();
-		
-		new AnnotationScanner().scan(this);
 	}
 	
 	public void addApplication(String uri, Application application) {
