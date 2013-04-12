@@ -15,38 +15,40 @@
  * intellectual property rights other than copyright. This disclaimer 
  * of warranty is an essential part of the License and a condition for 
  * the grant of any rights to this Software.
- *  
+ *   
  * For more  details, see <http://joinup.ec.europa.eu/software/page/eupl>.
  *
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.tutorial.jquery.mobile.helloworld;
+package org.whizu.tutorial.layout;
 
-import org.whizu.jquery.mobile.Form;
-import org.whizu.jquery.mobile.JQueryMobileApp;
-import org.whizu.jquery.mobile.Theme;
+import org.whizu.layout.GridLayout;
 import org.whizu.server.App;
+import org.whizu.ui.Application;
+import org.whizu.ui.Document;
 import org.whizu.ui.UI;
 
 /**
  * @author Rudy D'hauwe
  */
-@App(uri="/whizu/jqm/helloworld")
-public class HelloWorldApp extends JQueryMobileApp {
+@App(uri="/whizu/gridlayout")
+public class GridLayoutTutorial implements Application {
+
+	@Override
+	public String getTitle() {
+		return "My GridLayout Tutorial";
+	}
 
 	@Override
 	public void init(UI ui) {
-		addHeader("My jQuery Mobile header");
-		addLabel("Hello world!");
-		addButton("My first button");
-		addButton("My second button");
-		Form form = addForm();
-		form.addText();
-		form.addTextarea();
-		form.addSlider(0, 100, Theme.B);
-		form.addFlipSwitch();
-		addFooter("My jQuery Mobile footer");
+		Document document = ui.getDocument();
+		
+		GridLayout grid = new GridLayout(2);
+		grid.add(ui.createLabel("FirstLabel"))
+			.add(ui.createLabel("SecondLabel"))
+			.add(ui.createLabel("ThirdLabel"));
+		
+		document.add(grid);
 	}
 }
-

@@ -23,32 +23,40 @@
  *******************************************************************************/
 package org.whizu.server;
 
-import java.util.HashMap;
+import java.lang.annotation.Annotation;
 import java.util.Map;
 
+import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
+import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.whizu.ui.Application;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class Configuration {
+class AnnotationScanner {
 
-	private Map<String, Application> applicationMap = new HashMap<String, Application>();
-	
-	public Configuration() {
-		init();
-		
-		new AnnotationScanner().scan(this);
+	public void scan(Configuration config) {
+		long start = System.currentTimeMillis();
+		System.out.println("Scanning classpath for annotations");
+		GenericApplicationContext applicationContext = new GenericApplicationContext();
+		ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(applicationContext, false);
+		scanner.addIncludeFilter(new AnnotationTypeFilter(App.class));
+		scanner.scan("");
+		applicationContext.refresh();
+		Map<String, Object> result = applicationContext.getBeansWithAnnotation(App.class);
+		for (Object o : result.values()) {
+			System.out.println(o.getClass());
+			App ann = o.getClass().getAnnotation(App.class);
+			if (ann != null) { 
+				System.out.println(ann.uri());
+				config.addApplication(ann.uri(), (Application) o);
+			}
+			Annotation[] annos = o.getClass().getAnnotations();
+			for(Annotation a : annos)
+		        System.out.println(a);
+		}
+		long end = System.currentTimeMillis();
+		System.out.println("done annotation scanning in " + (end - start) + " ms");
 	}
-	
-	public void addApplication(String uri, Application application) {
-		applicationMap.put(uri, application);
-		applicationMap.put(uri+"/", application);
-	}
-	
-	public Application getApplication(String uri) {
-		return applicationMap.get(uri);
-	}
-
-	protected abstract void init();
 }
