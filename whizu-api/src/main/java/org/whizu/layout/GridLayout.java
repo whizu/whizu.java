@@ -49,7 +49,7 @@ public class GridLayout extends Widget implements Layout {
 	public GridLayout(int numberOfColumns) {
 		this.numberOfColumns = numberOfColumns;
 		
-		this.grid = Html.table(this).width("100%");
+		this.grid = Html.table(this).width("100%").attr("cellspacing", "0").attr("cellpadding", "0");
 		this.tbody = Html.tbody();
 		this.grid.add(tbody);
 	}
