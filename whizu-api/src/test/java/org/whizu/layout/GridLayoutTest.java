@@ -51,8 +51,37 @@ public class GridLayoutTest {
 
 	// private Log log = LogFactory.getLog(GridLayoutTest.class);
 
-	@Test
-	public void runTest1() {
+	private Component getDefaultComponent() {
+		Component myComponent = new Component() {
+
+			@Override
+			public Markup compile() {
+				return new Literal("myMarkup");
+			}
+
+			@Override
+			public Component css(String clazz) {
+				return this;
+			}
+
+			@Override
+			public String id() {
+				return "myID";
+			}
+
+			@Override
+			public String render() {
+				return "myComponent";
+			}
+
+			@Override
+			public void width(String width) {
+			}
+		};
+		return myComponent;
+	}
+
+	private void initRequestContext() {
 		RequestContext.init(new RequestContext() {
 
 			@Override
@@ -139,33 +168,12 @@ public class GridLayoutTest {
 				};
 			}
 		});
-
-		Component myComponent = new Component() {
-
-			@Override
-			public Markup compile() {
-				return new Literal("myMarkup");
-			}
-
-			@Override
-			public Component css(String clazz) {
-				return this;
-			}
-
-			@Override
-			public String id() {
-				return "myID";
-			}
-
-			@Override
-			public String render() {
-				return "myComponent";
-			}
-
-			@Override
-			public void width(String width) {
-			}
-		};
+	}
+	
+	@Test
+	public void runTest1() {
+		initRequestContext();
+		Component myComponent = getDefaultComponent();
 
 		GridLayout grid = new GridLayout(2);
 		grid.add(myComponent);
@@ -177,122 +185,11 @@ public class GridLayoutTest {
 				"<table style='width:100%;'><tbody><tr><td>myComponent</td><td>myComponent</td></tr><tr><td>myComponent</td></tr></tbody></table>",
 				markup);
 	}
-	
+
 	@Test
 	public void runTest2() {
-		RequestContext.init(new RequestContext() {
-
-			@Override
-			protected Request getRequestImpl() {
-				return new Request() {
-
-					@Override
-					public Script compile(Function function) {
-						// TODO Auto-generated method stub
-						return null;
-					}
-
-					@Override
-					public void execute(String js) {
-						// TODO Auto-generated method stub
-					}
-
-					@Override
-					public Session getSession() {
-						return new Session() {
-
-							@Override
-							public void addClickListener(EventHandler listener) {
-								// TODO Auto-generated method stub
-							}
-
-							@Override
-							public void addInput(Input input) {
-								// TODO Auto-generated method stub
-							}
-
-							@Override
-							public Object getAttribute(String name) {
-								// TODO Auto-generated method stub
-								return null;
-							}
-
-							@Override
-							public EventHandler getEventHandler(String id) {
-								// TODO Auto-generated method stub
-								return null;
-							}
-
-							@Override
-							public Input getInput(String id) {
-								// TODO Auto-generated method stub
-								return null;
-							}
-
-							@Override
-							public int getSessionCount() {
-								return 0;
-							}
-
-							@Override
-							public void handleEvent(String id) {
-								// TODO Auto-generated method stub
-							}
-
-							@Override
-							public String next() {
-								// TODO Auto-generated method stub
-								return null;
-							}
-
-							@Override
-							public void setAttribute(String name, Object value) {
-								// TODO Auto-generated method stub
-							}
-						};
-					}
-
-					@Override
-					public JQuery select(Identity... objs) {
-						// TODO Auto-generated method stub
-						return null;
-					}
-
-					@Override
-					public JQuery select(String selector) {
-						// TODO Auto-generated method stub
-						return null;
-					}
-				};
-			}
-		});
-
-		Component myComponent = new Component() {
-
-			@Override
-			public Markup compile() {
-				return new Literal("myMarkup");
-			}
-
-			@Override
-			public Component css(String clazz) {
-				return this;
-			}
-
-			@Override
-			public String id() {
-				return "myID";
-			}
-
-			@Override
-			public String render() {
-				return "myComponent";
-			}
-
-			@Override
-			public void width(String width) {
-			}
-		};
+		initRequestContext();
+		Component myComponent = getDefaultComponent();
 
 		GridLayout grid = new GridLayout(2);
 		grid.add(myComponent);
