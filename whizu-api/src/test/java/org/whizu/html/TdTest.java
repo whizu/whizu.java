@@ -23,20 +23,23 @@
  *******************************************************************************/
 package org.whizu.html;
 
-import org.whizu.dom.Node;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+import org.whizu.dom.Content;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Tr extends Node {
+public class TdTest {
 
-	Tr() {
-		super("tr");
-	}
-	
-	public Td td() {
+	@Test
+	public void testTd() {
 		Td td = new Td();
-		add(td);
-		return td;
+		equals("<td></td>", td);
+	}
+
+	private void equals(String markup, Content content) {
+		assertEquals(markup, content.render());
 	}
 }
