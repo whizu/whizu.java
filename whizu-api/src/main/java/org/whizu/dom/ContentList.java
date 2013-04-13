@@ -26,7 +26,6 @@ package org.whizu.dom;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * @author Rudy D'hauwe
  */
@@ -36,7 +35,7 @@ class ContentList implements Markup {
 
 	public ContentList() {
 	}
-	
+
 	public ContentList(Content... content) {
 		for (Content c : content) {
 			add(c);
@@ -52,7 +51,6 @@ class ContentList implements Markup {
 		return this;
 	}
 
-	
 	public <T extends Content> ContentList add(List<T> content) {
 		this.contentList.addAll(content);
 		return this;
