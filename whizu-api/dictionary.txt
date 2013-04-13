@@ -35,3 +35,11 @@ config
 eupl
 javascript
 collapsibles
+tr
+thead
+th
+td
+tbody
+br
+div
+hr

@@ -23,6 +23,8 @@
  *******************************************************************************/
 package org.whizu.html;
 
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
 
 /**
@@ -83,7 +85,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testButton() {
-		// fail("Not yet implemented");
+		equals("<button></button>", Html.button());
 	}
 
 	/**
@@ -92,7 +94,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testButtonIdentity() {
-		// fail("Not yet implemented");
+		equals("<button id='myID'></button>", Html.button(createIdentity("myID")));
 	}
 
 	/**
@@ -100,7 +102,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testButtonString() {
-		// fail("Not yet implemented");
+		equals("<button id='myID'></button>", Html.button("myID"));
 	}
 
 	/**
@@ -108,7 +110,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testDiv() {
-		// fail("Not yet implemented");
+		equals("<div></div>", Html.div());
 	}
 
 	/**
@@ -116,7 +118,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testDivIdentity() {
-		// fail("Not yet implemented");
+		equals("<div id='myID'></div>", Html.div(createIdentity("myID")));
 	}
 
 	/**
@@ -124,7 +126,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testDivString() {
-		// fail("Not yet implemented");
+		equals("<div id='myID'></div>", Html.div("myID"));
 	}
 
 	/**
@@ -132,7 +134,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testFormIdentity() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -140,7 +142,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testFormString() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -148,7 +150,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testH1() {
-		// fail("Not yet implemented");
+		equals("<h1></h1>", Html.h1());
 	}
 
 	/**
@@ -156,7 +158,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testH1String() {
-		// fail("Not yet implemented");
+		equals("<h1>title</h1>", Html.h1("title"));
 	}
 
 	/**
@@ -164,7 +166,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testH3() {
-		// fail("Not yet implemented");
+		equals("<h3></h3>", Html.h3());
 	}
 
 	/**
@@ -172,7 +174,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testH3String() {
-		// fail("Not yet implemented");
+		equals("<h3>title</h3>", Html.h3("title"));
 	}
 
 	/**
@@ -188,7 +190,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testImg() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -196,7 +198,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testInput() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -205,7 +207,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testInputIdentity() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -213,7 +215,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testInputString() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -221,7 +223,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testLabel() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -230,7 +232,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testSelectIdentity() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -238,7 +240,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testSelectString() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -247,7 +249,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTableIdentity() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -255,7 +257,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTableString() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -263,7 +265,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTag() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -271,7 +273,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTbody() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -279,7 +281,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTd() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -287,7 +289,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTdString() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -296,7 +298,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTextareaIdentity() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -304,7 +306,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTextareaString() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -312,7 +314,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTh() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -320,7 +322,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testThString() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -328,7 +330,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testThead() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -337,7 +339,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTheadElementArray() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -345,7 +347,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTr() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -353,7 +355,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTrElementArray() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -361,6 +363,6 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTrElement() {
-		// fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 }
