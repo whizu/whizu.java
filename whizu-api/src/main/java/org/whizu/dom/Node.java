@@ -30,6 +30,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The void elements in HTML 4.01/XHTML 1.0 Strict are area, base, br, col, hr,
+ * img, input, link, meta, and param. HTML5 currently adds command, keygen, and
+ * source to that list.
+ * 
  * @author Rudy D'hauwe
  */
 public class Node implements Element {
