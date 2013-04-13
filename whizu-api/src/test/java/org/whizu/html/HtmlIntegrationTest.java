@@ -146,8 +146,8 @@ public class HtmlIntegrationTest extends AbstractTest {
 				@Override
 				public Content render(String item) {	return 
 						Html.tr(
-							Html.td(item),
-							Html.td(item)
+							Html.td().add(item),
+							Html.td().add(item)
 						);
 				}}
 			)

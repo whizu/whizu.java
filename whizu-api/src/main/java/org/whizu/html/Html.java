@@ -96,7 +96,7 @@ public class Html {
 	}
 
 	public static Element input() {
-		return tag("input");
+		return selfClosing("input");
 	}
 
 	public static Element input(Identity element) {
@@ -119,6 +119,10 @@ public class Html {
 		return tag("select").id(id);
 	}
 
+	protected static Element selfClosing(String name) {
+		return new Node(name, true);
+	}
+
 	public static Element table(Identity element) {
 		return table(element.id());
 	}
@@ -139,8 +143,8 @@ public class Html {
 		return new Td();
 	}
 
-	public static Element td(String item) {
-		return td().add(item);
+	public static Element td(String id) {
+		return td().id(id);
 	}
 
 	public static Element textarea(Identity element) {
@@ -173,9 +177,5 @@ public class Html {
 
 	public static Element tr(Element... elements) {
 		return tr().add(elements);
-	}
-
-	public static Element tr(Element td) {
-		return tr().add(td);
 	}
 }

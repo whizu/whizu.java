@@ -134,7 +134,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testFormIdentity() {
-		fail("Not yet implemented");
+		equals("<form id='myID'></form>", Html.form(createIdentity("myID")));
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testFormString() {
-		fail("Not yet implemented");
+		equals("<form id='myID'></form>", Html.form("myID"));
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testImg() {
-		fail("Not yet implemented");
+		equals("<img id='myID'></img>", Html.img("myID"));
 	}
 
 	/**
@@ -198,16 +198,15 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testInput() {
-		fail("Not yet implemented");
+		equals("<input/>", Html.input());
 	}
 
 	/**
-	 * Test method for {@link org.whizu.html.Html#input(org.whizu.dom.Identity)}
-	 * .
+	 * Test method for {@link org.whizu.html.Html#input(org.whizu.dom.Identity)}.
 	 */
 	@Test
 	public void testInputIdentity() {
-		fail("Not yet implemented");
+		equals("<input id='myID'/>", Html.input(createIdentity("myID")));
 	}
 
 	/**
@@ -215,15 +214,15 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testInputString() {
-		fail("Not yet implemented");
+		equals("<input id='myID'/>", Html.input("myID"));
 	}
-
+	
 	/**
 	 * Test method for {@link org.whizu.html.Html#label()}.
 	 */
 	@Test
 	public void testLabel() {
-		fail("Not yet implemented");
+		equals("<label></label>", Html.label());
 	}
 
 	/**
@@ -232,7 +231,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testSelectIdentity() {
-		fail("Not yet implemented");
+		equals("<select id='myID'></select>", Html.select(createIdentity("myID")));
 	}
 
 	/**
@@ -240,7 +239,15 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testSelectString() {
-		fail("Not yet implemented");
+		equals("<select id='myID'></select>", Html.select("myID"));
+	}
+
+	/**
+	 * Test method for {@link org.whizu.html.Html#selfClosing(java.lang.String)}.
+	 */
+	@Test
+	public void testSelfClosingString() {
+		equals("<selfClosing/>", Html.selfClosing("selfClosing"));
 	}
 
 	/**
@@ -249,7 +256,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTableIdentity() {
-		fail("Not yet implemented");
+		equals("<table id='myID'></table>", Html.table(createIdentity("myID")));
 	}
 
 	/**
@@ -257,7 +264,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTableString() {
-		fail("Not yet implemented");
+		equals("<table id='myID'></table>", Html.table("myID"));
 	}
 
 	/**
@@ -265,7 +272,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTag() {
-		fail("Not yet implemented");
+		equals("<mytag></mytag>", Html.tag("mytag"));
 	}
 
 	/**
@@ -273,7 +280,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTbody() {
-		fail("Not yet implemented");
+		equals("<tbody></tbody>", Html.tbody());
 	}
 
 	/**
@@ -281,7 +288,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTd() {
-		fail("Not yet implemented");
+		equals("<td></td>", Html.td());
 	}
 
 	/**
@@ -289,7 +296,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTdString() {
-		fail("Not yet implemented");
+		equals("<td id='myID'></td>", Html.td("myID"));
 	}
 
 	/**
@@ -298,7 +305,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTextareaIdentity() {
-		fail("Not yet implemented");
+		equals("<textarea id='myID'></textarea>", Html.textarea(createIdentity("myID")));
 	}
 
 	/**
@@ -306,7 +313,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTextareaString() {
-		fail("Not yet implemented");
+		equals("<textarea id='myID'></textarea>", Html.textarea("myID"));
 	}
 
 	/**
@@ -314,15 +321,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTh() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link org.whizu.html.Html#th(java.lang.String)}.
-	 */
-	@Test
-	public void testThString() {
-		fail("Not yet implemented");
+		equals("<th></th>", Html.th());
 	}
 
 	/**
@@ -330,7 +329,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testThead() {
-		fail("Not yet implemented");
+		equals("<thead></thead>", Html.thead());
 	}
 
 	/**
@@ -339,7 +338,15 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTheadElementArray() {
-		fail("Not yet implemented");
+		equals("<thead><h1></h1><hr/></thead>", Html.thead(Html.h1(), Html.hr()));
+	}
+
+	/**
+	 * Test method for {@link org.whizu.html.Html#th(java.lang.String)}.
+	 */
+	@Test
+	public void testThString() {
+		equals("<th>contents</th>", Html.th("contents"));
 	}
 
 	/**
@@ -347,7 +354,7 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTr() {
-		fail("Not yet implemented");
+		equals("<tr></tr>", Html.tr());
 	}
 
 	/**
@@ -355,14 +362,6 @@ public class HtmlTest extends AbstractTest {
 	 */
 	@Test
 	public void testTrElementArray() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link org.whizu.html.Html#tr(org.whizu.dom.Element)}.
-	 */
-	@Test
-	public void testTrElement() {
-		fail("Not yet implemented");
+		equals("<tr><h1></h1><hr/></tr>", Html.tr(Html.h1(), Html.hr()));
 	}
 }
