@@ -34,7 +34,6 @@ import org.junit.runners.JUnit4;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Foreach;
-import org.whizu.html.Html;
 
 /**
  * @author Rudy D'hauwe
