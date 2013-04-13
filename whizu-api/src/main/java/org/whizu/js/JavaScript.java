@@ -34,9 +34,24 @@ import org.whizu.jquery.Script;
 public class JavaScript {
 
 	/**
-	 * 
-	 * @param function
-	 * @param milliseconds
+	 * With JavaScript, it is possible to execute some code at specified
+	 * time-intervals. This is called timing events. The setInterval() method
+	 * will wait a specified number of milliseconds, and then execute a
+	 * specified function, and it will continue to execute the function, once at
+	 * every given time-interval.
+	 */
+	public void setInterval(Function function, int milliseconds) {
+		Request request = RequestContext.getRequest();
+		Script action = request.compile(function);
+		String script = "setInterval(function(){" + action.toJavaScript() + "}," + milliseconds + ")";
+		request.execute(script);
+	}
+
+	/**
+	 * With JavaScript, it is possible to execute some code at specified
+	 * time-intervals. This is called timing events. The setTimeout() method
+	 * will wait the specified number of milliseconds, and then execute the
+	 * specified function once.
 	 */
 	public void setTimeout(Function function, int milliseconds) {
 		Request request = RequestContext.getRequest();
