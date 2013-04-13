@@ -63,12 +63,20 @@ public class Node implements Element {
 
 	@Override
 	public Element add(Content element) {
+		if(selfClosing) {
+			throw new IllegalStateException("A self-closing element must not add content");
+		}
+		
 		contents.add(element);
 		return this;
 	}
 
 	@Override
 	public Element add(Content... elements) {
+		if(selfClosing) {
+			throw new IllegalStateException("A self-closing element must not add content");
+		}
+		
 		for (Content part : elements) {
 			add(part);
 		}
@@ -77,22 +85,34 @@ public class Node implements Element {
 
 	@Override
 	public <T> Element add(Foreach<T> factory) {
+		if(selfClosing) {
+			throw new IllegalStateException("A self-closing element must not add content");
+		}
+		
 		Iterator<T> it = factory.iterator();
 		while (it.hasNext()) {
 			T item = it.next();
-			add(factory.render(item));
+			add(factory.compile(item));
 		}
 		return this;
 	}
 
 	@Override
 	public <T extends Content> Element add(List<T> content) {
+		if(selfClosing) {
+			throw new IllegalStateException("A self-closing element must not add content");
+		}
+		
 		contents.add(content);
 		return this;
 	}
 
 	@Override
 	public Element add(String text) {
+		if(selfClosing) {
+			throw new IllegalStateException("A self-closing element must not add content");
+		}
+		
 		return add(new Literal(text));
 	}
 
@@ -183,7 +203,7 @@ public class Node implements Element {
 
 	@Override
 	public Element margin(String margin) {
-		return attr("margin", margin);
+		return style("margin", margin);
 	}
 
 	@Override

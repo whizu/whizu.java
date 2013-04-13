@@ -111,6 +111,10 @@ public class Html {
 		return tag("label");
 	}
 
+	public static Element script(String src) {
+		return tag("script").attr("type", "text/javascript").attr("src", src);
+	}
+
 	public static Element select(Identity element) {
 		return select(element.id());
 	}

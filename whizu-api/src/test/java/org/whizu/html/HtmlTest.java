@@ -225,6 +225,15 @@ public class HtmlTest extends AbstractTest {
 
 	/**
 	 * Test method for
+	 * {@link org.whizu.html.Html#script(java.lang.String)}.
+	 */
+	@Test
+	public void testScriptString() {
+		equals("<script src='myScript.js' type='text/javascript'></script>", Html.script("myScript.js"));
+	}
+	
+	/**
+	 * Test method for
 	 * {@link org.whizu.html.Html#select(org.whizu.dom.Identity)}.
 	 */
 	@Test

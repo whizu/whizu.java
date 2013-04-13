@@ -42,12 +42,12 @@ import org.whizu.jquery.Script;
 import org.whizu.jquery.Session;
 
 /**
- * Tests for {@link GridLayoutTest}.
+ * Tests for {@link GridLayoutIntegrationTest}.
  * 
  * @author Rudy D'hauwe
  */
 @RunWith(JUnit4.class)
-public class GridLayoutTest {
+public class GridLayoutIntegrationTest {
 
 	// private Log log = LogFactory.getLog(GridLayoutTest.class);
 

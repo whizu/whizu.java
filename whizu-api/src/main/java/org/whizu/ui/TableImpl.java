@@ -95,7 +95,7 @@ class TableImpl extends Widget implements Table {
 								.add(new Foreach<String>(columnList) {
 
 									@Override
-									public Content render(String item) {
+									public Content compile(String item) {
 										return Html.th(item);
 									}
 								})
@@ -104,7 +104,7 @@ class TableImpl extends Widget implements Table {
 				     	.add(new Foreach<Component[]>(rows.values()) {
 
 				     		@Override
-				     		public Content render(Component[] item) {
+				     		public Content compile(Component[] item) {
 				     			Element tr = Html.tr()
 				     							.width(width)
 				     							.style("word-wrap", "break-word");

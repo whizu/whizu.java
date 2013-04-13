@@ -29,7 +29,7 @@ import java.util.Iterator;
 /**
  * @author Rudy D'hauwe
  */
-public abstract class Foreach<T> {
+public abstract class Foreach<T> { // TODO shouldn't T extend Component?
 
 	private Collection<T> list;
 
@@ -41,5 +41,7 @@ public abstract class Foreach<T> {
 		return list.iterator();
 	}
 
-	public abstract Content render(T item);
+	// TODO rename this method to compile?
+	// TODO shouldn't this method return Markup?
+	public abstract Content compile(T item);
 }

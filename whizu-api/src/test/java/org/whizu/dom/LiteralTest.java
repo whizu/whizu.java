@@ -21,35 +21,41 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.layout;
+package org.whizu.dom;
 
-import org.whizu.dom.Component;
-import org.whizu.dom.Content;
-import org.whizu.dom.Foreach;
-import org.whizu.dom.Markup;
-import org.whizu.html.Html;
-import org.whizu.widget.Container;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 /**
  * @author Rudy D'hauwe
  */
-class AbstractLayout extends Container implements Layout {
+public class LiteralTest {
 
-	protected Markup create(String css, final String itemClass) {
-		return Html.div(this).css(style).css(css).width(width).add(new Foreach<Component>(componentList) {
-
-			@Override
-			public Content compile(Component item) {
-				item.css(itemClass); // to be tested
-				return item;
-				// return item.render();
-				// return item.render().css(itemClass); //this works
-			}
-		});
+	/**
+	 * Test method for {@link org.whizu.dom.Literal#render()}.
+	 */
+	@Test
+	public void testRender() {
+		Literal obj = new Literal("myText");
+		assertEquals("myText", obj.render());
 	}
 
-	@Override
-	public Markup compile() {
-		return Html.div(this).css(style).width(width).add(componentList);
+	/**
+	 * Test method for {@link org.whizu.dom.Literal#Literal(java.lang.String)}.
+	 */
+	@Test
+	public void testLiteral() {
+		Literal obj = new Literal("myText");
+		assertEquals("myText", obj.getText());
+	}
+
+	/**
+	 * Test method for {@link org.whizu.dom.Literal#getText()}.
+	 */
+	@Test
+	public void testGetText() {
+		Literal obj = new Literal("myText");
+		assertEquals("myText", obj.getText());
 	}
 }

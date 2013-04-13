@@ -144,7 +144,7 @@ public class HtmlIntegrationTest extends AbstractTest {
 			),
 			Html.tbody().add(new Foreach<String>(list) {
 				@Override
-				public Content render(String item) {	return 
+				public Content compile(String item) {	return 
 						Html.tr(
 							Html.td().add(item),
 							Html.td().add(item)

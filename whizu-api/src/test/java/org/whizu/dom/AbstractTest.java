@@ -21,35 +21,28 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.layout;
+package org.whizu.dom;
 
-import org.whizu.dom.Component;
+import static org.junit.Assert.assertEquals;
+
 import org.whizu.dom.Content;
-import org.whizu.dom.Foreach;
-import org.whizu.dom.Markup;
-import org.whizu.html.Html;
-import org.whizu.widget.Container;
+import org.whizu.dom.Identity;
 
 /**
  * @author Rudy D'hauwe
  */
-class AbstractLayout extends Container implements Layout {
+public abstract class AbstractTest {
 
-	protected Markup create(String css, final String itemClass) {
-		return Html.div(this).css(style).css(css).width(width).add(new Foreach<Component>(componentList) {
+	protected Identity createIdentity(final String id) {
+		return new Identity() {
 
 			@Override
-			public Content compile(Component item) {
-				item.css(itemClass); // to be tested
-				return item;
-				// return item.render();
-				// return item.render().css(itemClass); //this works
-			}
-		});
+			public String id() {
+				return id;
+			}};
 	}
 
-	@Override
-	public Markup compile() {
-		return Html.div(this).css(style).width(width).add(componentList);
+	protected final void equals(String markup, Content content) {
+		assertEquals(markup, content.render());
 	}
 }
