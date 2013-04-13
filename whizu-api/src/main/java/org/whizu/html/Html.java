@@ -6,8 +6,8 @@ package org.whizu.html;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Identity;
+import org.whizu.dom.Markup;
 import org.whizu.dom.Node;
-
 
 /**
  * A bunch of convenience methods for generating HTML content.
@@ -36,8 +36,8 @@ public class Html {
 		return body().id(id);
 	}
 
-	public static Element br() {
-		return new Node("br");
+	public static Markup br() {
+		return new Node("br", true);
 	}
 
 	public static Element button() {
@@ -88,7 +88,7 @@ public class Html {
 	}
 
 	public static Element hr() {
-		return new Node("hr");
+		return new Node("hr", true);
 	}
 
 	public static Element img(String id) {

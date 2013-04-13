@@ -26,11 +26,21 @@ package org.whizu.html;
 import static org.junit.Assert.assertEquals;
 
 import org.whizu.dom.Content;
+import org.whizu.dom.Identity;
 
 /**
  * @author Rudy D'hauwe
  */
 public abstract class AbstractTest {
+
+	protected Identity createIdentity(final String id) {
+		return new Identity() {
+
+			@Override
+			public String id() {
+				return id;
+			}};
+	}
 
 	protected final void equals(String markup, Content content) {
 		assertEquals(markup, content.render());

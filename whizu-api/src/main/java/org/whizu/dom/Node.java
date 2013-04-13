@@ -46,8 +46,15 @@ public class Node implements Element {
 
 	private String id;
 
+	private boolean selfClosing;
+
 	public Node(String name) {
+		this(name, false);
+	}
+
+	public Node(String name, boolean selfClosing) {
 		this.name = name;
+		this.selfClosing = selfClosing;
 	}
 
 	@Override
@@ -219,9 +226,13 @@ public class Node implements Element {
 			markup += " " + "class=" + quote(getCss());
 		}
 
-		markup += ">";
-		markup += contents.render();
-		markup += "</" + name + ">";
+		if (selfClosing) {
+			markup += "/>";
+		} else {
+			markup += ">";
+			markup += contents.render();
+			markup += "</" + name + ">";
+		}
 		return markup;
 	}
 
