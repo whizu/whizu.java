@@ -36,12 +36,6 @@ import org.whizu.html.Html;
  */
 public class Container extends Widget implements Composite {
 
-	@Override
-	public Container css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
-
 	protected List<Component> componentList = new ArrayList<Component>();
 
 	@Override
@@ -54,6 +48,11 @@ public class Container extends Widget implements Composite {
 		
 		return this;
 	}
+
+	@Override
+	public Markup compile() {
+		return Html.div(this).add(componentList);
+	}
 	
 	/*
 	protected final void add(Content field) {
@@ -62,6 +61,17 @@ public class Container extends Widget implements Composite {
 		}
 	}
 	*/
+
+	@Override
+	public Container css(String clazz) {
+		setStyleName(clazz);
+		return this;
+	}
+
+	@Override
+	public void empty() {
+		jQuery(this).empty();
+	}
 
 	@Override
 	public void prepend(Component impl) {
@@ -73,17 +83,7 @@ public class Container extends Widget implements Composite {
 	}
 
 	@Override
-	public Markup compile() {
-		return Html.div(this).add(componentList);
-	}
-
-	@Override
 	public void remove(Component element) {
 		jQuery(element).remove();
-	}
-
-	@Override
-	public void empty() {
-		jQuery(this).empty();
 	}
 }

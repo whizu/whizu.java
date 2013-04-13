@@ -34,6 +34,9 @@ import org.whizu.jquery.JQuery;
 import org.whizu.value.Value;
 import org.whizu.widget.Widget;
 
+/**
+ * @author Rudy D'hauwe
+ */
 class LabelImpl extends Widget implements Label {
 
 	private ClickListenerImpl listener;

@@ -193,7 +193,7 @@ public class WhizuUI implements UI {
 
 	@Override
 	public void delay(int milliseconds, Function action) {
-		new Timeout(milliseconds, action);
+		new Timeout(action, milliseconds);
 	}
 	
 	@Override

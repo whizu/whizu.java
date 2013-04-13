@@ -25,7 +25,7 @@ package org.whizu.ui;
 
 import org.whizu.dom.Markup;
 import org.whizu.jquery.Function;
-import org.whizu.jquery.Script;
+import org.whizu.js.JavaScript;
 import org.whizu.widget.Widget;
 
 /**
@@ -33,22 +33,29 @@ import org.whizu.widget.Widget;
  */
 class Timeout extends Widget {
 
-	private Function action;
+	private Function function;
 
 	private int milliseconds;
 
-	public Timeout(int milliseconds, Function action) {
+	//@JavaScript
+	//private JavaScript js = new JavaScript();
+	
+	public Timeout(Function function, int milliseconds) {
 		this.milliseconds = milliseconds;
-		this.action = action;
-		compile();
+		this.function = function;
+		compile(); 
+		//TODO refactor/this is a special kind of widget
+		//TODO contains no markup, only client-side javascript
 	}
 
 	@Override
-	public Markup compile() {
-		Script script = compile(action);
-		String text = "setTimeout(function(){" + script.toJavaScript() + "}," + milliseconds + ")";
-		System.out.println("Timeout script: " + text);
-		getRequest().execute(text);
+	public final Markup compile() {
+		JavaScript js = new JavaScript();
+		compile(js);
 		return null;
+	}
+
+	protected void compile(JavaScript js) {
+		js.setTimeout(function, milliseconds);
 	}
 }
