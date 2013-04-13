@@ -23,8 +23,6 @@
  *******************************************************************************/
 package org.whizu.html;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,27 +37,26 @@ import org.whizu.dom.Foreach;
  * @author Rudy D'hauwe
  */
 @RunWith(JUnit4.class)
-public class HtmlTest {
+public class HtmlTest extends AbstractTest {
 
 	// private Log log = LogFactory.getLog(HtmlTest.class);
 
 	@Test
 	public void testTd() {
 		Element td = Html.td();
-		String markup = td.render();
-		assertEquals("<td></td>", markup);
+		equals("<td></td>", td);
 	}
 
 	@Test
 	public void test1() {
-		String markup = Html.tag("div").attr("id", "my-div").attr("class", "my-class").render();
-		assertEquals("<div id='my-div' class='my-class'></div>", markup);
+		Content content = Html.tag("div").attr("id", "my-div").attr("class", "my-class");
+		equals("<div id='my-div' class='my-class'></div>", content);
 	}
 
 	@Test
 	public void test2() {
-		String markup = Html.tag("div").id("my-div").css("my-class").render();
-		assertEquals("<div id='my-div' class='my-class '></div>", markup);
+		Content content = Html.tag("div").id("my-div").css("my-class");
+		equals("<div id='my-div' class='my-class '></div>", content);
 	}
 
 	@Test
@@ -76,10 +73,8 @@ public class HtmlTest {
 						 					Html.hr().size("1px"))
 						 			.border("solid 1px black");
 		// @formatter:on
-		String markup = body.render();
-		assertEquals(
-				"<body id='my-body' style='border:solid 1px black;'><div id='my-div' style='padding:10px;border:solid 1px black;' class='my-class '><h1>my-title</h1></div><br></br><hr size='1px'></hr></body>",
-				markup);
+		equals("<body id='my-body' style='border:solid 1px black;'><div id='my-div' style='padding:10px;border:solid 1px black;' class='my-class '><h1>my-title</h1></div><br></br><hr size='1px'></hr></body>",
+				body);
 	}
 
 	@Test
@@ -98,10 +93,8 @@ public class HtmlTest {
 								Html.hr().size("1px")); 
 						   
 		// @formatter:on
-		String markup = body2.render();
-		assertEquals(
-				"<body id='my-body' style='border:solid 1px black;'><div id='my-div' style='padding:10px;border:solid 1px black;' class='my-class '><h1>my-title</h1></div><br></br><hr size='1px'></hr></body>",
-				markup);
+		equals("<body id='my-body' style='border:solid 1px black;'><div id='my-div' style='padding:10px;border:solid 1px black;' class='my-class '><h1>my-title</h1></div><br></br><hr size='1px'></hr></body>",
+				body2);
 	}
 
 	@Test
@@ -118,26 +111,23 @@ public class HtmlTest {
 								Html.hr().size("1px")); 
 								   
 		// @formatter:on
-		String markup = body3.render();
-		assertEquals(
-				"<body id='my-body' style='border:solid 1px black;'><div id='my-div' style='padding:10px;border:solid 1px black;' class='my-class '><h1>my-title</h1></div><br></br><hr size='1px'></hr></body>",
-				markup);
+		equals("<body id='my-body' style='border:solid 1px black;'><div id='my-div' style='padding:10px;border:solid 1px black;' class='my-class '><h1>my-title</h1></div><br></br><hr size='1px'></hr></body>",
+				body3);
 	}
 
 	@Test
 	public void test6() {
 		// @formatter:off
-		String markup = Html.body("my-body").border("solid 1px black").add(
+		Content content = Html.body("my-body").border("solid 1px black").add(
 			Html.div("my-div").css("my-class").border("solid 1px black").padding("10px").add(
 				Html.h1().add("my-title"),
 				Html.br(), 
 				Html.hr().size("1px")
 			)
-		).render();
+		);
 		// @formatter:on
-		assertEquals(
-				"<body id='my-body' style='border:solid 1px black;'><div id='my-div' style='padding:10px;border:solid 1px black;' class='my-class '><h1>my-title</h1><br></br><hr size='1px'></hr></div></body>",
-				markup);
+		equals("<body id='my-body' style='border:solid 1px black;'><div id='my-div' style='padding:10px;border:solid 1px black;' class='my-class '><h1>my-title</h1><br></br><hr size='1px'></hr></div></body>",
+				content);
 	}
 
 	@Test
@@ -147,7 +137,7 @@ public class HtmlTest {
 		list.add("item 2");
 
 		// @formatter:off
-		String markup = Html.table("my-table").add(
+		Content content = Html.table("my-table").add(
 			Html.thead(
 				Html.th("column1"),
 				Html.th("column2")
@@ -161,10 +151,9 @@ public class HtmlTest {
 						);
 				}}
 			)
-		).render();
+		);
 		// @formatter:on
-		assertEquals(
-				"<table id='my-table'><thead><th>column1</th><th>column2</th></thead><tbody><tr><td>item 1</td><td>item 1</td></tr><tr><td>item 2</td><td>item 2</td></tr></tbody></table>",
-				markup);
+		equals("<table id='my-table'><thead><th>column1</th><th>column2</th></thead><tbody><tr><td>item 1</td><td>item 1</td></tr><tr><td>item 2</td><td>item 2</td></tr></tbody></table>",
+				content);
 	}
 }

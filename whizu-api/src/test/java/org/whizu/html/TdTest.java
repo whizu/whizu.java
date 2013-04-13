@@ -23,15 +23,12 @@
  *******************************************************************************/
 package org.whizu.html;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
-import org.whizu.dom.Content;
 
 /**
  * @author Rudy D'hauwe
  */
-public class TdTest {
+public class TdTest extends AbstractTest {
 
 	/**
 	 * Test method for {@link org.whizu.html.Td#Td()}.
@@ -40,9 +37,5 @@ public class TdTest {
 	public void testTd() {
 		Td td = new Td();
 		equals("<td></td>", td);
-	}
-
-	private void equals(String markup, Content content) {
-		assertEquals(markup, content.render());
 	}
 }

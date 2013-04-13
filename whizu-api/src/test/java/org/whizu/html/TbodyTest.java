@@ -1,14 +1,11 @@
 package org.whizu.html;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
-import org.whizu.dom.Content;
 
 /**
  * @author Rudy D'hauwe
  */
-public class TbodyTest {
+public class TbodyTest extends AbstractTest {
 
 	/**
 	 * Test method for {@link org.whizu.html.Tbody#Tbody()}.
@@ -32,9 +29,5 @@ public class TbodyTest {
 		equals("<td></td>", td);
 		equals("<tr><td></td></tr>", tr);
 		equals("<tbody><tr><td></td></tr></tbody>", tbody);
-	}
-	
-	private void equals(String markup, Content content) {
-		assertEquals(markup, content.render());
 	}
 }
