@@ -33,12 +33,18 @@ import org.whizu.dom.Content;
  */
 public class TrTest {
 
+	/**
+	 * Test method for {@link org.whizu.html.Tr#Tr()}.
+	 */
 	@Test
 	public void testTr() {
 		Tr tr = new Tr();
 		equals("<tr></tr>", tr);
 	}
 
+	/**
+	 * Test method for {@link org.whizu.html.Tr#td()}.
+	 */
 	@Test
 	public void testTd() {
 		Tr tr = new Tr();

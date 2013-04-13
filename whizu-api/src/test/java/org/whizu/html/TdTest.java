@@ -33,6 +33,9 @@ import org.whizu.dom.Content;
  */
 public class TdTest {
 
+	/**
+	 * Test method for {@link org.whizu.html.Td#Td()}.
+	 */
 	@Test
 	public void testTd() {
 		Td td = new Td();
