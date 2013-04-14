@@ -40,7 +40,6 @@
 		<!-- Create the distribution directory -->
 		<mkdir dir="${dist}/lib" />
 
-		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
 		<jar jarfile="${dist}/whizu.jar" basedir="${build}" />
 
 		<copy todir="${dist}/lib">
@@ -66,9 +65,19 @@
 		<!-- Put everything in ${dist} into the whizu-snapshot.zip file -->
 		<zip destfile="${package}/whizu-snapshot.zip" basedir="${dist}" />
 
+		<!-- Put everything in ${dist} into the whizu-snapshot.tar.gz file -->
 		<tar destfile="${package}/whizu-snapshot.tar.gz" compression="gzip">
 			<zipfileset src="${package}/whizu-snapshot.zip" />
 		</tar>
+	</target>
+
+	<target name="publish" depends="package" description="publish the package to the website">
+		<copy todir="../../whizu.github.com/download">
+			<fileset dir="${package}">
+				<include name="whizu-snapshot.zip" />
+				<include name="whizu-snapshot.tar.gz" />
+			</fileset>
+		</copy>
 	</target>
 
 	<target name="clean" description="clean up">
