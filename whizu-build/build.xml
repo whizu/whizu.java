@@ -52,8 +52,10 @@
 		</copy>
 
 		<copy todir="${dist}">
-			<fileset dir="../whizu-api">
+			<fileset dir=".">
 				<include name="LICENSE.pdf" />
+				<include name="LICENSE.txt" />
+				<include name="README.txt" />
 			</fileset>
 		</copy>
 	</target>
