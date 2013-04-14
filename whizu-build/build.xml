@@ -81,6 +81,9 @@
 				<include name="whizu-snapshot.tar.gz" />
 			</fileset>
 		</copy>
+		<copy todir="../../whizu.github.com/api">
+			<fileset dir="${dist}/docs/api" />
+		</copy>
 	</target>
 
 	<target name="clean" description="clean up">
