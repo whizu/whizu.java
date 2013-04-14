@@ -30,8 +30,8 @@ import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
-import org.whizu.jquery.Script;
 import org.whizu.jquery.Session;
+import org.whizu.js.Script;
 
 /**
  * @author Rudy D'hauwe
@@ -59,7 +59,7 @@ public abstract class Widget implements Component {
 		setStyleName(clazz);
 		return this;
 	}
-	
+
 	protected Request getRequest() {
 		return RequestContext.getRequest();
 	}
@@ -76,7 +76,7 @@ public abstract class Widget implements Component {
 	 * Initial creation and rendering of this widget by compiling it into a
 	 * combination of static HTML markup and javascript.
 	 */
-	//protected abstract Markup compile();
+	// protected abstract Markup compile();
 
 	@Override
 	public String id() {
@@ -108,7 +108,8 @@ public abstract class Widget implements Component {
 				Markup markup = compile();
 				if (markup == null) {
 					return "";
-				} else if (markup.equals(this)) {
+				} else if (markup.equals(this)) { // TODO unnecessary code?
+					// (Component doesn't implement Markup anymore)
 					throw new IllegalStateException("Widget.create() must not return this - causes infinite loop");
 				} else {
 					return markup.render();
@@ -127,8 +128,8 @@ public abstract class Widget implements Component {
 	public void width(String width) {
 		this.width = width;
 	}
-	
+
 	public Script compile(Function function) {
-		return getRequest().compile(function); 
+		return getRequest().compile(function);
 	}
 }

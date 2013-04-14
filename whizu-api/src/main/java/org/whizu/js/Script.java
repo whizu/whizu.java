@@ -21,41 +21,65 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.server;
+package org.whizu.js;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.whizu.jquery.Script;
-import org.whizu.js.Expression;
-
 /**
  * @author Rudy D'hauwe
  */
-class ScriptImpl implements Script {
+public class Script {
 
 	private List<Expression> expressionList = new ArrayList<Expression>();
 
-	ScriptImpl() {
+	private boolean isRendering = false;
+
+	private int renderingPosition;
+
+	public Script() {
 	}
 
-	ScriptImpl(String script) {
+	public Script(String script) {
+		//System.out.println(this + "Adding an expression when rendering " + isRendering + " at pos " + renderingPosition);
 		expressionList.add(new Expression(script));
 	}
 
-	@Override
 	public String toJavaScript() {
-		String script = "";
-		for (Expression expr : expressionList) {
-			script += expr.toJavaScript();
-			if (!script.endsWith(";")) {
-				script += ";";
+		try {
+			isRendering = true;
+			//System.out.println("Script size " + expressionList.size());
+			String script = "";
+			
+			renderingPosition = 0;
+			while (renderingPosition < expressionList.size()) {
+				Expression expr = expressionList.get(renderingPosition);
+				script += expr.toJavaScript();
+				if (!script.endsWith(";")) {
+					script += ";";
+				}
+				renderingPosition++;
 			}
+			/*
+			for (Expression expr : expressionList) {
+				script += expr.toJavaScript();
+				if (!script.endsWith(";")) {
+					script += ";";
+				}
+			}
+			*/
+			return script;
+		} finally {
+			isRendering = false;
 		}
-		return script;
 	}
 
 	public void addExpression(Expression expr) {
-		expressionList.add(expr);
+		//System.out.println(this + "Adding an expression when rendering " + isRendering + " at pos " + renderingPosition);
+		if (isRendering) {
+			expressionList.add(renderingPosition+1, expr);
+		} else {
+			expressionList.add(expressionList.size(), expr);
+		}
 	}
 }

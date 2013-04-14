@@ -38,8 +38,9 @@ import org.whizu.jquery.Input;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
-import org.whizu.jquery.Script;
 import org.whizu.jquery.Session;
+import org.whizu.js.Expression;
+import org.whizu.js.Script;
 
 /**
  * Tests for {@link GridLayoutIntegrationTest}.
@@ -92,11 +93,6 @@ public class GridLayoutIntegrationTest {
 					public Script compile(Function function) {
 						// TODO Auto-generated method stub
 						return null;
-					}
-
-					@Override
-					public void execute(String js) {
-						// TODO Auto-generated method stub
 					}
 
 					@Override
@@ -162,6 +158,24 @@ public class GridLayoutIntegrationTest {
 
 					@Override
 					public JQuery select(String selector) {
+						// TODO Auto-generated method stub
+						return null;
+					}
+
+					@Override
+					public Expression addExpression(String js) {
+						// TODO Auto-generated method stub
+						return null;
+					}
+
+					@Override
+					public String define(Function f) {
+						// TODO Auto-generated method stub
+						return null;
+					}
+
+					@Override
+					public String evaluate(Function f) {
 						// TODO Auto-generated method stub
 						return null;
 					}

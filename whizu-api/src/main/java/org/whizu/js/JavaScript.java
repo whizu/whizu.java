@@ -26,7 +26,6 @@ package org.whizu.js;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
-import org.whizu.jquery.Script;
 
 /**
  * @author Rudy D'hauwe
@@ -44,7 +43,7 @@ public class JavaScript {
 		Request request = RequestContext.getRequest();
 		Script action = request.compile(function);
 		String script = "setInterval(function(){" + action.toJavaScript() + "}," + milliseconds + ")";
-		request.execute(script);
+		request.addExpression(script);
 	}
 
 	/**
@@ -57,6 +56,6 @@ public class JavaScript {
 		Request request = RequestContext.getRequest();
 		Script action = request.compile(function);
 		String script = "setTimeout(function(){" + action.toJavaScript() + "}," + milliseconds + ")";
-		request.execute(script);
+		request.addExpression(script);
 	}
 }

@@ -58,7 +58,7 @@ class Schedule extends Widget {
 		String script = "$.get('/whizu?id=" + listenerId + "', function(data) { ; }, 'script');";
 		String text = "setTimeout(function(){" + script + "}," + milliseconds + ")";
 		System.out.println("Timeout script: " + text);
-		getRequest().execute(text);
+		getRequest().addExpression(text);
 
 		return null;
 	}

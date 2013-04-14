@@ -23,21 +23,40 @@
  *******************************************************************************/
 package org.whizu.js;
 
+import org.whizu.dom.Content;
+import org.whizu.dom.ContentList;
+import org.whizu.dom.Literal;
+
 /**
  * @author Rudy D'hauwe
  */
 public class Expression {
 
-	protected String expression = "";
-	
+	private ContentList contents = new ContentList();
+
+	// @Deprecated
+	// protected String expression = "";
+
 	public Expression() {
 	}
-	
+
 	public Expression(String expr) {
-		this.expression = expr;
+		contents.add(new Literal(expr));
+		// this.expression = expr;
 	}
-	
+
+	public void add(String part) {
+		contents.add(new Literal(part));
+		// System.out.println(this + " adding " + part);
+	}
+
+	public void add(Content part) {
+		contents.add(part);
+		// System.out.println(this + " adding component " + part);
+	}
+
 	public String toJavaScript() {
-		return expression;
+		return contents.render();
+		// return expression;
 	}
 }

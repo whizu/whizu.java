@@ -21,9 +21,28 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.widget;
 
-public interface Script {
+import static org.junit.Assert.assertEquals;
 
-	public abstract String toJavaScript();
+import org.whizu.dom.Content;
+import org.whizu.dom.Identity;
+
+/**
+ * @author Rudy D'hauwe
+ */
+public abstract class AbstractTest {
+
+	protected Identity createIdentity(final String id) {
+		return new Identity() {
+
+			@Override
+			public String id() {
+				return id;
+			}};
+	}
+
+	protected final void equals(String markup, Content content) {
+		assertEquals(markup, content.render());
+	}
 }

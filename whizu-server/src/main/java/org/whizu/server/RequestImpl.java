@@ -23,20 +23,13 @@
  *******************************************************************************/
 package org.whizu.server;
 
-import java.util.Stack;
-
-import org.whizu.dom.Identity;
-import org.whizu.jquery.Function;
-import org.whizu.jquery.JQuery;
+import org.whizu.jquery.AbstractRequest;
 import org.whizu.jquery.Request;
-import org.whizu.jquery.Script;
-import org.whizu.jquery.Session;
-import org.whizu.js.Expression;
 
 /**
  * @author Rudy D'hauwe
  */
-final class RequestImpl implements Request {
+final class RequestImpl extends AbstractRequest implements Request {
 
 	private static ThreadLocal<RequestImpl> request = new ThreadLocal<RequestImpl>() {
 
@@ -50,79 +43,14 @@ final class RequestImpl implements Request {
 		return request.get();
 	}
 	
-	private Stack<ScriptImpl> scriptStack = new Stack<ScriptImpl>();
-
-	private Session session;
-
 	private RequestImpl() {
-	}
-
-	protected Expression addExpression(String js) {
-		Expression script = new Expression(js);
-		return addExpression(script);
-	}
-
-	protected <T extends Expression> T addExpression(T expr) {
-		if (scriptStack.isEmpty()) {
-			ScriptImpl script = new ScriptImpl();
-			scriptStack.push(script);
-		}
-
-		ScriptImpl current = scriptStack.peek();
-		current.addExpression(expr);
-		return expr;
-	}
-
-	public Script createScript() {
-		scriptStack.push(new ScriptImpl());
-		return scriptStack.peek();
 	}
 
 	public String finish() {
 		try {
-			if (!scriptStack.isEmpty()) {
-				Script current = scriptStack.pop();
-				return current.toJavaScript();
-			} else {
-				return "";
-			}
+			return super.finish();
 		} finally {
 			request.remove();
 		}
-	}
-
-	@Override
-	public Session getSession() {
-		return session;
-	}
-
-	protected Script pop() {
-		return scriptStack.pop();
-	}
-
-	@Override
-	public JQuery select(Identity... objs) {
-		JQueryImpl query = new JQueryImpl(objs);
-		return addExpression(query);
-	}
-
-	@Override
-	public JQuery select(String selector) {
-		JQueryImpl query = new JQueryImpl(selector);
-		return addExpression(query);
-	}
-
-	protected final void setSession(Session session) {
-		this.session = session;
-	}
-
-	@Override
-	public Script compile(Function function) {
-		return FunctionWorker.compile(function);
-	}
-
-	@Override
-	public void execute(String js) {
-		addExpression(js);
 	}
 }

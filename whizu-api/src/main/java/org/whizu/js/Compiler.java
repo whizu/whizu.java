@@ -21,25 +21,11 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.js;
 
-import org.whizu.dom.Identity;
-import org.whizu.js.Expression;
-import org.whizu.js.Script;
+/**
+ * @author Rudy D'hauwe
+ */
+public interface Compiler {
 
-public interface Request {
-
-	public abstract Session getSession();
-
-	public abstract JQuery select(Identity... objs);
-
-	public abstract JQuery select(String selector);
-
-	public abstract Script compile(Function function);
-	
-	public abstract Expression addExpression(String js);
-	
-	public String define(Function f);
-	
-	public String evaluate(Function f);
 }

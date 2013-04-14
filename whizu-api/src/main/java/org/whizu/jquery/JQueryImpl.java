@@ -21,24 +21,22 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.server;
+package org.whizu.jquery;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.whizu.dom.Content;
 import org.whizu.dom.Identity;
-import org.whizu.jquery.Function;
-import org.whizu.jquery.JQuery;
-import org.whizu.jquery.Script;
 import org.whizu.js.Expression;
+import org.whizu.js.Script;
 
 /**
  * @author Rudy D'hauwe
  */
 class JQueryImpl extends Expression implements JQuery {
 
-	static JQuery self() {
-		return new JQueryImpl("$(this)");
-	}
+	/*
+	 * static JQuery self() { return new JQueryImpl("$(this)"); }
+	 */
 
 	private String selector = "";
 
@@ -66,7 +64,7 @@ class JQueryImpl extends Expression implements JQuery {
 
 	@Override
 	public JQuery append(Content content) {
-		return append(content.render());
+		return call("append", content);
 	}
 
 	@Override
@@ -83,7 +81,7 @@ class JQueryImpl extends Expression implements JQuery {
 	public String attr(String attributeName) {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	@Override
 	public JQuery before(String... content) {
 		return call("before", content);
@@ -102,6 +100,13 @@ class JQueryImpl extends Expression implements JQuery {
 	@Override
 	public JQuery call(String function, String arg) {
 		return concat(".", function, "(\"", arg, "\")");
+	}
+
+	private JQuery call(String function, Content arg) {
+		concat(".", function, "(\"");
+		add(arg);
+		concat("\")");
+		return this;
 	}
 
 	@Override
@@ -128,7 +133,7 @@ class JQueryImpl extends Expression implements JQuery {
 
 	@Override
 	public JQuery click(Function function) {
-		Script script = FunctionWorker.compile(function);
+		Script script = RequestContext.getRequest().compile(function);
 		return concat(".", "click", "(function(event) { ", script.toJavaScript(), " })");
 	}
 
@@ -139,8 +144,10 @@ class JQueryImpl extends Expression implements JQuery {
 
 	@Override
 	public JQuery concat(String... js) {
+
 		for (String part : js) {
-			this.expression += part;
+			// this.expression += part;
+			add(part);
 		}
 		return this;
 	}
@@ -162,7 +169,8 @@ class JQueryImpl extends Expression implements JQuery {
 
 	@Override
 	public JQuery get(String url, Function data, Function callback, String type) {
-		return concat(".", "get(", quote(url), ", ", FunctionWorker.evaluate(data), ", ", FunctionWorker.define(callback), ", ", quote(type), ")");
+		return concat(".", "get(", quote(url), ", ", RequestContext.getRequest().evaluate(data), ", ", RequestContext
+				.getRequest().define(callback), ", ", quote(type), ")");
 	}
 
 	private String getSelector(Identity... objs) {
@@ -181,7 +189,7 @@ class JQueryImpl extends Expression implements JQuery {
 
 	@Override
 	public JQuery html(String arg) {
-		String html = StringEscapeUtils.escapeJavaScript(arg); 
+		String html = StringEscapeUtils.escapeJavaScript(arg);
 		return call("html", html);
 	}
 
@@ -251,12 +259,8 @@ class JQueryImpl extends Expression implements JQuery {
 
 	@Override
 	public String toJavaScript() {
-		return selector.concat(expression);
-	}
-
-	@Override
-	public String toString() {
-		return toJavaScript();
+		// return selector.concat(expression);
+		return selector.concat(super.toJavaScript());
 	}
 
 	@Override

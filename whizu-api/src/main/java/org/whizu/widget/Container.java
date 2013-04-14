@@ -51,7 +51,7 @@ public class Container extends Widget implements Composite {
 
 	@Override
 	public Markup compile() {
-		return Html.div(this).add(componentList);
+		return Html.div(this).css(style).add(componentList);
 	}
 	
 	/*

@@ -21,25 +21,65 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.widget;
 
-import org.whizu.dom.Identity;
-import org.whizu.js.Expression;
-import org.whizu.js.Script;
+import org.whizu.jquery.EventHandler;
+import org.whizu.jquery.Input;
+import org.whizu.jquery.Session;
 
-public interface Request {
+/**
+ * @author Rudy D'hauwe
+ */
+public class TestSession implements Session {
 
-	public abstract Session getSession();
-
-	public abstract JQuery select(Identity... objs);
-
-	public abstract JQuery select(String selector);
-
-	public abstract Script compile(Function function);
+	private int componentCount = 0;
 	
-	public abstract Expression addExpression(String js);
-	
-	public String define(Function f);
-	
-	public String evaluate(Function f);
+	@Override
+	public void addClickListener(EventHandler listener) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void addInput(Input input) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public Object getAttribute(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EventHandler getEventHandler(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Input getInput(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getSessionCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void handleEvent(String id) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public String next() {
+		return "c" + componentCount++;
+	}
+
+	@Override
+	public void setAttribute(String name, Object value) {
+		// TODO Auto-generated method stub
+	}
 }
