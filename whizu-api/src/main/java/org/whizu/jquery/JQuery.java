@@ -3,12 +3,12 @@
  * Licensed under the EUPL V.1.1
  *   
  * This Software is provided to You under the terms of the European 
- * Union Public License (the “EUPL”) version 1.1 as published by the 
+ * Union Public License (the "EUPL") version 1.1 as published by the 
  * European Union. Any use of this Software, other than as authorized 
  * under this License is strictly prohibited (to the extent such use 
  * is covered by a right of the copyright holder of this Software).
  *
- * This Software is provided under the License on an “AS IS” basis and 
+ * This Software is provided under the License on an "AS IS" basis and 
  * without warranties of any kind concerning the Software, including 
  * without limitation merchantability, fitness for a particular purpose, 
  * absence of defects or errors, accuracy, and non-infringement of 
@@ -54,7 +54,7 @@ public interface JQuery {
 	/**
 	 * Insert content, specified by the parameter, after each element in the set of
 	 * matched elements. The .after() and .insertAfter() methods perform the same
-	 * task. The major difference is in the syntax—specifically, in the placement
+	 * task. The major difference is in the syntax-specifically, in the placement
 	 * of the content and target. With .after(), the selector expression preceding
 	 * the method is the container after which the content is inserted. With
 	 * .insertAfter(), on the other hand, the content precedes the method, either

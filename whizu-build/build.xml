@@ -9,6 +9,7 @@
 	<property name="src-server" location="../whizu-server/src/main/java" />
 	<property name="build" location="build" />
 	<property name="dist" location="dist" />
+	<property name="docs" location="${dist}/docs" />
 	<property name="package" location="package" />
 
 	<target name="init">
@@ -36,7 +37,7 @@
 		</copy>
 	</target>
 
-	<target name="dist" depends="compile" description="generate the distribution">
+	<target name="dist" depends="compile, javadoc" description="generate the distribution">
 		<!-- Create the distribution directory -->
 		<mkdir dir="${dist}/lib" />
 
@@ -73,7 +74,7 @@
 		</tar>
 	</target>
 
-	<target name="publish" depends="package" description="publish the package to the website">
+	<target name="publish" depends="clean, package" description="publish the package to the website">
 		<copy todir="../../whizu.github.com/download">
 			<fileset dir="${package}">
 				<include name="whizu-snapshot.zip" />
@@ -86,5 +87,19 @@
 		<!-- Delete the ${build} and ${dist} directory trees -->
 		<delete dir="${build}" />
 		<delete dir="${dist}" />
+		<delete dir="${package}" />
+	</target>
+
+	<target name="javadoc" depends="compile" description="generate the javadoc ">
+		<!-- Create the javadoc directory -->
+		<mkdir dir="${docs}/api" />
+
+		<javadoc packagenames="org.whizu.*" sourcepath="${src}:${src-server}" defaultexcludes="yes" destdir="${docs}/api" author="true" version="true" use="true" windowtitle="Whizu API">
+			<doctitle><![CDATA[<h1>Whizu</h1>]]></doctitle>
+			<bottom><![CDATA[<i>Copyright &#169; 2013 Rudy D'hauwe @ Whizu. All Rights Reserved.</i>]]></bottom>
+			<tag name="todo" scope="all" description="To do:" />
+			<link href="http://download.oracle.com/javase/7/docs/api/" />
+			<link href="http://developer.java.sun.com/developer/products/xml/docs/api/" />
+		</javadoc>
 	</target>
 </project>
