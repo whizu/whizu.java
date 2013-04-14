@@ -5,9 +5,11 @@
     </description>
 	<!-- set global properties for this build -->
 	<property name="src" location="../whizu-api/src/main/java" />
+	<property name="resources" location="../whizu-api/src/main/resources" />
 	<property name="src-server" location="../whizu-server/src/main/java" />
 	<property name="build" location="build" />
 	<property name="dist" location="dist" />
+	<property name="package" location="package" />
 
 	<target name="init">
 		<!-- Create the time stamp -->
@@ -29,6 +31,9 @@
 				</fileset>
 			</classpath>
 		</javac>
+		<copy todir="${build}">
+			<fileset dir="${resources}" />
+		</copy>
 	</target>
 
 	<target name="dist" depends="compile" description="generate the distribution">
@@ -36,7 +41,34 @@
 		<mkdir dir="${dist}/lib" />
 
 		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-		<jar jarfile="${dist}/lib/whizu-${DSTAMP}.jar" basedir="${build}" />
+		<jar jarfile="${dist}/whizu.jar" basedir="${build}" />
+
+		<copy todir="${dist}/lib">
+			<fileset dir="../whizu-api/lib">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="../whizu-server/lib">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+
+		<copy todir="${dist}">
+			<fileset dir="../whizu-api">
+				<include name="LICENSE.pdf" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="package" depends="dist" description="package the distribution">
+		<!-- Create the packaging directory -->
+		<mkdir dir="${package}" />
+
+		<!-- Put everything in ${dist} into the whizu-snapshot.zip file -->
+		<zip destfile="${package}/whizu-snapshot.zip" basedir="${dist}" />
+
+		<tar destfile="${package}/whizu-snapshot.tar.gz" compression="gzip">
+			<zipfileset src="${package}/whizu-snapshot.zip" />
+		</tar>
 	</target>
 
 	<target name="clean" description="clean up">
