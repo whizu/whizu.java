@@ -74,11 +74,11 @@ public class ContainerTest extends AbstractTest {
 		Container part = new Container();
 		parent.add(part);
 		assertEquals(false, part.isRendered());
-		part.css("myClass"); //is currently completely ignored
-		//Current implementation asserts the following:
+		part.css("myClass"); //is now no longer completely ignored
+		//Previous implementation asserts the following:
 		//assertEquals(true, part.isRendered());
 		//assertEquals("$(\"#c0\").append(\"<div id='c1'></div>\");", request.finish());
-		//Should be:
+		//This now gives:
 		assertEquals(false, part.isRendered());
 		assertEquals("$(\"#c0\").append(\"<div id='c1' class='myClass '></div>\");", request.finish());
 	}
