@@ -43,12 +43,6 @@ public class Collapsible extends Container {
 	}
 
 	@Override
-	public Collapsible css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
-
-	@Override
 	public Markup compile() {
 		return Html.div(this).attr("data-role", "collapsible").add(Html.h3(title)).add(componentList);
 	}

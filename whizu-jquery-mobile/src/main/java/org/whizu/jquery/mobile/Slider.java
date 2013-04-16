@@ -75,12 +75,6 @@ public class Slider extends Widget {
 		return field.after(label);
 	}
 
-	@Override
-	public Slider css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
-
 	public String getMax() {
 		return max;
 	}

@@ -23,7 +23,12 @@
  *******************************************************************************/
 package org.whizu.widget;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.whizu.dom.Component;
+import org.whizu.dom.Decorator;
+import org.whizu.dom.Element;
 import org.whizu.dom.Identity;
 import org.whizu.dom.Markup;
 import org.whizu.jquery.Function;
@@ -36,7 +41,7 @@ import org.whizu.js.Script;
 /**
  * @author Rudy D'hauwe
  */
-public abstract class Widget implements Component {
+public abstract class Widget implements Component, Decorator {
 
 	private enum State {
 		NEW, RENDERED
@@ -46,8 +51,11 @@ public abstract class Widget implements Component {
 
 	private State state = State.NEW;
 
+	@Deprecated
 	protected String style = null;
 
+	private List<String> cssList = new ArrayList<String>();
+	
 	protected String width = null;
 
 	protected Widget() {
@@ -56,7 +64,8 @@ public abstract class Widget implements Component {
 
 	@Override
 	public Component css(String clazz) {
-		setStyleName(clazz);
+		//setStyleName(clazz);
+		cssList.add(clazz);
 		return this;
 	}
 
@@ -120,10 +129,6 @@ public abstract class Widget implements Component {
 		}
 	}
 
-	public void setStyleName(String style) {
-		this.style = style;
-	}
-
 	@Override
 	public void width(String width) {
 		this.width = width;
@@ -131,5 +136,16 @@ public abstract class Widget implements Component {
 
 	public Script compile(Function function) {
 		return getRequest().compile(function);
+	}
+
+	@Override
+	public void decorate(Element element) {
+		element.css(cssList).width(width);
+	}
+
+	@Override
+	@Deprecated
+	public final void decorate(String name, Element element) {
+		decorate(element);
 	}
 }

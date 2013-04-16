@@ -50,10 +50,4 @@ class BarChartImpl extends Widget implements BarChart {
 								+ "','#666666']) }");
 		return Html.div(id());
 	}
-
-	@Override
-	public BarChartImpl css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
 }

@@ -35,7 +35,7 @@ class FormImpl extends Container implements Form {
 	@Override
 	public Markup compile() {
 		//isRendered = true;
-		Markup result = Html.form(id()).css(style).attr("action", "").add(componentList);
+		Markup result = Html.form(id()).decorate(this).attr("action", "").add(componentList);
 		String fct= "'submit', function(e) { e.stopPropagation(); e.preventDefault(); $(this).children().last().trigger('click'); }";
 		jQuery(this).callunquoted("bind", fct);
 		return result;

@@ -30,5 +30,6 @@ public interface Decorator {
 
 	public void decorate(Element element);
 
+	@Deprecated //?
 	public void decorate(String name, Element element);
 }

@@ -88,10 +88,4 @@ public class Grid extends Widget {
 		Element grid = Html.div(this).css(type.value);
 		return grid;
 	}
-
-	@Override
-	public Grid css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
 }

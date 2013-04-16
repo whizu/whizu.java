@@ -62,10 +62,4 @@ class TextAreaImpl extends Widget implements TextArea, Input {
 	public void parseString(String value) {
 		this.text = value;
 	}
-
-	@Override
-	public TextArea css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
 }

@@ -41,12 +41,6 @@ public class Popup extends Container {
 	}
 
 	@Override
-	public Popup css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
-
-	@Override
 	public Markup compile() {
 		// @formatter:off
 		Element popup = Html.div(this)

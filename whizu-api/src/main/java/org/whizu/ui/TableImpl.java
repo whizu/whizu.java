@@ -126,15 +126,4 @@ class TableImpl extends Widget implements Table {
 				     	}));
 		// @formatter:on
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.whizu.ui.Component#css(java.lang.String)
-	 */
-	@Override
-	public Table css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
 }

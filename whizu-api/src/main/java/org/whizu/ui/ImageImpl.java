@@ -107,10 +107,4 @@ class ImageImpl extends Widget implements Image {
 		droplistenerId = impl.getId();
 		getSession().addClickListener(impl);
 	}
-	
-	@Override
-	public Image css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
 }

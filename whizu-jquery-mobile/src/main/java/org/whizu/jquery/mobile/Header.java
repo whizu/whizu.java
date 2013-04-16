@@ -43,10 +43,4 @@ public class Header extends Widget {
 		jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
 		return Html.div(this).attr("data-role", "header").add(title);
 	}
-
-	@Override
-	public Header css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
 }

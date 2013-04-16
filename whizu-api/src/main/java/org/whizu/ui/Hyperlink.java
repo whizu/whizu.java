@@ -48,10 +48,4 @@ class Hyperlink extends Widget {
 		this.listener = new ClickListenerImpl(listener);
 		getSession().addClickListener(this.listener);
 	}
-
-	@Override
-	public Hyperlink css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
 }

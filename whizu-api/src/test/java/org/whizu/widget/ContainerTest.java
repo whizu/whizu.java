@@ -26,32 +26,13 @@ package org.whizu.widget;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 
 /**
  * @author Rudy D'hauwe
  */
 public class ContainerTest extends AbstractTest {
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		System.out.println("setting up");
-		final TestRequest theRequest = new TestRequest();
-		
-		RequestContext.init(new RequestContext() {
-			
-			@Override
-			protected Request getRequestImpl() {
-				return theRequest;
-			}
-		});
-	}
 
 	/**
 	 * Test method for {@link org.whizu.widget.Container#add(org.whizu.dom.Component)}.

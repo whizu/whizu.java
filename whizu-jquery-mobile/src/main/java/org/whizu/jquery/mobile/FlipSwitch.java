@@ -38,12 +38,6 @@ public class FlipSwitch extends Widget {
 	private Theme track;
 	
 	private Mini mini;
-	
-	@Override
-	public FlipSwitch css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
 
 	@Override
 	public Markup compile() {

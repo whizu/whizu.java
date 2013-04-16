@@ -32,12 +32,6 @@ import org.whizu.widget.Widget;
 public class Dialog extends Widget {
 
 	@Override
-	public Dialog css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
-
-	@Override
 	public Markup compile() {
 		throw new UnsupportedOperationException();
 	}

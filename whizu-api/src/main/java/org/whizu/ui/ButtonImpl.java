@@ -96,10 +96,4 @@ class ButtonImpl extends Widget implements Button {
 			}
 		}
 	}
-
-	@Override
-	public Button css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
 }

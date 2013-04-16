@@ -302,6 +302,24 @@ public class NodeTest extends AbstractTest {
 		node.css("class2");
 		equals("<div class='class1 class2 '></div>", node);
 	}
+	
+	/**
+	 * Test method for {@link org.whizu.dom.Node#css(java.util.List)}.
+	 */
+	@Test
+	public void testCssList() {
+		Node node = new Node("div");
+		List<String> cssList = new ArrayList<String>();
+		cssList.add("class1");
+		node.css(cssList);
+		equals("<div class='class1 '></div>", node);
+		node = new Node("div");
+		cssList = new ArrayList<String>();
+		cssList.add("class1");
+		cssList.add("class2");
+		node.css(cssList);
+		equals("<div class='class1 class2 '></div>", node);
+	}
 
 	/**
 	 * Test method for

@@ -52,10 +52,4 @@ public class Accordion extends Widget {
 	public Markup compile() {
 		return Html.div(this).attr("data-role", "collapsible-set").decorate(theme);
 	}
-
-	@Override
-	public Accordion css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
 }

@@ -31,12 +31,6 @@ import org.whizu.widget.Widget;
 public class Textarea extends Widget {
 	
 	@Override
-	public Textarea css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
-
-	@Override
 	public Markup compile() {
 		Element field = Html.textarea(this).attr("name", "label");
 		Element label = Html.tag("label").attr("for", field.id()).add("label");

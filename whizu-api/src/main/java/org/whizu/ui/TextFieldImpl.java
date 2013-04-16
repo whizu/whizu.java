@@ -84,10 +84,4 @@ class TextFieldImpl extends Widget implements TextField, Input {
 			this.value.setValue(value);
 		}
 	}
-
-	@Override
-	public TextField css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
 }

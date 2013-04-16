@@ -21,28 +21,18 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.widget;
 
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
-import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Footer extends Widget {
-
-	private String title;
-	
-	private Theme theme = Theme.E;
-
-	public Footer(String title) {
-		this.title = title;
-	}
+public class TestWidget extends Widget {
 
 	@Override
 	public Markup compile() {
-		jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
-		return Html.div(this).attr("data-role", "footer").decorate(theme).add(title);
+		return Html.div(this).decorate(this);
 	}
 }

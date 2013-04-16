@@ -124,7 +124,7 @@ class LabelImpl extends Widget implements Label {
 		}
 
 		// isRendered = true;
-		return Html.div(this).css(style).add(text);
+		return Html.div(this).decorate(this).add(text);
 	}
 
 	@Override
@@ -154,7 +154,6 @@ class LabelImpl extends Widget implements Label {
 
 	@Override
 	public Label css(String clazz) {
-		setStyleName(clazz);
-		return this;
+		return (Label) super.css(clazz);
 	}
 }

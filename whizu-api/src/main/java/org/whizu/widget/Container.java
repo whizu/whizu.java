@@ -51,21 +51,7 @@ public class Container extends Widget implements Composite {
 
 	@Override
 	public Markup compile() {
-		return Html.div(this).css(style).add(componentList);
-	}
-	
-	/*
-	protected final void add(Content field) {
-		if (this.isRendered()) {
-			jQuery(this).append(field);
-		}
-	}
-	*/
-
-	@Override
-	public Container css(String clazz) {
-		setStyleName(clazz);
-		return this;
+		return Html.div(this).decorate(this).add(componentList);
 	}
 
 	@Override

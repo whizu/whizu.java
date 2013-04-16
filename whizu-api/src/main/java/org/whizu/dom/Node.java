@@ -162,6 +162,7 @@ public class Node implements Element {
 
 	@Override
 	@SuppressWarnings("unchecked")
+	@Deprecated
 	public <T extends Element> T decorate(String name, Decorator decorator) {
 		if (decorator != null) {
 			decorator.decorate(name, this);
@@ -269,5 +270,11 @@ public class Node implements Element {
 	public Element wrap(String name) {
 		Node n = new Node(name);
 		return n.add(this);
+	}
+
+	@Override
+	public Element css(List<String> cssList) {
+		this.cssList.addAll(cssList);
+		return this;
 	}
 }

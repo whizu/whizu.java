@@ -25,8 +25,11 @@ package org.whizu.widget;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.whizu.dom.Content;
 import org.whizu.dom.Identity;
+import org.whizu.jquery.Request;
+import org.whizu.jquery.RequestContext;
 
 /**
  * @author Rudy D'hauwe
@@ -44,5 +47,21 @@ public abstract class AbstractTest {
 
 	protected final void equals(String markup, Content content) {
 		assertEquals(markup, content.render());
+	}
+	
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+		final TestRequest theRequest = new TestRequest();
+		
+		RequestContext.init(new RequestContext() {
+			
+			@Override
+			protected Request getRequestImpl() {
+				return theRequest;
+			}
+		});
 	}
 }

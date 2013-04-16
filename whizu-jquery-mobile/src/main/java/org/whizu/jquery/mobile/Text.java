@@ -34,12 +34,6 @@ import org.whizu.widget.Widget;
 public class Text extends Widget {
 
 	@Override
-	public Text css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
-
-	@Override
 	public Markup compile() {
 		Element input = Html.input(this).attr("type", "text").attr("name", "label").attr("value", "");
 		Element label = Html.tag("label").attr("for", input.id()).add("label");
