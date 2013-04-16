@@ -6,5 +6,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-server"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-jquery-mobile"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-jquery-ui"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/whizu-sencha"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
