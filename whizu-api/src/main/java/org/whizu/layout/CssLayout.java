@@ -26,5 +26,5 @@ package org.whizu.layout;
 /**
  * @author Rudy D'hauwe
  */
-public class CssLayout extends AbstractLayout implements Layout {
+public class CssLayout extends LayoutImpl implements Layout {
 }

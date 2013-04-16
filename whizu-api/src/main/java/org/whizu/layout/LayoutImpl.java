@@ -33,24 +33,15 @@ import org.whizu.widget.Container;
 /**
  * @author Rudy D'hauwe
  */
-class AbstractLayout extends Container implements Layout {
+class LayoutImpl extends Container implements Layout {
 
 	protected Markup create(String css, final String itemClass) {
-		//return Html.div(this).decorate(this).add(new Foreach<Component>(componentList) {
-		return Html.div(this).css(style).css(css).width(width).add(new Foreach<Component>(componentList) {
+		return Html.div(this).decorate(this).css(css).add(new Foreach<Component>(componentList) {
 
 			@Override
 			public Content compile(Component item) {
-				item.css(itemClass); // to be tested
-				return item;
-				// return item.render();
-				// return item.render().css(itemClass); //this works
+				return item.css(itemClass);
 			}
 		});
-	}
-
-	@Override
-	public Markup compile() {
-		return Html.div(this).css(style).width(width).add(componentList);
 	}
 }

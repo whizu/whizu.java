@@ -28,7 +28,7 @@ import org.whizu.dom.Markup;
 /**
  * @author Rudy D'hauwe
  */
-public class VerticalLayout extends AbstractLayout {
+public class VerticalLayout extends LayoutImpl {
 
 	@Override
 	public Markup compile() {

@@ -23,15 +23,27 @@
  *******************************************************************************/
 package org.whizu.layout;
 
-import org.whizu.dom.Markup;
+import org.junit.Test;
+import org.whizu.widget.AbstractTest;
+import org.whizu.widget.Container;
 
 /**
  * @author Rudy D'hauwe
  */
-public class HorizontalLayout extends LayoutImpl {
+public class HorizontalLayoutTest extends AbstractTest {
 
-	@Override
-	public Markup compile() {
-		return super.create("horizontal-layout", "horizontal-layout-element");
+	/**
+	 * Test method for {@link org.whizu.layout.HorizontalLayout#compile()}.
+	 */
+	@Test
+	public void testCompile() {
+		Layout parent = new HorizontalLayout();
+		Container child1 = new Container();
+		parent.add(child1);
+		child1.css("myClass");
+		Container child2 = new Container();
+		parent.add(child2);
+		String expected = "<div id='c0' class='horizontal-layout '><div id='c1' class='myClass horizontal-layout-element '></div><div id='c2' class='horizontal-layout-element '></div></div>";
+		equals(expected, parent);
 	}
 }
