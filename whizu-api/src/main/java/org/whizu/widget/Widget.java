@@ -65,6 +65,11 @@ public abstract class Widget implements Component, Decorator {
 	@Override
 	public Component css(String clazz) {
 		cssList.add(clazz);
+		
+		if (this.isRendered()) {
+			jQuery(this).addClass(clazz);
+		}
+		
 		return this;
 	}
 

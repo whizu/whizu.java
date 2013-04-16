@@ -36,6 +36,8 @@ import org.whizu.jquery.RequestContext;
  */
 public abstract class AbstractTest {
 
+	protected TestRequest theRequest;
+
 	protected Identity createIdentity(final String id) {
 		return new Identity() {
 
@@ -54,7 +56,7 @@ public abstract class AbstractTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		final TestRequest theRequest = new TestRequest();
+		this.theRequest = new TestRequest();
 		
 		RequestContext.init(new RequestContext() {
 			

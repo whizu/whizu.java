@@ -64,6 +64,11 @@ public class ContainerTest extends AbstractTest {
 		part.css("myClass");
 		assertEquals(false, part.isRendered());
 		assertEquals("$(\"#c0\").append(\"<div id='c1' class='myClass '></div>\");", request.finish());
+		assertEquals(true, parent.isRendered());
+		Container child2 = new Container();
+		parent.add(child2);
+		assertEquals(2, parent.componentList.size());
+		assertEquals("$(\"#c0\").append(\"<div id='c2'></div>\");", theRequest.finish());
 	}
 
 	/**
@@ -77,7 +82,11 @@ public class ContainerTest extends AbstractTest {
 		container = new Container();
 		container.css("myClass");
 		container.css("myOtherClass");
+		assertEquals(false, container.isRendered());
 		equals("<div id='c1' class='myClass myOtherClass '></div>", container);
+		assertEquals(true, container.isRendered());
+		container.css("nextClass");
+		assertEquals("$(\"#c1\").addClass(\"nextClass\");", theRequest.finish());
 	}
 
 	/**
@@ -95,9 +104,13 @@ public class ContainerTest extends AbstractTest {
 		assertEquals(2, container.componentList.size());
 		container.empty();
 		assertEquals(0, container.componentList.size());
+		assertEquals(false, container.isRendered());
+		assertEquals("", theRequest.finish());
 		equals("<div id='c0'></div>", container);
+		assertEquals(true, container.isRendered());
 		container.empty();
 		assertEquals(0, container.componentList.size());
+		assertEquals("$(\"#c0\").empty();", theRequest.finish());
 	}
 
 	/**
@@ -113,7 +126,14 @@ public class ContainerTest extends AbstractTest {
 		Container child2 = new Container();
 		container.prepend(child2);
 		assertEquals(2, container.componentList.size());
+		assertEquals(false, container.isRendered());
+		assertEquals("", theRequest.finish());
 		equals("<div id='c0'><div id='c2'></div><div id='c1'></div></div>", container);
+		assertEquals(true, container.isRendered());
+		Container child3 = new Container();
+		container.prepend(child3);
+		assertEquals(3, container.componentList.size());
+		assertEquals("$(\"#c0\").prepend(\"<div id='c3'></div>\");", theRequest.finish());
 	}
 
 	/**
@@ -132,5 +152,9 @@ public class ContainerTest extends AbstractTest {
 		container.remove(child1);
 		assertEquals(1, container.componentList.size());
 		equals("<div id='c0'><div id='c2'></div></div>", container);
+		assertEquals(true, container.isRendered());
+		container.remove(child2);
+		assertEquals(0, container.componentList.size());
+		assertEquals("$(\"#c2\").remove();", theRequest.finish());
 	}
 }
