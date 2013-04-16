@@ -24,7 +24,6 @@
 package org.whizu.widget;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import org.junit.Test;
 import org.whizu.jquery.RequestContext;
@@ -39,7 +38,15 @@ public class ContainerTest extends AbstractTest {
 	 */
 	@Test
 	public void testAdd() {
-		fail("Not yet implemented");
+		Container container = new Container();
+		assertEquals(0, container.componentList.size());
+		Container child1 = new Container();
+		container.add(child1);
+		assertEquals(1, container.componentList.size());
+		Container child2 = new Container();
+		container.add(child2);
+		assertEquals(2, container.componentList.size());
+		equals("<div id='c0'><div id='c1'></div><div id='c2'></div></div>", container);
 	}
 
 	/**
@@ -51,15 +58,10 @@ public class ContainerTest extends AbstractTest {
 		Container parent = new Container();
 		assertEquals("<div id='c0'></div>", parent.render());
 		assertEquals(true, parent.isRendered());
-		
 		Container part = new Container();
 		parent.add(part);
 		assertEquals(false, part.isRendered());
-		part.css("myClass"); //is now no longer completely ignored
-		//Previous implementation asserts the following:
-		//assertEquals(true, part.isRendered());
-		//assertEquals("$(\"#c0\").append(\"<div id='c1'></div>\");", request.finish());
-		//This now gives:
+		part.css("myClass");
 		assertEquals(false, part.isRendered());
 		assertEquals("$(\"#c0\").append(\"<div id='c1' class='myClass '></div>\");", request.finish());
 	}
@@ -69,7 +71,13 @@ public class ContainerTest extends AbstractTest {
 	 */
 	@Test
 	public void testCssString() {
-		fail("Not yet implemented");
+		Container container = new Container();
+		container.css("myClass");
+		equals("<div id='c0' class='myClass '></div>", container);
+		container = new Container();
+		container.css("myClass");
+		container.css("myOtherClass");
+		equals("<div id='c1' class='myClass myOtherClass '></div>", container);
 	}
 
 	/**
@@ -77,7 +85,19 @@ public class ContainerTest extends AbstractTest {
 	 */
 	@Test
 	public void testEmpty() {
-		fail("Not yet implemented");
+		Container container = new Container();
+		assertEquals(0, container.componentList.size());
+		Container child1 = new Container();
+		container.add(child1);
+		assertEquals(1, container.componentList.size());
+		Container child2 = new Container();
+		container.add(child2);
+		assertEquals(2, container.componentList.size());
+		container.empty();
+		assertEquals(0, container.componentList.size());
+		equals("<div id='c0'></div>", container);
+		container.empty();
+		assertEquals(0, container.componentList.size());
 	}
 
 	/**
@@ -85,7 +105,15 @@ public class ContainerTest extends AbstractTest {
 	 */
 	@Test
 	public void testPrepend() {
-		fail("Not yet implemented");
+		Container container = new Container();
+		assertEquals(0, container.componentList.size());
+		Container child1 = new Container();
+		container.prepend(child1);
+		assertEquals(1, container.componentList.size());
+		Container child2 = new Container();
+		container.prepend(child2);
+		assertEquals(2, container.componentList.size());
+		equals("<div id='c0'><div id='c2'></div><div id='c1'></div></div>", container);
 	}
 
 	/**
@@ -93,6 +121,16 @@ public class ContainerTest extends AbstractTest {
 	 */
 	@Test
 	public void testRemove() {
-		fail("Not yet implemented");
+		Container container = new Container();
+		assertEquals(0, container.componentList.size());
+		Container child1 = new Container();
+		container.add(child1);
+		assertEquals(1, container.componentList.size());
+		Container child2 = new Container();
+		container.add(child2);
+		assertEquals(2, container.componentList.size());
+		container.remove(child1);
+		assertEquals(1, container.componentList.size());
+		equals("<div id='c0'><div id='c2'></div></div>", container);
 	}
 }

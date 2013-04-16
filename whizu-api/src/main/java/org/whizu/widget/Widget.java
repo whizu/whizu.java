@@ -64,7 +64,6 @@ public abstract class Widget implements Component, Decorator {
 
 	@Override
 	public Component css(String clazz) {
-		//setStyleName(clazz);
 		cssList.add(clazz);
 		return this;
 	}

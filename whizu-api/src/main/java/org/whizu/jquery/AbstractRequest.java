@@ -63,7 +63,6 @@ public abstract class AbstractRequest implements Request {
 	}
 
 	public String finish() {
-		System.out.println("SCRIPT STACK SIZE IS " + scriptStack.size());
 		try {
 			if (!scriptStack.isEmpty()) {
 				try {

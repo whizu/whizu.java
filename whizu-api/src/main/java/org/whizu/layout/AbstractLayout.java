@@ -36,6 +36,7 @@ import org.whizu.widget.Container;
 class AbstractLayout extends Container implements Layout {
 
 	protected Markup create(String css, final String itemClass) {
+		//return Html.div(this).decorate(this).add(new Foreach<Component>(componentList) {
 		return Html.div(this).css(style).css(css).width(width).add(new Foreach<Component>(componentList) {
 
 			@Override

@@ -45,7 +45,7 @@ public class Container extends Widget implements Composite {
 		if (this.isRendered()) {
 			jQuery(this).append(impl);
 		}
-		
+
 		return this;
 	}
 
@@ -56,12 +56,16 @@ public class Container extends Widget implements Composite {
 
 	@Override
 	public void empty() {
-		jQuery(this).empty();
+		this.componentList.clear();
+
+		if (this.isRendered()) {
+			jQuery(this).empty();
+		}
 	}
 
 	@Override
 	public void prepend(Component impl) {
-		this.componentList.add(impl);
+		this.componentList.add(0, impl);
 
 		if (isRendered()) {
 			jQuery(this).prepend(impl);
@@ -70,6 +74,10 @@ public class Container extends Widget implements Composite {
 
 	@Override
 	public void remove(Component element) {
-		jQuery(element).remove();
+		this.componentList.remove(element);
+		
+		if (this.isRendered()) {
+			jQuery(element).remove();
+		}
 	}
 }

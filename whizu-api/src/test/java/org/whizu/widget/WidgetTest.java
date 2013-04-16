@@ -58,7 +58,7 @@ public class WidgetTest extends AbstractTest {
 	 * Test method for {@link org.whizu.widget.Widget#css(java.lang.String)}.
 	 */
 	@Test
-	public void testCss() {
+	public void testCssString() {
 		Widget widget = new TestWidget();
 		widget.css("myClass");
 		equals("<div id='c0' class='myClass '></div>", widget);
@@ -173,8 +173,8 @@ public class WidgetTest extends AbstractTest {
 	@Test
 	public void testJQueryString() {
 		Widget widget = new TestWidget();
-		JQuery jQuery = widget.jQuery("$('#myID')");
-		assertEquals("$('#myID')", jQuery.toJavaScript());
+		JQuery jQuery = widget.jQuery("$(\"#myID\")");
+		assertEquals("$(\"#myID\")", jQuery.toJavaScript());
 	}
 
 	/**
