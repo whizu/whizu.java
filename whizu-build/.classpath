@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-api"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-server"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/whizu-jquery-mobile"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
