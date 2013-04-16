@@ -23,12 +23,10 @@
  *******************************************************************************/
 package org.whizu.html;
 
-import org.whizu.dom.Node;
-
 /**
  * @author Rudy D'hauwe
  */
-public class Tbody extends Node {
+public class Tbody extends Tag<Tbody> {
 
 	Tbody() {
 		super("tbody");

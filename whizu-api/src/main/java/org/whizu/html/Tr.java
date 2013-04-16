@@ -23,12 +23,10 @@
  *******************************************************************************/
 package org.whizu.html;
 
-import org.whizu.dom.Node;
-
 /**
  * @author Rudy D'hauwe
  */
-public class Tr extends Node {
+public class Tr extends Tag<Tr> {
 
 	Tr() {
 		super("tr");

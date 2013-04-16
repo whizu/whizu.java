@@ -50,7 +50,7 @@ class ButtonImpl extends Widget implements Button {
 
 	@Override
 	public Markup compile() {
-		Element markup = Html.div(id()).css(style).add(caption);
+		Element markup = Html.div(id()).decorate(this).add(caption);
 		JQuery jQuery = jQuery(this).button();
 
 		if (listener != null) {

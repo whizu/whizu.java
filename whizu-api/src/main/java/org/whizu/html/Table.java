@@ -26,9 +26,24 @@ package org.whizu.html;
 /**
  * @author Rudy D'hauwe
  */
-public class Td extends Tag<Td> {
+public class Table extends Tag<Table> {
 
-	Td() {
-		super("td");
+	private Tbody tbody;
+	
+	Table() {
+		super("table");
+	}
+	
+	public Table(String id) {
+		this();
+		this.id(id);
+	}
+
+	public Tbody tbody() {
+		if (tbody == null) {
+			tbody = new Tbody();
+			add(tbody);
+		}
+		return tbody;
 	}
 }

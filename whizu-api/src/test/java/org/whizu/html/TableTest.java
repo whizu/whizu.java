@@ -23,12 +23,44 @@
  *******************************************************************************/
 package org.whizu.html;
 
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 /**
  * @author Rudy D'hauwe
  */
-public class Td extends Tag<Td> {
+public class TableTest extends AbstractTest {
 
-	Td() {
-		super("td");
+	/**
+	 * Test method for {@link org.whizu.html.Table#Table()}.
+	 */
+	@Test
+	public void testTable() {
+		Table table = new Table();
+		equals("<table></table>", table);
+	}
+	
+	/**
+	 * Test method for {@link org.whizu.html.Table#Table(java.lang.String)}.
+	 */
+	@Test
+	public void testTableString() {
+		Table table = new Table("myID");
+		equals("<table id='myID'></table>", table);
+	}
+
+	/**
+	 * Test method for {@link org.whizu.html.Table#tbody()}.
+	 */
+	@Test
+	public void testTbody() {
+		Table table = new Table();
+		Tbody tbody = table.width("100%").tbody();
+		equals("<tbody></tbody>", tbody);
+		equals("<table style='width:100%;'><tbody></tbody></table>", table);
+		Tbody tbody2 = table.tbody();
+		assertEquals(tbody, tbody2);
+		equals("<table style='width:100%;'><tbody></tbody></table>", table);
 	}
 }

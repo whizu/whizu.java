@@ -21,79 +21,45 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.layout;
+package org.whizu.html;
 
-import org.whizu.dom.Component;
+import org.whizu.dom.Content;
 import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
-import org.whizu.html.Html;
-import org.whizu.html.Table;
-import org.whizu.html.Tbody;
-import org.whizu.widget.Widget;
+import org.whizu.dom.Node;
 
 /**
+ * Base class for HTML tags with support for easy method chaining.
+ * 
  * @author Rudy D'hauwe
  */
-public class GridLayout extends Widget implements Layout {
+abstract class Tag<T extends Tag<T>> extends Node {
 
-	// private Log log = LogFactory.getLog(GridLayout.class);
-
-	private int numberOfColumns;
-
-	private int column = 0;
-
-	private Table grid;
-
-	private Tbody tbody;
-
-	private Element row;
-
-	public GridLayout() {
-		this(1);
-	}
-
-	public GridLayout(int numberOfColumns) {
-		this.numberOfColumns = numberOfColumns;
-		this.grid = Html.table(this).width("100%").attr("cellspacing", "0").attr("cellpadding", "0");
-		this.tbody = this.grid.tbody();
+	Tag(String name) {
+		super(name);
 	}
 
 	@Override
-	public Markup compile() {
-		return grid;
+	public T add(Content element) {
+		return getThis(super.add(element));
 	}
 
 	@Override
-	public GridLayout add(Component component) {
-		if (isRendered()) {
-			throw new UnsupportedOperationException();
-		} else {
-			if ((column == 0) || (column == numberOfColumns)) {
-				// row = Html.tr(); tbody.add(row);
-				row = tbody.tr();
-				column = 1;
-			} else {
-				column++;
-			}
-
-			row.add(Html.td().add(component));
-		}
-
-		return this;
+	public T add(Content... elements) {
+		return getThis(super.add(elements));
 	}
 
 	@Override
-	public void empty() {
-		throw new UnsupportedOperationException();
+	public T attr(String name, String value) {
+		return getThis(super.attr(name, value));
+	}
+
+	@SuppressWarnings("unchecked")
+	private T getThis(Element thiz) {
+		return (T) thiz;
 	}
 
 	@Override
-	public void prepend(Component component) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void remove(Component component) {
-		throw new UnsupportedOperationException();
+	public T width(String width) {
+		return getThis(super.width(width));
 	}
 }

@@ -92,7 +92,8 @@ public interface Element extends Markup, Identity {
 	/**
 	 * @return this
 	 */
-	public <T extends Element> T decorate(Decorator... decorators);
+	//public <T extends Element> T decorate(Decorator... decorators);
+	public Element decorate(Decorator... decorators);
 
 	/**
 	 * @return the id of this element

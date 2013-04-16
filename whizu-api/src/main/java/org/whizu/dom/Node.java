@@ -36,6 +36,7 @@ import java.util.Map;
  * 
  * @author Rudy D'hauwe
  */
+//public class Node<T extends Node<T>> implements Element {
 public class Node implements Element {
 
 	private Map<String, String> attrs = new HashMap<String, String>();
@@ -84,21 +85,21 @@ public class Node implements Element {
 	}
 
 	@Override
-	public <T> Element add(Foreach<T> factory) {
+	public <E> Element add(Foreach<E> factory) {
 		if(selfClosing) {
 			throw new IllegalStateException("A self-closing element must not add content");
 		}
 		
-		Iterator<T> it = factory.iterator();
+		Iterator<E> it = factory.iterator();
 		while (it.hasNext()) {
-			T item = it.next();
+			E item = it.next();
 			add(factory.compile(item));
 		}
 		return this;
 	}
 
 	@Override
-	public <T extends Content> Element add(List<T> content) {
+	public <E extends Content> Element add(List<E> content) {
 		if(selfClosing) {
 			throw new IllegalStateException("A self-closing element must not add content");
 		}
@@ -150,14 +151,14 @@ public class Node implements Element {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public <T extends Element> T decorate(Decorator... decorators) {
+	public final Element decorate(Decorator... decorators) {
 		for (Decorator d : decorators) {
 			if (d != null) {
 				d.decorate(this);
 			}
 		}
-		return (T) this;
+
+		return this;
 	}
 
 	private String getCss() {

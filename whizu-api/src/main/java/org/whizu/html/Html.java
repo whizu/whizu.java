@@ -150,12 +150,12 @@ public class Html {
 		return new Node(name, true);
 	}
 
-	public static Element table(Identity element) {
+	public static Table table(Identity element) {
 		return table(element.id());
 	}
 
-	public static Element table(String id) {
-		return tag("table").id(id);
+	public static Table table(String id) {
+		return new Table(id);
 	}
 
 	public static Element tag(String name) {
