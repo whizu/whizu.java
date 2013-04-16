@@ -55,7 +55,7 @@ public abstract class Widget implements Component, Decorator {
 	protected String style = null;
 
 	private List<String> cssList = new ArrayList<String>();
-	
+
 	protected String width = null;
 
 	protected Widget() {
@@ -65,11 +65,11 @@ public abstract class Widget implements Component, Decorator {
 	@Override
 	public Component css(String clazz) {
 		cssList.add(clazz);
-		
+
 		if (this.isRendered()) {
 			jQuery(this).addClass(clazz);
 		}
-		
+
 		return this;
 	}
 
@@ -135,15 +135,23 @@ public abstract class Widget implements Component, Decorator {
 
 	@Override
 	public void width(String width) {
-		this.width = width;
+		this.width = width; 
+		
+		if (this.isRendered()) {
+			jQuery(this).width(width);
+		}
 	}
 
-	public Script compile(Function function) {
+	public final Script compile(Function function) {
 		return getRequest().compile(function);
 	}
 
 	@Override
 	public void decorate(Element element) {
+		if (isRendered()) {
+			throw new IllegalStateException("This component is already rendered: " + this);
+		}
+
 		element.css(cssList).width(width);
 	}
 }

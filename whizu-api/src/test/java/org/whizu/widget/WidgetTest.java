@@ -65,7 +65,11 @@ public class WidgetTest extends AbstractTest {
 		widget = new TestWidget();
 		widget.css("myClass");
 		widget.css("myOtherClass");
+		assertEquals(false, widget.isRendered());
 		equals("<div id='c1' class='myClass myOtherClass '></div>", widget);
+		assertEquals(true, widget.isRendered());
+		widget.css("nextClass");
+		assertEquals("$(\"#c1\").addClass(\"nextClass\");", theRequest.finish());
 	}
 
 	/**
@@ -78,11 +82,23 @@ public class WidgetTest extends AbstractTest {
 		widget.width("120px");
 		Node node = new Node("myNode");
 		widget.decorate(node);
+		assertEquals(false, widget.isRendered());
 		equals("<myNode style='width:120px;' class='myClass '></myNode>", node);
 		widget.css("myOtherClass");
 		node = new Node("myNode");
 		widget.decorate(node);
+		assertEquals(false, widget.isRendered());
 		equals("<myNode style='width:120px;' class='myClass myOtherClass '></myNode>", node);
+		assertEquals(false, widget.isRendered());
+		equals("<div id='c0' style='width:120px;' class='myClass myOtherClass '></div>", widget);
+		assertEquals(true, widget.isRendered());
+		boolean thrown = false;
+		try {
+			widget.decorate(node);
+		} catch(IllegalStateException exc) {
+			thrown = true;
+		}
+		assertEquals(true, thrown);
 	}
 
 	/**
@@ -202,7 +218,11 @@ public class WidgetTest extends AbstractTest {
 		widget = new TestWidget();
 		widget.css("myClass");
 		widget.width("120px");
+		assertEquals(false, widget.isRendered());
 		equals("<div id='c1' style='width:120px;' class='myClass '></div>", widget);
+		assertEquals(true, widget.isRendered());
+		widget.width("150px");
+		assertEquals("$(\"#c1\").width(\"150px\");", theRequest.finish());
 	}
 
 	/**
