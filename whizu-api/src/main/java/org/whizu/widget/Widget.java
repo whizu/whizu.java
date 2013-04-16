@@ -142,10 +142,4 @@ public abstract class Widget implements Component, Decorator {
 	public void decorate(Element element) {
 		element.css(cssList).width(width);
 	}
-
-	@Override
-	@Deprecated
-	public final void decorate(String name, Element element) {
-		decorate(element);
-	}
 }

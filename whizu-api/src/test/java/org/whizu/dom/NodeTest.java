@@ -330,22 +330,12 @@ public class NodeTest extends AbstractTest {
 		Decorator decorator1 = new Decorator() {
 
 			@Override
-			public void decorate(String name, Element element) {
-				throw new UnsupportedOperationException();
-			}
-
-			@Override
 			public void decorate(Element element) {
 				element.attr("myAttribute", "myValue");
 			}
 		};
 
 		Decorator decorator2 = new Decorator() {
-
-			@Override
-			public void decorate(String name, Element element) {
-				throw new UnsupportedOperationException();
-			}
 
 			@Override
 			public void decorate(Element element) {
@@ -360,31 +350,6 @@ public class NodeTest extends AbstractTest {
 		node = new Node("div");
 		node.decorate(decorator1, decorator2);
 		equals("<div myAttribute2='myValue2' myAttribute='myValue'></div>", node);
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.whizu.dom.Node#decorate(java.lang.String, org.whizu.dom.Decorator)}
-	 * .
-	 */
-	@Test
-	public void testDecorateStringDecorator() {
-		Decorator decorator1 = new Decorator() {
-
-			@Override
-			public void decorate(String name, Element element) {
-				element.attr("myAttribute", "myValue");
-			}
-
-			@Override
-			public void decorate(Element element) {
-				element.attr("myDefaultAttribute", "myDefaultValue");
-			}
-		};
-
-		Node node = new Node("div");
-		node.decorate("myAttribute", decorator1);
-		equals("<div myAttribute='myValue'></div>", node);
 	}
 
 	/**

@@ -48,11 +48,10 @@ public enum Theme implements Decorator {
 	}
 
 	public void decorate(Element element) {
-		decorate(ATTRIBUTE_NAME, element);
+		element.attr(ATTRIBUTE_NAME, value);
 	}
-	
-	@Override
-	public void decorate(String name, Element element) {
-		element.attr(name, value);
+
+	public String value() {
+		return value;
 	}
 }

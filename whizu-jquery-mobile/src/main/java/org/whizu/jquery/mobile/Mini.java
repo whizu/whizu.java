@@ -46,11 +46,6 @@ public enum Mini implements Decorator {
 	}
 
 	public void decorate(Element element) {
-		decorate(ATTRIBUTE_NAME, element);
-	}
-	
-	@Override
-	public void decorate(String name, Element element) {
-		element.attr(name, value);
+		element.attr(ATTRIBUTE_NAME, value);
 	}
 }

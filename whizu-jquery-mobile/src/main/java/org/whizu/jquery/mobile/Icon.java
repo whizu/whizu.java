@@ -62,12 +62,8 @@ public enum Icon implements Decorator {
 		this.value = value;
 	}
 
-	public void decorate(Element element) {
-		decorate(ATTRIBUTE_NAME, element);
-	}
-
 	@Override
-	public void decorate(String name, Element element) {
-		element.attr(name, value);
+	public void decorate(Element element) {
+		element.attr(ATTRIBUTE_NAME, value);
 	}
 }

@@ -160,16 +160,6 @@ public class Node implements Element {
 		return (T) this;
 	}
 
-	@Override
-	@SuppressWarnings("unchecked")
-	@Deprecated
-	public <T extends Element> T decorate(String name, Decorator decorator) {
-		if (decorator != null) {
-			decorator.decorate(name, this);
-		}
-		return (T) this;
-	}
-
 	private String getCss() {
 		String style = "";
 		for (String key : cssList) {
