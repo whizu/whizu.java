@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="lib/servlet-api-3.0.jar"/>
 	<classpathentry kind="lib" path="lib/jetty-all-8.1.10.v20130312.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-jquery-mobile"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/whizu-jquery-ui"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
