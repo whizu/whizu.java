@@ -26,7 +26,7 @@ package org.whizu.html;
 /**
  * @author Rudy D'hauwe
  */
-public class Table extends Tag<Table> {
+public class Table extends NodeBuilder<Table> {
 
 	private Tbody tbody;
 	

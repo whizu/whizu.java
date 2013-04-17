@@ -32,9 +32,9 @@ import org.whizu.dom.Node;
  * 
  * @author Rudy D'hauwe
  */
-abstract class Tag<T extends Tag<T>> extends Node {
+abstract class NodeBuilder<T extends NodeBuilder<T>> extends Node {
 
-	Tag(String name) {
+	NodeBuilder(String name) {
 		super(name);
 	}
 

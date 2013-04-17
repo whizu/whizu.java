@@ -26,7 +26,7 @@ package org.whizu.html;
 /**
  * @author Rudy D'hauwe
  */
-public class Tbody extends Tag<Tbody> {
+public class Tbody extends NodeBuilder<Tbody> {
 
 	Tbody() {
 		super("tbody");

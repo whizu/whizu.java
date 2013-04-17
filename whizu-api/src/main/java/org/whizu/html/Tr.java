@@ -26,7 +26,7 @@ package org.whizu.html;
 /**
  * @author Rudy D'hauwe
  */
-public class Tr extends Tag<Tr> {
+public class Tr extends NodeBuilder<Tr> {
 
 	Tr() {
 		super("tr");
