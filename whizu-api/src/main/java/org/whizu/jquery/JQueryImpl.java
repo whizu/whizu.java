@@ -300,7 +300,8 @@ class JQueryImpl extends Expression implements JQuery {
 
 	@Override
 	public JQuery firstOfType(String element) {
-		return call("filter", element + ":first-of-type");
+		//return call("filter", element + ":first-of-type");
+		return call("filter", element);
 	}
 
 	@Override

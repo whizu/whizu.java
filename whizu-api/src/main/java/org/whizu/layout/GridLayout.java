@@ -29,6 +29,7 @@ import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.html.Table;
 import org.whizu.html.Tbody;
+import org.whizu.html.Td;
 import org.whizu.widget.Widget;
 
 /**
@@ -76,13 +77,17 @@ public class GridLayout extends Widget implements Layout {
 			if ((column == 0) || (column == numberOfColumns)) {
 				// row = Html.tr(); tbody.add(row);
 				row = tbody.tr();
-				jQuery(this).firstOfType("tbody").append(row);
+				row.add(Html.td().add(component));
+				jQuery("$(\"table > tbody\")").append(row);
 				column = 1;
 			} else {
+				Td td = Html.td().add(component);
+				row.add(td);
+				jQuery("$(\"table > tbody tr:last-child\")").append(td);
 				column++;
 			}
 
-			row.add(Html.td().add(component));
+			//row.add(Html.td().add(component));
 			//jQuery(this).lastChild("tr").append(Html.td().add(component));
 		} else {
 			if ((column == 0) || (column == numberOfColumns)) {
@@ -104,7 +109,7 @@ public class GridLayout extends Widget implements Layout {
 		this.init();
 		
 		if (this.isRendered()) {
-			jQuery(this).empty();
+			jQuery("$(\"table > tbody\")").empty();
 		}
 	}
 
