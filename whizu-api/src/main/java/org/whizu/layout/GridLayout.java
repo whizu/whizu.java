@@ -75,7 +75,6 @@ public class GridLayout extends Widget implements Layout {
 	@Override
 	public GridLayout add(Component component) {
 		if (isRendered()) {
-			System.out.println("column " + column);
 			if ((column == 0) || (column == numberOfColumns)) {
 				row = tbody.tr();
 				// row.add(Html.td().add(component));
