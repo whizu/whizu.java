@@ -65,21 +65,7 @@ class ImageImpl extends Widget implements Image {
 			jQuery(this).concat(script); // todo further refactoring
 		}
 
-		// .width("48px").attr("height", "48px").margin("0px")
-		return Html.img(this.id()).src(src).title(tooltip).style("display", "block").css(style).css("link");
-		/*
-		 * if (tooltip != null) { imgNode.attr("title", tooltip); }
-		 */
-
-		/*
-		 * 
-		 * if (tooltip != null) { NonVoid tooltipMarkup =
-		 * NonVoid.div("tooltip-"+this.getId()).attr("data-role",
-		 * "popup").css("ui-content").attr("data-theme", "e").style("max-width",
-		 * "300px").add(tooltip); Expression expr =
-		 * jQuery().document().append(tooltipMarkup.toString()); }
-		 */
-
+		return Html.img(this.id()).src(src).title(tooltip).style("display", "block");
 	}
 
 	@Override
