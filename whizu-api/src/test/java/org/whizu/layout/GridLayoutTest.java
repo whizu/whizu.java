@@ -72,7 +72,7 @@ public class GridLayoutTest extends AbstractTest {
 
 		String markup = grid.render();
 		assertEquals(
-				"<table id='c0' cellpadding='0' cellspacing='0' style='width:100%;'><tbody><tr><td><div id='c1'>Label1</div></td><td><div id='c2'>Label2</div></td></tr><tr><td><div id='c3'>Label3</div></td></tr></tbody></table>",
+				"<table id='c0' cellpadding='0' cellspacing='0'><tbody><tr><td><div id='c1'>Label1</div></td><td><div id='c2'>Label2</div></td></tr><tr><td><div id='c3'>Label3</div></td></tr></tbody></table>",
 				markup);
 		assertEquals(true, grid.isRendered());
 	}
@@ -89,18 +89,18 @@ public class GridLayoutTest extends AbstractTest {
 
 		String markup = grid.render();
 		assertEquals(
-				"<table id='c0' cellpadding='0' cellspacing='0' style='width:100%;'><tbody><tr><td><div id='c1'>Label1</div></td><td><div id='c2'>Label2</div></td></tr><tr><td><div id='c3'>Label3</div></td></tr></tbody></table>",
+				"<table id='c0' cellpadding='0' cellspacing='0'><tbody><tr><td><div id='c1'>Label1</div></td><td><div id='c2'>Label2</div></td></tr><tr><td><div id='c3'>Label3</div></td></tr></tbody></table>",
 				markup);
 		assertEquals(true, grid.isRendered());
 		grid.empty();
 		assertEquals(true, grid.isRendered());
-		assertEquals("$(\"#c0\").empty();", theRequest.finish());
+		assertEquals("$(\"table > tbody\").empty();", theRequest.finish());
 		assertEquals(true, grid.isRendered());
 		grid.add(new LabelImpl("Label4"));
 		grid.add(new LabelImpl("Label2"));
 		grid.add(new LabelImpl("Label3"));
 		assertEquals(
-				"$(\"#c0\").filter(\"tbody:first-of-type\").append(\"<tr><td><div id='c4'>Label4</div></td><td><div id='c5'>Label2</div></td></tr>\");$(\"#c0\").filter(\"tbody:first-of-type\").append(\"<tr><td><div id='c6'>Label3</div></td></tr>\");",
+				"$(\"table > tbody\").append(\"<tr></tr>\");$(\"table > tbody tr:last-child\").append(\"<td><div id='c4'>Label4</div></td>\");$(\"table > tbody tr:last-child\").append(\"<td><div id='c5'>Label2</div></td>\");$(\"table > tbody\").append(\"<tr></tr>\");$(\"table > tbody tr:last-child\").append(\"<td><div id='c6'>Label3</div></td>\");",
 				theRequest.finish());
 	}
 

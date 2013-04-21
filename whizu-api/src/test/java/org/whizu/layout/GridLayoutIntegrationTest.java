@@ -196,7 +196,7 @@ public class GridLayoutIntegrationTest {
 
 		String markup = grid.render();
 		assertEquals(
-				"<table cellpadding='0' cellspacing='0' style='width:100%;'><tbody><tr><td>myComponent</td><td>myComponent</td></tr><tr><td>myComponent</td></tr></tbody></table>",
+				"<table cellpadding='0' cellspacing='0'><tbody><tr><td>myComponent</td><td>myComponent</td></tr><tr><td>myComponent</td></tr></tbody></table>",
 				markup);
 	}
 
@@ -214,7 +214,7 @@ public class GridLayoutIntegrationTest {
 
 		String markup = grid.render();
 		assertEquals(
-				"<table cellpadding='0' cellspacing='0' style='width:100%;'><tbody><tr><td>myComponent</td><td>myComponent</td></tr><tr><td>myComponent</td><td>myComponent</td></tr><tr><td>myComponent</td></tr></tbody></table>",
+				"<table cellpadding='0' cellspacing='0'><tbody><tr><td>myComponent</td><td>myComponent</td></tr><tr><td>myComponent</td><td>myComponent</td></tr><tr><td>myComponent</td></tr></tbody></table>",
 				markup);
 	}
 
@@ -230,7 +230,7 @@ public class GridLayoutIntegrationTest {
 
 		String markup = grid.render();
 		assertEquals(
-				"<table cellpadding='0' cellspacing='0' style='width:100%;'><tbody><tr><td>myComponent</td></tr><tr><td>myComponent</td></tr><tr><td>myComponent</td></tr></tbody></table>",
+				"<table cellpadding='0' cellspacing='0'><tbody><tr><td>myComponent</td></tr><tr><td>myComponent</td></tr><tr><td>myComponent</td></tr></tbody></table>",
 				markup);
 	}
 }

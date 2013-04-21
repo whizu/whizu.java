@@ -60,7 +60,7 @@ public class GridLayout extends Widget implements Layout {
 
 	protected void init() {
 		super.init();
-		//width("100%").
+		// width("100%").
 		this.grid = Html.table(this).attr("cellspacing", "0").attr("cellpadding", "0");
 		this.tbody = this.grid.tbody();
 		this.row = null;
@@ -75,21 +75,18 @@ public class GridLayout extends Widget implements Layout {
 	@Override
 	public GridLayout add(Component component) {
 		if (isRendered()) {
+			System.out.println("column " + column);
 			if ((column == 0) || (column == numberOfColumns)) {
-				// row = Html.tr(); tbody.add(row);
 				row = tbody.tr();
-				row.add(Html.td().add(component));
+				// row.add(Html.td().add(component));
 				jQuery("$(\"table > tbody\")").append(row);
 				column = 1;
 			} else {
-				Td td = Html.td().add(component);
-				row.add(td);
-				jQuery("$(\"table > tbody tr:last-child\")").append(td);
 				column++;
 			}
-
-			//row.add(Html.td().add(component));
-			//jQuery(this).lastChild("tr").append(Html.td().add(component));
+			
+			Td td = Html.td().add(component);
+			jQuery("$(\"table > tbody tr:last-child\")").append(td);
 		} else {
 			if ((column == 0) || (column == numberOfColumns)) {
 				// row = Html.tr(); tbody.add(row);
@@ -109,7 +106,7 @@ public class GridLayout extends Widget implements Layout {
 	@Override
 	public void empty() {
 		this.init();
-		
+
 		if (this.isRendered()) {
 			jQuery("$(\"table > tbody\")").empty();
 		}
