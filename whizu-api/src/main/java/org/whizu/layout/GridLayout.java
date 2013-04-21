@@ -60,7 +60,8 @@ public class GridLayout extends Widget implements Layout {
 
 	protected void init() {
 		super.init();
-		this.grid = Html.table(this).width("100%").attr("cellspacing", "0").attr("cellpadding", "0");
+		//width("100%").
+		this.grid = Html.table(this).attr("cellspacing", "0").attr("cellpadding", "0");
 		this.tbody = this.grid.tbody();
 		this.row = null;
 		this.column = 0;
@@ -98,7 +99,8 @@ public class GridLayout extends Widget implements Layout {
 				column++;
 			}
 
-			row.add(Html.td().add(component));
+			Td td = Html.td().add(component);
+			row.add(td);
 		}
 
 		return this;

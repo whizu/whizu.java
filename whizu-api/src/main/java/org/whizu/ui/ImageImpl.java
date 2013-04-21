@@ -27,7 +27,6 @@ import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.widget.Widget;
 
-
 class ImageImpl extends Widget implements Image {
 
 	private String src;
@@ -46,28 +45,28 @@ class ImageImpl extends Widget implements Image {
 	public Markup compile() {
 		String script = "";
 		if (listenerId != null) {
-			String ajaxCall = "$.get('/whizu?id=" + listenerId
-					+ "', function(data) { ; }, 'script');";
+			String ajaxCall = "$.get('/whizu?id=" + listenerId + "', function(data) { ; }, 'script');";
 			script += ".click(function(event) { event.preventDefault(); " + ajaxCall + "})";
-			//script += ".mouseenter(function(event) { event.preventDefault(); " + ajaxCall + "})";
+			// script +=
+			// ".mouseenter(function(event) { event.preventDefault(); " +
+			// ajaxCall + "})";
 		}
 
-		//use event.originalEvent.dataTransfer
+		// use event.originalEvent.dataTransfer
 		if (droplistenerId != null) {
-			String ajaxCall = "$.get('/whizu?id=" + droplistenerId
-					+ "', function(data) { ; }, 'script');";
+			String ajaxCall = "$.get('/whizu?id=" + droplistenerId + "', function(data) { ; }, 'script');";
 			script += ".bind ('dragover', function(event) { event.stopPropagation(); event.preventDefault(); event.dataTransfer.dropEffect = 'move'; return false; } )";
 			script += ".bind ('dragenter', function(event) { event.stopPropagation(); event.preventDefault(); event.dataTransfer.dropEffect = 'copy'; return false; } )";
-			script += ".bind ('drop', function(event) { alert('drop'); alert(event.originalEvent.dataTransfer.files); event.stopPropagation(); event.preventDefault(); " + ajaxCall + " return false; } )";
+			script += ".bind ('drop', function(event) { alert('drop'); alert(event.originalEvent.dataTransfer.files); event.stopPropagation(); event.preventDefault(); "
+					+ ajaxCall + " return false; } )";
 		}
 
 		if (!script.equals("")) {
 			jQuery(this).concat(script); // todo further refactoring
 		}
 
-		
-		return Html.img(this.id()).src(src).title(tooltip).width("48px").attr("height", "48px").margin("0px").css(style)
-				.css("link");
+		// .width("48px").attr("height", "48px").margin("0px")
+		return Html.img(this.id()).src(src).title(tooltip).style("display", "block").css(style).css("link");
 		/*
 		 * if (tooltip != null) { imgNode.attr("title", tooltip); }
 		 */
@@ -99,7 +98,7 @@ class ImageImpl extends Widget implements Image {
 	@Override
 	public void addDropHandler() {
 		ClickListenerImpl impl = new ClickListenerImpl(new ClickListener() {
-			
+
 			@Override
 			public void click() {
 				System.out.println("...dropping");
