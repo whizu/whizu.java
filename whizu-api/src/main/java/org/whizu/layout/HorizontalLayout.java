@@ -28,7 +28,7 @@ import org.whizu.dom.Markup;
 /**
  * @author Rudy D'hauwe
  */
-public class HorizontalLayout extends LayoutImpl {
+public class HorizontalLayout extends LayoutBuilder<HorizontalLayout> {
 
 	@Override
 	public Markup compile() {

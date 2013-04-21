@@ -23,9 +23,11 @@
  *******************************************************************************/
 package org.whizu.layout;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
+import org.whizu.ui.LabelImpl;
 import org.whizu.widget.AbstractTest;
 
 /**
@@ -58,11 +60,21 @@ public class GridLayoutTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.layout.GridLayout#add(org.whizu.dom.Component)}.
+	 * Test method for
+	 * {@link org.whizu.layout.GridLayout#add(org.whizu.dom.Component)}.
 	 */
 	@Test
 	public void testAdd() {
-		fail("Not yet implemented");
+		GridLayout grid = new GridLayout(2);
+		grid.add(new LabelImpl("Label1"));
+		grid.add(new LabelImpl("Label2"));
+		grid.add(new LabelImpl("Label3"));
+
+		String markup = grid.render();
+		assertEquals(
+				"<table id='c0' cellpadding='0' cellspacing='0' style='width:100%;'><tbody><tr><td><div id='c1'>Label1</div></td><td><div id='c2'>Label2</div></td></tr><tr><td><div id='c3'>Label3</div></td></tr></tbody></table>",
+				markup);
+		assertEquals(true, grid.isRendered());
 	}
 
 	/**
@@ -70,11 +82,31 @@ public class GridLayoutTest extends AbstractTest {
 	 */
 	@Test
 	public void testEmpty() {
-		fail("Not yet implemented");
+		GridLayout grid = new GridLayout(2);
+		grid.add(new LabelImpl("Label1"));
+		grid.add(new LabelImpl("Label2"));
+		grid.add(new LabelImpl("Label3"));
+
+		String markup = grid.render();
+		assertEquals(
+				"<table id='c0' cellpadding='0' cellspacing='0' style='width:100%;'><tbody><tr><td><div id='c1'>Label1</div></td><td><div id='c2'>Label2</div></td></tr><tr><td><div id='c3'>Label3</div></td></tr></tbody></table>",
+				markup);
+		assertEquals(true, grid.isRendered());
+		grid.empty();
+		assertEquals(true, grid.isRendered());
+		assertEquals("$(\"#c0\").empty();", theRequest.finish());
+		assertEquals(true, grid.isRendered());
+		grid.add(new LabelImpl("Label4"));
+		grid.add(new LabelImpl("Label2"));
+		grid.add(new LabelImpl("Label3"));
+		assertEquals(
+				"$(\"#c0\").filter(\"tbody:first-of-type\").append(\"<tr><td><div id='c4'>Label4</div></td><td><div id='c5'>Label2</div></td></tr>\");$(\"#c0\").filter(\"tbody:first-of-type\").append(\"<tr><td><div id='c6'>Label3</div></td></tr>\");",
+				theRequest.finish());
 	}
 
 	/**
-	 * Test method for {@link org.whizu.layout.GridLayout#prepend(org.whizu.dom.Component)}.
+	 * Test method for
+	 * {@link org.whizu.layout.GridLayout#prepend(org.whizu.dom.Component)}.
 	 */
 	@Test
 	public void testPrepend() {
@@ -82,7 +114,8 @@ public class GridLayoutTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.layout.GridLayout#remove(org.whizu.dom.Component)}.
+	 * Test method for
+	 * {@link org.whizu.layout.GridLayout#remove(org.whizu.dom.Component)}.
 	 */
 	@Test
 	public void testRemove() {

@@ -152,7 +152,7 @@ public class WhizuUI implements UI {
 	}
 
 	@Override
-	public Layout createVerticalLayout() {
+	public VerticalLayout createVerticalLayout() {
 		return new VerticalLayout();
 	}
 

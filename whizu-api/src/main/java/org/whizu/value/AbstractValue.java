@@ -43,6 +43,7 @@ public abstract class AbstractValue<T> implements Value<T> {
 
 	public AbstractValue(String name) {
 		this.name = name;
+		setValue(getDefaultValue());
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -57,6 +58,8 @@ public abstract class AbstractValue<T> implements Value<T> {
 		System.out.println("fire change " + oldValue + " wordt " + newValue);
 		changeSupport.firePropertyChange(propertyName, oldValue, newValue);
 	}
+
+	protected abstract T getDefaultValue();
 
 	@Override
 	public String getName() {

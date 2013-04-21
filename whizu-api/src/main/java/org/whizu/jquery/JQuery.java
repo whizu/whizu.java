@@ -348,4 +348,8 @@ public interface JQuery {
 	 * @see <a href='http://api.jquery.com/wrapInner'>jQuery's .wrapInner()</a>
 	 */
 	public abstract JQuery wrapInner(String wrappingElement);
+
+	public abstract JQuery firstOfType(String element);
+
+	public abstract JQuery lastChild(String string);
 }

@@ -23,11 +23,13 @@
  *******************************************************************************/
 package org.whizu.ui;
 
+import org.whizu.dom.Component;
+
 /**
  * @author Rudy D'hauwe
  * $
  */
 public interface Clickable {
 
-	public void addClickListener(ClickListener clickListener);
+	public Component addClickListener(ClickListener clickListener);
 }

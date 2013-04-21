@@ -30,7 +30,7 @@ import org.whizu.widget.Container;
 /**
  * @author Rudy D'hauwe
  */
-class FormImpl extends Container implements Form {
+public class FormImpl extends Container implements Form {
 
 	@Override
 	public Markup compile() {

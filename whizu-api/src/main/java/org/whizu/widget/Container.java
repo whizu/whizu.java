@@ -39,7 +39,7 @@ public class Container extends Widget implements Composite {
 	protected List<Component> componentList = new ArrayList<Component>();
 
 	@Override
-	public final Container add(Component impl) {
+	public Container add(Component impl) {
 		this.componentList.add(impl);
 
 		if (this.isRendered()) {

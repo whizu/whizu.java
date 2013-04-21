@@ -26,7 +26,7 @@ package org.whizu.value;
 /**
  * @author Rudy D'hauwe
  */
-public class IntegerValue extends AbstractValue<Integer> {
+public class IntegerValue extends ValueBuilder<IntegerValue, Integer> {
 
 	public IntegerValue(String name) {
 		super(name);
@@ -49,4 +49,14 @@ public class IntegerValue extends AbstractValue<Integer> {
 	public String toString() {
 		return "" + getValue();
 	}
+
+	@Override
+	protected Integer getDefaultValue() {
+		return 0;
+	}
+
+//	public IntegerValue set(int value) {
+//		setValue(value);
+//		return this;
+//	}
 }

@@ -84,10 +84,11 @@ class ImageImpl extends Widget implements Image {
 	}
 
 	@Override
-	public void addClickListener(ClickListener listener) {
+	public Image addClickListener(ClickListener listener) {
 		ClickListenerImpl impl = new ClickListenerImpl(listener);
 		listenerId = impl.getId();
 		getSession().addClickListener(impl);
+		return this;
 	}
 
 	@Override

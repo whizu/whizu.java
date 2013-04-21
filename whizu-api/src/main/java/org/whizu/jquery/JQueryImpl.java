@@ -297,4 +297,14 @@ class JQueryImpl extends Expression implements JQuery {
 	public JQuery prepend(Content content) {
 		return prepend(content.render());
 	}
+
+	@Override
+	public JQuery firstOfType(String element) {
+		return call("filter", element + ":first-of-type");
+	}
+
+	@Override
+	public JQuery lastChild(String element) {
+		return call("filter", element + ":last-child");
+	}
 }

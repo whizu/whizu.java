@@ -21,42 +21,34 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.value;
+package org.whizu.layout;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+import org.whizu.dom.Markup;
+import org.whizu.widget.AbstractTest;
 
 /**
  * @author Rudy D'hauwe
  */
-public class StringValue extends ValueBuilder<StringValue, String> {
+public class LayoutBuilderTest extends AbstractTest {
 
-	public StringValue() {
-		this("");
-	}
-	
-	public StringValue(String name) {
-		super(name);
-	}
-
-	@Override
-	public String toString() {
-		return getValue();
-	}
-
-	@Override
-	public void parse(String s) {
-		setValue(s);
-	}
-	
-	@Override
-	public String getValue() {
-		return (super.getValue() == null) ? "" : super.getValue();
-	}
-
-	public void clear() {
-		setValue("");
-	}
-
-	@Override
-	protected String getDefaultValue() {
-		return "";
+	/**
+	 * Test method for
+	 * {@link org.whizu.layout.LayoutBuilder#create(java.lang.String, java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testCreate() {
+		LayoutBuilder<?> parent = new LayoutBuilder<>();
+		LayoutBuilder<?> child1 = new LayoutBuilder<>();
+		parent.add(child1);
+		child1.css("myClass");
+		LayoutBuilder<?> child2 = new LayoutBuilder<>();
+		parent.add(child2);
+		Markup markup = parent.create("parent-css", "child-css");
+		String expected = "<div id='c0' class='parent-css '><div id='c1' class='myClass child-css '></div><div id='c2' class='child-css '></div></div>";
+		assertEquals(expected, markup.render());
 	}
 }

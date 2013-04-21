@@ -28,7 +28,7 @@ import java.util.Date;
 /**
  * @author Rudy D'hauwe
  */
-public class DateValue extends AbstractValue<Date> {
+public class DateValue extends ValueBuilder<DateValue, Date> {
 
 	public DateValue(String name) {
 		super(name);
@@ -40,6 +40,10 @@ public class DateValue extends AbstractValue<Date> {
 	@Override
 	public void parse(String s) {
 		throw new UnsupportedOperationException();
+	}
 
+	@Override
+	protected Date getDefaultValue() {
+		return new Date();
 	}
 }

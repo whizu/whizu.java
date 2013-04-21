@@ -40,7 +40,7 @@ public class GridLayout extends Widget implements Layout {
 
 	private int numberOfColumns;
 
-	private int column = 0;
+	private int column;
 
 	private Table grid;
 
@@ -54,8 +54,15 @@ public class GridLayout extends Widget implements Layout {
 
 	public GridLayout(int numberOfColumns) {
 		this.numberOfColumns = numberOfColumns;
+		this.init();
+	}
+
+	protected void init() {
+		super.init();
 		this.grid = Html.table(this).width("100%").attr("cellspacing", "0").attr("cellpadding", "0");
 		this.tbody = this.grid.tbody();
+		this.row = null;
+		this.column = 0;
 	}
 
 	@Override
@@ -66,7 +73,17 @@ public class GridLayout extends Widget implements Layout {
 	@Override
 	public GridLayout add(Component component) {
 		if (isRendered()) {
-			throw new UnsupportedOperationException();
+			if ((column == 0) || (column == numberOfColumns)) {
+				// row = Html.tr(); tbody.add(row);
+				row = tbody.tr();
+				jQuery(this).firstOfType("tbody").append(row);
+				column = 1;
+			} else {
+				column++;
+			}
+
+			row.add(Html.td().add(component));
+			//jQuery(this).lastChild("tr").append(Html.td().add(component));
 		} else {
 			if ((column == 0) || (column == numberOfColumns)) {
 				// row = Html.tr(); tbody.add(row);
@@ -84,7 +101,11 @@ public class GridLayout extends Widget implements Layout {
 
 	@Override
 	public void empty() {
-		throw new UnsupportedOperationException();
+		this.init();
+		
+		if (this.isRendered()) {
+			jQuery(this).empty();
+		}
 	}
 
 	@Override

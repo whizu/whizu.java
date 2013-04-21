@@ -24,6 +24,7 @@
 package org.whizu.ui;
 
 import org.whizu.layout.Layout;
+import org.whizu.layout.VerticalLayout;
 import org.whizu.value.StringValue;
 /**
  * @author Rudy D'hauwe
@@ -42,7 +43,7 @@ public interface ViewFactory {
 	
 	public Layout createHorizontalLayout();
 	
-	public Layout createVerticalLayout();
+	public VerticalLayout createVerticalLayout();
 	
 	public Layout createFlowLayout();
 	

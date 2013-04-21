@@ -96,7 +96,7 @@ public abstract class Widget implements Component, Decorator {
 		return id;
 	}
 
-	protected final boolean isRendered() {
+	public final boolean isRendered() {
 		return State.RENDERED.equals(state);
 	}
 
@@ -153,5 +153,8 @@ public abstract class Widget implements Component, Decorator {
 		}
 
 		element.css(cssList).width(width);
+	}
+
+	protected void init() {
 	}
 }

@@ -33,17 +33,17 @@ import org.whizu.value.StringValue;
 import org.whizu.widget.Widget;
 
 
-class TextFieldImpl extends Widget implements TextField, Input {
+public class TextFieldImpl extends Widget implements TextField, Input {
 
 	private String text;
 	
 	private StringValue value;
 
-	TextFieldImpl(String text) {
+	public TextFieldImpl(String text) {
 		this.text = text;
 	}
 
-	TextFieldImpl(StringValue value) {
+	public TextFieldImpl(StringValue value) {
 		this.text = value.getValue();
 		this.value = value;
 		this.value.addPropertyChangeListener(new PropertyChangeListener() {

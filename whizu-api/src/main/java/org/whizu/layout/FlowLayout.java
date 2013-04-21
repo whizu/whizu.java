@@ -28,7 +28,7 @@ import org.whizu.dom.Markup;
 /**
  * @author Rudy D'hauwe
  */
-public class FlowLayout extends LayoutImpl implements Layout {
+public class FlowLayout extends LayoutBuilder<FlowLayout> implements Layout {
 
 	@Override
 	public Markup compile() {

@@ -21,42 +21,11 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.value;
+package org.whizu.ui;
 
 /**
  * @author Rudy D'hauwe
  */
-public class StringValue extends ValueBuilder<StringValue, String> {
+public @interface OnSubmit {
 
-	public StringValue() {
-		this("");
-	}
-	
-	public StringValue(String name) {
-		super(name);
-	}
-
-	@Override
-	public String toString() {
-		return getValue();
-	}
-
-	@Override
-	public void parse(String s) {
-		setValue(s);
-	}
-	
-	@Override
-	public String getValue() {
-		return (super.getValue() == null) ? "" : super.getValue();
-	}
-
-	public void clear() {
-		setValue("");
-	}
-
-	@Override
-	protected String getDefaultValue() {
-		return "";
-	}
 }

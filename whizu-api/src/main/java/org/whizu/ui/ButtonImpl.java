@@ -81,7 +81,7 @@ class ButtonImpl extends Widget implements Button {
 	}
 
 	@Override
-	public void addClickListener(ClickListener listener) {
+	public ButtonImpl addClickListener(ClickListener listener) {
 		if (this.listener != null) {
 			throw new IllegalStateException();
 		} else {
@@ -95,5 +95,6 @@ class ButtonImpl extends Widget implements Button {
 				// jQuery.select(this).click(...);
 			}
 		}
+		return this;
 	}
 }

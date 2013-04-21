@@ -25,7 +25,7 @@ package org.whizu.layout;
 
 import org.whizu.dom.Markup;
 
-public class AbsoluteLayout extends LayoutImpl {
+public class AbsoluteLayout extends LayoutBuilder<AbsoluteLayout> {
 
 	@Override
 	public Markup compile() {

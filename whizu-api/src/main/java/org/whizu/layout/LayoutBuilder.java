@@ -33,7 +33,12 @@ import org.whizu.widget.Container;
 /**
  * @author Rudy D'hauwe
  */
-class LayoutImpl extends Container implements Layout {
+class LayoutBuilder<T extends LayoutBuilder<T>> extends Container implements Layout {
+	
+	@Override
+	public T add(Component impl) {
+		return getThis(super.add(impl));
+	}
 
 	protected Markup create(String css, final String itemClass) {
 		return Html.div(this).decorate(this).css(css).add(new Foreach<Component>(componentList) {
@@ -43,5 +48,15 @@ class LayoutImpl extends Container implements Layout {
 				return item.css(itemClass);
 			}
 		});
+	}
+
+	@Override
+	public T css(String clazz) {
+		return getThis(super.css(clazz));
+	}
+
+	@SuppressWarnings("unchecked")
+	private T getThis(Component component) {
+		return (T) component;
 	}
 }

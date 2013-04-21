@@ -21,34 +21,23 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.layout;
+package org.whizu.tutorial.echo;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-import org.whizu.dom.Markup;
-import org.whizu.widget.AbstractTest;
+import org.whizu.value.StringValue;
+import org.whizu.value.ValueList;
 
 /**
  * @author Rudy D'hauwe
- * 
  */
-public class LayoutImplTest extends AbstractTest {
+public class CommentList extends ValueList<Comment> {
 
-	/**
-	 * Test method for
-	 * {@link org.whizu.layout.LayoutImpl#create(java.lang.String, java.lang.String)}.
-	 */
-	@Test
-	public void testCreate() {
-		LayoutImpl parent = new LayoutImpl();
-		LayoutImpl child1 = new LayoutImpl();
-		parent.add(child1);
-		child1.css("myClass");
-		LayoutImpl child2 = new LayoutImpl();
-		parent.add(child2);
-		Markup markup = parent.create("parent-css", "child-css");
-		String expected = "<div id='c0' class='parent-css '><div id='c1' class='myClass child-css '></div><div id='c2' class='child-css '></div></div>";
-		assertEquals(expected, markup.render());
+	public void add(String message) {
+		Comment comment = new Comment();
+		comment.message.set(message);
+		add(comment);
+	}
+
+	public void add(StringValue message) {
+		add(message.getValue());
 	}
 }

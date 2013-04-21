@@ -21,42 +21,24 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.value;
+package org.whizu.tutorial.echo;
+
+import org.whizu.value.AbstractValueObject;
+import org.whizu.value.DateValue;
+import org.whizu.value.StringValue;
+import org.whizu.value.Value;
 
 /**
  * @author Rudy D'hauwe
  */
-public class StringValue extends ValueBuilder<StringValue, String> {
+public class Comment extends AbstractValueObject {
 
-	public StringValue() {
-		this("");
-	}
-	
-	public StringValue(String name) {
-		super(name);
-	}
+	public final DateValue datetime = new DateValue("creation");
+
+	public final StringValue message = new StringValue("message");
 
 	@Override
-	public String toString() {
-		return getValue();
-	}
-
-	@Override
-	public void parse(String s) {
-		setValue(s);
-	}
-	
-	@Override
-	public String getValue() {
-		return (super.getValue() == null) ? "" : super.getValue();
-	}
-
-	public void clear() {
-		setValue("");
-	}
-
-	@Override
-	protected String getDefaultValue() {
-		return "";
+	public Value<?>[] getColumns() {
+		return new Value[]{datetime, message};
 	}
 }

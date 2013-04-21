@@ -30,13 +30,14 @@ import org.whizu.dom.Content;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.jquery.Function;
+import org.whizu.value.IntegerValue;
 import org.whizu.value.Value;
 import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-class LabelImpl extends Widget implements Label {
+public class LabelImpl extends Widget implements Label {
 
 	private ClickListenerImpl listener;
 
@@ -44,7 +45,7 @@ class LabelImpl extends Widget implements Label {
 
 	private Value<?> value;
 
-	LabelImpl(String text) {
+	public LabelImpl(String text) {
 		this.text = text;
 	}
 
@@ -72,8 +73,15 @@ class LabelImpl extends Widget implements Label {
 		this.text = t;
 	}
 
+	public LabelImpl(String text, IntegerValue arg) {
+		Label valueLabel = new LabelImpl(arg);
+		valueLabel.css("teller");
+		text = text.replace("$1", valueLabel.render());
+		this.text = text;
+	}
+
 	@Override
-	public void addClickListener(ClickListener listener) {
+	public Label addClickListener(ClickListener listener) {
 		// System.out.println("THIS LABEL " + text + " is rendered: " +
 		// isRendered);
 		// if not rendered, remember that this script must be added after
@@ -81,6 +89,7 @@ class LabelImpl extends Widget implements Label {
 		// nu gebeurt het in de verkeerde volgorde!
 		this.listener = new ClickListenerImpl(listener);
 		getSession().addClickListener(this.listener);
+		return this;
 	}
 
 	@Override
