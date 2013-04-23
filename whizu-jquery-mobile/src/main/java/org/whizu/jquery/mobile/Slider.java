@@ -65,7 +65,7 @@ public class Slider extends Widget {
 				.attr("min", min)
 				.attr("max", max)
 				.attr("step", step)
-				.attr("data-track-theme", track.value())
+//				.attr("data-track-theme", track.value())
 				.decorate(theme)
 				.decorate(mini);
 		Element label = Html.tag("label")

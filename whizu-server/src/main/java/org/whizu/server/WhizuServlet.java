@@ -158,7 +158,11 @@ public class WhizuServlet extends HttpServlet {
 			String id = request.getParameter("id");
 			if (id == null) {
 				debug("running setup:" + request.getRequestURI());
-				content = this.setup(request);
+				if (request.getRequestURI().endsWith(".css")) {
+					content = handleCss(request, response);
+				} else {
+					content = this.setup(request);
+				}
 			} else {
 				session.handleEvent(id);
 				content = RequestImpl.get().finish();
@@ -173,6 +177,26 @@ public class WhizuServlet extends HttpServlet {
 			} catch (Exception exc) {
 				exc.printStackTrace();
 			}
+		}
+	}
+
+	private String handleCss(HttpServletRequest request, HttpServletResponse response) {
+		String uri = request.getRequestURI();
+		String servletPath = request.getServletPath();
+		String contextPath = request.getContextPath();
+		debug(uri);
+		debug(servletPath);
+		debug(contextPath);
+		String css = uri.substring(servletPath.length());
+		return stream(css);
+	}
+
+	private String stream(String path) {
+		InputStream in = getClass().getResourceAsStream(path);
+		try {
+			return fromStream(in);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

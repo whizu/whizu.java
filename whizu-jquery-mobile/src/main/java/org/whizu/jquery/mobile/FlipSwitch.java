@@ -35,7 +35,7 @@ public class FlipSwitch extends Widget {
 
 	private Theme theme;
 	
-	private Theme track;
+//	private Theme track;
 	
 	private Mini mini;
 
@@ -45,7 +45,7 @@ public class FlipSwitch extends Widget {
 		Element field = Html.select(this)
 				.attr("data-role", "slider")
 				.attr("name", "label")
-				.attr("data-track-theme", track.value())
+//				.attr("data-track-theme", track.value())
 				.decorate(theme)
 				.decorate(mini)
 				.add("<option value='off'>Off</option><option value='on'>On</option>");
