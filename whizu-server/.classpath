@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="lib/servlet-api-3.0.jar"/>
 	<classpathentry kind="lib" path="/whizu-api/lib/commons-logging-1.1.2.jar"/>
 	<classpathentry kind="lib" path="/whizu-api/lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="/whizu-api/lib/javassist-3.17.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
