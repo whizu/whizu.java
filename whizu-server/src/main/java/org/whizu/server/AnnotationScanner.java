@@ -105,7 +105,7 @@ class AnnotationScanner {
 
 		AnnotationDetector cf2 = new AnnotationDetector(reporter2);
 		try {
-			System.out.println("now detecting @Autowired");
+			log.debug("now detecting @Autowired");
 			cf2.detect("org.whizu");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -113,52 +113,5 @@ class AnnotationScanner {
 
 		long end = System.currentTimeMillis();
 		log.debug("first scanning took " + (end - start));
-		start = System.currentTimeMillis();
-		/*
-		 * GenericApplicationContext applicationContext = new
-		 * GenericApplicationContext(); ClassPathBeanDefinitionScanner scanner =
-		 * new ClassPathBeanDefinitionScanner(applicationContext, false);
-		 * scanner.addIncludeFilter(new AnnotationTypeFilter(App.class));
-		 * scanner.scan("org.whizu"); applicationContext.refresh();
-		 */
-
-		// ClassPathScanningCandidateComponentProvider provider = new
-		// ClassPathScanningCandidateComponentProvider(true);
-		// String basePackage = "org/whizu";
-		// Set<BeanDefinition> components =
-		// provider.findCandidateComponents(basePackage);
-		// for (BeanDefinition component : components) {
-		// System.out.printf("Component: %s\n", component.getBeanClassName());
-		// }
-/*
-		ctx = new ClassPathXmlApplicationContext("application-context.xml");
-		System.out.println("BEAN " + ctx.getBean("ValueRenderer"));
-
-		System.out.println("#apps " + ctx.getBeansWithAnnotation(App.class).size());
-		end = System.currentTimeMillis();
-		System.out.println("done component scanning scanning in " + (end - start) + " ms");
-*/
-		
-		/*
-		 * start = System.currentTimeMillis(); ClassPathBeanDefinitionScanner
-		 * scanner = new ClassPathBeanDefinitionScanner(
-		 * (BeanDefinitionRegistry) ctx.getAutowireCapableBeanFactory());
-		 * scanner.addIncludeFilter(new AnnotationTypeFilter(App.class));
-		 * scanner.scan("org");
-		 * 
-		 * System.out.println("#apps " +
-		 * ctx.getBeansWithAnnotation(App.class).size()); end =
-		 * System.currentTimeMillis();
-		 * System.out.println("done annotation scanning in " + (end - start) +
-		 * " ms");
-		 * 
-		 * Map<String, Object> result = ctx.getBeansWithAnnotation(App.class);
-		 * for (Object o : result.values()) { System.out.println(o.getClass());
-		 * App ann = o.getClass().getAnnotation(App.class); if (ann != null) {
-		 * System.out.println(ann.uri()); config.addApplication(ann.uri(),
-		 * (Application) o); } Annotation[] annos =
-		 * o.getClass().getAnnotations(); for (Annotation a : annos)
-		 * System.out.println(a); }
-		 */
 	}
 }
