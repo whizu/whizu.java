@@ -24,6 +24,7 @@
 package org.whizu.tutorial.echo;
 
 import org.whizu.annotations.App;
+import org.whizu.annotations.Css;
 import org.whizu.dom.Component;
 import org.whizu.layout.HorizontalLayout;
 import org.whizu.layout.Layout;
@@ -43,12 +44,13 @@ import org.whizu.value.StringValue;
  * @author Rudy D'hauwe
  */
 @App(uri = "/whizu/tutorial/echo")
+@Css(uri = "/theme.css")
 public class Echo implements Application {
 
 	private final StringValue input = new StringValue("input");
 
 	private final IntegerValue commentCount = new IntegerValue("count");
-	
+
 	private final CommentList commentList = new CommentList();
 
 	@Override
@@ -62,19 +64,15 @@ public class Echo implements Application {
 	}
 
 	private Layout layout() {
-		return new HorizontalLayout()
-				  .add(left())
-				  .add(right());
+		return new HorizontalLayout().add(left()).add(right());
 	}
 
 	private Component left() {
-		return new VerticalLayout()
-			.css("left-column")
-			.add(new LabelImpl("Welcome to your very first meet and greet with Whizu."))
-			.add(new LabelImpl("Share a thought and allow for Whizu to echo your words."))
-			.add(form());
+		return new VerticalLayout().css("left-column")
+				.add(new LabelImpl("Welcome to your very first meet and greet with Whizu."))
+				.add(new LabelImpl("Share a thought and allow for Whizu to echo your words.")).add(form());
 	}
-	
+
 	private Form form() {
 		Form form = new FormImpl();
 		form.css("form");
@@ -84,35 +82,29 @@ public class Echo implements Application {
 	}
 
 	private Component button() {
-		return new LabelImpl("Share")
-			.css("submit-button")
-			.addClickListener(new ClickListener() {
-	
-				@Override
-				public void click() {
-					submit();
-				}
-			});
+		return new LabelImpl("Share").css("submit-button").addClickListener(new ClickListener() {
+
+			@Override
+			public void click() {
+				submit();
+			}
+		});
 	}
-	
+
 	/*
-	private void addDetail(StringValue message) {
-		history.prepend(new VerticalLayout()
-			.css("detail")
-			.add(new LabelImpl(new Date().toString()).css("detail-date"))
-			.add(new LabelImpl(message.getValue())));
-	}
-	*/
-	
+	 * private void addDetail(StringValue message) { history.prepend(new
+	 * VerticalLayout() .css("detail") .add(new LabelImpl(new
+	 * Date().toString()).css("detail-date")) .add(new
+	 * LabelImpl(message.getValue()))); }
+	 */
+
 	private Component textfield() {
 		return new TextFieldImpl(input).css("message");
 	}
 
 	private Component right() {
-		return new VerticalLayout()
-		  .css("right-column")
-		  .add(new LabelImpl("Thank you for sharing $1 comments.", commentCount).css("tekst"))
-		  .add(commentList);
+		return new VerticalLayout().css("right-column")
+				.add(new LabelImpl("Thank you for sharing $1 comments.", commentCount).css("tekst")).add(commentList);
 	}
 
 	@OnSubmit

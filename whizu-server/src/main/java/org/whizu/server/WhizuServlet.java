@@ -40,6 +40,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.whizu.annotations.Css;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
 import org.whizu.jquery.Request;
@@ -226,6 +227,16 @@ public class WhizuServlet extends HttpServlet {
 						app.init(new WhizuUI());
 					}
 				});
+				
+				Css ann = app.getClass().getAnnotation(Css.class);
+				if (ann != null) {
+					String cssUri = ann.uri();
+					String link = "<link rel='stylesheet' type='text/css' href='" + cssUri + "' />";
+					content = content.replace("${css}", link);
+				} else {
+					content = content.replace("${css}", "");
+				}
+				
 				return content;
 			} catch (IOException e) {
 				e.printStackTrace();
