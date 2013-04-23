@@ -12,6 +12,12 @@
 	display:inline-block;
 }
 
+.teller {
+	display: inline-block;
+	font-weight: bold;
+	font-decoration: underline;
+}
+
 .highlight {
 	border : solid 1px darkblue;
 	margin : 20px;
@@ -50,41 +56,4 @@
 	font-size:12px;
 	color:gray;
 	font-style:italic;
-}
-
-<!-- the framework -->
-
-.absolute-layout {
-	position:relative;
-	left:0px;
-}
-
-.absolute-layout-element {
-}
-
-.vertical-layout {
-}
-
-.vertical-layout-element {
-	display:block;
-}
-
-.flow-layout {
-}
-
-.flow-layout-element {
-	display:inline-block;
-}
-
-.horizontal-layout {
-	white-space:nowrap;
-}
-
-.horizontal-layout-element {
-	display:inline-block;
-	vertical-align:top;
-}
-
-.link:hover {
-	cursor:pointer;	
 }

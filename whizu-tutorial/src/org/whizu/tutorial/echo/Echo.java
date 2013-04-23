@@ -43,9 +43,13 @@ import org.whizu.value.StringValue;
 /**
  * @author Rudy D'hauwe
  */
-@App(uri = "/whizu/tutorial/echo")
+@App(uri = "/whizu/tutorial/echo") //@App(uri = "/whizu/tutorial/echo", css="/theme.css")
 @Css(uri = "/theme.css")
+//@Css(uri = Echo.STYLESHEET)
+//@Css(Echo.STYLESHEET)
 public class Echo implements Application {
+
+	//protected static final String STYLESHEET = "/theme.css";
 
 	private final StringValue input = new StringValue("input");
 
@@ -67,12 +71,14 @@ public class Echo implements Application {
 		return new HorizontalLayout().add(left()).add(right());
 	}
 
+	@Css("left-column") //doesn't work yet - unimplemented
 	private Component left() {
 		return new VerticalLayout().css("left-column")
 				.add(new LabelImpl("Welcome to your very first meet and greet with Whizu."))
 				.add(new LabelImpl("Share a thought and allow for Whizu to echo your words.")).add(form());
 	}
 
+	@Css("form") //doesn't work yet - unimplemented
 	private Form form() {
 		Form form = new FormImpl();
 		form.css("form");
@@ -91,21 +97,29 @@ public class Echo implements Application {
 		});
 	}
 
-	/*
-	 * private void addDetail(StringValue message) { history.prepend(new
-	 * VerticalLayout() .css("detail") .add(new LabelImpl(new
-	 * Date().toString()).css("detail-date")) .add(new
-	 * LabelImpl(message.getValue()))); }
-	 */
-
+	@Css("message")
 	private Component textfield() {
 		return new TextFieldImpl(input).css("message");
 	}
 
+	@Css("right-column")
+	//@Css(name="right-column")
+	//@Style(name="right-column", style="width:80px;border:solid 1px black;")
+	//@Css(name="right-column", style="width:80px;border:solid 1px black;")
 	private Component right() {
 		return new VerticalLayout().css("right-column")
 				.add(new LabelImpl("Thank you for sharing $1 comments.", commentCount).css("tekst")).add(commentList);
 	}
+	
+	/*
+	//@Css 
+	@Theme
+	private Style theme() { //private Stylesheet theme()
+		return new Style()
+			.define(".right-column").width("60px").border("solid 1px black")
+			.define(".left-column").width("300px");
+	}
+	*/
 
 	@OnSubmit
 	public void submit() {

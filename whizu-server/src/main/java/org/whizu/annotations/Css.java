@@ -32,9 +32,12 @@ import java.lang.annotation.Target;
  * @author Rudy D'hauwe
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target({ElementType.TYPE, ElementType.METHOD})
 public @interface Css {
 
-	public String uri();
+	public String uri() default "unassigned";
 
+	public String[] clazz() default {};
+	
+	public String[] value() default {};
 }
