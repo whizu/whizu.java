@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.whizu.dom.Component;
+
 /**
  * @author Rudy D'hauwe
  */
@@ -40,6 +42,8 @@ public class ValueList<T extends ValueObject> implements Value<List<T>> {
 
 	public List<T> value = new ArrayList<T>();
 
+	private PropertyChangeListener listener;
+
 	public ValueList() {
 	}
 
@@ -51,6 +55,10 @@ public class ValueList<T extends ValueObject> implements Value<List<T>> {
 
 	public void add(T element) {
 		this.value.add(element);
+		if (this.listener != null) {
+			listener.propertyChange(null);
+		}
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -60,7 +68,7 @@ public class ValueList<T extends ValueObject> implements Value<List<T>> {
 
 	@Override
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		throw new UnsupportedOperationException();
+		this.listener = listener;
 	}
 
 	/**
@@ -127,5 +135,10 @@ public class ValueList<T extends ValueObject> implements Value<List<T>> {
 
 	public int size() {
 		return this.value.size();
+	}
+
+	@Override
+	public Component render(ValueRenderer renderer) {
+		return renderer.render(this);
 	}
 }

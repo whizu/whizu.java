@@ -24,19 +24,14 @@
 package org.whizu.layout;
 
 import org.whizu.dom.Markup;
-import org.whizu.value.Value;
 
 /**
  * @author Rudy D'hauwe
  */
 public class VerticalLayout extends LayoutBuilder<VerticalLayout> {
-
+	
 	@Override
 	public Markup compile() {
 		return super.create("vertical-layout", "vertical-layout-element");
-	}
-
-	public VerticalLayout add(Value<?> value) {
-		throw new UnsupportedOperationException();
 	}
 }

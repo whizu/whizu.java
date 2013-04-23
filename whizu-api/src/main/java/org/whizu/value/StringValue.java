@@ -23,6 +23,8 @@
  *******************************************************************************/
 package org.whizu.value;
 
+import org.whizu.dom.Component;
+
 /**
  * @author Rudy D'hauwe
  */
@@ -58,5 +60,10 @@ public class StringValue extends ValueBuilder<StringValue, String> {
 	@Override
 	protected String getDefaultValue() {
 		return "";
+	}
+
+	@Override
+	public Component render(ValueRenderer renderer) {
+		return renderer.render(this);
 	}
 }

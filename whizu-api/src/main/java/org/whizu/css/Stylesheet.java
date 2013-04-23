@@ -21,57 +21,11 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.layout;
-
-import org.whizu.dom.Component;
-import org.whizu.dom.Content;
-import org.whizu.dom.Foreach;
-import org.whizu.dom.Markup;
-import org.whizu.html.Html;
-import org.whizu.value.Value;
-import org.whizu.widget.Container;
+package org.whizu.css;
 
 /**
  * @author Rudy D'hauwe
  */
-class LayoutBuilder<T extends LayoutBuilder<T>> extends Container implements Layout {
-	
-	@Override
-	public T add(Component impl) {
-		return getThis(super.add(impl));
-	}
+public class Stylesheet {
 
-	protected Markup create(String css, final String itemClass) {
-		return Html.div(this).decorate(this).css(css).add(new Foreach<Component>(componentList) {
-
-			@Override
-			public Content compile(Component item) {
-				return item.css(itemClass);
-			}
-		});
-	}
-
-	@Override
-	public T css(String clazz) {
-		return getThis(super.css(clazz));
-	}
-
-	@SuppressWarnings("unchecked")
-	private T getThis(Component component) {
-		return (T) component;
-	}
-	
-	private T getThis() {
-		return getThis(this);
-	}
-
-	public T add(Value<?> value) {
-		Component view = compile(value);
-		if (isRendered()) {
-			jQuery(this).append(view);
-		} else {
-			add(view);
-		}
-		return getThis();
-	}
 }

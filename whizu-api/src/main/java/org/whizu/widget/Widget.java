@@ -26,6 +26,8 @@ package org.whizu.widget;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.whizu.annotations.Autowire;
+import org.whizu.context.Ctx;
 import org.whizu.dom.Component;
 import org.whizu.dom.Decorator;
 import org.whizu.dom.Element;
@@ -37,6 +39,9 @@ import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Session;
 import org.whizu.js.Script;
+import org.whizu.value.Value;
+import org.whizu.value.ValueRenderer;
+import org.whizu.value.ValueRendererImpl;
 
 /**
  * @author Rudy D'hauwe
@@ -57,9 +62,18 @@ public abstract class Widget implements Component, Decorator {
 	private List<String> cssList = new ArrayList<String>();
 
 	protected String width = null;
+	
+	//@Autowired
+	@Autowire
+	public ValueRenderer renderer = new ValueRendererImpl();
 
 	protected Widget() {
+		this.autowire();
 		this.id = getSession().next();
+	}
+
+	private void autowire() {
+		Ctx.autowire(this);
 	}
 
 	@Override
@@ -144,6 +158,10 @@ public abstract class Widget implements Component, Decorator {
 
 	public final Script compile(Function function) {
 		return getRequest().compile(function);
+	}
+	
+	protected final Component compile(Value<?> value) {
+		return value.render(renderer);
 	}
 
 	@Override

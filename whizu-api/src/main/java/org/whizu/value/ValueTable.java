@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.whizu.dom.Component;
+
 /**
  * @author Rudy D'hauwe
  */
@@ -131,5 +133,10 @@ public class ValueTable<T extends ValueObject> /*extends AbstractValue<List<T>>*
 
 	public int size() {
 		return this.value.size();
+	}
+
+	@Override
+	public Component render(ValueRenderer renderer) {
+		return renderer.render(this);
 	}
 }

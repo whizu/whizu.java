@@ -31,9 +31,15 @@ public abstract class RequestContext {
 		INSTANCE = instance;
 	}
 	
+	public static RequestContext getINSTANCE() {
+		return INSTANCE;
+	}
+
 	public static final Request getRequest() {
 		return INSTANCE.getRequestImpl();
 	}
 	
 	protected abstract Request getRequestImpl();
+
+	public abstract void autowire(Object bean);
 }

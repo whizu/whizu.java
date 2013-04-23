@@ -55,7 +55,6 @@ public abstract class AbstractValue<T> implements Value<T> {
 	}
 
 	protected void firePropertyChange(String propertyName, T oldValue, T newValue) {
-		System.out.println("fire change " + oldValue + " wordt " + newValue);
 		changeSupport.firePropertyChange(propertyName, oldValue, newValue);
 	}
 

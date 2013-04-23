@@ -24,6 +24,7 @@
 package org.whizu.jquery;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.whizu.annotations.Bean;
 import org.whizu.dom.Content;
 import org.whizu.dom.Identity;
 import org.whizu.js.Expression;
@@ -32,6 +33,7 @@ import org.whizu.js.Script;
 /**
  * @author Rudy D'hauwe
  */
+@Bean("JQuery")
 class JQueryImpl extends Expression implements JQuery {
 
 	/*
@@ -50,6 +52,10 @@ class JQueryImpl extends Expression implements JQuery {
 
 	JQueryImpl(String selector) {
 		this.selector = selector;
+	}
+	
+	public JQueryImpl() {
+		
 	}
 
 	@Override

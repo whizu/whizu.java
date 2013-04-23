@@ -64,6 +64,11 @@ public abstract class AbstractTest {
 			protected Request getRequestImpl() {
 				return theRequest;
 			}
+
+			@Override
+			public void autowire(Object bean) {
+				//throw new UnsupportedOperationException();
+			}
 		});
 	}
 }

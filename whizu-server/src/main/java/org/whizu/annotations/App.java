@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.server;
+package org.whizu.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -23,11 +23,11 @@
  *******************************************************************************/
 package org.whizu.tutorial.echo;
 
+import org.whizu.annotations.App;
 import org.whizu.dom.Component;
 import org.whizu.layout.HorizontalLayout;
 import org.whizu.layout.Layout;
 import org.whizu.layout.VerticalLayout;
-import org.whizu.server.App;
 import org.whizu.ui.Application;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Form;

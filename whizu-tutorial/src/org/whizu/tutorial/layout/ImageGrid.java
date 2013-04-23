@@ -1,7 +1,7 @@
 package org.whizu.tutorial.layout;
 
+import org.whizu.annotations.App;
 import org.whizu.layout.GridLayout;
-import org.whizu.server.App;
 import org.whizu.ui.Application;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Image;

@@ -116,6 +116,11 @@ public class WhizuServlet extends HttpServlet {
 			protected final Request getRequestImpl() {
 				return RequestImpl.get();
 			}
+			
+			@Override
+			public void autowire(Object bean) {
+				//AnnotationScanner.ctx.getAutowireCapableBeanFactory().autowireBean(bean);
+			}
 		});
 
 		this.application = newInstance(config, INIT_PARAM_APPLICATION, null);
