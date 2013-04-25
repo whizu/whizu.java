@@ -1,4 +1,4 @@
-package org.whizu.annotations;
+package org.whizu.annotation;
 
 import java.lang.reflect.Method;
 

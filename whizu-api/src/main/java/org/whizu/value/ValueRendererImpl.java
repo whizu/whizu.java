@@ -3,7 +3,7 @@ package org.whizu.value;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.whizu.annotations.Instance;
+import org.whizu.annotation.Instance;
 import org.whizu.dom.Component;
 import org.whizu.layout.VerticalLayout;
 import org.whizu.ui.LabelImpl;

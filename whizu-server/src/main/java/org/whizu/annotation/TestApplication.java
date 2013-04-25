@@ -1,4 +1,4 @@
-package org.whizu.annotations;
+package org.whizu.annotation;
 
 import org.whizu.ui.Application;
 import org.whizu.ui.UI;

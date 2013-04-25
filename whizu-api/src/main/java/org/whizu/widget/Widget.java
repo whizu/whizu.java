@@ -26,7 +26,7 @@ package org.whizu.widget;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.whizu.annotations.Autowire;
+import org.whizu.annotation.Autowire;
 import org.whizu.context.Ctx;
 import org.whizu.dom.Component;
 import org.whizu.dom.Decorator;

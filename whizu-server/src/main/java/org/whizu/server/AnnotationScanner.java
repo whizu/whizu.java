@@ -28,9 +28,9 @@ import java.lang.annotation.Annotation;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.whizu.annotations.AnnotationDetector;
-import org.whizu.annotations.App;
-import org.whizu.annotations.Autowire;
+import org.whizu.annotation.AnnotationDetector;
+import org.whizu.annotation.App;
+import org.whizu.annotation.Autowire;
 import org.whizu.ui.Application;
 
 /**
@@ -72,7 +72,8 @@ class AnnotationScanner {
 					log.debug("@App found in " + className);
 					App ann = getClass(className).getAnnotation(App.class);
 					if (ann != null) {
-						config.addApplication(ann.uri(), newInstance(className));
+						ApplicationEnhancer enhancer = new ApplicationEnhancer();
+						config.addApplication(ann.uri(), enhancer.newInstance(className));
 					}
 				} else {
 					System.out.println("Andere @" + annotation + " in class " + className);

@@ -23,8 +23,9 @@
  *******************************************************************************/
 package org.whizu.tutorial.echo;
 
-import org.whizu.annotations.App;
-import org.whizu.annotations.Css;
+import org.whizu.annotation.App;
+import org.whizu.annotation.Css;
+import org.whizu.annotation.Style;
 import org.whizu.dom.Component;
 import org.whizu.layout.HorizontalLayout;
 import org.whizu.layout.Layout;
@@ -33,6 +34,7 @@ import org.whizu.ui.Application;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Form;
 import org.whizu.ui.FormImpl;
+import org.whizu.ui.Label;
 import org.whizu.ui.LabelImpl;
 import org.whizu.ui.OnSubmit;
 import org.whizu.ui.TextFieldImpl;
@@ -43,14 +45,11 @@ import org.whizu.value.StringValue;
 /**
  * @author Rudy D'hauwe
  */
-@App(uri = "/whizu/tutorial/echo") //@App(uri = "/whizu/tutorial/echo", css="/theme.css")
+@App(uri = "/whizu/tutorial/echo")
 @Css(uri = "/theme.css")
-//@Css(uri = Echo.STYLESHEET)
-//@Css(Echo.STYLESHEET)
 public class Echo implements Application {
 
-	//protected static final String STYLESHEET = "/theme.css";
-
+	@Css("message")
 	private final StringValue input = new StringValue("input");
 
 	private final IntegerValue commentCount = new IntegerValue("count");
@@ -71,24 +70,25 @@ public class Echo implements Application {
 		return new HorizontalLayout().add(left()).add(right());
 	}
 
-	@Css("left-column") //doesn't work yet - unimplemented
+	@Css("left-column")
 	private Component left() {
-		return new VerticalLayout().css("left-column")
+		return new VerticalLayout() //.css("left-column")
 				.add(new LabelImpl("Welcome to your very first meet and greet with Whizu."))
-				.add(new LabelImpl("Share a thought and allow for Whizu to echo your words.")).add(form());
+				.add(new LabelImpl("Share a thought and allow for Whizu to echo your words."))
+				.add(form());
 	}
 
-	@Css("form") //doesn't work yet - unimplemented
+	@Css("form")
 	private Form form() {
 		Form form = new FormImpl();
-		form.css("form");
 		form.add(textfield());
 		form.add(button());
 		return form;
 	}
 
+	@Css("submit-button")
 	private Component button() {
-		return new LabelImpl("Share").css("submit-button").addClickListener(new ClickListener() {
+		return new LabelImpl("Share").addClickListener(new ClickListener() {
 
 			@Override
 			public void click() {
@@ -99,27 +99,20 @@ public class Echo implements Application {
 
 	@Css("message")
 	private Component textfield() {
-		return new TextFieldImpl(input).css("message");
+		return new TextFieldImpl(input);//.css("message");
 	}
 
 	@Css("right-column")
-	//@Css(name="right-column")
-	//@Style(name="right-column", style="width:80px;border:solid 1px black;")
-	//@Css(name="right-column", style="width:80px;border:solid 1px black;")
+	@Style("width:600px;margin-top:20px;display:inline-block;")
+	//@Width("600px"
+	//@Display(Display.INLINE_BLOCK)
 	private Component right() {
-		return new VerticalLayout().css("right-column")
-				.add(new LabelImpl("Thank you for sharing $1 comments.", commentCount).css("tekst")).add(commentList);
+		@Css("tekst")
+		Label l = new LabelImpl("Thank you for sharing $1 comments.", commentCount).css("tekst");
+		
+		return new VerticalLayout()//.css("right-column")
+				.add(l).add(commentList);
 	}
-	
-	/*
-	//@Css 
-	@Theme
-	private Style theme() { //private Stylesheet theme()
-		return new Style()
-			.define(".right-column").width("60px").border("solid 1px black")
-			.define(".left-column").width("300px");
-	}
-	*/
 
 	@OnSubmit
 	public void submit() {

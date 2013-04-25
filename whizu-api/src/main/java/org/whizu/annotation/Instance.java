@@ -1,4 +1,4 @@
-package org.whizu.annotations;
+package org.whizu.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

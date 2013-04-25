@@ -32,7 +32,9 @@ import org.whizu.jquery.Input;
 import org.whizu.value.StringValue;
 import org.whizu.widget.Widget;
 
-
+/**
+ * @author Rudy D'hauwe
+ */
 public class TextFieldImpl extends Widget implements TextField, Input {
 
 	private String text;
@@ -66,7 +68,7 @@ public class TextFieldImpl extends Widget implements TextField, Input {
 						.attr("type", "text")
 						.width("300px")
 						.attr("name", id())
-						.css(style)
+						.decorate(this)
 						.style("display","inline-block")
 						.add(text);
 		// @formatter:on

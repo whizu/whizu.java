@@ -30,6 +30,9 @@ import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Set;
 
+import javassist.ClassPool;
+import javassist.NotFoundException;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +43,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.whizu.annotations.Css;
+import org.whizu.annotation.Bean;
+import org.whizu.annotation.Css;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
 import org.whizu.jquery.Request;
@@ -71,12 +75,12 @@ public class WhizuServlet extends HttpServlet {
 	private static final String WHIZU_SESSION = "whizu-session";
 
 	private static final Configuration DEFAULT_CONFIG = new Configuration() {
-		
+
 		@Override
 		protected void init() {
 		}
 	};
-	
+
 	private static String fromStream(InputStream in) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		StringBuilder out = new StringBuilder();
@@ -117,10 +121,10 @@ public class WhizuServlet extends HttpServlet {
 			protected final Request getRequestImpl() {
 				return RequestImpl.get();
 			}
-			
+
 			@Override
 			public void autowire(Object bean) {
-				//AnnotationScanner.ctx.getAutowireCapableBeanFactory().autowireBean(bean);
+				// AnnotationScanner.ctx.getAutowireCapableBeanFactory().autowireBean(bean);
 			}
 		});
 
@@ -207,6 +211,8 @@ public class WhizuServlet extends HttpServlet {
 		final Application app = config.getApplication(uri);
 		if (app != null) {
 			debug("Application to setup found:" + app);
+			System.out.println("**Annotation is present " + app.getClass().isAnnotationPresent(Bean.class));
+
 			// String content = app.create();
 			InputStream in = getClass().getResourceAsStream("/org/whizu/jquery/mobile/page.html");
 			// request.getServletContext().getResourceAsStream("/org/whizu/jquery/mobile/page.html");
@@ -227,7 +233,7 @@ public class WhizuServlet extends HttpServlet {
 						app.init(new WhizuUI());
 					}
 				});
-				
+
 				Css ann = app.getClass().getAnnotation(Css.class);
 				if (ann != null) {
 					String cssUri = ann.uri();
@@ -236,7 +242,7 @@ public class WhizuServlet extends HttpServlet {
 				} else {
 					content = content.replace("${css}", "");
 				}
-				
+
 				return content;
 			} catch (IOException e) {
 				e.printStackTrace();

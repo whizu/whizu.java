@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.annotations;
+package org.whizu.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -32,8 +32,8 @@ import java.lang.annotation.Target;
  * @author Rudy D'hauwe
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface App {
+@Target({ElementType.TYPE, ElementType.METHOD})
+public @interface Style {
 
-	public String uri();
+	public String[] value() default {};
 }

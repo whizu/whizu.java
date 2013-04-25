@@ -24,4 +24,4 @@
   Contributors:
       2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  */
-package org.whizu.annotations;
+package org.whizu.annotation;

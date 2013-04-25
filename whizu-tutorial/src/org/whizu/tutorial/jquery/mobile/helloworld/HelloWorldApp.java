@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.jquery.mobile.helloworld;
 
-import org.whizu.annotations.App;
+import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.Theme;
