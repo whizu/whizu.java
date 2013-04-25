@@ -33,7 +33,7 @@ import org.whizu.dom.Component;
 /**
  * @author Rudy D'hauwe
  */
-public class ValueTable<T extends ValueObject> /*extends AbstractValue<List<T>>*/ implements Value<List<T>> {
+public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T>, List<T>> {
 
 	private Class<T> clazz;
 
@@ -47,9 +47,11 @@ public class ValueTable<T extends ValueObject> /*extends AbstractValue<List<T>>*
 	public List<T> value = new ArrayList<T>();
 
 	public ValueTable() {
+		super("table");
 	}
 
 	public ValueTable(Class<T> clazz) {
+		this();
 		this.clazz = clazz;
 		this.clazzName = clazz.getName();
 		// this.sampleValueObject = createNew();
@@ -138,5 +140,10 @@ public class ValueTable<T extends ValueObject> /*extends AbstractValue<List<T>>*
 	@Override
 	public Component render(ValueRenderer renderer) {
 		return renderer.render(this);
+	}
+
+	@Override
+	protected List<T> getDefaultValue() {
+		return new ArrayList<T>();
 	}
 }

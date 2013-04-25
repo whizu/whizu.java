@@ -160,7 +160,7 @@ public abstract class Widget implements Component, Decorator {
 		return getRequest().compile(function);
 	}
 	
-	protected final Component compile(Value<?> value) {
+	protected final Component compile(Value value) {
 		return value.render(renderer);
 	}
 

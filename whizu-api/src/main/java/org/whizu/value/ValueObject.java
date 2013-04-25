@@ -28,5 +28,5 @@ package org.whizu.value;
  */
 public interface ValueObject {
 	
-	public Value<?>[] getColumns();
+	public Value[] getColumns();
 }

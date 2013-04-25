@@ -43,7 +43,7 @@ public class LabelImpl extends Widget implements Label {
 
 	private String text;
 
-	private Value<?> value;
+	private Value value;
 
 	public LabelImpl(String text) {
 		this.text = text;
@@ -54,7 +54,7 @@ public class LabelImpl extends Widget implements Label {
 		addClickListener(clickListener);
 	}
 
-	public LabelImpl(Value<?> value) {
+	public LabelImpl(Value value) {
 		this(value.toString());
 		this.value = value;
 		value.addPropertyChangeListener(new PropertyChangeListener() {

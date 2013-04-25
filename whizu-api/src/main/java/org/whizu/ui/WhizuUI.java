@@ -115,14 +115,14 @@ public class WhizuUI implements UI {
 	}
 
 	@Override
-	public Label createLabel(String text, Value<?> arg) {
+	public Label createLabel(String text, Value arg) {
 		Label valueLabel = createLabel(arg);
 		valueLabel.css("teller");
 		return createLabel(text, valueLabel);
 	}
 
 	@Override
-	public Label createLabel(Value<?> value) {
+	public Label createLabel(Value value) {
 		return new LabelImpl(value);
 	}
 

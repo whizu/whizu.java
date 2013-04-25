@@ -30,13 +30,13 @@ import org.whizu.dom.Component;
 /**
  * @author Rudy D'hauwe
  */
-public interface Value<T> {
+public interface Value {
 
 	public void addPropertyChangeListener(PropertyChangeListener listener);
 	
 	public String getName();
 	
-	public T getValue();
+	//public T getValue();
 
 	public boolean isReadOnly();
 

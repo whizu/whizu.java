@@ -33,7 +33,7 @@ import org.whizu.dom.Component;
 /**
  * @author Rudy D'hauwe
  */
-public class ValueList<T extends ValueObject> implements Value<List<T>> {
+public class ValueList<T extends ValueObject> extends ValueBuilder<ValueList<T>, List<T>> {
 
 	private Class<T> clazz;
 
@@ -45,9 +45,11 @@ public class ValueList<T extends ValueObject> implements Value<List<T>> {
 	private PropertyChangeListener listener;
 
 	public ValueList() {
+		super("list");
 	}
 
 	public ValueList(Class<T> clazz) {
+		this();
 		this.clazz = clazz;
 		this.clazzName = clazz.getName();
 		// this.sampleValueObject = createNew();
@@ -140,5 +142,10 @@ public class ValueList<T extends ValueObject> implements Value<List<T>> {
 	@Override
 	public Component render(ValueRenderer renderer) {
 		return renderer.render(this);
+	}
+
+	@Override
+	protected List<T> getDefaultValue() {
+		return new ArrayList<T>();
 	}
 }

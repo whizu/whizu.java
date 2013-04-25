@@ -38,7 +38,7 @@ public class Comment extends AbstractValueObject {
 	public final StringValue message = new StringValue("message");
 
 	@Override
-	public Value<?>[] getColumns() {
+	public Value[] getColumns() {
 		return new Value[]{datetime, message};
 	}
 }

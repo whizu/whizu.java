@@ -28,5 +28,5 @@ package org.whizu.value;
  */
 public abstract class AbstractValueObject implements ValueObject {
 
-	public abstract Value<?>[] getColumns();
+	public abstract Value[] getColumns();
 }
