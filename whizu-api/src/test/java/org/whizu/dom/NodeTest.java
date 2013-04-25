@@ -24,6 +24,7 @@
 package org.whizu.dom;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -436,6 +437,15 @@ public class NodeTest extends AbstractTest {
 		node.style("border", "solid 1px black");
 		node.style("height", "40px");
 		equals("<div style='height:40px;border:solid 1px black;'></div>", node);
+	}
+	
+	/**
+	 * Test method for
+	 * {@link org.whizu.dom.Node#style(java.lang.String)}.
+	 */
+	@Test
+	public void testStyleString() {
+		fail("Not yet implemented");
 	}
 
 	/**

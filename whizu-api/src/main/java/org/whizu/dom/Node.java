@@ -29,6 +29,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * The void elements in HTML 4.01/XHTML 1.0 Strict are area, base, br, col, hr,
  * img, input, link, meta, and param. HTML5 currently adds command, keygen, and
@@ -36,7 +38,7 @@ import java.util.Map;
  * 
  * @author Rudy D'hauwe
  */
-//public class Node<T extends Node<T>> implements Element {
+// public class Node<T extends Node<T>> implements Element {
 public class Node implements Element {
 
 	private Map<String, String> attrs = new HashMap<String, String>();
@@ -64,20 +66,20 @@ public class Node implements Element {
 
 	@Override
 	public Element add(Content element) {
-		if(selfClosing) {
+		if (selfClosing) {
 			throw new IllegalStateException("A self-closing element must not add content");
 		}
-		
+
 		contents.add(element);
 		return this;
 	}
 
 	@Override
 	public Element add(Content... elements) {
-		if(selfClosing) {
+		if (selfClosing) {
 			throw new IllegalStateException("A self-closing element must not add content");
 		}
-		
+
 		for (Content part : elements) {
 			add(part);
 		}
@@ -86,10 +88,10 @@ public class Node implements Element {
 
 	@Override
 	public <E> Element add(Foreach<E> factory) {
-		if(selfClosing) {
+		if (selfClosing) {
 			throw new IllegalStateException("A self-closing element must not add content");
 		}
-		
+
 		Iterator<E> it = factory.iterator();
 		while (it.hasNext()) {
 			E item = it.next();
@@ -100,20 +102,20 @@ public class Node implements Element {
 
 	@Override
 	public <E extends Content> Element add(List<E> content) {
-		if(selfClosing) {
+		if (selfClosing) {
 			throw new IllegalStateException("A self-closing element must not add content");
 		}
-		
+
 		contents.add(content);
 		return this;
 	}
 
 	@Override
 	public Element add(String text) {
-		if(selfClosing) {
+		if (selfClosing) {
 			throw new IllegalStateException("A self-closing element must not add content");
 		}
-		
+
 		return add(new Literal(text));
 	}
 
@@ -267,5 +269,16 @@ public class Node implements Element {
 	public Element css(List<String> cssList) {
 		this.cssList.addAll(cssList);
 		return this;
+	}
+
+	@Override
+	public void style(String style) {
+		if (!StringUtils.equals(style, "")) {
+			String[] styleList = style.split(";");
+			for (String element : styleList) {
+				String[] pair = element.split(":");
+				this.style(pair[0], pair[1]);
+			}
+		}
 	}
 }

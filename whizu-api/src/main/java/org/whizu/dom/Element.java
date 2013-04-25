@@ -161,4 +161,9 @@ public interface Element extends Markup, Identity {
 	 * @return this
 	 */
 	public Element css(List<String> clazzList);
+
+	/**
+	 * @return this
+	 */
+	public void style(String style);
 }

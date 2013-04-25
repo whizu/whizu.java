@@ -26,6 +26,7 @@ package org.whizu.widget;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.whizu.annotation.Autowire;
 import org.whizu.context.Ctx;
 import org.whizu.dom.Component;
@@ -60,6 +61,8 @@ public abstract class Widget implements Component, Decorator {
 
 	protected String width = null;
 	
+	private StringBuffer style = new StringBuffer();
+	
 	//@Autowired
 	@Autowire
 	public ValueRenderer renderer = new ValueRendererImpl();
@@ -86,8 +89,14 @@ public abstract class Widget implements Component, Decorator {
 	
 	@Override
 	public void style(String style) {
-		// TODO Auto-generated method stub
-		
+		this.style.append(style);
+		if (!StringUtils.endsWith(style, ";")) {
+			this.style.append(';');
+		}
+
+		if (this.isRendered()) {
+			throw new UnsupportedOperationException();
+		}
 	}
 
 	protected Request getRequest() {
@@ -173,7 +182,7 @@ public abstract class Widget implements Component, Decorator {
 			throw new IllegalStateException("This component is already rendered: " + this);
 		}
 
-		element.css(cssList).width(width);
+		element.css(cssList).width(width).style(style.toString());
 	}
 
 	protected void init() {

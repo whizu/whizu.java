@@ -71,6 +71,7 @@ public class Echo implements Application {
 	}
 
 	@Css("left-column")
+	//@Style("width:450px")
 	private Component left() {
 		return new VerticalLayout() //.css("left-column")
 				.add(new LabelImpl("Welcome to your very first meet and greet with Whizu."))
@@ -102,8 +103,8 @@ public class Echo implements Application {
 		return new TextFieldImpl(input);//.css("message");
 	}
 
-	@Css("right-column")
-	@Style("width:600px;margin-top:20px;display:inline-block;")
+	//@Css("right-column")
+	@Style("width:500px;margin-top:20px;")
 	private Component right() {
 		@Css("tekst")
 		Label l = new LabelImpl("Thank you for sharing $1 comments.", commentCount).css("tekst");
