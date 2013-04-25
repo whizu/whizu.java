@@ -31,7 +31,6 @@ import org.apache.commons.logging.LogFactory;
 import org.whizu.annotation.AnnotationDetector;
 import org.whizu.annotation.App;
 import org.whizu.annotation.Autowire;
-import org.whizu.ui.Application;
 
 /**
  * @author Rudy D'hauwe
@@ -84,14 +83,6 @@ class AnnotationScanner {
 				try {
 					return Class.forName(className);
 				} catch (ClassNotFoundException e) {
-					throw new IllegalArgumentException();
-				}
-			}
-
-			private Application newInstance(String className) {
-				try {
-					return (Application) getClass(className).newInstance();
-				} catch (InstantiationException | IllegalAccessException e) {
 					throw new IllegalArgumentException();
 				}
 			}

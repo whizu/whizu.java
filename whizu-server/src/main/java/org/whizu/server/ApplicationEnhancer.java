@@ -35,11 +35,13 @@ import javassist.bytecode.AnnotationsAttribute;
 import javassist.bytecode.ClassFile;
 import javassist.bytecode.ConstPool;
 import javassist.bytecode.annotation.Annotation;
-import javassist.bytecode.annotation.IntegerMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.whizu.annotation.Bean;
 import org.whizu.annotation.Css;
+import org.whizu.annotation.Style;
 import org.whizu.dom.Component;
 import org.whizu.ui.Application;
 
@@ -48,9 +50,14 @@ import org.whizu.ui.Application;
  */
 public class ApplicationEnhancer {
 
+	private Log log = LogFactory.getLog(ApplicationEnhancer.class);
+
 	public Application newInstance(String className) {
 		try {
-			System.out.println("enhancing class " + className);
+			if (log.isDebugEnabled()) {
+				log.debug("Enhancing class " + className);
+			}
+			
 			ClassPool classPool = ClassPool.getDefault();
 			CtClass ctClass = classPool.get(className);
 			CtClass[] nested = ctClass.getNestedClasses();
@@ -59,42 +66,26 @@ public class ApplicationEnhancer {
 			for (CtMethod method : ctMethods) {
 				System.out.println(method);
 
-				if (method.hasAnnotation(Css.class)) {
-					System.out.println("Enhancing " + method);
-
-					String oldName = method.getName();
-					// String newName = method.getName() + "_";
-					// method.setName(newName);
-
-					// CtMethod newmethod = CtNewMethod.make("public void " +
-					// oldName + () {
-					// System.out.println(\"test ok\"); }",ctclass);
-					// ctclass.addMethod(newmethod);
+				if (method.hasAnnotation(Css.class) || (method.hasAnnotation(Style.class))) {
+					if (log.isDebugEnabled()) {
+						log.debug("Enhancing method " + method);
+					}
 					methodsToDo.add(method);
-					// method.insertBefore("System.out.println(\"before\" " +
-					// oldName + ");");
 				}
 			}
 
 			for (CtMethod method : methodsToDo) {
 				System.out.println("To Enhance: " + method);
 				final Css annot = (Css) method.getAnnotation(Css.class);
-				final String mn = method.getName();
-				// method.insertBefore("System.out.println(\"before " +
-				// method.getName() + "\");");
-				method.insertAfter("System.out.println($_); org.whizu.server.ApplicationEnhancer.doIt(\""
-						+ annot.value()[0] + "\", $_);");
-				/*
-				 * method.instrument(new ExprEditor() { public void
-				 * edit(MethodCall m) throws CannotCompileException {
-				 * m.replace("{ System.out.println(\"move" + mn +
-				 * "\"); $_ = org.whizu.server.ApplicationEnhancer.doIt(\"" +
-				 * annot.value()[0] + "\", $proceed($$)); }");
-				 * //m.replace("{ System.out.println(\"move" + mn +
-				 * "\"); $_ = $proceed($$).css(\"" + annot.uri() + "\"); }"); }
-				 * });
-				 */
+				if (annot != null) {
+					// method.insertAfter("System.out.println($_);");
+					method.insertAfter("org.whizu.server.ApplicationEnhancer.doIt(\"" + annot.value()[0] + "\", $_);");
+				}
 
+				final Style sannot = (Style) method.getAnnotation(Style.class);
+				if (sannot != null) {
+					method.insertAfter("org.whizu.server.ApplicationEnhancer.style(\"" + sannot.value()[0] + "\", $_);");
+				}
 			}
 
 			for (CtClass n : nested) {
@@ -111,7 +102,7 @@ public class ApplicationEnhancer {
 			annot.addMemberValue("value", new StringMemberValue("hello", ccFile.getConstPool()));
 			attr.addAnnotation(annot);
 			ccFile.addAttribute(attr);
-			
+
 			Application app = (Application) ctClass.toClass().newInstance();
 			System.out.println("Enhanced CLASS is " + app.getClass());
 			Class<?> appClass = app.getClass();
@@ -123,7 +114,6 @@ public class ApplicationEnhancer {
 		} finally {
 		}
 	}
-
 	public static Object doIt(Object arg) {
 		System.out.println("do " + arg);
 		return arg;
@@ -136,12 +126,12 @@ public class ApplicationEnhancer {
 		}
 		return arg;
 	}
-	
-	private Application create(String className) {
-		try {
-			return (Application) Class.forName(className).newInstance();
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			throw new IllegalArgumentException();
+
+	public static Object style(String css, Object arg) {
+		if (arg instanceof Component) {
+			System.out.println("Apply style " + css + " to " + arg);
+			((Component) arg).style(css);
 		}
+		return arg;
 	}
 }

@@ -99,7 +99,7 @@
 		<mkdir dir="${docs}/api" />
 
 		<javadoc packagenames="org.whizu.*" sourcepath="${src}:${src-server}:${src-jquery-mobile}" defaultexcludes="yes" destdir="${docs}/api" author="true" version="true" use="true" windowtitle="Whizu API">
-			<doctitle><![CDATA[<h1>Whizu</h1>]]></doctitle>
+			<doctitle><![CDATA[Whizu]]></doctitle>
 			<bottom><![CDATA[<i>Copyright &#169; 2013 Rudy D'hauwe @ Whizu. All Rights Reserved.</i>]]></bottom>
 			<tag name="todo" scope="all" description="To do:" />
 			<link href="http://download.oracle.com/javase/7/docs/api/" />

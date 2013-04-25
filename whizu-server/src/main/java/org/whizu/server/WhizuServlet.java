@@ -30,9 +30,6 @@ import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Set;
 
-import javassist.ClassPool;
-import javassist.NotFoundException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

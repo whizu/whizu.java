@@ -37,4 +37,6 @@ public interface Component extends Content, Identity {
 	public Component css(String clazz);
 
 	public void width(String width);
+
+	public void style(String style);
 }

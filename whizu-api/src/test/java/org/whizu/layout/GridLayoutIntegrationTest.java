@@ -78,6 +78,12 @@ public class GridLayoutIntegrationTest {
 			@Override
 			public void width(String width) {
 			}
+
+			@Override
+			public void style(String style) {
+				// TODO Auto-generated method stub
+				
+			}
 		};
 		return myComponent;
 	}

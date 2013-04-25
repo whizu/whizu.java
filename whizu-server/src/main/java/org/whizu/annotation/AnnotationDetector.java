@@ -98,7 +98,7 @@ import java.util.Set;
  * <li><a href="http://community.jboss.org/wiki/MCScanninglib">JBoss MC Scanning lib</a>;</li>
  * <li><a href="http://code.google.com/p/reflections/">Google Reflections</a>, in fact an improved
  * version of <a href="http://scannotation.sourceforge.net/">scannotation</a>;</li>
- * <li><a herf="https://github.com/ngocdaothanh/annovention">annovention</a>, improved version of
+ * <li><a href="https://github.com/ngocdaothanh/annovention">annovention</a>, improved version of
  * the <a href="http://code.google.com/p/annovention">original Annovention</a> project. Available
  * from maven: {@code tv.cntt:annovention:1.2};</li>
  * <li>If using the Spring Framework, 

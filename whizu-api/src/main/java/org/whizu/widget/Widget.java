@@ -56,9 +56,6 @@ public abstract class Widget implements Component, Decorator {
 
 	private State state = State.NEW;
 
-	@Deprecated
-	protected String style = null;
-
 	private List<String> cssList = new ArrayList<String>();
 
 	protected String width = null;
@@ -85,6 +82,12 @@ public abstract class Widget implements Component, Decorator {
 		}
 
 		return this;
+	}
+	
+	@Override
+	public void style(String style) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	protected Request getRequest() {

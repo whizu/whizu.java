@@ -104,8 +104,6 @@ public class Echo implements Application {
 
 	@Css("right-column")
 	@Style("width:600px;margin-top:20px;display:inline-block;")
-	//@Width("600px"
-	//@Display(Display.INLINE_BLOCK)
 	private Component right() {
 		@Css("tekst")
 		Label l = new LabelImpl("Thank you for sharing $1 comments.", commentCount).css("tekst");
