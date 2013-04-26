@@ -25,6 +25,7 @@ package org.whizu.tutorial.barchart;
 
 import java.util.Date;
 
+import org.whizu.annotation.Title;
 import org.whizu.jquery.Function;
 import org.whizu.layout.Layout;
 import org.whizu.ui.Application;
@@ -41,7 +42,7 @@ import org.whizu.value.StringValue;
  */
 public class BarChart implements Application {
 
-	@Override
+	@Title
 	public String getTitle() {
 		return "My BarChart Tutorial";
 	}

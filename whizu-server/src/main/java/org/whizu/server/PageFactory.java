@@ -21,50 +21,30 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.tutorial.layout;
+package org.whizu.server;
 
-import org.whizu.annotation.Page;
-import org.whizu.annotation.Title;
-import org.whizu.dom.Component;
-import org.whizu.layout.GridLayout;
 import org.whizu.ui.Application;
-import org.whizu.ui.ClickListener;
-import org.whizu.ui.Document;
-import org.whizu.ui.UI;
 
 /**
  * @author Rudy D'hauwe
  */
-@Page("/whizu/gridlayout")
-@Title("My GridLayout Tutorial")
-public class GridLayoutTutorial implements Application {
+class PageFactory {
 
-	@Override
-	public void init(final UI ui) {
-		Document document = ui.getDocument();
+	// private Log log = LogFactory.getLog(ApplicationFactory.class);
 
-		final GridLayout grid = new GridLayout(2);
-		grid.add(ui.createLabel("FirstLabel")).add(ui.createLabel("SecondLabel")).add(ui.createLabel("ThirdLabel"));
+	private Class<Application> applicationClass;
 
-		document.add(grid);
+	public PageFactory(Class<Application> applicationClass) {
+		this.applicationClass = applicationClass;
+	}
 
-		Component emptyButton = ui.createButton("Empty").addClickListener(new ClickListener() {
-
-			@Override
-			public void click() {
-				grid.empty();
-			}
-		});
-		document.add(emptyButton);
-
-		Component addButton = ui.createButton("Add").addClickListener(new ClickListener() {
-			int i = 0;
-			
-			@Override
-			public void click() {
-				grid.add(ui.createLabel("Label " + (i++)));
-			}
-		});
-		document.add(addButton);
+	public Application createInstance() {
+		try {
+			return applicationClass.newInstance();
+		} catch (InstantiationException e) {
+			throw new IllegalStateException(e);
+		} catch (IllegalAccessException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 }

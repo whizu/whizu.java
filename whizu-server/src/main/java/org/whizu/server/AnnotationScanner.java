@@ -72,7 +72,7 @@ class AnnotationScanner {
 					Page ann = getClass(className).getAnnotation(Page.class);
 					if (ann != null) {
 						ApplicationEnhancer enhancer = new ApplicationEnhancer();
-						config.addApplication(ann.value(), enhancer.newInstance(className));
+						config.addApplication(ann.value(), enhancer.createFactory(className));
 					}
 				} else {
 					System.out.println("Andere @" + annotation + " in class " + className);

@@ -26,27 +26,36 @@ package org.whizu.server;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.whizu.ui.Application;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class Configuration {
+class Configuration {
 
-	private Map<String, Application> applicationMap = new HashMap<String, Application>();
-	
-	public Configuration() {
-		init();
+	private Log log = LogFactory.getLog(Configuration.class);
+
+	private Map<String, PageFactory> applicationFactoryMap = new HashMap<String, PageFactory>();
+
+	public void addApplication(String uri, PageFactory application) {
+		applicationFactoryMap.put(uri, application);
+		applicationFactoryMap.put(uri + "/", application);
 	}
-	
-	public void addApplication(String uri, Application application) {
-		applicationMap.put(uri, application);
-		applicationMap.put(uri+"/", application);
-	}
-	
+
+	/**
+	 * @return null if @Page(uri) has not been defined on any class
+	 */
 	public Application getApplication(String uri) {
-		return applicationMap.get(uri);
+		PageFactory factory = applicationFactoryMap.get(uri);
+		if (factory != null) {
+			return factory.createInstance();
+		} else {
+			if (log.isDebugEnabled()) {
+				log.debug("No @Page has been defined for uri " + uri);
+			}
+			return null;
+		}
 	}
-
-	protected abstract void init();
 }

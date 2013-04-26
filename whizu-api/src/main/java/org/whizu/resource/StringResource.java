@@ -21,17 +21,11 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.tutorial;
+package org.whizu.resource;
 
-import org.whizu.jquery.mobile.JQueryMobileApp;
-import org.whizu.server.Configuration;
-import org.whizu.tutorial.jquery.mobile.helloworld.HelloWorldApp;
+/**
+ * @author Rudy D'hauwe
+ */
+public class StringResource implements Resource {
 
-public class WhizuConfiguration extends Configuration {
-
-	@Override
-	public void init() {
-		addApplication("/whizu/jquery/mobile/helloworld", new JQueryMobileApp());
-		addApplication("/whizu/jqm/helloworld", new HelloWorldApp());
-	}
 }

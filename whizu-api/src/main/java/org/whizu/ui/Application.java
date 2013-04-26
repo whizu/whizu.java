@@ -28,7 +28,5 @@ package org.whizu.ui;
  */
 public interface Application {
 
-	public String getTitle();
-
 	public void init(UI ui);
 }

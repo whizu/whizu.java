@@ -21,50 +21,21 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.tutorial.layout;
+package org.whizu.annotation;
 
-import org.whizu.annotation.Page;
-import org.whizu.annotation.Title;
-import org.whizu.dom.Component;
-import org.whizu.layout.GridLayout;
-import org.whizu.ui.Application;
-import org.whizu.ui.ClickListener;
-import org.whizu.ui.Document;
-import org.whizu.ui.UI;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Rudy D'hauwe
  */
-@Page("/whizu/gridlayout")
-@Title("My GridLayout Tutorial")
-public class GridLayoutTutorial implements Application {
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD})
+public @interface Title {
 
-	@Override
-	public void init(final UI ui) {
-		Document document = ui.getDocument();
+	public static final String DEFAULT_TITLE = "Ridiculously fast web apps | Whizu";
 
-		final GridLayout grid = new GridLayout(2);
-		grid.add(ui.createLabel("FirstLabel")).add(ui.createLabel("SecondLabel")).add(ui.createLabel("ThirdLabel"));
-
-		document.add(grid);
-
-		Component emptyButton = ui.createButton("Empty").addClickListener(new ClickListener() {
-
-			@Override
-			public void click() {
-				grid.empty();
-			}
-		});
-		document.add(emptyButton);
-
-		Component addButton = ui.createButton("Add").addClickListener(new ClickListener() {
-			int i = 0;
-			
-			@Override
-			public void click() {
-				grid.add(ui.createLabel("Label " + (i++)));
-			}
-		});
-		document.add(addButton);
-	}
+	public String value() default DEFAULT_TITLE;
 }

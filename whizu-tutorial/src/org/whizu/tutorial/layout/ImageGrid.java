@@ -11,11 +11,6 @@ import org.whizu.ui.UI;
 public class ImageGrid implements Application {
 
 	@Override
-	public String getTitle() {
-		return "myGrid";
-	}
-
-	@Override
 	public void init(final UI ui) {
 		final GridLayout grid = new GridLayout(8);
 		for (int i=0; i<64; i++) {

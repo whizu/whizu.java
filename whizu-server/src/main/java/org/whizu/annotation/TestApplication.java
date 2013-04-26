@@ -5,10 +5,8 @@ import org.whizu.ui.UI;
 
 public class TestApplication implements Application {
 
-	@Override
-	@Css
+	@Title
 	public String getTitle() {
-		System.out.println("get title");
 		return "the-title";
 	}
 

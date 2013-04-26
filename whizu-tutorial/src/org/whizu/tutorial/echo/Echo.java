@@ -23,9 +23,10 @@
  *******************************************************************************/
 package org.whizu.tutorial.echo;
 
-import org.whizu.annotation.Page;
 import org.whizu.annotation.Css;
+import org.whizu.annotation.Page;
 import org.whizu.annotation.Style;
+import org.whizu.annotation.Title;
 import org.whizu.dom.Component;
 import org.whizu.layout.HorizontalLayout;
 import org.whizu.layout.Layout;
@@ -46,6 +47,7 @@ import org.whizu.value.StringValue;
  * @author Rudy D'hauwe
  */
 @Page("/whizu/tutorial/echo")
+@Title("Echo")
 @Css(uri = "/theme.css")
 public class Echo implements Application {
 
@@ -55,11 +57,6 @@ public class Echo implements Application {
 	private final IntegerValue commentCount = new IntegerValue("count");
 
 	private final CommentList commentList = new CommentList();
-
-	@Override
-	public String getTitle() {
-		return "Echo";
-	}
 
 	@Override
 	public void init(final UI ui) {

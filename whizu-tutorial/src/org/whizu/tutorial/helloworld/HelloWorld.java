@@ -25,6 +25,7 @@ package org.whizu.tutorial.helloworld;
 
 import java.util.Date;
 
+import org.whizu.annotation.Title;
 import org.whizu.layout.Layout;
 import org.whizu.ui.Application;
 import org.whizu.ui.ClickListener;
@@ -40,7 +41,7 @@ import org.whizu.value.StringValue;
  */
 public class HelloWorld implements Application {
 
-	@Override
+	@Title
 	public String getTitle() {
 		return "Hello World";
 	}

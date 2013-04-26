@@ -36,11 +36,6 @@ public class JQueryMobileApp implements Application {
 	private UI ui = new WhizuUI();
 
 	@Override
-	public String getTitle() {
-		return "jQuery Mobile";
-	}
-
-	@Override
 	public void init(UI ui) {
 		this.ui = ui;
 		ui.getDocument().add(ui.createLabel("hello there"));

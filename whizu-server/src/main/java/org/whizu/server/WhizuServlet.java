@@ -42,6 +42,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.whizu.annotation.Bean;
 import org.whizu.annotation.Css;
+import org.whizu.annotation.Title;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
 import org.whizu.jquery.Request;
@@ -65,18 +66,13 @@ public class WhizuServlet extends HttpServlet {
 	/**
 	 * The class name of the Configuration implementation class.
 	 */
-	public static final String INIT_PARAM_CONFIG = "config";
+	//public static final String INIT_PARAM_CONFIG = "config";
 
 	private static final long serialVersionUID = 520182899630886403L;
 
 	private static final String WHIZU_SESSION = "whizu-session";
 
-	private static final Configuration DEFAULT_CONFIG = new Configuration() {
-
-		@Override
-		protected void init() {
-		}
-	};
+	//private static final Configuration DEFAULT_CONFIG = new Configuration();
 
 	private static String fromStream(InputStream in) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -93,7 +89,7 @@ public class WhizuServlet extends HttpServlet {
 	@Deprecated
 	private Application application;
 
-	private Configuration config;
+	private Configuration config = new Configuration();
 
 	private Session assureUserSession(HttpSession session) {
 		Session userSession = (Session) session.getAttribute(WHIZU_SESSION);
@@ -126,7 +122,7 @@ public class WhizuServlet extends HttpServlet {
 		});
 
 		this.application = newInstance(config, INIT_PARAM_APPLICATION, null);
-		this.config = newInstance(config, INIT_PARAM_CONFIG, DEFAULT_CONFIG);
+		//this.config = newInstance(config, INIT_PARAM_CONFIG, DEFAULT_CONFIG);
 		new AnnotationScanner().scan(this.config);
 	}
 
@@ -208,7 +204,8 @@ public class WhizuServlet extends HttpServlet {
 		final Application app = config.getApplication(uri);
 		if (app != null) {
 			debug("Application to setup found:" + app);
-			System.out.println("**Annotation is present " + app.getClass().isAnnotationPresent(Bean.class));
+			Class<? extends Application> clazz = app.getClass();
+			System.out.println("**Annotation is present " + clazz.isAnnotationPresent(Bean.class));
 
 			// String content = app.create();
 			InputStream in = getClass().getResourceAsStream("/org/whizu/jquery/mobile/page.html");
@@ -216,7 +213,7 @@ public class WhizuServlet extends HttpServlet {
 			debug("inputstream " + in);
 			try {
 				String content = fromStream(in);
-				final String id = app.getClass().getName();
+				final String id = clazz.getName();
 				content = content.replace("${id}", id);
 				RequestImpl.get().getSession().addClickListener(new EventHandler() {
 
@@ -231,13 +228,24 @@ public class WhizuServlet extends HttpServlet {
 					}
 				});
 
-				Css ann = app.getClass().getAnnotation(Css.class);
+				Css ann = clazz.getAnnotation(Css.class);
+				System.out.println("css ann " + clazz + ann);
 				if (ann != null) {
 					String cssUri = ann.uri();
 					String link = "<link rel='stylesheet' type='text/css' href='" + cssUri + "' />";
 					content = content.replace("${css}", link);
 				} else {
 					content = content.replace("${css}", "");
+				}
+				
+				Title titleAnnotation = clazz.getAnnotation(Title.class);
+				System.out.println("Title ann " + clazz + titleAnnotation);
+				if (titleAnnotation != null) {
+					String title = titleAnnotation.value();
+					System.out.println("TITLE of ANNOTATION on " + clazz + " is " + title);
+					content = content.replace("${title}", title);
+				} else {
+					content = content.replace("${title}", Title.DEFAULT_TITLE);
 				}
 
 				return content;

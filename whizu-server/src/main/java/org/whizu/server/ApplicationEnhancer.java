@@ -39,7 +39,6 @@ import javassist.bytecode.annotation.StringMemberValue;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.whizu.annotation.Bean;
 import org.whizu.annotation.Css;
 import org.whizu.annotation.Style;
 import org.whizu.dom.Component;
@@ -52,12 +51,12 @@ public class ApplicationEnhancer {
 
 	private Log log = LogFactory.getLog(ApplicationEnhancer.class);
 
-	public Application newInstance(String className) {
+	public PageFactory createFactory(String className) {
 		try {
 			if (log.isDebugEnabled()) {
 				log.debug("Enhancing class " + className);
 			}
-			
+
 			ClassPool classPool = ClassPool.getDefault();
 			CtClass ctClass = classPool.get(className);
 			CtClass[] nested = ctClass.getNestedClasses();
@@ -103,17 +102,23 @@ public class ApplicationEnhancer {
 			attr.addAnnotation(annot);
 			ccFile.addAttribute(attr);
 
-			Application app = (Application) ctClass.toClass().newInstance();
-			System.out.println("Enhanced CLASS is " + app.getClass());
-			Class<?> appClass = app.getClass();
-			System.out.println("Annotation is present " + appClass.isAnnotationPresent(Bean.class));
-			return app;
-		} catch (NotFoundException | CannotCompileException | InstantiationException | IllegalAccessException
-				| ClassNotFoundException e) {
-			throw new RuntimeException(e);
+			Class<Application> newClass = getEnhancedClass(ctClass);
+			return new PageFactory(newClass);
+		} catch (NotFoundException | CannotCompileException | ClassNotFoundException e) {
+			throw new IllegalStateException(e);
 		} finally {
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	private Class<Application> getEnhancedClass(CtClass ctClass) {
+		try {
+			return ctClass.toClass();
+		} catch (CannotCompileException e) {
+			throw new IllegalStateException(e);
+		}
+	}
+	
 	public static Object doIt(Object arg) {
 		System.out.println("do " + arg);
 		return arg;
