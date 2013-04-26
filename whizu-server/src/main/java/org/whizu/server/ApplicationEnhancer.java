@@ -99,11 +99,7 @@ public class ApplicationEnhancer {
 				}
 			}
 
-			CtClass[] nested = ctClass.getNestedClasses();
-			for (CtClass n : nested) {
-				// Adds support for anonymous/inner classes
-				n.toClass();
-			}
+			fixInnerClasses(ctClass);
 
 			ClassFile ccFile = ctClass.getClassFile();
 			ConstPool constpool = ccFile.getConstPool();
@@ -123,6 +119,15 @@ public class ApplicationEnhancer {
 		} catch (NotFoundException | CannotCompileException | ClassNotFoundException e) {
 			throw new IllegalStateException(e);
 		} finally {
+		}
+	}
+
+	private void fixInnerClasses(CtClass ctClass) throws NotFoundException, CannotCompileException {
+		CtClass[] nested = ctClass.getNestedClasses();
+		for (CtClass n : nested) {
+			// Adds support for anonymous/inner classes
+			n.toClass();
+			fixInnerClasses(n);
 		}
 	}
 

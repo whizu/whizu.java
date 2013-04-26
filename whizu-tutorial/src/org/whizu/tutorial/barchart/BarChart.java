@@ -25,10 +25,13 @@ package org.whizu.tutorial.barchart;
 
 import java.util.Date;
 
+import org.whizu.annotation.Css;
 import org.whizu.annotation.Page;
 import org.whizu.annotation.Title;
+import org.whizu.dom.Component;
 import org.whizu.jquery.Function;
 import org.whizu.layout.Layout;
+import org.whizu.layout.VerticalLayout;
 import org.whizu.ui.Application;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Document;
@@ -99,7 +102,14 @@ public class BarChart implements Application {
 				graph.empty();
 				graph.add(ui.createBarChart(new String[]{"So cool", "So not cool"}, new Integer[]{kort, lang}));
 				// ui.delay(2500, new Function() {
-				ui.schedule(2500, new FunctionImpl());
+				ui.schedule(2500, new Function() {
+
+					@Override
+					public void execute() {
+						aantal.increment();
+						antwoord.setValue("Wat is jouw hobby?");
+					}
+				});
 			}
 		});
 		form.add(button);
@@ -112,6 +122,11 @@ public class BarChart implements Application {
 		document.add(layout);
 	}
 
+	@Css("mystyle")
+	public Component getLayout() {
+		return new VerticalLayout();
+	}
+	
 	class FunctionImpl extends Function {
 
 		@Override

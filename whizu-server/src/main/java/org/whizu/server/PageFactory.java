@@ -56,27 +56,27 @@ class PageFactory {
 		}
 	}
 
-	public String getTemplate() {
-		return template;
+	public String getStylesheet() {
+		return stylesheet;
 	}
 
-	protected void setTemplate(String template) {
-		this.template = template;
+	public String getTemplate() {
+		return template;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
-	protected void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getStylesheet() {
-		return stylesheet;
-	}
-
 	protected void setStylesheet(String stylesheet) {
 		this.stylesheet = stylesheet;
+	}
+
+	protected void setTemplate(String template) {
+		this.template = template;
+	}
+
+	protected void setTitle(String title) {
+		this.title = title;
 	}
 }
