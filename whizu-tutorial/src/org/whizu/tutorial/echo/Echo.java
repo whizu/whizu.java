@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.echo;
 
-import org.whizu.annotation.App;
+import org.whizu.annotation.Page;
 import org.whizu.annotation.Css;
 import org.whizu.annotation.Style;
 import org.whizu.dom.Component;
@@ -45,7 +45,7 @@ import org.whizu.value.StringValue;
 /**
  * @author Rudy D'hauwe
  */
-@App(uri = "/whizu/tutorial/echo")
+@Page("/whizu/tutorial/echo")
 @Css(uri = "/theme.css")
 public class Echo implements Application {
 
@@ -67,6 +67,7 @@ public class Echo implements Application {
 	}
 
 	private Layout layout() {
+		//return new HorizontalLayout(left(), right());
 		return new HorizontalLayout().add(left()).add(right());
 	}
 

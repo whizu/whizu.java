@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.layout;
 
-import org.whizu.annotation.App;
+import org.whizu.annotation.Page;
 import org.whizu.dom.Component;
 import org.whizu.layout.GridLayout;
 import org.whizu.ui.Application;
@@ -34,7 +34,7 @@ import org.whizu.ui.UI;
 /**
  * @author Rudy D'hauwe
  */
-@App(uri = "/whizu/gridlayout")
+@Page("/whizu/gridlayout")
 public class GridLayoutTutorial implements Application {
 
 	@Override

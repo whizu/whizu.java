@@ -1,13 +1,13 @@
 package org.whizu.tutorial.layout;
 
-import org.whizu.annotation.App;
+import org.whizu.annotation.Page;
 import org.whizu.layout.GridLayout;
 import org.whizu.ui.Application;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Image;
 import org.whizu.ui.UI;
 
-@App(uri="/whizu/imagegrid")
+@Page("/whizu/imagegrid")
 public class ImageGrid implements Application {
 
 	@Override
@@ -35,6 +35,5 @@ public class ImageGrid implements Application {
 				}
 			}
 		}));
-		
 	}
 }

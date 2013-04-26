@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.jquery.mobile.helloworld;
 
-import org.whizu.annotation.App;
+import org.whizu.annotation.Page;
 import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.Theme;
@@ -32,7 +32,7 @@ import org.whizu.ui.UI;
 /**
  * @author Rudy D'hauwe
  */
-@App(uri="/whizu/jqm/helloworld")
+@Page("/whizu/jqm/helloworld")
 public class HelloWorldApp extends JQueryMobileApp {
 
 	@Override

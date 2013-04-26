@@ -29,7 +29,7 @@ import java.lang.annotation.Annotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.whizu.annotation.AnnotationDetector;
-import org.whizu.annotation.App;
+import org.whizu.annotation.Page;
 import org.whizu.annotation.Autowire;
 
 /**
@@ -62,17 +62,17 @@ class AnnotationScanner {
 			@SuppressWarnings("unchecked")
 			@Override
 			public Class<? extends Annotation>[] annotations() {
-				return new Class[]{App.class};
+				return new Class[]{Page.class};
 			}
 
 			@Override
 			public void reportTypeAnnotation(Class<? extends Annotation> annotation, String className) {
-				if (annotation.equals(App.class)) {
+				if (annotation.equals(Page.class)) {
 					log.debug("@App found in " + className);
-					App ann = getClass(className).getAnnotation(App.class);
+					Page ann = getClass(className).getAnnotation(Page.class);
 					if (ann != null) {
 						ApplicationEnhancer enhancer = new ApplicationEnhancer();
-						config.addApplication(ann.uri(), enhancer.newInstance(className));
+						config.addApplication(ann.value(), enhancer.newInstance(className));
 					}
 				} else {
 					System.out.println("Andere @" + annotation + " in class " + className);
