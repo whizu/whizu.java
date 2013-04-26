@@ -6,11 +6,6 @@
 	<servlet>
 		<servlet-name>WhizuServlet</servlet-name>
 		<servlet-class>org.whizu.server.WhizuServlet</servlet-class>
-		<init-param>
-			<description>Script application class to start</description>
-			<param-name>application</param-name>
-			<param-value>org.whizu.tutorial.barchart.BarChart</param-value>
-		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>

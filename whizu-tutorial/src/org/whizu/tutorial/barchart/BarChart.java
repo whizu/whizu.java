@@ -25,6 +25,7 @@ package org.whizu.tutorial.barchart;
 
 import java.util.Date;
 
+import org.whizu.annotation.Page;
 import org.whizu.annotation.Title;
 import org.whizu.jquery.Function;
 import org.whizu.layout.Layout;
@@ -40,7 +41,12 @@ import org.whizu.value.StringValue;
 /**
  * @author Rudy D'hauwe
  */
+@Page("/whizu/tutorial/barchart")
 public class BarChart implements Application {
+
+	final StringValue antwoord = new StringValue("Mijn hobby is...");
+
+	final IntegerValue aantal = new IntegerValue("aantal");
 
 	@Title
 	public String getTitle() {
@@ -50,8 +56,6 @@ public class BarChart implements Application {
 	@Override
 	public void init(final UI ui) {
 		// model
-		final StringValue antwoord = new StringValue("Mijn hobby is...");
-		final IntegerValue aantal = new IntegerValue("aantal");
 		aantal.setValue(0);
 
 		// user interface
@@ -94,15 +98,8 @@ public class BarChart implements Application {
 				antwoord.clear();
 				graph.empty();
 				graph.add(ui.createBarChart(new String[]{"So cool", "So not cool"}, new Integer[]{kort, lang}));
-				//ui.delay(2500, new Function() {
-				ui.schedule(2500, new Function() {
-
-					@Override
-					public void execute() {
-						aantal.increment();
-						antwoord.setValue("Wat is jouw hobby?");
-					}
-				});
+				// ui.delay(2500, new Function() {
+				ui.schedule(2500, new FunctionImpl());
 			}
 		});
 		form.add(button);
@@ -113,5 +110,14 @@ public class BarChart implements Application {
 		layout.add(right);
 
 		document.add(layout);
+	}
+
+	class FunctionImpl extends Function {
+
+		@Override
+		public void execute() {
+			aantal.increment();
+			antwoord.setValue("Wat is jouw hobby?");
+		}
 	}
 }

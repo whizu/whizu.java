@@ -37,7 +37,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.whizu.annotation.Bean;
@@ -61,18 +60,18 @@ public class WhizuServlet extends HttpServlet {
 	/**
 	 * The class name of the Application implementation class.
 	 */
-	public static final String INIT_PARAM_APPLICATION = "application";
+	//public static final String INIT_PARAM_APPLICATION = "application";
 
 	/**
 	 * The class name of the Configuration implementation class.
 	 */
-	//public static final String INIT_PARAM_CONFIG = "config";
+	// public static final String INIT_PARAM_CONFIG = "config";
 
 	private static final long serialVersionUID = 520182899630886403L;
 
 	private static final String WHIZU_SESSION = "whizu-session";
 
-	//private static final Configuration DEFAULT_CONFIG = new Configuration();
+	// private static final Configuration DEFAULT_CONFIG = new Configuration();
 
 	private static String fromStream(InputStream in) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -86,8 +85,8 @@ public class WhizuServlet extends HttpServlet {
 	}
 
 	// not in session (shared across users)
-	@Deprecated
-	private Application application;
+	//@Deprecated
+	//private Application application;
 
 	private Configuration config = new Configuration();
 
@@ -121,11 +120,12 @@ public class WhizuServlet extends HttpServlet {
 			}
 		});
 
-		this.application = newInstance(config, INIT_PARAM_APPLICATION, null);
-		//this.config = newInstance(config, INIT_PARAM_CONFIG, DEFAULT_CONFIG);
+		//this.application = newInstance(config, INIT_PARAM_APPLICATION, null);
+		// this.config = newInstance(config, INIT_PARAM_CONFIG, DEFAULT_CONFIG);
 		new AnnotationScanner().scan(this.config);
 	}
 
+	/*
 	@SuppressWarnings("unchecked")
 	private <T> T newInstance(ServletConfig config, String param, T defaultValue) {
 		try {
@@ -145,6 +145,7 @@ public class WhizuServlet extends HttpServlet {
 		} finally {
 		}
 	}
+	*/
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
@@ -159,7 +160,7 @@ public class WhizuServlet extends HttpServlet {
 				if (request.getRequestURI().endsWith(".css")) {
 					content = handleCss(request, response);
 				} else {
-					content = this.setup(request);
+					content = this.servePageRequest(request);
 				}
 			} else {
 				session.handleEvent(id);
@@ -198,7 +199,8 @@ public class WhizuServlet extends HttpServlet {
 		}
 	}
 
-	private String setup(HttpServletRequest request) {
+	// serve a new page request to an application
+	private String servePageRequest(HttpServletRequest request) {
 		String uri = request.getRequestURI();
 		debug("uri:" + uri);
 		final Application app = config.getApplication(uri);
@@ -237,7 +239,7 @@ public class WhizuServlet extends HttpServlet {
 				} else {
 					content = content.replace("${css}", "");
 				}
-				
+
 				Title titleAnnotation = clazz.getAnnotation(Title.class);
 				System.out.println("Title ann " + clazz + titleAnnotation);
 				if (titleAnnotation != null) {
@@ -250,11 +252,14 @@ public class WhizuServlet extends HttpServlet {
 
 				return content;
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw new IllegalStateException(e);
 			}
+		} else {
+			//TODO remove this possibility
+			//application.init(new WhizuUI());
+			//return RequestImpl.get().finish();
+			throw new IllegalArgumentException("No @Page has been defined for " + uri);
 		}
-		application.init(new WhizuUI());
-		return RequestImpl.get().finish();
 	}
 
 	private Session startRequest(HttpServletRequest request) {

@@ -59,7 +59,7 @@ public class ApplicationEnhancer {
 
 			ClassPool classPool = ClassPool.getDefault();
 			CtClass ctClass = classPool.get(className);
-			CtClass[] nested = ctClass.getNestedClasses();
+
 			CtMethod[] ctMethods = ctClass.getDeclaredMethods();
 			List<CtMethod> methodsToDo = new ArrayList<CtMethod>();
 			for (CtMethod method : ctMethods) {
@@ -87,8 +87,9 @@ public class ApplicationEnhancer {
 				}
 			}
 
+			CtClass[] nested = ctClass.getNestedClasses();
 			for (CtClass n : nested) {
-				System.out.println("Dealing with nested class " + n);
+				// Adds support for anonymous/inner classes
 				n.toClass();
 			}
 
@@ -109,7 +110,7 @@ public class ApplicationEnhancer {
 		} finally {
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private Class<Application> getEnhancedClass(CtClass ctClass) {
 		try {
@@ -118,7 +119,7 @@ public class ApplicationEnhancer {
 			throw new IllegalStateException(e);
 		}
 	}
-	
+
 	public static Object doIt(Object arg) {
 		System.out.println("do " + arg);
 		return arg;
