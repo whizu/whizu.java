@@ -21,48 +21,19 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.server;
+package org.whizu.annotation;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.whizu.ui.Application;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Rudy D'hauwe
  */
-class Configuration {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface Stylesheet {
 
-	private Log log = LogFactory.getLog(Configuration.class);
-
-	private Map<String, PageFactory> applicationFactoryMap = new HashMap<String, PageFactory>();
-
-	public void addApplication(String uri, PageFactory application) {
-		applicationFactoryMap.put(uri, application);
-		applicationFactoryMap.put(uri + "/", application);
-	}
-
-	/**
-	 * @return null if @Page(uri) has not been defined on any class
-	 */
-	public PageFactory getFactory(String uri) {
-		return applicationFactoryMap.get(uri);
-	}
-	
-	/**
-	 * @return null if @Page(uri) has not been defined on any class
-	 */
-	public Application getApplication(String uri) {
-		PageFactory factory = applicationFactoryMap.get(uri);
-		if (factory != null) {
-			return factory.createInstance();
-		} else {
-			if (log.isDebugEnabled()) {
-				log.debug("No @Page has been defined for uri " + uri);
-			}
-			return null;
-		}
-	}
+	public String value();
 }

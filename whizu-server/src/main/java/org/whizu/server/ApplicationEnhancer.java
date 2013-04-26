@@ -41,6 +41,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.whizu.annotation.Css;
 import org.whizu.annotation.Style;
+import org.whizu.annotation.Stylesheet;
+import org.whizu.annotation.Title;
 import org.whizu.dom.Component;
 import org.whizu.ui.Application;
 
@@ -60,6 +62,16 @@ public class ApplicationEnhancer {
 			ClassPool classPool = ClassPool.getDefault();
 			CtClass ctClass = classPool.get(className);
 
+			String stylesheet = null;
+			if (ctClass.hasAnnotation(Stylesheet.class)) {
+				stylesheet = ((Stylesheet) ctClass.getAnnotation(Stylesheet.class)).value();
+			}
+			
+			String title = Title.DEFAULT_TITLE;
+			if (ctClass.hasAnnotation(Title.class)) {
+				title = ((Title) ctClass.getAnnotation(Title.class)).value();
+			}
+			
 			CtMethod[] ctMethods = ctClass.getDeclaredMethods();
 			List<CtMethod> methodsToDo = new ArrayList<CtMethod>();
 			for (CtMethod method : ctMethods) {
@@ -104,7 +116,10 @@ public class ApplicationEnhancer {
 			ccFile.addAttribute(attr);
 
 			Class<Application> newClass = getEnhancedClass(ctClass);
-			return new PageFactory(newClass);
+			PageFactory factory = new PageFactory(newClass);
+			factory.setTitle(title);
+			factory.setStylesheet(stylesheet);
+			return factory;
 		} catch (NotFoundException | CannotCompileException | ClassNotFoundException e) {
 			throw new IllegalStateException(e);
 		} finally {

@@ -26,6 +26,7 @@ package org.whizu.tutorial.echo;
 import org.whizu.annotation.Css;
 import org.whizu.annotation.Page;
 import org.whizu.annotation.Style;
+import org.whizu.annotation.Stylesheet;
 import org.whizu.annotation.Title;
 import org.whizu.dom.Component;
 import org.whizu.layout.HorizontalLayout;
@@ -46,9 +47,9 @@ import org.whizu.value.StringValue;
 /**
  * @author Rudy D'hauwe
  */
-@Page("/whizu/tutorial/echo")
 @Title("Echo")
-@Css(uri = "/theme.css")
+@Page("/whizu/tutorial/echo")
+@Stylesheet("/theme.css")
 public class Echo implements Application {
 
 	@Css("message")

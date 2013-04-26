@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.server;
 
+import org.whizu.annotation.Title;
 import org.whizu.ui.Application;
 
 /**
@@ -33,11 +34,18 @@ class PageFactory {
 	// private Log log = LogFactory.getLog(ApplicationFactory.class);
 
 	private Class<Application> applicationClass;
+	
+	private String template = "/org/whizu/jquery/mobile/page.html";
+	
+	private String title = Title.DEFAULT_TITLE;
+	
+	private String stylesheet;
 
 	public PageFactory(Class<Application> applicationClass) {
 		this.applicationClass = applicationClass;
 	}
 
+	//public Resource createPage() {
 	public Application createInstance() {
 		try {
 			return applicationClass.newInstance();
@@ -46,5 +54,29 @@ class PageFactory {
 		} catch (IllegalAccessException e) {
 			throw new IllegalStateException(e);
 		}
+	}
+
+	public String getTemplate() {
+		return template;
+	}
+
+	protected void setTemplate(String template) {
+		this.template = template;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	protected void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getStylesheet() {
+		return stylesheet;
+	}
+
+	protected void setStylesheet(String stylesheet) {
+		this.stylesheet = stylesheet;
 	}
 }
