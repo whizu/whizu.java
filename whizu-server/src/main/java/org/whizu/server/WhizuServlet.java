@@ -57,17 +57,6 @@ public class WhizuServlet extends HttpServlet {
 
 	private static final String WHIZU_SESSION = "whizu-session";
 
-	private static String fromStream(InputStream in) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-		StringBuilder out = new StringBuilder();
-		String line;
-		while ((line = reader.readLine()) != null) {
-			out.append(line);
-		}
-		in.close();
-		return out.toString();
-	}
-
 	private Configuration config = new Configuration();
 
 	private Session assureUserSession(HttpSession session) {
@@ -85,77 +74,15 @@ public class WhizuServlet extends HttpServlet {
 		System.out.println(message);
 	}
 
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		RequestContext.init(new RequestContext() {
-
-			@Override
-			protected final Request getRequestImpl() {
-				return RequestImpl.get();
-			}
-
-			@Override
-			public void autowire(Object bean) {
-				// AnnotationScanner.ctx.getAutowireCapableBeanFactory().autowireBean(bean);
-			}
-		});
-
-		new AnnotationScanner().scan(this.config);
-	}
-
-	/*
-	@SuppressWarnings("unchecked")
-	private <T> T newInstance(ServletConfig config, String param, T defaultValue) {
-		try {
-			String className = config.getInitParameter(param);
-			if (!StringUtils.isEmpty(className)) {
-				Class<T> clazz = (Class<T>) Class.forName(className);
-				return clazz.newInstance();
-			} else {
-				return defaultValue;
-			}
-		} catch (ClassNotFoundException e) {
-			throw new IllegalArgumentException(e);
-		} catch (InstantiationException e) {
-			throw new IllegalArgumentException(e);
-		} catch (IllegalAccessException e) {
-			throw new IllegalArgumentException(e);
-		} finally {
+	private String fromStream(InputStream in) throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		StringBuilder out = new StringBuilder();
+		String line;
+		while ((line = reader.readLine()) != null) {
+			out.append(line);
 		}
-	}
-	*/
-
-	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
-		long start = System.currentTimeMillis();
-		String content = "--";
-		try {
-			Session session = startRequest(request);
-			String id = request.getParameter("id");
-			if (id == null) {
-				debug("running setup:" + request.getRequestURI());
-				if (request.getRequestURI().endsWith(".css")) {
-					content = handleCss(request, response);
-				} else {
-					content = this.servePageRequest(request);
-					//Resource resource = this.servePageRequest(request);
-				}
-			} else {
-				session.handleEvent(id);
-				content = RequestImpl.get().finish();
-			}
-		} finally {
-			try {
-				long end = System.currentTimeMillis();
-				debug("Server side completed in " + (end - start) + "ms");
-				debug("Sending script- " + content);
-				response.getWriter().print(content);
-				response.getWriter().close();
-			} catch (Exception exc) {
-				exc.printStackTrace();
-			}
-		}
+		in.close();
+		return out.toString();
 	}
 
 	private String handleCss(HttpServletRequest request, HttpServletResponse response) {
@@ -169,17 +96,27 @@ public class WhizuServlet extends HttpServlet {
 		return stream(css);
 	}
 
-	private String stream(String path) {
-		InputStream in = getClass().getResourceAsStream(path);
-		try {
-			return fromStream(in);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		RequestContext.init(new RequestContext() {
+
+			@Override
+			public void autowire(Object bean) {
+				// AnnotationScanner.ctx.getAutowireCapableBeanFactory().autowireBean(bean);
+			}
+
+			@Override
+			protected final Request getRequestImpl() {
+				return RequestImpl.get();
+			}
+		});
+
+		new AnnotationScanner().scan(this.config);
 	}
 
 	// serve a new page request to an application
 	private String servePageRequest(HttpServletRequest request) {
+		//getPageResource(uri).stream(response.getWriter());
 		String uri = request.getRequestURI();
 		debug("uri:" + uri);
 		final PageFactory factory = config.getFactory(uri);
@@ -206,9 +143,7 @@ public class WhizuServlet extends HttpServlet {
 				});
 
 				String ann = factory.getStylesheet();
-				System.out.println("css ann " + clazz + ann);
 				if (ann != null) {
-					//String cssUri = ann.uri();
 					String link = "<link rel='stylesheet' type='text/css' href='" + ann + "' />";
 					content = content.replace("${css}", link);
 				} else {
@@ -216,9 +151,7 @@ public class WhizuServlet extends HttpServlet {
 				}
 
 				String title = factory.getTitle();
-				System.out.println("Title ann " + clazz + title);
 				if (title != null) {
-					System.out.println("TITLE of ANNOTATION on " + clazz + " is " + title);
 					content = content.replace("${title}", title);
 				} else {
 					content = content.replace("${title}", Title.DEFAULT_TITLE);
@@ -229,10 +162,41 @@ public class WhizuServlet extends HttpServlet {
 				throw new IllegalStateException(e);
 			}
 		} else {
-			//TODO remove this possibility
-			//application.init(new WhizuUI());
-			//return RequestImpl.get().finish();
 			throw new IllegalArgumentException("No @Page has been defined for " + uri);
+		}
+	}
+
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
+		long start = System.currentTimeMillis();
+		String content = "--";
+		try {
+			Session session = startRequest(request);
+			String id = request.getParameter("id");
+			if (id == null) {
+				debug("running setup:" + request.getRequestURI());
+				if (request.getRequestURI().endsWith(".css")) {
+					content = handleCss(request, response);
+				} else {
+					//even better: getResource(uri).stream(response.getWriter());
+					content = this.servePageRequest(request);
+					//Resource resource = this.servePageRequest(request);
+				}
+			} else {
+				session.handleEvent(id);
+				content = RequestImpl.get().finish();
+			}
+		} finally {
+			try {
+				long end = System.currentTimeMillis();
+				debug("Server side completed in " + (end - start) + "ms");
+				debug("Sending script- " + content);
+				response.getWriter().print(content);
+				response.getWriter().close();
+			} catch (Exception exc) {
+				exc.printStackTrace();
+			}
 		}
 	}
 
@@ -250,5 +214,14 @@ public class WhizuServlet extends HttpServlet {
 			}
 		}
 		return userSession;
+	}
+
+	private String stream(String path) {
+		InputStream in = getClass().getResourceAsStream(path);
+		try {
+			return fromStream(in);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

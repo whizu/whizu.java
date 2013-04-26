@@ -23,9 +23,19 @@
  *******************************************************************************/
 package org.whizu.resource;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * @author Rudy D'hauwe
  */
 public interface Resource {
 
+	/**
+	 * Return an InputStream. Each call creates a fresh stream.
+	 * 
+	 * @throws IOException
+	 *             if the stream could not be opened
+	 */
+	public InputStream getInputStream() throws IOException;
 }

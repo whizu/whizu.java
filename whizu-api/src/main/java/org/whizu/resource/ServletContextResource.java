@@ -23,9 +23,17 @@
  *******************************************************************************/
 package org.whizu.resource;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * @author Rudy D'hauwe
  */
 public class ServletContextResource implements Resource {
 
+	@Override
+	public InputStream getInputStream() throws IOException {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
 }

@@ -23,9 +23,23 @@
  *******************************************************************************/
 package org.whizu.resource;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * @author Rudy D'hauwe
  */
 public class StringResource implements Resource {
 
+	private byte[] bytes;
+
+	public StringResource(String content) {
+		this.bytes = content.getBytes();
+	}
+
+	@Override
+	public InputStream getInputStream() throws IOException {
+		return new ByteArrayInputStream(bytes);
+	}
 }
