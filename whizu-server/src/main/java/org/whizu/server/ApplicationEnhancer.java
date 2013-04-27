@@ -75,8 +75,6 @@ public class ApplicationEnhancer {
 			CtMethod[] ctMethods = ctClass.getDeclaredMethods();
 			List<CtMethod> methodsToDo = new ArrayList<CtMethod>();
 			for (CtMethod method : ctMethods) {
-				System.out.println(method);
-
 				if (method.hasAnnotation(Css.class) || (method.hasAnnotation(Style.class))) {
 					if (log.isDebugEnabled()) {
 						log.debug("Enhancing method " + method);
@@ -86,10 +84,8 @@ public class ApplicationEnhancer {
 			}
 
 			for (CtMethod method : methodsToDo) {
-				System.out.println("To Enhance: " + method);
 				final Css annot = (Css) method.getAnnotation(Css.class);
 				if (annot != null) {
-					// method.insertAfter("System.out.println($_);");
 					method.insertAfter("org.whizu.server.ApplicationEnhancer.doIt(\"" + annot.value()[0] + "\", $_);");
 				}
 
@@ -141,12 +137,10 @@ public class ApplicationEnhancer {
 	}
 
 	public static Object doIt(Object arg) {
-		System.out.println("do " + arg);
 		return arg;
 	}
 
 	public static Object doIt(String css, Object arg) {
-		System.out.println("Apply " + css + " to " + arg);
 		if (arg instanceof Component) {
 			((Component) arg).css(css);
 		}
@@ -155,7 +149,6 @@ public class ApplicationEnhancer {
 
 	public static Object style(String css, Object arg) {
 		if (arg instanceof Component) {
-			System.out.println("Apply style " + css + " to " + arg);
 			((Component) arg).style(css);
 		}
 		return arg;

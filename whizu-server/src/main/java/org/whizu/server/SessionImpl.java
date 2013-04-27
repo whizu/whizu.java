@@ -88,7 +88,6 @@ class SessionImpl implements Session {
 			listener.handleEvent();
 		} else {
 			try {
-				System.out.println("Finding app class " + id);
 				@SuppressWarnings("unchecked")
 				Class<Application> clazz = (Class<Application>) Class.forName(id);
 				Application app = clazz.newInstance();

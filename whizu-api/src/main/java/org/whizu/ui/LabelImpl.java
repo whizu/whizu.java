@@ -82,11 +82,6 @@ public class LabelImpl extends Widget implements Label {
 
 	@Override
 	public Label addClickListener(ClickListener listener) {
-		// System.out.println("THIS LABEL " + text + " is rendered: " +
-		// isRendered);
-		// if not rendered, remember that this script must be added after
-		// rendering !
-		// nu gebeurt het in de verkeerde volgorde!
 		this.listener = new ClickListenerImpl(listener);
 		getSession().addClickListener(this.listener);
 		return this;
@@ -149,7 +144,6 @@ public class LabelImpl extends Widget implements Label {
 		if (isRendered()) {
 			// String script = ".html('";
 			// + StringEscapeUtils.escapeJavaScript(text) + "');"; //TODO check
-			// System.out.println("run script " + script);
 			jQuery(this).html(text);
 		}
 	}

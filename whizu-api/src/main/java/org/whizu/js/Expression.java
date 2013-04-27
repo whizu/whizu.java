@@ -47,12 +47,10 @@ public class Expression {
 
 	public void add(String part) {
 		contents.add(new Literal(part));
-		// System.out.println(this + " adding " + part);
 	}
 
 	public void add(Content part) {
 		contents.add(part);
-		// System.out.println(this + " adding component " + part);
 	}
 
 	public String toJavaScript() {

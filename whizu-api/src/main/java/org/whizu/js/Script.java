@@ -41,14 +41,12 @@ public class Script {
 	}
 
 	public Script(String script) {
-		//System.out.println(this + "Adding an expression when rendering " + isRendering + " at pos " + renderingPosition);
 		expressionList.add(new Expression(script));
 	}
 
 	public String toJavaScript() {
 		try {
 			isRendering = true;
-			//System.out.println("Script size " + expressionList.size());
 			String script = "";
 			
 			renderingPosition = 0;
@@ -75,7 +73,6 @@ public class Script {
 	}
 
 	public void addExpression(Expression expr) {
-		//System.out.println(this + "Adding an expression when rendering " + isRendering + " at pos " + renderingPosition);
 		if (isRendering) {
 			expressionList.add(renderingPosition+1, expr);
 		} else {

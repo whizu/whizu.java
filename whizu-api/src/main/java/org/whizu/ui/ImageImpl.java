@@ -87,7 +87,6 @@ class ImageImpl extends Widget implements Image {
 
 			@Override
 			public void click() {
-				System.out.println("...dropping");
 			}
 		});
 		droplistenerId = impl.getId();

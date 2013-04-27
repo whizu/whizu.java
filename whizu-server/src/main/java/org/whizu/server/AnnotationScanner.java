@@ -53,7 +53,6 @@ class AnnotationScanner {
 
 			@Override
 			public void reportFieldAnnotation(Class<? extends Annotation> annotation, String className, String fieldName) {
-				System.out.println("@" + annotation + " in class " + className);
 			}
 		};
 
@@ -75,7 +74,6 @@ class AnnotationScanner {
 						config.addApplication(ann.value(), enhancer.createFactory(className));
 					}
 				} else {
-					System.out.println("Andere @" + annotation + " in class " + className);
 				}
 			}
 

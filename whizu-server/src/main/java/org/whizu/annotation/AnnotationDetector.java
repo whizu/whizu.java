@@ -39,6 +39,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * {@code AnnotationDetector} reads Java Class File (".class") files and reports the 
  * encountered annotations via a simple, developer friendly API.
@@ -112,7 +115,9 @@ import java.util.Set;
  * @since annotation-detector 3.0.0
  */
 public final class AnnotationDetector {
-    
+
+	private static Log log = LogFactory.getLog(AnnotationDetector.class);
+	
     /**
      * {@code Reporter} is the base interface, used to report the detected annotations.
      * Every category of annotations (i.e. Type, Field and Method) has its own specialized
@@ -596,8 +601,7 @@ public final class AnnotationDetector {
                 }
                 logMessage = String.format(message, args);
             }
-            System.out.println(logMessage);
+            log.debug(logMessage);
         }
     }
-
 }

@@ -72,14 +72,6 @@ public abstract class AbstractRequest implements Request {
 				} finally {
 					scriptStack.pop();
 				}
-				/*
-				 * 
-				 * System.out.println("2ND RUN SCRIPT STACK SIZE IS " +
-				 * scriptStack.size()); if (!scriptStack.isEmpty()) { current =
-				 * scriptStack.pop(); result = result + current.toJavaScript();
-				 * }
-				 * return result;
-				 */
 			} else {
 				return "";
 			}
