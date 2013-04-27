@@ -21,54 +21,23 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.widget;
+package org.whizu.server;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Before;
-import org.whizu.dom.Content;
-import org.whizu.dom.Identity;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractTest {
+class RequestContextImpl extends RequestContext {
 
-	protected TestRequest theRequest;
-
-	protected Identity createIdentity(final String id) {
-		return new Identity() {
-
-			@Override
-			public String id() {
-				return id;
-			}};
+	@Override
+	protected final Request getRequestImpl() {
+		return RequestImpl.get();
 	}
 
-	protected final void equals(String markup, Content content) {
-		assertEquals(markup, content.render());
-	}
-	
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		this.theRequest = new TestRequest();
-		
-		RequestContext.setInstance(new RequestContext() {
-			
-			@Override
-			protected Request getRequestImpl() {
-				return theRequest;
-			}
-
-			@Override
-			public void autowire(Object bean) {
-				//throw new UnsupportedOperationException();
-			}
-		});
+	@Override
+	public void autowire(Object bean) {
+		//throw new UnsupportedOperationException();
 	}
 }

@@ -89,7 +89,7 @@ public class GridLayoutIntegrationTest {
 	}
 
 	private void initRequestContext() {
-		RequestContext.init(new RequestContext() {
+		RequestContext.setInstance(new RequestContext() {
 
 			@Override
 			public void autowire(Object bean) {

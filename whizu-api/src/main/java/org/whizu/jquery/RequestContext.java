@@ -27,19 +27,19 @@ public abstract class RequestContext {
 
 	private static RequestContext INSTANCE;
 
-	public static void init(RequestContext instance) {
-		INSTANCE = instance;
-	}
-	
-	public static RequestContext getINSTANCE() {
+	public static RequestContext getInstance() {
 		return INSTANCE;
 	}
-
+	
 	public static final Request getRequest() {
 		return INSTANCE.getRequestImpl();
 	}
-	
-	protected abstract Request getRequestImpl();
 
+	public static void setInstance(RequestContext instance) {
+		INSTANCE = instance;
+	}
+	
 	public abstract void autowire(Object bean);
+
+	protected abstract Request getRequestImpl();
 }

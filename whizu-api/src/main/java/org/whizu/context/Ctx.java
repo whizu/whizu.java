@@ -31,6 +31,6 @@ import org.whizu.jquery.RequestContext;
 public class Ctx {
 
 	public static void autowire(Object bean) {
-		RequestContext.getINSTANCE().autowire(bean);
+		RequestContext.getInstance().autowire(bean);
 	}
 }

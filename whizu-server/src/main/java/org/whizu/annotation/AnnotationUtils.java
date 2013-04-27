@@ -1,0 +1,84 @@
+/*******************************************************************************
+ * Copyright (c) 2013 Rudy D'hauwe @ Whizu
+ * Licensed under the EUPL V.1.1
+ *   
+ * This Software is provided to You under the terms of the European 
+ * Union Public License (the "EUPL") version 1.1 as published by the 
+ * European Union. Any use of this Software, other than as authorized 
+ * under this License is strictly prohibited (to the extent such use 
+ * is covered by a right of the copyright holder of this Software).
+ *
+ * This Software is provided under the License on an "AS IS" basis and 
+ * without warranties of any kind concerning the Software, including 
+ * without limitation merchantability, fitness for a particular purpose, 
+ * absence of defects or errors, accuracy, and non-infringement of 
+ * intellectual property rights other than copyright. This disclaimer 
+ * of warranty is an essential part of the License and a condition for 
+ * the grant of any rights to this Software.
+ *   
+ * For more  details, see <http://joinup.ec.europa.eu/software/page/eupl>.
+ *
+ * Contributors:
+ *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
+ *******************************************************************************/
+package org.whizu.annotation;
+
+import java.io.IOException;
+import java.lang.annotation.Annotation;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.whizu.util.Chrono;
+
+/**
+ * @author Rudy D'hauwe
+ */
+public class AnnotationUtils {
+
+	private static Log log = LogFactory.getLog(AnnotationUtils.class);
+
+	private static void scan(AnnotationDetector.TypeReporter reporter) {
+		try {
+			new AnnotationDetector(reporter).detect();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static <T extends Annotation> void scan(final Class<T> clazz, final TypeReporter<T> reporter) {
+		if (log.isDebugEnabled()) {
+			log.debug("Scanning the classpath for @" + clazz.getSimpleName() + " annotations");
+		}
+
+		Chrono chrono = new Chrono();
+		AnnotationDetector.TypeReporter typeReporter = new AnnotationDetector.TypeReporter() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public Class<? extends Annotation>[] annotations() {
+				return new Class[]{clazz};
+			}
+
+			private Class<?> getClass(String className) {
+				try {
+					return Class.forName(className);
+				} catch (ClassNotFoundException e) {
+					throw new IllegalArgumentException(e);
+				}
+			}
+
+			@Override
+			public void reportTypeAnnotation(Class<? extends Annotation> annotationClass, String className) {
+				T annotation = getClass(className).getAnnotation(clazz);
+				reporter.report(annotation, className);
+			}
+		};
+
+		scan(typeReporter);
+
+		if (log.isDebugEnabled()) {
+			log.debug("Finished scanning the classpath for @" + clazz.getSimpleName() + " annotations in "
+					+ chrono.stop() + "ms");
+		}
+	}
+}

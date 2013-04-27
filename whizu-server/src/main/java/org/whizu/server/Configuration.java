@@ -28,12 +28,14 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.whizu.annotation.Page;
+import org.whizu.annotation.TypeReporter;
 import org.whizu.ui.Application;
 
 /**
  * @author Rudy D'hauwe
  */
-class Configuration {
+class Configuration implements TypeReporter<Page> {
 
 	private Log log = LogFactory.getLog(Configuration.class);
 
@@ -64,5 +66,15 @@ class Configuration {
 			}
 			return null;
 		}
+	}
+	
+	@Override
+	public void report(Page annotation, String className) {
+		if (log.isDebugEnabled()) {
+			log.debug("@Page(\"" + annotation.value() + "\") on " + className);
+		}
+
+		ApplicationEnhancer enhancer = new ApplicationEnhancer();
+		addApplication(annotation.value(), enhancer.createFactory(className));
 	}
 }

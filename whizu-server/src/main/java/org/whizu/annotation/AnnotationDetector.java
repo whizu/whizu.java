@@ -114,7 +114,7 @@ import org.apache.commons.logging.LogFactory;
  * @author <a href="mailto:rmuller@xiam.nl">Ronald K. Muller</a>
  * @since annotation-detector 3.0.0
  */
-public final class AnnotationDetector {
+final class AnnotationDetector {
 
 	private static Log log = LogFactory.getLog(AnnotationDetector.class);
 	

@@ -21,54 +21,20 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.widget;
-
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Before;
-import org.whizu.dom.Content;
-import org.whizu.dom.Identity;
-import org.whizu.jquery.Request;
-import org.whizu.jquery.RequestContext;
+package org.whizu.util;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractTest {
+public class Chrono {
 
-	protected TestRequest theRequest;
+	private long start;
 
-	protected Identity createIdentity(final String id) {
-		return new Identity() {
-
-			@Override
-			public String id() {
-				return id;
-			}};
+	public Chrono() {
+		this.start = System.currentTimeMillis();
 	}
 
-	protected final void equals(String markup, Content content) {
-		assertEquals(markup, content.render());
-	}
-	
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		this.theRequest = new TestRequest();
-		
-		RequestContext.setInstance(new RequestContext() {
-			
-			@Override
-			protected Request getRequestImpl() {
-				return theRequest;
-			}
-
-			@Override
-			public void autowire(Object bean) {
-				//throw new UnsupportedOperationException();
-			}
-		});
+	public long stop() {
+		return (System.currentTimeMillis() - this.start);
 	}
 }
