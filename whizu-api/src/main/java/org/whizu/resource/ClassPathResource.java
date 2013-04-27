@@ -30,10 +30,15 @@ import java.io.InputStream;
  * @author Rudy D'hauwe
  */
 public class ClassPathResource implements Resource {
+	
+	private String path;
+
+	public ClassPathResource(String path) {
+		this.path = path;
+	}
 
 	@Override
 	public InputStream getInputStream() throws IOException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return getClass().getResourceAsStream(path);
 	}
 }

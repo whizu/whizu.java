@@ -114,7 +114,8 @@ public class WhizuServlet extends HttpServlet {
 		new AnnotationScanner().scan(this.config);
 	}
 
-	// serve a new page request to an application
+	// serve a new page request to an application, 
+	// replace this method by a class PageResource?
 	private String servePageRequest(HttpServletRequest request) {
 		//getPageResource(uri).stream(response.getWriter());
 		String uri = request.getRequestURI();
@@ -216,6 +217,7 @@ public class WhizuServlet extends HttpServlet {
 		return userSession;
 	}
 
+	//replace this method by ClassPathResource
 	private String stream(String path) {
 		InputStream in = getClass().getResourceAsStream(path);
 		try {
