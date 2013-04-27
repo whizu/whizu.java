@@ -36,4 +36,10 @@ public class FileSystemResource implements Resource {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public String getString() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
 }

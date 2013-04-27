@@ -23,23 +23,33 @@
  *******************************************************************************/
 package org.whizu.resource;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * @author Rudy D'hauwe
  */
-public class ServletContextResource implements Resource {
+public abstract class AbstractResource implements Resource {
 
 	@Override
-	public InputStream getInputStream() throws IOException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
+	public String getString() throws IOException {
+		InputStream in = null;
 
-	@Override
-	public String getString() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		try {
+			in = getInputStream();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+			StringBuilder out = new StringBuilder();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				out.append(line);
+			}
+			return out.toString();
+		} finally {
+			if (in != null) {
+				in.close();
+			}
+		}
 	}
 }

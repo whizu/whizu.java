@@ -23,10 +23,7 @@
  *******************************************************************************/
 package org.whizu.server;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Set;
 
@@ -45,6 +42,8 @@ import org.whizu.jquery.Input;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Session;
+import org.whizu.resource.ClassPathResource;
+import org.whizu.resource.Resource;
 import org.whizu.ui.Application;
 import org.whizu.ui.WhizuUI;
 
@@ -71,29 +70,19 @@ public class WhizuServlet extends HttpServlet {
 
 	private void debug(String message) {
 		log.debug(message);
-		System.out.println(message);
 	}
 
-	private String fromStream(InputStream in) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-		StringBuilder out = new StringBuilder();
-		String line;
-		while ((line = reader.readLine()) != null) {
-			out.append(line);
-		}
-		in.close();
-		return out.toString();
-	}
-
-	private String handleCss(HttpServletRequest request, HttpServletResponse response) {
+	//replace by a class StylesheetResource?
+	private String handleCss(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String uri = request.getRequestURI();
 		String servletPath = request.getServletPath();
-		String contextPath = request.getContextPath();
-		debug(uri);
-		debug(servletPath);
-		debug(contextPath);
-		String css = uri.substring(servletPath.length());
-		return stream(css);
+		//String contextPath = request.getContextPath();
+		//debug(uri);
+		//debug(servletPath);
+		//debug(contextPath);
+		String path = uri.substring(servletPath.length());
+		Resource resource = new ClassPathResource(path);
+		return resource.getString();
 	}
 
 	@Override
@@ -124,10 +113,9 @@ public class WhizuServlet extends HttpServlet {
 		if (factory != null) {
 			final Application app = factory.createInstance();
 			Class<? extends Application> clazz = app.getClass();
-			InputStream in = getClass().getResourceAsStream(factory.getTemplate());
-			debug("inputstream " + in);
+			Resource resource = new ClassPathResource(factory.getTemplate());
 			try {
-				String content = fromStream(in);
+				String content = resource.getString();
 				final String id = clazz.getName();
 				content = content.replace("${id}", id);
 				RequestImpl.get().getSession().addClickListener(new EventHandler() {
@@ -210,20 +198,10 @@ public class WhizuServlet extends HttpServlet {
 			debug("P:" + key + "=" + parameterMap.get(key)[0]);
 			Input editable = userSession.getInput(key);
 			if (editable != null) {
-				debug("updating editable server-side " + editable);
+				//debug("updating editable server-side " + editable);
 				editable.parseString(parameterMap.get(key)[0]);
 			}
 		}
 		return userSession;
-	}
-
-	//replace this method by ClassPathResource
-	private String stream(String path) {
-		InputStream in = getClass().getResourceAsStream(path);
-		try {
-			return fromStream(in);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
 	}
 }

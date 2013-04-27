@@ -42,4 +42,9 @@ public class StringResource implements Resource {
 	public InputStream getInputStream() throws IOException {
 		return new ByteArrayInputStream(bytes);
 	}
+
+	@Override
+	public String getString() {
+		return new String(bytes);
+	}
 }

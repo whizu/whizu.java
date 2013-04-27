@@ -29,8 +29,8 @@ import java.io.InputStream;
 /**
  * @author Rudy D'hauwe
  */
-public class ClassPathResource implements Resource {
-	
+public class ClassPathResource extends AbstractResource {
+
 	private String path;
 
 	public ClassPathResource(String path) {

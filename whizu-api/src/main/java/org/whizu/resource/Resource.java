@@ -38,4 +38,6 @@ public interface Resource {
 	 *             if the stream could not be opened
 	 */
 	public InputStream getInputStream() throws IOException;
+
+	public String getString() throws IOException;
 }
