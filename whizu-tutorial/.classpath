@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-api"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-server"/>
@@ -9,5 +10,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-jquery-mobile"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-jquery-ui"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-sencha"/>
+	<classpathentry kind="lib" path="/whizu-api/lib/commons-logging-1.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

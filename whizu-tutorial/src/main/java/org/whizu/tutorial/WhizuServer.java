@@ -23,13 +23,18 @@
  *******************************************************************************/
 package org.whizu.tutorial;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 public class WhizuServer {
 
+	private static Log log = LogFactory.getLog(WhizuServer.class);
+	
 	public static void main(String[] args) {
 		try {
+			log.info("Starting the embedded Jetty server");
 			String workingDirectory = System.getProperty("user.dir");
 			String descriptor = workingDirectory + "/web/WEB-INF/web.xml";
 			String resourceBase = workingDirectory + "/web";
@@ -43,7 +48,7 @@ public class WhizuServer {
 			server.start();
 			server.join();
 		} catch (Exception exc) {
-			exc.printStackTrace();
+			log.fatal(exc.getMessage(), exc);
 			throw new RuntimeException(exc);
 		}
 	}

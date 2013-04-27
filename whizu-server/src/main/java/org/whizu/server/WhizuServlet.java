@@ -87,6 +87,7 @@ public class WhizuServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
+		log.info("Starting WhizuServlet");
 		RequestContext.init(new RequestContext() {
 
 			@Override
