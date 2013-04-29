@@ -26,8 +26,8 @@ package org.whizu.server;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.whizu.annotation.Page;
 import org.whizu.annotation.TypeReporter;
 import org.whizu.ui.Application;
@@ -37,7 +37,7 @@ import org.whizu.ui.Application;
  */
 class Configuration implements TypeReporter<Page> {
 
-	private Log log = LogFactory.getLog(Configuration.class);
+	private Logger log = LoggerFactory.getLogger(Configuration.class);
 
 	private Map<String, PageFactory> applicationFactoryMap = new HashMap<String, PageFactory>();
 

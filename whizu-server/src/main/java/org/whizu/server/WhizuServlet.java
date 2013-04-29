@@ -34,8 +34,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.whizu.annotation.AnnotationUtils;
 import org.whizu.annotation.Page;
 import org.whizu.annotation.Title;
@@ -53,7 +53,7 @@ import org.whizu.ui.WhizuUI;
  */
 public class WhizuServlet extends HttpServlet {
 
-	private Log log = LogFactory.getLog(WhizuServlet.class);
+	private Logger log = LoggerFactory.getLogger(WhizuServlet.class);
 
 	private static final String WHIZU_SESSION = "whizu-session";
 

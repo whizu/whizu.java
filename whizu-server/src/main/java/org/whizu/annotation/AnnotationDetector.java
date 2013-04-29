@@ -39,8 +39,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * {@code AnnotationDetector} reads Java Class File (".class") files and reports the 
@@ -116,7 +116,7 @@ import org.apache.commons.logging.LogFactory;
  */
 final class AnnotationDetector {
 
-	private static Log log = LogFactory.getLog(AnnotationDetector.class);
+	private static Logger log = LoggerFactory.getLogger(AnnotationDetector.class);
 	
     /**
      * {@code Reporter} is the base interface, used to report the detected annotations.

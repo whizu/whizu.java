@@ -37,8 +37,8 @@ import javassist.bytecode.ConstPool;
 import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.StringMemberValue;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.whizu.annotation.Css;
 import org.whizu.annotation.Style;
 import org.whizu.annotation.Stylesheet;
@@ -51,7 +51,7 @@ import org.whizu.ui.Application;
  */
 public class ApplicationEnhancer {
 
-	private Log log = LogFactory.getLog(ApplicationEnhancer.class);
+	private Logger log = LoggerFactory.getLogger(ApplicationEnhancer.class);
 
 	public PageFactory createFactory(String className) {
 		try {

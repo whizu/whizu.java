@@ -26,8 +26,8 @@ package org.whizu.annotation;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.whizu.util.Chrono;
 
 /**
@@ -35,7 +35,7 @@ import org.whizu.util.Chrono;
  */
 public class AnnotationUtils {
 
-	private static Log log = LogFactory.getLog(AnnotationUtils.class);
+	private static Logger log = LoggerFactory.getLogger(AnnotationUtils.class);
 
 	private static void scan(AnnotationDetector.TypeReporter reporter) {
 		try {
@@ -77,8 +77,7 @@ public class AnnotationUtils {
 		scan(typeReporter);
 
 		if (log.isDebugEnabled()) {
-			log.debug("Finished scanning the classpath for @" + clazz.getSimpleName() + " annotations in "
-					+ chrono.stop() + "ms");
+			log.debug("Finished scanning the classpath for @{} annotations in {}ms", clazz.getSimpleName(), chrono.stop());
 		}
 	}
 }

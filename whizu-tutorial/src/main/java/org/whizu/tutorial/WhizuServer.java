@@ -23,14 +23,14 @@
  *******************************************************************************/
 package org.whizu.tutorial;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WhizuServer {
 
-	private static Log log = LogFactory.getLog(WhizuServer.class);
+	private static Logger log = LoggerFactory.getLogger(WhizuServer.class);
 	
 	public static void main(String[] args) {
 		try {
@@ -48,7 +48,7 @@ public class WhizuServer {
 			server.start();
 			server.join();
 		} catch (Exception exc) {
-			log.fatal(exc.getMessage(), exc);
+			log.error(exc.getMessage(), exc);
 			throw new RuntimeException(exc);
 		}
 	}
