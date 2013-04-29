@@ -47,13 +47,14 @@ import org.whizu.resource.ClassPathResource;
 import org.whizu.resource.Resource;
 import org.whizu.ui.Application;
 import org.whizu.ui.WhizuUI;
+import org.whizu.util.Chrono;
 
 /**
  * @author Rudy D'hauwe
  */
 public class WhizuServlet extends HttpServlet {
 
-	private Logger log = LoggerFactory.getLogger(WhizuServlet.class);
+	private Logger logger = LoggerFactory.getLogger(WhizuServlet.class);
 
 	private static final String WHIZU_SESSION = "whizu-session";
 
@@ -61,10 +62,10 @@ public class WhizuServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		log.info("Starting the WhizuServlet");
+		logger.info("Starting the WhizuServlet");
 		RequestContext.setInstance(new RequestContextImpl());
 		AnnotationUtils.scan(Page.class, this.config);
-		log.info("WhizuServlet started");
+		logger.info("WhizuServlet started");
 	}
 
 	private Session assureUserSession(HttpSession session) {
@@ -142,9 +143,9 @@ public class WhizuServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
-		long start = System.currentTimeMillis();
+	protected void service(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		Chrono chrono = Chrono.start();
 		String content = "--";
 		try {
 			Session session = startRequest(request);
@@ -163,10 +164,9 @@ public class WhizuServlet extends HttpServlet {
 				content = RequestImpl.get().finish();
 			}
 		} finally {
-			long end = System.currentTimeMillis();
-			if (log.isDebugEnabled()) {
-				log.debug("Server side completed in " + (end - start) + "ms");
-				log.debug("Sending script " + content);
+			if (logger.isDebugEnabled()) {
+				logger.debug("Server side completed in {}ms", chrono.stop());
+				logger.debug("Streaming script {}", content);
 			}
 			response.getWriter().print(content);
 			response.getWriter().close();

@@ -35,7 +35,7 @@ import org.whizu.util.Chrono;
  */
 public class AnnotationUtils {
 
-	private static Logger log = LoggerFactory.getLogger(AnnotationUtils.class);
+	private static Logger logger = LoggerFactory.getLogger(AnnotationUtils.class);
 
 	private static void scan(AnnotationDetector.TypeReporter reporter) {
 		try {
@@ -46,11 +46,11 @@ public class AnnotationUtils {
 	}
 
 	public static <T extends Annotation> void scan(final Class<T> clazz, final TypeReporter<T> reporter) {
-		if (log.isDebugEnabled()) {
-			log.debug("Scanning the classpath for @" + clazz.getSimpleName() + " annotations");
+		if (logger.isDebugEnabled()) {
+			logger.debug("Scanning the classpath for @{} annotations", clazz.getSimpleName());
 		}
 
-		Chrono chrono = new Chrono();
+		Chrono chrono = Chrono.start();
 		AnnotationDetector.TypeReporter typeReporter = new AnnotationDetector.TypeReporter() {
 
 			@SuppressWarnings("unchecked")
@@ -76,8 +76,8 @@ public class AnnotationUtils {
 
 		scan(typeReporter);
 
-		if (log.isDebugEnabled()) {
-			log.debug("Finished scanning the classpath for @{} annotations in {}ms", clazz.getSimpleName(), chrono.stop());
+		if (logger.isDebugEnabled()) {
+			logger.debug("Scanned the classpath for @{} annotations in {}ms", clazz.getSimpleName(), chrono.stop());
 		}
 	}
 }

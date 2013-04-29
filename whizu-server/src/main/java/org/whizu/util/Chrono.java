@@ -28,10 +28,26 @@ package org.whizu.util;
  */
 public class Chrono {
 
-	private long start;
+	private static ThreadLocal<Chrono> chronoFactory = new ThreadLocal<Chrono>() {
 
-	public Chrono() {
+		@Override
+		protected Chrono initialValue() {
+			return new Chrono();
+		}
+	};
+	
+	public static Chrono start() {
+		return chronoFactory.get().reset();
+	}
+
+	private long start;
+	
+	private Chrono() {
+	}
+
+	private Chrono reset() {
 		this.start = System.currentTimeMillis();
+		return this;
 	}
 
 	public long stop() {
