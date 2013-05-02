@@ -7,8 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry including="**/*.java" kind="src" path="src/main/resources"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/whizu-api"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/whizu-server"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-jquery-mobile"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-jquery-ui"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/whizu-sencha"/>
@@ -28,5 +26,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/whizu"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

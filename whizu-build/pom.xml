@@ -1,9 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.whizu</groupId>
   <artifactId>whizu-build</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
   	<dependency>
   		<groupId>org.slf4j</groupId>
@@ -70,11 +74,18 @@
   </organization>
   <issueManagement>
   	<system>Github</system>
+  	<url>https://github.com/whizu/whizu.java/issues</url>
   </issueManagement>
   <modules>
-  <module>../whizu-pro</module>
-  <module>../whizu-api</module>
-  <module>../whizu-server</module>
-  <module>../whizu-tutorial</module>
+    <module>../whizu</module>
+    <module>../whizu-pro</module>
+    <module>../whizu-jquery-ui</module>
+    <module>../whizu-jquery-mobile</module>
+    <module>../whizu-sencha</module>
+    <module>../whizu-tutorial</module>
   </modules>
+  <scm>
+  	<url>scm:git:https://github.com/whizu/whizu.java</url>
+  	<connection>scm:git:https://github.com/whizu/whizu.java</connection>
+  </scm>
 </project>

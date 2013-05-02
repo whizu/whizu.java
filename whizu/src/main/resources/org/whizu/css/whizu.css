@@ -1,0 +1,42 @@
+.absolute-layout {
+	position: relative;
+	left: 0px;
+}
+
+.absolute-layout-element {
+	
+}
+
+.vertical-layout {
+	
+}
+
+.vertical-layout-element {
+	display: block;
+}
+
+.flow-layout {
+	
+}
+
+.flow-layout-element {
+	display: inline-block;
+}
+
+.horizontal-layout {
+	white-space: nowrap;
+}
+
+.horizontal-layout-element {
+	display: inline-block;
+	vertical-align: top;
+}
+
+img {
+	display: block;
+	vertical-align: bottom;
+}
+
+.link:hover {
+	cursor: pointer;
+}
