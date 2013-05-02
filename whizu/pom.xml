@@ -3,7 +3,7 @@
 	<groupId>org.whizu</groupId>
 	<artifactId>whizu</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>Whizu</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
