@@ -57,6 +57,7 @@
 	</issueManagement>
 	<scm>
 		<url>https://github.com/whizu/whizu.java</url>
-		<connection>scm:git:git://github.com/whizu/whizu.java.git</connection>
+		<connection>scm:git:ssh://git@github.com/whizu/whizu.java.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/whizu/whizu.java.git</developerConnection>
 	</scm>
 </project>
