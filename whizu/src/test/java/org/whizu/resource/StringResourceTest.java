@@ -12,7 +12,7 @@ public class StringResourceTest {
 	@Test
 	public void testStringResource() {
 		try {
-			String content = "my-stringéàç";
+			String content = "my-string";
 			StringResource resource = new StringResource(content);
 			InputStream in = resource.getInputStream();
 			int ch = in.read();
