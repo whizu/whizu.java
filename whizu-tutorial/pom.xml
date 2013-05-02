@@ -7,8 +7,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.0</version>
         <configuration>
-          <source/>
-          <target/>
+          <source />
+          <target />
         </configuration>
       </plugin>
     </plugins>
@@ -16,7 +16,7 @@
   <parent>
   	<groupId>org.whizu</groupId>
   	<artifactId>whizu-build</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
+  	<version>0.0.1</version>
   	<relativePath>../whizu-build</relativePath>
   </parent>
   <dependencies>
