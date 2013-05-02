@@ -91,7 +91,7 @@
 		<url>https://github.com/whizu/whizu.java/issues</url>
 	</issueManagement>
 	<scm>
-		<url>scm:git:https://github.com/whizu/whizu.java</url>
-		<connection>scm:git:https://github.com/whizu/whizu.java</connection>
+		<url>scm:git:https://github.com/whizu/whizu.java.git</url>
+		<connection>scm:git:https://github.com/whizu/whizu.java.git</connection>
 	</scm>
 </project>
