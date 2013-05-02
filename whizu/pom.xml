@@ -3,13 +3,13 @@
 	<parent>
 		<groupId>org.whizu</groupId>
 		<artifactId>whizu-master</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>	
 	<groupId>org.whizu</groupId>
 	<artifactId>whizu</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>Whizu</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,14 +18,6 @@
 	</properties>
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-scm-plugin</artifactId>
-				<version>1.8.1</version>
-				<configuration>
-					<connectionType>connection</connectionType>
-				</configuration>
-			</plugin>
 		</plugins>	
 	</build>
 	<dependencies>

@@ -4,14 +4,13 @@
 	<groupId>org.whizu</groupId>
 	<artifactId>whizu-master</artifactId>
 	<packaging>pom</packaging>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>Whizu</name>
 	<scm>
-		<url>scm:git:https://github.com/whizu/whizu.java.git</url>
-		<connection>scm:git:https://github.com/whizu/whizu.java.git</connection>
-	  <tag>whizu-0.0.1</tag>
+		<url>https://github.com/whizu/whizu.java</url>
+		<connection>scm:git:git@github.com/whizu/whizu.java.git</connection>
     </scm>
-<build>
+    <build>
 	  <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
