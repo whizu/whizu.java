@@ -3,9 +3,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.whizu</groupId>
-		<artifactId>whizu-build</artifactId>
+		<artifactId>whizu-master</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../whizu-build</relativePath>
+		<relativePath>../</relativePath>
 	</parent>
 	<artifactId>whizu-jquery-ui</artifactId>
+	<dependencies>
+		<dependency>
+			<groupId>org.whizu</groupId>
+			<artifactId>whizu</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
