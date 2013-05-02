@@ -39,13 +39,14 @@ public class LayoutBuilderTest extends AbstractTest {
 	 * {@link org.whizu.layout.LayoutBuilder#create(java.lang.String, java.lang.String)}
 	 * .
 	 */
+	@SuppressWarnings("rawtypes")
 	@Test
 	public void testCreate() {
-		LayoutBuilder<?> parent = new LayoutBuilder<>();
-		LayoutBuilder<?> child1 = new LayoutBuilder<>();
+		LayoutBuilder<?> parent = new LayoutBuilder();
+		LayoutBuilder<?> child1 = new LayoutBuilder();
 		parent.add(child1);
 		child1.css("myClass");
-		LayoutBuilder<?> child2 = new LayoutBuilder<>();
+		LayoutBuilder<?> child2 = new LayoutBuilder();
 		parent.add(child2);
 		Markup markup = parent.create("parent-css", "child-css");
 		String expected = "<div id='c0' class='parent-css '><div id='c1' class='myClass child-css '></div><div id='c2' class='child-css '></div></div>";
