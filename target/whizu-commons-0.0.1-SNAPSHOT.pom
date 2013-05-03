@@ -47,7 +47,7 @@
 	<maven.compiler.target>1.7</maven.compiler.target>	
   </properties>
   <modules>
-    <module>whizu-core</module>
+    <module>whizu</module>
 	<!--
 	<module>whizu-jquery-ui</module>
 	<module>whizu-jquery-mobile</module>
