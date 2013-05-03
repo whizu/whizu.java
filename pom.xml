@@ -50,8 +50,8 @@
   <modules>
     <module>whizu-core</module>
 	<module>whizu-jquery-mobile</module>
-	<!--
 	<module>whizu-jquery-ui</module>
+	<!--
 	<module>whizu-pro</module>
 	-->
   </modules>
