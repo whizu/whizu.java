@@ -4,9 +4,9 @@
         simple example build file
     </description>
 	<!-- set global properties for this build -->
-	<property name="src" location="../whizu-api/src/main/java" />
-	<property name="resources" location="../whizu-api/src/main/resources" />
-	<property name="src-server" location="../whizu-server/src/main/java" />
+	<property name="src" location="../whizu-core/src/main/java" />
+	<property name="resources" location="../whizu-core/src/main/resources" />
+	<property name="src-server" location="../whizu-pro/src/main/java" />
 	<property name="src-jquery-mobile" location="../whizu-jquery-mobile/src/main/java" />
 	<property name="build" location="build" />
 	<property name="dist" location="dist" />

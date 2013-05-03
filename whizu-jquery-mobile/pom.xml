@@ -3,15 +3,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.whizu</groupId>
-		<artifactId>whizu-master</artifactId>
+		<artifactId>whizu-commons</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../</relativePath>
 	</parent>
 	<artifactId>whizu-jquery-mobile</artifactId>
+	<name>Whizu jQuery Mobile</name>
+	<description>Whizu API for jQuery Mobile</description>
 	<dependencies>
 		<dependency>
 			<groupId>org.whizu</groupId>
-			<artifactId>whizu</artifactId>
+			<artifactId>whizu-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
