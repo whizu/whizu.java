@@ -51,7 +51,7 @@
     <module>whizu-core</module>
 	<module>whizu-jquery-mobile</module>
 	<module>whizu-jquery-ui</module>
-	<module>whizu-jquery-sencha</module>
+	<module>whizu-sencha</module>
 	<module>whizu-pro</module>
 	<module>whizu-tutorial</module>
   </modules>
