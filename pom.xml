@@ -7,7 +7,7 @@
   </parent>
   <groupId>org.whizu</groupId>
   <artifactId>whizu-commons</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Whizu Commons</name>
   <description>Whizu Commons</description>
@@ -35,10 +35,9 @@
   	<url>https://github.com/whizu/whizu.java/issues</url>
   </issueManagement>
   <scm>
-  	<connection>scm:git:git@github.com:whizu/whizu.java.git</connection>
-    <developerConnection>scm:git:git@github.com:whizu/whizu.java.git</developerConnection>
-    <url>git@github.com:whizu/whizu.java.git</url>
-    <tag>whizu-commons-0.0.1</tag>
+  	<connection>scm:git:https://github.com/whizu/whizu.java.git</connection>
+    <developerConnection>scm:git:https://github.com/whizu/whizu.java.git</developerConnection>
+    <url>https://github.com:whizu/whizu.java.git</url>
   </scm>
   <properties> 
     <skip-deploy-artifact>false</skip-deploy-artifact> 
