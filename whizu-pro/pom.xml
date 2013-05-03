@@ -1,11 +1,18 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.whizu</groupId>
-		<artifactId>whizu-master</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../</relativePath>
+		<artifactId>whizu-commons</artifactId>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>whizu-pro</artifactId>
+	<name>Whizu Professional</name>
+	<description>Whizu Professional</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.whizu</groupId>
+			<artifactId>whizu-core</artifactId>
+			<version>0.0.3-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
