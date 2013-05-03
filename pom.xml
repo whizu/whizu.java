@@ -159,6 +159,7 @@
         <version>2.4.1</version>
 		<configuration> 
 		  <mavenExecutorId>forked-path</mavenExecutorId>
+          <pushChanges>false</pushChanges>
 		</configuration> 
       </plugin>
       <plugin>
