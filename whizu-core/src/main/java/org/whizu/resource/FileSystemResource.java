@@ -29,16 +29,10 @@ import java.io.InputStream;
 /**
  * @author Rudy D'hauwe
  */
-public class FileSystemResource implements Resource {
+public class FileSystemResource extends AbstractResource {
 
 	@Override
 	public InputStream getInputStream() throws IOException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public String getString() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}

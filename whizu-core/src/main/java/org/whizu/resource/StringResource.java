@@ -26,6 +26,7 @@ package org.whizu.resource;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * @author Rudy D'hauwe
@@ -46,5 +47,10 @@ public class StringResource implements Resource {
 	@Override
 	public String getString() {
 		return new String(bytes);
+	}
+
+	@Override
+	public void print(OutputStream out) throws IOException {
+		out.write(bytes);
 	}
 }

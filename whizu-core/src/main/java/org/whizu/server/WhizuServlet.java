@@ -45,6 +45,7 @@ import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Session;
 import org.whizu.resource.ClassPathResource;
 import org.whizu.resource.Resource;
+import org.whizu.resource.StringResource;
 import org.whizu.ui.Application;
 import org.whizu.ui.WhizuUI;
 import org.whizu.util.Chrono;
@@ -79,17 +80,16 @@ public class WhizuServlet extends HttpServlet {
 	}
 
 	// replace by a class StylesheetResource?
-	private String handleCss(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private Resource handleCss(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String uri = request.getRequestURI();
 		String servletPath = request.getServletPath();
 		String path = uri.substring(servletPath.length());
-		Resource resource = new ClassPathResource(path);
-		return resource.getString();
+		return new ClassPathResource(path);
 	}
 
 	// serve a new page request to an application,
 	// replace this method by a class PageResource?
-	private String servePageRequest(HttpServletRequest request) {
+	private Resource servePageRequest(HttpServletRequest request) {
 		// getPageResource(uri).stream(response.getWriter());
 		String uri = request.getRequestURI();
 		final PageFactory factory = config.getFactory(uri);
@@ -129,7 +129,7 @@ public class WhizuServlet extends HttpServlet {
 					content = content.replace("${title}", Title.DEFAULT_TITLE);
 				}
 
-				return content;
+				return new StringResource(content);
 			} catch (IOException e) {
 				throw new IllegalStateException(e);
 			}
@@ -142,7 +142,7 @@ public class WhizuServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		Chrono chrono = Chrono.start();
-		String content = "--";
+		Resource content = null;
 		try {
 			Session session = startRequest(request);
 			String id = request.getParameter("id");
@@ -157,15 +157,23 @@ public class WhizuServlet extends HttpServlet {
 				}
 			} else {
 				session.handleEvent(id);
-				content = RequestImpl.get().finish();
+				content = new StringResource(RequestImpl.get().finish());
 			}
 		} finally {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Server side completed in {}ms", chrono.stop());
-				logger.debug("Streaming script {}", content);
+				logger.debug("Streaming script {}", content.getString());
 			}
-			response.getWriter().print(content);
-			response.getWriter().close();
+			
+			if (content != null) {
+				System.out.println(content.getClass());
+				
+				content.print(response.getOutputStream());
+				//response.getWriter().print(content.getString());
+			}
+			
+			response.getOutputStream().flush();
+			//response.getWriter().close();
 		}
 	}
 

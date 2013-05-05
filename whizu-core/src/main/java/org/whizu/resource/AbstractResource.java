@@ -27,6 +27,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 
 /**
  * @author Rudy D'hauwe
@@ -46,6 +47,24 @@ public abstract class AbstractResource implements Resource {
 				out.append(line);
 			}
 			return out.toString();
+		} finally {
+			if (in != null) {
+				in.close();
+			}
+		}
+	}
+
+	@Override
+	public void print(OutputStream out) throws IOException {
+		InputStream in = null;
+
+		try {
+			in = getInputStream();
+			byte[] buffer = new byte[256];
+		    int bytesRead = 0;
+		    while ((bytesRead = in.read(buffer)) != -1) {
+		        out.write(buffer, 0, bytesRead);
+		    }
 		} finally {
 			if (in != null) {
 				in.close();

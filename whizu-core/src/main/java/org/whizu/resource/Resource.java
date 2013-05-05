@@ -25,6 +25,7 @@ package org.whizu.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * @author Rudy D'hauwe
@@ -40,4 +41,6 @@ public interface Resource {
 	public InputStream getInputStream() throws IOException;
 
 	public String getString() throws IOException;
+
+	public void print(OutputStream out) throws IOException;
 }
