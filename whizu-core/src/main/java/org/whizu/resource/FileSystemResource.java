@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.resource;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -31,9 +32,14 @@ import java.io.InputStream;
  */
 public class FileSystemResource extends AbstractResource {
 
+	private String path;
+
+	public FileSystemResource(String path) {
+		this.path = path;
+	}
+	
 	@Override
 	public InputStream getInputStream() throws IOException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return new FileInputStream(path);
 	}
 }

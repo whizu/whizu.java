@@ -26,14 +26,24 @@ package org.whizu.resource;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.servlet.ServletContext;
+
 /**
  * @author Rudy D'hauwe
  */
 public class ServletContextResource extends AbstractResource {
 
+	private ServletContext ctx;
+
+	private String uri;
+
+	public ServletContextResource(ServletContext ctx, String uri) {
+		this.ctx = ctx;
+		this.uri = uri;
+	}
+
 	@Override
 	public InputStream getInputStream() throws IOException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return ctx.getResourceAsStream(uri);
 	}
 }
