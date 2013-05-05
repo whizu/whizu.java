@@ -80,6 +80,7 @@ public class WhizuServlet extends HttpServlet {
 	}
 
 	// replace by a class StylesheetResource?
+	//could be cached in production-mode (whizu-pro)
 	private Resource handleCss(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String uri = request.getRequestURI();
 		String servletPath = request.getServletPath();
@@ -166,10 +167,7 @@ public class WhizuServlet extends HttpServlet {
 			}
 			
 			if (content != null) {
-				System.out.println(content.getClass());
-				
 				content.print(response.getOutputStream());
-				//response.getWriter().print(content.getString());
 			}
 			
 			response.getOutputStream().flush();
