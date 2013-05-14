@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+<title>${title}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/whizu/org/whizu/css/whizu.css" />
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="/shop/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/shop/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/shop/print.css" media="print" />
+${css}
+<script src="/shop/jquery-1.9.1.min.js"></script>
+<script>$(document).ready(function() { $.getScript('/whizu?id=${id}'); });</script>
+</head>
+<body id='whizu'>
+    <HEADER>
+      <div class="inner">
+        <h1>&nbsp;</h1>
+      </div>
+    </HEADER>
+    <DIV class="inner clearfix">
+      <DIV id='left-column'>
+        
+        <div id='menu'>
+          <a href="">Home</a>
+        </div>
+      </DIV>
+      <DIV id='right-column'>
+         <h3>Welcome at My Shop</h3>
+         <p>Make your choice in the menu.</p>
+		 <br><br>
+      </DIV>
+      <div id='detail'>
+      </div>
+    </DIV>
+</body>
+</HTML>

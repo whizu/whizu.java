@@ -24,6 +24,8 @@
 package org.whizu.server;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
 
@@ -37,6 +39,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.annotation.AnnotationUtils;
+import org.whizu.annotation.Body;
 import org.whizu.annotation.Page;
 import org.whizu.annotation.Title;
 import org.whizu.jquery.EventHandler;
@@ -80,7 +83,7 @@ public class WhizuServlet extends HttpServlet {
 	}
 
 	// replace by a class StylesheetResource?
-	//could be cached in production-mode (whizu-pro)
+	// could be cached in production-mode (whizu-pro)
 	private Resource handleCss(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String uri = request.getRequestURI();
 		String servletPath = request.getServletPath();
@@ -130,6 +133,25 @@ public class WhizuServlet extends HttpServlet {
 					content = content.replace("${title}", Title.DEFAULT_TITLE);
 				}
 
+				
+				Method[] methods = clazz.getDeclaredMethods();
+				for (Method method : methods) {
+					if (method.isAnnotationPresent(Body.class)) {
+						try {
+							ClassPathResource body = (ClassPathResource) method.invoke(app);
+							String bodyText = body.getString();
+							logger.debug("@Body" + bodyText);
+							content = content.replace("</body>", bodyText + "</body>");
+						} catch (IllegalAccessException e) {
+							throw new IllegalStateException(e);
+						} catch (IllegalArgumentException e) {
+							throw new IllegalStateException(e);
+						} catch (InvocationTargetException e) {
+							throw new IllegalStateException(e);
+						}
+					}
+				}
+
 				return new StringResource(content);
 			} catch (IOException e) {
 				throw new IllegalStateException(e);
@@ -140,8 +162,8 @@ public class WhizuServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
 		Chrono chrono = Chrono.start();
 		Resource content = null;
 		try {
@@ -160,18 +182,20 @@ public class WhizuServlet extends HttpServlet {
 				session.handleEvent(id);
 				content = new StringResource(RequestImpl.get().finish());
 			}
+		} catch(Exception exc) {
+			exc.printStackTrace();
 		} finally {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Server side completed in {}ms", chrono.stop());
 				logger.debug("Streaming script {}", content.getString());
 			}
-			
+
 			if (content != null) {
 				content.print(response.getOutputStream());
 			}
-			
+
 			response.getOutputStream().flush();
-			//response.getWriter().close();
+			// response.getWriter().close();
 		}
 	}
 

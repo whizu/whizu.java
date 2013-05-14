@@ -200,4 +200,8 @@ public class WhizuUI implements UI {
 	public void schedule(int milliseconds, Function action) {
 		new Schedule(milliseconds, action);
 	}
+
+	public Component createTextField(Value value) {
+		return new TextFieldImpl(value);
+	}
 }

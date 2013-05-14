@@ -33,7 +33,7 @@ import org.whizu.dom.Component;
 /**
  * @author Rudy D'hauwe
  */
-public class ValueList<T extends ValueObject> extends ValueBuilder<ValueList<T>, List<T>> {
+public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
 
 	private Class<T> clazz;
 

@@ -21,57 +21,43 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.resource;
+package org.whizu.tutorial.shop.action;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
 
-/**
- * @author Rudy D'hauwe
- */
-public abstract class AbstractResource implements Resource {
+import org.whizu.tutorial.shop.model.Customer;
+import org.whizu.ui.Action;
 
-	@Override
-	public String getString() throws IOException {
-		InputStream in = null;
 
-		try {
-			in = getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-			StringBuilder out = new StringBuilder();
-			String line;
-			while ((line = reader.readLine()) != null) {
-				out.append(line);
-			}
-			return out.toString();
-		} catch(IOException exc) {
-			exc.printStackTrace();
-			return "empty body";
-		} finally {
-			if (in != null) {
-				in.close();
-			}
-		}
+public class CustomerSearchAction extends SearchAction<Customer> {
+
+	public CustomerSearchAction() {
+		super(Customer.class);
 	}
 
 	@Override
-	public void print(OutputStream out) throws IOException {
-		InputStream in = null;
+	public String getCaption() {
+		return "Customer";
+	}
 
-		try {
-			in = getInputStream();
-			byte[] buffer = new byte[256];
-		    int bytesRead = 0;
-		    while ((bytesRead = in.read(buffer)) != -1) {
-		        out.write(buffer, 0, bytesRead);
-		    }
-		} finally {
-			if (in != null) {
-				in.close();
-			}
-		}
+	@Override
+	protected Action getCreateAction() {
+		return null;
+	}
+
+	@Override
+	protected String[] getFields() {
+		return new String[]{"Naam"};
+	}
+
+	@Override
+	protected Collection<Customer> performSearch() {
+		return new ArrayList<Customer>();
+	}
+
+	@Override
+	protected Action getUpdateAction(Customer model) {
+		return null;
 	}
 }

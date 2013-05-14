@@ -21,57 +21,17 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.resource;
+package org.whizu.tutorial.shop.dao;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import org.whizu.tutorial.shop.model.Country;
 
-/**
- * @author Rudy D'hauwe
- */
-public abstract class AbstractResource implements Resource {
+public class CountryDAO extends Dao<Country> {
 
-	@Override
-	public String getString() throws IOException {
-		InputStream in = null;
-
-		try {
-			in = getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-			StringBuilder out = new StringBuilder();
-			String line;
-			while ((line = reader.readLine()) != null) {
-				out.append(line);
-			}
-			return out.toString();
-		} catch(IOException exc) {
-			exc.printStackTrace();
-			return "empty body";
-		} finally {
-			if (in != null) {
-				in.close();
-			}
-		}
-	}
-
-	@Override
-	public void print(OutputStream out) throws IOException {
-		InputStream in = null;
-
-		try {
-			in = getInputStream();
-			byte[] buffer = new byte[256];
-		    int bytesRead = 0;
-		    while ((bytesRead = in.read(buffer)) != -1) {
-		        out.write(buffer, 0, bytesRead);
-		    }
-		} finally {
-			if (in != null) {
-				in.close();
-			}
-		}
+	public static CountryDAO INSTANCE = new CountryDAO();
+	
+	public CountryDAO() {
+		add(new Country(1L, "BE", "Belgium"));
+		add(new Country(2L, "NL", "Netherlands"));
+		add(new Country(3L, "FR", "France"));
 	}
 }

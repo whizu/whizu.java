@@ -39,9 +39,11 @@ import javassist.bytecode.annotation.StringMemberValue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.whizu.annotation.Body;
 import org.whizu.annotation.Css;
 import org.whizu.annotation.Style;
 import org.whizu.annotation.Stylesheet;
+import org.whizu.annotation.Template;
 import org.whizu.annotation.Title;
 import org.whizu.dom.Component;
 import org.whizu.ui.Application;
@@ -72,6 +74,11 @@ public class ApplicationEnhancer {
 				title = ((Title) ctClass.getAnnotation(Title.class)).value();
 			}
 			
+			String template = null;
+			if (ctClass.hasAnnotation(Template.class)) {
+				template = ((Template) ctClass.getAnnotation(Template.class)).value();
+			}
+			
 			CtMethod[] ctMethods = ctClass.getDeclaredMethods();
 			List<CtMethod> methodsToDo = new ArrayList<CtMethod>();
 			for (CtMethod method : ctMethods) {
@@ -80,6 +87,10 @@ public class ApplicationEnhancer {
 						log.debug("Enhancing method " + method);
 					}
 					methodsToDo.add(method);
+				}
+				
+				if (method.hasAnnotation(Body.class)) {
+					log.debug("Found @Body");
 				}
 			}
 
@@ -111,6 +122,9 @@ public class ApplicationEnhancer {
 			PageFactory factory = new PageFactory(newClass);
 			factory.setTitle(title);
 			factory.setStylesheet(stylesheet);
+			if (template != null) {
+				factory.setTemplate(template);
+			}
 			return factory;
 		} catch (NotFoundException | CannotCompileException | ClassNotFoundException e) {
 			throw new IllegalStateException(e);

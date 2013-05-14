@@ -30,14 +30,16 @@ import org.whizu.dom.Component;
 /**
  * @author Rudy D'hauwe
  */
-public interface Value {
+public interface Value<T> {
 
 	public void addPropertyChangeListener(PropertyChangeListener listener);
 	
 	public String getName();
 	
-	//public T getValue();
-
+	public T getValue();
+	
+	public void setValue(T value);
+	
 	public boolean isReadOnly();
 
 	public void parse(String s);
@@ -45,4 +47,6 @@ public interface Value {
 	public void setReadOnly(boolean readonly);
 
 	public Component render(ValueRenderer renderer);
+
+	public void refresh(Value<T> value);
 }

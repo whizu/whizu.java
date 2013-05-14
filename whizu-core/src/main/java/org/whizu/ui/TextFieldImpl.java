@@ -30,6 +30,7 @@ import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.jquery.Input;
 import org.whizu.value.StringValue;
+import org.whizu.value.Value;
 import org.whizu.widget.Widget;
 
 /**
@@ -39,7 +40,7 @@ public class TextFieldImpl extends Widget implements TextField, Input {
 
 	private String text;
 	
-	private StringValue value;
+	private Value value;
 
 	public TextFieldImpl(String text) {
 		this.text = text;
@@ -52,7 +53,24 @@ public class TextFieldImpl extends Widget implements TextField, Input {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				text = TextFieldImpl.this.value.getValue();
+				text = "" + TextFieldImpl.this.value.getValue();
+				jQuery(TextFieldImpl.this).val(text);
+			}
+		});
+	}
+
+	public TextFieldImpl(Value value) {
+		if (value.getValue() == null) {
+			this.text = "";
+		} else {
+			this.text = "" + value.getValue();
+		}
+		this.value = value;
+		this.value.addPropertyChangeListener(new PropertyChangeListener() {
+
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				text = "" + TextFieldImpl.this.value.getValue();
 				jQuery(TextFieldImpl.this).val(text);
 			}
 		});
@@ -66,11 +84,11 @@ public class TextFieldImpl extends Widget implements TextField, Input {
 		return Html.tag("input")
 						.attr("id", id())
 						.attr("type", "text")
-						.width("300px")
+						//.width("300px")
 						.attr("name", id())
 						.decorate(this)
 						.style("display","inline-block")
-						.add(text);
+						.attr("value", text);
 		// @formatter:on
 	}
 

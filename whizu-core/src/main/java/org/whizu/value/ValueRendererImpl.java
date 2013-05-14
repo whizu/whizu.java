@@ -34,11 +34,12 @@ public class ValueRendererImpl implements ValueRenderer {
 	}
 
 	@Override
-	public <T extends ValueObject> Component render(final ValueList<T> value) {
+	public <T> Component render(final ValueList<T> value) {
 		final VerticalLayout view = new VerticalLayout();
 		for (int i = 0; i < value.size(); i++) {
 			VerticalLayout elementView = new VerticalLayout();
-			elementView.add(new LabelImpl("" + value.get(i).getColumns()[1]));
+			//elementView.add(new LabelImpl("" + value.get(i).getColumns()[1]));
+			elementView.add(new LabelImpl("" + value.get(i)));
 			view.add(elementView);
 		}
 
@@ -47,7 +48,8 @@ public class ValueRendererImpl implements ValueRenderer {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				VerticalLayout elementView = new VerticalLayout();
-				elementView.add(new LabelImpl("" + value.get(value.size() - 1).getColumns()[1]));
+				//elementView.add(new LabelImpl("" + value.get(value.size() - 1).getColumns()[1]));
+				elementView.add(new LabelImpl("" + value.get(value.size() - 1)));
 				view.add(elementView);
 			}
 		});

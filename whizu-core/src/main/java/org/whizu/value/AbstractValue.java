@@ -29,7 +29,7 @@ import java.beans.PropertyChangeSupport;
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractValue<T> implements Value {
+public abstract class AbstractValue<T> implements Value<T> {
 
 	// @Transient
 	private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -89,5 +89,15 @@ public abstract class AbstractValue<T> implements Value {
 
 	public void setValue(T value) {
 		firePropertyChange("value", this.value, this.value = value);
+	}
+
+	@Override
+	public String toString() {
+		return "" + getValue();
+	}
+
+	@Override
+	public void refresh(Value<T> value) {
+		this.setValue(value.getValue());
 	}
 }

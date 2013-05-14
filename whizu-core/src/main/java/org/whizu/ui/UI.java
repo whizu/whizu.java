@@ -37,7 +37,7 @@ public interface UI extends ViewFactory {
 
 	public Document getDocument();
 
-	public Label createLabel(Value aantal);
+	public Label createLabel(Value value);
 
 	public BarChart createBarChart(String[] x, Integer[] y);
 

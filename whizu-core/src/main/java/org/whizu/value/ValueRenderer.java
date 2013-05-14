@@ -10,7 +10,7 @@ public interface ValueRenderer {
 
 	public Component render(StringValue value);
 
-	public <T extends ValueObject> Component render(ValueList<T> value);
+	public <T> Component render(ValueList<T> value);
 	
 	public <T extends ValueObject> Component render(ValueTable<T> value);
 }

@@ -37,8 +37,15 @@ public class ClassPathResource extends AbstractResource {
 		this.path = path;
 	}
 
+	/**
+	 * @return null if path is not available on the classpath
+	 */
 	@Override
 	public InputStream getInputStream() throws IOException {
 		return getClass().getResourceAsStream(path);
+	}
+
+	public String getPath() {
+		return path;
 	}
 }

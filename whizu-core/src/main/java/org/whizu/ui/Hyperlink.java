@@ -23,29 +23,98 @@
  *******************************************************************************/
 package org.whizu.ui;
 
+import org.whizu.dom.Element;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
+import org.whizu.jquery.Function;
+import org.whizu.jquery.RequestContext;
+import org.whizu.js.JavaScript;
 import org.whizu.widget.Widget;
 
-class Hyperlink extends Widget {
+public class Hyperlink extends Widget {
 
 	private String caption;
 	
 	private ClickListenerImpl listener;
 
-	Hyperlink(String caption, ClickListener listener) {
+	public Hyperlink(final Action action) {
+		this.caption = action.getCaption();
+		addClickListener(new ClickListener() {
+			
+			@Override
+			public void click() {
+				action.handleEvent();
+			}
+		});
+	}
+	
+	public Hyperlink(String caption, ClickListener listener) {
 		this.caption = caption;
 		addClickListener(listener);
 	}
 
+	public Hyperlink(String caption, Action action) {
+		this.caption = caption;
+		addClickListener(action);
+	}
+
 	@Override
 	public Markup compile() {
-		String href = "/whizu?id=" + listener.getId();
-		return Html.div(id()).add(Html.a().attr("href", href).add(caption));
+		String id = RequestContext.getRequest().getSession().next();
+		final Element anchor = Html.a().attr("href", "").add(caption).id(id);
+		
+		String script = "";
+		if (listener != null) {
+			jQuery(anchor).click(new Function() {
+				@Override
+				public void execute() {
+
+					String url = "/whizu?id=" + listener.getId();
+
+					Function data = new Function() {
+
+						@Override
+						public void execute() {
+							jQuery("$(this)").closest("form").serialize();
+						}
+					};
+
+					Function callback = new Function("data") {
+
+						@Override
+						public void execute() {
+						}
+					};
+
+					String type = "script";
+
+					JavaScript.preventDefault();
+					jQuery("$").get(url, data, callback, type);
+				}
+			});
+		}
+
+		if (!script.equals("")) {
+			jQuery(this).concat(script); // TODO further refactoring (concat is
+											// for internal use only)
+		}
+		
+		return Html.div(id()).add(anchor);
 	}
 
 	private void addClickListener(ClickListener listener) {
 		this.listener = new ClickListenerImpl(listener);
 		getSession().addClickListener(this.listener);
+	}
+	
+	private void addClickListener(final Action action) {
+		ClickListener listener = new ClickListener() {
+			
+			@Override
+			public void click() {
+				action.handleEvent();
+			}
+		};
+		addClickListener(listener);
 	}
 }

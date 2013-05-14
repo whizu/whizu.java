@@ -21,57 +21,46 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.resource;
+package org.whizu.tutorial.shop.dao;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-/**
- * @author Rudy D'hauwe
- */
-public abstract class AbstractResource implements Resource {
+import org.whizu.tutorial.shop.model.Entity;
 
-	@Override
-	public String getString() throws IOException {
-		InputStream in = null;
 
-		try {
-			in = getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-			StringBuilder out = new StringBuilder();
-			String line;
-			while ((line = reader.readLine()) != null) {
-				out.append(line);
-			}
-			return out.toString();
-		} catch(IOException exc) {
-			exc.printStackTrace();
-			return "empty body";
-		} finally {
-			if (in != null) {
-				in.close();
-			}
-		}
+public class Dao<T extends Entity> {
+
+	Long next = 10L;
+	
+	private Map<Long, T> entityMap = new HashMap<Long, T>();
+
+	public void add(T entity) {
+		entityMap.put(entity.getId(), entity);
 	}
 
-	@Override
-	public void print(OutputStream out) throws IOException {
-		InputStream in = null;
+	public T findById(Long id) {
+		return entityMap.get(id);
+	}
 
-		try {
-			in = getInputStream();
-			byte[] buffer = new byte[256];
-		    int bytesRead = 0;
-		    while ((bytesRead = in.read(buffer)) != -1) {
-		        out.write(buffer, 0, bytesRead);
-		    }
-		} finally {
-			if (in != null) {
-				in.close();
-			}
+	public Collection<T> findAll() {
+		return entityMap.values();
+	}
+
+	public void delete(T entity) {
+		entityMap.remove(entity);
+	}
+
+	public T update(T entity) {
+		if (entity.getId() == null) {
+			entity.setId(next++);
+			add(entity);
+		} else {
+			entityMap.put(entity.getId(), entity);
 		}
+		entity.setLastUpdate(new Date());
+		return entity;
 	}
 }

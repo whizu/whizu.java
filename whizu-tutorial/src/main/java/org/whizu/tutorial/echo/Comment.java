@@ -41,4 +41,9 @@ public class Comment extends AbstractValueObject {
 	public Value[] getColumns() {
 		return new Value[]{datetime, message};
 	}
+
+	@Override
+	public String toString() {
+		return message.getValue();
+	}
 }

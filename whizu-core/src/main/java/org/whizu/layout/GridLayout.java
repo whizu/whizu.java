@@ -30,6 +30,7 @@ import org.whizu.html.Html;
 import org.whizu.html.Table;
 import org.whizu.html.Tbody;
 import org.whizu.html.Td;
+import org.whizu.ui.WhizuUI;
 import org.whizu.widget.Widget;
 
 /**
@@ -119,5 +120,9 @@ public class GridLayout extends Widget implements Layout {
 	@Override
 	public void remove(Component component) {
 		throw new UnsupportedOperationException();
+	}
+
+	public void skip() {
+		add(new WhizuUI().createLabel("")); //TODO refactor
 	}
 }

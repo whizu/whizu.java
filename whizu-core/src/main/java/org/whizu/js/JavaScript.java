@@ -58,4 +58,10 @@ public class JavaScript {
 		String script = "setTimeout(function(){" + action.toJavaScript() + "}," + milliseconds + ")";
 		request.addExpression(script);
 	}
+
+	public static void preventDefault() {
+		Request request = RequestContext.getRequest();
+		String script = "event.preventDefault();";
+		request.addExpression(script);
+	}
 }
