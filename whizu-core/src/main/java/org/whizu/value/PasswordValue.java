@@ -28,4 +28,11 @@ package org.whizu.value;
  */
 public class PasswordValue extends StringValue {
 
+	public PasswordValue(String key) {
+		super(key);
+	}
+	
+	public PasswordValue(String key, String value) {
+		super(key, value);
+	}
 }
