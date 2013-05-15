@@ -53,24 +53,24 @@ public class TextFieldImpl extends Widget implements TextField, Input {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				text = "" + TextFieldImpl.this.value.getValue();
+				text = "" + TextFieldImpl.this.value.get();
 				jQuery(TextFieldImpl.this).val(text);
 			}
 		});
 	}
 
 	public TextFieldImpl(Value value) {
-		if (value.getValue() == null) {
+		if (value.get() == null) {
 			this.text = "";
 		} else {
-			this.text = "" + value.getValue();
+			this.text = "" + value.get();
 		}
 		this.value = value;
 		this.value.addPropertyChangeListener(new PropertyChangeListener() {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				text = "" + TextFieldImpl.this.value.getValue();
+				text = "" + TextFieldImpl.this.value.get();
 				jQuery(TextFieldImpl.this).val(text);
 			}
 		});
@@ -101,7 +101,7 @@ public class TextFieldImpl extends Widget implements TextField, Input {
 	public void parseString(String value) {
 		this.text = value;
 		if (this.value != null) {
-			this.value.setValue(value);
+			this.value.set(value);
 		}
 	}
 }

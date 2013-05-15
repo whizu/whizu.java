@@ -26,7 +26,6 @@ package org.whizu.tutorial.shop.model;
 import org.whizu.annotation.Name;
 import org.whizu.value.Smart;
 import org.whizu.value.StringValue;
-import org.whizu.value.Value;
 
 /**
  * @author Rudy D'hauwe
@@ -34,11 +33,11 @@ import org.whizu.value.Value;
 public class Office extends Entity {
 
 	@Name("Address Label")
-	public final Value<String> address = new Smart<String>("Address");
+	public final StringValue address = new StringValue("Address");
 	
 	@Name("Name Label")
-	public final Value<String> naam = new StringValue("Name");
+	public final StringValue naam = new StringValue("Name");
 	
 	@Name("Country label")
-	public final Value<Country> country = new Smart<Country>("Country");
+	public final Smart<Country> country = new Smart<Country>("Country");
 }

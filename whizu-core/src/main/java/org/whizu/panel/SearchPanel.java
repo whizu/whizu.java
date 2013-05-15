@@ -65,7 +65,7 @@ public abstract class SearchPanel<T> implements Panel {
 			//table.add(columns)
 			Action action = getUpdateAction(art);
 			action.setCallback(getUpdateCallback(parent));
-			Value<?>[] columns = getColumns(art);
+			Value[] columns = getColumns(art);
 			String value = "" + columns[0];
 			parent.add(new Hyperlink(value, action));
 		}
@@ -88,9 +88,9 @@ public abstract class SearchPanel<T> implements Panel {
 
 	private Component createFilter() {
 		T model = createModel();
-		Value<?>[] columns = getColumns(model);
+		Value[] columns = getColumns(model);
 		FormBuilder form = new FormBuilder(columns.length);
-		for (Value<?> value : getColumns(model)) {
+		for (Value value : getColumns(model)) {
 			form.addValue(model, value);
 		}
 		return form.create();
@@ -140,5 +140,5 @@ public abstract class SearchPanel<T> implements Panel {
 
 	protected abstract Action getUpdateAction(T model);
 
-	protected abstract Value<?>[] getColumns(T model);
+	protected abstract Value[] getColumns(T model);
 }

@@ -29,7 +29,7 @@ import java.beans.PropertyChangeSupport;
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractValue<T> implements Value<T> {
+public abstract class AbstractValue<T> implements Value {
 
 	private static final String VALUE = "value_";
 
@@ -45,7 +45,7 @@ public abstract class AbstractValue<T> implements Value<T> {
 		key_ = key;
 		value_ = getDefaultValue();
 	}
-	
+
 	public AbstractValue(String key, T value) {
 		key_ = key;
 		value_ = value;
@@ -64,13 +64,13 @@ public abstract class AbstractValue<T> implements Value<T> {
 			changeSupport_.firePropertyChange(propertyName, oldValue, newValue);
 		}
 	}
-	
+
 	private void firePropertyChange(String propertyName, int index, Object oldValue, Object newValue) {
 		if (changeSupport_ != null) {
 			changeSupport_.fireIndexedPropertyChange(propertyName, index, oldValue, newValue);
 		}
 	}
-	
+
 	protected void fireIndexedPropertyChange(int index, Object oldValue, Object newValue) {
 		firePropertyChange(VALUE, index, oldValue, newValue);
 	}
@@ -97,15 +97,19 @@ public abstract class AbstractValue<T> implements Value<T> {
 	public final T get() {
 		return getValue();
 	}
-	
+
 	@Override
 	public final boolean isReadOnly() {
 		return readOnly_;
 	}
 
 	@Override
-	public void refresh(Value<T> value) {
-		setValue(value.getValue());
+	public void refresh(Object obj) {
+		if (obj instanceof AbstractValue<?>) {
+			setValue(((AbstractValue<T>) obj).getValue());
+		} else {
+			throw new UnsupportedOperationException();
+		}
 	}
 
 	public final void removePropertyChangeListener(PropertyChangeListener listener) {
@@ -128,8 +132,8 @@ public abstract class AbstractValue<T> implements Value<T> {
 	public void setValue(T value) {
 		firePropertyChange(VALUE, value_, value_ = value);
 	}
-	
-	public void set(T value) {
-		setValue(value);
+
+	public void set(Object value) {
+		setValue((T) value);
 	}
 }
