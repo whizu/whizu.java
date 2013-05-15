@@ -23,7 +23,6 @@
  *******************************************************************************/
 package org.whizu.value;
 
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -37,12 +36,10 @@ public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
 
 	private Class<T> clazz;
 
-	//@Embedded
+	// @Embedded
 	public String clazzName = "blabla";
 
 	public List<T> value = new ArrayList<T>();
-
-	private PropertyChangeListener listener;
 
 	public ValueList() {
 		super("list");
@@ -57,20 +54,12 @@ public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
 
 	public void add(T element) {
 		this.value.add(element);
-		if (this.listener != null) {
-			listener.propertyChange(null);
-		}
-		
+		fireIndexedPropertyChange(value.size() - 1, null, element);
 	}
 
 	@SuppressWarnings("unchecked")
 	public void addElement(ValueObject element) {
 		add((T) element);
-	}
-
-	@Override
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		this.listener = listener;
 	}
 
 	/**
@@ -96,21 +85,6 @@ public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
 		return clazzName;
 	}
 
-	@Override
-	public String getName() {
-		return "lijst name";
-	}
-
-	@Override
-	public List<T> getValue() {
-		return (List<T>) this.value;
-	}
-
-	@Override
-	public boolean isReadOnly() {
-		throw new UnsupportedOperationException();
-	}
-
 	public Iterator<T> iterator() {
 		return this.value.iterator();
 	}
@@ -125,14 +99,6 @@ public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
 
 	public void setClazzName(String clazzName) {
 		this.clazzName = clazzName;
-	}
-
-	/**
-	 * @throws UnsupportedOperationException
-	 */
-	@Override
-	public void setReadOnly(boolean newStatus) {
-		throw new UnsupportedOperationException();
 	}
 
 	public int size() {

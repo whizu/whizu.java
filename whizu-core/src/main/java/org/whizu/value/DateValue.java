@@ -32,8 +32,12 @@ import org.whizu.dom.Component;
  */
 public class DateValue extends ValueBuilder<DateValue, Date> {
 
-	public DateValue(String name) {
-		super(name);
+	public DateValue(String key) {
+		super(key);
+	}
+	
+	public DateValue(String key, Date value) {
+		super(key, value);
 	}
 
 	/**

@@ -30,8 +30,12 @@ import org.whizu.dom.Component;
  */
 public class IntegerValue extends ValueBuilder<IntegerValue, Integer> {
 
-	public IntegerValue(String name) {
-		super(name);
+	public IntegerValue(String key) {
+		super(key);
+	}
+	
+	public IntegerValue(String key, Integer value) {
+		super(key, value);
 	}
 
 	public void clear() {
@@ -61,9 +65,4 @@ public class IntegerValue extends ValueBuilder<IntegerValue, Integer> {
 	public Component render(ValueRenderer renderer) {
 		return renderer.render(this);
 	}
-
-//	public IntegerValue set(int value) {
-//		setValue(value);
-//		return this;
-//	}
 }

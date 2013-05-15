@@ -2,17 +2,16 @@ package org.whizu.value;
 
 abstract class ValueBuilder<T extends ValueBuilder<T, V>, V> extends AbstractValue<V> {
 
-	public ValueBuilder(String name) {
-		super(name);
+	public ValueBuilder(String key) {
+		super(key);
 	}
 
-	public T set(V value) {
-		setValue(value);
-		return getThis();
+	public ValueBuilder(String key, V value) {
+		super(key, value);
 	}
 
 	@SuppressWarnings("unchecked")
-	private T getThis() {
+	protected T getThis() {
 		return (T) this;
 	}
 }

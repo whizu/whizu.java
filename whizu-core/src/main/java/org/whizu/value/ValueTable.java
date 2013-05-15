@@ -23,7 +23,6 @@
  *******************************************************************************/
 package org.whizu.value;
 
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -35,7 +34,7 @@ import org.whizu.dom.Component;
  */
 public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T>, List<T>> {
 
-	private Class<T> clazz;
+	private Class<T> clazz_;
 
 	//@Embedded
 	public String clazzName = "blabla";
@@ -43,32 +42,25 @@ public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T
 	//@Transient
 	//private T sampleValueObject;
 
-	//@Embedded(concreteClass = java.util.ArrayList.class)
-	public List<T> value = new ArrayList<T>();
-
 	public ValueTable() {
 		super("table");
 	}
 
 	public ValueTable(Class<T> clazz) {
 		this();
-		this.clazz = clazz;
+		clazz_ = clazz;
 		this.clazzName = clazz.getName();
 		// this.sampleValueObject = createNew();
 	}
 
-	public void add(T element) {
-		this.value.add(element);
+	public final void add(T element) {
+		getValue().add(element);
+		fireIndexedPropertyChange(size()-1, null, element);
 	}
 
 	@SuppressWarnings("unchecked")
 	public void addElement(ValueObject element) {
 		add((T) element);
-	}
-
-	@Override
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -78,7 +70,7 @@ public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T
 	 */
 	public final T createNew() {
 		try {
-			return (T) clazz.newInstance();
+			return (T) clazz_.newInstance();
 		} catch (InstantiationException e) {
 			throw new RuntimeException(e);
 		} catch (IllegalAccessException e) {
@@ -87,30 +79,15 @@ public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T
 	}
 
 	public T get(int index) {
-		return value.get(index);
+		return getValue().get(index);
 	}
 
 	public String getClazzName() {
 		return clazzName;
 	}
 
-	@Override
-	public String getName() {
-		return "lijst name";
-	}
-
-	@Override
-	public List<T> getValue() {
-		return (List<T>) this.value;
-	}
-
-	@Override
-	public boolean isReadOnly() {
-		throw new UnsupportedOperationException();
-	}
-
 	public Iterator<T> iterator() {
-		return this.value.iterator();
+		return getValue().iterator();
 	}
 
 	/**
@@ -125,16 +102,8 @@ public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T
 		this.clazzName = clazzName;
 	}
 
-	/**
-	 * @throws UnsupportedOperationException
-	 */
-	@Override
-	public void setReadOnly(boolean newStatus) {
-		throw new UnsupportedOperationException();
-	}
-
 	public int size() {
-		return this.value.size();
+		return getValue().size();
 	}
 
 	@Override

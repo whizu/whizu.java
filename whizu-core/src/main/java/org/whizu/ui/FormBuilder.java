@@ -94,7 +94,7 @@ public class FormBuilder {
 
 	private StringValue getValue(final Object model, final String fieldName) {
 		String s = get(model, fieldName);
-		final StringValue value = new StringValue(fieldName).set(s);
+		final StringValue value = new StringValue(fieldName, s);
 		value.addPropertyChangeListener(new PropertyChangeListener() {
 
 			@Override

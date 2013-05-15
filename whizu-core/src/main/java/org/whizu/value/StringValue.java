@@ -38,6 +38,10 @@ public class StringValue extends ValueBuilder<StringValue, String> {
 		super(name);
 	}
 
+	public StringValue(String key, String value) {
+		super(key, value);
+	}
+
 	@Override
 	public String toString() {
 		return getValue();
@@ -48,11 +52,6 @@ public class StringValue extends ValueBuilder<StringValue, String> {
 		setValue(s);
 	}
 	
-	@Override
-	public String getValue() {
-		return (super.getValue() == null) ? "" : super.getValue();
-	}
-
 	public void clear() {
 		setValue("");
 	}

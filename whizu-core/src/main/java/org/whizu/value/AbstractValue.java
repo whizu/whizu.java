@@ -31,87 +31,97 @@ import java.beans.PropertyChangeSupport;
  */
 public abstract class AbstractValue<T> implements Value<T> {
 
-	// @Transient
-	private transient PropertyChangeSupport propertyChangeSupport;
+	private static final String VALUE = "value_";
 
-	private boolean isReadOnly;
+	private transient PropertyChangeSupport changeSupport_;
 
-	// @Transient
-	public final String key;
+	private final String key_;
 
-	private T value;
+	private boolean readOnly_;
+
+	private T value_;
 
 	public AbstractValue(String key) {
-		this.key = key;
-		setValue(getDefaultValue());
+		key_ = key;
+		value_ = getDefaultValue();
+	}
+	
+	public AbstractValue(String key, T value) {
+		key_ = key;
+		value_ = value;
 	}
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
+	public final void addPropertyChangeListener(PropertyChangeListener listener) {
 		getPropertyChangeSupport().addPropertyChangeListener(listener);
 	}
 
-	public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+	public final void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
 		getPropertyChangeSupport().addPropertyChangeListener(propertyName, listener);
 	}
 
-	protected void firePropertyChange(String propertyName, T oldValue, T newValue) {
-		if (this.propertyChangeSupport != null) {
-			this.propertyChangeSupport.firePropertyChange(propertyName, oldValue, newValue);
+	private void firePropertyChange(String propertyName, T oldValue, T newValue) {
+		if (changeSupport_ != null) {
+			changeSupport_.firePropertyChange(propertyName, oldValue, newValue);
 		}
+	}
+	
+	private void firePropertyChange(String propertyName, int index, Object oldValue, Object newValue) {
+		if (changeSupport_ != null) {
+			changeSupport_.fireIndexedPropertyChange(propertyName, index, oldValue, newValue);
+		}
+	}
+	
+	protected void fireIndexedPropertyChange(int index, Object oldValue, Object newValue) {
+		firePropertyChange(VALUE, index, oldValue, newValue);
 	}
 
 	protected abstract T getDefaultValue();
 
 	@Override
-	public String getName() {
-		return key;
+	public final String getName() {
+		return key_;
 	}
-	
+
 	private PropertyChangeSupport getPropertyChangeSupport() {
-		if (this.propertyChangeSupport == null) {
-			this.propertyChangeSupport = new PropertyChangeSupport(this);
+		if (changeSupport_ == null) {
+			changeSupport_ = new PropertyChangeSupport(this);
 		}
-		
-		return this.propertyChangeSupport;
+
+		return changeSupport_;
 	}
 
-	public T getValue() {
-		return this.value;
+	public final T getValue() {
+		return value_;
 	}
 
 	@Override
-	public boolean isReadOnly() {
-		return isReadOnly;
-	}
-
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
-		if (this.propertyChangeSupport != null) {
-			this.propertyChangeSupport.removePropertyChangeListener(listener);
-		}
-	}
-
-	public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
-		if (this.propertyChangeSupport != null) {
-			this.propertyChangeSupport.removePropertyChangeListener(propertyName, listener);
-		}
-	}
-
-	@Override
-	public void setReadOnly(boolean newStatus) {
-		this.isReadOnly = newStatus;
-	}
-
-	public void setValue(T value) {
-		firePropertyChange("value", this.value, this.value = value);
-	}
-
-	@Override
-	public String toString() {
-		return "" + getValue();
+	public final boolean isReadOnly() {
+		return readOnly_;
 	}
 
 	@Override
 	public void refresh(Value<T> value) {
-		this.setValue(value.getValue());
+		setValue(value.getValue());
+	}
+
+	public final void removePropertyChangeListener(PropertyChangeListener listener) {
+		if (changeSupport_ != null) {
+			changeSupport_.removePropertyChangeListener(listener);
+		}
+	}
+
+	public final void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+		if (changeSupport_ != null) {
+			changeSupport_.removePropertyChangeListener(propertyName, listener);
+		}
+	}
+
+	@Override
+	public final void setReadOnly(boolean readOnly) {
+		readOnly_ = readOnly;
+	}
+
+	public void setValue(T value) {
+		firePropertyChange(VALUE, value_, value_ = value);
 	}
 }
