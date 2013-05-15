@@ -64,4 +64,10 @@ public class ContentList implements Markup {
 		}
 		return markup;
 	}
+
+	@Override
+	public Content css(String itemClass) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
 }

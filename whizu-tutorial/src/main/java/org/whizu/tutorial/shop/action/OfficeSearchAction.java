@@ -23,48 +23,21 @@
  *******************************************************************************/
 package org.whizu.tutorial.shop.action;
 
-import java.util.Collection;
+import org.whizu.panel.Panel;
+import org.whizu.tutorial.shop.panel.OfficeSearchPanel;
 
-import org.whizu.tutorial.shop.dao.OfficeDAO;
-import org.whizu.tutorial.shop.model.Office;
-import org.whizu.ui.Action;
-import org.whizu.value.Value;
-
-
-//@Action
-public class OfficeSearchAction extends SearchAction<Office> {
-
-	public OfficeSearchAction() {
-		super(Office.class);
-	}
+/**
+ * @author Rudy D'hauwe
+ */
+public class OfficeSearchAction extends OpenContentPanelAction {
 
 	@Override
 	public String getCaption() {
-		return "Office";
+		return "Offices";
 	}
 
 	@Override
-	protected Action getCreateAction() {
-		return new OfficeUpdateAction(new Office());
-	}
-
-	@Override
-	protected String[] getFields() {
-		return new String[]{ "Naam", "Code"};
-	}
-	
-	@Override
-	protected Value[] getColumns(Office model) {
-		return new Value[] { model.naam, model.address };
-	}
-
-	@Override
-	protected Action getUpdateAction(Office model) {
-		return new OfficeUpdateAction(model);
-	}
-
-	@Override
-	protected Collection<Office> performSearch() {
-		return OfficeDAO.INSTANCE.findAll();
+	public Panel getPanel() {
+		return new OfficeSearchPanel();
 	}
 }

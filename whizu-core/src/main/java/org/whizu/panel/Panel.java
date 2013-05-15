@@ -21,52 +21,14 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.tutorial.shop.model;
+package org.whizu.panel;
 
-import java.util.Date;
+import org.whizu.dom.Composite;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Price extends Entity {
+public interface Panel {
 
-	private Customer customer;
-	
-	private Date from;
-	
-	private Product product;
-	
-	private Date until;
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public Date getFrom() {
-		return from;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public Date getUntil() {
-		return until;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public void setFrom(Date from) {
-		this.from = from;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	public void setUntil(Date until) {
-		this.until = until;
-	}	
+	public void create(Composite parent);
 }

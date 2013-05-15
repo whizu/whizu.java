@@ -24,6 +24,7 @@
 package org.whizu.layout;
 
 import org.whizu.dom.Component;
+import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
@@ -75,6 +76,11 @@ public class GridLayout extends Widget implements Layout {
 
 	@Override
 	public GridLayout add(Component component) {
+		return add((Content) component);
+	}
+	
+	@Override
+	public GridLayout add(Content component) {
 		if (isRendered()) {
 			if ((column == 0) || (column == numberOfColumns)) {
 				row = tbody.tr();

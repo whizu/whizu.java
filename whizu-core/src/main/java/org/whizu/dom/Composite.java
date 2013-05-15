@@ -30,6 +30,8 @@ public interface Composite extends Component {
 
 	public Composite add(Component component);
 
+	public Composite add(Content content);
+	
 	public void empty();
 
 	public void prepend(Component component);

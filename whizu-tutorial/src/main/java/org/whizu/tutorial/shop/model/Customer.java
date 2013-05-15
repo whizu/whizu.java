@@ -25,7 +25,6 @@ package org.whizu.tutorial.shop.model;
 
 /**
  * @author Rudy D'hauwe
- * @version $revision$
  */
 public class Customer extends Entity {
 

@@ -28,6 +28,7 @@ import java.util.List;
 
 import org.whizu.dom.Component;
 import org.whizu.dom.Composite;
+import org.whizu.dom.Content;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 
@@ -36,7 +37,15 @@ import org.whizu.html.Html;
  */
 public class Container extends Widget implements Composite {
 
-	protected List<Component> componentList = new ArrayList<Component>();
+	protected List<Content> componentList = new ArrayList<Content>();
+
+	public Container() {	
+	}
+	
+	public Container(String id) {
+		this.id_ = id;
+		this.state = State.RENDERED;
+	}
 
 	@Override
 	public Container add(Component impl) {
@@ -46,6 +55,17 @@ public class Container extends Widget implements Composite {
 			jQuery(this).append(impl);
 		}
 
+		return this;
+	}
+	
+	@Override
+	public Composite add(Content content) {
+		this.componentList.add(content);
+
+		if (this.isRendered()) {
+			jQuery(this).append(content);
+		}
+		
 		return this;
 	}
 

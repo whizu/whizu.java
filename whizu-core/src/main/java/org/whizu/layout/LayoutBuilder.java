@@ -42,10 +42,17 @@ class LayoutBuilder<T extends LayoutBuilder<T>> extends Container implements Lay
 	}
 
 	protected Markup create(String css, final String itemClass) {
-		return Html.div(this).decorate(this).css(css).add(new Foreach<Component>(componentList) {
+		return Html.div(this).decorate(this).css(css).add(new Foreach<Content>(componentList) {
 
+			/*
 			@Override
 			public Content compile(Component item) {
+				return item.css(itemClass);
+			}
+			*/
+
+			@Override
+			public Content compile(Content item) {
 				return item.css(itemClass);
 			}
 		});
@@ -65,7 +72,7 @@ class LayoutBuilder<T extends LayoutBuilder<T>> extends Container implements Lay
 		return getThis(this);
 	}
 
-	public T add(Value value) {
+	public T add(Value<?> value) {
 		Component view = compile(value);
 		if (isRendered()) {
 			jQuery(this).append(view);

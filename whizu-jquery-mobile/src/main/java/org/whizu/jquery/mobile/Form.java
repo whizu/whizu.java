@@ -80,7 +80,8 @@ public class Form extends Container {
 		throw new UnsupportedOperationException();
 	}
 
-	private void add(Content field) {
+	public Form add(Content field) {
 		jQuery(this).append(field);
+		return this;
 	}
 }

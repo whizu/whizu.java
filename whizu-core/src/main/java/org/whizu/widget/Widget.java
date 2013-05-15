@@ -49,13 +49,13 @@ import org.whizu.value.ValueRendererImpl;
  */
 public abstract class Widget implements Component, Decorator {
 
-	private enum State {
+	protected enum State {
 		NEW, RENDERED
 	}
 
-	private final String id;
+	protected String id_;
 
-	private State state = State.NEW;
+	protected State state = State.NEW;
 
 	private List<String> cssList = new ArrayList<String>();
 
@@ -69,7 +69,7 @@ public abstract class Widget implements Component, Decorator {
 
 	protected Widget() {
 		this.autowire();
-		this.id = getSession().next();
+		this.id_ = getSession().next();
 	}
 
 	private void autowire() {
@@ -119,7 +119,7 @@ public abstract class Widget implements Component, Decorator {
 
 	@Override
 	public String id() {
-		return id;
+		return id_;
 	}
 
 	public final boolean isRendered() {

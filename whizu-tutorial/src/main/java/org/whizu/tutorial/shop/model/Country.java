@@ -31,9 +31,6 @@ public class Country extends Entity {
 	private String code;
 	
 	private String naam;
-	
-	public Country() {
-	}
 
 	public String getCode() {
 		return code;

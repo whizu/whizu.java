@@ -42,4 +42,10 @@ public class Literal implements Markup {
 	public String getText() {
 		return text;
 	}
+
+	@Override
+	public Content css(String itemClass) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
 }

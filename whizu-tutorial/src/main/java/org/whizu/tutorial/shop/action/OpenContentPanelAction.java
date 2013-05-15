@@ -21,52 +21,52 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.tutorial.shop.model;
+package org.whizu.tutorial.shop.action;
 
-import java.util.Date;
+import org.whizu.jquery.Callback;
+import org.whizu.jquery.JQuery;
+import org.whizu.jquery.RequestContext;
+import org.whizu.jquery.Select;
+import org.whizu.panel.Panel;
+import org.whizu.tutorial.shop.panel.OfficeSearchPanel;
+import org.whizu.ui.Action;
+import org.whizu.widget.Container;
 
-/**
- * @author Rudy D'hauwe
- */
-public class Price extends Entity {
+//@Action
+public abstract class OpenContentPanelAction implements Action {
 
-	private Customer customer;
+	@Override
+	public void performAction() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setCallback(Callback callback) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Select(id = "right-column")
+	JQuery contentPanel;
+
+	public void performAction(Panel panel) {
+		JQuery detailPanel = RequestContext.getRequest().select("$(\"#detail\")");
+		detailPanel.empty();
+		contentPanel = RequestContext.getRequest().select("$(\"#right-column\")");
+		contentPanel.empty();
+		getPanel().create(new Container("right-column"));
+	}
+
+	public abstract Panel getPanel();
 	
-	private Date from;
-	
-	private Product product;
-	
-	private Date until;
-
-	public Customer getCustomer() {
-		return customer;
+	@Override
+	public String getId() {
+		return RequestContext.getRequest().getSession().next();
 	}
 
-	public Date getFrom() {
-		return from;
+	@Override
+	public void handleEvent() {
+		performAction(new OfficeSearchPanel());
 	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public Date getUntil() {
-		return until;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public void setFrom(Date from) {
-		this.from = from;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	public void setUntil(Date until) {
-		this.until = until;
-	}	
 }

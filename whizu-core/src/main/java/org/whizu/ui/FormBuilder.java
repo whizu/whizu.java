@@ -2,11 +2,8 @@ package org.whizu.ui;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import org.apache.commons.lang.reflect.FieldUtils;
-import org.whizu.annotation.Name;
 import org.whizu.layout.GridLayout;
 import org.whizu.value.StringValue;
 import org.whizu.value.Value;
@@ -54,6 +51,8 @@ public class FormBuilder {
 
 	@SuppressWarnings("rawtypes")
 	private String getLabelName(Object model, Value value) {
+		return value.getName();
+		/*
 		try {
 			Field[] fields = model.getClass().getFields();
 			for (Field field : fields) {
@@ -70,6 +69,7 @@ public class FormBuilder {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+		*/
 	}
 
 	public void addTextField(Object model, String fieldName) {
