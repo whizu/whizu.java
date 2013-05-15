@@ -38,7 +38,11 @@ public interface Value<T> {
 	
 	public T getValue();
 	
+	public T get();
+	
 	public void setValue(T value);
+	
+	public void set(T value);
 	
 	public boolean isReadOnly();
 

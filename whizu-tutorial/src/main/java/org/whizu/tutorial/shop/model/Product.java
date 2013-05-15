@@ -23,8 +23,6 @@
  *******************************************************************************/
 package org.whizu.tutorial.shop.model;
 
-import java.util.Date;
-
 public class Product extends Entity {
 
 	private String code;
@@ -32,16 +30,6 @@ public class Product extends Entity {
 	private String naam;
 	
 	private String omschr;
-
-	public Product() {
-	}
-
-	public Product(long id, String code, String naam, Date lastUpdate) {
-		setId(id);
-		setCode(code);
-		setNaam(naam);
-		setLastUpdate(lastUpdate);
-	}
 
 	public String getCode() {
 		return code;

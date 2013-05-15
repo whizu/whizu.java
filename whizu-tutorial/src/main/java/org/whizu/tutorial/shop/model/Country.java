@@ -23,17 +23,14 @@
  *******************************************************************************/
 package org.whizu.tutorial.shop.model;
 
+/**
+ * @author Rudy D'hauwe
+ */
 public class Country extends Entity {
 
 	private String code;
 	
 	private String naam;
-
-	public Country(long id, String code, String naam) {
-		setId(id);
-		setCode(code);
-		setNaam(naam);
-	}
 	
 	public Country() {
 	}

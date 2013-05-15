@@ -27,14 +27,25 @@ import java.util.Date;
 
 import org.whizu.tutorial.shop.model.Product;
 
-
+/**
+ * @author Rudy D'hauwe
+ */
 public class ProductDAO extends Dao<Product> {
 
 	public static ProductDAO INSTANCE = new ProductDAO();
 	
 	public ProductDAO() {
-		add(new Product(1L, "A", "Product A", new Date()));
-		add(new Product(2L, "B", "Product B", new Date()));
-		add(new Product(3L, "C", "Product C", new Date()));
+		add(create(1L, "A", "Product A", new Date()));
+		add(create(2L, "B", "Product B", new Date()));
+		add(create(3L, "C", "Product C", new Date()));
+	}
+
+	public Product create(long id, String code, String naam, Date lastUpdate) {
+		Product p = new Product();
+		p.setId(id);
+		p.setCode(code);
+		p.setNaam(naam);
+		p.setLastUpdate(lastUpdate);
+		return p;
 	}
 }

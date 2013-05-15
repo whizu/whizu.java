@@ -30,10 +30,6 @@ import org.whizu.dom.Component;
  */
 public class StringValue extends ValueBuilder<StringValue, String> {
 
-	public StringValue() {
-		this("");
-	}
-	
 	public StringValue(String name) {
 		super(name);
 	}

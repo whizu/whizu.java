@@ -94,6 +94,10 @@ public abstract class AbstractValue<T> implements Value<T> {
 		return value_;
 	}
 
+	public final T get() {
+		return getValue();
+	}
+	
 	@Override
 	public final boolean isReadOnly() {
 		return readOnly_;
@@ -123,5 +127,9 @@ public abstract class AbstractValue<T> implements Value<T> {
 
 	public void setValue(T value) {
 		firePropertyChange(VALUE, value_, value_ = value);
+	}
+	
+	public void set(T value) {
+		setValue(value);
 	}
 }

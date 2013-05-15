@@ -55,7 +55,7 @@ public class OfficeSearchAction extends SearchAction<Office> {
 	
 	@Override
 	protected Value[] getColumns(Office model) {
-		return new Value[] { model.naam, model.adres };
+		return new Value[] { model.naam, model.address };
 	}
 
 	@Override

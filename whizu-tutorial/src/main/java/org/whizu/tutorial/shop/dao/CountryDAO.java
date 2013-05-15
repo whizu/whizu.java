@@ -30,8 +30,16 @@ public class CountryDAO extends Dao<Country> {
 	public static CountryDAO INSTANCE = new CountryDAO();
 	
 	public CountryDAO() {
-		add(new Country(1L, "BE", "Belgium"));
-		add(new Country(2L, "NL", "Netherlands"));
-		add(new Country(3L, "FR", "France"));
+		add(create(1L, "BE", "Belgium"));
+		add(create(2L, "NL", "Netherlands"));
+		add(create(3L, "FR", "France"));
+	}
+
+	public Country create(long id, String code, String naam) {
+		Country c = new Country();
+		c.setId(id);
+		c.setCode(code);
+		c.setNaam(naam);
+		return c;
 	}
 }
