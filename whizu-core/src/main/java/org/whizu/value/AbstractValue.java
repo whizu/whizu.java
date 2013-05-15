@@ -32,37 +32,47 @@ import java.beans.PropertyChangeSupport;
 public abstract class AbstractValue<T> implements Value<T> {
 
 	// @Transient
-	private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+	private transient PropertyChangeSupport propertyChangeSupport;
 
 	private boolean isReadOnly;
 
 	// @Transient
-	public final String name;
+	public final String key;
 
 	private T value;
 
-	public AbstractValue(String name) {
-		this.name = name;
+	public AbstractValue(String key) {
+		this.key = key;
 		setValue(getDefaultValue());
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		changeSupport.addPropertyChangeListener(listener);
+		getPropertyChangeSupport().addPropertyChangeListener(listener);
 	}
 
 	public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
-		changeSupport.addPropertyChangeListener(propertyName, listener);
+		getPropertyChangeSupport().addPropertyChangeListener(propertyName, listener);
 	}
 
 	protected void firePropertyChange(String propertyName, T oldValue, T newValue) {
-		changeSupport.firePropertyChange(propertyName, oldValue, newValue);
+		if (this.propertyChangeSupport != null) {
+			this.propertyChangeSupport.firePropertyChange(propertyName, oldValue, newValue);
+		}
 	}
 
 	protected abstract T getDefaultValue();
 
 	@Override
 	public String getName() {
-		return name;
+		return key;
+	}
+	
+	private PropertyChangeSupport getPropertyChangeSupport() {
+		if (this.propertyChangeSupport == null) {
+			this.propertyChangeSupport = new PropertyChangeSupport(this);
+		}
+		
+		return this.propertyChangeSupport;
 	}
 
 	public T getValue() {
@@ -75,11 +85,15 @@ public abstract class AbstractValue<T> implements Value<T> {
 	}
 
 	public void removePropertyChangeListener(PropertyChangeListener listener) {
-		changeSupport.removePropertyChangeListener(listener);
+		if (this.propertyChangeSupport != null) {
+			this.propertyChangeSupport.removePropertyChangeListener(listener);
+		}
 	}
 
 	public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
-		changeSupport.removePropertyChangeListener(propertyName, listener);
+		if (this.propertyChangeSupport != null) {
+			this.propertyChangeSupport.removePropertyChangeListener(propertyName, listener);
+		}
 	}
 
 	@Override
