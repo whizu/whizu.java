@@ -36,7 +36,7 @@ public abstract class AbstractRequest implements Request {
 
 	private Stack<Script> scriptStack = new Stack<Script>();
 
-	private Session session;
+	private Session session_;
 
 	protected AbstractRequest() {
 	}
@@ -81,8 +81,8 @@ public abstract class AbstractRequest implements Request {
 	}
 
 	@Override
-	public Session getSession() {
-		return session;
+	public Session session() {
+		return session_;
 	}
 
 	public final Script pop() {
@@ -101,8 +101,8 @@ public abstract class AbstractRequest implements Request {
 		return addExpression(query);
 	}
 
-	public final void setSession(Session session) {
-		this.session = session;
+	public final void session(Session session) {
+		session_ = session;
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public abstract class AbstractRequest implements Request {
 
 	@Override
 	public String define(Function f) {
-		return "function(" + f.params + ") { " + compile(f).toJavaScript() + " }";
+		return "function(" + f.params() + ") { " + compile(f).toJavaScript() + " }";
 	}
 
 	@Override

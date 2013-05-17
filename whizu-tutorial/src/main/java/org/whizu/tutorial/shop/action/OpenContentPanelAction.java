@@ -61,8 +61,8 @@ public abstract class OpenContentPanelAction implements Action {
 	public abstract Panel getPanel();
 	
 	@Override
-	public String getId() {
-		return RequestContext.getRequest().getSession().next();
+	public String id() {
+		return RequestContext.getRequest().session().next();
 	}
 
 	@Override

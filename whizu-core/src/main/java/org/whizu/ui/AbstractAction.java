@@ -9,9 +9,15 @@ public abstract class AbstractAction implements Action {
 	
 	protected UI ui = new WhizuUI();
 
+	private String id;
+
+	public AbstractAction() {
+		this.id = RequestContext.getRequest().session().next();
+	}
+	
 	@Override
-	public final String getId() {
-		return RequestContext.getRequest().getSession().next();
+	public final String id() {
+		return id;
 	}
 	
 	public final void setCallback(Callback callback) {

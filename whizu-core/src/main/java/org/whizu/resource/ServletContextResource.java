@@ -33,17 +33,17 @@ import javax.servlet.ServletContext;
  */
 public class ServletContextResource extends AbstractResource {
 
-	private ServletContext ctx;
+	private final ServletContext ctx_;
 
-	private String uri;
+	private final String uri_;
 
 	public ServletContextResource(ServletContext ctx, String uri) {
-		this.ctx = ctx;
-		this.uri = uri;
+		ctx_ = ctx;
+		uri_ = uri;
 	}
 
 	@Override
 	public InputStream getInputStream() throws IOException {
-		return ctx.getResourceAsStream(uri);
+		return ctx_.getResourceAsStream(uri_);
 	}
 }

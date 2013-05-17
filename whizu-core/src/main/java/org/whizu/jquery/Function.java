@@ -33,15 +33,19 @@ package org.whizu.jquery;
  */
 public abstract class Function {
 
-	public String params;
+	private final String params_;
 
 	public Function() {
-		this.params = "event";
+		params_ = "event";
 	}
 
 	public Function(String params) {
-		this.params = params;
+		params_ = params;
 	}
 
 	public abstract void execute();
+	
+	public String params() {
+		return params_;
+	}	
 }

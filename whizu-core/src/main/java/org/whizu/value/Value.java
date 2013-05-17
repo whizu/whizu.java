@@ -34,17 +34,17 @@ public interface Value {
 
 	public void addPropertyChangeListener(PropertyChangeListener listener);
 	
-	public String getName();
+	public String name();
 	
 	public Object get();
 	
 	public void set(Object value);
 	
-	public boolean isReadOnly();
+	public boolean readOnly();
 
 	public void parse(String s);
 	
-	public void setReadOnly(boolean readonly);
+	public void readOnly(boolean readonly);
 
 	public Component render(ValueRenderer renderer);
 

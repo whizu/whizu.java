@@ -71,7 +71,7 @@ class ImageImpl extends Widget implements Image {
 	@Override
 	public Image addClickListener(ClickListener listener) {
 		ClickListenerImpl impl = new ClickListenerImpl(listener);
-		listenerId = impl.getId();
+		listenerId = impl.id();
 		getSession().addClickListener(impl);
 		return this;
 	}
@@ -89,7 +89,7 @@ class ImageImpl extends Widget implements Image {
 			public void click() {
 			}
 		});
-		droplistenerId = impl.getId();
+		droplistenerId = impl.id();
 		getSession().addClickListener(impl);
 	}
 }

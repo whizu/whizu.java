@@ -91,10 +91,10 @@ public class Event {
 
 	public static final Event UNLOAD = new Event("unload");
 
-	private String name;
+	private String name_;
 
 	public Event(String name) {
-		this.name = name;
+		name_ = name;
 	}
 
 	/**
@@ -108,8 +108,8 @@ public class Event {
 		throw new UnsupportedOperationException();
 	}
 
-	public String getName() {
-		return name;
+	public String name() {
+		return name_;
 	}
 
 	/**

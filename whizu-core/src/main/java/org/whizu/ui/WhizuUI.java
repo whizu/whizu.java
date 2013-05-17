@@ -159,11 +159,11 @@ public class WhizuUI implements UI {
 	@Override
 	public Document getDocument() {
 		Request request = getRequest();
-		Session session = request.getSession();
-		Document document = (Document) session.getAttribute("document");
+		Session session = request.session();
+		Document document = (Document) session.attribute("document");
 		if (document == null) {
 			document = new DocumentImpl();
-			session.setAttribute("document", document);
+			session.attribute("document", document);
 		}
 		return document;
 	}

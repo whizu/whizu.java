@@ -21,41 +21,11 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.dom;
-
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
+package org.whizu.mvc;
 
 /**
  * @author Rudy D'hauwe
  */
-public class LiteralTest {
+public interface View<T extends Model> {
 
-	/**
-	 * Test method for {@link org.whizu.dom.Literal#render()}.
-	 */
-	@Test
-	public void testRender() {
-		Literal obj = new Literal("myText");
-		assertEquals("myText", obj.render());
-	}
-
-	/**
-	 * Test method for {@link org.whizu.dom.Literal#Literal(java.lang.String)}.
-	 */
-	@Test
-	public void testLiteral() {
-		Literal obj = new Literal("myText");
-		assertEquals("myText", obj.text());
-	}
-
-	/**
-	 * Test method for {@link org.whizu.dom.Literal#text()}.
-	 */
-	@Test
-	public void testGetText() {
-		Literal obj = new Literal("myText");
-		assertEquals("myText", obj.text());
-	}
 }

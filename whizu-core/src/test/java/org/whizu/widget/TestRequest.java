@@ -35,7 +35,7 @@ public class TestRequest extends AbstractRequest implements Request {
 	Session theSession = new TestSession();
 	
 	@Override
-	public Session getSession() {
+	public Session session() {
 		return theSession;
 	}
 }

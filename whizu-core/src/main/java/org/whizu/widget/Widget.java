@@ -108,7 +108,7 @@ public abstract class Widget implements Component, Decorator {
 	}
 
 	protected Session getSession() {
-		return getRequest().getSession();
+		return getRequest().session();
 	}
 
 	/**

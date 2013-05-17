@@ -33,22 +33,22 @@ class PageFactory {
 
 	// private Logger log = LoggerFactory.getLogger(PageFactory.class);
 
-	private Class<Application> applicationClass;
+	private final Class<Application> applicationClass_;
 
-	private String template = "/org/whizu/jquery/mobile/page.html";
+	private String stylesheet_;
 
-	private String title = Title.DEFAULT_TITLE;
+	private String template_ = "/org/whizu/jquery/mobile/page.html";
 
-	private String stylesheet;
+	private String title_ = Title.DEFAULT_TITLE;
 
 	public PageFactory(Class<Application> applicationClass) {
-		this.applicationClass = applicationClass;
+		this.applicationClass_ = applicationClass;
 	}
 
 	// public Resource createPage() {
 	public Application createInstance() {
 		try {
-			return applicationClass.newInstance();
+			return applicationClass_.newInstance();
 		} catch (InstantiationException e) {
 			throw new IllegalStateException(e);
 		} catch (IllegalAccessException e) {
@@ -56,27 +56,27 @@ class PageFactory {
 		}
 	}
 
-	public String getStylesheet() {
-		return stylesheet;
+	public String stylesheet() {
+		return stylesheet_;
 	}
 
-	public String getTemplate() {
-		return template;
+	protected void stylesheet(String stylesheet) {
+		stylesheet_ = stylesheet;
 	}
 
-	public String getTitle() {
-		return title;
+	public String template() {
+		return template_;
 	}
 
-	protected void setStylesheet(String stylesheet) {
-		this.stylesheet = stylesheet;
+	protected void template(String template) {
+		template_ = template;
 	}
 
-	protected void setTemplate(String template) {
-		this.template = template;
+	public String title() {
+		return title_;
 	}
 
-	protected void setTitle(String title) {
-		this.title = title;
+	protected void title(String title) {
+		title_ = title;
 	}
 }

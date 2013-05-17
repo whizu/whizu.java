@@ -98,7 +98,7 @@ public class LabelImpl extends Widget implements Label {
 				@Override
 				public void execute() {
 
-					String url = "/whizu?id=" + listener.getId();
+					String url = "/whizu?id=" + listener.id();
 
 					Function data = new Function() {
 

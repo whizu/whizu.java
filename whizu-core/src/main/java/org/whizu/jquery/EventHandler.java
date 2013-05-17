@@ -28,7 +28,7 @@ package org.whizu.jquery;
  */
 public interface EventHandler {
 
-	public String getId();
+	public String id();
 
 	public void handleEvent();
 	

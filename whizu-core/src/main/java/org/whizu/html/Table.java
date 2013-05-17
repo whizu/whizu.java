@@ -28,7 +28,7 @@ package org.whizu.html;
  */
 public class Table extends NodeBuilder<Table> {
 
-	private Tbody tbody;
+	private Tbody tbody_;
 	
 	Table() {
 		super("table");
@@ -36,14 +36,14 @@ public class Table extends NodeBuilder<Table> {
 	
 	public Table(String id) {
 		this();
-		this.id(id);
+		id(id);
 	}
 
 	public Tbody tbody() {
-		if (tbody == null) {
-			tbody = new Tbody();
-			add(tbody);
+		if (tbody_ == null) {
+			tbody_ = new Tbody();
+			add(tbody_);
 		}
-		return tbody;
+		return tbody_;
 	}
 }

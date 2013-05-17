@@ -62,13 +62,13 @@ public class WhizuServlet extends HttpServlet {
 
 	private static final String WHIZU_SESSION = "whizu-session";
 
-	private Configuration config = new Configuration();
+	private Configuration config_ = new Configuration();
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		logger.info("Starting the WhizuServlet");
 		RequestContext.setInstance(new RequestContextImpl());
-		AnnotationUtils.scan(Page.class, this.config);
+		AnnotationUtils.scan(Page.class, config_);
 		logger.info("WhizuServlet started");
 	}
 
@@ -78,7 +78,7 @@ public class WhizuServlet extends HttpServlet {
 			userSession = new SessionImpl();
 			session.setAttribute(WHIZU_SESSION, userSession);
 		}
-		RequestImpl.get().setSession(userSession);
+		RequestImpl.get().session(userSession);
 		return userSession;
 	}
 
@@ -96,19 +96,19 @@ public class WhizuServlet extends HttpServlet {
 	private Resource servePageRequest(HttpServletRequest request) {
 		// getPageResource(uri).stream(response.getWriter());
 		String uri = request.getRequestURI();
-		final PageFactory factory = config.getFactory(uri);
+		final PageFactory factory = config_.getFactory(uri);
 		if (factory != null) {
 			final Application app = factory.createInstance();
 			Class<? extends Application> clazz = app.getClass();
-			Resource resource = new ClassPathResource(factory.getTemplate());
+			Resource resource = new ClassPathResource(factory.template());
 			try {
 				String content = resource.getString();
 				final String id = clazz.getName();
 				content = content.replace("${id}", id);
-				RequestImpl.get().getSession().addClickListener(new EventHandler() {
+				RequestImpl.get().session().addClickListener(new EventHandler() {
 
 					@Override
-					public String getId() {
+					public String id() {
 						return id;
 					}
 
@@ -118,7 +118,7 @@ public class WhizuServlet extends HttpServlet {
 					}
 				});
 
-				String ann = factory.getStylesheet();
+				String ann = factory.stylesheet();
 				if (ann != null) {
 					String link = "<link rel='stylesheet' type='text/css' href='" + ann + "' />";
 					content = content.replace("${css}", link);
@@ -126,7 +126,7 @@ public class WhizuServlet extends HttpServlet {
 					content = content.replace("${css}", "");
 				}
 
-				String title = factory.getTitle();
+				String title = factory.title();
 				if (title != null) {
 					content = content.replace("${title}", title);
 				} else {
@@ -176,7 +176,7 @@ public class WhizuServlet extends HttpServlet {
 					// even better:
 					// Resource resource = this.servePageRequest(request);
 					// getResource(uri).stream(response.getWriter());
-					content = this.servePageRequest(request);
+					content = servePageRequest(request);
 				}
 			} else {
 				session.handleEvent(id);

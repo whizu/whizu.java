@@ -29,7 +29,7 @@ import org.whizu.js.Script;
 
 public interface Request {
 
-	public abstract Session getSession();
+	public abstract Session session();
 
 	public abstract JQuery select(Identity... objs);
 

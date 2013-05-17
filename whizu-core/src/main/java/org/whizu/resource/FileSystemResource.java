@@ -32,14 +32,14 @@ import java.io.InputStream;
  */
 public class FileSystemResource extends AbstractResource {
 
-	private String path;
+	private final String path_;
 
 	public FileSystemResource(String path) {
-		this.path = path;
+		this.path_ = path;
 	}
 	
 	@Override
 	public InputStream getInputStream() throws IOException {
-		return new FileInputStream(path);
+		return new FileInputStream(path_);
 	}
 }

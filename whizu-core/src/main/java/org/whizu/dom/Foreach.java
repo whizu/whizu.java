@@ -25,24 +25,21 @@ package org.whizu.dom;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class Foreach<T> { // TODO shouldn't T extend Component?
+public abstract class Foreach<T> {
 
-	private Collection<T> list;
+	private Collection<T> list_;
 
 	public Foreach(Collection<T> list) {
-		this.list = list;
+		list_ = list;
 	}
 
 	public Iterator<T> iterator() {
-		return list.iterator();
+		return list_.iterator();
 	}
 
-	// TODO rename this method to compile?
-	// TODO shouldn't this method return Markup?
 	public abstract Content compile(T item);
 }

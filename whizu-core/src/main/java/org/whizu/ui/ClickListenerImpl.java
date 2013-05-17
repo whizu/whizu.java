@@ -43,7 +43,7 @@ class ClickListenerImpl implements EventHandler {
 	}
 	
 	private Session getSession() {
-		return getRequest().getSession();
+		return getRequest().session();
 	}
 
 	private Request getRequest() {
@@ -55,7 +55,7 @@ class ClickListenerImpl implements EventHandler {
 	}
 	
 	@Override
-	public String getId() {
+	public String id() {
 		return id;
 	}
 

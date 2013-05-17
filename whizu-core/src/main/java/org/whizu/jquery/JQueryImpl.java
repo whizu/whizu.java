@@ -40,22 +40,18 @@ class JQueryImpl extends Expression implements JQuery {
 	 * static JQuery self() { return new JQueryImpl("$(this)"); }
 	 */
 
-	private String selector = "";
+	private final String selector_;
 
 	JQueryImpl(Identity element) {
-		this.selector = getSelector(element);
+		selector_ = getSelector(element);
 	}
 
 	JQueryImpl(Identity... elements) {
-		this.selector = getSelector(elements);
+		selector_ = getSelector(elements);
 	}
 
 	JQueryImpl(String selector) {
-		this.selector = selector;
-	}
-	
-	public JQueryImpl() {
-		
+		selector_ = selector;
 	}
 
 	@Override
@@ -266,7 +262,7 @@ class JQueryImpl extends Expression implements JQuery {
 	@Override
 	public String toJavaScript() {
 		// return selector.concat(expression);
-		return selector.concat(super.toJavaScript());
+		return selector_.concat(super.toJavaScript());
 	}
 
 	@Override

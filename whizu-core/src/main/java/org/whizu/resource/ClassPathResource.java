@@ -31,10 +31,10 @@ import java.io.InputStream;
  */
 public class ClassPathResource extends AbstractResource {
 
-	private String path;
+	private final String path_;
 
 	public ClassPathResource(String path) {
-		this.path = path;
+		this.path_ = path;
 	}
 
 	/**
@@ -42,10 +42,10 @@ public class ClassPathResource extends AbstractResource {
 	 */
 	@Override
 	public InputStream getInputStream() throws IOException {
-		return getClass().getResourceAsStream(path);
+		return getClass().getResourceAsStream(path_);
 	}
 
-	public String getPath() {
-		return path;
+	public String path() {
+		return path_;
 	}
 }

@@ -47,7 +47,7 @@ public class TextFieldImpl extends Widget implements TextField, Input {
 	}
 
 	public TextFieldImpl(StringValue value) {
-		this.text = value.getValue();
+		this.text = value.value();
 		this.value = value;
 		this.value.addPropertyChangeListener(new PropertyChangeListener() {
 

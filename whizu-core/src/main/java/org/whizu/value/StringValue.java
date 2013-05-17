@@ -40,16 +40,16 @@ public class StringValue extends ValueBuilder<StringValue, String> {
 
 	@Override
 	public String toString() {
-		return getValue();
+		return value();
 	}
 
 	@Override
 	public void parse(String s) {
-		setValue(s);
+		value(s);
 	}
 	
 	public void clear() {
-		setValue("");
+		value("");
 	}
 
 	@Override

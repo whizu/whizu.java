@@ -41,37 +41,36 @@ public class GridLayout extends Widget implements Layout {
 
 	// private Log log = LogFactory.getLog(GridLayout.class);
 
-	private int numberOfColumns;
+	private final int numberOfColumns_;
 
-	private int column;
+	private int column_;
 
-	private Table grid;
+	private Table grid_;
 
-	private Tbody tbody;
+	private Tbody tbody_;
 
-	private Element row;
+	private Element row_;
 
 	public GridLayout() {
 		this(1);
 	}
 
 	public GridLayout(int numberOfColumns) {
-		this.numberOfColumns = numberOfColumns;
-		this.init();
+		numberOfColumns_ = numberOfColumns;
+		init();
 	}
 
 	protected void init() {
 		super.init();
-		// width("100%").
-		this.grid = Html.table(this).attr("cellspacing", "0").attr("cellpadding", "0");
-		this.tbody = this.grid.tbody();
-		this.row = null;
-		this.column = 0;
+		grid_ = Html.table(this).attr("cellspacing", "0").attr("cellpadding", "0");
+		tbody_ = grid_.tbody();
+		row_ = null;
+		column_ = 0;
 	}
 
 	@Override
 	public Markup compile() {
-		return grid;
+		return grid_;
 	}
 
 	@Override
@@ -82,28 +81,28 @@ public class GridLayout extends Widget implements Layout {
 	@Override
 	public GridLayout add(Content component) {
 		if (isRendered()) {
-			if ((column == 0) || (column == numberOfColumns)) {
-				row = tbody.tr();
+			if ((column_ == 0) || (column_ == numberOfColumns_)) {
+				row_ = tbody_.tr();
 				// row.add(Html.td().add(component));
-				jQuery("$(\"table > tbody\")").append(row);
-				column = 1;
+				jQuery("$(\"table > tbody\")").append(row_);
+				column_ = 1;
 			} else {
-				column++;
+				column_++;
 			}
 			
 			Td td = Html.td().add(component);
 			jQuery("$(\"table > tbody tr:last-child\")").append(td);
 		} else {
-			if ((column == 0) || (column == numberOfColumns)) {
+			if ((column_ == 0) || (column_ == numberOfColumns_)) {
 				// row = Html.tr(); tbody.add(row);
-				row = tbody.tr();
-				column = 1;
+				row_ = tbody_.tr();
+				column_ = 1;
 			} else {
-				column++;
+				column_++;
 			}
 
 			Td td = Html.td().add(component);
-			row.add(td);
+			row_.add(td);
 		}
 
 		return this;
@@ -111,9 +110,9 @@ public class GridLayout extends Widget implements Layout {
 
 	@Override
 	public void empty() {
-		this.init();
+		init();
 
-		if (this.isRendered()) {
+		if (isRendered()) {
 			jQuery("$(\"table > tbody\")").empty();
 		}
 	}

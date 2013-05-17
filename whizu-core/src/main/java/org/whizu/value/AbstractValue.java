@@ -35,19 +35,19 @@ public abstract class AbstractValue<T> implements Value {
 
 	private transient PropertyChangeSupport changeSupport_;
 
-	private final String key_;
+	private final String name_;
 
 	private boolean readOnly_;
 
 	private T value_;
 
 	public AbstractValue(String key) {
-		key_ = key;
+		name_ = key;
 		value_ = getDefaultValue();
 	}
 
 	public AbstractValue(String key, T value) {
-		key_ = key;
+		name_ = key;
 		value_ = value;
 	}
 
@@ -59,10 +59,8 @@ public abstract class AbstractValue<T> implements Value {
 		getPropertyChangeSupport().addPropertyChangeListener(propertyName, listener);
 	}
 
-	private void firePropertyChange(String propertyName, T oldValue, T newValue) {
-		if (changeSupport_ != null) {
-			changeSupport_.firePropertyChange(propertyName, oldValue, newValue);
-		}
+	protected void fireIndexedPropertyChange(int index, Object oldValue, Object newValue) {
+		firePropertyChange(VALUE, index, oldValue, newValue);
 	}
 
 	private void firePropertyChange(String propertyName, int index, Object oldValue, Object newValue) {
@@ -71,16 +69,17 @@ public abstract class AbstractValue<T> implements Value {
 		}
 	}
 
-	protected void fireIndexedPropertyChange(int index, Object oldValue, Object newValue) {
-		firePropertyChange(VALUE, index, oldValue, newValue);
+	private void firePropertyChange(String propertyName, T oldValue, T newValue) {
+		if (changeSupport_ != null) {
+			changeSupport_.firePropertyChange(propertyName, oldValue, newValue);
+		}
+	}
+
+	public final T get() {
+		return value();
 	}
 
 	protected abstract T getDefaultValue();
-
-	@Override
-	public final String getName() {
-		return key_;
-	}
 
 	private PropertyChangeSupport getPropertyChangeSupport() {
 		if (changeSupport_ == null) {
@@ -90,25 +89,27 @@ public abstract class AbstractValue<T> implements Value {
 		return changeSupport_;
 	}
 
-	public final T getValue() {
-		return value_;
-	}
-
-	public final T get() {
-		return getValue();
+	@Override
+	public final String name() {
+		return name_;
 	}
 
 	@Override
-	public final boolean isReadOnly() {
+	public final boolean readOnly() {
 		return readOnly_;
 	}
 
 	@Override
+	public final void readOnly(boolean readOnly) {
+		readOnly_ = readOnly;
+	}
+
+	@Override
 	public void refresh(Object obj) {
-		if (obj instanceof AbstractValue<?>) {
-			setValue(((AbstractValue<T>) obj).getValue());
+		if (obj instanceof Value) {
+			set(((Value) obj).get());
 		} else {
-			throw new UnsupportedOperationException();
+			set(obj);
 		}
 	}
 
@@ -124,16 +125,16 @@ public abstract class AbstractValue<T> implements Value {
 		}
 	}
 
-	@Override
-	public final void setReadOnly(boolean readOnly) {
-		readOnly_ = readOnly;
+	@SuppressWarnings("unchecked")
+	public final void set(Object value) {
+		value((T) value);
 	}
 
-	public void setValue(T value) {
+	public final T value() {
+		return value_;
+	}
+
+	public void value(T value) {
 		firePropertyChange(VALUE, value_, value_ = value);
-	}
-
-	public void set(Object value) {
-		setValue((T) value);
 	}
 }

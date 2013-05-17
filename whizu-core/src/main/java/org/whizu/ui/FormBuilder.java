@@ -51,7 +51,7 @@ public class FormBuilder {
 
 	@SuppressWarnings("rawtypes")
 	private String getLabelName(Object model, Value value) {
-		return value.getName();
+		return value.name();
 		/*
 		try {
 			Field[] fields = model.getClass().getFields();
@@ -99,7 +99,7 @@ public class FormBuilder {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent arg0) {
-				set(model, fieldName, value.getValue());
+				set(model, fieldName, value.value());
 			}
 		});
 		return value;

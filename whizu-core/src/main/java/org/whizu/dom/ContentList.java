@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class ContentList implements Markup {
 
-	private List<Content> contentList = new ArrayList<Content>();
+	private final List<Content> contentList_ = new ArrayList<Content>();
 
 	public ContentList() {
 	}
@@ -47,27 +47,26 @@ public class ContentList implements Markup {
 	 */
 	public ContentList add(Content content) {
 		assert (content != null);
-		this.contentList.add(content);
+		contentList_.add(content);
 		return this;
 	}
 
 	public <T extends Content> ContentList add(List<T> content) {
-		this.contentList.addAll(content);
+		contentList_.addAll(content);
 		return this;
+	}
+
+	@Override
+	public Content css(String itemClass) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public String render() {
 		String markup = "";
-		for (Content element : contentList) {
+		for (Content element : contentList_) {
 			markup += element.render();
 		}
 		return markup;
-	}
-
-	@Override
-	public Content css(String itemClass) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
 	}
 }

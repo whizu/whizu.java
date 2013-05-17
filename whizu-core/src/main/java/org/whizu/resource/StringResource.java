@@ -33,24 +33,24 @@ import java.io.OutputStream;
  */
 public class StringResource implements Resource {
 
-	private byte[] bytes;
+	private final byte[] bytes_;
 
 	public StringResource(String content) {
-		this.bytes = content.getBytes();
+		bytes_ = content.getBytes();
 	}
 
 	@Override
 	public InputStream getInputStream() throws IOException {
-		return new ByteArrayInputStream(bytes);
+		return new ByteArrayInputStream(bytes_);
 	}
 
 	@Override
 	public String getString() {
-		return new String(bytes);
+		return new String(bytes_);
 	}
 
 	@Override
 	public void print(OutputStream out) throws IOException {
-		out.write(bytes);
+		out.write(bytes_);
 	}
 }

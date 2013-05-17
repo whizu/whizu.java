@@ -54,7 +54,7 @@ public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T
 	}
 
 	public final void add(T element) {
-		getValue().add(element);
+		value().add(element);
 		fireIndexedPropertyChange(size()-1, null, element);
 	}
 
@@ -79,7 +79,7 @@ public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T
 	}
 
 	public T get(int index) {
-		return getValue().get(index);
+		return value().get(index);
 	}
 
 	public String getClazzName() {
@@ -87,7 +87,7 @@ public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T
 	}
 
 	public Iterator<T> iterator() {
-		return getValue().iterator();
+		return value().iterator();
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T
 	}
 
 	public int size() {
-		return getValue().size();
+		return value().size();
 	}
 
 	@Override

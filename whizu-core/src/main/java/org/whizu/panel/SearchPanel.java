@@ -42,12 +42,12 @@ import org.whizu.value.Value;
  */
 public abstract class SearchPanel<T> implements Panel {
 
-	private Class<T> clazz;
+	private final Class<T> clazz_;
 
 	private UI ui = new WhizuUI();
 
 	public SearchPanel(Class<T> clazz) {
-		this.clazz = clazz;
+		clazz_ = clazz;
 	}
 
 	public void create(final Composite parent) {
@@ -98,7 +98,7 @@ public abstract class SearchPanel<T> implements Panel {
 
 	protected final T createModel() {
 		try {
-			return clazz.newInstance();
+			return clazz_.newInstance();
 		} catch (InstantiationException e) {
 			throw new IllegalStateException(e);
 		} catch (IllegalAccessException e) {

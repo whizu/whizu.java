@@ -44,6 +44,6 @@ public class Comment extends AbstractValueObject {
 
 	@Override
 	public String toString() {
-		return message.getValue();
+		return message.value();
 	}
 }

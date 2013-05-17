@@ -59,7 +59,7 @@ public class BarChart implements Application {
 	@Override
 	public void init(final UI ui) {
 		// model
-		aantal.setValue(0);
+		aantal.value(0);
 
 		// user interface
 		Document document = ui.getDocument();
@@ -88,14 +88,14 @@ public class BarChart implements Application {
 			@Override
 			public void click() {
 				aantal.increment();
-				if (antwoord.getValue().length() > 10) {
+				if (antwoord.value().length() > 10) {
 					lang++;
 				} else {
 					kort++;
 				}
 				Layout detail = ui.createVerticalLayout();
 				detail.add(ui.createLabel(new Date().toString()).css("detail-date"));
-				detail.add(ui.createLabel(antwoord.getValue()));
+				detail.add(ui.createLabel(antwoord.value()));
 				detail.css("detail");
 				history.prepend(detail);
 				antwoord.clear();
@@ -107,7 +107,7 @@ public class BarChart implements Application {
 					@Override
 					public void execute() {
 						aantal.increment();
-						antwoord.setValue("Wat is jouw hobby?");
+						antwoord.value("Wat is jouw hobby?");
 					}
 				});
 			}
@@ -132,7 +132,7 @@ public class BarChart implements Application {
 		@Override
 		public void execute() {
 			aantal.increment();
-			antwoord.setValue("Wat is jouw hobby?");
+			antwoord.value("Wat is jouw hobby?");
 		}
 	}
 }

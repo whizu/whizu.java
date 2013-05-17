@@ -28,24 +28,23 @@ package org.whizu.dom;
  */
 public class Literal implements Markup {
 
-	@Override
-	public String render() {
-		return text;
-	}
+	private String text_;
 
-	private String text;
-	
 	public Literal(String text) {
-		this.text = text;
+		this.text_ = text;
 	}
-
-	public String getText() {
-		return text;
-	}
-
+	
 	@Override
 	public Content css(String itemClass) {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public String render() {
+		return text_;
+	}
+
+	public String text() {
+		return text_;
 	}
 }

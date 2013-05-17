@@ -120,10 +120,10 @@ public class ApplicationEnhancer {
 
 			Class<Application> newClass = getEnhancedClass(ctClass);
 			PageFactory factory = new PageFactory(newClass);
-			factory.setTitle(title);
-			factory.setStylesheet(stylesheet);
+			factory.title(title);
+			factory.stylesheet(stylesheet);
 			if (template != null) {
-				factory.setTemplate(template);
+				factory.template(template);
 			}
 			return factory;
 		} catch (NotFoundException | CannotCompileException | ClassNotFoundException e) {

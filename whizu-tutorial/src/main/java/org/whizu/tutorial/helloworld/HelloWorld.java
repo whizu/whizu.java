@@ -53,7 +53,7 @@ public class HelloWorld implements Application {
 		//model
 		final StringValue message = new StringValue("message");
 		final IntegerValue aantal = new IntegerValue("aantal");
-		aantal.setValue(0);
+		aantal.value(0);
 
 		//user interface
 		Document document = ui.getDocument();
@@ -75,7 +75,7 @@ public class HelloWorld implements Application {
 				aantal.increment();
 				Layout detail = ui.createVerticalLayout();
 				detail.add(ui.createLabel(new Date().toString()).css("detail-date"));
-				detail.add(ui.createLabel(message.getValue()));
+				detail.add(ui.createLabel(message.value()));
 				detail.css("detail");
 				history.prepend(detail);
 				message.clear();

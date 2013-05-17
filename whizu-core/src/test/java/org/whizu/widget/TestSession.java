@@ -45,7 +45,7 @@ public class TestSession implements Session {
 	}
 
 	@Override
-	public Object getAttribute(String name) {
+	public Object attribute(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -79,7 +79,7 @@ public class TestSession implements Session {
 	}
 
 	@Override
-	public void setAttribute(String name, Object value) {
+	public void attribute(String name, Object value) {
 		// TODO Auto-generated method stub
 	}
 }

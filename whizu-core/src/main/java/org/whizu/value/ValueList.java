@@ -34,27 +34,16 @@ import org.whizu.dom.Component;
  */
 public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
 
-	private Class<T> clazz;
-
-	// @Embedded
-	public String clazzName = "blabla";
-
-	public List<T> value = new ArrayList<T>();
-
-	public ValueList() {
-		super("list");
-	}
+	private final Class<T> clazz_;
 
 	public ValueList(Class<T> clazz) {
-		this();
-		this.clazz = clazz;
-		this.clazzName = clazz.getName();
-		// this.sampleValueObject = createNew();
+		super(clazz.getName());
+		clazz_ = clazz;
 	}
 
 	public void add(T element) {
-		this.value.add(element);
-		fireIndexedPropertyChange(value.size() - 1, null, element);
+		value().add(element);
+		fireIndexedPropertyChange(value().size() - 1, null, element);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -69,7 +58,7 @@ public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
 	 */
 	public final T createNew() {
 		try {
-			return (T) clazz.newInstance();
+			return (T) clazz_.newInstance();
 		} catch (InstantiationException e) {
 			throw new RuntimeException(e);
 		} catch (IllegalAccessException e) {
@@ -78,15 +67,16 @@ public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
 	}
 
 	public T get(int index) {
-		return value.get(index);
+		return value().get(index);
 	}
 
-	public String getClazzName() {
-		return clazzName;
+	@Override
+	protected List<T> getDefaultValue() {
+		return new ArrayList<T>();
 	}
 
 	public Iterator<T> iterator() {
-		return this.value.iterator();
+		return value().iterator();
 	}
 
 	/**
@@ -97,21 +87,12 @@ public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
 		throw new UnsupportedOperationException();
 	}
 
-	public void setClazzName(String clazzName) {
-		this.clazzName = clazzName;
-	}
-
-	public int size() {
-		return this.value.size();
-	}
-
 	@Override
 	public Component render(ValueRenderer renderer) {
 		return renderer.render(this);
 	}
 
-	@Override
-	protected List<T> getDefaultValue() {
-		return new ArrayList<T>();
+	public int size() {
+		return value().size();
 	}
 }

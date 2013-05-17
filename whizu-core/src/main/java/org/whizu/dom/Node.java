@@ -47,26 +47,26 @@ public class Node implements Element {
 
 	private List<String> cssList = new ArrayList<String>();
 
-	private String name;
+	private String name_;
 
 	private Map<String, String> styleMap = new HashMap<String, String>();
 
-	private String id;
+	private String id_;
 
-	private boolean selfClosing;
+	private boolean selfClosing_;
 
 	public Node(String name) {
 		this(name, false);
 	}
 
 	public Node(String name, boolean selfClosing) {
-		this.name = name;
-		this.selfClosing = selfClosing;
+		name_ = name;
+		selfClosing_ = selfClosing;
 	}
 
 	@Override
 	public Element add(Content element) {
-		if (selfClosing) {
+		if (selfClosing_) {
 			throw new IllegalStateException("A self-closing element must not add content");
 		}
 
@@ -76,7 +76,7 @@ public class Node implements Element {
 
 	@Override
 	public Element add(Content... elements) {
-		if (selfClosing) {
+		if (selfClosing_) {
 			throw new IllegalStateException("A self-closing element must not add content");
 		}
 
@@ -88,7 +88,7 @@ public class Node implements Element {
 
 	@Override
 	public <E> Element add(Foreach<E> factory) {
-		if (selfClosing) {
+		if (selfClosing_) {
 			throw new IllegalStateException("A self-closing element must not add content");
 		}
 
@@ -102,7 +102,7 @@ public class Node implements Element {
 
 	@Override
 	public <E extends Content> Element add(List<E> content) {
-		if (selfClosing) {
+		if (selfClosing_) {
 			throw new IllegalStateException("A self-closing element must not add content");
 		}
 
@@ -112,7 +112,7 @@ public class Node implements Element {
 
 	@Override
 	public Element add(String text) {
-		if (selfClosing) {
+		if (selfClosing_) {
 			throw new IllegalStateException("A self-closing element must not add content");
 		}
 
@@ -173,7 +173,7 @@ public class Node implements Element {
 
 	@Override
 	public String id() {
-		return id;
+		return id_;
 	}
 
 	private String getStyle() {
@@ -191,7 +191,7 @@ public class Node implements Element {
 
 	@Override
 	public Element id(String id) {
-		this.id = id;
+		this.id_ = id;
 		return attr("id", id);
 	}
 
@@ -231,7 +231,7 @@ public class Node implements Element {
 
 	@Override
 	public String render() {
-		String markup = "<" + name;
+		String markup = "<" + name_;
 		for (String key : attrs.keySet()) {
 			markup += " " + key + "=" + quote(attrs.get(key));
 		}
@@ -244,12 +244,12 @@ public class Node implements Element {
 			markup += " " + "class=" + quote(getCss());
 		}
 
-		if (selfClosing) {
+		if (selfClosing_) {
 			markup += "/>";
 		} else {
 			markup += ">";
 			markup += contents.render();
-			markup += "</" + name + ">";
+			markup += "</" + name_ + ">";
 		}
 		return markup;
 	}

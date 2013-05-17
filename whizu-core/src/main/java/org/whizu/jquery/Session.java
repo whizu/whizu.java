@@ -29,7 +29,9 @@ public interface Session {
 
 	public abstract void addInput(Input input);
 
-	public abstract Object getAttribute(String name);
+	public abstract Object attribute(String name);
+
+	public abstract void attribute(String name, Object value);
 
 	public abstract EventHandler getEventHandler(String id);
 
@@ -40,6 +42,4 @@ public interface Session {
 	public abstract void handleEvent(String id);
 
 	public abstract String next();
-
-	public abstract void setAttribute(String name, Object value);
 }

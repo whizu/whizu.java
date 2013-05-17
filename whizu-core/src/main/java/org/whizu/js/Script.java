@@ -31,32 +31,32 @@ import java.util.List;
  */
 public class Script {
 
-	private List<Expression> expressionList = new ArrayList<Expression>();
+	private final List<Expression> expressionList_ = new ArrayList<Expression>();
 
-	private boolean isRendering = false;
+	private boolean isRendering_ = false;
 
-	private int renderingPosition;
+	private int renderingPosition_;
 
 	public Script() {
 	}
 
 	public Script(String script) {
-		expressionList.add(new Expression(script));
+		expressionList_.add(new Expression(script));
 	}
 
 	public String toJavaScript() {
 		try {
-			isRendering = true;
+			isRendering_ = true;
 			String script = "";
 			
-			renderingPosition = 0;
-			while (renderingPosition < expressionList.size()) {
-				Expression expr = expressionList.get(renderingPosition);
+			renderingPosition_ = 0;
+			while (renderingPosition_ < expressionList_.size()) {
+				Expression expr = expressionList_.get(renderingPosition_);
 				script += expr.toJavaScript();
 				if (!script.endsWith(";")) {
 					script += ";";
 				}
-				renderingPosition++;
+				renderingPosition_++;
 			}
 			/*
 			for (Expression expr : expressionList) {
@@ -68,15 +68,15 @@ public class Script {
 			*/
 			return script;
 		} finally {
-			isRendering = false;
+			isRendering_ = false;
 		}
 	}
 
 	public void addExpression(Expression expr) {
-		if (isRendering) {
-			expressionList.add(renderingPosition+1, expr);
+		if (isRendering_) {
+			expressionList_.add(renderingPosition_+1, expr);
 		} else {
-			expressionList.add(expressionList.size(), expr);
+			expressionList_.add(expressionList_.size(), expr);
 		}
 	}
 }

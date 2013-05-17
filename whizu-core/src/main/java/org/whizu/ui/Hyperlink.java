@@ -60,7 +60,7 @@ public class Hyperlink extends Widget {
 
 	@Override
 	public Markup compile() {
-		String id = RequestContext.getRequest().getSession().next();
+		String id = RequestContext.getRequest().session().next();
 		final Element anchor = Html.a().attr("href", "").add(caption).id(id);
 		
 		String script = "";
@@ -69,7 +69,7 @@ public class Hyperlink extends Widget {
 				@Override
 				public void execute() {
 
-					String url = "/whizu?id=" + listener.getId();
+					String url = "/whizu?id=" + listener.id();
 
 					Function data = new Function() {
 

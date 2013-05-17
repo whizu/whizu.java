@@ -52,7 +52,7 @@ class Schedule extends Widget {
 			}
 		});
 		getSession().addClickListener(impl);
-		String listenerId = impl.getId();
+		String listenerId = impl.id();
 
 		String script = "$.get('/whizu?id=" + listenerId + "', function(data) { ; }, 'script');";
 		String text = "setTimeout(function(){" + script + "}," + milliseconds + ")";

@@ -39,21 +39,21 @@ public class IntegerValue extends ValueBuilder<IntegerValue, Integer> {
 	}
 
 	public void clear() {
-		setValue(null);
+		value(null);
 	}
 
 	public void increment() {
-		setValue(getValue() + 1);
+		value(value() + 1);
 	}
 
 	@Override
 	public void parse(String s) {
-		setValue(Integer.parseInt(s));
+		value(Integer.parseInt(s));
 	}
 
 	@Override
 	public String toString() {
-		return "" + getValue();
+		return "" + value();
 	}
 
 	@Override

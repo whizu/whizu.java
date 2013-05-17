@@ -106,7 +106,7 @@ public class GridLayoutIntegrationTest {
 					}
 
 					@Override
-					public Session getSession() {
+					public Session session() {
 						return new Session() {
 
 							@Override
@@ -120,7 +120,7 @@ public class GridLayoutIntegrationTest {
 							}
 
 							@Override
-							public Object getAttribute(String name) {
+							public Object attribute(String name) {
 								// TODO Auto-generated method stub
 								return null;
 							}
@@ -154,7 +154,7 @@ public class GridLayoutIntegrationTest {
 							}
 
 							@Override
-							public void setAttribute(String name, Object value) {
+							public void attribute(String name, Object value) {
 								// TODO Auto-generated method stub
 							}
 						};

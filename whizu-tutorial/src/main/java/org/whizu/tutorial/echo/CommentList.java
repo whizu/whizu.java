@@ -31,6 +31,10 @@ import org.whizu.value.ValueList;
  */
 public class CommentList extends ValueList<Comment> {
 
+	public CommentList() {
+		super(Comment.class);
+	}
+
 	public void add(String message) {
 		Comment comment = new Comment();
 		comment.message.set(message);
@@ -38,6 +42,6 @@ public class CommentList extends ValueList<Comment> {
 	}
 
 	public void add(StringValue message) {
-		add(message.getValue());
+		add(message.value());
 	}
 }

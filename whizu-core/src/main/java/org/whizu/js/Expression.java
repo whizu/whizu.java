@@ -32,29 +32,24 @@ import org.whizu.dom.Literal;
  */
 public class Expression {
 
-	private ContentList contents = new ContentList();
-
-	// @Deprecated
-	// protected String expression = "";
+	private ContentList contents_ = new ContentList();
 
 	public Expression() {
 	}
 
 	public Expression(String expr) {
-		contents.add(new Literal(expr));
-		// this.expression = expr;
+		contents_.add(new Literal(expr));
 	}
 
 	public void add(String part) {
-		contents.add(new Literal(part));
+		contents_.add(new Literal(part));
 	}
 
 	public void add(Content part) {
-		contents.add(part);
+		contents_.add(part);
 	}
 
 	public String toJavaScript() {
-		return contents.render();
-		// return expression;
+		return contents_.render();
 	}
 }

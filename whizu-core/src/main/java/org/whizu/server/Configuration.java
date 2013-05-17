@@ -37,7 +37,7 @@ import org.whizu.ui.Application;
  */
 class Configuration implements TypeReporter<Page> {
 
-	private Logger log = LoggerFactory.getLogger(Configuration.class);
+	private final Logger log = LoggerFactory.getLogger(Configuration.class);
 
 	private Map<String, PageFactory> applicationFactoryMap = new HashMap<String, PageFactory>();
 

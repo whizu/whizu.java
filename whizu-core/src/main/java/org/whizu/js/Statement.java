@@ -27,5 +27,4 @@ package org.whizu.js;
  * @author Rudy D'hauwe
  */
 public interface Statement {
-
 }
