@@ -12,8 +12,11 @@ import org.whizu.tutorial.shop.action.CustomerSearchAction;
 import org.whizu.tutorial.shop.action.OfficeSearchAction;
 import org.whizu.tutorial.shop.action.PriceSearchAction;
 import org.whizu.tutorial.shop.action.ProductSearchAction;
+import org.whizu.ui.AbstractAction;
 import org.whizu.ui.Action;
 import org.whizu.ui.Application;
+import org.whizu.ui.Dialog;
+import org.whizu.ui.DialogImpl;
 import org.whizu.ui.Hyperlink;
 import org.whizu.ui.UI;
 
@@ -42,6 +45,27 @@ public class PricingApp implements Application { //TODO remove "implements Appli
 		add(new CustomerSearchAction());
 		add(new CountrySearchAction());
 		add(new PriceSearchAction());
+		add(new AbstractAction() {
+			
+			@Override
+			public void handleEvent() {
+				Dialog dialog = new DialogImpl("My dialog");
+				dialog.add(ui.createLabel("my dialog text"));
+				ui.getDocument().add(dialog);
+				
+			}
+			
+			@Override
+			public void performAction() {
+				// TODO Auto-generated method stub
+				throw new UnsupportedOperationException();
+			}
+			
+			@Override
+			public String getCaption() {
+				return "Open dialog";
+			}
+		});
 	}
 
 	private void add(Action action) {

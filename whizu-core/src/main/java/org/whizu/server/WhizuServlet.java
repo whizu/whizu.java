@@ -62,7 +62,7 @@ public class WhizuServlet extends HttpServlet {
 
 	private static final String WHIZU_SESSION = "whizu-session";
 
-	private Configuration config_ = new Configuration();
+	private final Configuration config_ = new Configuration();
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {

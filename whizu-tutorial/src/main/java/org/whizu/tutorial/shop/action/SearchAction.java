@@ -37,7 +37,6 @@ import org.whizu.ui.Action;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.FormBuilder;
 import org.whizu.ui.Hyperlink;
-import org.whizu.ui.Table;
 import org.whizu.value.Value;
 
 //@Action
@@ -51,8 +50,6 @@ public abstract class SearchAction<T> extends AbstractAction {
 
 	@Select(id = "right-column")
 	JQuery contentPanel;
-
-	private Table table;
 
 	protected void refresh() {
 		contentPanel = RequestContext.getRequest().select("$(\"#right-column\")");

@@ -119,6 +119,14 @@ class JQueryImpl extends Expression implements JQuery {
 		}
 		return concat(".", function, "(", arguments, ")");
 	}
+	
+	public JQuery call(String function, int... args) {
+		String arguments = "" + args[0] + "";
+		for (int i = 1; i < args.length; i++) {
+			arguments = arguments.concat(",").concat(""+args[i]);
+		}
+		return concat(".", function, "(", arguments, ")");
+	}
 
 	public JQuery call(String function, String arg0, String... args) {
 		String arguments = "'" + arg0 + "'";
@@ -309,5 +317,10 @@ class JQueryImpl extends Expression implements JQuery {
 	@Override
 	public JQuery lastChild(String element) {
 		return call("filter", element + ":last-child");
+	}
+
+	@Override
+	public JQuery fadeTo(int i, int j) {
+		return call("fadeTo", i, j);
 	}
 }

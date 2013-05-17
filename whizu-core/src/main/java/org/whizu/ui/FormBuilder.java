@@ -43,13 +43,11 @@ public class FormBuilder {
 		addTextField(model, fieldName);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public void addValue(Object model, Value value) {
 		layout.add(ui.createLabel(getLabelName(model, value))); // todo refactor
 		layout.add(ui.createTextField(value));
 	}
 
-	@SuppressWarnings("rawtypes")
 	private String getLabelName(Object model, Value value) {
 		return value.name();
 		/*

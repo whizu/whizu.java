@@ -9,10 +9,12 @@
 <link rel="stylesheet" type="text/css" href="/shop/pygment_trac.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="/shop/print.css" media="print" />
 ${css}
-<script src="/shop/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/shop/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/shop/jquery.leanModal.min.js"></script>
 <script>$(document).ready(function() { $.getScript('/whizu?id=${id}'); });</script>
 </head>
 <body id='whizu'>
+    <div id='lean_overlay'></div>    
     <HEADER>
       <div class="inner">
         <h1>&nbsp;</h1>
@@ -33,5 +35,6 @@ ${css}
       <div id='detail'>
       </div>
     </DIV>
+    
 </body>
 </HTML>

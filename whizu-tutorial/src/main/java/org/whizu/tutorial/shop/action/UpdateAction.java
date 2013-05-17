@@ -117,8 +117,8 @@ public abstract class UpdateAction<T> extends AbstractAction {
 			Field[] fields = clazz.getDeclaredFields();
 			for (Field field : fields) {
 				System.out.println("Writing field " + field.getName());
-				Class type = field.getType();
-				Class vc = Value.class;
+				Class<?> type = field.getType();
+				Class<?> vc = Value.class;
 				if (vc.isAssignableFrom(type)) {
 					System.out.println("field " + field.getName() + " is een value");
 					Value targetValue = (Value) FieldUtils.readField(field, target, true);

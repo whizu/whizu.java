@@ -25,6 +25,7 @@ package org.whizu.ui;
 
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
+import org.whizu.jquery.RequestContext;
 import org.whizu.widget.Container;
 
 /**
@@ -34,25 +35,22 @@ public class DialogImpl extends Container implements Dialog {
 
 	private final String caption_;
 
-	protected DialogImpl(String caption) {
+	public DialogImpl(String caption) {
 		caption_ = caption;
 	}
 
 	@Override
 	public Markup compile() {
-		String script = null;
-		if (width == null) {
-			script = ".popup('open');";
-			// jQuery(this).dialog();
-		} else {
-			script = ".popup({ width:" + width + " });";
-			// jQuery(this).dialog(width);
-		}
-		jQuery(this).concat(script);
-
-		// isRendered = true;
-		jQuery(this).trigger("create");
-		return Html.div(id()).attr("data-role", "content").attr("title", caption_).add(componentList);
+		String script = "";
+		script += "$('#lean_overlay').click(function() { $('#lean_overlay').fadeOut(200); $('#" + this.id() + "').css({'display':'none'}); });";
+		script += "$('#lean_overlay').css({'display':'block',opacity:0});";
+		script += "$('#lean_overlay').fadeTo(200, 0.5);";
+		script += "var modal_width = $('#" + this.id() + "').outerWidth();";
+		script += "$('#" + this.id() + "').css({'display':'block','position':'fixed','top':'100px','left':'50%','margin-left':-(modal_width / 2) + 'px','opacity':0,'z-index':11000});";
+		script += "$('#" + this.id() + "').fadeTo(200, 1);";
+		RequestContext.getRequest().addExpression(script);
+		//jQuery(this).fadeTo(200, 1); //TODO this gets in front of the script????? preceedes getRequest().addExpression()??
+		return Html.div(id()).attr("title", caption_).css("whizu-dialog").add(componentList);
 	}
 
 	public void close() {

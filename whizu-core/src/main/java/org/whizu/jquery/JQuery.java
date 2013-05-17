@@ -352,4 +352,6 @@ public interface JQuery {
 	public abstract JQuery firstOfType(String element);
 
 	public abstract JQuery lastChild(String string);
+
+	public abstract JQuery fadeTo(int i, int j);
 }
