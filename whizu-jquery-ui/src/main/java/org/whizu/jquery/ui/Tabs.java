@@ -23,6 +23,16 @@
  *******************************************************************************/
 package org.whizu.jquery.ui;
 
-public class Tabs {
+import org.whizu.dom.Markup;
+import org.whizu.widget.Widget;
 
+/**
+ * @author Rudy D'hauwe
+ */
+public class Tabs extends Widget {
+
+	@Override
+	public Markup compile() {
+		throw new UnsupportedOperationException();
+	}
 }

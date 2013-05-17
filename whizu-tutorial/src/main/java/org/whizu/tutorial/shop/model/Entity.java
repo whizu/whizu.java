@@ -25,25 +25,38 @@ package org.whizu.tutorial.shop.model;
 
 import java.util.Date;
 
+/**
+ * @author Rudy D'hauwe
+ */
 public abstract class Entity {
 
-	private Long id;
-	
-	private Date lastUpdate;
+	private Long id_;
 
+	private Date lastUpdate_;
+
+	@Deprecated
 	public Long getId() {
-		return id;
+		return id_;
 	}
-	
+
+	@Deprecated
 	public Date getLastUpdate() {
-		return lastUpdate;
+		return lastUpdate_;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public final Long id() {
+		return id_;
 	}
 
-	public void setLastUpdate(Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
+	public final void id(Long id) {
+		id_ = id;
+	}
+
+	public Date lastUpdate() {
+		return lastUpdate_;
+	}
+
+	public void lastUpdate(Date lastUpdate) {
+		this.lastUpdate_ = lastUpdate;
 	}
 }

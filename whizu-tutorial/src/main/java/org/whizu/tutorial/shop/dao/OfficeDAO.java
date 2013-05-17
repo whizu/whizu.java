@@ -36,7 +36,7 @@ public class OfficeDAO extends Dao<Office> {
 
 	private void add(long id, String naam, String adres) {
 		Office obj = new Office();
-		obj.setId(id);
+		obj.id(id);
 		obj.naam.set(naam);
 		obj.address.value(adres);
 		add(obj);

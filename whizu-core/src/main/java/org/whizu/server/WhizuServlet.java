@@ -133,7 +133,6 @@ public class WhizuServlet extends HttpServlet {
 					content = content.replace("${title}", Title.DEFAULT_TITLE);
 				}
 
-				
 				Method[] methods = clazz.getDeclaredMethods();
 				for (Method method : methods) {
 					if (method.isAnnotationPresent(Body.class)) {
@@ -182,20 +181,24 @@ public class WhizuServlet extends HttpServlet {
 				session.handleEvent(id);
 				content = new StringResource(RequestImpl.get().finish());
 			}
-		} catch(Exception exc) {
+		} catch (Exception exc) {
 			exc.printStackTrace();
 		} finally {
-			if (logger.isDebugEnabled()) {
-				logger.debug("Server side completed in {}ms", chrono.stop());
-				logger.debug("Streaming script {}", content.getString());
-			}
+			try {
+				if (logger.isDebugEnabled()) {
+					logger.debug("Server side completed in {}ms", chrono.stop());
+					logger.debug("Streaming script {}", content.getString());
+				}
 
-			if (content != null) {
-				content.print(response.getOutputStream());
-			}
+				if (content != null) {
+					content.print(response.getOutputStream());
+				}
 
-			response.getOutputStream().flush();
-			// response.getWriter().close();
+				response.getOutputStream().flush();
+				// response.getWriter().close();
+			} finally {
+				RequestImpl.get().finish(); 
+			}
 		}
 	}
 

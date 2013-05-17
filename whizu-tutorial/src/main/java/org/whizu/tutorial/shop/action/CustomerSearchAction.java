@@ -29,7 +29,9 @@ import java.util.Collection;
 import org.whizu.tutorial.shop.model.Customer;
 import org.whizu.ui.Action;
 
-
+/**
+ * @author Rudy D'hauwe
+ */
 public class CustomerSearchAction extends SearchAction<Customer> {
 
 	public CustomerSearchAction() {

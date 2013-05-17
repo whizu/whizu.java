@@ -32,18 +32,24 @@ import org.whizu.tutorial.shop.panel.OfficeSearchPanel;
 import org.whizu.ui.Action;
 import org.whizu.widget.Container;
 
-//@Action
+/**
+ * @author Rudy D'hauwe
+ */
 public abstract class OpenContentPanelAction implements Action {
 
+	private final String id_;
+	
+	public OpenContentPanelAction() {
+		id_ = RequestContext.getRequest().session().next();
+	}
+	
 	@Override
 	public void performAction() {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setCallback(Callback callback) {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
 
@@ -62,7 +68,7 @@ public abstract class OpenContentPanelAction implements Action {
 	
 	@Override
 	public String id() {
-		return RequestContext.getRequest().session().next();
+		return id_;
 	}
 
 	@Override

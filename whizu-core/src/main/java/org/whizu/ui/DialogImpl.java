@@ -27,12 +27,15 @@ import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.widget.Container;
 
-class DialogImpl extends Container implements Dialog {
+/**
+ * @author Rudy D'hauwe
+ */
+public class DialogImpl extends Container implements Dialog {
 
-	private String caption;
+	private final String caption_;
 
 	protected DialogImpl(String caption) {
-		this.caption = caption;
+		caption_ = caption;
 	}
 
 	@Override
@@ -45,11 +48,11 @@ class DialogImpl extends Container implements Dialog {
 			script = ".popup({ width:" + width + " });";
 			// jQuery(this).dialog(width);
 		}
-		jQuery(this).concat(script); // todo further refactoring
+		jQuery(this).concat(script);
 
 		// isRendered = true;
 		jQuery(this).trigger("create");
-		return Html.div(id()).attr("data-role", "content").attr("title", caption).add(componentList);
+		return Html.div(id()).attr("data-role", "content").attr("title", caption_).add(componentList);
 	}
 
 	public void close() {

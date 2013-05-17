@@ -29,8 +29,11 @@ import java.util.Collection;
 import org.whizu.tutorial.shop.model.Price;
 import org.whizu.ui.Action;
 
-
-//@Action
+/**
+ * @author Rudy D'hauwe
+ */
+//@Listen("/whizu/shop/search/price")
+//@Id("/whizu/shop/search/price")
 public class PriceSearchAction extends SearchAction<Price> {
 
 	public PriceSearchAction() {

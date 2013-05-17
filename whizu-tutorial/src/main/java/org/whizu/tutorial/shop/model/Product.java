@@ -23,6 +23,9 @@
  *******************************************************************************/
 package org.whizu.tutorial.shop.model;
 
+/**
+ * @author Rudy D'hauwe
+ */
 public class Product extends Entity {
 
 	private String code;

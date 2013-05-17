@@ -38,7 +38,7 @@ public class Dao<T extends Entity> {
 	private Map<Long, T> entityMap = new HashMap<Long, T>();
 
 	public void add(T entity) {
-		entityMap.put(entity.getId(), entity);
+		entityMap.put(entity.id(), entity);
 	}
 
 	public T findById(Long id) {
@@ -54,13 +54,13 @@ public class Dao<T extends Entity> {
 	}
 
 	public T update(T entity) {
-		if (entity.getId() == null) {
-			entity.setId(next++);
+		if (entity.id() == null) {
+			entity.id(next++);
 			add(entity);
 		} else {
-			entityMap.put(entity.getId(), entity);
+			entityMap.put(entity.id(), entity);
 		}
-		entity.setLastUpdate(new Date());
+		entity.lastUpdate(new Date());
 		return entity;
 	}
 }

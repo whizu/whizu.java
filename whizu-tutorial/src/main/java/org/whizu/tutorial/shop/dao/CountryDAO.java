@@ -37,7 +37,7 @@ public class CountryDAO extends Dao<Country> {
 
 	public Country create(long id, String code, String naam) {
 		Country c = new Country();
-		c.setId(id);
+		c.id(id);
 		c.setCode(code);
 		c.setNaam(naam);
 		return c;

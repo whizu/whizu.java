@@ -23,6 +23,38 @@
  *******************************************************************************/
 package org.whizu.jquery.ui;
 
-public class Dialog {
+import org.whizu.dom.Markup;
+import org.whizu.html.Html;
+import org.whizu.widget.Container;
 
+public class Dialog extends Container {
+
+	private final String caption_;
+
+	protected Dialog(String caption) {
+		caption_ = caption;
+	}
+
+	@Override
+	public Markup compile() {
+		String script = null;
+		if (width == null) {
+			script = ".popup('open');";
+			// jQuery(this).dialog();
+		} else {
+			script = ".popup({ width:" + width + " });";
+			// jQuery(this).dialog(width);
+		}
+		jQuery(this).concat(script);
+
+		// isRendered = true;
+		jQuery(this).trigger("create");
+		return Html.div(id()).attr("data-role", "content").attr("title", caption_).add(componentList);
+	}
+
+	public void close() {
+		if (isRendered()) {
+			jQuery(this).call("dialog", "close");
+		}
+	}
 }

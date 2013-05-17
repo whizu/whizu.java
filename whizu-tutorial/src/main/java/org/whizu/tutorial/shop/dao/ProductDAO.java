@@ -42,10 +42,10 @@ public class ProductDAO extends Dao<Product> {
 
 	public Product create(long id, String code, String naam, Date lastUpdate) {
 		Product p = new Product();
-		p.setId(id);
+		p.id(id);
 		p.setCode(code);
 		p.setNaam(naam);
-		p.setLastUpdate(lastUpdate);
+		p.lastUpdate(lastUpdate);
 		return p;
 	}
 }
