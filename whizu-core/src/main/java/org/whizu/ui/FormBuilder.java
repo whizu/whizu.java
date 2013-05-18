@@ -36,7 +36,8 @@ public class FormBuilder {
 	}
 	public void addButton(String caption, ClickListener listener) {
 		layout.skip();
-		layout.add(ui.createLabel(caption).css("submit").addClickListener(listener));
+		//layout.add(ui.createLabel(caption).css("submit").addClickListener(listener));
+		layout.add(ui.createButton(caption).addClickListener(listener).css("whizu-button"));
 	}
 
 	public void addField(Object model, String fieldName) {

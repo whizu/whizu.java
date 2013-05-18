@@ -88,7 +88,8 @@ public class TextFieldImpl extends Widget implements TextField, Input {
 						.attr("name", id())
 						.decorate(this)
 						.style("display","inline-block")
-						.attr("value", text);
+						.attr("value", text)
+						.css("whizu-txtfld");
 		// @formatter:on
 	}
 

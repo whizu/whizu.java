@@ -28,6 +28,7 @@ import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
+import org.whizu.js.JavaScript;
 import org.whizu.widget.Widget;
 
 /**
@@ -50,13 +51,15 @@ class ButtonImpl extends Widget implements Button {
 
 	@Override
 	public Markup compile() {
-		Element markup = Html.div(id()).decorate(this).add(caption);
-		JQuery jQuery = jQuery(this).button();
+		Element markup = Html.button(id()).decorate(this).add(caption).css("whizu-button");
+		JQuery jQuery = jQuery(this);//.button();
 
 		if (listener != null) {
 			jQuery.click(new Function() {
 				@Override
 				public void execute() {
+					new JavaScript().preventDefault();
+					
 					String url = "http://localhost:8090/whizu?id=" + listener.id();
 
 					Function data = new Function() {

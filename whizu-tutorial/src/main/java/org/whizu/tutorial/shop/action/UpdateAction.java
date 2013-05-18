@@ -53,7 +53,8 @@ public abstract class UpdateAction<T> extends AbstractAction {
 		for (Value value : columns) {
 			form.addValue(model, value);
 		}
-		form.addButton("Confirm", this);
+		form.addButton("OK", this);
+		//form.addButton("Cancel", this);
 		return form.create();
 	}
 
@@ -62,7 +63,7 @@ public abstract class UpdateAction<T> extends AbstractAction {
 		for (String fieldName : fieldNames) {
 			form.addField(model, fieldName);
 		}
-		form.addButton("Confirm", this);
+		form.addButton("OK", this);
 		return form.create();
 	}
 

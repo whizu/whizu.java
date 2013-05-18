@@ -72,7 +72,7 @@ public abstract class SearchPanel<T> implements Panel {
 		// panel.append(this.table);
 
 
-		parent.add(ui.createLabel("Create new...").css("submit").addClickListener(new ClickListener() {
+		parent.add(ui.createButton("Create new...").addClickListener(new ClickListener() {
 
 			@Override
 			public void click() {

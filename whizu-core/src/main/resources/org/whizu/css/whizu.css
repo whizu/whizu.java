@@ -53,6 +53,50 @@ img {
 	display: none;
 }
 
+/*************************************************** Button *****************************/
+.whizu-button {
+	float: left;
+	background: #3F9D4A;
+	border: none;
+	width: auto;
+	overflow: visible;
+	font-size: 0.9em;
+	color: #FFF;
+	padding: 7px 10px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	font-weight: bold;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+	cursor:pointer;
+}
+
+/*************************************************** TextField **************************/
+.whizu-txtfld {
+	/*width: 244px;*/
+	padding: 5px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	font-size: 0.9em;
+	color: #222;
+	background: #F7F7F7;
+	outline: none;
+	border-top: 1px solid #CCC;
+	border-left: 1px solid #CCC;
+	border-right: 1px solid #E7E6E6;
+	border-bottom: 1px solid #E7E6E6;
+}
+
+.whizu-txtfld input.good_input {
+	background: #DEF5E1 url(../img/good.png) 236px center no-repeat;
+}
+
+.whizu-txtfld input.error_input {
+	background: #FDE0E0;
+}
+
+/*************************************************** Dialog *****************************/
 .whizu-dialog {
 	border: solid 1px lightblue;
 	background: white;
