@@ -42,25 +42,63 @@ img {
 }
 
 /* Theme CSS */
-
 #lean_overlay {
-    position: fixed;
-    z-index:100;
-    top: 0px;
-    left: 0px;
-    height:100%;
-    width:100%;
-    background: #000;
-    display: none;
+	position: fixed;
+	z-index: 100;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	background: #000;
+	display: none;
 }
 
 .whizu-dialog {
 	border: solid 1px lightblue;
 	background: white;
-	color:blue;
-	border-radius:4px;
-	width:200px;
-	height:150px;
-	padding:10px;
+	color: blue;
+	border-radius: 5px;
+	min-height: 150px;
+	padding-bottom: 2px;
+	display: none;
+	background: #FFF;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+	-moz-box-shadow: 0 0px 4px rgba(0, 0, 0, 0.7);
 }
 
+.whizu-dialog .header {
+	background: url(/whizu/org/whizu/images/header-bg.png);
+	padding: 14px 18px 14px 18px;
+	border-bottom: 1px solid #CCC;
+	border-top-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-right-radius: 5px;
+}
+
+.whizu-dialog .header .title {
+	color: #444;
+	font-size: 1.3em;
+	font-weight: 700;
+	margin-bottom: 3px;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.whizu-dialog .header .desc {
+	color: #444;
+	font-size: 0.9em;
+	margin: 0;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+	text-shadow: none;
+}
+
+.whizu-dialog .body {
+	padding: 18px;
+	color: gray;
+}

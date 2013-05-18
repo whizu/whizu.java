@@ -20,24 +20,24 @@ import org.whizu.ui.DialogImpl;
 import org.whizu.ui.Hyperlink;
 import org.whizu.ui.UI;
 
-
 /**
  * @author Rudy D'hauwe
  */
 @Page("/whizu/shop")
 @Template("/org/whizu/tutorial/shop/page.html")
 @Title("My Shop")
-public class PricingApp implements Application { //TODO remove "implements Application"
+public class PricingApp implements Application { // TODO remove
+													// "implements Application"
 
-	//@Select(id="menu")
+	// @Select(id="menu")
 	@Autowire
 	JQuery menu;
-	
-	@Select(id="right-column")
+
+	@Select(id = "right-column")
 	JQuery contentPanel;
-	
-	//@OnLoad
-	//@Setup
+
+	// @OnLoad
+	// @Setup
 	@Override
 	public void init(UI ui) {
 		add(new OfficeSearchAction());
@@ -46,21 +46,23 @@ public class PricingApp implements Application { //TODO remove "implements Appli
 		add(new CountrySearchAction());
 		add(new PriceSearchAction());
 		add(new AbstractAction() {
-			
+
 			@Override
 			public void handleEvent() {
-				Dialog dialog = new DialogImpl("My dialog");
-				dialog.add(ui.createLabel("my dialog text"));
+				Dialog dialog = new DialogImpl("My dialog", "My description");
+				dialog.add(
+						ui.createLabel("My dialog text lmsd qsdkjlh qkljdfh qlkflkqsdhklqsdh kql s dh fl kqsdhf lkjd hlqsd kjlqsd ldkqsh klsdqhlkqsdh klqsdjh klqsdh kqsldhf klsqdhf lkqsdh fqklsdjhf qsd klqshdf."))
+						.width("400px");
 				ui.getDocument().add(dialog);
-				
+
 			}
-			
+
 			@Override
 			public void performAction() {
 				// TODO Auto-generated method stub
 				throw new UnsupportedOperationException();
 			}
-			
+
 			@Override
 			public String getCaption() {
 				return "Open dialog";

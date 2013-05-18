@@ -171,6 +171,8 @@ public class WhizuServlet extends HttpServlet {
 			if (id == null) {
 				if (request.getRequestURI().endsWith(".css")) {
 					content = handleCss(request, response);
+				} else if (request.getRequestURI().endsWith(".png")) {
+					content = handleCss(request, response);
 				} else {
 					// even better:
 					// Resource resource = this.servePageRequest(request);
@@ -197,7 +199,7 @@ public class WhizuServlet extends HttpServlet {
 				response.getOutputStream().flush();
 				// response.getWriter().close();
 			} finally {
-				RequestImpl.get().finish(); 
+				RequestImpl.get().finish();
 			}
 		}
 	}

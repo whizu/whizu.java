@@ -32,9 +32,9 @@ public interface Label extends Component, Clickable {
 
 	public Label css(String clazz);
 
-	public String getText();
+	public String text();
 
-	public void setText(String text);
+	public void text(String text);
 
 	public void toggle();
 }

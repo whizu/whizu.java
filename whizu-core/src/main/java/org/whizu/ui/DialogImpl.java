@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.ui;
 
+import org.whizu.dom.Element;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.jquery.RequestContext;
@@ -35,24 +36,53 @@ public class DialogImpl extends Container implements Dialog {
 
 	private final String caption_;
 
+	private String description_;
+
+	public DialogImpl() {
+		caption_ = null;
+	}
+
 	public DialogImpl(String caption) {
 		caption_ = caption;
+	}
+
+	public DialogImpl(String caption, String description) {
+		caption_ = caption;
+		description_ = description;
 	}
 
 	@Override
 	public Markup compile() {
 		String script = "";
-		script += "$('#lean_overlay').click(function() { $('#lean_overlay').fadeOut(200); $('#" + this.id() + "').css({'display':'none'}); });";
+		script += "$('#lean_overlay').click(function() { $('#lean_overlay').fadeOut(200); $('#" + this.id()
+				+ "').css({'display':'none'}); });";
 		script += "$('#lean_overlay').css({'display':'block',opacity:0});";
 		script += "$('#lean_overlay').fadeTo(200, 0.5);";
 		script += "var modal_width = $('#" + this.id() + "').outerWidth();";
-		script += "$('#" + this.id() + "').css({'display':'block','position':'fixed','top':'100px','left':'50%','margin-left':-(modal_width / 2) + 'px','opacity':0,'z-index':11000});";
+		script += "$('#"
+				+ this.id()
+				+ "').css({'display':'block','position':'fixed','top':'100px','left':'50%','margin-left':-(modal_width / 2) + 'px','opacity':0,'z-index':11000});";
 		script += "$('#" + this.id() + "').fadeTo(200, 1);";
 		RequestContext.getRequest().addExpression(script);
-		//jQuery(this).fadeTo(200, 1); //TODO this gets in front of the script????? preceedes getRequest().addExpression()??
-		return Html.div(id()).attr("title", caption_).css("whizu-dialog").add(componentList);
+		// jQuery(this).fadeTo(200, 1); //TODO this gets in front of the
+		// script????? preceedes getRequest().addExpression()??
+		Element markup = Html.div(id()).attr("title", caption_).css("whizu-dialog");
+		if ((caption_ != null) || (description_ != null)) {
+			Element header = Html.div().css("header");
+			if (caption_ != null) {
+				header.add(Html.div().add(caption_).css("title"));
+			}
+			if (description_ != null) {
+				header.add(Html.div().add(description_).css("desc"));
+			}
+			markup.add(header);
+		}
+		Element inner = Html.div().css("body");
+		markup.add(inner);
+		inner.add(componentList);
+		markup.decorate(this);
+		return markup;
 	}
-
 	public void close() {
 		if (isRendered()) {
 			jQuery(this).call("dialog", "close");

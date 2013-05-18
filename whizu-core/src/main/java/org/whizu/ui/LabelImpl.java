@@ -41,12 +41,12 @@ public class LabelImpl extends Widget implements Label {
 
 	private ClickListenerImpl listener;
 
-	private String text;
+	private String text_;
 
 	private Value value;
 
 	public LabelImpl(String text) {
-		this.text = text;
+		this.text_ = text;
 	}
 
 	public LabelImpl(String text, ClickListener clickListener) {
@@ -61,8 +61,8 @@ public class LabelImpl extends Widget implements Label {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent event) {
-				text = LabelImpl.this.value.toString();
-				jQuery(LabelImpl.this).empty().append(text);
+				text_ = LabelImpl.this.value.toString();
+				jQuery(LabelImpl.this).empty().append(text_);
 			}
 		});
 	}
@@ -70,14 +70,14 @@ public class LabelImpl extends Widget implements Label {
 	public LabelImpl(String t, Content arg) {
 		// AbstractWidget impl = (AbstractWidget) arg;
 		t = t.replace("$1", arg.render());
-		this.text = t;
+		this.text_ = t;
 	}
 
 	public LabelImpl(String text, IntegerValue arg) {
 		Label valueLabel = new LabelImpl(arg);
 		valueLabel.css("teller");
 		text = text.replace("$1", valueLabel.render());
-		this.text = text;
+		this.text_ = text;
 	}
 
 	@Override
@@ -128,18 +128,18 @@ public class LabelImpl extends Widget implements Label {
 		}
 
 		// isRendered = true;
-		return Html.div(this).decorate(this).add(text);
+		return Html.div(this).decorate(this).add(text_);
 	}
 
 	@Override
-	public String getText() {
-		return text;
+	public String text() {
+		return text_;
 	}
 
 	@Override
-	public void setText(String text) {
+	public void text(String text) {
 		// if (this.value != null) value.setValue(text);
-		this.text = text;
+		this.text_ = text;
 		// value changed notification
 		if (isRendered()) {
 			// String script = ".html('";
