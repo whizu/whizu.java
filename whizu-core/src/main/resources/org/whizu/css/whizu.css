@@ -53,6 +53,14 @@ img {
 	display: none;
 }
 
+/*************************************************** Form *******************************/
+.whizu-form {
+	border-radius: 5px;
+	padding: 8px;
+	margin: 0px;
+	padding: 8px;
+}
+
 /*************************************************** Button *****************************/
 .whizu-button {
 	float: left;
@@ -68,7 +76,7 @@ img {
 	-moz-border-radius: 4px;
 	font-weight: bold;
 	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-	cursor:pointer;
+	cursor: pointer;
 }
 
 /*************************************************** TextField **************************/
@@ -86,6 +94,7 @@ img {
 	border-left: 1px solid #CCC;
 	border-right: 1px solid #E7E6E6;
 	border-bottom: 1px solid #E7E6E6;
+	
 }
 
 .whizu-txtfld input.good_input {

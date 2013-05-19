@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="whizu" default="dist" basedir=".">
-	<description>
-        simple example build file
-    </description>
+	<description>simple example build file</description>
+
 	<!-- set global properties for this build -->
-	<property name="src" location="../whizu-core/src/main/java" />
-	<property name="resources" location="../whizu-core/src/main/resources" />
-	<property name="src-server" location="../whizu-pro/src/main/java" />
-	<property name="src-jquery-mobile" location="../whizu-jquery-mobile/src/main/java" />
+	<property name="project.version" value="0.0.4-snapshot" />
+	<property name="project.home" location=".." />
 	<property name="build" location="build" />
 	<property name="dist" location="dist" />
 	<property name="docs" location="${dist}/docs" />
 	<property name="package" location="package" />
+	<property name="publish" location="C:/Java/workspace/whizu/www.whizu.org/war" />
+	<property name="maven.local.repository" location="${user.home}/.m2/repository" />
 
-	<target name="init">
+	<path id="project.class.path">
+		<pathelement location="${maven.local.repository}/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar" />
+		<pathelement location="${maven.local.repository}/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" />
+		<pathelement location="${maven.local.repository}/org/glassfish/javax.servlet/3.1/javax.servlet-3.1.jar" />
+		<pathelement location="${maven.local.repository}/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar" />
+	</path>
+
+	<path id="project.src">
+		<pathelement location="${project.home}/whizu-core/src/main/java" />
+		<pathelement location="${project.home}/whizu-jquery-ui/src/main/java" />
+		<pathelement location="${project.home}/whizu-jquery-mobile/src/main/java" />
+	</path>
+
+	<path id="project.resources">
+		<pathelement location="${project.home}/whizu-core/src/main/resources" />
+		<pathelement location="${project.home}/whizu-jquery-ui/src/main/resources" />
+		<pathelement location="${project.home}/whizu-jquery-mobile/src/main/resources" />
+	</path>
+
+	<target name="init" depends="">
 		<!-- Create the time stamp -->
 		<tstamp />
 		<!-- Create the build directory structure used by compile -->
@@ -22,19 +40,14 @@
 
 	<target name="compile" depends="init" description="compile the source ">
 		<!-- Compile the java code from ${src} into ${build} -->
-		<javac srcdir="${src}:${src-server}:${src-jquery-mobile}" destdir="${build}">
-			<classpath>
-				<pathelement path="${classpath}" />
-				<fileset dir="../whizu-api/lib">
-					<include name="*.jar" />
-				</fileset>
-				<fileset dir="../whizu-server/lib">
-					<include name="*.jar" />
-				</fileset>
-			</classpath>
+		<javac destdir="${build}">
+			<src path="${toString:project.src}" />
+			<classpath refid="project.class.path" />
 		</javac>
-		<copy todir="${build}">
-			<fileset dir="${resources}" />
+		<copy todir="${build}" verbose="true">
+			<fileset dir="${project.home}/whizu-core/src/main/resources" />
+			<fileset dir="${project.home}/whizu-jquery-ui/src/main/resources" />
+			<fileset dir="${project.home}/whizu-jquery-mobile/src/main/resources" />
 		</copy>
 	</target>
 
@@ -44,13 +57,8 @@
 
 		<jar jarfile="${dist}/whizu.jar" basedir="${build}" />
 
-		<copy todir="${dist}/lib">
-			<fileset dir="../whizu-api/lib">
-				<include name="*.jar" />
-			</fileset>
-			<fileset dir="../whizu-server/lib">
-				<include name="*.jar" />
-			</fileset>
+		<copy todir="${dist}/lib" flatten="true">
+			<path refid="project.class.path" />
 		</copy>
 
 		<copy todir="${dist}">
@@ -76,13 +84,13 @@
 	</target>
 
 	<target name="publish" depends="clean, package" description="publish the package to the website">
-		<copy todir="../../whizu.github.com/download">
+		<copy todir="${publish}/download">
 			<fileset dir="${package}">
 				<include name="whizu-snapshot.zip" />
 				<include name="whizu-snapshot.tar.gz" />
 			</fileset>
 		</copy>
-		<copy todir="../../whizu.github.com/api">
+		<copy todir="${publish}/api">
 			<fileset dir="${dist}/docs/api" />
 		</copy>
 	</target>
@@ -98,12 +106,18 @@
 		<!-- Create the javadoc directory -->
 		<mkdir dir="${docs}/api" />
 
-		<javadoc packagenames="org.whizu.*" sourcepath="${src}:${src-server}:${src-jquery-mobile}" defaultexcludes="yes" destdir="${docs}/api" author="true" version="true" use="true" windowtitle="Whizu API">
-			<doctitle><![CDATA[Whizu]]></doctitle>
-			<bottom><![CDATA[<i>Copyright &#169; 2013 Rudy D'hauwe @ Whizu. All Rights Reserved.</i>]]></bottom>
-			<tag name="todo" scope="all" description="To do:" />
-			<link href="http://download.oracle.com/javase/7/docs/api/" />
-			<link href="http://developer.java.sun.com/developer/products/xml/docs/api/" />
-		</javadoc>
-	</target>
+		<javadoc packagenames="org.whizu.*" sourcepath="${toString:project.src}" defaultexcludes="yes" destdir="${docs}/api" author="true" version="true" use="true" windowtitle="Whizu API">
+			<doctitle>
+				<![CDATA[Whizu ${project.version} API]]>
+			</doctitle>
+			<bottom>
+				<![CDATA[<div style='font-size:16px;margin:10px;padding:20px;position:relative;top:20px;'>
+				<a href='http://www.whizu.org'>Whizu<sup>&#0153;</sup>
+				</a> is copyright &copy; 2013 by <a href='http://www.whizu.org/about.html'>Rudy D'hauwe</a> | All rights reserved | <a href='http://www.whizu.org'>www.whizu.org</a>
+			</div>]]></bottom>
+		<tag name="todo" scope="all" description="To do:" />
+		<link href="http://download.oracle.com/javase/7/docs/api/" />
+		<link href="http://developer.java.sun.com/developer/products/xml/docs/api/" />
+	</javadoc>
+</target>
 </project>

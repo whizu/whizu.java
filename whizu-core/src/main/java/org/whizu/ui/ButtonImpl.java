@@ -58,7 +58,7 @@ class ButtonImpl extends Widget implements Button {
 			jQuery.click(new Function() {
 				@Override
 				public void execute() {
-					new JavaScript().preventDefault();
+					JavaScript.preventDefault();
 					
 					String url = "http://localhost:8090/whizu?id=" + listener.id();
 

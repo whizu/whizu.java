@@ -37,7 +37,7 @@ public class FormBuilder {
 	public void addButton(String caption, ClickListener listener) {
 		layout.skip();
 		//layout.add(ui.createLabel(caption).css("submit").addClickListener(listener));
-		layout.add(ui.createButton(caption).addClickListener(listener).css("whizu-button"));
+		layout.add(ui.createButton(caption).addClickListener(listener));
 	}
 
 	public void addField(Object model, String fieldName) {
@@ -111,5 +111,9 @@ public class FormBuilder {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public void width(String width) {
+		form.width(width);
 	}
 }

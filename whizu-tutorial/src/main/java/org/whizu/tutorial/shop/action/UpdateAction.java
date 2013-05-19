@@ -55,6 +55,9 @@ public abstract class UpdateAction<T> extends AbstractAction {
 		}
 		form.addButton("OK", this);
 		//form.addButton("Cancel", this);
+		
+		form.width("300px");
+		
 		return form.create();
 	}
 
