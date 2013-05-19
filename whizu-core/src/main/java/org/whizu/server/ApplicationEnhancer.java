@@ -44,8 +44,9 @@ import org.whizu.annotation.Css;
 import org.whizu.annotation.Style;
 import org.whizu.annotation.Stylesheet;
 import org.whizu.annotation.Template;
-import org.whizu.annotation.Title;
 import org.whizu.dom.Component;
+import org.whizu.html.Description;
+import org.whizu.html.Title;
 import org.whizu.ui.Application;
 
 /**
@@ -68,14 +69,15 @@ public class ApplicationEnhancer {
 			if (ctClass.hasAnnotation(Stylesheet.class)) {
 				stylesheet = ((Stylesheet) ctClass.getAnnotation(Stylesheet.class)).value();
 			}
-			
+
 			String title = Title.DEFAULT_TITLE;
 			if (ctClass.hasAnnotation(Title.class)) {
 				title = ((Title) ctClass.getAnnotation(Title.class)).value();
 			}
-			
+
 			String template = getTemplate(ctClass);
-			
+			Description description = getAnnotation(ctClass, Description.class);
+
 			CtMethod[] ctMethods = ctClass.getDeclaredMethods();
 			List<CtMethod> methodsToDo = new ArrayList<CtMethod>();
 			for (CtMethod method : ctMethods) {
@@ -85,7 +87,7 @@ public class ApplicationEnhancer {
 					}
 					methodsToDo.add(method);
 				}
-				
+
 				if (method.hasAnnotation(Body.class)) {
 					log.debug("Found @Body");
 				}
@@ -122,6 +124,7 @@ public class ApplicationEnhancer {
 			if (template != null) {
 				factory.template(template);
 			}
+			factory.description(description);
 			return factory;
 		} catch (NotFoundException | CannotCompileException | ClassNotFoundException e) {
 			throw new IllegalStateException(e);
@@ -130,12 +133,19 @@ public class ApplicationEnhancer {
 	}
 
 	private String getTemplate(CtClass ctClass) throws ClassNotFoundException, NotFoundException {
-		if (ctClass.hasAnnotation(Template.class)) {
-			return ((Template) ctClass.getAnnotation(Template.class)).value();
+		Template template = getAnnotation(ctClass, Template.class);
+		return (template == null) ? null : template.value();
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T extends java.lang.annotation.Annotation> T getAnnotation(CtClass ctClass,
+			Class<T> annotationClass) throws ClassNotFoundException, NotFoundException {
+		if (ctClass.hasAnnotation(annotationClass)) {
+			return ((T) ctClass.getAnnotation(annotationClass));
 		} else {
 			CtClass superClass = ctClass.getSuperclass();
 			if (superClass != null) {
-				return getTemplate(superClass);
+				return getAnnotation(superClass, annotationClass);
 			} else {
 				return null;
 			}

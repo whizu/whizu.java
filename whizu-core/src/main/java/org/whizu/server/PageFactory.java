@@ -23,7 +23,8 @@
  *******************************************************************************/
 package org.whizu.server;
 
-import org.whizu.annotation.Title;
+import org.whizu.html.Description;
+import org.whizu.html.Title;
 import org.whizu.ui.Application;
 
 /**
@@ -34,6 +35,8 @@ class PageFactory {
 	// private Logger log = LoggerFactory.getLogger(PageFactory.class);
 
 	private final Class<Application> applicationClass_;
+
+	private String description_ = Description.DEFAULT_VALUE;
 
 	private String stylesheet_;
 
@@ -56,6 +59,14 @@ class PageFactory {
 		}
 	}
 
+	public String description() {
+		return description_;
+	}
+
+	public void description(Description description) {
+		description_ = (description == null) ? Description.DEFAULT_VALUE : description.value();
+	}
+
 	public String stylesheet() {
 		return stylesheet_;
 	}
@@ -75,7 +86,7 @@ class PageFactory {
 	public String title() {
 		return title_;
 	}
-
+	
 	protected void title(String title) {
 		title_ = title;
 	}

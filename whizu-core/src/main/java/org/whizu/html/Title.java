@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.annotation;
+package org.whizu.html;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -35,7 +35,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface Title {
 
-	public static final String DEFAULT_TITLE = "Ridiculously fast web apps | Whizu";
+	public static final String DEFAULT_TITLE = "Ridiculously fast web apps - www.Whizu.org";
 
 	public String value() default DEFAULT_TITLE;
 }

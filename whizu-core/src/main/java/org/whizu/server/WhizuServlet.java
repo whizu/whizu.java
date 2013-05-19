@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
 import org.whizu.annotation.AnnotationUtils;
 import org.whizu.annotation.Body;
 import org.whizu.annotation.Page;
-import org.whizu.annotation.Title;
+import org.whizu.html.Title;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
 import org.whizu.jquery.RequestContext;
@@ -131,6 +131,11 @@ public class WhizuServlet extends HttpServlet {
 					content = content.replace("${title}", title);
 				} else {
 					content = content.replace("${title}", Title.DEFAULT_TITLE);
+				}
+				
+				String desc = factory.description();
+				if (desc != null) {
+					content = content.replace("${description}", desc);
 				}
 
 				Method[] methods = clazz.getDeclaredMethods();

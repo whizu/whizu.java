@@ -26,7 +26,7 @@ package org.whizu.tutorial.helloworld;
 import java.util.Date;
 
 import org.whizu.annotation.Page;
-import org.whizu.annotation.Title;
+import org.whizu.html.Title;
 import org.whizu.layout.Layout;
 import org.whizu.ui.Application;
 import org.whizu.ui.ClickListener;
