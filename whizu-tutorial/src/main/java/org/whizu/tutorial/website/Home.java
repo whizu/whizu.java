@@ -10,6 +10,8 @@ public class Home extends AbstractPage {
 
 	@Override
 	public void init(UI ui) {
-		ui.getDocument().add(ui.createLabel("Home"));
+		h3("Home");
+		
+		p("This is a first paragraph.");
 	}
 }

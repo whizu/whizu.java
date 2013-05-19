@@ -6,12 +6,19 @@ import org.whizu.html.Title;
 import org.whizu.ui.UI;
 
 @Page("/whizu/website/about")
-@Title("About")
-@Description("About us")
+@Title("About us - Whizu")
+@Description("About us at Whizu")
 public class About extends AbstractPage {
 
 	@Override
 	public void init(UI ui) {
-		ui.getDocument().add(ui.createLabel("About"));
+		h3("About");
+
+		p("Welcome at the About page.");
+		
+		p("Whizu™ is open source software available for <a href='/download'>download</a>. and for free "
+			+ "use under the terms of the European Union Public License (EUPL) v1.1. "
+			+ "Any use of this software, other than as authorized under this license " 
+			+ "is strictly prohibited.");
 	}
 }

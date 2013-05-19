@@ -1,18 +1,65 @@
 <!DOCTYPE html>
-<HTML>
-<head>
-<title>${title}</title>
-<meta name="description" content="${description}">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/whizu/org/whizu/css/whizu.css" />
-<link rel="stylesheet" type="text/css" href="/website/stylesheet.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="/shop/pygment_trac.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="/shop/print.css" media="print" />
-${css}
-<script type="text/javascript" src="/shop/jquery-1.9.1.min.js"></script>
-<script>$(document).ready(function() { $.getScript('/whizu?id=${id}'); });</script>
-</head>
-<body id='whizu'>
-    !!Welcome at my website.
-</body>
-</HTML>
+<html>
+  <head>
+    <title>${title}</title>
+    <meta name="description" content="${description}">
+    <meta charset="utf-8">
+	<meta http-equiv="Content-Language" content="en">
+	<meta name="robots" content="all,index,follow">    
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/website/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/shop/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/shop/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    ${css}
+    <script type="text/javascript" src="/shop/jquery-1.9.1.min.js"></script>
+    <script>$(document).ready(function() { $.getScript('/whizu?id=${id}'); });</script>
+  </head>
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Whizu</h1>
+        <h2>Ridiculously fast web apps. Now easier than ever.</h2>
+        <a href="https://github.com/whizu" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <DIV class="inner clearfix">
+      <DIV id='left-column'> 
+        <div id='menu'>         
+          <a href='/'>Home</a>
+          <a href=''>Getting started</a>
+          <a href=''>User manual</a>
+          <a href='/api'>Javadoc API</a>
+          <a href='/download'>Download</a>
+		  <a href='/licensing.jsp'>Licensing</a>
+          <a href='/website/about' rel='author'>About me</a>
+          <a href='/contact.jsp'>Contact</a>
+        </div>
+        
+        <div id='toc'><div class="g-plusone" data-href="http://www.whizu.org"></div></div>
+        <a href="/download" class="button">
+            <small>Whizu</small>
+            Download
+        </a>
+      </DIV>
+      <DIV id='right-column'><div id='whizu'></div>
+      </DIV>
+    </DIV>
+
+    <!-- Place this tag after the last +1 button tag. -->
+    <script type="text/javascript">
+        (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript';
+            po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(po, s);
+        })();
+    </script>
+  </BODY>
+</html>
