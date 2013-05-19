@@ -74,10 +74,7 @@ public class ApplicationEnhancer {
 				title = ((Title) ctClass.getAnnotation(Title.class)).value();
 			}
 			
-			String template = null;
-			if (ctClass.hasAnnotation(Template.class)) {
-				template = ((Template) ctClass.getAnnotation(Template.class)).value();
-			}
+			String template = getTemplate(ctClass);
 			
 			CtMethod[] ctMethods = ctClass.getDeclaredMethods();
 			List<CtMethod> methodsToDo = new ArrayList<CtMethod>();
@@ -129,6 +126,19 @@ public class ApplicationEnhancer {
 		} catch (NotFoundException | CannotCompileException | ClassNotFoundException e) {
 			throw new IllegalStateException(e);
 		} finally {
+		}
+	}
+
+	private String getTemplate(CtClass ctClass) throws ClassNotFoundException, NotFoundException {
+		if (ctClass.hasAnnotation(Template.class)) {
+			return ((Template) ctClass.getAnnotation(Template.class)).value();
+		} else {
+			CtClass superClass = ctClass.getSuperclass();
+			if (superClass != null) {
+				return getTemplate(superClass);
+			} else {
+				return null;
+			}
 		}
 	}
 
