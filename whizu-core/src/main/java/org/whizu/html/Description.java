@@ -35,7 +35,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface Description {
 
-	public static final String DEFAULT_VALUE = "Ridiculously fast web apps - www.Whizu.org";
+	public static final String DEFAULT_VALUE = "Ridiculously fast web apps - www.whizu.org";
 
 	public String value() default DEFAULT_VALUE;
 }
