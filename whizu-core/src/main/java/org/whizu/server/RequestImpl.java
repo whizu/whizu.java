@@ -46,6 +46,7 @@ final class RequestImpl extends AbstractRequest implements Request {
 	private RequestImpl() {
 	}
 
+    @Override
 	public String finish() {
 		try {
 			return super.finish();

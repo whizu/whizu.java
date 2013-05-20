@@ -21,9 +21,6 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-/**
- * 
- */
 package org.whizu.html;
 
 import org.whizu.dom.Content;

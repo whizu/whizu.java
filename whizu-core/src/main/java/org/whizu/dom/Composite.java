@@ -32,9 +32,9 @@ public interface Composite extends Component {
 
 	public Composite add(Content content);
 	
-	public void empty();
+    public void empty();
 
-	public void prepend(Component component);
+    public void prepend(Component component);
 
 	public void remove(Component component);
 }

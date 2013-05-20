@@ -28,7 +28,13 @@ package org.whizu.jquery;
  */
 public interface Input {
 
-	public String id();
+	/**
+     *
+     */
+    public String id();
 
-	public void parseString(String value);
+	/**
+     * 
+     */
+    public void parseString(String value);
 }
