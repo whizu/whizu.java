@@ -113,7 +113,7 @@
 			<bottom>
 				<![CDATA[<div style='font-size:16px;margin:10px;padding:20px;position:relative;top:20px;'>
 				<a href='http://www.whizu.org'>Whizu<sup>&#0153;</sup>
-				</a> is copyright &copy; 2013 by <a href='http://www.whizu.org/about.html'>Rudy D'hauwe</a> | All rights reserved | <a href='http://www.whizu.org'>www.whizu.org</a>
+				</a> is copyright &copy; 2013 by <a href='http://www.whizu.org/about.jsp' rel='author'>Rudy D'hauwe</a> | All rights reserved | <a href='http://www.whizu.org'>www.whizu.org</a>
 			</div>]]></bottom>
 		<tag name="todo" scope="all" description="To do:" />
 		<link href="http://download.oracle.com/javase/7/docs/api/" />
