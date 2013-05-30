@@ -111,6 +111,11 @@ public class Support {
 
 	private static void add(String key, String value) {
 		map.put(key, value);
+		int last = key.lastIndexOf('_');
+		if (last > 0) {
+			key = key.substring(0, last) + "Impl" + key.substring(last);
+			map.put(key, value);
+		}
 	}
 
 	public static String get(Class<?> clazz, String fieldName) {
