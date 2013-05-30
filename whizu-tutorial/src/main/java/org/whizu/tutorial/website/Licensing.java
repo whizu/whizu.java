@@ -24,7 +24,6 @@
 package org.whizu.tutorial.website;
 
 import org.whizu.annotation.Page;
-import org.whizu.annotation.processing.Html;
 import org.whizu.annotation.processing.Markdown;
 import org.whizu.html.Description;
 import org.whizu.html.Title;
@@ -33,36 +32,56 @@ import org.whizu.ui.UI;
 /**
  * @author Rudy D'hauwe
  */
-@Page("/whizu/website/about")
-@Title("About us - Whizu")
-@Description("About us at Whizu")
-public class About extends AbstractPage {
+@Page("/whizu/website/licensing")
+@Title("Licensing")
+@Description("Whizu is Open Source Software")
+public class Licensing extends AbstractPage {
 
 	/**
-	 * About me
+	 * ### About me
 	 */
-	@Html
+	@Markdown
 	private String title;
 
 	/**
-	 * Whizu is open source software available for download and for free use
-	 * under the terms of the European Union Public License (EUPL) v1.1. Any use
-	 * of this software, other than as authorized under this license is strictly
-	 * prohibited.
+	 * Whizu is open source software available for free [download](/download)
+	 * and for free use under the terms of the European Union Public License
+	 * (EUPL) v1.1. Any use of this software, other than as authorized under
+	 * this license is strictly prohibited.
 	 */
-	@Html
+	@Markdown
 	public String about;
 
 	/**
-	 * ### another line
+	 * ### Commercial use
+	 * 
+	 * The EUPL v1.1 is a strong copyleft license. As such the EUPL v1.1 is
+	 * compatible with the GNU General Public License (GPLv2).
+	 * 
+	 * Any derivative work or a distribution of any merger with the original
+	 * code must be licensed under this unmodified EUPL v1.1 licence. If you
+	 * have created a derivative work, and if you distribute this new work, you
+	 * must apply the same EUPL licence (without modifying the licence terms) to
+	 * the whole derivative work. You will have to communicate the source code
+	 * of your derivative work from a free access repository. You must at least
+	 * provide a link or an address allowing any licensee to open this
+	 * repository and access or download the source code, as long you continue
+	 * to distribute the derivative work.
+	 * 
+	 * ### Guidelines for users and developers
+	 * 
+	 * For more details about the EUPL or to obtain a copy in your language, see
+	 * the European Union EUPL website. An excellent document is available for
+	 * download providing a detailed description on how to use software licensed
+	 * under the EUPL.
 	 */
 	@Markdown
 	private String welcome;
 
 	@Override
 	public void init(UI ui) {
-		h3(title);
-		p(about);
+		add(title);
+		add(about);
 		add(welcome);
 	}
 }

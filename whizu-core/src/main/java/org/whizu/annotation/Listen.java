@@ -21,48 +21,19 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.tutorial.website;
+package org.whizu.annotation;
 
-import org.whizu.annotation.Page;
-import org.whizu.annotation.processing.Html;
-import org.whizu.annotation.processing.Markdown;
-import org.whizu.html.Description;
-import org.whizu.html.Title;
-import org.whizu.ui.UI;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Rudy D'hauwe
  */
-@Page("/whizu/website/about")
-@Title("About us - Whizu")
-@Description("About us at Whizu")
-public class About extends AbstractPage {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface Listen {
 
-	/**
-	 * About me
-	 */
-	@Html
-	private String title;
-
-	/**
-	 * Whizu is open source software available for download and for free use
-	 * under the terms of the European Union Public License (EUPL) v1.1. Any use
-	 * of this software, other than as authorized under this license is strictly
-	 * prohibited.
-	 */
-	@Html
-	public String about;
-
-	/**
-	 * ### another line
-	 */
-	@Markdown
-	private String welcome;
-
-	@Override
-	public void init(UI ui) {
-		h3(title);
-		p(about);
-		add(welcome);
-	}
+	public String value();
 }

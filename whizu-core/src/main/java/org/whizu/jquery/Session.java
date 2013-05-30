@@ -23,7 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery;
 
-public interface Session {
+import java.io.Serializable;
+
+public interface Session extends Serializable {
 
 	public abstract void addClickListener(EventHandler listener);
 

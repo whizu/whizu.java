@@ -29,6 +29,8 @@ import java.util.List;
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
+import javassist.CtConstructor;
+import javassist.CtField;
 import javassist.CtMethod;
 import javassist.NotFoundException;
 import javassist.bytecode.AnnotationsAttribute;
@@ -44,6 +46,7 @@ import org.whizu.annotation.Css;
 import org.whizu.annotation.Style;
 import org.whizu.annotation.Stylesheet;
 import org.whizu.annotation.Template;
+import org.whizu.annotation.processing.Html;
 import org.whizu.dom.Component;
 import org.whizu.html.Description;
 import org.whizu.html.Title;
@@ -105,11 +108,25 @@ public class ApplicationEnhancer {
 				}
 			}
 
+			CtField[] fields = ctClass.getDeclaredFields();
+			for (CtField field : fields) {
+				log.debug("Enhancing field " + field.getName());
+				if (field.hasAnnotation(Html.class)) {
+					log.debug("Enhancing field " + field.getName() + " with annotation @Html");
+					CtConstructor[] constructors = ctClass.getConstructors();
+					for (CtConstructor constructor : constructors) {
+						constructor.insertAfter(field.getName() + "=org.whizu.annotation.processing.Support.getValue(getClass(), \"" + field.getName() + "\");");
+					}
+				}
+			}
+
+			log.debug("just before fixing inner classes");
 			fixInnerClasses(ctClass);
 
 			ClassFile ccFile = ctClass.getClassFile();
 			ConstPool constpool = ccFile.getConstPool();
 
+			log.debug("just before creating the annotation");
 			// create the annotation
 			AnnotationsAttribute attr = new AnnotationsAttribute(constpool, AnnotationsAttribute.visibleTag);
 			Annotation annot = new Annotation("org.whizu.annotation.Bean", constpool);
@@ -117,7 +134,10 @@ public class ApplicationEnhancer {
 			attr.addAnnotation(annot);
 			ccFile.addAttribute(attr);
 
+			//ctClass.setName(ctClass.getName()+"Impl"); //google app engine
+			ctClass.setName(ctClass.getName());
 			Class<Application> newClass = getEnhancedClass(ctClass);
+			
 			PageFactory factory = new PageFactory(newClass);
 			factory.title(title);
 			factory.stylesheet(stylesheet);
@@ -125,10 +145,16 @@ public class ApplicationEnhancer {
 				factory.template(template);
 			}
 			factory.description(description);
+			log.debug("Enhanced class returns {}", factory);
 			return factory;
 		} catch (NotFoundException | CannotCompileException | ClassNotFoundException e) {
+			log.debug(e.getMessage(), e);
+			throw new IllegalStateException(e);
+		} catch (Exception e) {
+			log.debug(e.getMessage(), e);
 			throw new IllegalStateException(e);
 		} finally {
+			log.debug("ApplicationEnhancer.finally()");
 		}
 	}
 

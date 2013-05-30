@@ -12,21 +12,26 @@
 	<property name="publish" location="C:/Java/workspace/whizu/www.whizu.org/war" />
 	<property name="maven.local.repository" location="${user.home}/.m2/repository" />
 
+	<property name="whizu-apt" location="${project.home}/whizu-apt" />
+
 	<path id="project.class.path">
+		<pathelement location="${maven.local.repository}/org/pegdown/pegdown/1.2.1/pegdown-1.2.1.jar" />
 		<pathelement location="${maven.local.repository}/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar" />
 		<pathelement location="${maven.local.repository}/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" />
 		<pathelement location="${maven.local.repository}/org/glassfish/javax.servlet/3.1/javax.servlet-3.1.jar" />
-		<pathelement location="${maven.local.repository}/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar" />
+		<pathelement location="${maven.local.repository}/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar" />	
 	</path>
 
 	<path id="project.src">
 		<pathelement location="${project.home}/whizu-core/src/main/java" />
+		<pathelement location="${project.home}/whizu-apt/src/main/java" /> 
 		<pathelement location="${project.home}/whizu-jquery-ui/src/main/java" />
 		<pathelement location="${project.home}/whizu-jquery-mobile/src/main/java" />
 	</path>
 
 	<path id="project.resources">
 		<pathelement location="${project.home}/whizu-core/src/main/resources" />
+		<pathelement location="${project.home}/whizu-apt/src/main/resources" />
 		<pathelement location="${project.home}/whizu-jquery-ui/src/main/resources" />
 		<pathelement location="${project.home}/whizu-jquery-mobile/src/main/resources" />
 	</path>
@@ -51,11 +56,12 @@
 		</copy>
 	</target>
 
-	<target name="dist" depends="compile, javadoc" description="generate the distribution">
+	<target name="dist" depends="compile" description="generate the distribution">
 		<!-- Create the distribution directory -->
 		<mkdir dir="${dist}/lib" />
 
 		<jar jarfile="${dist}/whizu.jar" basedir="${build}" />
+		<jar jarfile="${dist}/whizu-apt.jar" basedir="${whizu-apt}/target/classes" />
 
 		<copy todir="${dist}/lib" flatten="true">
 			<path refid="project.class.path" />

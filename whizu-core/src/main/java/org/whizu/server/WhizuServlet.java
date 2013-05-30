@@ -69,8 +69,23 @@ public class WhizuServlet extends HttpServlet {
 		logger.info("Starting the WhizuServlet");
 		RequestContext.setInstance(new RequestContextImpl());
 		AnnotationUtils.scan(Page.class, config_);
+		//runConstants();
 		logger.info("WhizuServlet started");
 	}
+
+	/*
+	private void runConstants() {
+		try {
+			Class<?> constants = Class.forName("org.whizu.silly.Constants");
+			Method method = constants.getMethod("setup");
+			method.invoke(null);
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		} finally {
+		}
+	}
+	*/
 
 	private Session assureUserSession(HttpSession session) {
 		Session userSession = (Session) session.getAttribute(WHIZU_SESSION);
@@ -132,7 +147,7 @@ public class WhizuServlet extends HttpServlet {
 				} else {
 					content = content.replace("${title}", Title.DEFAULT_TITLE);
 				}
-				
+
 				String desc = factory.description();
 				if (desc != null) {
 					content = content.replace("${description}", desc);
@@ -194,7 +209,8 @@ public class WhizuServlet extends HttpServlet {
 			try {
 				if (logger.isDebugEnabled()) {
 					logger.debug("Server side completed in {}ms", chrono.stop());
-					logger.debug("Streaming script {}", content.getString());
+					if (content != null)
+						logger.debug("Streaming script {}", content.getString());
 				}
 
 				if (content != null) {

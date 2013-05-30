@@ -1,13 +1,13 @@
 package org.whizu.tutorial.website;
 
 import org.whizu.annotation.Template;
+import org.whizu.dom.Literal;
 import org.whizu.html.Html;
 import org.whizu.ui.Application;
-import org.whizu.ui.UI;
 import org.whizu.ui.WhizuUI;
 
 @Template("/org/whizu/tutorial/website/template.html")
-public class AbstractPage implements Application {
+public abstract class AbstractPage implements Application {
 
 	private WhizuUI ui_ = new WhizuUI();
 	
@@ -19,7 +19,7 @@ public class AbstractPage implements Application {
 		ui_.getDocument().add(Html.tag("p").add(paragraph));
 	}
 	
-	@Override
-	public void init(UI ui) {
+	protected void add(String html) {
+		ui_.getDocument().add(new Literal(html));
 	}
 }

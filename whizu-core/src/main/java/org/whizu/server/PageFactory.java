@@ -23,6 +23,14 @@
  *******************************************************************************/
 package org.whizu.server;
 
+import java.io.Serializable;
+import java.lang.reflect.Field;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.whizu.annotation.processing.Html;
+import org.whizu.annotation.processing.Markdown;
+import org.whizu.annotation.processing.Support;
 import org.whizu.html.Description;
 import org.whizu.html.Title;
 import org.whizu.ui.Application;
@@ -30,9 +38,9 @@ import org.whizu.ui.Application;
 /**
  * @author Rudy D'hauwe
  */
-class PageFactory {
+class PageFactory implements Serializable {
 
-	// private Logger log = LoggerFactory.getLogger(PageFactory.class);
+	private Logger log = LoggerFactory.getLogger(PageFactory.class);
 
 	private final Class<Application> applicationClass_;
 
@@ -45,13 +53,25 @@ class PageFactory {
 	private String title_ = Title.DEFAULT_TITLE;
 
 	public PageFactory(Class<Application> applicationClass) {
-		this.applicationClass_ = applicationClass;
+		applicationClass_ = applicationClass;
 	}
 
 	// public Resource createPage() {
 	public Application createInstance() {
 		try {
-			return applicationClass_.newInstance();
+			Application application = applicationClass_.newInstance();
+			log.debug("PageFactory.createInstance() of Class {}", applicationClass_);
+			Field[] fields = applicationClass_.getDeclaredFields();
+			Support.update();
+			for (Field field : fields) {
+				log.debug("Field {} has annotation @Html: {}", field.getName(), field.isAnnotationPresent(Html.class));
+				if ((field.isAnnotationPresent(Html.class)) || (field.isAnnotationPresent(Markdown.class))) {
+					field.setAccessible(true);
+					field.set(application, Support.getValue(applicationClass_, field.getName()));
+				}
+			}
+
+			return application;
 		} catch (InstantiationException e) {
 			throw new IllegalStateException(e);
 		} catch (IllegalAccessException e) {
@@ -86,7 +106,7 @@ class PageFactory {
 	public String title() {
 		return title_;
 	}
-	
+
 	protected void title(String title) {
 		title_ = title;
 	}

@@ -44,6 +44,7 @@ class Configuration implements TypeReporter<Page> {
 	public void addApplication(String uri, PageFactory application) {
 		applicationFactoryMap.put(uri, application);
 		applicationFactoryMap.put(uri + "/", application);
+		log.debug("Added uri {} to applicationMap for {}", uri, application);
 	}
 
 	/**
@@ -75,6 +76,8 @@ class Configuration implements TypeReporter<Page> {
 		}
 
 		ApplicationEnhancer enhancer = new ApplicationEnhancer();
-		addApplication(annotation.value(), enhancer.createFactory(className));
+		PageFactory factory = enhancer.createFactory(className);
+		log.debug("Created PageFactory is {}", factory);
+		addApplication(annotation.value(), factory); 
 	}
 }
