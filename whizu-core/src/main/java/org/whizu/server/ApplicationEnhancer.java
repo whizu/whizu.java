@@ -32,6 +32,7 @@ import javassist.CtClass;
 import javassist.CtConstructor;
 import javassist.CtField;
 import javassist.CtMethod;
+import javassist.LoaderClassPath;
 import javassist.NotFoundException;
 import javassist.bytecode.AnnotationsAttribute;
 import javassist.bytecode.ClassFile;
@@ -66,6 +67,10 @@ public class ApplicationEnhancer {
 			}
 
 			ClassPool classPool = ClassPool.getDefault();
+			//Add the classloader of your application's classes so Javassist can find them
+			ClassLoader loader = getClass().getClassLoader();
+			classPool.appendClassPath(new LoaderClassPath(loader));
+			
 			CtClass ctClass = classPool.get(className);
 
 			String stylesheet = null;

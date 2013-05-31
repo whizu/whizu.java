@@ -34,17 +34,21 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.Name;
 
 import org.pegdown.PegDownProcessor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Rudy D'hauwe
  */
 public class Support {
 
+	private static Logger log = LoggerFactory.getLogger(Support.class);
+	
 	private static Map<String, String> map = new HashMap<String, String>();
 
 	static {
-		readHtml("/org/whizu/annotation/processing/html.properties");
-		readMarkdown("/org/whizu/annotation/processing/markdown.properties");
+		//readHtml("/org/whizu/annotation/processing/Html.properties");
+		//readMarkdown("/org/whizu/annotation/processing/Markdown.properties");
 	}
 
 	public static void add(Class<?> clazz, String fieldName, String value) {
@@ -54,7 +58,8 @@ public class Support {
 	private static void readMarkdown(String fileName) {
 		InputStream in = null;
 		try {
-			in = Support.class.getClass().getResourceAsStream(fileName);
+			//in = Support.class.getClass().getResourceAsStream(fileName);
+			in = Support.class.getResourceAsStream(fileName);
 			if (in != null) {
 				PegDownProcessor processor = new PegDownProcessor();
 				Properties props = new Properties();
@@ -83,10 +88,22 @@ public class Support {
 	 * @param string
 	 */
 	private static void readHtml(String fileName) {
+		log.debug("Start reading " + fileName);
+
 		InputStream in = null;
 		try {
-			in = Support.class.getClass().getResourceAsStream(fileName);
+			//in = Support.class.getClass().getResourceAsStream(fileName); //not good for gae
+			/*
+			log.debug("1" + Support.class.getResourceAsStream(fileName));
+			log.debug("2" + Support.class.getClassLoader().getResourceAsStream(fileName));
+			log.debug("3" + Html.class.getResourceAsStream("Html.properties"));
+			log.debug("4" + Html.class.getClassLoader().getResourceAsStream("Html.properties"));
+			log.debug("5" + Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName));
+			log.debug("6" + Thread.currentThread().getContextClassLoader().getResourceAsStream("Html.properties"));
+			*/
+			in = Support.class.getResourceAsStream(fileName);
 			if (in != null) {
+				log.debug("ResourceStream found");
 				Properties props = new Properties();
 				props.load(in);
 				Enumeration<Object> keys = props.keys();
@@ -94,10 +111,15 @@ public class Support {
 					String key = (String) keys.nextElement();
 					String value = (String) props.get(key);
 					String html = value.replace("\n", "").replace('"', '\'');
+					log.debug(key + "=" + html);
 					add(key, html);
 				}
 			}
+			else {
+				log.debug("ResourceStream NOT found");
+			}
 		} catch (IOException e) {
+			log.debug("Exception reading Html.properties", e);
 			e.printStackTrace();
 		} finally {
 			if (in != null) {
@@ -142,7 +164,7 @@ public class Support {
 	 * 
 	 */
 	public static void update() {
-		readHtml("/org/whizu/annotation/processing/html.properties");
-		readMarkdown("/org/whizu/annotation/processing/markdown.properties");
+		readHtml("/org/whizu/annotation/processing/Html.properties");
+		readMarkdown("/org/whizu/annotation/processing/Markdown.properties");
 	}
 }
