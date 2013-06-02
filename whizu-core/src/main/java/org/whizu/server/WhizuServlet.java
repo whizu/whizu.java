@@ -66,26 +66,11 @@ public class WhizuServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		logger.info("Starting the WhizuServlet");
+		logger.info("WhizuServlet starting...");
 		RequestContext.setInstance(new RequestContextImpl());
 		AnnotationUtils.scan(Page.class, config_);
-		//runConstants();
 		logger.info("WhizuServlet started");
 	}
-
-	/*
-	private void runConstants() {
-		try {
-			Class<?> constants = Class.forName("org.whizu.silly.Constants");
-			Method method = constants.getMethod("setup");
-			method.invoke(null);
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalAccessException
-				| IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		} finally {
-		}
-	}
-	*/
 
 	private Session assureUserSession(HttpSession session) {
 		Session userSession = (Session) session.getAttribute(WHIZU_SESSION);
@@ -181,8 +166,8 @@ public class WhizuServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		Chrono chrono = Chrono.start();
 		Resource content = null;
 		try {
@@ -194,7 +179,6 @@ public class WhizuServlet extends HttpServlet {
 				} else if (request.getRequestURI().endsWith(".png")) {
 					content = handleCss(request, response);
 				} else {
-					// even better:
 					// Resource resource = this.servePageRequest(request);
 					// getResource(uri).stream(response.getWriter());
 					content = servePageRequest(request);
@@ -203,8 +187,9 @@ public class WhizuServlet extends HttpServlet {
 				session.handleEvent(id);
 				content = new StringResource(RequestImpl.get().finish());
 			}
-		} catch (Exception exc) {
-			exc.printStackTrace();
+		} catch (RuntimeException e) {
+			logger.error("Whoops. An unexpected RuntimeException in WhizuServlet.", e);
+			throw new ServletException(e);
 		} finally {
 			try {
 				if (logger.isDebugEnabled()) {
