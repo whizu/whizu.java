@@ -61,7 +61,7 @@ public class Support {
 			//in = Support.class.getClass().getResourceAsStream(fileName);
 			in = Support.class.getResourceAsStream(fileName);
 			if (in != null) {
-				PegDownProcessor processor = new PegDownProcessor();
+				PegDownProcessor processor = new PegDownProcessor(100000L);
 				Properties props = new Properties();
 				props.load(in);
 				Enumeration<Object> keys = props.keys();
