@@ -164,7 +164,7 @@ public class WhizuServlet extends HttpServlet {
 			// throw new
 			// IllegalArgumentException("No @Page has been defined for " + uri);
 			logger.debug("Page {} not found", uri);
-			response.sendError(404);
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return new StringResource("Page not found");
 		}
 	}
