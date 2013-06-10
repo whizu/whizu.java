@@ -93,7 +93,7 @@ public class WhizuServlet extends HttpServlet {
 
 	// serve a new page request to an application,
 	// replace this method by a class PageResource?
-	private Resource servePageRequest(HttpServletRequest request) {
+	private Resource servePageRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// getPageResource(uri).stream(response.getWriter());
 		String uri = request.getRequestURI();
 		final PageFactory factory = config_.getFactory(uri);
@@ -161,7 +161,11 @@ public class WhizuServlet extends HttpServlet {
 				throw new IllegalStateException(e);
 			}
 		} else {
-			throw new IllegalArgumentException("No @Page has been defined for " + uri);
+			// throw new
+			// IllegalArgumentException("No @Page has been defined for " + uri);
+			logger.debug("Page {} not found", uri);
+			response.sendError(404);
+			return new StringResource("Page not found");
 		}
 	}
 
@@ -181,19 +185,20 @@ public class WhizuServlet extends HttpServlet {
 				} else {
 					// Resource resource = this.servePageRequest(request);
 					// getResource(uri).stream(response.getWriter());
-					content = servePageRequest(request);
+					content = servePageRequest(request, response);
 				}
 			} else {
-				response.setHeader("X-Robots-Tag", "noindex");
+				response.setHeader("X-Robots-Tag", "noindex"); // "noarchive"?
 				session.handleEvent(id);
 				/*
-				// Set standard HTTP/1.1 no-cache headers.
-				response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
-				// Set IE extended HTTP/1.1 no-cache headers (use addHeader).
-				response.addHeader("Cache-Control", "post-check=0, pre-check=0");
-				// Set standard HTTP/1.0 no-cache header.
-				response.setHeader("Pragma", "no-cache");
-				*/
+				 * // Set standard HTTP/1.1 no-cache headers.
+				 * response.setHeader("Cache-Control",
+				 * "no-store, no-cache, must-revalidate"); // Set IE extended
+				 * HTTP/1.1 no-cache headers (use addHeader).
+				 * response.addHeader("Cache-Control",
+				 * "post-check=0, pre-check=0"); // Set standard HTTP/1.0
+				 * no-cache header. response.setHeader("Pragma", "no-cache");
+				 */
 				content = new StringResource(RequestImpl.get().finish());
 			}
 
@@ -206,10 +211,13 @@ public class WhizuServlet extends HttpServlet {
 			// if (true) throw new RuntimeException("fake exception");
 
 			if (content != null) {
-				content.print(response.getOutputStream());
+				if (!content.getString().equals("Page not found")) {
+					logger.debug("Streaming content of page");
+					content.print(response.getOutputStream());
+					response.getOutputStream().flush();
+				}
 			}
 
-			response.getOutputStream().flush();
 			// response.getWriter().close();
 		} catch (RuntimeException e) {
 			logger.error("Whoops. An unexpected RuntimeException in WhizuServlet.", e);
