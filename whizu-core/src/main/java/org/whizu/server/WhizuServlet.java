@@ -166,8 +166,8 @@ public class WhizuServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
 		Chrono chrono = Chrono.start();
 		Resource content = null;
 		try {
@@ -184,29 +184,40 @@ public class WhizuServlet extends HttpServlet {
 					content = servePageRequest(request);
 				}
 			} else {
+				response.setHeader("X-Robots-Tag", "noindex");
 				session.handleEvent(id);
+				/*
+				// Set standard HTTP/1.1 no-cache headers.
+				response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+				// Set IE extended HTTP/1.1 no-cache headers (use addHeader).
+				response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+				// Set standard HTTP/1.0 no-cache header.
+				response.setHeader("Pragma", "no-cache");
+				*/
 				content = new StringResource(RequestImpl.get().finish());
 			}
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("Server side completed in {}ms", chrono.stop());
+				if (content != null)
+					logger.debug("Streaming script {}", content.getString());
+			}
+
+			// if (true) throw new RuntimeException("fake exception");
+
+			if (content != null) {
+				content.print(response.getOutputStream());
+			}
+
+			response.getOutputStream().flush();
+			// response.getWriter().close();
 		} catch (RuntimeException e) {
 			logger.error("Whoops. An unexpected RuntimeException in WhizuServlet.", e);
-			throw new ServletException(e);
+			e.printStackTrace(response.getWriter());
+			// throw new ServletException(e);
+
 		} finally {
-			try {
-				if (logger.isDebugEnabled()) {
-					logger.debug("Server side completed in {}ms", chrono.stop());
-					if (content != null)
-						logger.debug("Streaming script {}", content.getString());
-				}
-
-				if (content != null) {
-					content.print(response.getOutputStream());
-				}
-
-				response.getOutputStream().flush();
-				// response.getWriter().close();
-			} finally {
-				RequestImpl.get().finish();
-			}
+			RequestImpl.get().finish();
 		}
 	}
 

@@ -44,10 +44,10 @@ public class Licensing extends AbstractPage {
 	private String title;
 
 	/**
-	 * Whizu is open source software available for free [download](/download)
-	 * and for free use under the terms of the European Union Public License
-	 * (EUPL) v1.1. Any use of this software, other than as authorized under
-	 * this license is strictly prohibited.
+	 * Whizu is open source software available for free [download]({}) and for
+	 * free use under the terms of the European Union Public License (EUPL)
+	 * v1.1. Any use of this software, other than as authorized under this
+	 * license is strictly prohibited.
 	 */
 	@Markdown
 	public String about;
