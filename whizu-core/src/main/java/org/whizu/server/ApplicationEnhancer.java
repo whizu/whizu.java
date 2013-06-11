@@ -44,6 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.annotation.Body;
 import org.whizu.annotation.Css;
+import org.whizu.annotation.Expires;
 import org.whizu.annotation.Style;
 import org.whizu.annotation.Stylesheet;
 import org.whizu.annotation.Template;
@@ -81,6 +82,13 @@ public class ApplicationEnhancer {
 			String title = Title.DEFAULT_TITLE;
 			if (ctClass.hasAnnotation(Title.class)) {
 				title = ((Title) ctClass.getAnnotation(Title.class)).value();
+			}
+			
+			String expires = null;
+			log.debug("ctClass Expires in {}", expires);
+			if (ctClass.hasAnnotation(Expires.class)) {
+				expires = ((Expires) ctClass.getAnnotation(Expires.class)).value();
+				log.debug("ctClass Expires in {}", expires);
 			}
 
 			String template = getTemplate(ctClass);
@@ -145,6 +153,7 @@ public class ApplicationEnhancer {
 			
 			PageFactory factory = new PageFactory(newClass);
 			factory.title(title);
+			factory.expires(expires);
 			factory.stylesheet(stylesheet);
 			if (template != null) {
 				factory.template(template);

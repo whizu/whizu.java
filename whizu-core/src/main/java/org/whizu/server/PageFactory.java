@@ -40,11 +40,13 @@ import org.whizu.ui.Application;
  */
 class PageFactory implements Serializable {
 
-	private Logger log = LoggerFactory.getLogger(PageFactory.class);
-
 	private final Class<Application> applicationClass_;
 
 	private String description_ = Description.DEFAULT_VALUE;
+
+	private String expires_ = null;
+
+	private Logger log = LoggerFactory.getLogger(PageFactory.class);
 
 	private String stylesheet_;
 
@@ -85,6 +87,14 @@ class PageFactory implements Serializable {
 
 	public void description(Description description) {
 		description_ = (description == null) ? Description.DEFAULT_VALUE : description.value();
+	}
+
+	public String expires() {
+		return expires_;
+	}
+	
+	public void expires(String expires) {
+		expires_ = expires;
 	}
 
 	public String stylesheet() {

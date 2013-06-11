@@ -76,7 +76,7 @@
 		</copy>
 	</target>
 
-	<target name="package" depends="dist" description="package the distribution">
+	<target name="package" depends="dist, javadoc" description="package the distribution">
 		<!-- Create the packaging directory -->
 		<mkdir dir="${package}" />
 

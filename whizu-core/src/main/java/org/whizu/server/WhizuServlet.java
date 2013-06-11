@@ -156,6 +156,15 @@ public class WhizuServlet extends HttpServlet {
 					}
 				}
 
+				long CACHE_DURATION_IN_SECOND = 100 * 60; //10 minutes
+				logger.debug("SETTING the Expires header to {} seconds", CACHE_DURATION_IN_SECOND);
+				String expires = factory.expires();
+				if (expires != null) {
+					logger.debug("SETTING the Expires header to {} seconds", CACHE_DURATION_IN_SECOND);
+					response.setHeader("Cache-Control", "public, max-age=" + CACHE_DURATION_IN_SECOND);
+					response.setDateHeader("Expires", System.currentTimeMillis() + CACHE_DURATION_IN_SECOND);
+				}
+
 				return new StringResource(content);
 			} catch (IOException e) {
 				throw new IllegalStateException(e);
@@ -188,7 +197,7 @@ public class WhizuServlet extends HttpServlet {
 					content = servePageRequest(request, response);
 				}
 			} else {
-				response.setHeader("X-Robots-Tag", "noindex"); // "noarchive"?
+				response.setHeader("X-Robots-Tag", "noarchive"); // "noarchive"?
 				session.handleEvent(id);
 				/*
 				 * // Set standard HTTP/1.1 no-cache headers.
