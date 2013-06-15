@@ -146,6 +146,7 @@ public class Support {
 
 	public static String get(Class<?> clazz, String fieldName) {
 		String result = map.get(clazz.getName() + "." + fieldName);
+		//log.debug("html is " + result);
 		return result;
 	}
 

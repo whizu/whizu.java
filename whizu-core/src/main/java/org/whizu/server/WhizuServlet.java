@@ -156,13 +156,9 @@ public class WhizuServlet extends HttpServlet {
 					}
 				}
 
-				long CACHE_DURATION_IN_SECOND = 100 * 60; //10 minutes
-				logger.debug("SETTING the Expires header to {} seconds", CACHE_DURATION_IN_SECOND);
 				String expires = factory.expires();
 				if (expires != null) {
-					logger.debug("SETTING the Expires header to {} seconds", CACHE_DURATION_IN_SECOND);
-					response.setHeader("Cache-Control", "public, max-age=" + CACHE_DURATION_IN_SECOND);
-					response.setDateHeader("Expires", System.currentTimeMillis() + CACHE_DURATION_IN_SECOND);
+					setExpires(response);
 				}
 
 				return new StringResource(content);
@@ -178,6 +174,17 @@ public class WhizuServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * @param response
+	 */
+	private void setExpires(HttpServletResponse response) {
+		long CACHE_DURATION_IN_SECOND = 100 * 60; //100 minutes
+		logger.debug("SETTING the Expires header to {} seconds", CACHE_DURATION_IN_SECOND);
+		logger.debug("SETTING the Expires header to {} seconds", CACHE_DURATION_IN_SECOND);
+		response.setHeader("Cache-Control", "public, max-age=" + CACHE_DURATION_IN_SECOND);
+		response.setDateHeader("Expires", System.currentTimeMillis() + CACHE_DURATION_IN_SECOND);
+	}
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException {
@@ -189,8 +196,10 @@ public class WhizuServlet extends HttpServlet {
 			if (id == null) {
 				if (request.getRequestURI().endsWith(".css")) {
 					content = handleCss(request, response);
+					setExpires(response);
 				} else if (request.getRequestURI().endsWith(".png")) {
 					content = handleCss(request, response);
+					setExpires(response);
 				} else {
 					// Resource resource = this.servePageRequest(request);
 					// getResource(uri).stream(response.getWriter());
