@@ -37,15 +37,19 @@ public class AnnotationUtils {
 
 	private static Logger logger = LoggerFactory.getLogger(AnnotationUtils.class);
 
-	private static void scan(AnnotationDetector.TypeReporter reporter) {
+	private static void scan(AnnotationDetector.TypeReporter reporter, String packageNames) {
 		try {
-			new AnnotationDetector(reporter).detect();
+			if (packageNames == null) {
+				new AnnotationDetector(reporter).detect();
+			} else {
+				new AnnotationDetector(reporter).detect(packageNames);
+			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public static <T extends Annotation> void scan(final Class<T> clazz, final TypeReporter<T> reporter) {
+	public static <T extends Annotation> void scan(final Class<T> clazz, final TypeReporter<T> reporter, String packageNames) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Scanning the classpath for @{} annotations", clazz.getSimpleName());
 		}
@@ -56,7 +60,7 @@ public class AnnotationUtils {
 			@SuppressWarnings("unchecked")
 			@Override
 			public Class<? extends Annotation>[] annotations() {
-				return new Class[]{clazz};
+				return new Class[] { clazz };
 			}
 
 			private Class<?> getClass(String className) {
@@ -74,7 +78,7 @@ public class AnnotationUtils {
 			}
 		};
 
-		scan(typeReporter);
+		scan(typeReporter, packageNames);
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("Scanned the classpath for @{} annotations in {}ms", clazz.getSimpleName(), chrono.stop());

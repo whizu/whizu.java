@@ -84,13 +84,7 @@ public class ApplicationEnhancer {
 				title = ((Title) ctClass.getAnnotation(Title.class)).value();
 			}
 			
-			String expires = null;
-			log.debug("ctClass Expires in {}", expires);
-			if (ctClass.hasAnnotation(Expires.class)) {
-				expires = ((Expires) ctClass.getAnnotation(Expires.class)).value();
-				log.debug("ctClass Expires in {}", expires);
-			}
-
+			String expires = getExpires(ctClass);
 			String template = getTemplate(ctClass);
 			Description description = getAnnotation(ctClass, Description.class);
 
@@ -175,6 +169,11 @@ public class ApplicationEnhancer {
 	private String getTemplate(CtClass ctClass) throws ClassNotFoundException, NotFoundException {
 		Template template = getAnnotation(ctClass, Template.class);
 		return (template == null) ? null : template.value();
+	}
+	
+	private String getExpires(CtClass ctClass) throws ClassNotFoundException, NotFoundException {
+		Expires expires = getAnnotation(ctClass, Expires.class);
+		return (expires == null) ? null : expires.value();
 	}
 
 	@SuppressWarnings("unchecked")

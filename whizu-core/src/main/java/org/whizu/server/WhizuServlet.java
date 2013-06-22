@@ -58,18 +58,35 @@ import org.whizu.util.Chrono;
  */
 public class WhizuServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final String PACKAGE_NAMES = "package-names";
+
 	private Logger logger = LoggerFactory.getLogger(WhizuServlet.class);
 
 	private static final String WHIZU_SESSION = "whizu-session";
 
 	private final Configuration config_ = new Configuration();
 
+	private String packageScan_ = null;
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		logger.info("WhizuServlet starting...");
+		packageScan_ = getParam(config, PACKAGE_NAMES);
 		RequestContext.setInstance(new RequestContextImpl());
-		AnnotationUtils.scan(Page.class, config_);
+		AnnotationUtils.scan(Page.class, config_, packageScan_);
 		logger.info("WhizuServlet started");
+	}
+
+	/**
+	 * @param config
+	 * @param string
+	 * @return
+	 */
+	private String getParam(ServletConfig config, String name) {
+		return config.getInitParameter(name);
 	}
 
 	private Session assureUserSession(HttpSession session) {
