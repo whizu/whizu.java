@@ -223,7 +223,7 @@ public class WhizuServlet extends HttpServlet {
 					content = servePageRequest(request, response);
 				}
 			} else {
-				response.setHeader("X-Robots-Tag", "noarchive"); // "noarchive"?
+				response.setHeader("X-Robots-Tag", "noindex"); // "noarchive"?
 				session.handleEvent(id);
 				/*
 				 * // Set standard HTTP/1.1 no-cache headers.
