@@ -34,7 +34,6 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.Name;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
 import org.pegdown.PegDownProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +71,8 @@ public class Support {
 					String markdown = (String) props.get(key);
 					//markdown = StringEscapeUtils.escapeHtml(markdown);
 					String html = processor.markdownToHtml(markdown.replace("\n ", "\n")).replace('"', '\'');
-					html = StringEscapeUtils.escapeJavaScript(html);
+					//html = StringEscapeUtils.escapeJavaScript(html);
+					html = StringEscapeUtils.escapeJava(html);
 					add(key, html);
 				}
 			}
