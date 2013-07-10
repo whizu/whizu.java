@@ -68,7 +68,8 @@ public class HelloWorld implements Application {
 		form.add(ui.createTextField(message).css("message"));
 		form.css("form");
 		Label button = ui.createLabel("Share").css("submit-button");
-		button.addClickListener(new ClickListener() {
+		System.out.println("before add listener");
+		ClickListener listener = new ClickListener() {
 
 			@Override
 			public void click() {
@@ -80,7 +81,8 @@ public class HelloWorld implements Application {
 				history.prepend(detail);
 				message.clear();
 			}
-		});
+		};
+		button.addClickListener(listener);
 		form.add(button);
 		left.add(form);
 

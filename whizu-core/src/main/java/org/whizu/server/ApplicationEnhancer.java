@@ -142,7 +142,7 @@ public class ApplicationEnhancer {
 			ccFile.addAttribute(attr);
 
 			//ctClass.setName(ctClass.getName()+"Impl"); //google app engine
-			ctClass.setName(ctClass.getName() + "Impl");
+			//ctClass.setName(ctClass.getName() + "Impl");
 			Class<Application> newClass = getEnhancedClass(ctClass);
 			
 			PageFactory factory = new PageFactory(newClass);
