@@ -1,0 +1,119 @@
+/*******************************************************************************
+ * Copyright (c) 2013 Rudy D'hauwe @ Whizu
+ * Licensed under the EUPL V.1.1
+ *   
+ * This Software is provided to You under the terms of the European 
+ * Union Public License (the "EUPL") version 1.1 as published by the 
+ * European Union. Any use of this Software, other than as authorized 
+ * under this License is strictly prohibited (to the extent such use 
+ * is covered by a right of the copyright holder of this Software).
+ *
+ * This Software is provided under the License on an "AS IS" basis and 
+ * without warranties of any kind concerning the Software, including 
+ * without limitation merchantability, fitness for a particular purpose, 
+ * absence of defects or errors, accuracy, and non-infringement of 
+ * intellectual property rights other than copyright. This disclaimer 
+ * of warranty is an essential part of the License and a condition for 
+ * the grant of any rights to this Software.
+ *   
+ * For more  details, see <http://joinup.ec.europa.eu/software/page/eupl>.
+ *
+ * Contributors:
+ *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
+ *******************************************************************************/
+package org.whizu.tutorial.jquery.mobile.example;
+
+import org.whizu.annotation.Page;
+import org.whizu.annotation.Style;
+import org.whizu.annotation.Submit;
+import org.whizu.jquery.EventHandler;
+import org.whizu.jquery.RequestContext;
+import org.whizu.jquery.mobile.Button;
+import org.whizu.jquery.mobile.Form;
+import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.ListItem;
+import org.whizu.jquery.mobile.ListView;
+import org.whizu.layout.CssLayout;
+import org.whizu.layout.HorizontalLayout;
+import org.whizu.layout.Layout;
+import org.whizu.ui.UI;
+import org.whizu.value.StringValue;
+
+/**
+ * @author Rudy D'hauwe
+ */
+@Page("/whizu/jqm/example")
+public class Notebook extends JQueryMobileApp {
+
+	private StringValue title = new StringValue("Title");
+
+	private StringValue description = new StringValue("Description");
+
+	private ListView notebook = new ListView();
+
+	private int i = 0;
+
+	@Override
+	public void init(UI ui) {
+		addHeader("My notebook");
+		Layout layout = new HorizontalLayout();
+		Form form = createForm();
+		Layout left = createLeftColumn();
+		left.add(form);
+		Layout right = createRightColumn();
+		right.add(notebook);
+		layout.add(left);
+		layout.add(right);
+		add(layout);
+		addFooter("jQuery Mobile by Whizu");
+	}
+
+	@Style("width:400px")
+	private Layout createLeftColumn() {
+		return new CssLayout();
+	}
+
+	//@Style({ "margin-top:52px", "padding-left:10px" })
+	@Style({ "margin-top:52px;padding-left:10px" })
+	private Layout createRightColumn() {
+		Layout right = new CssLayout();
+		right.style("border-left:solid 1px lightblue");
+		right.style("min-height:250px");
+		right.style("margin-bottom:25px");
+		right.width("500px");
+		return right;
+	}
+
+	@Style("margin:25px")
+	Form createForm() {
+		Form form = new Form();
+		form.addText(title);
+		form.addTextarea(description);
+		Button button = form.addButton("Add note");
+		addClickListener(button);
+		return form;
+	}
+
+	@Submit
+	public void addNote() {
+		ListItem item = new ListItem("Title " + title.get());
+		item.p("Adding a paragraph " + i++);
+		notebook.addItem(item);
+	}
+
+	@Deprecated
+	private void addClickListener(final Button button) {
+		RequestContext.session().addClickListener(new EventHandler() {
+
+			@Override
+			public String id() {
+				return button.id();
+			}
+
+			@Override
+			public void handleEvent() {
+				Notebook.this.addNote();
+			}
+		});
+	}
+}

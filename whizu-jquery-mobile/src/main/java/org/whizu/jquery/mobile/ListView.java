@@ -23,6 +23,10 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Markup;
+import org.whizu.html.Html;
+import org.whizu.widget.Container;
+
 /**
  * A listview is coded as a simple unordered list containing linked list items with
  * a data-role="listview" attribute. jQuery Mobile will apply all the necessary
@@ -35,7 +39,7 @@ package org.whizu.jquery.mobile;
  * 
  * @author Rudy D'hauwe
  */
-public class Listview {
+public class ListView extends Container {
 
 	/**
 	 * Adds a search filter bar to the listview.
@@ -79,5 +83,35 @@ public class Listview {
 	 */
 	public void setInset(boolean inset) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Markup compile() {
+		Markup markup = Html.ul(this).attr("data-role", "listview").add("<li><a href='#'><h2>Meeting with the jQuery Mobile team</h2><p>Sure! Let's schedule a meeting with the jQuery Mobile team.</p></a></li><li><a href='#'><h2>Boston Conference Planning</h2><p>In preparation for the upcoming conference in Boston, we need to start gathering<br> a list of sponsors and speakers.</p></a></li>").decorate(this).add(componentList);
+		return markup;
+	}
+
+	/**
+	 * @param string
+	 * @return
+	 */
+	public ListItem addItem(String title) {
+		ListItem item = new ListItem();
+		item.prepend(Html.h2(title));
+		prepend(item);
+		if (this.isRendered()) {
+			jQuery(this).call("listview", "refresh");
+		}
+		return item;
+	}
+
+	/**
+	 * @param item
+	 */
+	public void addItem(ListItem item) {
+		prepend(item);
+		if (this.isRendered()) {
+			jQuery(this).call("listview", "refresh");
+		}
 	}
 }

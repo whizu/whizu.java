@@ -42,4 +42,8 @@ public abstract class RequestContext {
 	public abstract void autowire(Object bean);
 
 	protected abstract Request getRequestImpl();
+
+	public static Session session() {
+		return getRequest().session();
+	}
 }

@@ -23,11 +23,13 @@
  *******************************************************************************/
 package org.whizu.html;
 
+import org.whizu.dom.Component;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Identity;
 import org.whizu.dom.Markup;
 import org.whizu.dom.Node;
+import org.whizu.widget.Widget;
 
 /**
  * A bunch of convenience methods for generating HTML content.
@@ -99,12 +101,20 @@ public class Html {
 		return h1().add(text);
 	}
 	
+	public static Element h2() {
+		return tag("h2");
+	}
+	
 	public static Element h3() {
 		return tag("h3");
 	}
 
 	public static Content h3(String text) {
 		return h3().add(text);
+	}
+	
+	public static Content h2(String text) {
+		return h2().add(text);
 	}
 
 	public static Element hr() {
@@ -201,5 +211,25 @@ public class Html {
 
 	public static Element tr(Element... elements) {
 		return tr().add(elements);
+	}
+
+	public static Element ul() {
+		return tag("ul");
+	}
+
+	public static Element li() {
+		return tag("li");
+	}
+
+	public static Element p(String text) {
+		return tag("p").add(text);
+	}
+
+	public static Element ul(Identity element) {
+		return ul().id(element.id());
+	}
+
+	public static Element li(Identity element) {
+		return li().id(element.id());
 	}
 }

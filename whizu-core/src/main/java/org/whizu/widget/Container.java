@@ -68,6 +68,16 @@ public class Container extends Widget implements Composite {
 		
 		return this;
 	}
+	
+	public Composite prepend(Content content) {
+		this.componentList.add(content);
+
+		if (this.isRendered()) {
+			jQuery(this).prepend(content);
+		}
+		
+		return this;
+	}
 
 	@Override
 	public Markup compile() {

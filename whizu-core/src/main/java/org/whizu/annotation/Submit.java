@@ -21,28 +21,11 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.annotation;
 
-import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
-import org.whizu.html.Html;
-import org.whizu.widget.Widget;
+/**
+ * @author Rudy D'hauwe
+ */
+public @interface Submit {
 
-public class Textarea extends Widget {
-	
-	private String labelText;
-
-	/**
-	 * @param label
-	 */
-	public Textarea(String label) {
-		this.labelText = label;
-	}
-
-	@Override
-	public Markup compile() {
-		Element field = Html.textarea(this).attr("name", id());
-		Element label = Html.tag("label").attr("for", field.id()).add(labelText);
-		return field.after(label);
-	}
 }

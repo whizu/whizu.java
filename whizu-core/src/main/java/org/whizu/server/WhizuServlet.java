@@ -270,6 +270,7 @@ public class WhizuServlet extends HttpServlet {
 		Map<String, String[]> parameterMap = request.getParameterMap();
 		Set<String> keys = parameterMap.keySet();
 		for (String key : keys) {
+			logger.debug("Incoming request parameter {} equals {}", key, parameterMap.get(key)[0]);
 			Input editable = userSession.getInput(key);
 			if (editable != null) {
 				editable.parseString(parameterMap.get(key)[0]);

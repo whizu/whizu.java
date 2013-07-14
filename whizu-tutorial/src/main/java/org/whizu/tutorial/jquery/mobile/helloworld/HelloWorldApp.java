@@ -42,8 +42,8 @@ public class HelloWorldApp extends JQueryMobileApp {
 		addButton("My first button");
 		addButton("My second button");
 		Form form = addForm();
-		form.addText();
-		form.addTextarea();
+		form.addText("text");
+		form.addTextarea("textarea");
 		form.addSlider(0, 100, Theme.B);
 		form.addFlipSwitch();
 		addFooter("My jQuery Mobile footer");

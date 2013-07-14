@@ -26,9 +26,12 @@ package org.whizu.jquery.mobile;
 import org.whizu.dom.Element;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
+import org.whizu.jquery.Function;
+import org.whizu.jquery.JQuery;
 import org.whizu.jquery.mobile.Icon;
 import org.whizu.jquery.mobile.Mini;
 import org.whizu.jquery.mobile.Theme;
+import org.whizu.js.JavaScript;
 import org.whizu.widget.Widget;
 
 /**
@@ -40,8 +43,8 @@ import org.whizu.widget.Widget;
  */
 public class Button extends Widget {
 
-	//private Log log = LogFactory.getLog(Button.class);
-	
+	// private Log log = LogFactory.getLog(Button.class);
+
 	private String title;
 
 	public enum Type {
@@ -80,11 +83,9 @@ public class Button extends Widget {
 	}
 
 	/*
-	@Override
-	public Button css(String clazz) {
-		return (Button) super.css(clazz);
-	}
-	*/
+	 * @Override public Button css(String clazz) { return (Button)
+	 * super.css(clazz); }
+	 */
 
 	public Button icon(Icon icon) {
 		this.icon = icon;
@@ -95,26 +96,58 @@ public class Button extends Widget {
 	public Markup compile() {
 		jQuery(this).trigger("create");
 		switch (type) {
-			case INPUT :
-				Element button = Html.input(this).attr("type", "button").attr("value", title)
-						.attr("data-inline", inline.value);
-				button.decorate(icon, theme, mini);
-				return button;
-			case SUBMIT :
-				Element submit = Html.input(this).attr("type", "submit").attr("value", title).attr("data-inline", inline.value)
-						.attr("data-mini", mini.value);
-				submit.decorate(icon, theme, mini);
-				return submit;
-			case RESET :
-				return Html.input(this).attr("type", "reset").attr("value", title).attr("data-inline", inline.value)
-						.attr("data-mini", mini.value);
-			case BUTTON :
-				return Html.button(this).attr("data-inline", inline.value).attr("data-mini", mini.value).add(title);
-			case ANCHOR :
-				return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
-						.attr("data-mini", mini.value).add(title);
-			default :
-				throw new IllegalArgumentException("Unsupported button type: " + type);
+		case INPUT:
+			Element button = Html.input(this).attr("type", "button").attr("value", title)
+					.attr("data-inline", inline.value);
+			button.decorate(icon, theme, mini, this);
+			addClickListener();
+			return button;
+		case SUBMIT:
+			Element submit = Html.input(this).attr("type", "submit").attr("value", title)
+					.attr("data-inline", inline.value).attr("data-mini", mini.value);
+			submit.decorate(icon, theme, mini);
+			return submit;
+		case RESET:
+			return Html.input(this).attr("type", "reset").attr("value", title).attr("data-inline", inline.value)
+					.attr("data-mini", mini.value);
+		case BUTTON:
+			return Html.button(this).attr("data-inline", inline.value).attr("data-mini", mini.value).add(title);
+		case ANCHOR:
+			return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
+					.attr("data-mini", mini.value).add(title);
+		default:
+			throw new IllegalArgumentException("Unsupported button type: " + type);
 		}
+	}
+
+	private void addClickListener() {
+		JQuery jQuery = jQuery(this);
+
+		// if (listener != null) {
+		jQuery.click(new Function() {
+			@Override
+			public void execute() {
+				JavaScript.preventDefault();
+				
+				String url = "http://localhost:8090/whizu?id=" + Button.this.id(); //listener.id();
+
+				Function data = new Function() {
+					@Override
+					public void execute() {
+						jQuery("$(this)").closest("form").serialize();
+					}
+				};
+
+				Function callback = new Function("data") {
+					@Override
+					public void execute() {
+					}
+				};
+
+				String type = "script";
+				jQuery("$").get(url, data, callback, type);
+			}
+		});
+		// }
 	}
 }

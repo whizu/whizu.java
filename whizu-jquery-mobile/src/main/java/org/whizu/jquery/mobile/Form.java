@@ -23,10 +23,12 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Component;
 import org.whizu.dom.Content;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.value.PasswordValue;
+import org.whizu.value.StringValue;
 import org.whizu.widget.Container;
 
 /**
@@ -47,17 +49,29 @@ public class Form extends Container {
 		// @formatter:off
 		return Html.form(this)
 				.attr("method", "post")
-				.attr("action", "form.php");
+				.attr("action", "form.php").decorate(this).add(componentList);
 		// @formatter:on
 	}
 
-	public void addText() {
-		Content text = new Text();
+	public void addText(String label) {
+		Content text = new Text(label);
 		add(text);
 	}
 
-	public void addTextarea() {
-		Content text = new Textarea();
+	public void addText(String label, boolean fieldContain) {
+		if (fieldContain) {
+			FieldContain fc = new FieldContain();
+			Text text = new Text(label);
+			fc.add(text);
+			add(fc);
+		} else {
+			Text text = new Text(label);
+			add(text);
+		}
+	}
+	
+	public void addTextarea(String label) {
+		Content text = new Textarea(label);
 		add(text);
 	}
 
@@ -83,5 +97,57 @@ public class Form extends Container {
 	public Form add(Content field) {
 		jQuery(this).append(field);
 		return this;
+	}
+
+	/**
+	 * 
+	 */
+	public void addListView() {
+		Content list = new ListView();
+		add(list);
+	}
+
+	/**
+	 * @param b
+	 */
+	public void addTextarea(String label, boolean fieldContain) {
+		if (fieldContain) {
+			FieldContain fc = new FieldContain();
+			Textarea text = new Textarea(label);
+			fc.add(text);
+			add(fc);
+		} else {
+			Textarea text = new Textarea(label);
+			add(text);
+		}
+	}
+
+	public Button addButton(String title) {
+		Button button = new Button(title);
+		add(button);
+		return button;
+	}
+
+	/**
+	 * @param button
+	 */
+	public void addFieldContain(Component component) {
+		FieldContain fc = new FieldContain();
+		fc.add(component);
+		add(fc);
+	}
+
+	/**
+	 * @param title
+	 */
+	public void addText(StringValue value) {
+		addText(value.name(), false);
+	}
+
+	/**
+	 * @param description
+	 */
+	public void addTextarea(StringValue value) {
+		addTextarea(value.name(), false);
 	}
 }

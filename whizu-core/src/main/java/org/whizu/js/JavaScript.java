@@ -64,4 +64,13 @@ public class JavaScript {
 		String script = "event.preventDefault();";
 		request.addExpression(script);
 	}
+
+	/**
+	 * @param string
+	 */
+	public static void alert(String message) {
+		Request request = RequestContext.getRequest();
+		String script = "alert('" + message + "');";
+		request.addExpression(script);
+	}
 }

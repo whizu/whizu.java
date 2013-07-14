@@ -23,26 +23,32 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Element;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
-import org.whizu.widget.Widget;
+import org.whizu.widget.Container;
 
-public class Textarea extends Widget {
+/**
+ * @author Rudy D'hauwe
+ */
+public class ListItem extends Container {
+
+	public ListItem() {
+	}
 	
-	private String labelText;
-
-	/**
-	 * @param label
-	 */
-	public Textarea(String label) {
-		this.labelText = label;
+	public ListItem(String title) {
+		prepend(Html.h2(title));
 	}
 
 	@Override
 	public Markup compile() {
-		Element field = Html.textarea(this).attr("name", id());
-		Element label = Html.tag("label").attr("for", field.id()).add(labelText);
-		return field.after(label);
+		Markup markup = Html.li(this).decorate(this).add(componentList);
+		return markup;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void p(String text) {
+		add(Html.p(text));
 	}
 }
