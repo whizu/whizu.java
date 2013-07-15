@@ -25,6 +25,7 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
+import org.whizu.value.StringValue;
 import org.whizu.widget.Container;
 
 /**
@@ -39,16 +40,21 @@ public class ListItem extends Container {
 		prepend(Html.h2(title));
 	}
 
+	public ListItem(StringValue title) {
+		this(title.get());
+	}
+
 	@Override
 	public Markup compile() {
 		Markup markup = Html.li(this).decorate(this).add(componentList);
 		return markup;
 	}
 
-	/**
-	 * @param string
-	 */
 	public void p(String text) {
 		add(Html.p(text));
+	}
+
+	public void p(StringValue value) {
+		p(value.get());
 	}
 }

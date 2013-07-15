@@ -58,14 +58,14 @@ public class Form extends Container {
 		add(text);
 	}
 
-	public void addText(String label, boolean fieldContain) {
+	public void addText(StringValue value, boolean fieldContain) {
 		if (fieldContain) {
 			FieldContain fc = new FieldContain();
-			Text text = new Text(label);
+			Text text = new Text(value);
 			fc.add(text);
 			add(fc);
 		} else {
-			Text text = new Text(label);
+			Text text = new Text(value);
 			add(text);
 		}
 	}
@@ -99,25 +99,19 @@ public class Form extends Container {
 		return this;
 	}
 
-	/**
-	 * 
-	 */
 	public void addListView() {
 		Content list = new ListView();
 		add(list);
 	}
 
-	/**
-	 * @param b
-	 */
-	public void addTextarea(String label, boolean fieldContain) {
+	public void addTextarea(StringValue value, boolean fieldContain) {
 		if (fieldContain) {
 			FieldContain fc = new FieldContain();
-			Textarea text = new Textarea(label);
+			Textarea text = new Textarea(value);
 			fc.add(text);
 			add(fc);
 		} else {
-			Textarea text = new Textarea(label);
+			Textarea text = new Textarea(value);
 			add(text);
 		}
 	}
@@ -128,26 +122,17 @@ public class Form extends Container {
 		return button;
 	}
 
-	/**
-	 * @param button
-	 */
 	public void addFieldContain(Component component) {
 		FieldContain fc = new FieldContain();
 		fc.add(component);
 		add(fc);
 	}
 
-	/**
-	 * @param title
-	 */
 	public void addText(StringValue value) {
-		addText(value.name(), false);
+		addText(value, false);
 	}
 
-	/**
-	 * @param description
-	 */
 	public void addTextarea(StringValue value) {
-		addTextarea(value.name(), false);
+		addTextarea(value, false);
 	}
 }

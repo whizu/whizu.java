@@ -23,26 +23,54 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.whizu.dom.Element;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
+import org.whizu.jquery.Input;
+import org.whizu.value.StringValue;
+import org.whizu.value.Value;
 import org.whizu.widget.Widget;
 
-public class Textarea extends Widget {
+/**
+ * @author Rudy D'hauwe
+ */
+public class Textarea extends Widget implements Input {
 	
-	private String labelText;
+	private Logger logger = LoggerFactory.getLogger(Textarea.class);
+	
+	private Value model_;
 
-	/**
-	 * @param label
-	 */
 	public Textarea(String label) {
-		this.labelText = label;
+		this(new StringValue(label));
+	}
+	
+	public Textarea(Value model) {
+		model_ = model;
+		model_.addPropertyChangeListener(new PropertyChangeListener() {
+			
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				jQuery(Textarea.this).val(""+model_.get());
+			}
+		});
 	}
 
 	@Override
 	public Markup compile() {
 		Element field = Html.textarea(this).attr("name", id());
-		Element label = Html.tag("label").attr("for", field.id()).add(labelText);
+		Element label = Html.tag("label").attr("for", field.id()).add(model_.name());
+		getSession().addInput(this);
 		return field.after(label);
+	}
+
+	@Override
+	public void parseString(String value) {
+		logger.debug("Incoming request value {}", value);
+		model_.set(value);
 	}
 }

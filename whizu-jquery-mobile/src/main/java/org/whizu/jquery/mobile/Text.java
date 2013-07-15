@@ -23,12 +23,17 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.dom.Element;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.jquery.Input;
+import org.whizu.value.StringValue;
+import org.whizu.value.Value;
 import org.whizu.widget.Widget;
 
 /**
@@ -36,21 +41,29 @@ import org.whizu.widget.Widget;
  */
 public class Text extends Widget implements Input {
 
-	private String labelText;
-	
 	private Logger logger = LoggerFactory.getLogger(Text.class);
+	
+	private Value model_;
 
-	/**
-	 * @param label
-	 */
 	public Text(String label) {
-		this.labelText = label;
+		this(new StringValue(label));
+	}
+	
+	public Text(Value model) {
+		model_ = model;
+		model_.addPropertyChangeListener(new PropertyChangeListener() {
+			
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				jQuery(Text.this).val(""+model_.get());
+			}
+		});
 	}
 
 	@Override
 	public Markup compile() {
 		Element input = Html.input(this).attr("type", "text").attr("name", id()).attr("value", "");
-		Element label = Html.tag("label").attr("for", input.id()).add(labelText);
+		Element label = Html.tag("label").attr("for", input.id()).add(model_.name());
 		getSession().addInput(this);
 		return input.after(label);
 	}
@@ -58,5 +71,6 @@ public class Text extends Widget implements Input {
 	@Override
 	public void parseString(String value) {
 		logger.debug("Incoming request value {}", value);
+		model_.set(value);
 	}
 }

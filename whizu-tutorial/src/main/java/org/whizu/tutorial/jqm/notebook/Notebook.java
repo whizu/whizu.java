@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.tutorial.jquery.mobile.example;
+package org.whizu.tutorial.jqm.notebook;
 
 import org.whizu.annotation.Page;
 import org.whizu.annotation.Style;
@@ -51,8 +51,6 @@ public class Notebook extends JQueryMobileApp {
 
 	private ListView notebook = new ListView();
 
-	private int i = 0;
-
 	@Override
 	public void init(UI ui) {
 		addHeader("My notebook");
@@ -74,14 +72,9 @@ public class Notebook extends JQueryMobileApp {
 	}
 
 	//@Style({ "margin-top:52px", "padding-left:10px" })
-	@Style({ "margin-top:52px;padding-left:10px" })
+	@Style({ "min-height:250px;margin-top:52px;margin-bottom:25px;padding-left:10px;border-left:solid 1px lightblue;width:500px;" })
 	private Layout createRightColumn() {
-		Layout right = new CssLayout();
-		right.style("border-left:solid 1px lightblue");
-		right.style("min-height:250px");
-		right.style("margin-bottom:25px");
-		right.width("500px");
-		return right;
+		return new CssLayout();
 	}
 
 	@Style("margin:25px")
@@ -96,9 +89,11 @@ public class Notebook extends JQueryMobileApp {
 
 	@Submit
 	public void addNote() {
-		ListItem item = new ListItem("Title " + title.get());
-		item.p("Adding a paragraph " + i++);
+		ListItem item = new ListItem(title);
+		item.p(description);
 		notebook.addItem(item);
+		title.clear();
+		description.clear();
 	}
 
 	@Deprecated
