@@ -37,4 +37,9 @@ public interface Input {
      * 
      */
     public void parseString(String value);
+
+	/**
+	 * 
+	 */
+	public void clear();
 }

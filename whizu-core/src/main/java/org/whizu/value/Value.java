@@ -49,4 +49,6 @@ public interface Value {
 	public Component render(ValueRenderer renderer);
 
 	public void refresh(Object value);
+
+	public void clear();
 }

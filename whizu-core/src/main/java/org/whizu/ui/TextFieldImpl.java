@@ -105,4 +105,9 @@ public class TextFieldImpl extends Widget implements TextField, Input {
 			this.value.set(value);
 		}
 	}
+	
+	@Override
+	public void clear() {
+		//model_.clear();
+	}
 }

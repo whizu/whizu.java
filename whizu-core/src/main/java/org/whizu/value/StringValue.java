@@ -48,6 +48,7 @@ public class StringValue extends ValueBuilder<StringValue, String> {
 		value(s);
 	}
 	
+	@Override
 	public void clear() {
 		value("");
 	}

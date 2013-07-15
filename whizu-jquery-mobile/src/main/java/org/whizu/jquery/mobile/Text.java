@@ -73,4 +73,9 @@ public class Text extends Widget implements Input {
 		logger.debug("Incoming request value {}", value);
 		model_.set(value);
 	}
+
+	@Override
+	public void clear() {
+		model_.clear();
+	}
 }

@@ -27,6 +27,7 @@ import org.whizu.dom.Component;
 import org.whizu.dom.Content;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
+import org.whizu.jquery.Input;
 import org.whizu.value.PasswordValue;
 import org.whizu.value.StringValue;
 import org.whizu.widget.Container;
@@ -134,5 +135,14 @@ public class Form extends Container {
 
 	public void addTextarea(StringValue value) {
 		addTextarea(value, false);
+	}
+
+	public void clear() {
+		for (Content c : componentList) {
+			if (c instanceof Input) {
+				Input i = (Input) c;
+				i.clear();
+			}
+		}
 	}
 }

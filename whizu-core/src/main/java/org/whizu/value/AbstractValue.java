@@ -137,4 +137,9 @@ public abstract class AbstractValue<T> implements Value {
 	public void value(T value) {
 		firePropertyChange(VALUE, value_, value_ = value);
 	}
+
+	@Override
+	public void clear() {
+		set(null);
+	}
 }

@@ -62,4 +62,9 @@ class TextAreaImpl extends Widget implements TextArea, Input {
 	public void parseString(String value) {
 		this.text = value;
 	}
+	
+	@Override
+	public void clear() {
+		//model_.clear();
+	}
 }

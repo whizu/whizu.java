@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.tutorial.jqm.notebook;
+package org.whizu.tutorial.jqm.sample;
 
 import org.whizu.annotation.Page;
 import org.whizu.annotation.Style;
@@ -42,7 +42,7 @@ import org.whizu.value.StringValue;
 /**
  * @author Rudy D'hauwe
  */
-@Page("/whizu/jqm/notebook")
+@Page("/whizu/jqm/sample")
 public class Notebook extends JQueryMobileApp {
 
 	private StringValue title = new StringValue("Title");
@@ -50,8 +50,6 @@ public class Notebook extends JQueryMobileApp {
 	private StringValue description = new StringValue("Description");
 
 	private ListView notebook = new ListView();
-
-	private Form form;
 
 	@Override
 	public void init(UI ui) {
@@ -73,6 +71,7 @@ public class Notebook extends JQueryMobileApp {
 		return new CssLayout();
 	}
 
+	//@Style({ "margin-top:52px", "padding-left:10px" })
 	@Style({ "min-height:250px;margin-top:52px;margin-bottom:25px;padding-left:10px;border-left:solid 1px lightblue;width:500px;" })
 	private Layout createRightColumn() {
 		return new CssLayout();
@@ -80,7 +79,7 @@ public class Notebook extends JQueryMobileApp {
 
 	@Style("margin:25px")
 	Form createForm() {
-		form = new Form();
+		Form form = new Form();
 		form.addText(title);
 		form.addTextarea(description);
 		Button button = form.addButton("Add note");
@@ -93,7 +92,8 @@ public class Notebook extends JQueryMobileApp {
 		ListItem item = new ListItem(title);
 		item.p(description);
 		notebook.addItem(item);
-		form.clear();
+		title.clear();
+		description.clear();
 	}
 
 	@Deprecated
