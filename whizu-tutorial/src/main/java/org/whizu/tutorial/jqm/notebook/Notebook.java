@@ -53,7 +53,6 @@ public class Notebook extends JQueryMobileApp {
 
 	private Form form;
 
-	
 	@Override
 	public void init(UI ui) {
 		addHeader("My notebook");
