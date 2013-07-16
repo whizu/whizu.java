@@ -23,29 +23,66 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Element;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.widget.Widget;
 
 /**
+ * The page is the primary unit of interaction in jQuery Mobile and is used to
+ * group content into logical views that can be animated in and out of view with
+ * page transitions. A HTML document may start with a single Page and the AJAX
+ * navigation system will load additional pages on demand into the DOM as users
+ * navigate around. Alternatively, a HTML document can be built with multiple Pages
+ * inside it and the framework will transition between these local views with no
+ * need to request content from the server.
+ * 
  * @author Rudy D'hauwe
  */
-public class Footer extends Widget {
+public class Page extends Widget {
 
-	private Theme theme = Theme.E;
+	private Element content_;
 
-	private String title_;
+	private Footer footer_;
 
-	public Footer() {
+	private Header header_;
+
+	public Page() {
+		super();
 	}
 
-	public Footer(String title) {
-		title_ = title;
+	public Page(String id) {
+		super(id);
 	}
 
 	@Override
 	public Markup compile() {
-		jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
-		return Html.div(this).decorate(DataRole.FOOTER, theme).add(title_);
+		content_ = Html.div().decorate(DataRole.CONTENT);
+		return Html.div(this).decorate(DataRole.PAGE, this).add(header_, content_, footer_);
+	}
+
+	public Footer footer() {
+		if (footer_ == null) {
+			footer_ = new Footer();
+		}
+
+		return footer_;
+	}
+
+	public Page footer(Footer footer) {
+		footer_ = footer;
+		return this;
+	}
+
+	public Header header() {
+		if (header_ == null) {
+			header_ = new Header();
+		}
+		return header_;
+	}
+
+	public Page header(Header header) {
+		header_ = header;
+		return this;
 	}
 }

@@ -21,25 +21,29 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.annotation.processing;
+package org.whizu.jquery.mobile;
 
-import org.apache.commons.lang.StringEscapeUtils;
-import org.junit.Test;
-import org.pegdown.PegDownProcessor;
+import org.whizu.dom.Decorator;
+import org.whizu.dom.Element;
 
 /**
  * @author Rudy D'hauwe
  */
-public class SupportTest {
+enum ButtonPosition implements Decorator {
 
-	@Test
-	public void testPegdownProcessor() {
-		String markdown = "This is a [Hyperlink](/articles/my-hyperlink.whizu) with a 'quote'. \n * abc \\nb * sd ";
-		PegDownProcessor processor = new PegDownProcessor();
-		String html = processor.markdownToHtml(markdown.replace("\n ", "\n")).replace('"', '\'');
-		System.out.println(html);
-		System.out.println(StringEscapeUtils.escapeJavaScript(html));
-		System.out.println(StringEscapeUtils.escapeJava(html));
-		System.out.println(StringEscapeUtils.escapeHtml(html));
+	// @formatter:off
+	LEFT("ui-btn-left"),
+	RIGHT("ui-btn-right");
+	// @formatter:on
+
+	private String value_;
+
+	private ButtonPosition(String value) {
+		value_ = value;
+	}
+
+	@Override
+	public void decorate(Element element) {
+		element.css(value_);
 	}
 }

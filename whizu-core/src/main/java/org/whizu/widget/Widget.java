@@ -28,7 +28,6 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.whizu.annotation.Autowire;
-import org.whizu.context.Ctx;
 import org.whizu.dom.Component;
 import org.whizu.dom.Decorator;
 import org.whizu.dom.Element;
@@ -63,17 +62,15 @@ public abstract class Widget implements Component, Decorator {
 	
 	private StringBuffer style = new StringBuffer();
 	
-	//@Autowired
 	@Autowire
-	public ValueRenderer renderer = new ValueRendererImpl();
+	private ValueRenderer renderer = new ValueRendererImpl();
 
 	protected Widget() {
-		this.autowire();
-		this.id_ = getSession().next();
+		id_ = getSession().next();
 	}
-
-	private void autowire() {
-		Ctx.autowire(this);
+	
+	protected Widget(String id) {
+		id_ = id;
 	}
 
 	@Override
@@ -110,12 +107,6 @@ public abstract class Widget implements Component, Decorator {
 	protected Session getSession() {
 		return getRequest().session();
 	}
-
-	/**
-	 * Initial creation and rendering of this widget by compiling it into a
-	 * combination of static HTML markup and javascript.
-	 */
-	// protected abstract Markup compile();
 
 	@Override
 	public String id() {
@@ -184,7 +175,7 @@ public abstract class Widget implements Component, Decorator {
 
 		element.css(cssList).width(width).style(style.toString());
 	}
-
+	
 	protected void init() {
 	}
 }

@@ -66,11 +66,14 @@ public class Node implements Element {
 
 	@Override
 	public Element add(Content element) {
-		if (selfClosing_) {
-			throw new IllegalStateException("A self-closing element must not add content");
+		if (element != null) {
+			if (selfClosing_) {
+				throw new IllegalStateException("A self-closing element must not add content");
+			}
+
+			contents.add(element);
 		}
 
-		contents.add(element);
 		return this;
 	}
 
@@ -112,13 +115,16 @@ public class Node implements Element {
 
 	@Override
 	public Element add(String text) {
-		if (selfClosing_) {
-			throw new IllegalStateException("A self-closing element must not add content");
+		if (text != null) {
+			if (selfClosing_) {
+				throw new IllegalStateException("A self-closing element must not add content");
+			}
+			
+			add(new Literal(text));
 		}
-
-		return add(new Literal(text));
+		return this;
 	}
-
+	
 	public Element addCss(String clazz) {
 		cssList.add(clazz);
 		return this;

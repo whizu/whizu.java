@@ -21,25 +21,20 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.annotation.processing;
-
-import org.apache.commons.lang.StringEscapeUtils;
-import org.junit.Test;
-import org.pegdown.PegDownProcessor;
+package org.whizu.jquery.mobile;
 
 /**
+ * If you need to create a header that doesn't follow the default configuration,
+ * simply wrap your custom styled markup in any container, such as div. The plugin
+ * won't apply the automatic button logic to the wrapped content inside the header
+ * container so you can write custom styles for laying out the content in your
+ * header. It's also possible to create custom bars without using the header
+ * data-role at all. For example, start with any container and add the ui-bar class
+ * to apply standard bar padding and add the ui-bar-b class to assign the bar
+ * swatch styles from your theme. (The "b" can be any swatch letter.)
+ * 
  * @author Rudy D'hauwe
  */
-public class SupportTest {
+public class Bar {
 
-	@Test
-	public void testPegdownProcessor() {
-		String markdown = "This is a [Hyperlink](/articles/my-hyperlink.whizu) with a 'quote'. \n * abc \\nb * sd ";
-		PegDownProcessor processor = new PegDownProcessor();
-		String html = processor.markdownToHtml(markdown.replace("\n ", "\n")).replace('"', '\'');
-		System.out.println(html);
-		System.out.println(StringEscapeUtils.escapeJavaScript(html));
-		System.out.println(StringEscapeUtils.escapeJava(html));
-		System.out.println(StringEscapeUtils.escapeHtml(html));
-	}
 }

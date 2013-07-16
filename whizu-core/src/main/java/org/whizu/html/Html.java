@@ -23,13 +23,11 @@
  *******************************************************************************/
 package org.whizu.html;
 
-import org.whizu.dom.Component;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Identity;
 import org.whizu.dom.Markup;
 import org.whizu.dom.Node;
-import org.whizu.widget.Widget;
 
 /**
  * A bunch of convenience methods for generating HTML content.
@@ -105,16 +103,16 @@ public class Html {
 		return tag("h2");
 	}
 	
+	public static Content h2(String text) {
+		return h2().add(text);
+	}
+
 	public static Element h3() {
 		return tag("h3");
 	}
-
+	
 	public static Content h3(String text) {
 		return h3().add(text);
-	}
-	
-	public static Content h2(String text) {
-		return h2().add(text);
 	}
 
 	public static Element hr() {
@@ -141,6 +139,18 @@ public class Html {
 		return tag("label");
 	}
 
+	public static Element li() {
+		return tag("li");
+	}
+
+	public static Element li(Identity element) {
+		return li().id(element.id());
+	}
+
+	public static Element p(String text) {
+		return tag("p").add(text);
+	}
+
 	public static Element script(String src) {
 		return tag("script").attr("type", "text/javascript").attr("src", src);
 	}
@@ -155,6 +165,10 @@ public class Html {
 
 	protected static Element selfClosing(String name) {
 		return new Node(name, true);
+	}
+
+	public static Element span() {
+		return tag("span");
 	}
 
 	public static Table table(Identity element) {
@@ -217,19 +231,7 @@ public class Html {
 		return tag("ul");
 	}
 
-	public static Element li() {
-		return tag("li");
-	}
-
-	public static Element p(String text) {
-		return tag("p").add(text);
-	}
-
 	public static Element ul(Identity element) {
 		return ul().id(element.id());
-	}
-
-	public static Element li(Identity element) {
-		return li().id(element.id());
 	}
 }

@@ -35,9 +35,4 @@ class RequestContextImpl extends RequestContext {
 	protected final Request getRequestImpl() {
 		return RequestImpl.get();
 	}
-
-	@Override
-	public void autowire(Object bean) {
-		//throw new UnsupportedOperationException();
-	}
 }

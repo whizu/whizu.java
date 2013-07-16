@@ -39,8 +39,6 @@ public abstract class RequestContext {
 		INSTANCE = instance;
 	}
 	
-	public abstract void autowire(Object bean);
-
 	protected abstract Request getRequestImpl();
 
 	public static Session session() {

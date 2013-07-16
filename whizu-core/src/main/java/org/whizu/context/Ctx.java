@@ -23,14 +23,8 @@
  *******************************************************************************/
 package org.whizu.context;
 
-import org.whizu.jquery.RequestContext;
-
 /**
  * @author Rudy D'hauwe
  */
 public class Ctx {
-
-	public static void autowire(Object bean) {
-		RequestContext.getInstance().autowire(bean);
-	}
 }

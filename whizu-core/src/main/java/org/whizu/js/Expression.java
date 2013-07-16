@@ -42,11 +42,15 @@ public class Expression {
 	}
 
 	public void add(String part) {
-		contents_.add(new Literal(part));
+		if (part != null) {
+			contents_.add(new Literal(part));
+		}
 	}
 
 	public void add(Content part) {
-		contents_.add(part);
+		if (part != null) {
+			contents_.add(part);
+		}
 	}
 
 	public String toJavaScript() {

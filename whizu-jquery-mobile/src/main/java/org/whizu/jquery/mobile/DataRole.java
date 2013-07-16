@@ -21,25 +21,33 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.annotation.processing;
+package org.whizu.jquery.mobile;
 
-import org.apache.commons.lang.StringEscapeUtils;
-import org.junit.Test;
-import org.pegdown.PegDownProcessor;
+import org.whizu.dom.Decorator;
+import org.whizu.dom.Element;
 
 /**
  * @author Rudy D'hauwe
  */
-public class SupportTest {
+public enum DataRole implements Decorator {
 
-	@Test
-	public void testPegdownProcessor() {
-		String markdown = "This is a [Hyperlink](/articles/my-hyperlink.whizu) with a 'quote'. \n * abc \\nb * sd ";
-		PegDownProcessor processor = new PegDownProcessor();
-		String html = processor.markdownToHtml(markdown.replace("\n ", "\n")).replace('"', '\'');
-		System.out.println(html);
-		System.out.println(StringEscapeUtils.escapeJavaScript(html));
-		System.out.println(StringEscapeUtils.escapeJava(html));
-		System.out.println(StringEscapeUtils.escapeHtml(html));
+	// @formatter:off
+	CONTENT("content"),
+	FOOTER("footer"), 
+	HEADER("header"), 
+	PAGE("page"); 
+	// @formatter:on
+
+	private static final String ATTRIBUTE_NAME = "data-role";
+
+	private String value_;
+
+	private DataRole(String value) {
+		value_ = value;
+	}
+
+	@Override
+	public void decorate(Element element) {
+		element.attr(ATTRIBUTE_NAME, value_);
 	}
 }
