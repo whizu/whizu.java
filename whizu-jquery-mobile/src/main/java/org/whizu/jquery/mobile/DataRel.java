@@ -23,33 +23,30 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Decorator;
 import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
-import org.whizu.html.Html;
-import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Footer extends Widget {
+public enum DataRel implements Decorator {
 
-	private Theme theme_ = Theme.E;
+	// @formatter:off
+	CLOSE("close"),
+	DIALOG("dialog"),
+	POPUP("popup");
+	// @formatter:on
 
-	private Element title_;
+	private static final String ATTRIBUTE_NAME = "data-rel";
 
-	public Footer() {
-	}
+	private String value_;
 
-	/**
-	 * Creates a header with a title wrapped in an H4 heading element.
-	 */
-	public Footer(String title) {
-		title_ = Html.h4(title);
+	private DataRel(String value) {
+		value_ = value;
 	}
 
 	@Override
-	public Markup compile() {
-		jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
-		return Html.div(this).decorate(DataRole.FOOTER, theme_).add(title_);
+	public void decorate(Element element) {
+		element.attr(ATTRIBUTE_NAME, value_);
 	}
 }

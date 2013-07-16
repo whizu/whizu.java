@@ -21,38 +21,28 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.tutorial.jqm.api;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
-import org.whizu.html.Html;
-import org.whizu.widget.Container;
+import org.whizu.annotation.Page;
+import org.whizu.annotation.Template;
+import org.whizu.jquery.mobile.Document;
+import org.whizu.jquery.mobile.Header;
+import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.ui.WhizuUI;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Popup extends Container {
-
-	private String title;
-
-	public Popup(String title) {
-		this.title = title;
-	}
+@Page("/whizu/jqm/widgets/headers")
+@Template("/org/whizu/jquery/mobile/document.html")
+public class Headers extends JQueryMobileApp {
 
 	@Override
-	public Markup compile() {
-		// @formatter:off
-		Element popup = Html.div(this)
-						 .decorate(DataRole.POPUP)
-						 .add(componentList);
-		Content link = Html.a()
-						 .attr("href", "#" + popup.id())
-						 .decorate(DataRel.POPUP)
-						 .attr("data-inline", "true")
-						 .attr("data-transition", "pop")
-						 .add(title);
-		// @formatter:on 
-		return popup.after(link);
+	public void init() {
+		Document document = document();
+		
+		org.whizu.jquery.mobile.Page page = document.activePage();
+		page.header("huidige pagina");
+		org.whizu.jquery.mobile.Page page2 = document.createPage();
 	}
 }

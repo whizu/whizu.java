@@ -57,8 +57,11 @@ public class Page extends Widget {
 
 	@Override
 	public Markup compile() {
-		content_ = Html.div().decorate(DataRole.CONTENT);
-		return Html.div(this).decorate(DataRole.PAGE, this).add(header_, content_, footer_);
+		content_ = Html.div().decorate(DataRole.CONTENT).add("Hi there");
+		Element element = Html.div(this).decorate(DataRole.PAGE, this).add(header_, content_, footer_);
+		jQuery("$.mobile.pageContainer").append(element);
+		jQuery("$.mobile").call("changePage", "#"+id());
+		return element;
 	}
 
 	public Footer footer() {
@@ -84,5 +87,13 @@ public class Page extends Widget {
 	public Page header(Header header) {
 		header_ = header;
 		return this;
+	}
+
+	public Header header(String title) {
+		header_ = new Header(title);
+		if (true || isRendered()) {
+			jQuery("$.mobile.activePage").append(header_);
+		}
+		return header_;
 	}
 }

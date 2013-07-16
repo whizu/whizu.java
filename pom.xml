@@ -8,7 +8,7 @@
 	</parent>
 	<groupId>org.whizu</groupId>
 	<artifactId>whizu-commons</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Whizu Commons</name>
 	<description>Whizu Commons</description>
@@ -51,10 +51,12 @@
 	<modules>
 		<module>whizu-core</module>
 		<module>whizu-jquery-mobile</module>
+		<!-- 
 		<module>whizu-jquery-ui</module>
 		<module>whizu-sencha</module>
 		<module>whizu-pro</module>
 		<module>whizu-tutorial</module>
+		 -->
 	</modules>
 	<dependencies>
 		<dependency>

@@ -36,7 +36,6 @@ import org.whizu.jquery.mobile.ListView;
 import org.whizu.layout.CssLayout;
 import org.whizu.layout.HorizontalLayout;
 import org.whizu.layout.Layout;
-import org.whizu.ui.UI;
 import org.whizu.value.StringValue;
 
 /**
@@ -54,7 +53,7 @@ public class Notebook extends JQueryMobileApp {
 	private Form form;
 
 	@Override
-	public void init(UI ui) {
+	public void init() {
 		addHeader("My notebook");
 		Layout layout = new HorizontalLayout();
 		Form form = createForm();

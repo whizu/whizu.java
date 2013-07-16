@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.whizu</groupId>
 		<artifactId>whizu-commons</artifactId>
-		<version>0.0.4-SNAPSHOT</version>
+		<version>0.0.5-SNAPSHOT</version>
 	</parent>
 	<artifactId>whizu-core</artifactId>
 	<name>Whizu Core</name>

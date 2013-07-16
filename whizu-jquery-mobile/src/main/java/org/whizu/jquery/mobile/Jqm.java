@@ -23,33 +23,32 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
-import org.whizu.html.Html;
-import org.whizu.widget.Widget;
-
 /**
  * @author Rudy D'hauwe
  */
-public class Footer extends Widget {
+public final class Jqm {
 
-	private Theme theme_ = Theme.E;
-
-	private Element title_;
-
-	public Footer() {
+	public static Footer createFooter() {
+		return new Footer();
+	}
+	
+	public static Footer createFooter(String title) {
+		return new Footer(title);
 	}
 
-	/**
-	 * Creates a header with a title wrapped in an H4 heading element.
-	 */
-	public Footer(String title) {
-		title_ = Html.h4(title);
+	public static Header createHeader() {
+		return new Header();
+	}
+	
+	public static Page createPage() {
+		return new Page();
 	}
 
-	@Override
-	public Markup compile() {
-		jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
-		return Html.div(this).decorate(DataRole.FOOTER, theme_).add(title_);
+	public static Page createPage(String id) {
+		return new Page(id);
+	}
+
+	public static Document document() {
+		return new Document();
 	}
 }

@@ -52,7 +52,7 @@ public class Notebook extends JQueryMobileApp {
 	private ListView notebook = new ListView();
 
 	@Override
-	public void init(UI ui) {
+	public void init() {
 		addHeader("My notebook");
 		Layout layout = new HorizontalLayout();
 		Form form = createForm();

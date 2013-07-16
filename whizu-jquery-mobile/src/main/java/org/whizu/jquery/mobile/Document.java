@@ -23,36 +23,29 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
-import org.whizu.html.Html;
-import org.whizu.widget.Container;
+import org.whizu.dom.Component;
+import org.whizu.ui.WhizuUI;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Popup extends Container {
+public class Document {
 
-	private String title;
-
-	public Popup(String title) {
-		this.title = title;
+	org.whizu.ui.Document documentImpl = new WhizuUI().getDocument();
+	
+	public Page createPage() {
+		Page page = new Page();
+		page.render();
+		return page;
 	}
 
-	@Override
-	public Markup compile() {
-		// @formatter:off
-		Element popup = Html.div(this)
-						 .decorate(DataRole.POPUP)
-						 .add(componentList);
-		Content link = Html.a()
-						 .attr("href", "#" + popup.id())
-						 .decorate(DataRel.POPUP)
-						 .attr("data-inline", "true")
-						 .attr("data-transition", "pop")
-						 .add(title);
-		// @formatter:on 
-		return popup.after(link);
+	public <T extends Component> T add(T widget) {
+		new WhizuUI().getDocument().add(widget);
+		return widget;
+	}
+
+	public Page activePage() {
+		Page page = new Page();
+		return page;
 	}
 }

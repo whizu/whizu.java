@@ -58,9 +58,6 @@ import org.whizu.util.Chrono;
  */
 public class WhizuServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final String PACKAGE_NAMES = "package-names";
 
 	private Logger logger = LoggerFactory.getLogger(WhizuServlet.class);

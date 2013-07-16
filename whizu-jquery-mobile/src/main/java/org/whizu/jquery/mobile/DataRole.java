@@ -35,7 +35,9 @@ public enum DataRole implements Decorator {
 	CONTENT("content"),
 	FOOTER("footer"), 
 	HEADER("header"), 
-	PAGE("page"); 
+	PAGE("page"),
+	PANEL("panel"),
+	POPUP("popup"); 
 	// @formatter:on
 
 	private static final String ATTRIBUTE_NAME = "data-role";

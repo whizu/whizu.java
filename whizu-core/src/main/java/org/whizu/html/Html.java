@@ -115,6 +115,14 @@ public class Html {
 		return h3().add(text);
 	}
 
+	public static Element h4() {
+		return tag("h4");
+	}
+	
+	public static Element h4(String text) {
+		return h4().add(text);
+	}
+
 	public static Element hr() {
 		return new Node("hr", true);
 	}

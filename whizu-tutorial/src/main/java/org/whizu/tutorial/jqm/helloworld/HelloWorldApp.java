@@ -36,9 +36,9 @@ import org.whizu.ui.UI;
 public class HelloWorldApp extends JQueryMobileApp {
 
 	@Override
-	public void init(UI ui) {
+	public void init() {
 		addHeader("My jQuery Mobile header");
-		addLabel("Hello world!");
+		//addLabel("Hello world!");
 		addButton("My first button");
 		addButton("My second button");
 		Form form = addForm();

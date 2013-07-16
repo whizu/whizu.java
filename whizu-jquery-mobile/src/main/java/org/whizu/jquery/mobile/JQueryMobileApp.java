@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.annotation.Template;
 import org.whizu.dom.Component;
 import org.whizu.ui.Application;
 import org.whizu.ui.UI;
@@ -31,37 +32,42 @@ import org.whizu.ui.WhizuUI;
 /**
  * @author Rudy D'hauwe
  */
-public class JQueryMobileApp implements Application {
-
-	private UI ui = new WhizuUI();
+//@Template("/org/whizu/jquery/mobile/document.html")
+public abstract class JQueryMobileApp implements Application {
 
 	@Override
-	public void init(UI ui) {
-		this.ui = ui;
-		ui.getDocument().add(ui.createLabel("hello there"));
-	}
-
-	public void addLabel(String label) {
-		ui.getDocument().add(ui.createLabel(label));
-	}
-
-	public void addHeader(String title) {
-		add(new Header("<h2>" + title + "</h2>"));
+	public final void init(UI ui) {
+		init();
 	}
 	
+	protected abstract void init();
+	
+	public Document document() {
+		return Jqm.document();
+	}
+
+	@Deprecated
+	public void addHeader(String title) {
+		add(new Header(title));
+	}
+	
+	@Deprecated
 	protected <T extends Component> T add(T widget) {
-		ui.getDocument().add(widget);
+		new WhizuUI().getDocument().add(widget);
 		return widget;
 	}
 
+	@Deprecated
 	public void addFooter(String title) {
-		add(new Footer("<h2>" + title + "</h2>"));
+		add(new Footer(title));
 	}
 	
+	@Deprecated
 	public void addButton(String title) {
 		add(new Button(title));
 	}
 	
+	@Deprecated
 	public Form addForm() {
 		return add(new Form());
 	}
