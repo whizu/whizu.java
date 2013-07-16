@@ -26,9 +26,7 @@ package org.whizu.tutorial.jqm.api;
 import org.whizu.annotation.Page;
 import org.whizu.annotation.Template;
 import org.whizu.jquery.mobile.Document;
-import org.whizu.jquery.mobile.Header;
 import org.whizu.jquery.mobile.JQueryMobileApp;
-import org.whizu.ui.WhizuUI;
 
 /**
  * @author Rudy D'hauwe
@@ -40,7 +38,6 @@ public class Headers extends JQueryMobileApp {
 	@Override
 	public void init() {
 		Document document = document();
-		
 		org.whizu.jquery.mobile.Page page = document.activePage();
 		page.header("huidige pagina");
 		org.whizu.jquery.mobile.Page page2 = document.createPage();
