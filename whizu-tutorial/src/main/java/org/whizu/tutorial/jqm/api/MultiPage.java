@@ -37,6 +37,9 @@ public class MultiPage extends JQueryMobileApp {
 
 	@Override
 	public void onLoad(Document document) {
+		Page index = document.page();
+		index.header("Welcome !");
+		
 		Page foo = document.addPage("foo");
 		Page bar = document.addPage("bar");
 
@@ -50,6 +53,8 @@ public class MultiPage extends JQueryMobileApp {
 		//foo.p("Take me ").add(Jqm.createHyperlink("back to Foo", foo));
 		bar.footer("Page Footer");
 		
-		Jqm.changePage("foo");
+		Jqm.createButton("foo").onClick(foo).appendTo(index);
+		Jqm.createButton("bar").onClick(foo).appendTo(index);
+		//Jqm.changePage("foo");
 	}
 }

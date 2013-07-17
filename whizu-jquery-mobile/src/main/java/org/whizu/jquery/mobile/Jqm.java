@@ -23,8 +23,6 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.jquery.RequestContext;
-
 /**
  * @author Rudy D'hauwe
  */
@@ -38,15 +36,12 @@ public final class Jqm {
 		return new Document();
 	}
 
+	/*
 	public static void changePage(String id) {
 		RequestContext.getRequest().addExpression("$.mobile.changePage('#" + id + "');");
-		
 	}
+	*/
 
-	/**
-	 * @param string
-	 * @return
-	 */
 	public static ButtonBuilder createButton(String caption) {
 		return new ButtonBuilder(caption);
 	}

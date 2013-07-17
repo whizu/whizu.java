@@ -24,11 +24,9 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.annotation.Template;
-import org.whizu.dom.Component;
 import org.whizu.jquery.RequestContext;
 import org.whizu.ui.Application;
 import org.whizu.ui.UI;
-import org.whizu.ui.WhizuUI;
 
 /**
  * @author Rudy D'hauwe
@@ -48,31 +46,5 @@ public abstract class JQueryMobileApp implements Application {
 	
 	public Document document() {
 		return Jqm.document();
-	}
-
-	@Deprecated
-	public void addHeader(String title) {
-		add(new Header(title));
-	}
-	
-	@Deprecated
-	protected <T extends Component> T add(T widget) {
-		new WhizuUI().getDocument().add(widget);
-		return widget;
-	}
-
-	@Deprecated
-	public void addFooter(String title) {
-		add(new Footer(title));
-	}
-	
-	@Deprecated
-	public void addButton(String title) {
-		add(new Button(title));
-	}
-	
-	@Deprecated
-	public Form addForm() {
-		return add(new Form());
 	}
 }

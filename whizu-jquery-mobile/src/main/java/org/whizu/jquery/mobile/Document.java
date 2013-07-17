@@ -32,22 +32,35 @@ import org.whizu.jquery.Selector;
  */
 public class Document {
 
-	private Selector body = new Selector("$(\"#whizu\")"); //private JQuery body = new Selector("$('body')"); //Selector implements JQuery
-	
-	//verified
+	private Selector body = new Selector("$(\"#whizu\")"); // private JQuery
+															// body = new
+															// Selector("$('body')");
+															// //Selector
+															// implements JQuery
+
+	// verified
 	public Page activePage() {
 		return new PageSelector("$.mobile.activePage");
 	}
 
+	public void add(String string) {
+		body.append(string);
+	}
+
 	public Page addPage(String id) {
 		PageBuilder page = new PageBuilder(id);
-		//body.append(page);
+		// body.append(page);
 		String ex = "$p = $(\"" + page.render() + "\");";
-		RequestContext.getRequest().addExpression(ex + " $p.appendTo($.mobile.pageContainer); "); //$.mobile.changePage($('#second'));");
+		RequestContext.getRequest().addExpression(ex + " $p.appendTo($.mobile.pageContainer); "); // $.mobile.changePage($('#second'));");
 
-		//jQuery("$.mobile.pageContainer").append(p);
-		//jQuery("$.mobile").call("changePage", "#"+id);
-		return page(id); //return page 
+		// jQuery("$.mobile.pageContainer").append(p);
+		// jQuery("$.mobile").call("changePage", "#"+id);
+		return page(id); // return page
+	}
+
+	// verified
+	public Page allPages() {
+		return new PageSelector("$(\"div:jqmData(role='page')\")");
 	}
 
 	public Document append(String content) {
@@ -55,31 +68,27 @@ public class Document {
 		return this;
 	}
 
-	private JQuery jQuery(String selector) {
-		return new Selector(selector).query();
+	// verified
+	public Page first() {
+		return new PageSelector("$(\"div:jqmData(role='page')\").first()");
 	}
-	
-	//verified
+
+	// verified
 	public Page index() {
 		return page("index");
 	}
 
-	//verified
-	public Page page(String id) {
-		return new PageSelector(id, "$('#" + id + "')");
-	}
-	
-	//verified
-	public Page page() {
-		return new PageSelector("$(\"div:jqmData(role='page')\").first()");
-	}
-	
-	//verified
-	public Page allPages() {
-		return new PageSelector("$(\"div:jqmData(role='page')\")");
+	private JQuery jQuery(String selector) {
+		return new Selector(selector).query();
 	}
 
-	public void add(String string) {
-		body.append(string);
+	// verified
+	public Page page() {
+		return index();
+	}
+
+	// verified
+	public Page page(String id) {
+		return new PageSelector(id, "$('#" + id + "')");
 	}
 }
