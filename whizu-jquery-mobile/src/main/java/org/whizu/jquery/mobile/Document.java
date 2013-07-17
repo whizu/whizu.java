@@ -39,7 +39,7 @@ public class Document {
 		return page;
 	}
 
-	public <T extends Component> T add(T widget) {
+	private <T extends Component> T add(T widget) {
 		new WhizuUI().getDocument().add(widget);
 		return widget;
 	}
