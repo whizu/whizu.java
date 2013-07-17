@@ -21,36 +21,33 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.tutorial.jqm.api;
 
-import org.whizu.dom.Decorator;
-import org.whizu.dom.Element;
+import org.whizu.annotation.App;
+import org.whizu.jquery.mobile.Document;
+import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.Jqm;
+import org.whizu.jquery.mobile.Page;
 
 /**
  * @author Rudy D'hauwe
  */
-public enum DataRole implements Decorator {
-
-	// @formatter:off
-	COLLAPSIBLE("collapsible"),
-	CONTENT("content"),
-	FOOTER("footer"), 
-	HEADER("header"), 
-	PAGE("page"),
-	PANEL("panel"),
-	POPUP("popup"); 
-	// @formatter:on
-
-	private static final String ATTRIBUTE_NAME = "data-role";
-
-	private String value_;
-
-	private DataRole(String value) {
-		value_ = value;
-	}
+@App("/whizu/jqm/widgets/multipage")
+public class MultiPage extends JQueryMobileApp {
 
 	@Override
-	public void decorate(Element element) {
-		element.attr(ATTRIBUTE_NAME, value_);
+	public void onLoad(Document document) {
+		Page foo = document.addPage("foo");
+		Page bar = document.addPage("bar");
+
+		foo.header("Foo");
+		foo.p("I'm first in the source order so I'm shown as the page.");
+		foo.p("View internal page called ").add(Jqm.createHyperlink("bar", bar));
+		foo.footer("Page Footer");
+
+		bar.header("Bar");
+		bar.p("I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is being clicked.");
+		foo.p("Take me ").add(Jqm.createHyperlink("back to Foo", foo));
+		bar.footer("Page Footer");
 	}
 }

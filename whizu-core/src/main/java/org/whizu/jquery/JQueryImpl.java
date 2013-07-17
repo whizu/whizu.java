@@ -53,7 +53,7 @@ class JQueryImpl extends Expression implements JQuery {
 	JQueryImpl(String selector) {
 		selector_ = selector;
 	}
-
+	
 	@Override
 	public JQuery addClass(String style) {
 		return call("addClass", style);

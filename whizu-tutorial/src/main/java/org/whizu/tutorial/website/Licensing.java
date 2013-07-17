@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.website;
 
-import org.whizu.annotation.Page;
+import org.whizu.annotation.App;
 import org.whizu.annotation.processing.Markdown;
 import org.whizu.html.Description;
 import org.whizu.html.Title;
@@ -32,7 +32,7 @@ import org.whizu.ui.UI;
 /**
  * @author Rudy D'hauwe
  */
-@Page("/whizu/website/licensing")
+@App("/whizu/website/licensing")
 @Title("Licensing")
 @Description("Whizu is Open Source Software")
 public class Licensing extends AbstractPage {

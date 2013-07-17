@@ -24,6 +24,9 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Element;
+import org.whizu.dom.Markup;
+import org.whizu.html.Html;
+import org.whizu.widget.Widget;
 
 /**
  * The page is the primary unit of interaction in jQuery Mobile and is used to
@@ -36,12 +39,72 @@ import org.whizu.dom.Element;
  * 
  * @author Rudy D'hauwe
  */
-public interface Page {
+class PageImpl extends Widget implements Page {
 
-	public Header header(String title);
+	private Element content_;
 
-	public Element p(String text);
+	private Footer footer_;
 
-	public Footer footer(String title);
+	private Header header_;
 
+	public PageImpl() {
+		super();
+	}
+
+	public PageImpl(String id) {
+		super(id);
+	}
+
+	@Override
+	public Markup compile() {
+		content_ = Html.div().decorate(DataRole.CONTENT);
+		Element element = Html.div(this).decorate(DataRole.PAGE, this).add(header_, content_, footer_);
+		//jQuery("$.mobile.pageContainer").append(element);
+		//jQuery("$.mobile").call("changePage", "#"+id());
+		return element;
+	}
+
+	public Footer footer() {
+		if (footer_ == null) {
+			footer_ = new Footer();
+		}
+
+		return footer_;
+	}
+
+	public PageImpl footer(Footer footer) {
+		footer_ = footer;
+		return this;
+	}
+
+	public Footer footer(String title) {
+		footer(new Footer(title));
+		return footer_;
+	}
+
+	public Header header() {
+		if (header_ == null) {
+			header_ = new Header();
+		}
+		return header_;
+	}
+
+	public Page header(Header header) {
+		header_ = header;
+		return this;
+	}
+
+	public Header header(String title) {
+		header_ = new Header(title);
+		if (true || isRendered()) {
+			jQuery("$.mobile.activePage").append(header_);
+		}
+		return header_;
+	}
+
+	public Element p(String text) {
+		Element p = Html.p(text);
+		content_.add(Html.p(text));
+		return p;
+	}
 }

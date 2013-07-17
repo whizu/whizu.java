@@ -23,12 +23,13 @@
  *******************************************************************************/
 package org.whizu.tutorial.jqm.notebook;
 
-import org.whizu.annotation.Page;
+import org.whizu.annotation.App;
 import org.whizu.annotation.Style;
 import org.whizu.annotation.Submit;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.mobile.Button;
+import org.whizu.jquery.mobile.Document;
 import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.ListItem;
@@ -41,7 +42,7 @@ import org.whizu.value.StringValue;
 /**
  * @author Rudy D'hauwe
  */
-@Page("/whizu/jqm/notebook")
+@App("/whizu/jqm/notebook")
 public class Notebook extends JQueryMobileApp {
 
 	private StringValue title = new StringValue("Title");
@@ -53,7 +54,7 @@ public class Notebook extends JQueryMobileApp {
 	private Form form;
 
 	@Override
-	public void init() {
+	public void onLoad(Document document) {
 		addHeader("My notebook");
 		Layout layout = new HorizontalLayout();
 		Form form = createForm();

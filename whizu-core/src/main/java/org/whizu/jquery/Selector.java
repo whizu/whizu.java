@@ -21,19 +21,30 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.annotation;
+package org.whizu.jquery;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.whizu.dom.Content;
 
 /**
  * @author Rudy D'hauwe
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface Page {
+public class Selector {
 
-	public String value();
+	private String selector_;
+
+	public Selector(String selector) {
+		selector_ = selector;
+	}
+	
+	public void append(Content content) {
+		query().append(content);
+	}
+	
+	public void append(String content) {
+		query().append(content);
+	}
+	
+	public JQuery query() {
+		return RequestContext.getRequest().select(selector_);
+	}
 }

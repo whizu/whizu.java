@@ -1,11 +1,11 @@
 package org.whizu.tutorial.website;
 
-import org.whizu.annotation.Page;
+import org.whizu.annotation.App;
 import org.whizu.annotation.processing.Html;
 import org.whizu.html.Title;
 import org.whizu.ui.UI;
 
-@Page("/whizu/website")
+@App("/whizu/website")
 @Title("Home")
 public class Home extends AbstractPage {
 

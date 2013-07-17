@@ -23,34 +23,14 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Decorator;
-import org.whizu.dom.Element;
+import org.whizu.annotation.Template;
 
 /**
  * @author Rudy D'hauwe
  */
-public enum DataRole implements Decorator {
+@Template("/org/whizu/jquery/mobile/document.html")
+public interface JqmApp {
 
-	// @formatter:off
-	COLLAPSIBLE("collapsible"),
-	CONTENT("content"),
-	FOOTER("footer"), 
-	HEADER("header"), 
-	PAGE("page"),
-	PANEL("panel"),
-	POPUP("popup"); 
-	// @formatter:on
-
-	private static final String ATTRIBUTE_NAME = "data-role";
-
-	private String value_;
-
-	private DataRole(String value) {
-		value_ = value;
-	}
-
-	@Override
-	public void decorate(Element element) {
-		element.attr(ATTRIBUTE_NAME, value_);
-	}
+	public void init(Document document);
+	
 }

@@ -21,36 +21,19 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.annotation;
 
-import org.whizu.dom.Decorator;
-import org.whizu.dom.Element;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Rudy D'hauwe
  */
-public enum DataRole implements Decorator {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface App {
 
-	// @formatter:off
-	COLLAPSIBLE("collapsible"),
-	CONTENT("content"),
-	FOOTER("footer"), 
-	HEADER("header"), 
-	PAGE("page"),
-	PANEL("panel"),
-	POPUP("popup"); 
-	// @formatter:on
-
-	private static final String ATTRIBUTE_NAME = "data-role";
-
-	private String value_;
-
-	private DataRole(String value) {
-		value_ = value;
-	}
-
-	@Override
-	public void decorate(Element element) {
-		element.attr(ATTRIBUTE_NAME, value_);
-	}
+	public String value();
 }

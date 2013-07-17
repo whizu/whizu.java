@@ -25,7 +25,7 @@ package org.whizu.tutorial.helloworld;
 
 import java.util.Date;
 
-import org.whizu.annotation.Page;
+import org.whizu.annotation.App;
 import org.whizu.html.Title;
 import org.whizu.layout.Layout;
 import org.whizu.ui.Application;
@@ -40,7 +40,7 @@ import org.whizu.value.StringValue;
 /**
  * @author Rudy D'hauwe
  */
-@Page("/whizu/tutorial/helloworld")
+@App("/whizu/tutorial/helloworld")
 public class HelloWorld implements Application {
 
 	@Title

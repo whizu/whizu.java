@@ -23,23 +23,21 @@
  *******************************************************************************/
 package org.whizu.tutorial.jqm.api;
 
-import org.whizu.annotation.Page;
-import org.whizu.annotation.Template;
+import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.Document;
 import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.Page;
 
 /**
  * @author Rudy D'hauwe
  */
-@Page("/whizu/jqm/widgets/headers")
-@Template("/org/whizu/jquery/mobile/document.html")
-public class Headers extends JQueryMobileApp {
+@App("/whizu/jqm/widgets/headers")
+public class Headers extends JQueryMobileApp /*implements JqmApp*/ {
 
 	@Override
-	public void init() {
-		Document document = document();
-		org.whizu.jquery.mobile.Page page = document.activePage();
+	public void onLoad(Document document) {
+		Page page = document.activePage();
 		page.header("huidige pagina");
-		org.whizu.jquery.mobile.Page page2 = document.createPage();
+		Page page2 = document.addPage("Nieuw");
 	}
 }

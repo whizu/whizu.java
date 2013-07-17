@@ -21,36 +21,20 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.tutorial.jqm.helloworld;
 
-import org.whizu.dom.Decorator;
-import org.whizu.dom.Element;
+import org.whizu.annotation.App;
+import org.whizu.jquery.mobile.Document;
+import org.whizu.jquery.mobile.JQueryMobileApp;
 
 /**
  * @author Rudy D'hauwe
  */
-public enum DataRole implements Decorator {
-
-	// @formatter:off
-	COLLAPSIBLE("collapsible"),
-	CONTENT("content"),
-	FOOTER("footer"), 
-	HEADER("header"), 
-	PAGE("page"),
-	PANEL("panel"),
-	POPUP("popup"); 
-	// @formatter:on
-
-	private static final String ATTRIBUTE_NAME = "data-role";
-
-	private String value_;
-
-	private DataRole(String value) {
-		value_ = value;
-	}
+@App("/whizu/jqm/helloworld")
+public class HelloWorld extends JQueryMobileApp {
 
 	@Override
-	public void decorate(Element element) {
-		element.attr(ATTRIBUTE_NAME, value_);
+	public void onLoad(Document document) {
+		document.append("Hello world");
 	}
 }

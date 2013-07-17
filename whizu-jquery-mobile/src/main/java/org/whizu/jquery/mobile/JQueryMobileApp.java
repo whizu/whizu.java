@@ -32,15 +32,15 @@ import org.whizu.ui.WhizuUI;
 /**
  * @author Rudy D'hauwe
  */
-//@Template("/org/whizu/jquery/mobile/document.html")
+@Template("/org/whizu/jquery/mobile/document.html")
 public abstract class JQueryMobileApp implements Application {
 
 	@Override
 	public final void init(UI ui) {
-		init();
+		onLoad(Jqm.document());
 	}
 	
-	protected abstract void init();
+	protected abstract void onLoad(Document document);
 	
 	public Document document() {
 		return Jqm.document();

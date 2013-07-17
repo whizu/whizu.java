@@ -28,6 +28,10 @@ package org.whizu.jquery.mobile;
  */
 public final class Jqm {
 
+	public static Button createHyperlink(String caption, Page target) {
+		return new Button(caption).onClick(target);
+	}
+
 	public static Document document() {
 		return new Document();
 	}

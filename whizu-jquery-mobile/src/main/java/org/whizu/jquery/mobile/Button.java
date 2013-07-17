@@ -150,4 +150,9 @@ public class Button extends Widget {
 		});
 		// }
 	}
+
+	public Button onClick(Page page) {
+		// TODO Auto-generated method stub
+		return this;
+	}
 }

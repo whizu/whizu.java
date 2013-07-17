@@ -28,14 +28,14 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.whizu.annotation.Page;
+import org.whizu.annotation.App;
 import org.whizu.annotation.TypeReporter;
 import org.whizu.ui.Application;
 
 /**
  * @author Rudy D'hauwe
  */
-class Configuration implements TypeReporter<Page> {
+class Configuration implements TypeReporter<App> {
 
 	private final Logger log = LoggerFactory.getLogger(Configuration.class);
 
@@ -70,7 +70,7 @@ class Configuration implements TypeReporter<Page> {
 	}
 	
 	@Override
-	public void report(Page annotation, String className) {
+	public void report(App annotation, String className) {
 		if (log.isDebugEnabled()) {
 			log.debug("@Page(\"" + annotation.value() + "\") on " + className);
 		}

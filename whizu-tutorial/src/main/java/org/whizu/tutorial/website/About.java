@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.website;
 
-import org.whizu.annotation.Page;
+import org.whizu.annotation.App;
 import org.whizu.annotation.processing.Html;
 import org.whizu.annotation.processing.Markdown;
 import org.whizu.html.Description;
@@ -33,7 +33,7 @@ import org.whizu.ui.UI;
 /**
  * @author Rudy D'hauwe
  */
-@Page("/whizu/website/about")
+@App("/whizu/website/about")
 @Title("About us - Whizu")
 @Description("About us at Whizu")
 public class About extends AbstractPage {

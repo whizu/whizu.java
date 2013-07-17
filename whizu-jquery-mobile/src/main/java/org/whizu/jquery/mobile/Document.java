@@ -23,29 +23,42 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Component;
-import org.whizu.ui.WhizuUI;
+import org.whizu.jquery.JQuery;
+import org.whizu.jquery.Selector;
 
 /**
  * @author Rudy D'hauwe
  */
 public class Document {
 
-	org.whizu.ui.Document documentImpl = new WhizuUI().getDocument();
+	private Selector body = new Selector("$('body')"); //private JQuery body = new Selector("$('body')"); //Selector implements JQuery
 	
-	public Page createPage() {
-		Page page = new Page();
-		page.render();
-		return page;
-	}
-
-	private <T extends Component> T add(T widget) {
-		new WhizuUI().getDocument().add(widget);
-		return widget;
-	}
-
 	public Page activePage() {
-		Page page = new Page();
-		return page;
+		return new PageSelector("$.mobile.activePage");
+	}
+
+	public Page addPage(String id) {
+		PageImpl page = new PageImpl(id);
+		//body.append(page);
+		jQuery("$.mobile.pageContainer").append(page);
+		//jQuery("$.mobile").call("changePage", "#"+id());
+		return page(id); //return page 
+	}
+
+	public Document append(String content) {
+		body.append(content);
+		return this;
+	}
+
+	private JQuery jQuery(String selector) {
+		return new Selector(selector).query();
+	}
+
+	public Page page(String id) {
+		return new PageSelector("$('" + id + "')");
+	}
+	
+	public Page page() {
+		return new PageSelector("div:jqmData(id='')");
 	}
 }
