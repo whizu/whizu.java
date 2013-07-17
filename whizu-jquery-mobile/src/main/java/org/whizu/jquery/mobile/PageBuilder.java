@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
@@ -39,7 +40,7 @@ import org.whizu.widget.Widget;
  * 
  * @author Rudy D'hauwe
  */
-class PageImpl extends Widget implements Page {
+class PageBuilder extends Widget implements Page {
 
 	private Element content_;
 
@@ -47,17 +48,17 @@ class PageImpl extends Widget implements Page {
 
 	private Header header_;
 
-	public PageImpl() {
+	public PageBuilder() {
 		super();
 	}
 
-	public PageImpl(String id) {
+	public PageBuilder(String id) {
 		super(id);
 	}
 
 	@Override
 	public Markup compile() {
-		content_ = Html.div().decorate(DataRole.CONTENT);
+		content_ = Html.div().decorate(DataRole.CONTENT).add("page " + id());
 		Element element = Html.div(this).decorate(DataRole.PAGE, this).add(header_, content_, footer_);
 		//jQuery("$.mobile.pageContainer").append(element);
 		//jQuery("$.mobile").call("changePage", "#"+id());
@@ -72,7 +73,7 @@ class PageImpl extends Widget implements Page {
 		return footer_;
 	}
 
-	public PageImpl footer(Footer footer) {
+	public PageBuilder footer(Footer footer) {
 		footer_ = footer;
 		return this;
 	}
@@ -96,7 +97,7 @@ class PageImpl extends Widget implements Page {
 
 	public Header header(String title) {
 		header_ = new Header(title);
-		if (true || isRendered()) {
+		if (isRendered()) {
 			jQuery("$.mobile.activePage").append(header_);
 		}
 		return header_;
@@ -106,5 +107,10 @@ class PageImpl extends Widget implements Page {
 		Element p = Html.p(text);
 		content_.add(Html.p(text));
 		return p;
+	}
+
+	@Override
+	public void append(Content content) {
+		content_.add(content);
 	}
 }

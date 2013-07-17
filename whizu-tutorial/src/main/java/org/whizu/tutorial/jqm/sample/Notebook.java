@@ -32,12 +32,13 @@ import org.whizu.jquery.mobile.Button;
 import org.whizu.jquery.mobile.Document;
 import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.ListItem;
 import org.whizu.jquery.mobile.ListView;
+import org.whizu.jquery.mobile.Page;
 import org.whizu.layout.CssLayout;
 import org.whizu.layout.HorizontalLayout;
 import org.whizu.layout.Layout;
-import org.whizu.ui.UI;
 import org.whizu.value.StringValue;
 
 /**
@@ -54,7 +55,8 @@ public class Notebook extends JQueryMobileApp {
 
 	@Override
 	public void onLoad(Document document) {
-		addHeader("My notebook");
+		Page page = document.addPage("index");
+		page.header("My notebook");
 		Layout layout = new HorizontalLayout();
 		Form form = createForm();
 		Layout left = createLeftColumn();
@@ -63,8 +65,11 @@ public class Notebook extends JQueryMobileApp {
 		right.add(notebook);
 		layout.add(left);
 		layout.add(right);
-		add(layout);
-		addFooter("jQuery Mobile by Whizu");
+		//layout.appendTo(page);
+		page.append(layout);
+		page.footer("jQuery Mobile by Whizu");
+		
+		Jqm.changePage("index");
 	}
 
 	@Style("width:400px")

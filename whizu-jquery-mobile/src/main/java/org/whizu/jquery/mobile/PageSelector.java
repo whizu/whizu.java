@@ -5,25 +5,39 @@ import org.whizu.jquery.Selector;
 
 class PageSelector extends Selector implements Page {
 
+	private String id_;
+
 	public PageSelector(String selector) {
 		super(selector);
 	}
 
+	public PageSelector(String id, String selector) {
+		this(selector);
+		id_ = id;
+	}
+
 	@Override
 	public Header header(String title) {
-		// TODO Auto-generated method stub
-		return null;
+		Header header = new Header(title);
+		prepend(header);
+		return header;
 	}
 
 	@Override
 	public Element p(String text) {
-		// TODO Auto-generated method stub
+		append(text);
 		return null;
 	}
 
 	@Override
 	public Footer footer(String title) {
-		// TODO Auto-generated method stub
-		return null;
+		Footer footer = new Footer(title);
+		append(footer);
+		return footer;
+	}
+
+	@Override
+	public String id() {
+		return id_;
 	}
 }

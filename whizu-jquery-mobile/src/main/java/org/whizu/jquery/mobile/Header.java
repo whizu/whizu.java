@@ -97,7 +97,7 @@ public class Header extends Widget {
 
 	@Override
 	public Markup compile() {
-		jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate"); //necessary?
+		//jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate"); //necessary?
 		return Html.div(this).decorate(DataRole.HEADER, theme_, position_, fullscreen_).add(title_).add(buttonList_);
 	}
 

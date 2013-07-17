@@ -24,20 +24,34 @@
 package org.whizu.tutorial.jqm.api;
 
 import org.whizu.annotation.App;
+import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.mobile.Document;
 import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
 
 /**
  * @author Rudy D'hauwe
  */
 @App("/whizu/jqm/widgets/headers")
-public class Headers extends JQueryMobileApp /*implements JqmApp*/ {
+public class Headers extends JQueryMobileApp /* implements JqmApp */{
 
 	@Override
 	public void onLoad(Document document) {
-		Page page = document.activePage();
-		page.header("huidige pagina");
-		Page page2 = document.addPage("Nieuw");
+		Page page = document.page(); //addPage("Nieuw");
+		Page next = document.addPage("Next");
+
+		page.header("Huidige pagina");
+		Jqm.createButton("My button 1")
+			.onClick(next)
+			.appendTo(page);
+
+		next.header("Volgende pagina");
+		Jqm.createButton("My button 2")
+				.onClick(page)
+				.appendTo(next);
+
+		//Jqm.changePage("Nieuw");
+		//RequestContext.getRequest().addExpression("$idd = $(\"div:jqmData(role='page')\").eq(1).attr('id'); $.mobile.changePage('#'+$idd);");
 	}
 }

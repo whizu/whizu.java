@@ -21,35 +21,22 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.tutorial.jqm.api;
+package org.whizu.tutorial.jqm.helloworld;
 
 import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.Document;
 import org.whizu.jquery.mobile.JQueryMobileApp;
-import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
 
 /**
  * @author Rudy D'hauwe
  */
-@App("/whizu/jqm/widgets/multipage")
-public class MultiPage extends JQueryMobileApp {
+@App("/whizu/jqm/basic")
+public class Basic extends JQueryMobileApp {
 
 	@Override
 	public void onLoad(Document document) {
-		Page foo = document.addPage("foo");
-		Page bar = document.addPage("bar");
-
-		foo.header("Foos");
-		foo.p("I'm first in the source order so I'm shown as the page.");
-		//foo.p("View internal page called ").add(Jqm.createHyperlink("bar", bar));
-		foo.footer("Page Footer");
-
-		bar.header("Bars");
-		bar.p("I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is being clicked.");
-		//foo.p("Take me ").add(Jqm.createHyperlink("back to Foo", foo));
-		bar.footer("Page Footer");
-		
-		Jqm.changePage("foo");
+		Page page = document.page();
+		page.header("Basic Page Template");
 	}
 }

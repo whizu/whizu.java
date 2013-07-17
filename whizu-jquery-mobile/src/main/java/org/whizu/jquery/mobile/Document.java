@@ -24,6 +24,7 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.jquery.JQuery;
+import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Selector;
 
 /**
@@ -31,17 +32,21 @@ import org.whizu.jquery.Selector;
  */
 public class Document {
 
-	private Selector body = new Selector("$('body')"); //private JQuery body = new Selector("$('body')"); //Selector implements JQuery
+	private Selector body = new Selector("$(\"#whizu\")"); //private JQuery body = new Selector("$('body')"); //Selector implements JQuery
 	
+	//verified
 	public Page activePage() {
 		return new PageSelector("$.mobile.activePage");
 	}
 
 	public Page addPage(String id) {
-		PageImpl page = new PageImpl(id);
+		PageBuilder page = new PageBuilder(id);
 		//body.append(page);
-		jQuery("$.mobile.pageContainer").append(page);
-		//jQuery("$.mobile").call("changePage", "#"+id());
+		String ex = "$p = $(\"" + page.render() + "\");";
+		RequestContext.getRequest().addExpression(ex + " $p.appendTo($.mobile.pageContainer); "); //$.mobile.changePage($('#second'));");
+
+		//jQuery("$.mobile.pageContainer").append(p);
+		//jQuery("$.mobile").call("changePage", "#"+id);
 		return page(id); //return page 
 	}
 
@@ -53,12 +58,28 @@ public class Document {
 	private JQuery jQuery(String selector) {
 		return new Selector(selector).query();
 	}
+	
+	//verified
+	public Page index() {
+		return page("index");
+	}
 
+	//verified
 	public Page page(String id) {
-		return new PageSelector("$('" + id + "')");
+		return new PageSelector(id, "$('#" + id + "')");
 	}
 	
+	//verified
 	public Page page() {
-		return new PageSelector("div:jqmData(id='')");
+		return new PageSelector("$(\"div:jqmData(role='page')\").first()");
+	}
+	
+	//verified
+	public Page allPages() {
+		return new PageSelector("$(\"div:jqmData(role='page')\")");
+	}
+
+	public void add(String string) {
+		body.append(string);
 	}
 }

@@ -40,6 +40,10 @@ public class Selector {
 		query().append(content);
 	}
 	
+	public void prepend(Content content) {
+		query().prepend(content);
+	}
+	
 	public void append(String content) {
 		query().append(content);
 	}

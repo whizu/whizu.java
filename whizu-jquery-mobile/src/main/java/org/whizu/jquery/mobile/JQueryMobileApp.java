@@ -25,6 +25,7 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.annotation.Template;
 import org.whizu.dom.Component;
+import org.whizu.jquery.RequestContext;
 import org.whizu.ui.Application;
 import org.whizu.ui.UI;
 import org.whizu.ui.WhizuUI;
@@ -38,6 +39,9 @@ public abstract class JQueryMobileApp implements Application {
 	@Override
 	public final void init(UI ui) {
 		onLoad(Jqm.document());
+		//works:RequestContext.getRequest().addExpression("$('#whizu').closest(\":jqmData(role='page')\").trigger('pagecreate');");
+		//works also:
+		RequestContext.getRequest().addExpression("$('#whizu').parent().trigger('pagecreate');");
 	}
 	
 	protected abstract void onLoad(Document document);

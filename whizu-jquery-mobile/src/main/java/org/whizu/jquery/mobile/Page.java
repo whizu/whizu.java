@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 
 /**
@@ -43,5 +44,9 @@ public interface Page {
 	public Element p(String text);
 
 	public Footer footer(String title);
+
+	public String id();
+
+	public void append(Content content);
 
 }

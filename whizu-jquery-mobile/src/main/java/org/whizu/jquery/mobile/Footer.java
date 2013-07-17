@@ -49,7 +49,7 @@ public class Footer extends Widget {
 
 	@Override
 	public Markup compile() {
-		jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
+		//jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
 		return Html.div(this).decorate(DataRole.FOOTER, theme_).add(title_);
 	}
 }
