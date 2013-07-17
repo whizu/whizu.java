@@ -36,13 +36,13 @@ public abstract class JQueryMobileApp implements Application {
 
 	@Override
 	public final void init(UI ui) {
-		onLoad(Jqm.document());
+		onLoad(Jqm.document().page());
 		//works:RequestContext.getRequest().addExpression("$('#whizu').closest(\":jqmData(role='page')\").trigger('pagecreate');");
 		//works also:
 		RequestContext.getRequest().addExpression("$('#whizu').parent().trigger('pagecreate');");
 	}
 	
-	protected abstract void onLoad(Document document);
+	protected abstract void onLoad(Page page);
 	
 	public Document document() {
 		return Jqm.document();

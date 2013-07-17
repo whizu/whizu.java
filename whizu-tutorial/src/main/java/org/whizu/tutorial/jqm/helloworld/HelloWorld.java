@@ -24,8 +24,8 @@
 package org.whizu.tutorial.jqm.helloworld;
 
 import org.whizu.annotation.App;
-import org.whizu.jquery.mobile.Document;
 import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.Page;
 
 /**
  * @author Rudy D'hauwe
@@ -34,7 +34,7 @@ import org.whizu.jquery.mobile.JQueryMobileApp;
 public class HelloWorld extends JQueryMobileApp {
 
 	@Override
-	public void onLoad(Document document) {
-		document.append("Hello world");
+	public void onLoad(Page page) {
+		page.append("Hello world");
 	}
 }

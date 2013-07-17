@@ -45,4 +45,8 @@ public final class Jqm {
 	public static ButtonBuilder createButton(String caption) {
 		return new ButtonBuilder(caption);
 	}
+
+	public static Page addPage(String id) {
+		return document().addPage(id);
+	}
 }

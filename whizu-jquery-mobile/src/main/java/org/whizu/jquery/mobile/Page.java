@@ -49,4 +49,5 @@ public interface Page {
 
 	public void append(Content content);
 
+	public void append(String string);
 }

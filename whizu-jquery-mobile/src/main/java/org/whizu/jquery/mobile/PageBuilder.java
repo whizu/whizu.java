@@ -113,4 +113,9 @@ class PageBuilder extends Widget implements Page {
 	public void append(Content content) {
 		content_.add(content);
 	}
+
+	@Override
+	public void append(String text) {
+		content_.add(text);
+	}
 }

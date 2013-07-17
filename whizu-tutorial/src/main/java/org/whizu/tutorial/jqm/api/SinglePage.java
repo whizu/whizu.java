@@ -24,8 +24,6 @@
 package org.whizu.tutorial.jqm.api;
 
 import org.whizu.annotation.App;
-import org.whizu.jquery.RequestContext;
-import org.whizu.jquery.mobile.Document;
 import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
@@ -37,16 +35,16 @@ import org.whizu.jquery.mobile.Page;
 public class SinglePage extends JQueryMobileApp {
 
 	@Override
-	public void onLoad(Document document) {
-		Page page = document.page();// document.index(); //document.page(); //document.activePage(); //document.page(); //document.page("index");
+	public void onLoad(Page page) {
+		//Page page = document.page();// document.index(); //document.page(); //document.activePage(); //document.page(); //document.page("index");
 		page.header("Page Title Do it Now");
 		page.p("Page content goes here. <a href='#first'>first page</a> <a href='#second'>second page</a>");
 		page.footer("Page Footer");
 	
-		page = document.addPage("second");
+		page = Jqm.addPage("second");
 		page.header("my second header");
 		
-		page = document.addPage("first");
+		page = Jqm.addPage("first");
 		page.p("hello <a href='#'>home</a> <a href='#index'>index</a>");
 		page.header("Cool");
 	}

@@ -24,7 +24,6 @@
 package org.whizu.tutorial.jqm.helloworld;
 
 import org.whizu.annotation.App;
-import org.whizu.jquery.mobile.Document;
 import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.Page;
 
@@ -35,8 +34,7 @@ import org.whizu.jquery.mobile.Page;
 public class Basic extends JQueryMobileApp {
 
 	@Override
-	public void onLoad(Document document) {
-		Page page = document.page();
+	public void onLoad(Page page) {
 		page.header("Basic Page Template");
 	}
 }

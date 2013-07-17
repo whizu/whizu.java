@@ -29,7 +29,6 @@ import org.whizu.annotation.Submit;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.mobile.Button;
-import org.whizu.jquery.mobile.Document;
 import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.ListItem;
@@ -55,8 +54,7 @@ public class Notebook extends JQueryMobileApp {
 	private Form form;
 
 	@Override
-	public void onLoad(Document document) {
-		Page page = document.page();
+	public void onLoad(Page page) {
 		page.header("My notebook");
 		Layout layout = new HorizontalLayout();
 		Form form = createForm();

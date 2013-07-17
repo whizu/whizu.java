@@ -24,7 +24,6 @@
 package org.whizu.tutorial.jqm.api;
 
 import org.whizu.annotation.App;
-import org.whizu.jquery.mobile.Document;
 import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
@@ -36,12 +35,11 @@ import org.whizu.jquery.mobile.Page;
 public class MultiPage extends JQueryMobileApp {
 
 	@Override
-	public void onLoad(Document document) {
-		Page index = document.page();
+	public void onLoad(Page index) {
 		index.header("Welcome !");
 		
-		Page foo = document.addPage("foo");
-		Page bar = document.addPage("bar");
+		Page foo = Jqm.addPage("foo");
+		Page bar = Jqm.addPage("bar");
 
 		foo.header("Foos");
 		foo.p("I'm first in the source order so I'm shown as the page.");
@@ -54,7 +52,7 @@ public class MultiPage extends JQueryMobileApp {
 		bar.footer("Page Footer");
 		
 		Jqm.createButton("foo").onClick(foo).appendTo(index);
-		Jqm.createButton("bar").onClick(foo).appendTo(index);
+		Jqm.createButton("bar").onClick(bar).appendTo(index);
 		//Jqm.changePage("foo");
 	}
 }

@@ -24,8 +24,6 @@
 package org.whizu.tutorial.jqm.api;
 
 import org.whizu.annotation.App;
-import org.whizu.jquery.RequestContext;
-import org.whizu.jquery.mobile.Document;
 import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
@@ -37,9 +35,8 @@ import org.whizu.jquery.mobile.Page;
 public class Headers extends JQueryMobileApp /* implements JqmApp */{
 
 	@Override
-	public void onLoad(Document document) {
-		Page page = document.page(); //addPage("Nieuw");
-		Page next = document.addPage("Next");
+	public void onLoad(Page page) {
+		Page next = Jqm.addPage("Next");
 
 		page.header("Huidige pagina");
 		Jqm.createButton("My button 1")
