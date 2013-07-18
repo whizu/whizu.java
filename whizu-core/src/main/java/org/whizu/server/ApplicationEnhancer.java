@@ -68,10 +68,11 @@ public class ApplicationEnhancer {
 			}
 
 			ClassPool classPool = ClassPool.getDefault();
-			//Add the classloader of your application's classes so Javassist can find them
+			// Add the classloader of your application's classes so Javassist can
+			// find them
 			ClassLoader loader = getClass().getClassLoader();
 			classPool.appendClassPath(new LoaderClassPath(loader));
-			
+
 			CtClass ctClass = classPool.get(className);
 
 			String stylesheet = null;
@@ -83,7 +84,7 @@ public class ApplicationEnhancer {
 			if (ctClass.hasAnnotation(Title.class)) {
 				title = ((Title) ctClass.getAnnotation(Title.class)).value();
 			}
-			
+
 			String expires = getExpires(ctClass);
 			String template = getTemplate(ctClass);
 			Description description = getAnnotation(ctClass, Description.class);
@@ -122,7 +123,9 @@ public class ApplicationEnhancer {
 					log.debug("Enhancing field " + field.getName() + " with annotation @Html");
 					CtConstructor[] constructors = ctClass.getConstructors();
 					for (CtConstructor constructor : constructors) {
-						constructor.insertAfter(field.getName() + "=org.whizu.annotation.processing.Support.getValue(getClass(), \"" + field.getName() + "\");");
+						constructor.insertAfter(field.getName()
+								+ "=org.whizu.annotation.processing.Support.getValue(getClass(), \"" + field.getName()
+								+ "\");");
 					}
 				}
 			}
@@ -141,10 +144,10 @@ public class ApplicationEnhancer {
 			attr.addAnnotation(annot);
 			ccFile.addAttribute(attr);
 
-			//ctClass.setName(ctClass.getName()+"Impl"); //google app engine
-			//ctClass.setName(ctClass.getName() + "Impl");
+			// ctClass.setName(ctClass.getName()+"Impl"); //google app engine
+			// ctClass.setName(ctClass.getName() + "Impl");
 			Class<Application> newClass = getEnhancedClass(ctClass);
-			
+
 			PageFactory factory = new PageFactory(newClass);
 			factory.title(title);
 			factory.expires(expires);
@@ -155,7 +158,13 @@ public class ApplicationEnhancer {
 			factory.description(description);
 			log.debug("Enhanced class returns {}", factory);
 			return factory;
-		} catch (NotFoundException | CannotCompileException | ClassNotFoundException e) {
+		} catch (NotFoundException e) {
+			log.debug(e.getMessage(), e);
+			throw new IllegalStateException(e);
+		} catch (CannotCompileException e) {
+			log.debug(e.getMessage(), e);
+			throw new IllegalStateException(e);
+		} catch (ClassNotFoundException e) {
 			log.debug(e.getMessage(), e);
 			throw new IllegalStateException(e);
 		} catch (Exception e) {
@@ -170,15 +179,15 @@ public class ApplicationEnhancer {
 		Template template = getAnnotation(ctClass, Template.class);
 		return (template == null) ? null : template.value();
 	}
-	
+
 	private String getExpires(CtClass ctClass) throws ClassNotFoundException, NotFoundException {
 		Expires expires = getAnnotation(ctClass, Expires.class);
 		return (expires == null) ? null : expires.value();
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T extends java.lang.annotation.Annotation> T getAnnotation(CtClass ctClass,
-			Class<T> annotationClass) throws ClassNotFoundException, NotFoundException {
+	private <T extends java.lang.annotation.Annotation> T getAnnotation(CtClass ctClass, Class<T> annotationClass)
+			throws ClassNotFoundException, NotFoundException {
 		if (ctClass.hasAnnotation(annotationClass)) {
 			return ((T) ctClass.getAnnotation(annotationClass));
 		} else {

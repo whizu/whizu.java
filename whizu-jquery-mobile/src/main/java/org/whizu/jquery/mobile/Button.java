@@ -45,41 +45,42 @@ public class Button extends Widget {
 
 	// private Log log = LogFactory.getLog(Button.class);
 
-	private String title;
-
-	public enum Type {
-		INPUT, BUTTON, SUBMIT, RESET, ANCHOR, ICON_ONLY;
-	};
-
 	public enum Inline {
-		TRUE("true"), FALSE("false");
+		FALSE("false"), TRUE("true");
 
 		protected String value;
 
 		Inline(String value) {
 			this.value = value;
 		}
+	}
+
+	public enum Type {
+		ANCHOR, BUTTON, ICON_ONLY, INPUT, RESET, SUBMIT;
 	};
 
-	private Type type = Type.INPUT;
-
-	private Inline inline = Inline.FALSE;
-
-	private Mini mini = Mini.FALSE;
-
-	private Theme theme = Theme.C;
+	public static ButtonBuilder builder(String title) {
+		return new ButtonBuilder(title);
+	};
 
 	private Icon icon;
 
+	private Inline inline = Inline.FALSE;
+
+	public Mini mini = Mini.FALSE;
+
+	private Page onClick;
+
+	private Theme theme = Theme.C;
+
+	private String title;
+
+	private Type type = Type.INPUT;
+
+	private Popup onClickPopup;
+
 	public Button(String title) {
 		this.title = title;
-	}
-
-	public Button(String title, Type type, Inline inline, Mini mini) {
-		this.title = title;
-		this.type = type;
-		this.inline = inline;
-		this.mini = mini;
 	}
 
 	/*
@@ -87,37 +88,11 @@ public class Button extends Widget {
 	 * super.css(clazz); }
 	 */
 
-	public Button icon(Icon icon) {
-		this.icon = icon;
-		return this;
-	}
-
-	@Override
-	public Markup compile() {
-		jQuery(this).trigger("create");
-		switch (type) {
-		case INPUT:
-			Element button = Html.input(this).attr("type", "button").attr("value", title)
-					.attr("data-inline", inline.value);
-			button.decorate(icon, theme, mini, this);
-			addClickListener();
-			return button;
-		case SUBMIT:
-			Element submit = Html.input(this).attr("type", "submit").attr("value", title)
-					.attr("data-inline", inline.value).attr("data-mini", mini.value);
-			submit.decorate(icon, theme, mini);
-			return submit;
-		case RESET:
-			return Html.input(this).attr("type", "reset").attr("value", title).attr("data-inline", inline.value)
-					.attr("data-mini", mini.value);
-		case BUTTON:
-			return Html.button(this).attr("data-inline", inline.value).attr("data-mini", mini.value).add(title);
-		case ANCHOR:
-			return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
-					.attr("data-mini", mini.value).add(title);
-		default:
-			throw new IllegalArgumentException("Unsupported button type: " + type);
-		}
+	public Button(String title, Type type, Inline inline, Mini mini) {
+		this.title = title;
+		this.type = type;
+		this.inline = inline;
+		this.mini = mini;
 	}
 
 	private void addClickListener() {
@@ -128,8 +103,8 @@ public class Button extends Widget {
 			@Override
 			public void execute() {
 				JavaScript.preventDefault();
-				
-				String url = "http://localhost:8090/whizu?id=" + Button.this.id(); //listener.id();
+
+				String url = "http://localhost:8090/whizu?id=" + Button.this.id(); // listener.id();
 
 				Function data = new Function() {
 					@Override
@@ -151,8 +126,60 @@ public class Button extends Widget {
 		// }
 	}
 
+	public void appendTo(Page page) {
+		((PageSelector) page).append(this);
+	}
+
+	@Override
+	public Markup compile() {
+		//jQuery(this).trigger("create");
+		if (onClick != null) {
+			return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
+					.attr("data-mini", mini.value).attr("href", "#" + onClick.id()).add(title);
+		} else if (onClickPopup != null) {
+			return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
+					.attr("data-mini", mini.value).attr("data-rel", "popup").attr("href", "#" + onClickPopup.id()).add(title);
+		}
+		else {
+
+			switch (type) {
+			case INPUT:
+				Element button = Html.input(this).attr("type", "button").attr("value", title)
+						.attr("data-inline", inline.value);
+				button.decorate(icon, theme, mini, this);
+				addClickListener();
+				return button;
+			case SUBMIT:
+				Element submit = Html.input(this).attr("type", "submit").attr("value", title)
+						.attr("data-inline", inline.value).attr("data-mini", mini.value);
+				submit.decorate(icon, theme, mini);
+				return submit;
+			case RESET:
+				return Html.input(this).attr("type", "reset").attr("value", title).attr("data-inline", inline.value)
+						.attr("data-mini", mini.value);
+			case BUTTON:
+				return Html.button(this).attr("data-inline", inline.value).attr("data-mini", mini.value).add(title);
+			case ANCHOR:
+				return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
+						.attr("data-mini", mini.value).add(title);
+			default:
+				throw new IllegalArgumentException("Unsupported button type: " + type);
+			}
+		}
+	}
+
+	public Button icon(Icon icon) {
+		this.icon = icon;
+		return this;
+	}
+
 	public Button onClick(Page page) {
-		// TODO Auto-generated method stub
+		this.onClick = page;
+		return this;
+	}
+
+	public Button onClick(Popup popup) {
+		this.onClickPopup = popup;
 		return this;
 	}
 }

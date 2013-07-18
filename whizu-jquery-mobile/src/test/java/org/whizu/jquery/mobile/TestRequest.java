@@ -23,36 +23,19 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
-import org.whizu.html.Html;
-import org.whizu.widget.Container;
+import org.whizu.jquery.AbstractRequest;
+import org.whizu.jquery.Request;
+import org.whizu.jquery.Session;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Popup extends Container {
+public class TestRequest extends AbstractRequest implements Request {
 
-	public Popup(String id) {
-		id_ = id;
-	}
-
+	Session theSession = new TestSession();
+	
 	@Override
-	public Markup compile() {
-		// @formatter:off
-		Element popup = Html.div(this)
-						 .decorate(DataRole.POPUP)
-						 .add(componentList);
-		/*
-		Content link = Html.a()
-						 .attr("href", "#" + popup.id())
-						 .decorate(DataRel.POPUP)
-						 .attr("data-inline", "true")
-						 .attr("data-transition", "pop")
-						 .add("title");
-		return popup.after(link);
-		*/
-		// @formatter:on 
-		return popup;
+	public Session session() {
+		return theSession;
 	}
 }

@@ -53,7 +53,7 @@ public class Header extends Widget {
 	private Theme theme_;
 
 	private Element title_;
-
+	
 	/**
 	 * Creates a header without a title. The heading title in the header bar has
 	 * some margin that will give the bar its height. If you choose not to use a
@@ -69,6 +69,10 @@ public class Header extends Widget {
 	 */
 	public Header(String title) {
 		title_ = Html.h1(title);
+	}
+
+	public static HeaderBuilder builder() {
+		return new HeaderBuilder();
 	}
 	
 	/**
@@ -127,6 +131,15 @@ public class Header extends Widget {
 	 */
 	public Header theme(Theme theme) {
 		theme_ = theme;
+		return this;
+	}
+
+	public void on(Page page) {
+		((PageSelector) page).header(this);
+	}
+
+	public Header title(String title) {
+		title_ = Html.h1(title);
 		return this;
 	}
 }

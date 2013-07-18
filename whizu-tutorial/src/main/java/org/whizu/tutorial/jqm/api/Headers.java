@@ -41,11 +41,13 @@ public class Headers extends JQueryMobileApp /* implements JqmApp */{
 		page.header("Huidige pagina");
 		Jqm.createButton("My button 1")
 			.onClick(next)
+			.build()
 			.appendTo(page);
 
 		next.header("Volgende pagina");
 		Jqm.createButton("My button 2")
 				.onClick(page)
+				.build()
 				.appendTo(next);
 
 		//Jqm.changePage("Nieuw");

@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Content;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Selector;
@@ -64,6 +65,11 @@ public class Document {
 	}
 
 	public Document append(String content) {
+		body.append(content);
+		return this;
+	}
+	
+	public Document append(Content content) {
 		body.append(content);
 		return this;
 	}

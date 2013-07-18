@@ -22,6 +22,10 @@ class PageSelector extends Selector implements Page {
 		prepend(header);
 		return header;
 	}
+	
+	protected void header(Header header) {
+		prepend(header);
+	}
 
 	@Override
 	public Element p(String text) {

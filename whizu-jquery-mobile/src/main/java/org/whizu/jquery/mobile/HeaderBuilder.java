@@ -1,0 +1,26 @@
+package org.whizu.jquery.mobile;
+
+public class HeaderBuilder implements Builder<Header> {
+
+	private Header build_ = new Header();
+
+	public HeaderBuilder title(String title) {
+		build_.title(title);
+		return this;
+	}
+
+	public Header build() {
+		return build_;
+	}
+
+	public HeaderButtonBuilder<HeaderBuilder> button(String title) {
+		return new HeaderButtonBuilder<HeaderBuilder>(title, new Sink<Button, HeaderBuilder>() {
+
+			@Override
+			public HeaderBuilder done(Button build) {
+				build_.addButton(build);
+				return HeaderBuilder.this;
+			}
+		});
+	}
+}

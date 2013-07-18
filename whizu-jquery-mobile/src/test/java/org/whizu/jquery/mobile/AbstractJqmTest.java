@@ -23,36 +23,50 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
-import org.whizu.html.Html;
-import org.whizu.widget.Container;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.whizu.dom.Content;
+import org.whizu.dom.Identity;
+import org.whizu.jquery.Request;
+import org.whizu.jquery.RequestContext;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Popup extends Container {
+public abstract class AbstractJqmTest {
 
-	public Popup(String id) {
-		id_ = id;
+	protected TestRequest theRequest;
+	
+	protected Page page;
+
+	protected Identity createIdentity(final String id) {
+		return new Identity() {
+
+			@Override
+			public String id() {
+				return id;
+			}};
 	}
 
-	@Override
-	public Markup compile() {
-		// @formatter:off
-		Element popup = Html.div(this)
-						 .decorate(DataRole.POPUP)
-						 .add(componentList);
-		/*
-		Content link = Html.a()
-						 .attr("href", "#" + popup.id())
-						 .decorate(DataRel.POPUP)
-						 .attr("data-inline", "true")
-						 .attr("data-transition", "pop")
-						 .add("title");
-		return popup.after(link);
-		*/
-		// @formatter:on 
-		return popup;
+	protected final void equals(String markup, Content content) {
+		assertEquals(markup, content.render());
+	}
+	
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+		this.theRequest = new TestRequest();
+		this.page = Jqm.document().page();
+		
+		RequestContext.setInstance(new RequestContext() {
+			
+			@Override
+			protected Request getRequestImpl() {
+				return theRequest;
+			}
+		});
 	}
 }

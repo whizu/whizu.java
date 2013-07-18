@@ -21,38 +21,54 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.tutorial.jqm.api;
 
-import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
-import org.whizu.html.Html;
-import org.whizu.widget.Container;
+import org.whizu.annotation.App;
+import org.whizu.jquery.mobile.Header;
+import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.Jqm;
+import org.whizu.jquery.mobile.Page;
+import org.whizu.jquery.mobile.Popup;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Popup extends Container {
-
-	public Popup(String id) {
-		id_ = id;
-	}
+@App("/whizu/jqm/widgets/popups")
+public class Popups extends JQueryMobileApp {
 
 	@Override
-	public Markup compile() {
-		// @formatter:off
-		Element popup = Html.div(this)
-						 .decorate(DataRole.POPUP)
-						 .add(componentList);
+	public void onLoad(Page page) {
 		/*
-		Content link = Html.a()
-						 .attr("href", "#" + popup.id())
-						 .decorate(DataRel.POPUP)
-						 .attr("data-inline", "true")
-						 .attr("data-transition", "pop")
-						 .add("title");
-		return popup.after(link);
+		HeaderBuilder header = page.header("Popups");
+		header.addButton(new Button("hello"));
 		*/
-		// @formatter:on 
-		return popup;
+		
+		Page next = Jqm.addPage("Next");
+		
+		Popup popup = Jqm.addPopup("popup").p("My first text").build();
+		page.append(popup);
+		
+		popup = Jqm.addPopup("popup").p("My second popup with same id").build();
+		page.append(popup);
+		
+		//Jqm.createHeader("Popups").on(page);
+		Header.builder()
+		    .title("Popups")
+		    .button("New")
+		        .onClick(popup)
+		        .build()
+		    .build()
+		    .on(page);
+		
+		Jqm.createButton("My button 1")
+			.onClick(next)
+			.build()
+			.appendTo(page);
+
+		next.header("Volgende pagina");
+		Jqm.createButton("My button 2")
+				.onClick(page)
+				.build()
+				.appendTo(next);
 	}
 }

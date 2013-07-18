@@ -49,4 +49,12 @@ public final class Jqm {
 	public static Page addPage(String id) {
 		return document().addPage(id);
 	}
+
+	public static Header createHeader(String caption) {
+		return new Header(caption);
+	}
+
+	public static PopupBuilder addPopup(String id) {
+		return new PopupBuilder(id);
+	}
 }

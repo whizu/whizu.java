@@ -23,36 +23,63 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
-import org.whizu.html.Html;
-import org.whizu.widget.Container;
+import org.whizu.jquery.EventHandler;
+import org.whizu.jquery.Input;
+import org.whizu.jquery.Session;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Popup extends Container {
+public class TestSession implements Session {
 
-	public Popup(String id) {
-		id_ = id;
+	private int componentCount = 0;
+	
+	@Override
+	public void addClickListener(EventHandler listener) {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public Markup compile() {
-		// @formatter:off
-		Element popup = Html.div(this)
-						 .decorate(DataRole.POPUP)
-						 .add(componentList);
-		/*
-		Content link = Html.a()
-						 .attr("href", "#" + popup.id())
-						 .decorate(DataRel.POPUP)
-						 .attr("data-inline", "true")
-						 .attr("data-transition", "pop")
-						 .add("title");
-		return popup.after(link);
-		*/
-		// @formatter:on 
-		return popup;
+	public void addInput(Input input) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public Object attribute(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EventHandler getEventHandler(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Input getInput(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getSessionCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void handleEvent(String id) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public String next() {
+		return "c" + componentCount++;
+	}
+
+	@Override
+	public void attribute(String name, Object value) {
+		// TODO Auto-generated method stub
 	}
 }

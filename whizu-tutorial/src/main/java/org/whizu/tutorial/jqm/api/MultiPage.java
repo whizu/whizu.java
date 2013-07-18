@@ -51,8 +51,8 @@ public class MultiPage extends JQueryMobileApp {
 		//foo.p("Take me ").add(Jqm.createHyperlink("back to Foo", foo));
 		bar.footer("Page Footer");
 		
-		Jqm.createButton("foo").onClick(foo).appendTo(index);
-		Jqm.createButton("bar").onClick(bar).appendTo(index);
+		Jqm.createButton("foo").onClick(foo).build().appendTo(index);
+		Jqm.createButton("bar").onClick(bar).build().appendTo(index);
 		//Jqm.changePage("foo");
 	}
 }
