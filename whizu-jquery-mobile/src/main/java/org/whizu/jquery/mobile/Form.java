@@ -27,7 +27,11 @@ import org.whizu.dom.Component;
 import org.whizu.dom.Content;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
+import org.whizu.jquery.Function;
 import org.whizu.jquery.Input;
+import org.whizu.js.JavaScript;
+import org.whizu.ui.ClickListener;
+import org.whizu.ui.ClickListenerImpl;
 import org.whizu.value.PasswordValue;
 import org.whizu.value.StringValue;
 import org.whizu.widget.Container;
@@ -38,20 +42,61 @@ import org.whizu.widget.Container;
 public class Form extends Container {
 
 	/*
-	@Override
-	public Form css(String clazz) {
-		setStyleName(clazz);
-		return this;
-	}
-	*/
+	 * @Override public Form css(String clazz) { setStyleName(clazz); return
+	 * this; }
+	 */
+
+	private ClickListenerImpl handler_;
 
 	@Override
 	public Markup compile() {
 		// @formatter:off
-		return Html.form(this)
-				.attr("method", "post")
-				.attr("action", "form.php").decorate(this).add(componentList);
+		Markup markup = Html.form(this)
+			.attr("method", "post")
+			//.attr("action", "form.php")
+			.decorate(this)
+			.add(componentList);
 		// @formatter:on
+		addSubmitHandler();
+
+		return markup;
+	}
+
+	/**
+	 * 
+	 */
+	private void addSubmitHandler() {
+		if (handler_ != null) {
+			Function f = new Function() {
+
+				@Override
+				public void execute() {
+					JavaScript.preventDefault();
+					JavaScript.alert("submit form");
+					
+					String url = "http://localhost:8090/whizu?id=" + handler_.id();
+
+					Function data = new Function() {
+						@Override
+						public void execute() {
+							jQuery("$(this)").closest("form").serialize();
+						}};
+						
+					Function callback = new Function("data") {
+						@Override
+						public void execute() {
+						}
+					};
+
+					String type = "script";
+					jQuery("$").get(url, data, callback, type);
+					
+					JavaScript.script("return false;");
+				}
+			};
+			
+			jQuery(this).submit(f);
+		}
 	}
 
 	public void addText(String label) {
@@ -70,7 +115,7 @@ public class Form extends Container {
 			add(text);
 		}
 	}
-	
+
 	public void addTextarea(String label) {
 		Content text = new Textarea(label);
 		add(text);
@@ -90,7 +135,7 @@ public class Form extends Container {
 		Content field = new FlipSwitch();
 		add(field);
 	}
-	
+
 	public void add(PasswordValue value) {
 		throw new UnsupportedOperationException();
 	}
@@ -144,5 +189,10 @@ public class Form extends Container {
 				i.clear();
 			}
 		}
+	}
+
+	public void onSubmit(ClickListener handler) {
+		handler_ = new ClickListenerImpl(handler);
+		getSession().addClickListener(handler_);
 	}
 }

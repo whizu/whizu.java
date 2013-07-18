@@ -21,16 +21,48 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.tutorial.jqm.api;
 
-import org.whizu.annotation.Template;
+import org.whizu.annotation.Listen;
+import org.whizu.jquery.mobile.Form;
+import org.whizu.jquery.mobile.Header;
+import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.Jqm;
+import org.whizu.jquery.mobile.Page;
+import org.whizu.ui.ClickListener;
+import org.whizu.value.StringValue;
 
 /**
  * @author Rudy D'hauwe
  */
-@Template("/org/whizu/jquery/mobile/document.html")
-public interface JqmApp {
+@Listen("/whizu/jqm/widgets/forms")
+public class Forms extends JQueryMobileApp {
 
-	public void init(Document document);
+	private StringValue name = new StringValue("Name");
 	
+	@Override
+	public void onLoad(Page page) {
+
+		// @formatter:off
+		Header.builder()
+		    .title("Forms")
+		    .build()
+		    .on(page);
+		// @formatter:on
+		
+		Form form = new Form();
+		form.onSubmit(submit());
+		form.addText(name);
+		page.append(form);
+	}
+
+	private ClickListener submit() {
+		return new ClickListener() {
+			
+			@Override
+			public void click() {
+				Jqm.page().append("Name entered " + name.get());				
+			}
+		};
+	}
 }

@@ -28,10 +28,9 @@ import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
-import org.whizu.jquery.mobile.Icon;
-import org.whizu.jquery.mobile.Mini;
-import org.whizu.jquery.mobile.Theme;
 import org.whizu.js.JavaScript;
+import org.whizu.ui.ClickListener;
+import org.whizu.ui.ClickListenerImpl;
 import org.whizu.widget.Widget;
 
 /**
@@ -69,7 +68,9 @@ public class Button extends Widget {
 
 	public Mini mini = Mini.FALSE;
 
-	private Page onClick;
+	private Page onClick_;
+
+	private Popup onClickPopup_;
 
 	private Theme theme = Theme.C;
 
@@ -77,7 +78,7 @@ public class Button extends Widget {
 
 	private Type type = Type.INPUT;
 
-	private Popup onClickPopup;
+	private ClickListenerImpl listener_;
 
 	public Button(String title) {
 		this.title = title;
@@ -104,7 +105,8 @@ public class Button extends Widget {
 			public void execute() {
 				JavaScript.preventDefault();
 
-				String url = "http://localhost:8090/whizu?id=" + Button.this.id(); // listener.id();
+				String listenerId = (listener_ == null) ? Button.this.id() : listener_.id();
+				String url = "http://localhost:8090/whizu?id=" + listenerId;
 
 				Function data = new Function() {
 					@Override
@@ -126,6 +128,11 @@ public class Button extends Widget {
 		// }
 	}
 
+	private void addClickListener(ClickListener listener) {
+		listener_ = new ClickListenerImpl(listener);
+		getSession().addClickListener(listener_);
+	}
+
 	public void appendTo(Page page) {
 		((PageSelector) page).append(this);
 	}
@@ -133,12 +140,12 @@ public class Button extends Widget {
 	@Override
 	public Markup compile() {
 		//jQuery(this).trigger("create");
-		if (onClick != null) {
+		if (onClick_ != null) {
 			return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
-					.attr("data-mini", mini.value).attr("href", "#" + onClick.id()).add(title);
-		} else if (onClickPopup != null) {
+					.attr("data-mini", mini.value).attr("href", "#" + onClick_.id()).add(title);
+		} else if (onClickPopup_ != null) {
 			return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
-					.attr("data-mini", mini.value).attr("data-rel", "popup").attr("href", "#" + onClickPopup.id()).add(title);
+					.attr("data-mini", mini.value).attr("data-rel", "popup").attr("href", "#" + onClickPopup_.id()).add(title);
 		}
 		else {
 
@@ -173,13 +180,22 @@ public class Button extends Widget {
 		return this;
 	}
 
+	public <T extends ClickListener> void onClick(Class<T> listenerClass) {
+		listener_ = new ClickListenerImpl(listenerClass);
+		getSession().addClickListener(listener_);		
+	}
+	
+	public void onClick(ClickListener listener) {
+		addClickListener(listener);
+	}
+
 	public Button onClick(Page page) {
-		this.onClick = page;
+		onClick_ = page;
 		return this;
 	}
 
 	public Button onClick(Popup popup) {
-		this.onClickPopup = popup;
+		onClickPopup_ = popup;
 		return this;
 	}
 }

@@ -24,7 +24,6 @@
 package org.whizu.jquery;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import org.whizu.annotation.Bean;
 import org.whizu.dom.Content;
 import org.whizu.dom.Identity;
 import org.whizu.js.Expression;
@@ -33,7 +32,6 @@ import org.whizu.js.Script;
 /**
  * @author Rudy D'hauwe
  */
-@Bean("JQuery")
 class JQueryImpl extends Expression implements JQuery {
 
 	/*
@@ -147,6 +145,12 @@ class JQueryImpl extends Expression implements JQuery {
 		return concat(".", "click", "(function(event) { ", script.toJavaScript(), " })");
 	}
 
+	@Override
+	public JQuery live(String event, Function function) {
+		Script script = RequestContext.getRequest().compile(function);
+		return concat(".", "live", "('" + event + "', function(event) { ", script.toJavaScript(), " })");
+	}
+	
 	@Override
 	public JQuery closest(String name) {
 		return call("closest", name);
@@ -322,5 +326,11 @@ class JQueryImpl extends Expression implements JQuery {
 	@Override
 	public JQuery fadeTo(int i, int j) {
 		return call("fadeTo", i, j);
+	}
+
+	@Override
+	public JQuery submit(Function function) {
+		Script script = RequestContext.getRequest().compile(function);
+		return concat(".", "submit", "(function(event) { ", script.toJavaScript(), " })"); 
 	}
 }

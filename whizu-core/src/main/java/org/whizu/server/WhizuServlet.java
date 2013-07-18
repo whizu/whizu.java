@@ -40,7 +40,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.annotation.AnnotationUtils;
 import org.whizu.annotation.Body;
-import org.whizu.annotation.App;
+import org.whizu.annotation.Listen;
 import org.whizu.html.Title;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
@@ -70,11 +70,12 @@ public class WhizuServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
+		Chrono chrono = Chrono.start();
 		logger.info("WhizuServlet starting...");
 		packageScan_ = getParam(config, PACKAGE_NAMES);
 		RequestContext.setInstance(new RequestContextImpl());
-		AnnotationUtils.scan(App.class, config_, packageScan_);
-		logger.info("WhizuServlet started");
+		AnnotationUtils.scan(Listen.class, config_, packageScan_);
+		logger.info("WhizuServlet started in {}ms", chrono.stop());
 	}
 
 	/**
@@ -255,6 +256,7 @@ public class WhizuServlet extends HttpServlet {
 			logger.error("Whoops. An unexpected RuntimeException in WhizuServlet.", e);
 			e.printStackTrace(response.getWriter());
 			// throw new ServletException(e);
+			//TODO stream the exception stack trace to the browser in dev mode
 
 		} finally {
 			RequestImpl.get().finish();

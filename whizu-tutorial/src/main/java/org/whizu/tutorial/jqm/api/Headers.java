@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.jqm.api;
 
-import org.whizu.annotation.App;
+import org.whizu.annotation.Listen;
 import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
@@ -31,26 +31,31 @@ import org.whizu.jquery.mobile.Page;
 /**
  * @author Rudy D'hauwe
  */
-@App("/whizu/jqm/widgets/headers")
+@Listen("/whizu/jqm/widgets/headers")
 public class Headers extends JQueryMobileApp /* implements JqmApp */{
 
 	@Override
 	public void onLoad(Page page) {
-		Page next = Jqm.addPage("Next");
-
 		page.header("Huidige pagina");
-		Jqm.createButton("My button 1")
-			.onClick(next)
-			.build()
-			.appendTo(page);
 
+		Page next = Jqm.addPage("Next");
 		next.header("Volgende pagina");
+
+		// @formatter:off
+		Jqm.createButton("My button 1")
+		    .onClick(next)
+		    .build()
+		    .appendTo(page);
+		// @formatter:on
+
+		// @formatter:off
 		Jqm.createButton("My button 2")
 				.onClick(page)
 				.build()
 				.appendTo(next);
+		// @formatter:on
 
-		//Jqm.changePage("Nieuw");
-		//RequestContext.getRequest().addExpression("$idd = $(\"div:jqmData(role='page')\").eq(1).attr('id'); $.mobile.changePage('#'+$idd);");
+		// Jqm.changePage("Nieuw");
+		// RequestContext.getRequest().addExpression("$idd = $(\"div:jqmData(role='page')\").eq(1).attr('id'); $.mobile.changePage('#'+$idd);");
 	}
 }

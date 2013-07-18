@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.whizu.annotation.Autowire;
 import org.whizu.dom.Component;
 import org.whizu.dom.Decorator;
 import org.whizu.dom.Element;
@@ -62,7 +61,6 @@ public abstract class Widget implements Component, Decorator {
 	
 	private StringBuffer style = new StringBuffer();
 	
-	@Autowire
 	private ValueRenderer renderer = new ValueRendererImpl();
 
 	protected Widget() {

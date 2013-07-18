@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.jqm.api;
 
-import org.whizu.annotation.App;
+import org.whizu.annotation.Listen;
 import org.whizu.jquery.mobile.Header;
 import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.Jqm;
@@ -33,7 +33,7 @@ import org.whizu.jquery.mobile.Popup;
 /**
  * @author Rudy D'hauwe
  */
-@App("/whizu/jqm/widgets/popups")
+@Listen("/whizu/jqm/widgets/popups")
 public class Popups extends JQueryMobileApp {
 
 	@Override
@@ -52,13 +52,18 @@ public class Popups extends JQueryMobileApp {
 		page.append(popup);
 		
 		//Jqm.createHeader("Popups").on(page);
+		// @formatter:off
 		Header.builder()
 		    .title("Popups")
-		    .button("New")
+		    .button("Popup")
 		        .onClick(popup)
+		        .build()
+		    .button("Next page")
+		        .onClick(next)
 		        .build()
 		    .build()
 		    .on(page);
+		// @formatter:on
 		
 		Jqm.createButton("My button 1")
 			.onClick(next)

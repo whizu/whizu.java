@@ -26,7 +26,7 @@ package org.whizu.tutorial.barchart;
 import java.util.Date;
 
 import org.whizu.annotation.Css;
-import org.whizu.annotation.App;
+import org.whizu.annotation.Listen;
 import org.whizu.dom.Component;
 import org.whizu.html.Title;
 import org.whizu.jquery.Function;
@@ -44,7 +44,7 @@ import org.whizu.value.StringValue;
 /**
  * @author Rudy D'hauwe
  */
-@App("/whizu/tutorial/barchart")
+@Listen("/whizu/tutorial/barchart")
 public class BarChart implements Application {
 
 	final StringValue antwoord = new StringValue("Mijn hobby is...");

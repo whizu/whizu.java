@@ -73,4 +73,9 @@ public class JavaScript {
 		String script = "alert('" + message + "');";
 		request.addExpression(script);
 	}
+	
+	public static void script(String script) {
+		Request request = RequestContext.getRequest();
+		request.addExpression(script);
+	}
 }

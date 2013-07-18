@@ -110,7 +110,9 @@ class PageFactory implements Serializable {
 	}
 
 	protected void template(String template) {
-		template_ = template;
+		if (template != null) {
+			template_ = template;
+		}
 	}
 
 	public String title() {

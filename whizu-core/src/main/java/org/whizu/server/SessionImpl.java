@@ -26,6 +26,8 @@ package org.whizu.server;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
 import org.whizu.jquery.Session;
@@ -37,6 +39,8 @@ import org.whizu.ui.WhizuUI;
  */
 class SessionImpl implements Session {
 
+	private Logger log = LoggerFactory.getLogger(SessionImpl.class);
+	
 	private static int sessionCount = 0;
 
 	private int componentCount = 0;
@@ -54,6 +58,7 @@ class SessionImpl implements Session {
 	@Override
 	public void addClickListener(EventHandler listener) {
 		eventHandlerMap.put(listener.id(), listener);
+		log.debug("Session.EventHandlers #{}", eventHandlerMap.size());
 	}
 
 	@Override

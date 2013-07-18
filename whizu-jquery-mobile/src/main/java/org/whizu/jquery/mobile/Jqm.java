@@ -28,12 +28,12 @@ package org.whizu.jquery.mobile;
  */
 public final class Jqm {
 
-	public static Button createHyperlink(String caption, Page target) {
-		return new Button(caption).onClick(target);
+	public static Page addPage(String id) {
+		return document().addPage(id);
 	}
 
-	public static Document document() {
-		return new Document();
+	public static PopupBuilder addPopup(String id) {
+		return new PopupBuilder(id);
 	}
 
 	/*
@@ -46,15 +46,19 @@ public final class Jqm {
 		return new ButtonBuilder(caption);
 	}
 
-	public static Page addPage(String id) {
-		return document().addPage(id);
-	}
-
 	public static Header createHeader(String caption) {
 		return new Header(caption);
 	}
 
-	public static PopupBuilder addPopup(String id) {
-		return new PopupBuilder(id);
+	public static Button createHyperlink(String caption, Page target) {
+		return new Button(caption).onClick(target);
+	}
+
+	public static Document document() {
+		return new Document();
+	}
+
+	public static Page page() {
+		return document().page();
 	}
 }

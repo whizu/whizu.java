@@ -1,7 +1,6 @@
 package org.whizu.tutorial.shop;
 
-import org.whizu.annotation.Autowire;
-import org.whizu.annotation.App;
+import org.whizu.annotation.Listen;
 import org.whizu.annotation.Template;
 import org.whizu.html.Title;
 import org.whizu.jquery.JQuery;
@@ -23,14 +22,13 @@ import org.whizu.ui.UI;
 /**
  * @author Rudy D'hauwe
  */
-@App("/whizu/shop")
+@Listen("/whizu/shop")
 @Template("/org/whizu/tutorial/shop/page.html")
 @Title("My Shop")
 public class PricingApp implements Application { // TODO remove
 													// "implements Application"
 
 	// @Select(id="menu")
-	@Autowire
 	JQuery menu;
 
 	@Select(id = "right-column")

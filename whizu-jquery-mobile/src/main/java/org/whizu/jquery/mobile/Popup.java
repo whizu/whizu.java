@@ -55,4 +55,8 @@ public class Popup extends Container {
 		// @formatter:on 
 		return popup;
 	}
+
+	public static PopupBuilder builder(String id) {
+		return new PopupBuilder(id);
+	}
 }

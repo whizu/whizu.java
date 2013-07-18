@@ -187,6 +187,8 @@ public interface JQuery {
 	 */
 	public abstract JQuery insertBefore(String target);
 
+	public JQuery live(String event, Function function);
+	
 	/**
 	 * Insert content, specified by the parameter, to the beginning of each element
 	 * in the set of matched elements. The .prepend() method inserts the specified
@@ -354,4 +356,6 @@ public interface JQuery {
 	public abstract JQuery lastChild(String string);
 
 	public abstract JQuery fadeTo(int i, int j);
+
+	public abstract JQuery submit(Function f);
 }
