@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.layout;
 
-import org.whizu.annotation.Listen;
+import org.whizu.annotation.App;
 import org.whizu.dom.Component;
 import org.whizu.html.Title;
 import org.whizu.layout.GridLayout;
@@ -35,7 +35,7 @@ import org.whizu.ui.UI;
 /**
  * @author Rudy D'hauwe
  */
-@Listen("/whizu/gridlayout")
+@App("/whizu/gridlayout")
 @Title("My GridLayout Tutorial")
 public class GridLayoutTutorial implements Application {
 

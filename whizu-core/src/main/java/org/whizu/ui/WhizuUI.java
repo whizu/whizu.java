@@ -40,6 +40,7 @@ import org.whizu.value.Value;
 /**
  * @author Rudy D'hauwe
  */
+@Deprecated
 public class WhizuUI implements UI {
 
 	public WhizuUI() {

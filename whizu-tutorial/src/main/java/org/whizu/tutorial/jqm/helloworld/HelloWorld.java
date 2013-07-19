@@ -23,14 +23,14 @@
  *******************************************************************************/
 package org.whizu.tutorial.jqm.helloworld;
 
-import org.whizu.annotation.Listen;
+import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.Page;
 
 /**
  * @author Rudy D'hauwe
  */
-@Listen("/whizu/jqm/helloworld")
+@App("/whizu/jqm/helloworld")
 public class HelloWorld extends JQueryMobileApp {
 
 	@Override

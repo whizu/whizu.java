@@ -32,8 +32,8 @@ import java.lang.annotation.Target;
  * @author Rudy D'hauwe
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.TYPE, ElementType.METHOD })
-public @interface Listen {
+@Target(ElementType.TYPE)
+public @interface App {
 
 	public String value();
 }

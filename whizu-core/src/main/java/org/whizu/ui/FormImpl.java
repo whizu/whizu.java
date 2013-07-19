@@ -30,6 +30,7 @@ import org.whizu.widget.Container;
 /**
  * @author Rudy D'hauwe
  */
+@Deprecated
 public class FormImpl extends Container implements Form {
 
 	@Override

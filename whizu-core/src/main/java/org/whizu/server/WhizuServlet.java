@@ -40,7 +40,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.annotation.AnnotationUtils;
 import org.whizu.annotation.Body;
-import org.whizu.annotation.Listen;
+import org.whizu.annotation.App;
 import org.whizu.html.Title;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
@@ -74,7 +74,7 @@ public class WhizuServlet extends HttpServlet {
 		logger.info("WhizuServlet starting...");
 		packageScan_ = getParam(config, PACKAGE_NAMES);
 		RequestContext.setInstance(new RequestContextImpl());
-		AnnotationUtils.scan(Listen.class, config_, packageScan_);
+		AnnotationUtils.scan(App.class, config_, packageScan_);
 		logger.info("WhizuServlet started in {}ms", chrono.stop());
 	}
 

@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.jqm.api;
 
-import org.whizu.annotation.Listen;
+import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
@@ -31,7 +31,7 @@ import org.whizu.jquery.mobile.Page;
 /**
  * @author Rudy D'hauwe
  */
-@Listen("/whizu/jqm/widgets/multipage")
+@App("/whizu/jqm/widgets/multipage")
 public class MultiPage extends JQueryMobileApp {
 
 	@Override

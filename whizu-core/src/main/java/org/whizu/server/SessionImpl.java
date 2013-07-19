@@ -96,6 +96,7 @@ class SessionImpl implements Session {
 				@SuppressWarnings("unchecked")
 				Class<Application> clazz = (Class<Application>) Class.forName(id);
 				Application app = clazz.newInstance();
+				
 				app.init(new WhizuUI()); //TODO don't create static UI here
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();

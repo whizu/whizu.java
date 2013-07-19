@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.jqm.notebook;
 
-import org.whizu.annotation.Listen;
+import org.whizu.annotation.App;
 import org.whizu.annotation.Style;
 import org.whizu.annotation.Submit;
 import org.whizu.jquery.EventHandler;
@@ -42,7 +42,7 @@ import org.whizu.value.StringValue;
 /**
  * @author Rudy D'hauwe
  */
-@Listen("/whizu/jqm/notebook")
+@App("/whizu/jqm/notebook")
 public class Notebook extends JQueryMobileApp {
 
 	private StringValue title = new StringValue("Title");

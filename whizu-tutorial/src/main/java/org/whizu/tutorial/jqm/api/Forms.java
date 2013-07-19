@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.jqm.api;
 
-import org.whizu.annotation.Listen;
+import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.Header;
 import org.whizu.jquery.mobile.JQueryMobileApp;
@@ -35,7 +35,7 @@ import org.whizu.value.StringValue;
 /**
  * @author Rudy D'hauwe
  */
-@Listen("/whizu/jqm/widgets/forms")
+@App("/whizu/jqm/widgets/forms")
 public class Forms extends JQueryMobileApp {
 
 	private StringValue name = new StringValue("Name");

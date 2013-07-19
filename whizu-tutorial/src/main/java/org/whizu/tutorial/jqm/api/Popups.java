@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.jqm.api;
 
-import org.whizu.annotation.Listen;
+import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.Header;
 import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.Jqm;
@@ -33,7 +33,7 @@ import org.whizu.jquery.mobile.Popup;
 /**
  * @author Rudy D'hauwe
  */
-@Listen("/whizu/jqm/widgets/popups")
+@App("/whizu/jqm/widgets/popups")
 public class Popups extends JQueryMobileApp {
 
 	@Override

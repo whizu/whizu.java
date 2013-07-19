@@ -24,7 +24,7 @@
 package org.whizu.tutorial.echo;
 
 import org.whizu.annotation.Css;
-import org.whizu.annotation.Listen;
+import org.whizu.annotation.App;
 import org.whizu.annotation.Style;
 import org.whizu.annotation.Stylesheet;
 import org.whizu.dom.Component;
@@ -48,7 +48,7 @@ import org.whizu.value.StringValue;
  * @author Rudy D'hauwe
  */
 @Title("Echo")
-@Listen("/whizu/tutorial/echo")
+@App("/whizu/tutorial/echo")
 @Stylesheet("/theme.css")
 public class Echo implements Application {
 

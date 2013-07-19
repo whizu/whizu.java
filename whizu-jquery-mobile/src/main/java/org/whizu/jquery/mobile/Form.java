@@ -72,7 +72,7 @@ public class Form extends Container {
 				@Override
 				public void execute() {
 					JavaScript.preventDefault();
-					JavaScript.alert("submit form");
+					//JavaScript.alert("submit form");
 					
 					String url = "http://localhost:8090/whizu?id=" + handler_.id();
 
