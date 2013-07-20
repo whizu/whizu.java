@@ -46,10 +46,10 @@ public class Popups extends JQueryMobileApp {
 		Page next = Jqm.addPage("Next");
 		
 		Popup popup = Jqm.addPopup("popup").p("My first text").build();
-		page.append(popup);
+		//page.append(popup);
 		
 		popup = Jqm.addPopup("popup").p("My second popup with same id").build();
-		page.append(popup);
+		//page.append(popup);
 		
 		//Jqm.createHeader("Popups").on(page);
 		// @formatter:off

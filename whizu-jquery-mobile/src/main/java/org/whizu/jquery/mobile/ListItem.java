@@ -25,6 +25,7 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
+import org.whizu.value.DateValue;
 import org.whizu.value.StringValue;
 import org.whizu.widget.Container;
 
@@ -35,7 +36,7 @@ public class ListItem extends Container {
 
 	public ListItem() {
 	}
-	
+
 	public ListItem(String title) {
 		prepend(Html.h2(title));
 	}
@@ -56,5 +57,9 @@ public class ListItem extends Container {
 
 	public void p(StringValue value) {
 		p(value.get());
+	}
+
+	public void p(DateValue value) {
+		p("" + value.get());
 	}
 }

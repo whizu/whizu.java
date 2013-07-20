@@ -26,11 +26,16 @@ package org.whizu.dom;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author Rudy D'hauwe
  */
 public abstract class Foreach<T> {
 
+	private static final Logger log = LoggerFactory.getLogger(Foreach.class);
+	
 	private Collection<T> list_;
 
 	public Foreach(Collection<T> list) {

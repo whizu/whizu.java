@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.whizu.dom.Component;
 import org.whizu.dom.Decorator;
 import org.whizu.dom.Element;
@@ -47,6 +49,8 @@ import org.whizu.value.ValueRendererImpl;
  */
 public abstract class Widget implements Component, Decorator {
 
+	private static final Logger log = LoggerFactory.getLogger(Widget.class);
+	
 	protected enum State {
 		NEW, RENDERED
 	}

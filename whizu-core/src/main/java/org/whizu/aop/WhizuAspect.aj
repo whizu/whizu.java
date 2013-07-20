@@ -40,7 +40,7 @@ public aspect WhizuAspect {
 	@Pointcut("execution(@org.whizu.annotation.Style * org..*.* (..))")
 	public void styleAnnotatedMethods() {}
 	
-	@Pointcut("execution(@org.whizu.annotation.Css * org..*.* (..))")
+	@Pointcut("execution(@org.whizu.annotation.Css * *.* (..))")
 	public void cssAnnotatedMethods() {}
 	
 	after() returning (Component result) : styleAnnotatedMethods() {
@@ -49,7 +49,7 @@ public aspect WhizuAspect {
 		Style annotation = method.getAnnotation(Style.class);
 		Component content = (Component) result;
 		content.style(annotation.value()[0]);
-		System.out.println("ADDED STYLE ANNOTATION " + annotation.value());
+		System.out.println("@Style(" + annotation.value() + ")");
 	}
 	
 	after() returning (Content result) : cssAnnotatedMethods() {
@@ -58,6 +58,6 @@ public aspect WhizuAspect {
 		Css annotation = method.getAnnotation(Css.class);
 		Content content = (Content) result;
 		content.css(annotation.value()[0]);
-		System.out.println("ADDED CSS ANNOTATION " + annotation.value());
+		System.out.println("@Css(" + annotation.value() + ")");
 	}
 }

@@ -12,6 +12,10 @@
 		<servlet-name>WhizuServlet</servlet-name>
 		<url-pattern>/whizu/*</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>WhizuServlet</servlet-name>
+		<url-pattern>*.whizu</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>

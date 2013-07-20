@@ -23,11 +23,16 @@
  *******************************************************************************/
 package org.whizu.html;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author Rudy D'hauwe
  */
 public class Tbody extends NodeBuilder<Tbody> {
 
+	private static final Logger log = LoggerFactory.getLogger(Tbody.class);
+	
 	Tbody() {
 		super("tbody");
 	}

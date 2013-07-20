@@ -26,11 +26,16 @@ package org.whizu.value;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author Rudy D'hauwe
  */
 public abstract class AbstractValue<T> implements Value {
 
+	private static final Logger log = LoggerFactory.getLogger(AbstractValue.class);
+	
 	private static final String VALUE = "value_";
 
 	private transient PropertyChangeSupport changeSupport_;

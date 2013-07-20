@@ -10,7 +10,7 @@ public class FormsTest extends AbstractJqmTest {
 
 	@Test
 	public void testButtonBuilder() {
-		Page next = Jqm.addPage("next");
+		Jqm.addPage("next");
 
 		StringValue name = new StringValue("Name");
 

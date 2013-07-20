@@ -61,15 +61,15 @@ public class JqmTest extends AbstractJqmTest {
 	public void testPopups() {
 		Page next = Jqm.addPage("Next");
 		Popup popup = Jqm.addPopup("popup").p("My first text").build();
-		page.append(popup);
+		//page.append(popup);
 		popup = Jqm.addPopup("popup").p("My second popup with same id").build();
-		page.append(popup);
+		//page.append(popup);
 		Header.builder().title("Popups").button("New").onClick(popup).build().build().on(page);
 		Jqm.createButton("My button 1").onClick(next).build().appendTo(page);
 		next.header("Volgende pagina");
 		Jqm.createButton("My button 2").onClick(page).build().appendTo(next);
 		assertEquals(
-				"$p = $(\"<div data-role='page' id='Next'><div data-role='content'>page Next</div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').append(\"<div data-role='popup' id='popup'><p>My first text</p></div>\");$('#index').append(\"<div data-role='popup' id='popup'><p>My second popup with same id</p></div>\");$('#index').prepend(\"<div data-role='header' id='c2'><h1>Popups</h1><a data-role='button' id='c3' data-inline='false' data-rel='popup' data-mini='true' href='#popup'>New</a></div>\");$('#index').append(\"<a data-role='button' id='c4' data-inline='false' data-mini='false' href='#Next'>My button 1</a>\");$('#Next').prepend(\"<div data-role='header' id='c5'><h1>Volgende pagina</h1></div>\");$('#Next').append(\"<a data-role='button' id='c6' data-inline='false' data-mini='false' href='#index'>My button 2</a>\");",
+				"$p = $(\"<div data-role='page' id='Next'><div data-role='content'>page Next</div></div>\"); $p.appendTo($.mobile.pageContainer); ;$.mobile.activePage.append(\"<div data-role='popup' id='popup'><p>My first text</p></div>\");$.mobile.activePage.append(\"<div data-role='popup' id='popup'><p>My second popup with same id</p></div>\");$('#index').prepend(\"<div data-role='header' id='c2'><h1>Popups</h1><a data-role='button' id='c3' data-inline='false' data-rel='popup' data-mini='true' href='#popup'>New</a></div>\");$('#index').append(\"<a data-role='button' id='c4' data-inline='false' data-mini='false' href='#Next'>My button 1</a>\");$('#Next').prepend(\"<div data-role='header' id='c5'><h1>Volgende pagina</h1></div>\");$('#Next').append(\"<a data-role='button' id='c6' data-inline='false' data-mini='false' href='#index'>My button 2</a>\");",
 				theRequest.finish());
 	}
 }

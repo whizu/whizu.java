@@ -23,9 +23,32 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.ui.ClickListener;
+import org.whizu.value.StringValue;
+
 /**
  * @author Rudy D'hauwe
  */
-class Radio {
+public class FormBuilder implements Builder<Form> {
 
+	public static FormBuilder create() {
+		return new FormBuilder();
+	}
+
+	private Form form_ = new Form();
+
+	public FormBuilder addText(StringValue name) {
+		form_.addText(name);
+		return this;
+	}
+
+	@Override
+	public Form build() {
+		return form_;
+	}
+
+	public FormBuilder onSubmit(ClickListener listener) {
+		form_.onSubmit(listener);
+		return this;
+	}
 }

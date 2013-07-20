@@ -23,25 +23,13 @@
  *******************************************************************************/
 package org.whizu.server;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-
-import javassist.CannotCompileException;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtMethod;
-import javassist.LoaderClassPath;
 import javassist.NotFoundException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.whizu.annotation.Css;
 import org.whizu.annotation.Expires;
-import org.whizu.annotation.Style;
 import org.whizu.annotation.Stylesheet;
 import org.whizu.annotation.Template;
-import org.whizu.dom.Component;
 import org.whizu.html.Description;
 import org.whizu.html.Title;
 import org.whizu.ui.Application;
@@ -177,12 +165,12 @@ public class ApplicationEnhancer {
 
 			String stylesheet = null;
 			if (clazz.isAnnotationPresent(Stylesheet.class)) {
-				stylesheet = ((Stylesheet) clazz.getAnnotation(Stylesheet.class)).value();
+				stylesheet = clazz.getAnnotation(Stylesheet.class).value();
 			}
 
 			String title = Title.DEFAULT_TITLE;
 			if (clazz.isAnnotationPresent(Title.class)) {
-				title = ((Title) clazz.getAnnotation(Title.class)).value();
+				title = clazz.getAnnotation(Title.class).value();
 			}
 
 			String expires = getExpires(clazz);
@@ -216,8 +204,8 @@ public class ApplicationEnhancer {
 		try {
 			@SuppressWarnings("unchecked")
 			Class<Application> clazz = (Class<Application>) Class.forName(className);
-			if ((2+1-2==2-1)) return clazz;
-			boolean enhancementNecessary = false;
+
+			/*
 			Method[] methods = clazz.getDeclaredMethods();
 			for (Method method : methods) {
 				if (method.isAnnotationPresent(Css.class) || (method.isAnnotationPresent(Style.class))) {
@@ -230,18 +218,6 @@ public class ApplicationEnhancer {
 				ClassLoader loader = getClass().getClassLoader();
 				classPool.appendClassPath(new LoaderClassPath(loader));
 				CtClass ctClass = classPool.get(className);
-
-				/*
-				 * CtField[] fields = ctClass.getDeclaredFields(); for (CtField
-				 * field : fields) { log.debug("Enhancing field " +
-				 * field.getName()); if (field.hasAnnotation(Html.class)) {
-				 * log.debug("Enhancing field " + field.getName() +
-				 * " with annotation @Html"); CtConstructor[] constructors =
-				 * ctClass.getConstructors(); for (CtConstructor constructor :
-				 * constructors) { constructor.insertAfter(field.getName() +
-				 * "=org.whizu.annotation.processing.Support.getValue(getClass(), \""
-				 * + field.getName() + "\");"); } } }
-				 */
 
 				CtMethod[] ctMethods = ctClass.getDeclaredMethods();
 				List<CtMethod> methodsToDo = new ArrayList<CtMethod>();
@@ -276,14 +252,10 @@ public class ApplicationEnhancer {
 				log.debug("************* NO ENHANCEMENT FOR " + clazz);
 			}
 
+			*/
 			return clazz;
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
-		} catch (NotFoundException e) {
-			throw new RuntimeException(e);
-		} catch (CannotCompileException e) {
-			throw new RuntimeException(e);
-		} finally {
 		}
 	}
 
@@ -330,17 +302,16 @@ public class ApplicationEnhancer {
 	private <T extends java.lang.annotation.Annotation> T getAnnotation(Class<?> ctClass, Class<T> annotationClass)
 			throws ClassNotFoundException, NotFoundException {
 		if (ctClass.isAnnotationPresent(annotationClass)) {
-			return ((T) ctClass.getAnnotation(annotationClass));
-		} else {
-			Class<?> superClass = ctClass.getSuperclass();
-			if (superClass != null) {
-				return getAnnotation(superClass, annotationClass);
-			} else {
-				return null;
-			}
+			return ctClass.getAnnotation(annotationClass);
 		}
+		Class<?> superClass = ctClass.getSuperclass();
+		if (superClass != null) {
+			return getAnnotation(superClass, annotationClass);
+		}
+		return null;
 	}
 
+	/*
 	// Adds support for anonymous/inner classes
 	private void fixInnerClasses(CtClass ctClass) throws NotFoundException, CannotCompileException {
 		CtClass[] nested = ctClass.getNestedClasses();
@@ -350,7 +321,6 @@ public class ApplicationEnhancer {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private Class<Application> getEnhancedClass(CtClass ctClass) {
 		try {
 			return ctClass.toClass();
@@ -358,7 +328,9 @@ public class ApplicationEnhancer {
 			throw new IllegalStateException(e);
 		}
 	}
+	*/
 
+	/*
 	public static Object doIt(Object arg) {
 		return arg;
 	}
@@ -376,4 +348,5 @@ public class ApplicationEnhancer {
 		}
 		return arg;
 	}
+	*/
 }

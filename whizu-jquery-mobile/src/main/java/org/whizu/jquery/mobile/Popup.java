@@ -33,6 +33,24 @@ import org.whizu.widget.Container;
  */
 public class Popup extends Container {
 
+	public enum PositionTo {
+		ORIGIN("origin"), WINDOW("window");
+
+		protected String value;
+
+		PositionTo(String value) {
+			this.value = value;
+		}
+	}
+
+	public static PopupBuilder builder(String id) {
+		return new PopupBuilder(id);
+	}
+	
+	private PositionTo positionTo_;
+	
+	private Theme theme_;
+
 	public Popup(String id) {
 		id_ = id;
 	}
@@ -42,7 +60,12 @@ public class Popup extends Container {
 		// @formatter:off
 		Element popup = Html.div(this)
 						 .decorate(DataRole.POPUP)
+						 .decorate(theme_, this)
 						 .add(componentList);
+		
+		if (positionTo_ != null) {
+			 popup.attr("data-position-to", positionTo_.value);
+		}
 		/*
 		Content link = Html.a()
 						 .attr("href", "#" + popup.id())
@@ -56,7 +79,11 @@ public class Popup extends Container {
 		return popup;
 	}
 
-	public static PopupBuilder builder(String id) {
-		return new PopupBuilder(id);
+	public void positionToWindow() {
+		positionTo_ = PositionTo.WINDOW;
+	}
+
+	public void theme(Theme theme) {
+		theme_ = theme;
 	}
 }

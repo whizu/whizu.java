@@ -1,5 +1,6 @@
 package org.whizu.jquery.mobile;
 
+import org.whizu.jquery.mobile.Button.Type;
 import org.whizu.ui.ClickListener;
 
 public class ButtonBuilder implements Builder<Button> {
@@ -29,12 +30,11 @@ public class ButtonBuilder implements Builder<Button> {
 		return this;
 	}
 
-	/**
-	 * We actually DON'T WANT this behavior! Definitely not with inner classes.
-	 */
-	@Deprecated
-	public <T extends ClickListener> ButtonBuilder onClick(Class<T> listenerClass) {
-		build_.onClick(listenerClass);
-		return this;
+	public void type(Type type) {
+		build_.type(type);
+	}
+
+	public void theme(Theme theme) {
+		build_.theme(theme);
 	}
 }

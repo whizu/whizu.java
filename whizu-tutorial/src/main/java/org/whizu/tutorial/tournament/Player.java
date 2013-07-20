@@ -21,11 +21,20 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.tutorial.tournament;
+
+import org.whizu.value.DateValue;
+import org.whizu.value.IntegerValue;
+import org.whizu.value.StringValue;
 
 /**
  * @author Rudy D'hauwe
  */
-class Radio {
+public class Player {
 
+	public final StringValue name = new StringValue("Name");
+	
+	public final DateValue birthdate = new DateValue("Birth date");
+	
+	public final IntegerValue level = new IntegerValue("Level");
 }

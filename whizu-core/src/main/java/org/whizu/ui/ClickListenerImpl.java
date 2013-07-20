@@ -34,20 +34,12 @@ import org.whizu.jquery.Session;
 public class ClickListenerImpl implements EventHandler {
 
 	private String id;
-	
+
 	private ClickListener listener;
 
 	public ClickListenerImpl(ClickListener listener) {
 		this.id = getSession().next();
 		this.listener = listener;
-	}
-	
-	/**
-	 * @param listenerClass
-	 */
-	public <T extends ClickListener> ClickListenerImpl(Class<T> listenerClass) {
-		this.id = getSession().next();
-		this.listener = instantiate(listenerClass);
 	}
 
 	private Session getSession() {
@@ -61,7 +53,7 @@ public class ClickListenerImpl implements EventHandler {
 	private void clicked() {
 		listener.click();
 	}
-	
+
 	@Override
 	public String id() {
 		return id;
@@ -70,29 +62,5 @@ public class ClickListenerImpl implements EventHandler {
 	@Override
 	public void handleEvent() {
 		clicked();
-	}
-	
-	public <T> T instantiate(Class<T> clazz) {
-		try {
-			Class<?> enclosingClass = clazz.getEnclosingClass();
-			if (enclosingClass == null) {
-				return clazz.newInstance();
-			} else {
-				throw new IllegalArgumentException("Don't use inner classes for Listeners!");
-				/*
-				Constructor<T> constructor = clazz.getConstructor(enclosingClass);
-				Object enclosingInstance = instantiate(enclosingClass);
-				return constructor.newInstance(enclosingInstance);
-				*/
-			}
-		} catch (InstantiationException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalArgumentException e) {
-			throw new RuntimeException(e);
-		} catch (SecurityException e) {
-			throw new RuntimeException(e);
-		}
 	}
 }

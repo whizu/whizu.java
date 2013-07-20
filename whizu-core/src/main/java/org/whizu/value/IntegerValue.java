@@ -23,6 +23,8 @@
  *******************************************************************************/
 package org.whizu.value;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.whizu.dom.Component;
 
 /**
@@ -30,10 +32,12 @@ import org.whizu.dom.Component;
  */
 public class IntegerValue extends ValueBuilder<IntegerValue, Integer> {
 
+	private static final Logger log = LoggerFactory.getLogger(IntegerValue.class);
+
 	public IntegerValue(String key) {
 		super(key);
 	}
-	
+
 	public IntegerValue(String key, Integer value) {
 		super(key, value);
 	}

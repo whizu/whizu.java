@@ -23,10 +23,15 @@
  *******************************************************************************/
 package org.whizu.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author Rudy D'hauwe
  */
 public class Chrono {
+
+	private static final Logger log = LoggerFactory.getLogger(Chrono.class);
 
 	private static ThreadLocal<Chrono> chronoFactory = new ThreadLocal<Chrono>() {
 
@@ -35,13 +40,13 @@ public class Chrono {
 			return new Chrono();
 		}
 	};
-	
+
 	public static Chrono start() {
 		return chronoFactory.get().reset();
 	}
 
 	private long start;
-	
+
 	private Chrono() {
 	}
 

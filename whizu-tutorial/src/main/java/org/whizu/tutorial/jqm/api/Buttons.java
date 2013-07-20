@@ -69,11 +69,11 @@ public class Buttons extends JQueryMobileApp /* implements JQueryMobile */{
 //		    .build()
 //		    .appendTo(page);
 			
-		Jqm.createButton("Register 4")
-		    .onClick(RegistrationListener.class)
-		    .build()
-		    .appendTo(page);
-		// @formatter:on		
+//		Jqm.createButton("Register 4")
+//		    .onClick(RegistrationListener.class)
+//		    .build()
+//		    .appendTo(page);
+//		// @formatter:on		
 	}
 
 	public ClickListener register() {

@@ -6,7 +6,7 @@
     </layout>
   </appender>
   
-  <logger name="org.whizu" level="DEBUG"/>
+  <logger name="org.whizu" level="TRACE"/>
   
   <root level="INFO">
     <appender-ref ref="STDOUT" />

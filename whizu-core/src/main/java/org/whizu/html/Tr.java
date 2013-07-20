@@ -23,11 +23,16 @@
  *******************************************************************************/
 package org.whizu.html;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author Rudy D'hauwe
  */
 public class Tr extends NodeBuilder<Tr> {
 
+	private static final Logger log = LoggerFactory.getLogger(Tr.class);
+	
 	Tr() {
 		super("tr");
 	}

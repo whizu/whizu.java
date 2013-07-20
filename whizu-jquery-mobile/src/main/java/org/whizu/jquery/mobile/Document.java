@@ -24,7 +24,6 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Content;
-import org.whizu.jquery.JQuery;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Selector;
 
@@ -84,9 +83,9 @@ public class Document {
 		return page("index");
 	}
 
-	private JQuery jQuery(String selector) {
-		return new Selector(selector).query();
-	}
+//	private JQuery jQuery(String selector) {
+//		return new Selector(selector).query();
+//	}
 
 	// verified
 	public Page page() {

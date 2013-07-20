@@ -32,8 +32,8 @@ public final class Jqm {
 		return document().addPage(id);
 	}
 
-	public static PopupBuilder addPopup(String id) {
-		return new PopupBuilder(id);
+	public static void addPopup(Popup popup) {
+		document().activePage().append(popup);
 	}
 
 	/*
@@ -41,6 +41,10 @@ public final class Jqm {
 		RequestContext.getRequest().addExpression("$.mobile.changePage('#" + id + "');");
 	}
 	*/
+
+	public static PopupBuilder addPopup(String id) {
+		return new PopupBuilder(id);
+	}
 
 	public static ButtonBuilder createButton(String caption) {
 		return new ButtonBuilder(caption);

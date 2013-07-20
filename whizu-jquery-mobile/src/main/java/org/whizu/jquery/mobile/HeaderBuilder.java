@@ -23,4 +23,11 @@ public class HeaderBuilder implements Builder<Header> {
 			}
 		});
 	}
+
+	/**
+	 * @return a new Header builder.
+	 */
+	public static HeaderBuilder create() {
+		return new HeaderBuilder();
+	}
 }

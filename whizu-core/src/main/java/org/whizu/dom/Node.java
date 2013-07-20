@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The void elements in HTML 4.01/XHTML 1.0 Strict are area, base, br, col, hr,
@@ -41,6 +43,8 @@ import org.apache.commons.lang.StringUtils;
 // public class Node<T extends Node<T>> implements Element {
 public class Node implements Element {
 
+	private static final Logger log = LoggerFactory.getLogger(Node.class);
+	
 	private Map<String, String> attrs = new HashMap<String, String>();
 
 	private ContentList contents = new ContentList();

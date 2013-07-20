@@ -37,7 +37,7 @@ import org.whizu.ui.Application;
  */
 class Configuration implements TypeReporter<App> {
 
-	private final Logger log = LoggerFactory.getLogger(Configuration.class);
+	private static final Logger log = LoggerFactory.getLogger(Configuration.class);
 
 	private Map<String, PageFactory> applicationFactoryMap = new HashMap<String, PageFactory>();
 
@@ -61,12 +61,10 @@ class Configuration implements TypeReporter<App> {
 		PageFactory factory = applicationFactoryMap.get(uri);
 		if (factory != null) {
 			return factory.createInstance();
-		} else {
-			if (log.isDebugEnabled()) {
-				log.debug("No @Page has been defined for uri " + uri);
-			}
-			return null;
 		}
+		
+		log.debug("No @Page has been defined for uri {}", uri);
+		return null;
 	}
 	
 	@Override

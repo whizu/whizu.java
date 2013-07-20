@@ -26,6 +26,8 @@ package org.whizu.widget;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.whizu.dom.Component;
 import org.whizu.dom.Composite;
 import org.whizu.dom.Content;
@@ -37,11 +39,13 @@ import org.whizu.html.Html;
  */
 public class Container extends Widget implements Composite {
 
+	private static final Logger log = LoggerFactory.getLogger(Container.class);
+
 	protected List<Content> componentList = new ArrayList<Content>();
 
-	public Container() {	
+	public Container() {
 	}
-	
+
 	public Container(String id) {
 		this.id_ = id;
 		this.state = State.RENDERED;
@@ -57,7 +61,7 @@ public class Container extends Widget implements Composite {
 
 		return this;
 	}
-	
+
 	@Override
 	public Composite add(Content content) {
 		this.componentList.add(content);
@@ -65,17 +69,17 @@ public class Container extends Widget implements Composite {
 		if (this.isRendered()) {
 			jQuery(this).append(content);
 		}
-		
+
 		return this;
 	}
-	
+
 	public Composite prepend(Content content) {
 		this.componentList.add(content);
 
 		if (this.isRendered()) {
 			jQuery(this).prepend(content);
 		}
-		
+
 		return this;
 	}
 
@@ -105,7 +109,7 @@ public class Container extends Widget implements Composite {
 	@Override
 	public void remove(Component element) {
 		this.componentList.remove(element);
-		
+
 		if (this.isRendered()) {
 			jQuery(element).remove();
 		}

@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,8 +40,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.annotation.AnnotationUtils;
-import org.whizu.annotation.Body;
 import org.whizu.annotation.App;
+import org.whizu.annotation.Body;
 import org.whizu.html.Title;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
@@ -58,34 +59,31 @@ import org.whizu.util.Chrono;
  */
 public class WhizuServlet extends HttpServlet {
 
-	private static final String PACKAGE_NAMES = "package-names";
+	private static final Logger log = LoggerFactory.getLogger(WhizuServlet.class);
 
-	private Logger logger = LoggerFactory.getLogger(WhizuServlet.class);
+	private static final String PACKAGE_NAMES = "package-names";
 
 	private static final String WHIZU_SESSION = "whizu-session";
 
 	private final Configuration config_ = new Configuration();
 
-	private String packageScan_ = null;
-
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		Chrono chrono = Chrono.start();
-		logger.info("WhizuServlet starting...");
-		packageScan_ = getParam(config, PACKAGE_NAMES);
-		RequestContext.setInstance(new RequestContextImpl());
-		AnnotationUtils.scan(App.class, config_, packageScan_);
-		logger.info("WhizuServlet started in {}ms", chrono.stop());
-	}
-
 	/**
-	 * @param config
-	 * @param string
-	 * @return
+	 * The context path of the web application.
+	 * 
+	 * The context path is the portion of the request URI that is used to select
+	 * the context of the request. The context path always comes first in a
+	 * request URI. The path starts with a / character but does not end with a /
+	 * character. For servlets in the default (root) context, this equals "".
+	 * 
+	 * It is possible that a servlet container may match a context by more than
+	 * one context path. In such cases the HttpServletRequest.getContextPath()
+	 * will return the actual context path used by the request and it may differ
+	 * from the path returned by this method. This context path should be
+	 * considered as the prime or preferred context path of the application.
 	 */
-	private String getParam(ServletConfig config, String name) {
-		return config.getInitParameter(name);
-	}
+	private String contextPath_;
+
+	private String packageScan_ = null;
 
 	private Session assureUserSession(HttpSession session) {
 		Session userSession = (Session) session.getAttribute(WHIZU_SESSION);
@@ -97,6 +95,10 @@ public class WhizuServlet extends HttpServlet {
 		return userSession;
 	}
 
+	private String getParam(ServletConfig config, String name) {
+		return config.getInitParameter(name);
+	}
+
 	// replace by a class StylesheetResource?
 	// could be cached in production-mode (whizu-pro)
 	private Resource handleCss(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -104,6 +106,18 @@ public class WhizuServlet extends HttpServlet {
 		String servletPath = request.getServletPath();
 		String path = uri.substring(servletPath.length());
 		return new ClassPathResource(path);
+	}
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		log.info("WhizuServlet starting...");
+		Chrono chrono = Chrono.start();
+		ServletContext context = config.getServletContext();
+		contextPath_ = context.getContextPath();
+		packageScan_ = getParam(config, PACKAGE_NAMES);
+		RequestContext.setInstance(new RequestContextImpl());
+		AnnotationUtils.scan(App.class, config_, packageScan_);
+		log.info("WhizuServlet started in {}ms", chrono.stop());
 	}
 
 	// serve a new page request to an application,
@@ -123,13 +137,13 @@ public class WhizuServlet extends HttpServlet {
 				RequestImpl.get().session().addClickListener(new EventHandler() {
 
 					@Override
-					public String id() {
-						return id;
+					public void handleEvent() {
+						app.init(new WhizuUI());
 					}
 
 					@Override
-					public void handleEvent() {
-						app.init(new WhizuUI());
+					public String id() {
+						return id;
 					}
 				});
 
@@ -159,7 +173,7 @@ public class WhizuServlet extends HttpServlet {
 						try {
 							ClassPathResource body = (ClassPathResource) method.invoke(app);
 							String bodyText = body.getString();
-							logger.debug("@Body" + bodyText);
+							log.debug("@Body" + bodyText);
 							content = content.replace("</body>", bodyText + "</body>");
 						} catch (IllegalAccessException e) {
 							throw new IllegalStateException(e);
@@ -182,27 +196,22 @@ public class WhizuServlet extends HttpServlet {
 			}
 		} else {
 			// throw new
-			// IllegalArgumentException("No @Page has been defined for " + uri);
-			logger.debug("Page {} not found", uri);
+			// IllegalArgumentException("No @App has been defined for " + uri);
+			log.debug("Page {} not found", uri);
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return new StringResource("Page not found");
 		}
 	}
 
-	/**
-	 * @param response
-	 */
-	private void setExpires(HttpServletResponse response) {
-		long CACHE_DURATION_IN_SECOND = 100 * 60; //100 minutes
-		logger.debug("SETTING the Expires header to {} seconds", CACHE_DURATION_IN_SECOND);
-		logger.debug("SETTING the Expires header to {} seconds", CACHE_DURATION_IN_SECOND);
-		response.setHeader("Cache-Control", "public, max-age=" + CACHE_DURATION_IN_SECOND);
-		response.setDateHeader("Expires", System.currentTimeMillis() + CACHE_DURATION_IN_SECOND);
-	}
-
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		log.trace("HttpServletRequest.requestURI {}", request.getRequestURI());
+		log.trace("HttpServletRequest.contextPath {}", request.getContextPath());
+		log.trace("ServletCopntext.contextPath {}", request.getServletContext().getContextPath());
+		log.trace("HttpServletRequest.servletPath {}", request.getServletPath());
+		log.trace("HttpServletRequest.pathInfo {}", request.getPathInfo());
+
 		Chrono chrono = Chrono.start();
 		Resource content = null;
 		try {
@@ -235,17 +244,15 @@ public class WhizuServlet extends HttpServlet {
 				content = new StringResource(RequestImpl.get().finish());
 			}
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("Server side completed in {}ms", chrono.stop());
+			if (log.isDebugEnabled()) {
+				log.debug("Server side completed in {}ms", chrono.stop());
 				if (content != null)
-					logger.debug("Streaming script {}", content.getString());
+					log.debug("Streaming script {}", content.getString());
 			}
-
-			// if (true) throw new RuntimeException("fake exception");
 
 			if (content != null) {
 				if (!content.getString().equals("Page not found")) {
-					logger.debug("Streaming content of page");
+					log.debug("Streaming content of page");
 					content.print(response.getOutputStream());
 					response.getOutputStream().flush();
 				}
@@ -253,14 +260,20 @@ public class WhizuServlet extends HttpServlet {
 
 			// response.getWriter().close();
 		} catch (RuntimeException e) {
-			logger.error("Whoops. An unexpected RuntimeException in WhizuServlet.", e);
+			log.error("Whoops. An unexpected RuntimeException in WhizuServlet.", e);
 			e.printStackTrace(response.getWriter());
 			// throw new ServletException(e);
-			//TODO stream the exception stack trace to the browser in dev mode
-
+			// TODO stream the exception stack trace to the browser in dev mode
 		} finally {
 			RequestImpl.get().finish();
 		}
+	}
+
+	private void setExpires(HttpServletResponse response) {
+		long CACHE_DURATION_IN_SECOND = 100 * 60; // 100 minutes
+		log.debug("SETTING the Expires header to {} seconds", CACHE_DURATION_IN_SECOND);
+		response.setHeader("Cache-Control", "public, max-age=" + CACHE_DURATION_IN_SECOND);
+		response.setDateHeader("Expires", System.currentTimeMillis() + CACHE_DURATION_IN_SECOND);
 	}
 
 	private Session startRequest(HttpServletRequest request) {
@@ -269,7 +282,7 @@ public class WhizuServlet extends HttpServlet {
 		Map<String, String[]> parameterMap = request.getParameterMap();
 		Set<String> keys = parameterMap.keySet();
 		for (String key : keys) {
-			logger.debug("Incoming request parameter {} equals {}", key, parameterMap.get(key)[0]);
+			log.debug("Incoming request parameter {} equals {}", key, parameterMap.get(key)[0]);
 			Input editable = userSession.getInput(key);
 			if (editable != null) {
 				editable.parseString(parameterMap.get(key)[0]);

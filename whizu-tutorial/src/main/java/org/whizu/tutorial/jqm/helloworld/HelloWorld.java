@@ -35,6 +35,6 @@ public class HelloWorld extends JQueryMobileApp {
 
 	@Override
 	public void onLoad(Page page) {
-		page.append("Hello world");
+		page.header("Hello world");
 	}
 }
