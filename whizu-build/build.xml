@@ -3,7 +3,7 @@
 	<description>simple example build file</description>
 
 	<!-- set global properties for this build -->
-	<property name="project.version" value="0.0.4-snapshot" />
+	<property name="project.version" value="0.1-SNAPSHOT" />
 	<property name="project.home" location=".." />
 	<property name="build" location="build" />
 	<property name="dist" location="dist" />
