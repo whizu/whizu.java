@@ -23,38 +23,59 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.ui.ClickListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.whizu.dom.Element;
+import org.whizu.dom.Markup;
+import org.whizu.html.Html;
+import org.whizu.jquery.Input;
 import org.whizu.value.DateValue;
-import org.whizu.value.StringValue;
+import org.whizu.value.Value;
+import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class FormBuilder implements Builder<Form> {
+class DateField extends Widget implements Input {
 
-	public static FormBuilder create() {
-		return new FormBuilder();
+	private static final Logger log = LoggerFactory.getLogger(DateField.class);
+	
+	private Value model_;
+
+	public DateField(String label) {
+		this(new DateValue(label));
 	}
-
-	private Form form_ = new Form();
-
-	public FormBuilder addDate(DateValue date) {
-		form_.addDate(date);
-		return this;
-	}
-
-	public FormBuilder addText(StringValue name) {
-		form_.addText(name);
-		return this;
+	
+	public DateField(Value model) {
+		model_ = model;
+		model_.addPropertyChangeListener(new PropertyChangeListener() {
+			
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				jQuery(DateField.this).val(""+model_.get());
+			}
+		});
 	}
 
 	@Override
-	public Form build() {
-		return form_;
+	public Markup compile() {
+		Element input = Html.input(this).attr("type", "date").attr("name", id()).attr("value", "");
+		Element label = Html.tag("label").attr("for", input.id()).add(model_.name());
+		getSession().addInput(this);
+		return input.after(label);
 	}
 
-	public FormBuilder onSubmit(ClickListener listener) {
-		form_.onSubmit(listener);
-		return this;
+	@Override
+	public void parseString(String value) {
+		log.debug("Incoming request value {}", value);
+		model_.set(value);
+	}
+
+	@Override
+	public void clear() {
+		model_.clear();
 	}
 }

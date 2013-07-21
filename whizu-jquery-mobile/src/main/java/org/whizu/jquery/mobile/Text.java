@@ -41,7 +41,7 @@ import org.whizu.widget.Widget;
  */
 public class Text extends Widget implements Input {
 
-	private Logger logger = LoggerFactory.getLogger(Text.class);
+	private static final Logger log = LoggerFactory.getLogger(Text.class);
 	
 	private Value model_;
 
@@ -70,7 +70,7 @@ public class Text extends Widget implements Input {
 
 	@Override
 	public void parseString(String value) {
-		logger.debug("Incoming request value {}", value);
+		log.debug("Incoming request value {}", value);
 		model_.set(value);
 	}
 

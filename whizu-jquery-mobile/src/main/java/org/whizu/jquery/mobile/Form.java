@@ -32,6 +32,7 @@ import org.whizu.jquery.Input;
 import org.whizu.js.JavaScript;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.ClickListenerImpl;
+import org.whizu.value.DateValue;
 import org.whizu.value.PasswordValue;
 import org.whizu.value.StringValue;
 import org.whizu.widget.Container;
@@ -48,18 +49,49 @@ public class Form extends Container {
 
 	private ClickListenerImpl handler_;
 
-	@Override
-	public Markup compile() {
-		// @formatter:off
-		Markup markup = Html.form(this)
-			.attr("method", "post")
-			//.attr("action", "form.php")
-			.decorate(this)
-			.add(componentList);
-		// @formatter:on
-		addSubmitHandler();
+	public Form add(Content field) {
+		jQuery(this).append(field);
+		return this;
+	}
 
-		return markup;
+	public void add(PasswordValue value) {
+		throw new UnsupportedOperationException();
+	}
+
+	public Button addButton(String title) {
+		Button button = new Button(title);
+		add(button);
+		return button;
+	}
+
+	public void addDate(DateValue date) {
+		add(new DateField(date));
+	}
+
+	public void addFieldContain(Component component) {
+		FieldContain fc = new FieldContain();
+		fc.add(component);
+		add(fc);
+	}
+
+	public void addFlipSwitch() {
+		Content field = new FlipSwitch();
+		add(field);
+	}
+
+	public void addListView() {
+		Content list = new ListView();
+		add(list);
+	}
+
+	public void addSlider(int min, int max) {
+		Content slider = new Slider(min, max);
+		add(slider);
+	}
+
+	public void addSlider(int min, int max, Theme theme) {
+		Content slider = new Slider(min, max, theme);
+		add(slider);
 	}
 
 	/**
@@ -104,6 +136,10 @@ public class Form extends Container {
 		add(text);
 	}
 
+	public void addText(StringValue value) {
+		addText(value, false);
+	}
+
 	public void addText(StringValue value, boolean fieldContain) {
 		if (fieldContain) {
 			FieldContain fc = new FieldContain();
@@ -121,33 +157,8 @@ public class Form extends Container {
 		add(text);
 	}
 
-	public void addSlider(int min, int max) {
-		Content slider = new Slider(min, max);
-		add(slider);
-	}
-
-	public void addSlider(int min, int max, Theme theme) {
-		Content slider = new Slider(min, max, theme);
-		add(slider);
-	}
-
-	public void addFlipSwitch() {
-		Content field = new FlipSwitch();
-		add(field);
-	}
-
-	public void add(PasswordValue value) {
-		throw new UnsupportedOperationException();
-	}
-
-	public Form add(Content field) {
-		jQuery(this).append(field);
-		return this;
-	}
-
-	public void addListView() {
-		Content list = new ListView();
-		add(list);
+	public void addTextarea(StringValue value) {
+		addTextarea(value, false);
 	}
 
 	public void addTextarea(StringValue value, boolean fieldContain) {
@@ -162,26 +173,6 @@ public class Form extends Container {
 		}
 	}
 
-	public Button addButton(String title) {
-		Button button = new Button(title);
-		add(button);
-		return button;
-	}
-
-	public void addFieldContain(Component component) {
-		FieldContain fc = new FieldContain();
-		fc.add(component);
-		add(fc);
-	}
-
-	public void addText(StringValue value) {
-		addText(value, false);
-	}
-
-	public void addTextarea(StringValue value) {
-		addTextarea(value, false);
-	}
-
 	public void clear() {
 		for (Content c : componentList) {
 			if (c instanceof Input) {
@@ -189,6 +180,20 @@ public class Form extends Container {
 				i.clear();
 			}
 		}
+	}
+
+	@Override
+	public Markup compile() {
+		// @formatter:off
+		Markup markup = Html.form(this)
+			.attr("method", "post")
+			//.attr("action", "form.php")
+			.decorate(this)
+			.add(componentList);
+		// @formatter:on
+		addSubmitHandler();
+
+		return markup;
 	}
 
 	public void onSubmit(ClickListener handler) {
