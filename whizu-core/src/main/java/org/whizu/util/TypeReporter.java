@@ -23,35 +23,12 @@
  *******************************************************************************/
 package org.whizu.util;
 
+import java.lang.annotation.Annotation;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Chrono {
-
-	private static ThreadLocal<Chrono> chronoFactory = new ThreadLocal<Chrono>() {
-
-		@Override
-		protected Chrono initialValue() {
-			return new Chrono();
-		}
-	};
-
-	public static Chrono start() {
-		return chronoFactory.get().reset();
-	}
-
-	private long start;
-
-	private Chrono() {
-	}
-
-	private Chrono reset() {
-		this.start = System.currentTimeMillis();
-		return this;
-	}
-
-	public long stop() {
-		return (System.currentTimeMillis() - this.start);
-	}
+public interface TypeReporter<T extends Annotation> {
+	
+	public void report(T annotation, Class<?> annotatedClass);
 }

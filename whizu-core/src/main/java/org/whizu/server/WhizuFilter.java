@@ -21,14 +21,50 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.annotation;
+package org.whizu.server;
 
-import java.lang.annotation.Annotation;
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface TypeReporter<T extends Annotation> {
+public class WhizuFilter implements Filter {
+
+	private RequestDispatcher requestDispatcher_;
+
+	@Override
+	public void destroy() {
+		requestDispatcher_ = null;
+	}
+
+	@Override
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+			throws IOException, ServletException {
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpServletResponse response = (HttpServletResponse) res;
+
+		// dispatch and process the request if possible
+		boolean dispatched = requestDispatcher_.dispatch(request, response);
+
+		// if the request could not be dispatched
+		if (!dispatched) {
+			// forward the request to the next filter or resource in the chain
+			chain.doFilter(request, response);
+		}
+	}
 	
-	public void report(T annotation, String className);
+	@Override
+	public void init(FilterConfig config)
+			throws ServletException {
+		requestDispatcher_ = RequestDispatcherBuilder.createFromFilterConfig(config).build();
+	}
 }

@@ -155,14 +155,11 @@ public class ApplicationEnhancer {
 	}
 	*/
 
-	public PageFactory createFactory(String className) {
+	public PageFactory createFactory(Class<?> appClass) {
 		try {
-			if (log.isDebugEnabled()) {
-				log.debug("Enhancing class the new way " + className);
-			}
-
-			Class<Application> clazz = getApplicationClass(className);
-
+			log.debug("Enhancing class {}", appClass);
+			Class<Application> clazz = (Class<Application>) appClass;
+			
 			String stylesheet = null;
 			if (clazz.isAnnotationPresent(Stylesheet.class)) {
 				stylesheet = clazz.getAnnotation(Stylesheet.class).value();

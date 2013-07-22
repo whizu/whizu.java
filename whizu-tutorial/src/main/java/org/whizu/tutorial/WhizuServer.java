@@ -42,7 +42,7 @@ public class WhizuServer {
 			WebAppContext context = new WebAppContext();
 			context.setDescriptor(descriptor);
 			context.setResourceBase(resourceBase);
-			context.setContextPath("/");
+			context.setContextPath("/dev");
 			context.setParentLoaderPriority(true);
 			server.setHandler(context);
 			server.start();

@@ -29,8 +29,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.annotation.App;
-import org.whizu.annotation.TypeReporter;
 import org.whizu.ui.Application;
+import org.whizu.util.TypeReporter;
 
 /**
  * @author Rudy D'hauwe
@@ -68,13 +68,13 @@ class Configuration implements TypeReporter<App> {
 	}
 	
 	@Override
-	public void report(App annotation, String className) {
+	public void report(App annotation, Class<?> annotatedClass) {
 		if (log.isDebugEnabled()) {
-			log.debug("@Page(\"" + annotation.value() + "\") on " + className);
+			log.debug("@Page(\"" + annotation.value() + "\") on " + annotatedClass.getName());
 		}
 
 		ApplicationEnhancer enhancer = new ApplicationEnhancer();
-		PageFactory factory = enhancer.createFactory(className);
+		PageFactory factory = enhancer.createFactory(annotatedClass);
 		log.debug("Created PageFactory is {}", factory);
 		addApplication(annotation.value(), factory); 
 	}

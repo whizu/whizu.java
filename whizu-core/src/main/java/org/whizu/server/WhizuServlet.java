@@ -39,7 +39,6 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.whizu.annotation.AnnotationUtils;
 import org.whizu.annotation.App;
 import org.whizu.annotation.Body;
 import org.whizu.html.Title;
@@ -52,6 +51,7 @@ import org.whizu.resource.Resource;
 import org.whizu.resource.StringResource;
 import org.whizu.ui.Application;
 import org.whizu.ui.WhizuUI;
+import org.whizu.util.AnnotationScanner;
 import org.whizu.util.Chrono;
 
 /**
@@ -61,25 +61,27 @@ public class WhizuServlet extends HttpServlet {
 
 	private static final Logger log = LoggerFactory.getLogger(WhizuServlet.class);
 
-	private static final String PACKAGE_NAMES = "package-names";
+	private static final String PACKAGE_NAMES = "annotation-scanning";
 
 	private static final String WHIZU_SESSION = "whizu-session";
 
 	private final Configuration config_ = new Configuration();
 
+	private RequestDispatcher requestProcessor_;
+
 	/**
 	 * The context path of the web application.
 	 * 
 	 * The context path is the portion of the request URI that is used to select
-	 * the context of the request. The context path always comes first in a
-	 * request URI. The path starts with a / character but does not end with a /
-	 * character. For servlets in the default (root) context, this equals "".
+	 * the context of the request. The context path always comes first in a request
+	 * URI. The path starts with a / character but does not end with a / character.
+	 * For servlets in the default (root) context, this equals "".
 	 * 
-	 * It is possible that a servlet container may match a context by more than
-	 * one context path. In such cases the HttpServletRequest.getContextPath()
-	 * will return the actual context path used by the request and it may differ
-	 * from the path returned by this method. This context path should be
-	 * considered as the prime or preferred context path of the application.
+	 * It is possible that a servlet container may match a context by more than one
+	 * context path. In such cases the HttpServletRequest.getContextPath() will
+	 * return the actual context path used by the request and it may differ from
+	 * the path returned by this method. This context path should be considered as
+	 * the prime or preferred context path of the application.
 	 */
 	private String contextPath_;
 
@@ -101,28 +103,37 @@ public class WhizuServlet extends HttpServlet {
 
 	// replace by a class StylesheetResource?
 	// could be cached in production-mode (whizu-pro)
-	private Resource handleCss(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private Resource handleCss(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		String uri = request.getRequestURI();
 		String servletPath = request.getServletPath();
 		String path = uri.substring(servletPath.length());
 		return new ClassPathResource(path);
 	}
 
+	/**
+	 * Called by the servlet container to indicate that the servlet is being placed
+	 * into service. 
+	 */
 	@Override
-	public void init(ServletConfig config) throws ServletException {
-		log.info("WhizuServlet starting...");
+	public void init()
+			throws ServletException {
 		Chrono chrono = Chrono.start();
+		log.info("WhizuServlet is starting...");
+		ServletConfig config = getServletConfig();
 		ServletContext context = config.getServletContext();
 		contextPath_ = context.getContextPath();
 		packageScan_ = getParam(config, PACKAGE_NAMES);
 		RequestContext.setInstance(new RequestContextImpl());
-		AnnotationUtils.scan(App.class, config_, packageScan_);
+		new AnnotationScanner(packageScan_).scan(App.class, config_);
+		//AnnotationScanner.scan(App.class, config_, packageScan_);
 		log.info("WhizuServlet started in {}ms", chrono.stop());
 	}
 
 	// serve a new page request to an application,
 	// replace this method by a class PageResource?
-	private Resource servePageRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private Resource servePageRequest(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		// getPageResource(uri).stream(response.getWriter());
 		String uri = request.getRequestURI();
 		final PageFactory factory = config_.getFactory(uri);
@@ -204,13 +215,47 @@ public class WhizuServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		log.trace("HttpServletRequest.requestURI {}", request.getRequestURI());
-		log.trace("HttpServletRequest.contextPath {}", request.getContextPath());
-		log.trace("ServletCopntext.contextPath {}", request.getServletContext().getContextPath());
-		log.trace("HttpServletRequest.servletPath {}", request.getServletPath());
-		log.trace("HttpServletRequest.pathInfo {}", request.getPathInfo());
+
+		/**
+		 * Returns the part of this request's URL from the protocol name up to the
+		 * query string in the first line of the HTTP request. The web container
+		 * does not decode this string.
+		 */
+		log.debug("HttpServletRequest.requestURI {}", request.getRequestURI());
+
+		/**
+		 * Returns the portion of the request URI that indicates the context of the
+		 * request. The context path always comes first in a request URI. The path
+		 * starts with a "/" character but does not end with a "/" character. For
+		 * servlets in the default (root) context, this method returns "". The
+		 * container does not decode this string.
+		 * 
+		 * It is possible that a servlet container may match a context by more than
+		 * one context path. In such cases this method will return the actual
+		 * context path used by the request and it may differ from the path
+		 * returned by the ServletContext.getContextPath() method.
+		 */
+		log.debug("HttpServletRequest.contextPath {}", request.getContextPath());
+
+		/**
+		 * Returns the context path of the web application. The context path is the
+		 * portion of the request URI that is used to select the context of the
+		 * request. The context path always comes first in a request URI. The path
+		 * starts with a / character but does not end with a / character. For
+		 * servlets in the default (root) context, this method returns "".
+		 * 
+		 * It is possible that a servlet container may match a context by more than
+		 * one context path. In such cases the HttpServletRequest.getContextPath()
+		 * will return the actual context path used by the request and it may
+		 * differ from the path returned by this method.
+		 */
+		log.debug("ServletContext.contextPath {}", request.getServletContext().getContextPath());
+
+		// log.trace("HttpServletRequest.servletPath {}",
+		// request.getServletPath());
+		// log.trace("HttpServletRequest.pathInfo {}", request.getPathInfo());
 
 		Chrono chrono = Chrono.start();
 		Resource content = null;
@@ -238,8 +283,8 @@ public class WhizuServlet extends HttpServlet {
 				 * "no-store, no-cache, must-revalidate"); // Set IE extended
 				 * HTTP/1.1 no-cache headers (use addHeader).
 				 * response.addHeader("Cache-Control",
-				 * "post-check=0, pre-check=0"); // Set standard HTTP/1.0
-				 * no-cache header. response.setHeader("Pragma", "no-cache");
+				 * "post-check=0, pre-check=0"); // Set standard HTTP/1.0 no-cache
+				 * header. response.setHeader("Pragma", "no-cache");
 				 */
 				content = new StringResource(RequestImpl.get().finish());
 			}
@@ -268,7 +313,6 @@ public class WhizuServlet extends HttpServlet {
 			RequestImpl.get().finish();
 		}
 	}
-
 	private void setExpires(HttpServletResponse response) {
 		long CACHE_DURATION_IN_SECOND = 100 * 60; // 100 minutes
 		log.debug("SETTING the Expires header to {} seconds", CACHE_DURATION_IN_SECOND);

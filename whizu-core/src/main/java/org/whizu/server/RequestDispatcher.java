@@ -21,37 +21,41 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.util;
+package org.whizu.server;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Chrono {
+class RequestDispatcher {
 
-	private static ThreadLocal<Chrono> chronoFactory = new ThreadLocal<Chrono>() {
-
-		@Override
-		protected Chrono initialValue() {
-			return new Chrono();
-		}
-	};
-
-	public static Chrono start() {
-		return chronoFactory.get().reset();
+	private ServletContext servletContext_;
+	
+	private Configuration config = new Configuration();
+	
+	/**
+	 * Looks up and dispatches the request to the right
+	 * <code>RequestProcessor</code> if any.
+	 * 
+	 * @return true if the request was dispatched and processed
+	 * @return false if the request could not be dispatched
+	 */
+	public boolean dispatch(HttpServletRequest request, HttpServletResponse response) {
+		return false;
 	}
 
-	private long start;
-
-	private Chrono() {
+	protected void servletContext(ServletContext servletContext) {
+		servletContext_ = servletContext;
 	}
 
-	private Chrono reset() {
-		this.start = System.currentTimeMillis();
-		return this;
+	protected void addApplication(String value, PageFactory factory) {
+		config.addApplication(value, factory);
 	}
 
-	public long stop() {
-		return (System.currentTimeMillis() - this.start);
+	public void addApp(String value, Class<?> annotatedClass) {
+				
 	}
 }
