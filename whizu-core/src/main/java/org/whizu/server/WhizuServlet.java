@@ -57,6 +57,7 @@ import org.whizu.util.Chrono;
 /**
  * @author Rudy D'hauwe
  */
+@Deprecated
 public class WhizuServlet extends HttpServlet {
 
 	private static final Logger log = LoggerFactory.getLogger(WhizuServlet.class);
@@ -66,8 +67,6 @@ public class WhizuServlet extends HttpServlet {
 	private static final String WHIZU_SESSION = "whizu-session";
 
 	private final Configuration config_ = new Configuration();
-
-	private RequestDispatcher requestProcessor_;
 
 	/**
 	 * The context path of the web application.

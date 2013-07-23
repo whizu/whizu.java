@@ -40,13 +40,13 @@ import org.whizu.ui.Application;
  */
 class PageFactory implements Serializable {
 
+	private static final Logger log = LoggerFactory.getLogger(PageFactory.class);
+
 	private final Class<Application> applicationClass_;
 
 	private String description_ = Description.DEFAULT_VALUE;
 
 	private String expires_ = null;
-
-	private Logger log = LoggerFactory.getLogger(PageFactory.class);
 
 	private String stylesheet_;
 

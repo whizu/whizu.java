@@ -26,12 +26,19 @@ package org.whizu.server;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author Rudy D'hauwe
  */
-public interface RequestProcessor {
+public abstract class AbstractRequestProcessor implements RequestProcessor {
 
-	public boolean process(HttpServletRequest request, HttpServletResponse response);
-
-	public boolean accept(Class<?> clazz);
+	private static final Logger log = LoggerFactory.getLogger(AbstractRequestProcessor.class);
+	
+	@Override
+	public boolean process(HttpServletRequest request, HttpServletResponse response) {
+		log.debug("Processing {} by {}", request.getRequestURI(), this);
+		return false;
+	}
 }

@@ -21,17 +21,11 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.server;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+package org.whizu.jquery.mobile;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface RequestProcessor {
+public interface JQueryMobile {
 
-	public boolean process(HttpServletRequest request, HttpServletResponse response);
-
-	public boolean accept(Class<?> clazz);
 }

@@ -10,6 +10,11 @@
 	<description>Whizu API for jQuery Mobile</description>
 	<dependencies>
 		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.servlet</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.whizu</groupId>
 			<artifactId>whizu-core</artifactId>
 			<version>0.1-SNAPSHOT</version>

@@ -23,39 +23,55 @@
  *******************************************************************************/
 package org.whizu.server;
 
-import javax.servlet.ServletContext;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Rudy D'hauwe
  */
 class RequestDispatcher {
 
-	private ServletContext servletContext_;
+	private static final Logger log = LoggerFactory.getLogger(RequestDispatcher.class);
 	
-	private Configuration config = new Configuration();
+	private RequestProcessor fallThrough_ = new FallThroughRequestProcessor();
 	
+	private Map<String, RequestProcessor> requestProcessorMap_ = new HashMap<String, RequestProcessor>();
+
+	protected void addRequestProcessor(String uri, RequestProcessor processor) {
+		requestProcessorMap_.put(uri, processor);
+	}
+
 	/**
 	 * Looks up and dispatches the request to the right
 	 * <code>RequestProcessor</code> if any.
 	 * 
 	 * @return true if the request was dispatched and processed
-	 * @return false if the request could not be dispatched
+	 * @return false otherwise
 	 */
-	public boolean dispatch(HttpServletRequest request, HttpServletResponse response) {
-		return false;
+	protected boolean dispatch(HttpServletRequest request, HttpServletResponse response) {
+		RequestProcessor processor = getRequestProcessor(request);
+		return processor.process(request, response);
 	}
-
-	protected void servletContext(ServletContext servletContext) {
-		servletContext_ = servletContext;
-	}
-
-	protected void addApplication(String value, PageFactory factory) {
-		config.addApplication(value, factory);
-	}
-
-	public void addApp(String value, Class<?> annotatedClass) {
-				
+	
+	private RequestProcessor getRequestProcessor(HttpServletRequest request) {
+		String uri = request.getRequestURI();
+		RequestProcessor processor = requestProcessorMap_.get(uri);
+		log.debug("uri {} to be served by processor {}", uri, processor);
+		
+		if (processor == null) {
+			//do more advanced stuff to find the right processor
+		}
+		
+		if (processor == null) {
+			processor = fallThrough_;
+		}
+		
+		return processor;
 	}
 }

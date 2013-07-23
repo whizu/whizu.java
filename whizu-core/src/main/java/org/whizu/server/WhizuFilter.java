@@ -34,6 +34,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.whizu.jquery.RequestContext;
+
 /**
  * @author Rudy D'hauwe
  */
@@ -65,6 +67,7 @@ public class WhizuFilter implements Filter {
 	@Override
 	public void init(FilterConfig config)
 			throws ServletException {
+		RequestContext.setInstance(new RequestContextImpl());
 		requestDispatcher_ = RequestDispatcherBuilder.createFromFilterConfig(config).build();
 	}
 }

@@ -23,8 +23,6 @@
  *******************************************************************************/
 package org.whizu.server;
 
-import javassist.NotFoundException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.annotation.Expires;
@@ -41,123 +39,11 @@ public class ApplicationEnhancer {
 
 	private Logger log = LoggerFactory.getLogger(ApplicationEnhancer.class);
 
-	/*
-	public PageFactory createFactoryOld(String className) {
-		try {
-			if (log.isDebugEnabled()) {
-				log.debug("Enhancing class " + className);
-			}
-
-			ClassPool classPool = ClassPool.getDefault();
-			ClassLoader loader = getClass().getClassLoader();
-			classPool.appendClassPath(new LoaderClassPath(loader));
-			CtClass ctClass = classPool.get(className);
-
-			String stylesheet = null;
-			if (ctClass.hasAnnotation(Stylesheet.class)) {
-				stylesheet = ((Stylesheet) ctClass.getAnnotation(Stylesheet.class)).value();
-			}
-
-			String title = Title.DEFAULT_TITLE;
-			if (ctClass.hasAnnotation(Title.class)) {
-				title = ((Title) ctClass.getAnnotation(Title.class)).value();
-			}
-
-			String expires = getExpires(ctClass);
-			String template = getTemplate(ctClass);
-			Description description = getAnnotation(ctClass, Description.class);
-
-			CtMethod[] ctMethods = ctClass.getDeclaredMethods();
-			List<CtMethod> methodsToDo = new ArrayList<CtMethod>();
-			for (CtMethod method : ctMethods) {
-				if (method.hasAnnotation(Css.class) || (method.hasAnnotation(Style.class))) {
-					if (log.isDebugEnabled()) {
-						log.debug("Enhancing method " + method);
-					}
-					methodsToDo.add(method);
-				}
-
-				if (method.hasAnnotation(Body.class)) {
-					log.debug("Found @Body");
-				}
-			}
-
-			for (CtMethod method : methodsToDo) {
-				final Css annot = (Css) method.getAnnotation(Css.class);
-				if (annot != null) {
-					method.insertAfter("org.whizu.server.ApplicationEnhancer.doIt(\"" + annot.value()[0] + "\", $_);");
-				}
-
-				final Style sannot = (Style) method.getAnnotation(Style.class);
-				if (sannot != null) {
-					method.insertAfter("org.whizu.server.ApplicationEnhancer.style(\"" + sannot.value()[0] + "\", $_);");
-				}
-			}
-
-			CtField[] fields = ctClass.getDeclaredFields();
-			for (CtField field : fields) {
-				log.debug("Enhancing field " + field.getName());
-				if (field.hasAnnotation(Html.class)) {
-					log.debug("Enhancing field " + field.getName() + " with annotation @Html");
-					CtConstructor[] constructors = ctClass.getConstructors();
-					for (CtConstructor constructor : constructors) {
-						constructor.insertAfter(field.getName()
-								+ "=org.whizu.annotation.processing.Support.getValue(getClass(), \"" + field.getName()
-								+ "\");");
-					}
-				}
-			}
-
-			log.debug("just before fixing inner classes");
-			fixInnerClasses(ctClass);
-			ClassFile ccFile = ctClass.getClassFile();
-			ConstPool constpool = ccFile.getConstPool();
-
-			// log.debug("just before creating the annotation");
-			// create the annotation
-			// AnnotationsAttribute attr = new AnnotationsAttribute(constpool,
-			// AnnotationsAttribute.visibleTag);
-			// Annotation annot = new Annotation("org.whizu.annotation.Bean",
-			// constpool);
-			// annot.addMemberValue("value", new StringMemberValue("hello",
-			// ccFile.getConstPool()));
-			// attr.addAnnotation(annot);
-			// ccFile.addAttribute(attr);
-			// ctClass.setName(ctClass.getName()+"Impl"); //google app engine
-			// ctClass.setName(ctClass.getName() + "Impl");
-
-			Class<Application> newClass = getEnhancedClass(ctClass);
-
-			PageFactory factory = new PageFactory(newClass);
-			factory.title(title);
-			factory.expires(expires);
-			factory.stylesheet(stylesheet);
-			factory.template(template);
-			factory.description(description);
-
-			log.debug("Enhanced class returns {}", factory);
-			return factory;
-		} catch (NotFoundException e) {
-			log.debug(e.getMessage(), e);
-			throw new IllegalStateException(e);
-		} catch (CannotCompileException e) {
-			log.debug(e.getMessage(), e);
-			throw new IllegalStateException(e);
-		} catch (ClassNotFoundException e) {
-			log.debug(e.getMessage(), e);
-			throw new IllegalStateException(e);
-		} catch (Exception e) {
-			log.debug(e.getMessage(), e);
-			throw new IllegalStateException(e);
-		} finally {
-			log.debug("ApplicationEnhancer.finally()");
-		}
-	}
-	*/
-
 	public PageFactory createFactory(Class<?> appClass) {
 		try {
 			log.debug("Enhancing class {}", appClass);
+			
+			@SuppressWarnings("unchecked")
 			Class<Application> clazz = (Class<Application>) appClass;
 			
 			String stylesheet = null;
@@ -183,9 +69,6 @@ public class ApplicationEnhancer {
 
 			log.debug("Enhanced class returns {}", factory);
 			return factory;
-		} catch (NotFoundException e) {
-			log.debug(e.getMessage(), e);
-			throw new IllegalStateException(e);
 		} catch (ClassNotFoundException e) {
 			log.debug(e.getMessage(), e);
 			throw new IllegalStateException(e);
@@ -197,107 +80,18 @@ public class ApplicationEnhancer {
 		}
 	}
 
-	private Class<Application> getApplicationClass(String className) {
-		try {
-			@SuppressWarnings("unchecked")
-			Class<Application> clazz = (Class<Application>) Class.forName(className);
-
-			/*
-			Method[] methods = clazz.getDeclaredMethods();
-			for (Method method : methods) {
-				if (method.isAnnotationPresent(Css.class) || (method.isAnnotationPresent(Style.class))) {
-					enhancementNecessary = true;
-				}
-			}
-
-			if (enhancementNecessary) {
-				ClassPool classPool = ClassPool.getDefault();
-				ClassLoader loader = getClass().getClassLoader();
-				classPool.appendClassPath(new LoaderClassPath(loader));
-				CtClass ctClass = classPool.get(className);
-
-				CtMethod[] ctMethods = ctClass.getDeclaredMethods();
-				List<CtMethod> methodsToDo = new ArrayList<CtMethod>();
-				for (CtMethod method : ctMethods) {
-					if (method.hasAnnotation(Css.class) || (method.hasAnnotation(Style.class))) {
-						if (log.isDebugEnabled()) {
-							log.debug("Enhancing method " + method);
-						}
-						methodsToDo.add(method);
-					}
-				}
-
-				for (CtMethod method : methodsToDo) {
-					final Css annot = (Css) method.getAnnotation(Css.class);
-					if (annot != null) {
-						method.insertAfter("org.whizu.server.ApplicationEnhancer.doIt(\"" + annot.value()[0]
-								+ "\", $_);");
-					}
-
-					final Style sannot = (Style) method.getAnnotation(Style.class);
-					if (sannot != null) {
-						method.insertAfter("org.whizu.server.ApplicationEnhancer.style(\"" + sannot.value()[0]
-								+ "\", $_);");
-					}
-				}
-
-				log.debug("just before fixing inner classes");
-				fixInnerClasses(ctClass);
-				Class<Application> newClass = getEnhancedClass(ctClass);
-				return newClass;
-			} else {
-				log.debug("************* NO ENHANCEMENT FOR " + clazz);
-			}
-
-			*/
-			return clazz;
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	private String getTemplate(Class<?> ctClass) throws ClassNotFoundException, NotFoundException {
+	private String getTemplate(Class<?> ctClass) throws ClassNotFoundException {
 		Template template = getAnnotation(ctClass, Template.class);
 		return (template == null) ? null : template.value();
 	}
 
-/*
-	private String getTemplate(CtClass ctClass) throws ClassNotFoundException, NotFoundException {
-		Template template = getAnnotation(ctClass, Template.class);
-		return (template == null) ? null : template.value();
-	}
-	
-
-	private String getExpires(CtClass ctClass) throws ClassNotFoundException, NotFoundException {
+	private String getExpires(Class<?> ctClass) throws ClassNotFoundException {
 		Expires expires = getAnnotation(ctClass, Expires.class);
 		return (expires == null) ? null : expires.value();
 	}
-*/
-	
-	private String getExpires(Class<?> ctClass) throws ClassNotFoundException, NotFoundException {
-		Expires expires = getAnnotation(ctClass, Expires.class);
-		return (expires == null) ? null : expires.value();
-	}
-
-	/*
-	@SuppressWarnings("unchecked")
-	private <T extends java.lang.annotation.Annotation> T getAnnotation(CtClass ctClass, Class<T> annotationClass)
-			throws ClassNotFoundException, NotFoundException {
-		if (ctClass.hasAnnotation(annotationClass)) {
-			return ((T) ctClass.getAnnotation(annotationClass));
-		} else {
-			CtClass superClass = ctClass.getSuperclass();
-			if (superClass != null) {
-				return getAnnotation(superClass, annotationClass);
-			} else {
-				return null;
-			}
-		}
-	}
-	*/
 
 	private <T extends java.lang.annotation.Annotation> T getAnnotation(Class<?> ctClass, Class<T> annotationClass)
-			throws ClassNotFoundException, NotFoundException {
+			throws ClassNotFoundException {
 		if (ctClass.isAnnotationPresent(annotationClass)) {
 			return ctClass.getAnnotation(annotationClass);
 		}
@@ -307,43 +101,4 @@ public class ApplicationEnhancer {
 		}
 		return null;
 	}
-
-	/*
-	// Adds support for anonymous/inner classes
-	private void fixInnerClasses(CtClass ctClass) throws NotFoundException, CannotCompileException {
-		CtClass[] nested = ctClass.getNestedClasses();
-		for (CtClass n : nested) {
-			n.toClass();
-			fixInnerClasses(n);
-		}
-	}
-
-	private Class<Application> getEnhancedClass(CtClass ctClass) {
-		try {
-			return ctClass.toClass();
-		} catch (CannotCompileException e) {
-			throw new IllegalStateException(e);
-		}
-	}
-	*/
-
-	/*
-	public static Object doIt(Object arg) {
-		return arg;
-	}
-
-	public static Object doIt(String css, Object arg) {
-		if (arg instanceof Component) {
-			((Component) arg).css(css);
-		}
-		return arg;
-	}
-
-	public static Object style(String css, Object arg) {
-		if (arg instanceof Component) {
-			((Component) arg).style(css);
-		}
-		return arg;
-	}
-	*/
 }

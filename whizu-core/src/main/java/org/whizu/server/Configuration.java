@@ -69,10 +69,6 @@ class Configuration implements TypeReporter<App> {
 	
 	@Override
 	public void report(App annotation, Class<?> annotatedClass) {
-		if (log.isDebugEnabled()) {
-			log.debug("@Page(\"" + annotation.value() + "\") on " + annotatedClass.getName());
-		}
-
 		ApplicationEnhancer enhancer = new ApplicationEnhancer();
 		PageFactory factory = enhancer.createFactory(annotatedClass);
 		log.debug("Created PageFactory is {}", factory);
