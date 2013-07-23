@@ -28,4 +28,5 @@ package org.whizu.jquery.mobile;
  */
 public interface JQueryMobile {
 
+	public void onLoad(Page page);
 }

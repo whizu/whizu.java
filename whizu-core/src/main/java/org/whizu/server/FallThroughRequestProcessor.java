@@ -1,5 +1,7 @@
 package org.whizu.server;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,12 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 class FallThroughRequestProcessor extends AbstractRequestProcessor {
 
 	@Override
-	public boolean accept(Class<?> clazz) {
-		return false;
-	}
-
-	@Override
-	public boolean process(HttpServletRequest request, HttpServletResponse response) {
+	public boolean process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		return false;
 	}
 }

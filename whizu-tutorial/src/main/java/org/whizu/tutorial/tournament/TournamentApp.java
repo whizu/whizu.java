@@ -51,7 +51,7 @@ public class TournamentApp extends JQueryMobileApp implements JQueryMobile {
 	private final ListView playerList = new ListView();
 
 	@Override
-	protected void onLoad(Page page) {
+	public void onLoad(Page page) {
 		// @formatter:off
 		HeaderBuilder.create()
 			.title("Tournament")

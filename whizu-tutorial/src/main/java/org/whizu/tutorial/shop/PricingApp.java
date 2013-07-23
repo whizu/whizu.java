@@ -2,7 +2,7 @@ package org.whizu.tutorial.shop;
 
 import org.whizu.annotation.App;
 import org.whizu.annotation.Template;
-import org.whizu.html.Title;
+import org.whizu.annotation.Title;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Select;

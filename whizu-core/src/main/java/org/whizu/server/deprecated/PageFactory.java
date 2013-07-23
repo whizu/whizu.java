@@ -21,24 +21,25 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.server;
+package org.whizu.server.deprecated;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.whizu.annotation.Description;
+import org.whizu.annotation.Title;
 import org.whizu.annotation.processing.Html;
 import org.whizu.annotation.processing.Markdown;
 import org.whizu.annotation.processing.Support;
-import org.whizu.html.Description;
-import org.whizu.html.Title;
 import org.whizu.ui.Application;
 
 /**
  * @author Rudy D'hauwe
  */
-class PageFactory implements Serializable {
+@Deprecated
+public class PageFactory implements Serializable {
 
 	private static final Logger log = LoggerFactory.getLogger(PageFactory.class);
 

@@ -41,12 +41,16 @@ import org.whizu.util.TypeReporter;
  */
 class RequestDispatcherBuilder {
 
-	/**
-	 * Configuration parameter for classpath annotation scanning.
-	 */
-	private static final String INIT_PARAM_ANNOTATION_SCANNING = "annotation-scanning";
+	private static final String JQUERY_MOBILE_SERVER = "org.whizu.server.JQueryMobileServer";
 
 	private static final Logger log = LoggerFactory.getLogger(RequestDispatcherBuilder.class);
+
+	/**
+	 * Configuration parameter for classpath annotation scanning. Supported values
+	 * are the empty string (""), "on", "true", "off", "false", or a comma
+	 * separated list of packages to scan.
+	 */
+	private static final String INIT_PARAM_ANNOTATION_SCANNING = "annotation-scanning";
 
 	private static RequestDispatcherBuilder create() {
 		return new RequestDispatcherBuilder();
@@ -66,16 +70,29 @@ class RequestDispatcherBuilder {
 
 	protected RequestDispatcher build() {
 		final RequestDispatcher dispatcher_ = new RequestDispatcher();
-		final List<RequestProcessor> requestProcessorList = getRequestProcessorList();
+		final List<Server> serverList = getServerList();
 
 		if (classpathAnnotationScanner_ != null) {
 			classpathAnnotationScanner_.scan(App.class, new TypeReporter<App>() {
 
 				@Override
 				public void report(App app, Class<?> appClass) {
-					report(app.value(), appClass);
+					initRequestProcessor(app.value(), appClass);
 				}
-				
+
+				private RequestProcessor initRequestProcessor(String uri, Class<?> clazz) {
+					uri = servletContextPath_ + uri;
+					for (Server server : serverList) {
+						if (server.accept(clazz)) {
+							return server.createRequestProcessor(uri, clazz, servletContextPath_, dispatcher_);
+						}
+					}
+					// TODO detect multiple processors are found for the same uri
+					// TODO detect that an uri is mapped multiple times
+					log.warn("No request processor found for {}", clazz);
+					return null;
+				}
+/*
 				private void report(String uri, Class<?> appClass) {
 					RequestProcessor processor = getRequestProcessor(appClass);
 					uri = servletContextPath_ + uri;
@@ -84,34 +101,39 @@ class RequestDispatcherBuilder {
 				}
 
 				private RequestProcessor getRequestProcessor(Class<?> clazz) {
-					for (RequestProcessor processor : requestProcessorList) {
-						if (processor.accept(clazz)) {
-							return processor;
+					for (Server server : serverList) {
+						if (server.accept(clazz)) {
+							return server.createRequestProcessor(clazz, servletContextPath_);
 						}
 					}
+					// TODO detect that multiple processors are found for the same
+					// uri
+					// TODO detect that an uri is mapped multiple times
+					log.warn("No request processor found for {}", clazz);
 					return null;
 				}
+*/				
 			});
 		}
 
 		return dispatcher_;
 	}
 
-	private List<RequestProcessor> getRequestProcessorList() {
-		List<RequestProcessor> list = new ArrayList<RequestProcessor>();
+	private List<Server> getServerList() {
+		List<Server> list = new ArrayList<Server>();
 
 		try {
-			String jqmProcessorName = "org.whizu.server.JQueryMobileRequestProcessor";
 			@SuppressWarnings("unchecked")
-			Class<RequestProcessor> jqmProcessorClass = (Class<RequestProcessor>) Class.forName(jqmProcessorName);
-			RequestProcessor jqmProcessor = jqmProcessorClass.newInstance();
-			list.add(jqmProcessor);
+			Class<Server> jqmServerClass = (Class<Server>) Class.forName(JQUERY_MOBILE_SERVER);
+			Server jqmServer = jqmServerClass.newInstance();
+			list.add(jqmServer);
 		} catch (ClassNotFoundException e) {
+			log.warn("JQueryMobile library is mising on the classpath", e);
 		} catch (InstantiationException e) {
+			throw new RuntimeException(e);
 		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
 		}
-
-		list.add(new DefaultRequestProcessor());
 
 		return list;
 	}

@@ -23,15 +23,20 @@
  *******************************************************************************/
 package org.whizu.server;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * TODO rename RequestProcessor into Service
+ * TODO rename Server into ServiceBuilder
+ * 
  * @author Rudy D'hauwe
  */
 public interface RequestProcessor {
 
-	public boolean process(HttpServletRequest request, HttpServletResponse response);
+	public boolean process(HttpServletRequest request, HttpServletResponse response)
+			throws IOException;
 
-	public boolean accept(Class<?> clazz);
 }

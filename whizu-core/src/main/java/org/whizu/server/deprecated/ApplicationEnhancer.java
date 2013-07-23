@@ -21,20 +21,21 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.server;
+package org.whizu.server.deprecated;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.whizu.annotation.Description;
 import org.whizu.annotation.Expires;
 import org.whizu.annotation.Stylesheet;
 import org.whizu.annotation.Template;
-import org.whizu.html.Description;
-import org.whizu.html.Title;
+import org.whizu.annotation.Title;
 import org.whizu.ui.Application;
 
 /**
  * @author Rudy D'hauwe
  */
+@Deprecated
 public class ApplicationEnhancer {
 
 	private Logger log = LoggerFactory.getLogger(ApplicationEnhancer.class);

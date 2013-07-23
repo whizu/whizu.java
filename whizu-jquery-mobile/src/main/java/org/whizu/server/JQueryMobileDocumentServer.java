@@ -21,21 +21,32 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.html;
+package org.whizu.server;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.whizu.resource.Resource;
 
 /**
+ * TODO rename and abstract into 'DocumentServer' or 'DocumentServer'?
+ * 
  * @author Rudy D'hauwe
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
-public @interface Description {
+class JQueryMobileDocumentServer extends AbstractRequestProcessor {
 
-	public static final String DEFAULT_VALUE = "Ridiculously fast web apps - www.whizu.org";
+	private Resource document_;
 
-	public String value() default DEFAULT_VALUE;
+	protected JQueryMobileDocumentServer(Resource document) {
+		document_ = document;
+	}
+
+	@Override
+	public boolean process(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		document_.print(response.getOutputStream());
+		return true;
+	}
 }

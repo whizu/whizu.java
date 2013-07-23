@@ -106,7 +106,7 @@ public class Form extends Container {
 					JavaScript.preventDefault();
 					//JavaScript.alert("submit form");
 					
-					String url = "http://localhost:8090/whizu?id=" + handler_.id();
+					String url = "http://localhost:8090/dev/whizu?id=" + handler_.id(); //TODO {context-path}
 
 					Function data = new Function() {
 						@Override

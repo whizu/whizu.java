@@ -24,9 +24,9 @@
 package org.whizu.tutorial.website;
 
 import org.whizu.annotation.App;
+import org.whizu.annotation.Description;
+import org.whizu.annotation.Title;
 import org.whizu.annotation.processing.Markdown;
-import org.whizu.html.Description;
-import org.whizu.html.Title;
 import org.whizu.ui.UI;
 
 /**

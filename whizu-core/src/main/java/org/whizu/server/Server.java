@@ -21,59 +21,15 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.resource;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+package org.whizu.server;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractResource implements Resource {
+public interface Server {
 
-	@Override
-	public String getString() throws IOException {
-		return getStringBuilder().toString();
-	}
-	
-	@Override
-	public StringBuilder getStringBuilder() throws IOException {
-		InputStream in = null;
+	public boolean accept(Class<?> clazz);
 
-		try {
-			in = getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-			StringBuilder out = new StringBuilder();
-			String line;
-			while ((line = reader.readLine()) != null) {
-				out.append(line);
-			}
-			return out;
-		} finally {
-			if (in != null) {
-				in.close();
-			}
-		}
-	}
-
-	@Override
-	public void print(OutputStream out) throws IOException {
-		InputStream in = null;
-
-		try {
-			in = getInputStream();
-			byte[] buffer = new byte[256];
-		    int bytesRead = 0;
-		    while ((bytesRead = in.read(buffer)) != -1) {
-		        out.write(buffer, 0, bytesRead);
-		    }
-		} finally {
-			if (in != null) {
-				in.close();
-			}
-		}
-	}
+	public RequestProcessor createRequestProcessor(String uri, Class<?> clazz, String contextPath,
+			RequestDispatcher dispatcher);
 }

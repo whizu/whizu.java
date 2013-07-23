@@ -32,6 +32,7 @@ import org.whizu.ui.UI;
  * @author Rudy D'hauwe
  */
 @Template("/org/whizu/jquery/mobile/document.html")
+@Deprecated
 public abstract class JQueryMobileApp implements Application {
 
 	@Override

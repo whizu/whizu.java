@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.server;
+package org.whizu.server.deprecated;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +35,8 @@ import org.whizu.util.TypeReporter;
 /**
  * @author Rudy D'hauwe
  */
-class Configuration implements TypeReporter<App> {
+@Deprecated
+public class Configuration implements TypeReporter<App> {
 
 	private static final Logger log = LoggerFactory.getLogger(Configuration.class);
 

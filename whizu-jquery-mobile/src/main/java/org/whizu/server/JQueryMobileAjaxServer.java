@@ -21,59 +21,47 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.resource;
+package org.whizu.server;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.whizu.jquery.RequestContext;
+import org.whizu.jquery.mobile.JQueryMobile;
+import org.whizu.jquery.mobile.Jqm;
+import org.whizu.util.Objects;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractResource implements Resource {
+class JQueryMobileAjaxServer implements RequestProcessor {
 
-	@Override
-	public String getString() throws IOException {
-		return getStringBuilder().toString();
-	}
+	private static final Logger log = LoggerFactory.getLogger(JQueryMobileAjaxServer.class);
 	
-	@Override
-	public StringBuilder getStringBuilder() throws IOException {
-		InputStream in = null;
+	Class<JQueryMobile> appClass_;
 
-		try {
-			in = getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-			StringBuilder out = new StringBuilder();
-			String line;
-			while ((line = reader.readLine()) != null) {
-				out.append(line);
-			}
-			return out;
-		} finally {
-			if (in != null) {
-				in.close();
-			}
-		}
+	public JQueryMobileAjaxServer(Class<JQueryMobile> appClass) {
+		appClass_ = appClass;
 	}
 
 	@Override
-	public void print(OutputStream out) throws IOException {
-		InputStream in = null;
-
+	public boolean process(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		try {
-			in = getInputStream();
-			byte[] buffer = new byte[256];
-		    int bytesRead = 0;
-		    while ((bytesRead = in.read(buffer)) != -1) {
-		        out.write(buffer, 0, bytesRead);
-		    }
+			JQueryMobile app = Objects.newInstance(appClass_);
+			app.onLoad(Jqm.document().page());
+			// works:RequestContext.getRequest().addExpression("$('#whizu').closest(\":jqmData(role='page')\").trigger('pagecreate');");
+			RequestContext.getRequest().addExpression("$('#whizu').parent().trigger('pagecreate');");
+			response.setHeader("X-Robots-Tag", "noindex");
+			return true;
 		} finally {
-			if (in != null) {
-				in.close();
-			}
+			String result = RequestImpl.get().finish();
+			log.debug("ajax:"+result);
+			response.getOutputStream().print(result);
 		}
 	}
 }

@@ -23,14 +23,19 @@
  *******************************************************************************/
 package org.whizu.server;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.whizu.jquery.Input;
+import org.whizu.jquery.Session;
 
 /**
  * @author Rudy D'hauwe
@@ -38,9 +43,11 @@ import org.slf4j.LoggerFactory;
 class RequestDispatcher {
 
 	private static final Logger log = LoggerFactory.getLogger(RequestDispatcher.class);
-	
+
+	private static final String WHIZU_SESSION = "whizu-session";
+
 	private RequestProcessor fallThrough_ = new FallThroughRequestProcessor();
-	
+
 	private Map<String, RequestProcessor> requestProcessorMap_ = new HashMap<String, RequestProcessor>();
 
 	protected void addRequestProcessor(String uri, RequestProcessor processor) {
@@ -48,30 +55,60 @@ class RequestDispatcher {
 	}
 
 	/**
-	 * Looks up and dispatches the request to the right
-	 * <code>RequestProcessor</code> if any.
+	 * Finds the right <code>RequestProcessor</code> to process the request and
+	 * dispatches the request to the request processor, if any.
 	 * 
 	 * @return true if the request was dispatched and processed
 	 * @return false otherwise
 	 */
-	protected boolean dispatch(HttpServletRequest request, HttpServletResponse response) {
+	protected boolean dispatch(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		initRequest(request);
 		RequestProcessor processor = getRequestProcessor(request);
 		return processor.process(request, response);
 	}
-	
+
 	private RequestProcessor getRequestProcessor(HttpServletRequest request) {
 		String uri = request.getRequestURI();
 		RequestProcessor processor = requestProcessorMap_.get(uri);
 		log.debug("uri {} to be served by processor {}", uri, processor);
-		
+
 		if (processor == null) {
-			//do more advanced stuff to find the right processor
+			// do more advanced stuff to find the right processor
 		}
-		
+
 		if (processor == null) {
 			processor = fallThrough_;
 		}
-		
+
 		return processor;
+	}
+
+	// move completely to ajax server?
+	private Session initRequest(HttpServletRequest request) {
+		Session userSession = initSession(request);
+		
+		Map<String, String[]> parameterMap = request.getParameterMap();
+		Set<String> keys = parameterMap.keySet();
+		for (String key : keys) {
+			log.debug("Incoming request parameter {} equals {}", key, parameterMap.get(key)[0]);
+			Input editable = userSession.getInput(key);
+			if (editable != null) {
+				editable.parseString(parameterMap.get(key)[0]);
+			}
+		}
+
+		return userSession;
+	}
+
+	private Session initSession(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Session userSession = (Session) session.getAttribute(WHIZU_SESSION);
+		if (userSession == null) {
+			userSession = new SessionImpl();
+			session.setAttribute(WHIZU_SESSION, userSession);
+		}
+		RequestImpl.get().session(userSession);
+		return userSession;
 	}
 }

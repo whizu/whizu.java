@@ -38,9 +38,15 @@ public interface Resource {
 	 * @throws IOException
 	 *             if the stream could not be opened
 	 */
-	public InputStream getInputStream() throws IOException;
+	public InputStream getInputStream()
+			throws IOException;
 
-	public String getString() throws IOException;
+	public String getString()
+			throws IOException;
 
-	public void print(OutputStream out) throws IOException;
+	public void print(OutputStream out)
+			throws IOException;
+
+	public StringBuilder getStringBuilder()
+			throws IOException;
 }

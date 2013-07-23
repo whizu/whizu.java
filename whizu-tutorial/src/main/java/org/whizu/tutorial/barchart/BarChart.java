@@ -27,8 +27,8 @@ import java.util.Date;
 
 import org.whizu.annotation.Css;
 import org.whizu.annotation.App;
+import org.whizu.annotation.Title;
 import org.whizu.dom.Component;
-import org.whizu.html.Title;
 import org.whizu.jquery.Function;
 import org.whizu.layout.Layout;
 import org.whizu.layout.VerticalLayout;

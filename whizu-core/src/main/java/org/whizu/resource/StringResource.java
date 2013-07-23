@@ -40,7 +40,8 @@ public class StringResource implements Resource {
 	}
 
 	@Override
-	public InputStream getInputStream() throws IOException {
+	public InputStream getInputStream()
+			throws IOException {
 		return new ByteArrayInputStream(bytes_);
 	}
 
@@ -50,7 +51,14 @@ public class StringResource implements Resource {
 	}
 
 	@Override
-	public void print(OutputStream out) throws IOException {
+	public void print(OutputStream out)
+			throws IOException {
 		out.write(bytes_);
+	}
+
+	@Override
+	public StringBuilder getStringBuilder()
+			throws IOException {
+		return new StringBuilder(getString());
 	}
 }
