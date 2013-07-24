@@ -31,8 +31,6 @@ import org.slf4j.LoggerFactory;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Input;
 import org.whizu.jquery.Session;
-import org.whizu.ui.Application;
-import org.whizu.ui.WhizuUI;
 
 /**
  * @author Rudy D'hauwe
@@ -40,7 +38,7 @@ import org.whizu.ui.WhizuUI;
 class SessionImpl implements Session {
 
 	private Logger log = LoggerFactory.getLogger(SessionImpl.class);
-	
+
 	private static int sessionCount = 0;
 
 	private int componentCount = 0;
@@ -87,25 +85,14 @@ class SessionImpl implements Session {
 	}
 
 	@Override
-	public void handleEvent(String id) {
+	public boolean handleEvent(String id) {
 		EventHandler listener = getEventHandler(id);
 		if (listener != null) {
 			listener.handleEvent();
-		} else {
-			try {
-				@SuppressWarnings("unchecked")
-				Class<Application> clazz = (Class<Application>) Class.forName(id);
-				Application app = clazz.newInstance();
-				
-				app.init(new WhizuUI()); //TODO don't create static UI here
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
+			return true;
 		}
+		
+		return false;
 	}
 
 	@Override

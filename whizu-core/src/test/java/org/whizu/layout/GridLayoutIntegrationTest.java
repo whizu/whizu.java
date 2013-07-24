@@ -139,8 +139,8 @@ public class GridLayoutIntegrationTest {
 							}
 
 							@Override
-							public void handleEvent(String id) {
-								// TODO Auto-generated method stub
+							public boolean handleEvent(String id) {
+								return false;
 							}
 
 							@Override

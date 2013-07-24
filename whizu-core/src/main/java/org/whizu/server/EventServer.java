@@ -23,30 +23,27 @@
  *******************************************************************************/
 package org.whizu.server;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.whizu.resource.Resource;
+import org.whizu.jquery.RequestContext;
+import org.whizu.jquery.Session;
 
 /**
- * TODO rename and abstract into 'DocumentServer' ?
- * 
  * @author Rudy D'hauwe
  */
-class JQueryMobileDocumentServer extends AbstractRequestProcessor {
-
-	private Resource document_;
-
-	protected JQueryMobileDocumentServer(Resource document) {
-		document_ = document;
-	}
+public class EventServer extends AjaxServer {
 
 	@Override
-	public boolean process(HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
-		document_.print(response.getOutputStream());
-		return true;
+	protected boolean execute(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		if (id != null) {
+			Session session = RequestContext.session();
+			if (session.handleEvent(id)) {
+				response.setHeader("X-Robots-Tag", "noindex"); // "noarchive"?
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -46,9 +46,9 @@ class RequestDispatcherBuilder {
 	private static final Logger log = LoggerFactory.getLogger(RequestDispatcherBuilder.class);
 
 	/**
-	 * Configuration parameter for classpath annotation scanning. Supported values
-	 * are the empty string (""), "on", "true", "off", "false", or a comma
-	 * separated list of packages to scan.
+	 * Configuration parameter for classpath annotation scanning. Supported
+	 * values are the empty string (""), "on", "true", "off", "false", or a
+	 * comma separated list of packages to scan.
 	 */
 	private static final String INIT_PARAM_ANNOTATION_SCANNING = "annotation-scanning";
 
@@ -87,33 +87,14 @@ class RequestDispatcherBuilder {
 							return server.createRequestProcessor(uri, clazz, servletContextPath_, dispatcher_);
 						}
 					}
-					// TODO detect multiple processors are found for the same uri
+					// TODO if multiple processors are found for same uri
 					// TODO detect that an uri is mapped multiple times
 					log.warn("No request processor found for {}", clazz);
 					return null;
 				}
-/*
-				private void report(String uri, Class<?> appClass) {
-					RequestProcessor processor = getRequestProcessor(appClass);
-					uri = servletContextPath_ + uri;
-					log.debug("Mapping @App {} with class {} to {}", uri, appClass, processor);
-					dispatcher_.addRequestProcessor(uri, processor);
-				}
-
-				private RequestProcessor getRequestProcessor(Class<?> clazz) {
-					for (Server server : serverList) {
-						if (server.accept(clazz)) {
-							return server.createRequestProcessor(clazz, servletContextPath_);
-						}
-					}
-					// TODO detect that multiple processors are found for the same
-					// uri
-					// TODO detect that an uri is mapped multiple times
-					log.warn("No request processor found for {}", clazz);
-					return null;
-				}
-*/				
 			});
+			
+			dispatcher_.addRequestProcessor(servletContextPath_ + "/whizu/event", new EventServer());
 		}
 
 		return dispatcher_;

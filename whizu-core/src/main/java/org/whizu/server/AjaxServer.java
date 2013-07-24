@@ -28,25 +28,26 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.whizu.resource.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * TODO rename and abstract into 'DocumentServer' ?
- * 
  * @author Rudy D'hauwe
  */
-class JQueryMobileDocumentServer extends AbstractRequestProcessor {
+abstract class AjaxServer implements RequestProcessor {
 
-	private Resource document_;
-
-	protected JQueryMobileDocumentServer(Resource document) {
-		document_ = document;
-	}
-
+	private static final Logger log = LoggerFactory.getLogger(AjaxServer.class);
+	
 	@Override
-	public boolean process(HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
-		document_.print(response.getOutputStream());
-		return true;
+	public final boolean process(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		try {
+			return execute(request, response);
+		} finally {
+			String result = RequestImpl.get().finish();
+			log.debug("Ajax:" + result);
+			response.getOutputStream().print(result);
+		}
 	}
+
+	protected abstract boolean execute(HttpServletRequest request, HttpServletResponse response);
 }

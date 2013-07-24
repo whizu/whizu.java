@@ -26,5 +26,5 @@ package org.whizu.server;
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractServer<T> implements Server {
+abstract class AbstractServer<T> implements Server {
 }

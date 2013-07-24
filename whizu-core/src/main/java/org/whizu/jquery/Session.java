@@ -41,7 +41,8 @@ public interface Session extends Serializable {
 
 	public abstract int getSessionCount();
 
-	public abstract void handleEvent(String id);
+	@Deprecated
+	public abstract boolean handleEvent(String id);
 
 	public abstract String next();
 }

@@ -29,8 +29,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * TODO rename RequestProcessor into Service
- * TODO rename Server into ServiceBuilder
+ * TODO rename RequestProcessor into Service/Server
+ * TODO rename Server into ServiceBuilder/ServerBuilder
  * 
  * @author Rudy D'hauwe
  */

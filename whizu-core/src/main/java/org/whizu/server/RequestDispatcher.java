@@ -63,18 +63,18 @@ class RequestDispatcher {
 	 */
 	protected boolean dispatch(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
-		initRequest(request);
 		RequestProcessor processor = getRequestProcessor(request);
 		return processor.process(request, response);
 	}
 
 	private RequestProcessor getRequestProcessor(HttpServletRequest request) {
+		Session session = initRequest(request);
 		String uri = request.getRequestURI();
 		RequestProcessor processor = requestProcessorMap_.get(uri);
 		log.debug("uri {} to be served by processor {}", uri, processor);
 
 		if (processor == null) {
-			// do more advanced stuff to find the right processor
+			//do more
 		}
 
 		if (processor == null) {

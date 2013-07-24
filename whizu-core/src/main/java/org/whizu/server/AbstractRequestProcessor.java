@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractRequestProcessor implements RequestProcessor {
+abstract class AbstractRequestProcessor implements RequestProcessor {
 
 	private static final Logger log = LoggerFactory.getLogger(AbstractRequestProcessor.class);
 
