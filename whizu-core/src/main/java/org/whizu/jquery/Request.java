@@ -39,6 +39,8 @@ public interface Request {
 	
 	public abstract Expression addExpression(String js);
 	
+	public abstract <T extends Expression> T addExpression(T expr);
+	
 	public String define(Function f);
 	
 	public String evaluate(Function f);

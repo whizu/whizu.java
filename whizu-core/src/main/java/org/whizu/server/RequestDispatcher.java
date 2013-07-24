@@ -68,10 +68,9 @@ class RequestDispatcher {
 	}
 
 	private RequestProcessor getRequestProcessor(HttpServletRequest request) {
-		Session session = initRequest(request);
+		initRequest(request);
 		String uri = request.getRequestURI();
 		RequestProcessor processor = requestProcessorMap_.get(uri);
-		log.debug("uri {} to be served by processor {}", uri, processor);
 
 		if (processor == null) {
 			//do more
@@ -80,6 +79,8 @@ class RequestDispatcher {
 		if (processor == null) {
 			processor = fallThrough_;
 		}
+		
+		log.debug("RequestURI {} to be served by the {}", uri, processor.getClass().getSimpleName());
 
 		return processor;
 	}
@@ -91,7 +92,7 @@ class RequestDispatcher {
 		Map<String, String[]> parameterMap = request.getParameterMap();
 		Set<String> keys = parameterMap.keySet();
 		for (String key : keys) {
-			log.debug("Incoming request parameter {} equals {}", key, parameterMap.get(key)[0]);
+			//log.debug("Incoming request parameter {} equals {}", key, parameterMap.get(key)[0]);
 			Input editable = userSession.getInput(key);
 			if (editable != null) {
 				editable.parseString(parameterMap.get(key)[0]);

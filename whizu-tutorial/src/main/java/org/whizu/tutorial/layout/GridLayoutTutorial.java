@@ -27,28 +27,28 @@ import org.whizu.annotation.App;
 import org.whizu.annotation.Title;
 import org.whizu.dom.Component;
 import org.whizu.layout.GridLayout;
-import org.whizu.ui.Application;
+import org.whizu.ui.ButtonImpl;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Document;
-import org.whizu.ui.UI;
+import org.whizu.ui.DocumentImpl;
+import org.whizu.ui.LabelImpl;
 
 /**
  * @author Rudy D'hauwe
  */
 @App("/whizu/gridlayout")
 @Title("My GridLayout Tutorial")
-public class GridLayoutTutorial implements Application {
+public class GridLayoutTutorial {
 
-	@Override
-	public void init(final UI ui) {
-		Document document = ui.getDocument();
+	public void init() {
+		Document document = new DocumentImpl();
 
 		final GridLayout grid = new GridLayout(2);
-		grid.add(ui.createLabel("FirstLabel")).add(ui.createLabel("SecondLabel")).add(ui.createLabel("ThirdLabel"));
+		grid.add(new LabelImpl("FirstLabel")).add(new LabelImpl("SecondLabel")).add(new LabelImpl("ThirdLabel"));
 
 		document.add(grid);
 
-		Component emptyButton = ui.createButton("Empty").addClickListener(new ClickListener() {
+		Component emptyButton = new ButtonImpl("Empty").addClickListener(new ClickListener() {
 
 			@Override
 			public void click() {
@@ -57,12 +57,12 @@ public class GridLayoutTutorial implements Application {
 		});
 		document.add(emptyButton);
 
-		Component addButton = ui.createButton("Add").addClickListener(new ClickListener() {
+		Component addButton = new ButtonImpl("Add").addClickListener(new ClickListener() {
 			int i = 0;
 			
 			@Override
 			public void click() {
-				grid.add(ui.createLabel("Label " + (i++)));
+				grid.add(new LabelImpl("Label " + (i++)));
 			}
 		});
 		document.add(addButton);

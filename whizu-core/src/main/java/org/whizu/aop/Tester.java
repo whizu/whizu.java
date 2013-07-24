@@ -31,7 +31,6 @@ import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.ui.Button;
 import org.whizu.ui.ClickListener;
-import org.whizu.ui.WhizuUI;
 
 /**
  * @author Rudy D'hauwe
@@ -93,11 +92,7 @@ class Tester {
 		};
 		
 	}
-	
-	@Style("a:b")
-	public Component setter() {
-		return new WhizuUI().createButton("hello");
-	}
+
 
 	public static void main(String[] args) {
 		Tester t = new Tester();

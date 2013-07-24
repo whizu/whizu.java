@@ -28,9 +28,6 @@ import org.slf4j.LoggerFactory;
 import org.whizu.dom.Element;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
-import org.whizu.jquery.Function;
-import org.whizu.jquery.JQuery;
-import org.whizu.js.JavaScript;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.ClickListenerImpl;
 import org.whizu.widget.Widget;
@@ -99,16 +96,20 @@ public class Button extends Widget {
 	}
 
 	private void addClickListener() {
-		JQuery jQuery = jQuery(this);
+		if (listener_ != null) {
+			jQuery(this).click(listener_);
+		} else {
+			//???? Button.this.id() ???
+		}
 
-		// if (listener != null) {
-		jQuery.click(new Function() {
+		/*
+		jQuery(this).click(new Function() {
 			@Override
 			public void execute() {
 				JavaScript.preventDefault();
 
 				String listenerId = (listener_ == null) ? Button.this.id() : listener_.id();
-				String url = "http://localhost:8090/whizu?id=" + listenerId;
+				String url = "/dev/whizu/event?id=" + listenerId;
 
 				Function data = new Function() {
 					@Override
@@ -127,7 +128,7 @@ public class Button extends Widget {
 				jQuery("$").get(url, data, callback, type);
 			}
 		});
-		// }
+		*/
 	}
 
 	private void addClickListener(ClickListener listener) {
@@ -146,7 +147,6 @@ public class Button extends Widget {
 			return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
 					.attr("data-mini", mini.value).attr("href", "#" + onClick_.id()).add(title);
 		} else if (onClickPopup_ != null) {
-			log.debug("onClick Popup is rendered " + onClickPopup_.isRendered());
 			return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
 					.decorate(icon, theme_, mini, this).attr("data-rel", "popup")
 					.attr("href", "#" + onClickPopup_.id()).add(title);

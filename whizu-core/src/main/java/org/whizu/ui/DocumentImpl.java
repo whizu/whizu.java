@@ -28,12 +28,10 @@ import org.whizu.widget.Container;
 /**
  * @author Rudy D'hauwe
  */
-class DocumentImpl extends Container implements Document {
+public class DocumentImpl extends Container implements Document {
 
-	DocumentImpl() {
+	public DocumentImpl() {
 		render();
-		//setRendered(true);
-		//render();
 	}
 
 	@Override

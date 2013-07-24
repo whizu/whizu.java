@@ -67,6 +67,11 @@ public abstract class AbstractJqmTest {
 			protected Request getRequestImpl() {
 				return theRequest;
 			}
+
+			@Override
+			protected String getServletContextPath() {
+				return "/dev";
+			}
 		});
 	}
 }

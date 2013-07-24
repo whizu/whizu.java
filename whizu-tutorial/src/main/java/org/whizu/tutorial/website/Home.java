@@ -2,8 +2,6 @@ package org.whizu.tutorial.website;
 
 import org.whizu.annotation.App;
 import org.whizu.annotation.Title;
-import org.whizu.annotation.processing.Html;
-import org.whizu.ui.UI;
 
 @App("/whizu/website")
 @Title("Home")
@@ -12,11 +10,10 @@ public class Home extends AbstractPage {
 	/**
 	 * Home
 	 */
-	@Html
+	//@Html/@Multiline
 	private String home;
 	
-	@Override
-	public void init(UI ui) {
+	public void init() {
 		h3(home);
 		p("This is a first paragraph.");
 	}

@@ -64,6 +64,11 @@ public abstract class AbstractTest {
 			protected Request getRequestImpl() {
 				return theRequest;
 			}
+
+			@Override
+			protected String getServletContextPath() {
+				return "/dev";
+			}
 		});
 	}
 }

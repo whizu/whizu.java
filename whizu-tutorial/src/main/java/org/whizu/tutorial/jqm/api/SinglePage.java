@@ -24,7 +24,7 @@
 package org.whizu.tutorial.jqm.api;
 
 import org.whizu.annotation.App;
-import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
 
@@ -32,7 +32,7 @@ import org.whizu.jquery.mobile.Page;
  * @author Rudy D'hauwe
  */
 @App("/whizu/jqm/widgets/singlepage")
-public class SinglePage extends JQueryMobileApp {
+public class SinglePage implements JQueryMobile {
 
 	@Override
 	public void onLoad(Page page) {

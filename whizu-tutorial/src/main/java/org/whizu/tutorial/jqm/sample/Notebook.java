@@ -30,7 +30,7 @@ import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.mobile.Button;
 import org.whizu.jquery.mobile.Form;
-import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.ListItem;
 import org.whizu.jquery.mobile.ListView;
 import org.whizu.jquery.mobile.Page;
@@ -43,7 +43,7 @@ import org.whizu.value.StringValue;
  * @author Rudy D'hauwe
  */
 @App("/whizu/jqm/sample")
-public class Notebook extends JQueryMobileApp {
+public class Notebook implements JQueryMobile {
 
 	private StringValue title = new StringValue("Title");
 

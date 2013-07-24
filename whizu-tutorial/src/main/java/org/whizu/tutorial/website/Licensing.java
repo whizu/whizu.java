@@ -25,9 +25,8 @@ package org.whizu.tutorial.website;
 
 import org.whizu.annotation.App;
 import org.whizu.annotation.Description;
+import org.whizu.annotation.Markdown;
 import org.whizu.annotation.Title;
-import org.whizu.annotation.processing.Markdown;
-import org.whizu.ui.UI;
 
 /**
  * @author Rudy D'hauwe
@@ -78,8 +77,7 @@ public class Licensing extends AbstractPage {
 	@Markdown
 	private String welcome;
 
-	@Override
-	public void init(UI ui) {
+	public void init() {
 		add(title);
 		add(about);
 		add(welcome);

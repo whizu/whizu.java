@@ -24,14 +24,14 @@
 package org.whizu.tutorial.jqm.helloworld;
 
 import org.whizu.annotation.App;
-import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Page;
 
 /**
  * @author Rudy D'hauwe
  */
 @App("/whizu/jqm/basic")
-public class Basic extends JQueryMobileApp {
+public class Basic implements JQueryMobile {
 
 	@Override
 	public void onLoad(Page page) {

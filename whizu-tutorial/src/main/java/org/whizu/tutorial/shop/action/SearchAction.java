@@ -37,6 +37,7 @@ import org.whizu.ui.Action;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.FormBuilder;
 import org.whizu.ui.Hyperlink;
+import org.whizu.ui.LabelImpl;
 import org.whizu.value.Value;
 
 //@Action
@@ -56,7 +57,7 @@ public abstract class SearchAction<T> extends AbstractAction {
 		contentPanel.empty();
 		contentPanel.append(Html.h3(getCaption()));
 		handleEvent(contentPanel);
-		contentPanel.append(ui.createLabel("Create new...").css("submit").addClickListener(new ClickListener() {
+		contentPanel.append(new LabelImpl("Create new...").css("submit").addClickListener(new ClickListener() {
 
 			@Override
 			public void click() {
@@ -94,7 +95,7 @@ public abstract class SearchAction<T> extends AbstractAction {
 			}
 		}
 
-		// this.table = ui.createTable(all);
+		// this.table = new Table(all);
 		// panel.append(this.table);
 
 	}

@@ -27,7 +27,7 @@ import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.widget.Widget;
 
-class ImageImpl extends Widget implements Image {
+public class ImageImpl extends Widget implements Image {
 
 	private String src;
 
@@ -37,7 +37,7 @@ class ImageImpl extends Widget implements Image {
 
 	private String droplistenerId;
 
-	ImageImpl(String src) {
+	public ImageImpl(String src) {
 		this.src = src;
 	}
 

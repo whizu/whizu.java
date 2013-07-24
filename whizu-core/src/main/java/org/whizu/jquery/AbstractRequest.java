@@ -46,7 +46,7 @@ public abstract class AbstractRequest implements Request {
 		return addExpression(script);
 	}
 
-	protected final <T extends Expression> T addExpression(T expr) {
+	public final <T extends Expression> T addExpression(T expr) {
 		if (scriptStack.isEmpty()) {
 			Script script = new Script();
 			scriptStack.push(script);

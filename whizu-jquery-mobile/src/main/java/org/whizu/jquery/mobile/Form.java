@@ -27,9 +27,7 @@ import org.whizu.dom.Component;
 import org.whizu.dom.Content;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
-import org.whizu.jquery.Function;
 import org.whizu.jquery.Input;
-import org.whizu.js.JavaScript;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.ClickListenerImpl;
 import org.whizu.value.DateValue;
@@ -94,41 +92,8 @@ public class Form extends Container {
 		add(slider);
 	}
 
-	/**
-	 * 
-	 */
 	private void addSubmitHandler() {
-		if (handler_ != null) {
-			Function f = new Function() {
-
-				@Override
-				public void execute() {
-					JavaScript.preventDefault();
-					//JavaScript.alert("submit form");
-					
-					String url = "/dev/whizu/event?id=" + handler_.id(); //TODO {context-path}
-
-					Function data = new Function() {
-						@Override
-						public void execute() {
-							jQuery("$(this)").closest("form").serialize();
-						}};
-						
-					Function callback = new Function("data") {
-						@Override
-						public void execute() {
-						}
-					};
-
-					String type = "script";
-					jQuery("$").get(url, data, callback, type);
-					
-					JavaScript.script("return false;");
-				}
-			};
-			
-			jQuery(this).submit(f);
-		}
+		jQuery(this).submit(handler_);
 	}
 
 	public void addText(String label) {

@@ -25,10 +25,8 @@ package org.whizu.tutorial.website;
 
 import org.whizu.annotation.App;
 import org.whizu.annotation.Description;
+import org.whizu.annotation.Markdown;
 import org.whizu.annotation.Title;
-import org.whizu.annotation.processing.Html;
-import org.whizu.annotation.processing.Markdown;
-import org.whizu.ui.UI;
 
 /**
  * @author Rudy D'hauwe
@@ -41,7 +39,7 @@ public class About extends AbstractPage {
 	/**
 	 * About me
 	 */
-	@Html
+	//@Multiline
 	private String title;
 
 	/**
@@ -50,7 +48,7 @@ public class About extends AbstractPage {
 	 * of this software, other than as authorized under this license is strictly
 	 * prohibited.
 	 */
-	@Html
+	//@Html
 	public String about;
 
 	/**
@@ -59,8 +57,7 @@ public class About extends AbstractPage {
 	@Markdown
 	private String welcome;
 
-	@Override
-	public void init(UI ui) {
+	public void init() {
 		h3(title);
 		p(about);
 		add(welcome);

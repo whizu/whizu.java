@@ -27,6 +27,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.whizu.dom.Content;
 import org.whizu.dom.Identity;
 import org.whizu.js.Expression;
+import org.whizu.js.JavaScript;
 import org.whizu.js.Script;
 
 /**
@@ -38,6 +39,11 @@ class JQueryImpl extends Expression implements JQuery {
 	 * static JQuery self() { return new JQueryImpl("$(this)"); }
 	 */
 
+	public static final JQuery jQuery(String selector) {
+		JQueryImpl query = new JQueryImpl(selector);
+		return RequestContext.getRequest().addExpression(query);
+	}
+	
 	private final String selector_;
 
 	JQueryImpl(Identity element) {
@@ -51,7 +57,7 @@ class JQueryImpl extends Expression implements JQuery {
 	JQueryImpl(String selector) {
 		selector_ = selector;
 	}
-	
+
 	@Override
 	public JQuery addClass(String style) {
 		return call("addClass", style);
@@ -97,11 +103,6 @@ class JQueryImpl extends Expression implements JQuery {
 		return concat(".", function, "()");
 	}
 
-	@Override
-	public JQuery call(String function, String arg) {
-		return concat(".", function, "(\"", arg, "\")");
-	}
-
 	private JQuery call(String function, Content arg) {
 		concat(".", function, "(\"");
 		add(arg);
@@ -109,19 +110,24 @@ class JQueryImpl extends Expression implements JQuery {
 		return this;
 	}
 
+	public JQuery call(String function, int... args) {
+		String arguments = "" + args[0] + "";
+		for (int i = 1; i < args.length; i++) {
+			arguments = arguments.concat(",").concat("" + args[i]);
+		}
+		return concat(".", function, "(", arguments, ")");
+	}
+
+	@Override
+	public JQuery call(String function, String arg) {
+		return concat(".", function, "(\"", arg, "\")");
+	}
+
 	@Override
 	public JQuery call(String function, String... args) {
 		String arguments = "\"" + args[0] + "\"";
 		for (int i = 1; i < args.length; i++) {
 			arguments = arguments.concat(",").concat("'").concat(args[i]).concat("'");
-		}
-		return concat(".", function, "(", arguments, ")");
-	}
-	
-	public JQuery call(String function, int... args) {
-		String arguments = "" + args[0] + "";
-		for (int i = 1; i < args.length; i++) {
-			arguments = arguments.concat(",").concat(""+args[i]);
 		}
 		return concat(".", function, "(", arguments, ")");
 	}
@@ -140,17 +146,19 @@ class JQueryImpl extends Expression implements JQuery {
 	}
 
 	@Override
+	public JQuery click(final EventHandler eventHandler) {
+		if (eventHandler != null) {
+			click(getEventHandlerFunction(eventHandler));
+		}
+		return this;
+	}
+	
+	@Override
 	public JQuery click(Function function) {
 		Script script = RequestContext.getRequest().compile(function);
 		return concat(".", "click", "(function(event) { ", script.toJavaScript(), " })");
 	}
 
-	@Override
-	public JQuery live(String event, Function function) {
-		Script script = RequestContext.getRequest().compile(function);
-		return concat(".", "live", "('" + event + "', function(event) { ", script.toJavaScript(), " })");
-	}
-	
 	@Override
 	public JQuery closest(String name) {
 		return call("closest", name);
@@ -177,14 +185,58 @@ class JQueryImpl extends Expression implements JQuery {
 	}
 
 	@Override
+	public JQuery fadeTo(int i, int j) {
+		return call("fadeTo", i, j);
+	}
+
+	@Override
 	public JQuery find(String selector) {
 		return concat(".", "find(", quote(selector), ")");
+	}
+
+	@Override
+	public JQuery firstOfType(String element) {
+		// return call("filter", element + ":first-of-type");
+		return call("filter", element);
 	}
 
 	@Override
 	public JQuery get(String url, Function data, Function callback, String type) {
 		return concat(".", "get(", quote(url), ", ", RequestContext.getRequest().evaluate(data), ", ", RequestContext
 				.getRequest().define(callback), ", ", quote(type), ")");
+	}
+
+	private Function getEventHandlerFunction(final EventHandler eventHandler) {
+		return new Function() {
+			@Override
+			public void execute() {
+				JavaScript.preventDefault();
+
+				String url = getContextPath() + "/whizu/event?id=" + eventHandler.id();
+
+				Function data = new Function() {
+					@Override
+					public void execute() {
+						jQuery("$(this)").closest("form").serialize();
+					}
+				};
+
+				Function callback = new Function("data") {
+					@Override
+					public void execute() {
+					}
+				};
+
+				String type = "script";
+				jQuery("$").get(url, data, callback, type);
+				
+				JavaScript.script("return false;");
+			}
+		};
+	}
+
+	private String getContextPath() {
+		return RequestContext.getContextPath();
 	}
 
 	private String getSelector(Identity... objs) {
@@ -215,6 +267,22 @@ class JQueryImpl extends Expression implements JQuery {
 	@Override
 	public JQuery insertBefore(String target) {
 		return call("insertBefore", target);
+	}
+
+	@Override
+	public JQuery lastChild(String element) {
+		return call("filter", element + ":last-child");
+	}
+
+	@Override
+	public JQuery live(String event, Function function) {
+		Script script = RequestContext.getRequest().compile(function);
+		return concat(".", "live", "('" + event + "', function(event) { ", script.toJavaScript(), " })");
+	}
+
+	@Override
+	public JQuery prepend(Content content) {
+		return prepend(content.render());
 	}
 
 	@Override
@@ -262,6 +330,20 @@ class JQueryImpl extends Expression implements JQuery {
 	}
 
 	@Override
+	public JQuery submit(final EventHandler eventHandler) {
+		if (eventHandler != null) {
+			submit(getEventHandlerFunction(eventHandler));
+		}
+		return this;
+	}
+
+	@Override
+	public JQuery submit(Function function) {
+		Script script = RequestContext.getRequest().compile(function);
+		return concat(".", "submit", "(function(event) { ", script.toJavaScript(), " })");
+	}
+
+	@Override
 	public JQuery text(String arg) {
 		return call("text", arg);
 	}
@@ -305,32 +387,5 @@ class JQueryImpl extends Expression implements JQuery {
 	@Override
 	public JQuery wrapInner(String wrappingElement) {
 		return call("wrapInner", wrappingElement);
-	}
-
-	@Override
-	public JQuery prepend(Content content) {
-		return prepend(content.render());
-	}
-
-	@Override
-	public JQuery firstOfType(String element) {
-		//return call("filter", element + ":first-of-type");
-		return call("filter", element);
-	}
-
-	@Override
-	public JQuery lastChild(String element) {
-		return call("filter", element + ":last-child");
-	}
-
-	@Override
-	public JQuery fadeTo(int i, int j) {
-		return call("fadeTo", i, j);
-	}
-
-	@Override
-	public JQuery submit(Function function) {
-		Script script = RequestContext.getRequest().compile(function);
-		return concat(".", "submit", "(function(event) { ", script.toJavaScript(), " })"); 
 	}
 }

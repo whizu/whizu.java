@@ -25,7 +25,7 @@ package org.whizu.tutorial.jqm.api;
 
 import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.Header;
-import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.jquery.mobile.Popup;
@@ -34,7 +34,7 @@ import org.whizu.jquery.mobile.Popup;
  * @author Rudy D'hauwe
  */
 @App("/whizu/jqm/widgets/popups")
-public class Popups extends JQueryMobileApp {
+public class Popups implements JQueryMobile {
 
 	@Override
 	public void onLoad(Page page) {

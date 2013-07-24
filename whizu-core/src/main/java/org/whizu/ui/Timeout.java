@@ -56,6 +56,6 @@ class Timeout extends Widget {
 	}
 
 	protected void compile(JavaScript js) {
-		js.setTimeout(function, milliseconds);
+		JavaScript.setTimeout(milliseconds, function);
 	}
 }

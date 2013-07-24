@@ -34,17 +34,17 @@ import org.whizu.widget.Widget;
 /**
  * @author Rudy D'hauwe
  */
-class ButtonImpl extends Widget implements Button {
+public class ButtonImpl extends Widget implements Button {
 
 	private String caption;
 
 	private ClickListenerImpl listener;
 
-	ButtonImpl(String caption) {
+	public ButtonImpl(String caption) {
 		this.caption = caption;
 	}
 
-	ButtonImpl(String name, ClickListener clickListener) {
+	public ButtonImpl(String name, ClickListener clickListener) {
 		this(name);
 		addClickListener(clickListener);
 	}

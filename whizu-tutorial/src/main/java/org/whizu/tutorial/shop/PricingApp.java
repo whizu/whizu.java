@@ -13,11 +13,11 @@ import org.whizu.tutorial.shop.action.PriceSearchAction;
 import org.whizu.tutorial.shop.action.ProductSearchAction;
 import org.whizu.ui.AbstractAction;
 import org.whizu.ui.Action;
-import org.whizu.ui.Application;
 import org.whizu.ui.Dialog;
 import org.whizu.ui.DialogImpl;
+import org.whizu.ui.DocumentImpl;
 import org.whizu.ui.Hyperlink;
-import org.whizu.ui.UI;
+import org.whizu.ui.LabelImpl;
 
 /**
  * @author Rudy D'hauwe
@@ -25,7 +25,7 @@ import org.whizu.ui.UI;
 @App("/whizu/shop")
 @Template("/org/whizu/tutorial/shop/page.html")
 @Title("My Shop")
-public class PricingApp implements Application { // TODO remove
+public class PricingApp { // TODO remove
 													// "implements Application"
 
 	// @Select(id="menu")
@@ -36,8 +36,7 @@ public class PricingApp implements Application { // TODO remove
 
 	// @OnLoad
 	// @Setup
-	@Override
-	public void init(UI ui) {
+		public void init() {
 		add(new OfficeSearchAction());
 		add(new ProductSearchAction());
 		add(new CustomerSearchAction());
@@ -49,9 +48,9 @@ public class PricingApp implements Application { // TODO remove
 			public void handleEvent() {
 				Dialog dialog = new DialogImpl("My dialog", "My description");
 				dialog.add(
-						ui.createLabel("My dialog text lmsd qsdkjlh qkljdfh qlkflkqsdhklqsdh kql s dh fl kqsdhf lkjd hlqsd kjlqsd ldkqsh klsdqhlkqsdh klqsdjh klqsdh kqsldhf klsqdhf lkqsdh fqklsdjhf qsd klqshdf."))
+						new LabelImpl("My dialog text lmsd qsdkjlh qkljdfh qlkflkqsdhklqsdh kql s dh fl kqsdhf lkjd hlqsd kjlqsd ldkqsh klsdqhlkqsdh klqsdjh klqsdh kqsldhf klsqdhf lkqsdh fqklsdjhf qsd klqshdf."))
 						.width("400px");
-				ui.getDocument().add(dialog);
+				new DocumentImpl().add(dialog);
 
 			}
 

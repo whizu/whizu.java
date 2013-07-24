@@ -26,7 +26,7 @@ package org.whizu.tutorial.jqm.api;
 import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.Header;
-import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.ui.ClickListener;
@@ -36,7 +36,7 @@ import org.whizu.value.StringValue;
  * @author Rudy D'hauwe
  */
 @App("/whizu/jqm/widgets/forms")
-public class Forms extends JQueryMobileApp {
+public class Forms implements JQueryMobile {
 
 	private StringValue name = new StringValue("Name");
 	

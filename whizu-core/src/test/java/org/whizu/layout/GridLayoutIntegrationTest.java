@@ -185,7 +185,18 @@ public class GridLayoutIntegrationTest {
 						// TODO Auto-generated method stub
 						return null;
 					}
+
+					@Override
+					public <T extends Expression> T addExpression(T expr) {
+						// TODO Auto-generated method stub
+						return null;
+					}
 				};
+			}
+
+			@Override
+			protected String getServletContextPath() {
+				return "/dev";
 			}
 		});
 	}

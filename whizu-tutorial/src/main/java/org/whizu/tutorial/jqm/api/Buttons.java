@@ -27,7 +27,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import org.whizu.annotation.App;
-import org.whizu.jquery.mobile.JQueryMobileApp;
+import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.ui.ClickListener;
@@ -36,7 +36,7 @@ import org.whizu.ui.ClickListener;
  * @author Rudy D'hauwe
  */
 @App("/whizu/jqm/widgets/buttons")
-public class Buttons extends JQueryMobileApp /* implements JQueryMobile */{
+public class Buttons  implements JQueryMobile {
 
 	private int x = 0;
 

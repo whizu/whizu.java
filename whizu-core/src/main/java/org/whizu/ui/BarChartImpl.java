@@ -30,7 +30,7 @@ import org.whizu.widget.Widget;
 /**
  * @author Rudy D'hauwe
  */
-class BarChartImpl extends Widget implements BarChart {
+public class BarChartImpl extends Widget implements BarChart {
 
 	private String[] x;
 	

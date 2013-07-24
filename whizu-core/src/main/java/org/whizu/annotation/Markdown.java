@@ -21,31 +21,19 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.annotation;
 
-import org.whizu.annotation.Template;
-import org.whizu.jquery.RequestContext;
-import org.whizu.ui.Application;
-import org.whizu.ui.UI;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Rudy D'hauwe
  */
-@Template("/org/whizu/jquery/mobile/document.html")
-@Deprecated
-public abstract class JQueryMobileApp implements Application {
-
-	@Override
-	public final void init(UI ui) {
-		onLoad(Jqm.document().page());
-		//works:RequestContext.getRequest().addExpression("$('#whizu').closest(\":jqmData(role='page')\").trigger('pagecreate');");
-		//works also:
-		RequestContext.getRequest().addExpression("$('#whizu').parent().trigger('pagecreate');");
-	}
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.FIELD })
+public @interface Markdown {
 	
-	protected abstract void onLoad(Page page);
-	
-	public Document document() {
-		return Jqm.document();
-	}
+	public static final String FILENAME = "markdown.properties";
 }

@@ -25,19 +25,25 @@ package org.whizu.tutorial.barchart;
 
 import java.util.Date;
 
-import org.whizu.annotation.Css;
 import org.whizu.annotation.App;
+import org.whizu.annotation.Css;
 import org.whizu.annotation.Title;
 import org.whizu.dom.Component;
 import org.whizu.jquery.Function;
+import org.whizu.js.JavaScript;
+import org.whizu.layout.CssLayout;
+import org.whizu.layout.HorizontalLayout;
 import org.whizu.layout.Layout;
 import org.whizu.layout.VerticalLayout;
-import org.whizu.ui.Application;
+import org.whizu.ui.BarChartImpl;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Document;
+import org.whizu.ui.DocumentImpl;
 import org.whizu.ui.Form;
+import org.whizu.ui.FormImpl;
 import org.whizu.ui.Label;
-import org.whizu.ui.UI;
+import org.whizu.ui.LabelImpl;
+import org.whizu.ui.TextFieldImpl;
 import org.whizu.value.IntegerValue;
 import org.whizu.value.StringValue;
 
@@ -45,7 +51,7 @@ import org.whizu.value.StringValue;
  * @author Rudy D'hauwe
  */
 @App("/whizu/tutorial/barchart")
-public class BarChart implements Application {
+public class BarChart {
 
 	final StringValue antwoord = new StringValue("Mijn hobby is...");
 
@@ -56,31 +62,30 @@ public class BarChart implements Application {
 		return "My BarChart Tutorial";
 	}
 
-	@Override
-	public void init(final UI ui) {
+	public void init() {
 		// model
 		aantal.value(0);
 
 		// user interface
-		Document document = ui.getDocument();
-		Layout layout = ui.createHorizontalLayout();
+		Document document = new DocumentImpl();
+		Layout layout = new HorizontalLayout();
 
-		Layout left = ui.createCssLayout();
+		Layout left = new CssLayout();
 		left.css("left-column");
-		left.add(ui.createLabel("Welkom op deze eenvoudige rondvraag.").css("tekst"));
-		left.add(ui.createLabel("Het aantal reeds ontvangen antwoorden is:").css("tekst"));
-		left.add(ui.createLabel(aantal).css("highlight"));
-		final Layout graph = ui.createCssLayout();
+		left.add(new LabelImpl("Welkom op deze eenvoudige rondvraag.").css("tekst"));
+		left.add(new LabelImpl("Het aantal reeds ontvangen antwoorden is:").css("tekst"));
+		left.add(new LabelImpl(aantal).css("highlight"));
+		final Layout graph = new CssLayout();
 		left.add(graph);
 
-		final Layout history = ui.createVerticalLayout();
-		Layout right = ui.createCssLayout();
+		final Layout history = new VerticalLayout();
+		Layout right = new CssLayout();
 		right.css("right-column");
-		right.add(ui.createLabel("Wat is jouw favoriete hobby?"));
-		Form form = ui.createForm();
-		form.add(ui.createTextField(antwoord));
+		right.add(new LabelImpl("Wat is jouw favoriete hobby?"));
+		Form form = new FormImpl();
+		form.add(new TextFieldImpl(antwoord));
 		form.css("form");
-		Label button = ui.createLabel("Verzenden").css("submit-button");
+		Label button = new LabelImpl("Verzenden").css("submit-button");
 		button.addClickListener(new ClickListener() {
 			int kort = 0;
 			int lang = 0;
@@ -93,16 +98,16 @@ public class BarChart implements Application {
 				} else {
 					kort++;
 				}
-				Layout detail = ui.createVerticalLayout();
-				detail.add(ui.createLabel(new Date().toString()).css("detail-date"));
-				detail.add(ui.createLabel(antwoord.value()));
+				Layout detail = new VerticalLayout();
+				detail.add(new LabelImpl(new Date().toString()).css("detail-date"));
+				detail.add(new LabelImpl(antwoord.value()));
 				detail.css("detail");
 				history.prepend(detail);
 				antwoord.clear();
 				graph.empty();
-				graph.add(ui.createBarChart(new String[]{"So cool", "So not cool"}, new Integer[]{kort, lang}));
+				graph.add(new BarChartImpl(new String[]{"So cool", "So not cool"}, new Integer[]{kort, lang}));
 				// ui.delay(2500, new Function() {
-				ui.schedule(2500, new Function() {
+				JavaScript.setTimeout(2500, new Function() {
 
 					@Override
 					public void execute() {

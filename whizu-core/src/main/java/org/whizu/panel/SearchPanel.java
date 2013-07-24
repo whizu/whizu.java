@@ -30,11 +30,10 @@ import org.whizu.dom.Composite;
 import org.whizu.html.Html;
 import org.whizu.jquery.Callback;
 import org.whizu.ui.Action;
+import org.whizu.ui.ButtonImpl;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.FormBuilder;
 import org.whizu.ui.Hyperlink;
-import org.whizu.ui.UI;
-import org.whizu.ui.WhizuUI;
 import org.whizu.value.Value;
 
 /**
@@ -43,8 +42,6 @@ import org.whizu.value.Value;
 public abstract class SearchPanel<T> implements Panel {
 
 	private final Class<T> clazz_;
-
-	private UI ui = new WhizuUI();
 
 	public SearchPanel(Class<T> clazz) {
 		clazz_ = clazz;
@@ -60,7 +57,7 @@ public abstract class SearchPanel<T> implements Panel {
 
 		Collection<T> all = performSearch();
 
-		// this.table = ui.createTable(all);
+		// this.table = new Table(all);
 		for (T art : all) {
 			//table.add(columns)
 			Action action = getUpdateAction(art);
@@ -72,7 +69,7 @@ public abstract class SearchPanel<T> implements Panel {
 		// panel.append(this.table);
 
 
-		parent.add(ui.createButton("Create new...").addClickListener(new ClickListener() {
+		parent.add(new ButtonImpl("Create new...").addClickListener(new ClickListener() {
 
 			@Override
 			public void click() {

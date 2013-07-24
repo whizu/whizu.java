@@ -46,10 +46,12 @@ public aspect WhizuAspect {
 	after() returning (Component result) : styleAnnotatedMethods() {
 		MethodSignature signature = (MethodSignature) thisJoinPointStaticPart.getSignature();
 		Method method = signature.getMethod();
+		System.out.println("getting method " + method);
 		Style annotation = method.getAnnotation(Style.class);
+		System.out.println("getting style annotation " + annotation);
 		Component content = (Component) result;
 		content.style(annotation.value()[0]);
-		System.out.println("@Style(" + annotation.value() + ")");
+		System.out.println("@Style(" + annotation.value()[0] + ")");
 	}
 	
 	after() returning (Content result) : cssAnnotatedMethods() {

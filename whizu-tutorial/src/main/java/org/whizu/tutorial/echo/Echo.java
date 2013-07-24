@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.tutorial.echo;
 
-import org.whizu.annotation.Css;
 import org.whizu.annotation.App;
+import org.whizu.annotation.Css;
 import org.whizu.annotation.Style;
 import org.whizu.annotation.Stylesheet;
 import org.whizu.annotation.Title;
@@ -32,15 +32,14 @@ import org.whizu.dom.Component;
 import org.whizu.layout.HorizontalLayout;
 import org.whizu.layout.Layout;
 import org.whizu.layout.VerticalLayout;
-import org.whizu.ui.Application;
 import org.whizu.ui.ClickListener;
+import org.whizu.ui.DocumentImpl;
 import org.whizu.ui.Form;
 import org.whizu.ui.FormImpl;
 import org.whizu.ui.Label;
 import org.whizu.ui.LabelImpl;
 import org.whizu.ui.OnSubmit;
 import org.whizu.ui.TextFieldImpl;
-import org.whizu.ui.UI;
 import org.whizu.value.IntegerValue;
 import org.whizu.value.StringValue;
 
@@ -50,7 +49,7 @@ import org.whizu.value.StringValue;
 @Title("Echo")
 @App("/whizu/tutorial/echo")
 @Stylesheet("/theme.css")
-public class Echo implements Application {
+public class Echo {
 
 	@Css("message")
 	private final StringValue input = new StringValue("input");
@@ -59,9 +58,8 @@ public class Echo implements Application {
 
 	private final CommentList commentList = new CommentList();
 
-	@Override
-	public void init(final UI ui) {
-		ui.getDocument().add(layout());
+	public void init() {
+		new DocumentImpl().add(layout());
 	}
 
 	private Layout layout() {

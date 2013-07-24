@@ -27,13 +27,17 @@ import java.util.Date;
 
 import org.whizu.annotation.App;
 import org.whizu.annotation.Title;
+import org.whizu.layout.HorizontalLayout;
 import org.whizu.layout.Layout;
-import org.whizu.ui.Application;
+import org.whizu.layout.VerticalLayout;
 import org.whizu.ui.ClickListener;
 import org.whizu.ui.Document;
+import org.whizu.ui.DocumentImpl;
 import org.whizu.ui.Form;
+import org.whizu.ui.FormImpl;
 import org.whizu.ui.Label;
-import org.whizu.ui.UI;
+import org.whizu.ui.LabelImpl;
+import org.whizu.ui.TextFieldImpl;
 import org.whizu.value.IntegerValue;
 import org.whizu.value.StringValue;
 
@@ -41,42 +45,41 @@ import org.whizu.value.StringValue;
  * @author Rudy D'hauwe
  */
 @App("/helloworld.whizu")
-public class HelloWorld2 implements Application {
+public class HelloWorld2 {
 
 	@Title
 	public String getTitle() {
 		return "Hello World";
 	}
 
-	@Override
-	public void init(final UI ui) {
+	public void init() {
 		//model
 		final StringValue message = new StringValue("message");
 		final IntegerValue aantal = new IntegerValue("aantal");
 		aantal.value(0);
 
 		//user interface
-		Document document = ui.getDocument();
-		final Layout history = ui.createVerticalLayout();
-		Layout layout = ui.createHorizontalLayout();
+		Document document = new DocumentImpl();
+		final Layout history = new VerticalLayout();
+		Layout layout = new HorizontalLayout();
 		
-		Layout left = ui.createVerticalLayout();
+		Layout left = new VerticalLayout();
 		left.css("left-column");
-		left.add(ui.createLabel("Welcome to your very first meet and greet with Whizu."));
-		left.add(ui.createLabel("Share a thought and allow for Whizu to echo your words."));
-		Form form = ui.createForm();
-		form.add(ui.createTextField(message).css("message"));
+		left.add(new LabelImpl("Welcome to your very first meet and greet with Whizu."));
+		left.add(new LabelImpl("Share a thought and allow for Whizu to echo your words."));
+		Form form = new FormImpl();
+		form.add(new TextFieldImpl(message).css("message"));
 		form.css("form");
-		Label button = ui.createLabel("Share").css("submit-button");
+		Label button = new LabelImpl("Share").css("submit-button");
 		System.out.println("before add listener");
 		ClickListener listener = new ClickListener() {
 
 			@Override
 			public void click() {
 				aantal.increment();
-				Layout detail = ui.createVerticalLayout();
-				detail.add(ui.createLabel(new Date().toString()).css("detail-date"));
-				detail.add(ui.createLabel(message.value()));
+				Layout detail = new VerticalLayout();
+				detail.add(new LabelImpl(new Date().toString()).css("detail-date"));
+				detail.add(new LabelImpl(message.value()));
 				detail.css("detail");
 				history.prepend(detail);
 				message.clear();
@@ -86,9 +89,9 @@ public class HelloWorld2 implements Application {
 		form.add(button);
 		left.add(form);
 
-		Layout right = ui.createVerticalLayout();
+		Layout right = new VerticalLayout();
 		right.css("right-column");
-		right.add(ui.createLabel("Thank you for sharing $1 comments.", aantal).css("tekst"));
+		right.add(new LabelImpl("Thank you for sharing $1 comments.", aantal).css("tekst"));
 		right.add(history);
 		
 		layout.add(left);

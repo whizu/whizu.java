@@ -14,9 +14,11 @@
 			<artifactId>javax.servlet</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.pegdown</groupId>
 			<artifactId>pegdown</artifactId>
 		</dependency>
+		-->
 	</dependencies>
 </project>

@@ -71,14 +71,12 @@ class JQueryMobileServer extends AbstractServer<JQueryMobile> {
 			RequestProcessor ajaxServer = new JQueryMobileAjaxServer(appClass_);
 			dispatcher_.addRequestProcessor(onLoad, ajaxServer);
 			
+			String stylesheetURI = contextPath_ + "/whizu/stylesheet/whizu.css";
+			Resource stylesheet = new ClassPathResource("/org/whizu/css/whizu.css");
+			RequestProcessor stylesheetServer = new StylesheetServer(stylesheet);
+			dispatcher_.addRequestProcessor(stylesheetURI, stylesheetServer);
+			
 			/*
-			 * final String id = appClass_.getName(); content =
-			 * content.replace("${id}", id);
-			 * RequestImpl.get().session().addClickListener(new EventHandler() {
-			 * @Override public void handleEvent() { app.init(new WhizuUI()); }
-			 * @Override public String id() { return id; } }); 
-			 * 
-			 * 
 			 * Expires expires = getAnnotation(Expires.class);
 			 * String expires = factory.expires(); if (expires != null) {
 			 * setExpires(response); }

@@ -60,6 +60,7 @@ class JQueryMobileAjaxServer implements RequestProcessor {
 			return true;
 		} finally {
 			String result = RequestImpl.get().finish();
+			log.debug(result);
 			response.getOutputStream().print(result);
 		}
 	}

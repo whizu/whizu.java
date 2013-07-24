@@ -31,8 +31,19 @@ import org.whizu.jquery.RequestContext;
  */
 class RequestContextImpl extends RequestContext {
 
+	private String contextPath_;
+	
+	public RequestContextImpl(String contextPath) {
+		contextPath_ = contextPath;
+	}
+	
 	@Override
 	protected final Request getRequestImpl() {
 		return RequestImpl.get();
+	}
+
+	@Override
+	protected String getServletContextPath() {
+		return contextPath_;
 	}
 }

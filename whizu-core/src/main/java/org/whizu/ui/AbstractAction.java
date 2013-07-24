@@ -7,8 +7,6 @@ public abstract class AbstractAction implements Action {
 
 	private Callback callback;
 	
-	protected UI ui = new WhizuUI();
-
 	private String id_;
 
 	public AbstractAction() {

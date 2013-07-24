@@ -358,4 +358,8 @@ public interface JQuery {
 	public abstract JQuery fadeTo(int i, int j);
 
 	public abstract JQuery submit(Function f);
+
+	public abstract JQuery click(EventHandler eventHandler);
+
+	public abstract JQuery submit(EventHandler eventHandler);
 }

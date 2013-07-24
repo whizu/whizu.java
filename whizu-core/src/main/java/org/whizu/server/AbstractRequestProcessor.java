@@ -44,4 +44,11 @@ abstract class AbstractRequestProcessor implements RequestProcessor {
 		log.debug("Processing {} by {}", request.getRequestURI(), this);
 		return false;
 	}
+	
+	protected void setExpires(HttpServletResponse response) {
+		long CACHE_DURATION_IN_SECOND = 100 * 60; // 100 minutes
+		log.debug("Setting the Expires header to {} seconds", CACHE_DURATION_IN_SECOND);
+		response.setHeader("Cache-Control", "public, max-age=" + CACHE_DURATION_IN_SECOND);
+		response.setDateHeader("Expires", System.currentTimeMillis() + CACHE_DURATION_IN_SECOND);
+	}
 }

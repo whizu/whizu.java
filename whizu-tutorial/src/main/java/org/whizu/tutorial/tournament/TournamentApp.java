@@ -30,7 +30,6 @@ import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.FormBuilder;
 import org.whizu.jquery.mobile.HeaderBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
-import org.whizu.jquery.mobile.JQueryMobileApp;
 import org.whizu.jquery.mobile.ListItem;
 import org.whizu.jquery.mobile.ListView;
 import org.whizu.jquery.mobile.Page;
@@ -43,7 +42,7 @@ import org.whizu.ui.ClickListener;
  * @author Rudy D'hauwe
  */
 @App("/whizu/tournament")
-public class TournamentApp extends JQueryMobileApp implements JQueryMobile {
+public class TournamentApp implements JQueryMobile {
 
 	private static final Logger log = LoggerFactory.getLogger(TournamentApp.class);
 

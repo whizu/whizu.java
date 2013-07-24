@@ -44,4 +44,10 @@ public abstract class RequestContext {
 	public static Session session() {
 		return getRequest().session();
 	}
+
+	public static String getContextPath() {
+		return INSTANCE.getServletContextPath();
+	}
+
+	protected abstract String getServletContextPath();
 }

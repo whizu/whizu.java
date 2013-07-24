@@ -14,8 +14,6 @@ public class FormBuilder {
 
 	private GridLayout layout;
 
-	private WhizuUI ui = new WhizuUI();
-
 	public FormBuilder() {
 		this(1);
 	}
@@ -36,8 +34,8 @@ public class FormBuilder {
 	}
 	public void addButton(String caption, ClickListener listener) {
 		layout.skip();
-		//layout.add(ui.createLabel(caption).css("submit").addClickListener(listener));
-		layout.add(ui.createButton(caption).addClickListener(listener));
+		//layout.add(new LabelImpl(caption).css("submit").addClickListener(listener));
+		layout.add(new ButtonImpl(caption).addClickListener(listener));
 	}
 
 	public void addField(Object model, String fieldName) {
@@ -45,8 +43,8 @@ public class FormBuilder {
 	}
 
 	public void addValue(Object model, Value value) {
-		layout.add(ui.createLabel(getLabelName(model, value))); // todo refactor
-		layout.add(ui.createTextField(value));
+		layout.add(new LabelImpl(getLabelName(model, value))); // todo refactor
+		layout.add(new TextFieldImpl(value));
 	}
 
 	private String getLabelName(Object model, Value value) {
@@ -72,8 +70,8 @@ public class FormBuilder {
 	}
 
 	public void addTextField(Object model, String fieldName) {
-		layout.add(ui.createLabel(fieldName));
-		layout.add(ui.createTextField(getValue(model, fieldName)));
+		layout.add(new LabelImpl(fieldName));
+		layout.add(new TextFieldImpl(getValue(model, fieldName)));
 	}
 
 	public Form create() {

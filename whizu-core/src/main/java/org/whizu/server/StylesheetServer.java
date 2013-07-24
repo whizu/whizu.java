@@ -21,25 +21,31 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.annotation.processing;
+package org.whizu.server;
 
-import org.apache.commons.lang.StringEscapeUtils;
-import org.junit.Test;
-import org.pegdown.PegDownProcessor;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.whizu.resource.Resource;
 
 /**
  * @author Rudy D'hauwe
  */
-public class SupportTest {
+public class StylesheetServer extends AbstractRequestProcessor {
 
-	@Test
-	public void testPegdownProcessor() {
-		String markdown = "This is a [Hyperlink](/articles/my-hyperlink.whizu) with a 'quote'. \n * abc \\nb * sd ";
-		PegDownProcessor processor = new PegDownProcessor();
-		String html = processor.markdownToHtml(markdown.replace("\n ", "\n")).replace('"', '\'');
-		System.out.println(html);
-		System.out.println(StringEscapeUtils.escapeJavaScript(html));
-		System.out.println(StringEscapeUtils.escapeJava(html));
-		System.out.println(StringEscapeUtils.escapeHtml(html));
+	private Resource document_;
+
+	protected StylesheetServer(Resource document) {
+		document_ = document;
+	}
+
+	@Override
+	public boolean process(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		response.setContentType("text/css");
+		document_.print(response.getOutputStream());
+		return true;
 	}
 }
