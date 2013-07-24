@@ -25,8 +25,6 @@ package org.whizu.value;
 
 import java.beans.PropertyChangeListener;
 
-import org.whizu.dom.Component;
-
 /**
  * @author Rudy D'hauwe
  */
@@ -45,8 +43,6 @@ public interface Value {
 	public void parse(String s);
 	
 	public void readOnly(boolean readonly);
-
-	public Component render(ValueRenderer renderer);
 
 	public void refresh(Object value);
 

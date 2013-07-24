@@ -72,6 +72,7 @@ class LayoutBuilder<T extends LayoutBuilder<T>> extends Container implements Lay
 		return getThis(this);
 	}
 
+	/*
 	public T add(Value value) {
 		Component view = compile(value);
 		if (isRendered()) {
@@ -81,4 +82,5 @@ class LayoutBuilder<T extends LayoutBuilder<T>> extends Container implements Lay
 		}
 		return getThis();
 	}
+	*/
 }

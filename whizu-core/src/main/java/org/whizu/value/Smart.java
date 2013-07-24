@@ -23,7 +23,6 @@
  *******************************************************************************/
 package org.whizu.value;
 
-import org.whizu.dom.Component;
 
 /**
  * @author Rudy D'hauwe
@@ -40,11 +39,6 @@ public class Smart<T> extends AbstractValue<T> {
 
 	@Override
 	public void parse(String s) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Component render(ValueRenderer renderer) {
 		throw new UnsupportedOperationException();
 	}
 

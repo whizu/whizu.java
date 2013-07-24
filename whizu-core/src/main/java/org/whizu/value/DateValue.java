@@ -27,7 +27,6 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.whizu.dom.Component;
 
 /**
  * @author Rudy D'hauwe
@@ -55,10 +54,5 @@ public class DateValue extends ValueBuilder<DateValue, Date> {
 	@Override
 	protected Date getDefaultValue() {
 		return new Date();
-	}
-
-	@Override
-	public Component render(ValueRenderer renderer) {
-		return renderer.render(this);
 	}
 }

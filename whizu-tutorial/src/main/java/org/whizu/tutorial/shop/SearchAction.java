@@ -32,7 +32,6 @@ import org.whizu.jquery.Callback;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Select;
-import org.whizu.layout.Label;
 import org.whizu.tutorial.panel.Action;
 import org.whizu.ui.ClickListener;
 import org.whizu.value.Value;
@@ -54,6 +53,7 @@ public abstract class SearchAction<T> extends AbstractAction {
 		contentPanel.empty();
 		contentPanel.append(Html.h3(getCaption()));
 		handleEvent(contentPanel);
+		/* uncomment
 		contentPanel.append(new Label("Create new...").css("submit").addClickListener(new ClickListener() {
 
 			@Override
@@ -61,6 +61,7 @@ public abstract class SearchAction<T> extends AbstractAction {
 				initCreate();
 			}
 		}));
+		*/
 
 	}
 

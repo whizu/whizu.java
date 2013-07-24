@@ -40,9 +40,6 @@ import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Session;
 import org.whizu.js.Script;
-import org.whizu.value.Value;
-import org.whizu.value.ValueRenderer;
-import org.whizu.value.ValueRendererImpl;
 
 /**
  * @author Rudy D'hauwe
@@ -65,7 +62,7 @@ public abstract class Widget implements Component, Decorator {
 	
 	private StringBuffer style = new StringBuffer();
 	
-	private ValueRenderer renderer = new ValueRendererImpl();
+	//private ValueRenderer renderer = new ValueRendererImpl();
 
 	protected Widget() {
 		id_ = getSession().next();
@@ -165,10 +162,6 @@ public abstract class Widget implements Component, Decorator {
 		return getRequest().compile(function);
 	}
 	
-	protected final Component compile(Value value) {
-		return value.render(renderer);
-	}
-
 	@Override
 	public void decorate(Element element) {
 		if (isRendered()) {

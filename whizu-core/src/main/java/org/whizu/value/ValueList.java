@@ -27,8 +27,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.whizu.dom.Component;
-
 /**
  * @author Rudy D'hauwe
  */
@@ -85,11 +83,6 @@ public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
 	@Override
 	public void parse(String s) {
 		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Component render(ValueRenderer renderer) {
-		return renderer.render(this);
 	}
 
 	public int size() {

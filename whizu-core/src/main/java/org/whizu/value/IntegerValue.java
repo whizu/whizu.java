@@ -25,7 +25,6 @@ package org.whizu.value;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.whizu.dom.Component;
 
 /**
  * @author Rudy D'hauwe
@@ -63,10 +62,5 @@ public class IntegerValue extends ValueBuilder<IntegerValue, Integer> {
 	@Override
 	protected Integer getDefaultValue() {
 		return 0;
-	}
-
-	@Override
-	public Component render(ValueRenderer renderer) {
-		return renderer.render(this);
 	}
 }
