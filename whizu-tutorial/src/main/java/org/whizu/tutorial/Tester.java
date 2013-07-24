@@ -25,13 +25,8 @@ package org.whizu.tutorial;
 
 import org.whizu.annotation.Css;
 import org.whizu.annotation.Style;
-import org.whizu.dom.Component;
-import org.whizu.dom.Composite;
-import org.whizu.dom.Content;
 import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
 import org.whizu.html.Html;
-import org.whizu.ui.Form;
 
 /**
  * @author Rudy D'hauwe
@@ -44,79 +39,8 @@ class Tester {
 		return Html.div();
 	}
 	
-	@Style("border:myClass")
-	public Form get2() {
-		return new Form() {
-
-			@Override
-			public Composite add(Component component) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public Composite add(Content content) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void empty() {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void prepend(Component component) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void remove(Component component) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public Markup compile() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public Component css(String clazz) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void width(String width) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void style(String style) {
-				System.out.println("style applied " + style);
-			}
-
-			@Override
-			public String render() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public String id() {
-				// TODO Auto-generated method stub
-				return null;
-			}};
-	}
-
 	public static void main(String[] args) {
 		Tester t = new Tester();
 		System.out.println(t.get().render());
-		System.out.println(t.get2());
 	}
 }
