@@ -21,27 +21,42 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.shop;
 
-import java.io.Serializable;
+import java.util.Collection;
 
-public interface Session extends Serializable {
+import org.whizu.tutorial.panel.Action;
 
-	public abstract void addClickListener(EventHandler listener);
 
-	public abstract void addInput(Input input);
+//@Action
+public class ProductSearchAction extends SearchAction<Product> {
 
-	public abstract Object attribute(String name);
+	public ProductSearchAction() {
+		super(Product.class);
+	}
 
-	public abstract void attribute(String name, Object value);
+	@Override
+	public String getCaption() {
+		return "Product";
+	}
 
-	public abstract EventHandler getEventHandler(String id);
+	@Override
+	protected Action getCreateAction() {
+		return new ProductUpdateAction(new Product());
+	}
 
-	public abstract Input getInput(String id);
+	@Override
+	protected String[] getFields() {
+		return new String[]{"Naam", "Code"};
+	}
 
-	public abstract int getSessionCount();
+	@Override
+	protected Action getUpdateAction(Product model) {
+		return new ProductUpdateAction(model);
+	}
 
-	public abstract boolean handleEvent(String id);
-
-	public abstract String next();
+	@Override
+	protected Collection<Product> performSearch() {
+		return ProductDAO.INSTANCE.findAll();
+	}
 }

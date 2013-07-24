@@ -21,27 +21,42 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.shop;
 
-import java.io.Serializable;
+import java.util.Date;
 
-public interface Session extends Serializable {
+/**
+ * @author Rudy D'hauwe
+ */
+public abstract class Entity {
 
-	public abstract void addClickListener(EventHandler listener);
+	private Long id_;
 
-	public abstract void addInput(Input input);
+	private Date lastUpdate_;
 
-	public abstract Object attribute(String name);
+	@Deprecated
+	public Long getId() {
+		return id_;
+	}
 
-	public abstract void attribute(String name, Object value);
+	@Deprecated
+	public Date getLastUpdate() {
+		return lastUpdate_;
+	}
 
-	public abstract EventHandler getEventHandler(String id);
+	public final Long id() {
+		return id_;
+	}
 
-	public abstract Input getInput(String id);
+	public final void id(Long id) {
+		id_ = id;
+	}
 
-	public abstract int getSessionCount();
+	public Date lastUpdate() {
+		return lastUpdate_;
+	}
 
-	public abstract boolean handleEvent(String id);
-
-	public abstract String next();
+	public void lastUpdate(Date lastUpdate) {
+		this.lastUpdate_ = lastUpdate;
+	}
 }

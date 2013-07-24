@@ -26,7 +26,6 @@ package org.whizu.layout;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.whizu.ui.LabelImpl;
 import org.whizu.widget.AbstractTest;
 
 /**
@@ -65,9 +64,9 @@ public class GridLayoutTest extends AbstractTest {
 	@Test
 	public void testAdd() {
 		GridLayout grid = new GridLayout(2);
-		grid.add(new LabelImpl("Label1"));
-		grid.add(new LabelImpl("Label2"));
-		grid.add(new LabelImpl("Label3"));
+		grid.add(new Label("Label1"));
+		grid.add(new Label("Label2"));
+		grid.add(new Label("Label3"));
 
 		String markup = grid.render();
 		assertEquals(
@@ -82,9 +81,9 @@ public class GridLayoutTest extends AbstractTest {
 	@Test
 	public void testEmpty() {
 		GridLayout grid = new GridLayout(2);
-		grid.add(new LabelImpl("Label1"));
-		grid.add(new LabelImpl("Label2"));
-		grid.add(new LabelImpl("Label3"));
+		grid.add(new Label("Label1"));
+		grid.add(new Label("Label2"));
+		grid.add(new Label("Label3"));
 
 		String markup = grid.render();
 		assertEquals(
@@ -95,9 +94,9 @@ public class GridLayoutTest extends AbstractTest {
 		assertEquals(true, grid.isRendered());
 		assertEquals("$(\"table > tbody\").empty();", theRequest.finish());
 		assertEquals(true, grid.isRendered());
-		grid.add(new LabelImpl("Label4"));
-		grid.add(new LabelImpl("Label2"));
-		grid.add(new LabelImpl("Label3"));
+		grid.add(new Label("Label4"));
+		grid.add(new Label("Label2"));
+		grid.add(new Label("Label3"));
 		assertEquals(
 				"$(\"table > tbody\").append(\"<tr></tr>\");$(\"table > tbody tr:last-child\").append(\"<td><div id='c4'>Label4</div></td>\");$(\"table > tbody tr:last-child\").append(\"<td><div id='c5'>Label2</div></td>\");$(\"table > tbody\").append(\"<tr></tr>\");$(\"table > tbody tr:last-child\").append(\"<td><div id='c6'>Label3</div></td>\");",
 				theRequest.finish());

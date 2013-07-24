@@ -21,27 +21,30 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.shop;
 
-import java.io.Serializable;
+import java.util.Date;
 
-public interface Session extends Serializable {
 
-	public abstract void addClickListener(EventHandler listener);
+/**
+ * @author Rudy D'hauwe
+ */
+public class ProductDAO extends Dao<Product> {
 
-	public abstract void addInput(Input input);
+	public static ProductDAO INSTANCE = new ProductDAO();
+	
+	public ProductDAO() {
+		add(create(1L, "A", "Product A", new Date()));
+		add(create(2L, "B", "Product B", new Date()));
+		add(create(3L, "C", "Product C", new Date()));
+	}
 
-	public abstract Object attribute(String name);
-
-	public abstract void attribute(String name, Object value);
-
-	public abstract EventHandler getEventHandler(String id);
-
-	public abstract Input getInput(String id);
-
-	public abstract int getSessionCount();
-
-	public abstract boolean handleEvent(String id);
-
-	public abstract String next();
+	public Product create(long id, String code, String naam, Date lastUpdate) {
+		Product p = new Product();
+		p.id(id);
+		p.setCode(code);
+		p.setNaam(naam);
+		p.lastUpdate(lastUpdate);
+		return p;
+	}
 }

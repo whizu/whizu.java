@@ -23,15 +23,11 @@
  *******************************************************************************/
 package org.whizu.dom;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author Rudy D'hauwe
  */
 public class Literal implements Markup {
-
-	private static final Logger log = LoggerFactory.getLogger(Literal.class);
 
 	private String text_;
 

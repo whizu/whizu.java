@@ -21,27 +21,57 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.shop;
 
-import java.io.Serializable;
+import org.whizu.jquery.Callback;
+import org.whizu.jquery.JQuery;
+import org.whizu.jquery.RequestContext;
+import org.whizu.jquery.Select;
+import org.whizu.tutorial.panel.Action;
+import org.whizu.tutorial.panel.Panel;
+import org.whizu.widget.Container;
 
-public interface Session extends Serializable {
+/**
+ * @author Rudy D'hauwe
+ */
+public abstract class OpenContentPanelAction implements Action {
 
-	public abstract void addClickListener(EventHandler listener);
+	private final String id_;
+	
+	public OpenContentPanelAction() {
+		id_ = RequestContext.getRequest().session().next();
+	}
+	
+	@Override
+	public void performAction() {
+		throw new UnsupportedOperationException();
+	}
 
-	public abstract void addInput(Input input);
+	@Override
+	public void setCallback(Callback callback) {
+		throw new UnsupportedOperationException();
+	}
 
-	public abstract Object attribute(String name);
+	@Select(id = "right-column")
+	JQuery contentPanel;
 
-	public abstract void attribute(String name, Object value);
+	public void performAction(Panel panel) {
+		JQuery detailPanel = RequestContext.getRequest().select("$(\"#detail\")");
+		detailPanel.empty();
+		contentPanel = RequestContext.getRequest().select("$(\"#right-column\")");
+		contentPanel.empty();
+		getPanel().create(new Container("right-column"));
+	}
 
-	public abstract EventHandler getEventHandler(String id);
+	public abstract Panel getPanel();
+	
+	@Override
+	public String id() {
+		return id_;
+	}
 
-	public abstract Input getInput(String id);
-
-	public abstract int getSessionCount();
-
-	public abstract boolean handleEvent(String id);
-
-	public abstract String next();
+	@Override
+	public void handleEvent() {
+		performAction(new OfficeSearchPanel());
+	}
 }

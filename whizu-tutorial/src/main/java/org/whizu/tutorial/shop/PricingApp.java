@@ -6,18 +6,7 @@ import org.whizu.annotation.Title;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Select;
-import org.whizu.tutorial.shop.action.CountrySearchAction;
-import org.whizu.tutorial.shop.action.CustomerSearchAction;
-import org.whizu.tutorial.shop.action.OfficeSearchAction;
-import org.whizu.tutorial.shop.action.PriceSearchAction;
-import org.whizu.tutorial.shop.action.ProductSearchAction;
-import org.whizu.ui.AbstractAction;
-import org.whizu.ui.Action;
-import org.whizu.ui.Dialog;
-import org.whizu.ui.DialogImpl;
-import org.whizu.ui.DocumentImpl;
-import org.whizu.ui.Hyperlink;
-import org.whizu.ui.LabelImpl;
+import org.whizu.tutorial.panel.Action;
 
 /**
  * @author Rudy D'hauwe
@@ -42,6 +31,7 @@ public class PricingApp { // TODO remove
 		add(new CustomerSearchAction());
 		add(new CountrySearchAction());
 		add(new PriceSearchAction());
+		/* uncomment
 		add(new AbstractAction() {
 
 			@Override
@@ -65,10 +55,11 @@ public class PricingApp { // TODO remove
 				return "Open dialog";
 			}
 		});
+		*/
 	}
 
 	private void add(Action action) {
 		menu = RequestContext.getRequest().select("$(\"#menu\")");
-		menu.append(new Hyperlink(action));
+		// uncomment menu.append(new Hyperlink(action));
 	}
 }

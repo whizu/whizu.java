@@ -21,27 +21,23 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.shop;
 
-import java.io.Serializable;
 
-public interface Session extends Serializable {
+public class OfficeDAO extends Dao<Office> {
 
-	public abstract void addClickListener(EventHandler listener);
+	public static OfficeDAO INSTANCE = new OfficeDAO();
+	
+	public OfficeDAO() {
+		add(1L, "Belgium Office", "Brussels");
+		add(2L, "UK Office", "London");
+	}
 
-	public abstract void addInput(Input input);
-
-	public abstract Object attribute(String name);
-
-	public abstract void attribute(String name, Object value);
-
-	public abstract EventHandler getEventHandler(String id);
-
-	public abstract Input getInput(String id);
-
-	public abstract int getSessionCount();
-
-	public abstract boolean handleEvent(String id);
-
-	public abstract String next();
+	private void add(long id, String naam, String adres) {
+		Office obj = new Office();
+		obj.id(id);
+		obj.naam.set(naam);
+		obj.address.value(adres);
+		add(obj);
+	}
 }

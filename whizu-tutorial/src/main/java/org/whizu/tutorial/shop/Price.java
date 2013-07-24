@@ -21,27 +21,52 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.shop;
 
-import java.io.Serializable;
+import java.util.Date;
 
-public interface Session extends Serializable {
+/**
+ * @author Rudy D'hauwe
+ */
+public class Price extends Entity {
 
-	public abstract void addClickListener(EventHandler listener);
+	private Customer customer;
+	
+	private Date from;
+	
+	private Product product;
+	
+	private Date until;
 
-	public abstract void addInput(Input input);
+	public Customer getCustomer() {
+		return customer;
+	}
 
-	public abstract Object attribute(String name);
+	public Date getFrom() {
+		return from;
+	}
 
-	public abstract void attribute(String name, Object value);
+	public Product getProduct() {
+		return product;
+	}
 
-	public abstract EventHandler getEventHandler(String id);
+	public Date getUntil() {
+		return until;
+	}
 
-	public abstract Input getInput(String id);
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
-	public abstract int getSessionCount();
+	public void setFrom(Date from) {
+		this.from = from;
+	}
 
-	public abstract boolean handleEvent(String id);
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
-	public abstract String next();
+	public void setUntil(Date until) {
+		this.until = until;
+	}	
 }

@@ -39,7 +39,7 @@ public class EventServer extends AjaxServer {
 		String id = request.getParameter("id");
 		if (id != null) {
 			Session session = RequestContext.session();
-			if (session.handleEvent(id)) {
+			if (session.handleEvent(id)) { //TODO redesign event handler lookup and execution
 				response.setHeader("X-Robots-Tag", "noindex"); // "noarchive"?
 				return true;
 			}

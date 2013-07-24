@@ -26,12 +26,12 @@ package org.whizu.layout;
 import org.whizu.dom.Component;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
+import org.whizu.dom.Literal;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.html.Table;
 import org.whizu.html.Tbody;
 import org.whizu.html.Td;
-import org.whizu.ui.LabelImpl;
 import org.whizu.widget.Widget;
 
 /**
@@ -128,6 +128,6 @@ public class GridLayout extends Widget implements Layout {
 	}
 
 	public void skip() {
-		add(new LabelImpl("")); //TODO refactor
+		add(new Literal("")); //TODO refactor
 	}
 }

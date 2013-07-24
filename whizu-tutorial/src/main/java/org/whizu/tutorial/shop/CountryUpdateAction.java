@@ -21,27 +21,27 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.shop;
 
-import java.io.Serializable;
 
-public interface Session extends Serializable {
+public class CountryUpdateAction extends UpdateAction<Country> {
 
-	public abstract void addClickListener(EventHandler listener);
+	public CountryUpdateAction(Country art) {
+		super(art);
+	}
 
-	public abstract void addInput(Input input);
+	@Override
+	public String getCaption() {
+		return model.getNaam();
+	}
 
-	public abstract Object attribute(String name);
+	@Override
+	protected String[] getFields() {
+		return new String[]{"Code", "Naam"};
+	}
 
-	public abstract void attribute(String name, Object value);
-
-	public abstract EventHandler getEventHandler(String id);
-
-	public abstract Input getInput(String id);
-
-	public abstract int getSessionCount();
-
-	public abstract boolean handleEvent(String id);
-
-	public abstract String next();
+	@Override
+	protected Country performUpdate() {
+		return CountryDAO.INSTANCE.update(model);
+	}
 }

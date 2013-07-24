@@ -21,27 +21,43 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.shop;
 
-import java.io.Serializable;
+import java.util.Collection;
 
-public interface Session extends Serializable {
+import org.whizu.tutorial.panel.Action;
 
-	public abstract void addClickListener(EventHandler listener);
 
-	public abstract void addInput(Input input);
+//@Action
+//@Title("Country")
+public class CountrySearchAction extends SearchAction<Country> {
 
-	public abstract Object attribute(String name);
+	public CountrySearchAction() {
+		super(Country.class);
+	}
 
-	public abstract void attribute(String name, Object value);
+	@Override
+	public String getCaption() {
+		return "Country";
+	}
 
-	public abstract EventHandler getEventHandler(String id);
+	@Override
+	protected Action getCreateAction() {
+		return new CountryUpdateAction(new Country());
+	}
 
-	public abstract Input getInput(String id);
+	@Override
+	protected String[] getFields() {
+		return new String[]{"Naam"};
+	}
 
-	public abstract int getSessionCount();
+	@Override
+	protected Action getUpdateAction(Country model) {
+		return new CountryUpdateAction(model);
+	}
 
-	public abstract boolean handleEvent(String id);
-
-	public abstract String next();
+	@Override
+	protected Collection<Country> performSearch() {
+		return CountryDAO.INSTANCE.findAll();
+	}
 }

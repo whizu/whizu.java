@@ -21,27 +21,14 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.panel;
 
-import java.io.Serializable;
+import org.whizu.dom.Composite;
 
-public interface Session extends Serializable {
+/**
+ * @author Rudy D'hauwe
+ */
+public interface Panel {
 
-	public abstract void addClickListener(EventHandler listener);
-
-	public abstract void addInput(Input input);
-
-	public abstract Object attribute(String name);
-
-	public abstract void attribute(String name, Object value);
-
-	public abstract EventHandler getEventHandler(String id);
-
-	public abstract Input getInput(String id);
-
-	public abstract int getSessionCount();
-
-	public abstract boolean handleEvent(String id);
-
-	public abstract String next();
+	public void create(Composite parent);
 }

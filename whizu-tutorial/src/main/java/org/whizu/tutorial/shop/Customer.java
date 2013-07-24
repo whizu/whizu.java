@@ -21,27 +21,40 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.shop;
 
-import java.io.Serializable;
+/**
+ * @author Rudy D'hauwe
+ */
+public class Customer extends Entity {
 
-public interface Session extends Serializable {
+	private String naam;
+	
+	private String adres;
+	
+	private Country land;
 
-	public abstract void addClickListener(EventHandler listener);
+	public String getAdres() {
+		return adres;
+	}
 
-	public abstract void addInput(Input input);
+	public Country getLand() {
+		return land;
+	}
 
-	public abstract Object attribute(String name);
+	public String getNaam() {
+		return naam;
+	}
 
-	public abstract void attribute(String name, Object value);
+	public void setAdres(String adres) {
+		this.adres = adres;
+	}
 
-	public abstract EventHandler getEventHandler(String id);
+	public void setLand(Country land) {
+		this.land = land;
+	}
 
-	public abstract Input getInput(String id);
-
-	public abstract int getSessionCount();
-
-	public abstract boolean handleEvent(String id);
-
-	public abstract String next();
+	public void setNaam(String naam) {
+		this.naam = naam;
+	}
 }

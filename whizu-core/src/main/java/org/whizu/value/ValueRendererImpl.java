@@ -5,8 +5,8 @@ import java.beans.PropertyChangeListener;
 
 import org.whizu.annotation.Instance;
 import org.whizu.dom.Component;
+import org.whizu.layout.Label;
 import org.whizu.layout.VerticalLayout;
-import org.whizu.ui.LabelImpl;
 
 //@Service("ValueRenderer")
 @Instance("ValueRenderer")
@@ -39,7 +39,7 @@ public class ValueRendererImpl implements ValueRenderer {
 		for (int i = 0; i < value.size(); i++) {
 			VerticalLayout elementView = new VerticalLayout();
 			//elementView.add(new LabelImpl("" + value.get(i).getColumns()[1]));
-			elementView.add(new LabelImpl("" + value.get(i)));
+			elementView.add(new Label("" + value.get(i)));
 			view.add(elementView);
 		}
 
@@ -49,7 +49,7 @@ public class ValueRendererImpl implements ValueRenderer {
 			public void propertyChange(PropertyChangeEvent evt) {
 				VerticalLayout elementView = new VerticalLayout();
 				//elementView.add(new LabelImpl("" + value.get(value.size() - 1).getColumns()[1]));
-				elementView.add(new LabelImpl("" + value.get(value.size() - 1)));
+				elementView.add(new Label("" + value.get(value.size() - 1)));
 				view.add(elementView);
 			}
 		});

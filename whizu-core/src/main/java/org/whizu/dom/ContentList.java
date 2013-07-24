@@ -26,16 +26,11 @@ package org.whizu.dom;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * @author Rudy D'hauwe
  */
 public class ContentList implements Markup {
 
-	private static final Logger log = LoggerFactory.getLogger(ContentList.class);
-	
 	private final List<Content> contentList_ = new ArrayList<Content>();
 
 	public ContentList() {

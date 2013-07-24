@@ -21,27 +21,45 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.shop;
 
-import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-public interface Session extends Serializable {
 
-	public abstract void addClickListener(EventHandler listener);
 
-	public abstract void addInput(Input input);
+public class Dao<T extends Entity> {
 
-	public abstract Object attribute(String name);
+	Long next = 10L;
+	
+	private Map<Long, T> entityMap = new HashMap<Long, T>();
 
-	public abstract void attribute(String name, Object value);
+	public void add(T entity) {
+		entityMap.put(entity.id(), entity);
+	}
 
-	public abstract EventHandler getEventHandler(String id);
+	public T findById(Long id) {
+		return entityMap.get(id);
+	}
 
-	public abstract Input getInput(String id);
+	public Collection<T> findAll() {
+		return entityMap.values();
+	}
 
-	public abstract int getSessionCount();
+	public void delete(T entity) {
+		entityMap.remove(entity);
+	}
 
-	public abstract boolean handleEvent(String id);
-
-	public abstract String next();
+	public T update(T entity) {
+		if (entity.id() == null) {
+			entity.id(next++);
+			add(entity);
+		} else {
+			entityMap.put(entity.id(), entity);
+		}
+		entity.lastUpdate(new Date());
+		return entity;
+	}
 }

@@ -21,27 +21,22 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.shop;
 
-import java.io.Serializable;
+import org.whizu.tutorial.panel.Panel;
 
-public interface Session extends Serializable {
+/**
+ * @author Rudy D'hauwe
+ */
+public class OfficeSearchAction extends OpenContentPanelAction {
 
-	public abstract void addClickListener(EventHandler listener);
+	@Override
+	public String getCaption() {
+		return "Offices";
+	}
 
-	public abstract void addInput(Input input);
-
-	public abstract Object attribute(String name);
-
-	public abstract void attribute(String name, Object value);
-
-	public abstract EventHandler getEventHandler(String id);
-
-	public abstract Input getInput(String id);
-
-	public abstract int getSessionCount();
-
-	public abstract boolean handleEvent(String id);
-
-	public abstract String next();
+	@Override
+	public Panel getPanel() {
+		return new OfficeSearchPanel();
+	}
 }

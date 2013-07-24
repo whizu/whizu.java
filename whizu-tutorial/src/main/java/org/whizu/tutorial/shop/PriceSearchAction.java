@@ -21,27 +21,46 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.shop;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
-public interface Session extends Serializable {
+import org.whizu.tutorial.panel.Action;
 
-	public abstract void addClickListener(EventHandler listener);
+/**
+ * @author Rudy D'hauwe
+ */
+//@Listen("/whizu/shop/search/price")
+//@Id("/whizu/shop/search/price")
+public class PriceSearchAction extends SearchAction<Price> {
 
-	public abstract void addInput(Input input);
+	public PriceSearchAction() {
+		super(Price.class);
+	}
 
-	public abstract Object attribute(String name);
+	@Override
+	public String getCaption() {
+		return "Price";
+	}
+	
+	@Override
+	protected Action getCreateAction() {
+		return null;
+	}
 
-	public abstract void attribute(String name, Object value);
+	@Override
+	protected String[] getFields() {
+		return new String[]{"Naam"};
+	}
 
-	public abstract EventHandler getEventHandler(String id);
+	@Override
+	protected Collection<Price> performSearch() {
+		return new ArrayList<Price>();
+	}
 
-	public abstract Input getInput(String id);
-
-	public abstract int getSessionCount();
-
-	public abstract boolean handleEvent(String id);
-
-	public abstract String next();
+	@Override
+	protected Action getUpdateAction(Price model) {
+		return null;
+	}
 }
