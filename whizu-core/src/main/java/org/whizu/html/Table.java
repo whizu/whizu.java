@@ -23,16 +23,12 @@
  *******************************************************************************/
 package org.whizu.html;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author Rudy D'hauwe
  */
 public class Table extends NodeBuilder<Table> {
 
-	private static final Logger log = LoggerFactory.getLogger(Table.class);
-	
 	private Tbody tbody_;
 	
 	Table() {

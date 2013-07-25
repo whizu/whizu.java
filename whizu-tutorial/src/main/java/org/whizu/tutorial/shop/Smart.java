@@ -21,7 +21,9 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.value;
+package org.whizu.tutorial.shop;
+
+import org.whizu.value.AbstractValue;
 
 
 /**

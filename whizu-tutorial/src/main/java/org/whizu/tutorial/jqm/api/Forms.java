@@ -24,12 +24,12 @@
 package org.whizu.tutorial.jqm.api;
 
 import org.whizu.annotation.App;
+import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.Header;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
-import org.whizu.ui.ClickListener;
 import org.whizu.value.StringValue;
 
 /**

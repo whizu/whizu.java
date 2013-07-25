@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.tutorial.jqm.api;
 
+import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
-import org.whizu.ui.ClickListener;
 
 /**
  * @author Rudy D'hauwe

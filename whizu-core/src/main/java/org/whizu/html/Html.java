@@ -23,8 +23,6 @@
  *******************************************************************************/
 package org.whizu.html;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Identity;
@@ -38,8 +36,6 @@ import org.whizu.dom.Node;
  */
 public class Html {
 
-	private static final Logger log = LoggerFactory.getLogger(Html.class);
-	
 	public static Element a() {
 		return tag("a");
 	}

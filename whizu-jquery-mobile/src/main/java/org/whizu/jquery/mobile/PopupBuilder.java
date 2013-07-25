@@ -25,6 +25,7 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Content;
 import org.whizu.html.Html;
+import org.whizu.util.Builder;
 
 /**
  * @author Rudy D'hauwe

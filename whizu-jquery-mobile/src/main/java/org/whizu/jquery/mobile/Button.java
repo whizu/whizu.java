@@ -28,8 +28,8 @@ import org.slf4j.LoggerFactory;
 import org.whizu.dom.Element;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
-import org.whizu.ui.ClickListener;
-import org.whizu.ui.ClickListenerImpl;
+import org.whizu.jquery.ClickListener;
+import org.whizu.jquery.ClickListenerImpl;
 import org.whizu.widget.Widget;
 
 /**

@@ -1,5 +1,7 @@
 package org.whizu.jquery.mobile;
 
+import org.whizu.util.Builder;
+
 public class HeaderBuilder implements Builder<Header> {
 
 	private Header build_ = new Header();

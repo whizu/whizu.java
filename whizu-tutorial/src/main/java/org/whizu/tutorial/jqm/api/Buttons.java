@@ -27,10 +27,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import org.whizu.annotation.App;
+import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
-import org.whizu.ui.ClickListener;
 
 /**
  * @author Rudy D'hauwe

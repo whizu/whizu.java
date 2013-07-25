@@ -9,7 +9,7 @@
 	<property name="dist" location="dist" />
 	<property name="docs" location="${dist}/docs" />
 	<property name="package" location="package" />
-	<property name="publish" location="C:/Java/workspace/whizu/www.whizu.org/war" />
+	<property name="publish" location="J:/git/whizu.public/www.whizu.org/war" />
 	<property name="maven.local.repository" location="${user.home}/.m2/repository" />
 
 	<property name="whizu-apt" location="${project.home}/whizu-apt" />
@@ -22,6 +22,12 @@
 		<pathelement location="${maven.local.repository}/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar" />	
 	</path>
 
+	<path id="publish.class.path">
+		<pathelement location="${maven.local.repository}/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar" />
+		<pathelement location="${maven.local.repository}/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" />
+		<pathelement location="${maven.local.repository}/org/glassfish/javax.servlet/3.1/javax.servlet-3.1.jar" />
+	</path>
+			
 	<path id="project.src">
 		<pathelement location="${project.home}/whizu-core/src/main/java" />
 		<pathelement location="${project.home}/whizu-apt/src/main/java" /> 
@@ -64,7 +70,7 @@
 		<jar jarfile="${dist}/whizu-apt.jar" basedir="${whizu-apt}/target/classes" />
 
 		<copy todir="${dist}/lib" flatten="true">
-			<path refid="project.class.path" />
+			<path refid="publish.class.path" />
 		</copy>
 
 		<copy todir="${dist}">
@@ -113,7 +119,7 @@
 		<!-- Create the javadoc directory -->
 		<mkdir dir="${docs}/api" />
 
-		<javadoc packagenames="org.whizu.*" sourcepath="${toString:project.src}" defaultexcludes="yes" destdir="${docs}/api" author="true" version="true" use="true" windowtitle="Whizu API">
+		<javadoc packagenames="org.whizu.*" excludepackagenames="org.whizu.apt,org.whizu.jquery.ui,org.whizu.mvc,org.whizu.panel,org.whizu.context,org.whizu.aop,org.whizu.annotation.processing" sourcepath="${toString:project.src}" defaultexcludes="yes" destdir="${docs}/api" author="true" version="true" use="true" windowtitle="Whizu API">
 			<doctitle>
 				<![CDATA[Whizu ${project.version} API]]>
 			</doctitle>

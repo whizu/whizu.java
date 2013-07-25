@@ -23,15 +23,11 @@
  *******************************************************************************/
 package org.whizu.value;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author Rudy D'hauwe
  */
 public class IntegerValue extends ValueBuilder<IntegerValue, Integer> {
-
-	private static final Logger log = LoggerFactory.getLogger(IntegerValue.class);
 
 	public IntegerValue(String key) {
 		super(key);

@@ -52,9 +52,9 @@ public final class ProcessorImpl extends AbstractProcessor {
 
 	//protected static final String HTML_TYPE = "org.whizu.annotation.Html";
 
-	protected static final String MARKDOWN_TYPE = "org.whizu.annotation.Markdown";
+	protected static final String MARKDOWN_TYPE = "org.whizu.annotation.processing.Markdown";
 
-	private static final String PACKAGE = "org.whizu.apt";
+	private static final String PACKAGE = "org.whizu.annotation.processing";
 
 	private Elements elementUtils_;
 

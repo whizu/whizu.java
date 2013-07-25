@@ -33,7 +33,6 @@ import org.whizu.jquery.JQuery;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Select;
 import org.whizu.tutorial.panel.Action;
-import org.whizu.ui.ClickListener;
 import org.whizu.value.Value;
 
 //@Action

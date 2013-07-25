@@ -3,7 +3,7 @@ package org.whizu.jquery.mobile;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.whizu.ui.ClickListener;
+import org.whizu.jquery.ClickListener;
 import org.whizu.value.StringValue;
 
 public class FormsTest extends AbstractJqmTest {

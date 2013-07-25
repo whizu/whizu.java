@@ -25,7 +25,6 @@ package org.whizu.tutorial.jqm.notebook;
 
 import org.whizu.annotation.App;
 import org.whizu.annotation.Style;
-import org.whizu.annotation.Submit;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.mobile.Button;
@@ -88,7 +87,6 @@ public class Notebook implements JQueryMobile {
 		return form;
 	}
 
-	@Submit
 	public void addNote() {
 		ListItem item = new ListItem(title);
 		item.p(description);

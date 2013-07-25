@@ -1,6 +1,7 @@
 package org.whizu.jquery.mobile;
 
-import org.whizu.ui.ClickListener;
+import org.whizu.jquery.ClickListener;
+import org.whizu.util.Builder;
 
 /**
  * TODO to be replaced by inner class of HeaderButton

@@ -23,8 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.mobile.Button.Type;
-import org.whizu.ui.ClickListener;
+import org.whizu.util.Builder;
 
 /**
  * @author Rudy D'hauwe

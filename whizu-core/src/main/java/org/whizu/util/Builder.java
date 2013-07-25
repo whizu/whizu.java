@@ -21,46 +21,12 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.ui;
-
-import org.whizu.jquery.EventHandler;
-import org.whizu.jquery.Request;
-import org.whizu.jquery.RequestContext;
-import org.whizu.jquery.Session;
+package org.whizu.util;
 
 /**
  * @author Rudy D'hauwe
  */
-public class ClickListenerImpl implements EventHandler {
+public interface Builder<T> {
 
-	private String id;
-
-	private ClickListener listener;
-
-	public ClickListenerImpl(ClickListener listener) {
-		this.id = getSession().next();
-		this.listener = listener;
-	}
-
-	private Session getSession() {
-		return getRequest().session();
-	}
-
-	private Request getRequest() {
-		return RequestContext.getRequest();
-	}
-
-	private void clicked() {
-		listener.click();
-	}
-
-	@Override
-	public String id() {
-		return id;
-	}
-
-	@Override
-	public void handleEvent() {
-		clicked();
-	}
+	public T build();
 }

@@ -23,8 +23,6 @@
  *******************************************************************************/
 package org.whizu.html;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Node;
@@ -36,8 +34,6 @@ import org.whizu.dom.Node;
  */
 abstract class NodeBuilder<T extends NodeBuilder<T>> extends Node {
 
-	private static final Logger log = LoggerFactory.getLogger(NodeBuilder.class);
-	
 	NodeBuilder(String name) {
 		super(name);
 	}

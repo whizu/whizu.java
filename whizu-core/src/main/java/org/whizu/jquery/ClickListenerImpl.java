@@ -21,21 +21,42 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.annotation;
+package org.whizu.jquery;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 
 /**
  * @author Rudy D'hauwe
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
-public @interface Body {
+public class ClickListenerImpl implements EventHandler {
 
-	public static final String DEFAULT_VALUE = "NULL";
+	private String id;
 
-	public String value() default DEFAULT_VALUE;
+	private ClickListener listener;
+
+	public ClickListenerImpl(ClickListener listener) {
+		this.id = getSession().next();
+		this.listener = listener;
+	}
+
+	private Session getSession() {
+		return getRequest().session();
+	}
+
+	private Request getRequest() {
+		return RequestContext.getRequest();
+	}
+
+	private void clicked() {
+		listener.click();
+	}
+
+	@Override
+	public String id() {
+		return id;
+	}
+
+	@Override
+	public void handleEvent() {
+		clicked();
+	}
 }

@@ -26,6 +26,7 @@ package org.whizu.tutorial.tournament;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.annotation.App;
+import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.FormBuilder;
 import org.whizu.jquery.mobile.HeaderBuilder;
@@ -36,7 +37,6 @@ import org.whizu.jquery.mobile.Page;
 import org.whizu.jquery.mobile.Popup;
 import org.whizu.jquery.mobile.PopupBuilder;
 import org.whizu.jquery.mobile.Theme;
-import org.whizu.ui.ClickListener;
 
 /**
  * @author Rudy D'hauwe

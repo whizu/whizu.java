@@ -25,16 +25,11 @@ package org.whizu.value;
 
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * @author Rudy D'hauwe
  */
 public class DateValue extends ValueBuilder<DateValue, Date> {
 
-	private static final Logger log = LoggerFactory.getLogger(DateValue.class);
-	
 	public DateValue(String key) {
 		super(key);
 	}

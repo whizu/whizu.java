@@ -23,7 +23,8 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.ui.ClickListener;
+import org.whizu.jquery.ClickListener;
+import org.whizu.util.Builder;
 import org.whizu.value.DateValue;
 import org.whizu.value.StringValue;
 
