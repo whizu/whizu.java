@@ -1,6 +1,5 @@
-package org.whizu.jquery.mobile;
+package org.whizu.util;
 
-import org.whizu.util.Builder;
 
 public interface Sink<T, B extends Builder<?>> {
 

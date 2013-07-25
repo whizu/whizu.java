@@ -1,6 +1,7 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.util.Builder;
+import org.whizu.util.Sink;
 
 public class HeaderBuilder implements Builder<Header> {
 

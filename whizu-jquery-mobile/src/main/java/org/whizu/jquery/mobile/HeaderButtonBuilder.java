@@ -2,6 +2,7 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.jquery.ClickListener;
 import org.whizu.util.Builder;
+import org.whizu.util.Sink;
 
 /**
  * TODO to be replaced by inner class of HeaderButton
