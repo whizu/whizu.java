@@ -72,9 +72,8 @@ public abstract class AbstractRequest implements Request {
 				} finally {
 					scriptStack.pop();
 				}
-			} else {
-				return "";
 			}
+			return "";
 		} finally {
 			// request.remove();
 		}
