@@ -25,7 +25,6 @@
 	<path id="publish.class.path">
 		<pathelement location="${maven.local.repository}/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar" />
 		<pathelement location="${maven.local.repository}/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" />
-		<pathelement location="${maven.local.repository}/org/glassfish/javax.servlet/3.1/javax.servlet-3.1.jar" />
 	</path>
 			
 	<path id="project.src">
