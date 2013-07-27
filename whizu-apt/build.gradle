@@ -1,0 +1,15 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'org.whizu'
+version = '0.1-SNAPSHOT'
+
+description = "Whizu Annotation Processing Tool (APT)"
+
+sourceCompatibility = 1.5
+targetCompatibility = 1.5
+
+repositories {
+        
+     mavenRepo url: "http://repo.maven.apache.org/maven2"
+}
