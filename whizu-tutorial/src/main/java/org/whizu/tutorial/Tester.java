@@ -23,7 +23,14 @@
  *******************************************************************************/
 package org.whizu.tutorial;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.whizu.annotation.Css;
+import org.whizu.annotation.Markdown;
 import org.whizu.annotation.Style;
 import org.whizu.dom.Element;
 import org.whizu.html.Html;
@@ -33,14 +40,44 @@ import org.whizu.html.Html;
  */
 class Tester {
 
+	/**
+	 * dddxfdfgfffdddssdf
+	 */
+	@Markdown
+	private String x;
+
+	/**
+	 * sddsf a a a a a sd* fqsd. a()< a ab
+	 * sdfsdfsddffgdfdg
+	 * 
+	 * 00054 sddsfq
+	 */
+	@Markdown
+	private String y;
+	
 	@Css("myClass")
 	@Style("border:myClass")
 	public Element get() {
 		return Html.div();
 	}
-	
-	public static void main(String[] args) {
+
+	public static void main(String[] args) throws IOException {
 		Tester t = new Tester();
 		System.out.println(t.get().render());
+
+		String filePath = "j:/git/whizu.java/whizu-tutorial/src/main/java/org/whizu/tutorial/Tester.java";
+		String content = new String(Files.readAllBytes(Paths.get(filePath)));
+
+		System.out.println(content);
+
+		Pattern pattern = Pattern.compile("(/\\*\\*)[\\s]+[\\*]([\\w|[\\.\\s\\*/,!@#$%^&*()<>]]+)(\\*/)");
+		pattern = Pattern.compile("(/\\*\\*)([\\w|[\\.\\s\\*/,!@#$%^&*()<>]]+)(\\*/)[\\s]+@Markdown");
+		Matcher matcher = pattern.matcher(content);
+		// Check all occurance
+		while (matcher.find()) {
+			System.out.print("Start index: " + matcher.start());
+			System.out.print("End index: " + matcher.end() + " ");
+			System.out.println("|"+matcher.group(2)+"|");
+		}
 	}
 }
