@@ -59,4 +59,9 @@ public class IntegerValue extends ValueBuilder<IntegerValue, Integer> {
 	protected Integer getDefaultValue() {
 		return 0;
 	}
+
+	@Override
+	public <T> T visit(Visitor<T> visitor) {
+		return visitor.accept(this);
+	}
 }

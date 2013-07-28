@@ -30,9 +30,9 @@ import java.util.List;
 /**
  * @author Rudy D'hauwe
  */
-public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T>, List<T>> {
+public class ValueTable<TVO extends ValueObject> extends ValueBuilder<ValueTable<TVO>, List<TVO>> {
 
-	private Class<T> clazz_;
+	private Class<TVO> clazz_;
 
 	//@Embedded
 	public String clazzName = "blabla";
@@ -44,21 +44,21 @@ public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T
 		super("table");
 	}
 
-	public ValueTable(Class<T> clazz) {
+	public ValueTable(Class<TVO> clazz) {
 		this();
 		clazz_ = clazz;
 		this.clazzName = clazz.getName();
 		// this.sampleValueObject = createNew();
 	}
 
-	public final void add(T element) {
+	public final void add(TVO element) {
 		value().add(element);
 		fireIndexedPropertyChange(size()-1, null, element);
 	}
 
 	@SuppressWarnings("unchecked")
 	public void addElement(ValueObject element) {
-		add((T) element);
+		add((TVO) element);
 	}
 
 	/**
@@ -66,9 +66,9 @@ public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T
 	 * 
 	 * @return new instance of T
 	 */
-	public final T createNew() {
+	public final TVO createNew() {
 		try {
-			return (T) clazz_.newInstance();
+			return (TVO) clazz_.newInstance();
 		} catch (InstantiationException e) {
 			throw new RuntimeException(e);
 		} catch (IllegalAccessException e) {
@@ -76,7 +76,7 @@ public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T
 		}
 	}
 
-	public T get(int index) {
+	public TVO get(int index) {
 		return value().get(index);
 	}
 
@@ -84,7 +84,12 @@ public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T
 		return clazzName;
 	}
 
-	public Iterator<T> iterator() {
+	@Override
+	protected List<TVO> getDefaultValue() {
+		return new ArrayList<TVO>();
+	}
+
+	public Iterator<TVO> iterator() {
 		return value().iterator();
 	}
 
@@ -105,7 +110,7 @@ public class ValueTable<T extends ValueObject> extends ValueBuilder<ValueTable<T
 	}
 
 	@Override
-	protected List<T> getDefaultValue() {
-		return new ArrayList<T>();
+	public <T> T visit(Visitor<T> visitor) {
+		return visitor.accept(this);
 	}
 }

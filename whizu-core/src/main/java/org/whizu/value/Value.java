@@ -47,4 +47,6 @@ public interface Value {
 	public void refresh(Object value);
 
 	public void clear();
+	
+	public <T> T visit(Visitor<T> visitor);
 }

@@ -23,16 +23,20 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Content;
 import org.whizu.jquery.ClickListener;
 import org.whizu.util.Builder;
 import org.whizu.value.DateValue;
 import org.whizu.value.StringValue;
+import org.whizu.value.Value;
 
 /**
  * @author Rudy D'hauwe
  */
 public class FormBuilder implements Builder<Form> {
 
+	private ValueRenderer valueRenderer_ = new ValueRenderer();
+	
 	public static FormBuilder create() {
 		return new FormBuilder();
 	}
@@ -46,6 +50,12 @@ public class FormBuilder implements Builder<Form> {
 
 	public FormBuilder addText(StringValue name) {
 		form_.addText(name);
+		return this;
+	}
+	
+	public FormBuilder addField(Value value) {
+		Content view = valueRenderer_.visit(value);
+		form_.add(view);
 		return this;
 	}
 

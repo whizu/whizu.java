@@ -21,44 +21,55 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.value;
+package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Content;
+import org.whizu.value.DateValue;
+import org.whizu.value.IntegerValue;
+import org.whizu.value.PasswordValue;
+import org.whizu.value.StringValue;
+import org.whizu.value.Value;
+import org.whizu.value.ValueList;
+import org.whizu.value.ValueObject;
+import org.whizu.value.ValueTable;
+import org.whizu.value.Visitor;
 
 /**
  * @author Rudy D'hauwe
  */
-public class StringValue extends ValueBuilder<StringValue, String> {
+class ValueRenderer implements Visitor<Content> {
 
-	public StringValue(String name) {
-		super(name);
-	}
-
-	public StringValue(String key, String value) {
-		super(key, value);
+	@Override
+	public Content accept(DateValue value) {
+		return new DateField(value);
 	}
 
 	@Override
-	public void clear() {
-		value("");
+	public Content accept(IntegerValue value) {
+		return new Text(value);
 	}
 
 	@Override
-	protected String getDefaultValue() {
-		return "";
+	public Content accept(StringValue value) {
+		return new Text(value);
 	}
 
 	@Override
-	public void parse(String s) {
-		value(s);
-	}
-	
-	@Override
-	public String toString() {
-		return value();
+	public Content accept(PasswordValue value) {
+		return new Text(value);
 	}
 
 	@Override
-	public <T> T visit(Visitor<T> visitor) {
-		return visitor.accept(this);
+	public <VO> Content accept(ValueList<VO> list) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public <VO extends ValueObject> Content accept(ValueTable<VO> table) {
+		throw new UnsupportedOperationException();
+	}
+
+	public Content visit(Value value) {
+		return value.visit(this);
 	}
 }

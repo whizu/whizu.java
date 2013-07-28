@@ -30,23 +30,23 @@ import java.util.List;
 /**
  * @author Rudy D'hauwe
  */
-public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
+public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> {
 
-	private final Class<T> clazz_;
+	private final Class<VO> clazz_;
 
-	public ValueList(Class<T> clazz) {
+	public ValueList(Class<VO> clazz) {
 		super(clazz.getName());
 		clazz_ = clazz;
 	}
 
-	public void add(T element) {
+	public void add(VO element) {
 		value().add(element);
 		fireIndexedPropertyChange(value().size() - 1, null, element);
 	}
 
 	@SuppressWarnings("unchecked")
 	public void addElement(ValueObject element) {
-		add((T) element);
+		add((VO) element);
 	}
 
 	/**
@@ -54,9 +54,9 @@ public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
 	 * 
 	 * @return new instance of T
 	 */
-	public final T createNew() {
+	public final VO createNew() {
 		try {
-			return (T) clazz_.newInstance();
+			return (VO) clazz_.newInstance();
 		} catch (InstantiationException e) {
 			throw new RuntimeException(e);
 		} catch (IllegalAccessException e) {
@@ -64,16 +64,16 @@ public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
 		}
 	}
 
-	public T get(int index) {
+	public VO get(int index) {
 		return value().get(index);
 	}
 
 	@Override
-	protected List<T> getDefaultValue() {
-		return new ArrayList<T>();
+	protected List<VO> getDefaultValue() {
+		return new ArrayList<VO>();
 	}
 
-	public Iterator<T> iterator() {
+	public Iterator<VO> iterator() {
 		return value().iterator();
 	}
 
@@ -87,5 +87,10 @@ public class ValueList<T> extends ValueBuilder<ValueList<T>, List<T>> {
 
 	public int size() {
 		return value().size();
+	}
+
+	@Override
+	public <T> T visit(Visitor<T> visitor) {
+		return visitor.accept(this);
 	}
 }

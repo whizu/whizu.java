@@ -35,4 +35,9 @@ public class PasswordValue extends StringValue {
 	public PasswordValue(String key, String value) {
 		super(key, value);
 	}
+
+	@Override
+	public <T> T visit(Visitor<T> visitor) {
+		return visitor.accept(this);
+	}
 }

@@ -50,4 +50,9 @@ public class DateValue extends ValueBuilder<DateValue, Date> {
 	protected Date getDefaultValue() {
 		return new Date();
 	}
+
+	@Override
+	public <T> T visit(Visitor<T> visitor) {
+		return visitor.accept(this);
+	}
 }

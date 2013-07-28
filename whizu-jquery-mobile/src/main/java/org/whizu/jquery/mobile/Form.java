@@ -33,6 +33,7 @@ import org.whizu.jquery.Input;
 import org.whizu.value.DateValue;
 import org.whizu.value.PasswordValue;
 import org.whizu.value.StringValue;
+import org.whizu.value.Value;
 import org.whizu.widget.Container;
 
 /**
@@ -40,12 +41,9 @@ import org.whizu.widget.Container;
  */
 public class Form extends Container {
 
-	/*
-	 * @Override public Form css(String clazz) { setStyleName(clazz); return
-	 * this; }
-	 */
-
 	private ClickListenerImpl handler_;
+	
+	private ValueRenderer valueRenderer_ = new ValueRenderer();
 
 	public Form add(Content field) {
 		jQuery(this).append(field);
@@ -164,5 +162,10 @@ public class Form extends Container {
 	public void onSubmit(ClickListener handler) {
 		handler_ = new ClickListenerImpl(handler);
 		getSession().addClickListener(handler_);
+	}
+	
+	public void addField(Value value) {
+		Content view = valueRenderer_.visit(value);
+		add(view);
 	}
 }

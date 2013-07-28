@@ -23,42 +23,20 @@
  *******************************************************************************/
 package org.whizu.value;
 
-
 /**
  * @author Rudy D'hauwe
  */
-public class StringValue extends ValueBuilder<StringValue, String> {
+public interface Visitor<T> {
 
-	public StringValue(String name) {
-		super(name);
-	}
+	public T accept(DateValue value);
 
-	public StringValue(String key, String value) {
-		super(key, value);
-	}
+	public T accept(IntegerValue value);
 
-	@Override
-	public void clear() {
-		value("");
-	}
-
-	@Override
-	protected String getDefaultValue() {
-		return "";
-	}
-
-	@Override
-	public void parse(String s) {
-		value(s);
-	}
+	public T accept(StringValue value);
 	
-	@Override
-	public String toString() {
-		return value();
-	}
+	public T accept(PasswordValue value);
+	
+	public <VO> T accept(ValueList<VO> list);
 
-	@Override
-	public <T> T visit(Visitor<T> visitor) {
-		return visitor.accept(this);
-	}
+	public <VO extends ValueObject> T accept(ValueTable<VO> table);
 }
