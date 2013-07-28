@@ -10,9 +10,9 @@ import org.whizu.util.Sink;
  */
 public class HeaderButtonBuilder<B extends Builder<?>> {
 
-	private Sink<Button, B> sink_;
-
 	private ButtonBuilder builder_;
+
+	private Sink<Button, B> sink_;
 
 	public HeaderButtonBuilder(String title, Sink<Button, B> sink) {
 		builder_ = Button.builder(title);
@@ -31,13 +31,18 @@ public class HeaderButtonBuilder<B extends Builder<?>> {
 		return this;
 	}
 
-	public HeaderButtonBuilder<B> onClick(Page foo) {
-		builder_.onClick(foo);
+	public HeaderButtonBuilder<B> onClickOpen(Page foo) {
+		builder_.onClickOpen(foo);
 		return this;
 	}
 
-	public HeaderButtonBuilder<B> onClick(Popup popup) {
-		builder_.onClick(popup);
+	public HeaderButtonBuilder<B> onClickOpen(Popup popup) {
+		builder_.onClickOpen(popup);
+		return this;
+	}
+	
+	public HeaderButtonBuilder<B> onClickOpenDialog(Page page) {
+		builder_.onClickOpenDialog(page);
 		return this;
 	}
 

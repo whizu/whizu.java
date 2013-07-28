@@ -64,6 +64,11 @@ public class Form extends Container {
 		add(new DateField(date));
 	}
 
+	public void addField(Value value) {
+		Content view = valueRenderer_.visit(value);
+		add(view);
+	}
+
 	public void addFieldContain(Component component) {
 		FieldContain fc = new FieldContain();
 		fc.add(component);
@@ -158,14 +163,9 @@ public class Form extends Container {
 
 		return markup;
 	}
-
+	
 	public void onSubmit(ClickListener handler) {
 		handler_ = new ClickListenerImpl(handler);
 		getSession().addClickListener(handler_);
-	}
-	
-	public void addField(Value value) {
-		Content view = valueRenderer_.visit(value);
-		add(view);
 	}
 }

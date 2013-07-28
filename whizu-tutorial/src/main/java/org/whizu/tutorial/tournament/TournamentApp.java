@@ -56,7 +56,7 @@ public class TournamentApp implements JQueryMobile {
 			.title("Tournament")
 			.button("Add player")
 			    .theme(Theme.E)
-			    .onClick(addPlayerEvent())
+			    .onClickOpen(addPlayerEvent())
 				.build()
 			.build()
 			.on(page);

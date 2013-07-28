@@ -56,23 +56,23 @@ public class Popups implements JQueryMobile {
 		Header.builder()
 		    .title("Popups")
 		    .button("Popup")
-		        .onClick(popup)
+		        .onClickOpen(popup)
 		        .build()
 		    .button("Next page")
-		        .onClick(next)
+		        .onClickOpen(next)
 		        .build()
 		    .build()
 		    .on(page);
 		// @formatter:on
 		
 		Jqm.createButton("My button 1")
-			.onClick(next)
+			.onClickOpen(next)
 			.build()
 			.appendTo(page);
 
 		next.header("Volgende pagina");
 		Jqm.createButton("My button 2")
-				.onClick(page)
+				.onClickOpen(page)
 				.build()
 				.appendTo(next);
 	}

@@ -15,10 +15,10 @@ public class HeaderBuilderTest extends AbstractJqmTest {
 		Header.builder()
 		    .title("Popups")
 		    .button("Popup")
-		        .onClick(popup)
+		        .onClickOpen(popup)
 		        .build()
 		    .button("Next page")
-		        .onClick(next)
+		        .onClickOpen(next)
 		        .build()
 		    .build()
 		    .on(page);		

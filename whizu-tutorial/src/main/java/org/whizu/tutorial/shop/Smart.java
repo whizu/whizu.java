@@ -24,6 +24,7 @@
 package org.whizu.tutorial.shop;
 
 import org.whizu.value.AbstractValue;
+import org.whizu.value.Visitor;
 
 
 /**
@@ -46,6 +47,14 @@ public class Smart<T> extends AbstractValue<T> {
 
 	@Override
 	protected T getDefaultValue() {
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.whizu.value.Value#visit(org.whizu.value.Visitor)
+	 */
+	@Override
+	public <T> T visit(Visitor<T> visitor) {
 		return null;
 	}
 }

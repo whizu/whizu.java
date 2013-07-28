@@ -18,7 +18,7 @@ public class ButtonBuilderTest extends AbstractJqmTest {
 			.appendTo(page);
 		*/
 		Button.builder("My button")
-		    .onClick(next)
+		    .onClickOpen(next)
 		    .build()
 		    .appendTo(page);
 		// @formatter:on
@@ -34,7 +34,7 @@ public class ButtonBuilderTest extends AbstractJqmTest {
 
 		// @formatter:off
 		Jqm.createButton("My button")
-			.onClick(next)
+			.onClickOpen(next)
 			.build()
 			.appendTo(page);
 		// @formatter:on

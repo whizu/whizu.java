@@ -51,13 +51,19 @@ public class ButtonBuilder implements Builder<Button> {
 		return this;
 	}
 
-	public ButtonBuilder onClick(Page foo) {
+	public ButtonBuilder onClickOpen(Page foo) {
 		build_.onClick(foo);
 		return this;
 	}
 
-	public ButtonBuilder onClick(Popup popup) {
+	public ButtonBuilder onClickOpen(Popup popup) {
 		build_.onClick(popup);
+		return this;
+	}
+
+	public ButtonBuilder onClickOpenDialog(Page foo) {
+		build_.onClick(foo);
+		build_.dataRel(DataRel.DIALOG);
 		return this;
 	}
 
@@ -67,11 +73,5 @@ public class ButtonBuilder implements Builder<Button> {
 
 	public void type(Type type) {
 		build_.type(type);
-	}
-
-	public ButtonBuilder onClickOpenDialog(Page foo) {
-		build_.onClick(foo);
-		build_.dataRel(DataRel.DIALOG);
-		return this;
 	}
 }

@@ -43,14 +43,14 @@ public class Headers implements JQueryMobile /* implements JqmApp */{
 
 		// @formatter:off
 		Jqm.createButton("My button 1")
-		    .onClick(next)
+		    .onClickOpen(next)
 		    .build()
 		    .appendTo(page);
 		// @formatter:on
 
 		// @formatter:off
 		Jqm.createButton("My button 2")
-				.onClick(page)
+				.onClickOpen(page)
 				.build()
 				.appendTo(next);
 		// @formatter:on

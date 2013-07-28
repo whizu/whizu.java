@@ -66,15 +66,6 @@ public class Popup extends Container {
 		if (positionTo_ != null) {
 			 popup.attr("data-position-to", positionTo_.value);
 		}
-		/*
-		Content link = Html.a()
-						 .attr("href", "#" + popup.id())
-						 .decorate(DataRel.POPUP)
-						 .attr("data-inline", "true")
-						 .attr("data-transition", "pop")
-						 .add("title");
-		return popup.after(link);
-		*/
 		// @formatter:on 
 		return popup;
 	}

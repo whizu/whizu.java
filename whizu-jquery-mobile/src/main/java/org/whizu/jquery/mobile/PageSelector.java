@@ -3,6 +3,9 @@ package org.whizu.jquery.mobile;
 import org.whizu.dom.Element;
 import org.whizu.jquery.Selector;
 
+/**
+ * @author Rudy D'hauwe
+ */
 class PageSelector extends Selector implements Page {
 
 	private String id_;
