@@ -68,4 +68,10 @@ public class ButtonBuilder implements Builder<Button> {
 	public void type(Type type) {
 		build_.type(type);
 	}
+
+	public ButtonBuilder onClickOpenDialog(Page foo) {
+		build_.onClick(foo);
+		build_.dataRel(DataRel.DIALOG);
+		return this;
+	}
 }

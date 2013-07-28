@@ -43,7 +43,7 @@ public class Popup extends Container {
 		}
 	}
 
-	public static PopupBuilder builder(String id) {
+	public static final PopupBuilder builder(String id) {
 		return new PopupBuilder(id);
 	}
 	

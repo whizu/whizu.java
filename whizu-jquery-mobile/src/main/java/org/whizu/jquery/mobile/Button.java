@@ -61,6 +61,8 @@ public class Button extends Widget {
 		return new ButtonBuilder(title);
 	}
 
+	private DataRel dataRel_;
+
 	private Icon icon;
 
 	private Inline inline = Inline.FALSE;
@@ -145,7 +147,7 @@ public class Button extends Widget {
 		// jQuery(this).trigger("create");
 		if (onClick_ != null) {
 			return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
-					.attr("data-mini", mini.value).attr("href", "#" + onClick_.id()).add(title);
+					.attr("data-mini", mini.value).decorate(dataRel_).attr("href", "#" + onClick_.id()).add(title);
 		} else if (onClickPopup_ != null) {
 			return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
 					.decorate(icon, theme_, mini, this).attr("data-rel", "popup")
@@ -179,6 +181,10 @@ public class Button extends Widget {
 				throw new IllegalArgumentException("Unsupported button type: " + type_);
 			}
 		}
+	}
+
+	public void dataRel(DataRel dataRel) {
+		dataRel_ = dataRel;
 	}
 
 	public Button icon(Icon icon) {

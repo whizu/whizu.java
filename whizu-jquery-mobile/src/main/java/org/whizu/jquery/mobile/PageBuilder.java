@@ -58,7 +58,7 @@ class PageBuilder extends Widget implements Page {
 
 	@Override
 	public Markup compile() {
-		content_ = Html.div().decorate(DataRole.CONTENT).add("page " + id());
+		content_ = Html.div().decorate(DataRole.CONTENT);
 		Element element = Html.div(this).decorate(DataRole.PAGE, this).add(header_, content_, footer_);
 		//jQuery("$.mobile.pageContainer").append(element);
 		//jQuery("$.mobile").call("changePage", "#"+id());

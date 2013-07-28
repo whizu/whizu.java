@@ -23,9 +23,26 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.util.Builder;
+
 /**
  * @author Rudy D'hauwe
  */
-public interface Dialog {
+public class DialogBuilder extends PageBuilder implements Builder<Dialog> {
 
+	public static DialogBuilder createWithId(String id) {
+		return new DialogBuilder(id);
+	}
+
+	// private Dialog build_;
+
+	protected DialogBuilder(String id) {
+		super(id);
+	}
+
+	@Override
+	public Dialog build() {
+		return new Dialog() {
+		};
+	}
 }

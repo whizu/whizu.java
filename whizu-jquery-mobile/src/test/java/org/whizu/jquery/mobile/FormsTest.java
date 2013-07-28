@@ -28,7 +28,7 @@ public class FormsTest extends AbstractJqmTest {
 
 		// "$p = $(\"<div data-role='page' id='next'><div data-role='content'>page next</div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').prepend(\"<div data-role='header' id='c0'><h1>Forms</h1></div>\");$('#index').append(\"<form id='c1' method='post'><label for='c2'>Name</label><input id='c2' name='c2' value='' type='text'/></form>\");$(\"#c1\").submit(function(event) { event.preventDefault();alert('submit form');return false; });",
 
-		String expected = "$p = $(\"<div data-role='page' id='next'><div data-role='content'>page next</div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').prepend(\"<div data-role='header' id='c0'><h1>Forms</h1></div>\");$('#index').append(\"<form id='c1' method='post'><label for='c3'>Name</label><input id='c3' name='c3' value='' type='text'/></form>\");$(\"#c1\").submit(function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c2', $(this).closest(\"form\").serialize(), function(data) {  }, 'script');return false; });";
+		String expected = "$p = $(\"<div data-role='page' id='next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').prepend(\"<div data-role='header' id='c0'><h1>Forms</h1></div>\");$('#index').append(\"<form id='c1' method='post'><label for='c3'>Name</label><input id='c3' name='c3' value='' type='text'/></form>\");$(\"#c1\").submit(function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c2', $(this).closest(\"form\").serialize(), function(data) {  }, 'script');return false; });";
 		assertEquals(expected, theRequest.finish());
 
 	}

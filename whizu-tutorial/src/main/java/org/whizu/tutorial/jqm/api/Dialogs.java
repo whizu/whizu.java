@@ -21,11 +21,38 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.tutorial.jqm.api;
+
+import org.whizu.annotation.App;
+import org.whizu.jquery.mobile.JQueryMobile;
+import org.whizu.jquery.mobile.Jqm;
+import org.whizu.jquery.mobile.Page;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Dialog {
+@App("/whizu/jqm/widgets/dialogs")
+public class Dialogs implements JQueryMobile {
 
+	@Override
+	public void onLoad(Page index) {
+		index.header("Welcome !");
+		
+		Page foo = Jqm.addPage("foo");
+		Page bar = Jqm.addPage("bar");
+
+		foo.header("Foos");
+		foo.p("I'm first in the source order so I'm shown as the page.");
+		//foo.p("View internal page called ").add(Jqm.createHyperlink("bar", bar));
+		//foo.footer("Page Footer");
+
+		bar.header("Bars");
+		bar.p("I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is being clicked.");
+		//foo.p("Take me ").add(Jqm.createHyperlink("back to Foo", foo));
+		bar.footer("Page Footer");
+		
+		Jqm.createButton("foo").onClickOpenDialog(foo).build().appendTo(index);
+		Jqm.createButton("bar").onClickOpenDialog(bar).build().appendTo(index);
+		//Jqm.changePage("foo");
+	}
 }

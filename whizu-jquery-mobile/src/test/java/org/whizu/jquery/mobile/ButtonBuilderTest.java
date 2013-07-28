@@ -24,7 +24,7 @@ public class ButtonBuilderTest extends AbstractJqmTest {
 		// @formatter:on
 
 		assertEquals(
-				"$p = $(\"<div data-role='page' id='next'><div data-role='content'>page next</div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').append(\"<a data-role='button' id='c0' data-inline='false' data-mini='false' href='#next'>My button</a>\");",
+				"$p = $(\"<div data-role='page' id='next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').append(\"<a data-role='button' id='c0' data-inline='false' data-mini='false' href='#next'>My button</a>\");",
 				theRequest.finish());
 	}
 
@@ -40,7 +40,7 @@ public class ButtonBuilderTest extends AbstractJqmTest {
 		// @formatter:on
 
 		assertEquals(
-				"$p = $(\"<div data-role='page' id='next'><div data-role='content'>page next</div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').append(\"<a data-role='button' id='c0' data-inline='false' data-mini='false' href='#next'>My button</a>\");",
+				"$p = $(\"<div data-role='page' id='next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').append(\"<a data-role='button' id='c0' data-inline='false' data-mini='false' href='#next'>My button</a>\");",
 				theRequest.finish());
 	}
 }

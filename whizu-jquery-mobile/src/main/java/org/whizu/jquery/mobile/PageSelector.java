@@ -29,7 +29,7 @@ class PageSelector extends Selector implements Page {
 
 	@Override
 	public Element p(String text) {
-		append(text);
+		query().find("div[data-role=content]").append(text);
 		return null;
 	}
 
