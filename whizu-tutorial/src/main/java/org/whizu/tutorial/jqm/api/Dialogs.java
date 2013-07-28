@@ -51,8 +51,8 @@ public class Dialogs implements JQueryMobile {
 		//foo.p("Take me ").add(Jqm.createHyperlink("back to Foo", foo));
 		bar.footer("Page Footer");
 		
-		Jqm.createButton("foo").onClickOpenDialog(foo).build().appendTo(index);
-		Jqm.createButton("bar").onClickOpenDialog(bar).build().appendTo(index);
+		index.append(Jqm.createButton("foo").onClickOpenDialog(foo).build());
+		index.append(Jqm.createButton("bar").onClickOpenDialog(bar).build());
 		//Jqm.changePage("foo");
 	}
 }

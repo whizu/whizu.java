@@ -51,8 +51,8 @@ public class MultiPage implements JQueryMobile {
 		//foo.p("Take me ").add(Jqm.createHyperlink("back to Foo", foo));
 		bar.footer("Page Footer");
 		
-		Jqm.createButton("foo").onClickOpen(foo).build().appendTo(index);
-		Jqm.createButton("bar").onClickOpen(bar).build().appendTo(index);
+		index.append(Jqm.createButton("foo").onClickOpen(foo).build());
+		index.append(Jqm.createButton("bar").onClickOpen(bar).build());
 		//Jqm.changePage("foo");
 	}
 }

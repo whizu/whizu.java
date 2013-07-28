@@ -31,23 +31,23 @@ import org.whizu.dom.Element;
  * group content into logical views that can be animated in and out of view with
  * page transitions. A HTML document may start with a single Page and the AJAX
  * navigation system will load additional pages on demand into the DOM as users
- * navigate around. Alternatively, a HTML document can be built with multiple Pages
- * inside it and the framework will transition between these local views with no
- * need to request content from the server.
+ * navigate around. Alternatively, a HTML document can be built with multiple
+ * Pages inside it and the framework will transition between these local views
+ * with no need to request content from the server.
  * 
  * @author Rudy D'hauwe
  */
 public interface Page {
 
-	public Header header(String title);
+	public void append(Content content);
 
-	public Element p(String text);
+	public void append(String html);
 
 	public Footer footer(String title);
 
+	public Header header(String title);
+
 	public String id();
 
-	public void append(Content content);
-
-	public void append(String string);
+	public Element p(String text);
 }

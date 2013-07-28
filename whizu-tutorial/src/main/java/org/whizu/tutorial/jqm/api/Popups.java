@@ -24,6 +24,7 @@
 package org.whizu.tutorial.jqm.api;
 
 import org.whizu.annotation.App;
+import org.whizu.jquery.mobile.Button;
 import org.whizu.jquery.mobile.Header;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
@@ -65,15 +66,15 @@ public class Popups implements JQueryMobile {
 		    .on(page);
 		// @formatter:on
 		
-		Jqm.createButton("My button 1")
+		Button button1 = Jqm.createButton("My button 1")
 			.onClickOpen(next)
-			.build()
-			.appendTo(page);
+			.build();
+		page.append(button1);
 
 		next.header("Volgende pagina");
-		Jqm.createButton("My button 2")
+		Button button2 = Jqm.createButton("My button 2")
 				.onClickOpen(page)
-				.build()
-				.appendTo(next);
+				.build();
+		next.append(button2);
 	}
 }
