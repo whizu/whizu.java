@@ -37,7 +37,7 @@ import java.util.List;
  * @author Rudy D'hauwe
  * @see <a href='http://api.jquery.com/Types/#Element'>jQuery's Element type</a>
  */
-public interface Element extends Markup, Identity {
+public interface Element extends Markup, Identity { //extends Component?
 
 	/**
 	 * Add content to this element.

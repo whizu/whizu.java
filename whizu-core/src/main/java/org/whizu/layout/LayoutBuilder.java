@@ -28,7 +28,6 @@ import org.whizu.dom.Content;
 import org.whizu.dom.Foreach;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
-import org.whizu.value.Value;
 import org.whizu.widget.Container;
 
 /**

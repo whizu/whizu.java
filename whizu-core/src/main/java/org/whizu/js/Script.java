@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * @author Rudy D'hauwe
  */
-public class Script {
+public final class Script {
 
 	private final List<Expression> expressionList_ = new ArrayList<Expression>();
 

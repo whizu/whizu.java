@@ -26,5 +26,6 @@ package org.whizu.dom;
 /**
  * @author Rudy D'hauwe
  */
+@Deprecated //replace by Content
 public interface Markup extends Content {
 }

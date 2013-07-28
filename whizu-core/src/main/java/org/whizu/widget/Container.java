@@ -26,8 +26,6 @@ package org.whizu.widget;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.whizu.dom.Component;
 import org.whizu.dom.Composite;
 import org.whizu.dom.Content;
@@ -38,8 +36,6 @@ import org.whizu.html.Html;
  * @author Rudy D'hauwe
  */
 public class Container extends Widget implements Composite {
-
-	private static final Logger log = LoggerFactory.getLogger(Container.class);
 
 	protected List<Content> componentList = new ArrayList<Content>();
 
@@ -52,6 +48,7 @@ public class Container extends Widget implements Composite {
 	}
 
 	@Override
+	@Deprecated
 	public Container add(Component impl) {
 		this.componentList.add(impl);
 

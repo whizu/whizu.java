@@ -28,6 +28,7 @@ package org.whizu.dom;
  */
 public interface Composite extends Component {
 
+	@Deprecated //replace by add(Content)
 	public Composite add(Component component);
 
 	public Composite add(Content content);

@@ -33,5 +33,6 @@ public interface Content {
 	 */
 	public String render();
 
+	@Deprecated
 	public Content css(String itemClass);
 }

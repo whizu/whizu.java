@@ -27,27 +27,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.whizu.dom.Component;
 import org.whizu.dom.Decorator;
 import org.whizu.dom.Element;
 import org.whizu.dom.Identity;
 import org.whizu.dom.Markup;
-import org.whizu.jquery.Function;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Session;
-import org.whizu.js.Script;
 
 /**
  * @author Rudy D'hauwe
  */
 public abstract class Widget implements Component, Decorator {
 
-	private static final Logger log = LoggerFactory.getLogger(Widget.class);
-	
 	protected enum State {
 		NEW, RENDERED
 	}
@@ -62,8 +56,6 @@ public abstract class Widget implements Component, Decorator {
 	
 	private StringBuffer style = new StringBuffer();
 	
-	//private ValueRenderer renderer = new ValueRendererImpl();
-
 	protected Widget() {
 		id_ = getSession().next();
 	}
@@ -133,16 +125,15 @@ public abstract class Widget implements Component, Decorator {
 		try {
 			if (isRendered()) {
 				throw new IllegalStateException("This component is already rendered: " + this);
+			}
+			Markup markup = compile();
+			if (markup == null) {
+				return "";
+			} else if (markup.equals(this)) { // TODO unnecessary code?
+				// (Component doesn't implement Markup anymore)
+				throw new IllegalStateException("Widget.create() must not return this - causes infinite loop");
 			} else {
-				Markup markup = compile();
-				if (markup == null) {
-					return "";
-				} else if (markup.equals(this)) { // TODO unnecessary code?
-					// (Component doesn't implement Markup anymore)
-					throw new IllegalStateException("Widget.create() must not return this - causes infinite loop");
-				} else {
-					return markup.render();
-				}
+				return markup.render();
 			}
 		} finally {
 			this.state = State.RENDERED;
@@ -158,9 +149,10 @@ public abstract class Widget implements Component, Decorator {
 		}
 	}
 
-	public final Script compile(Function function) {
-		return getRequest().compile(function);
-	}
+//	@Deprecated
+//	public final Script compile(Function function) {
+//		return getRequest().compile(function);
+//	}
 	
 	@Override
 	public void decorate(Element element) {

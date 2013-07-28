@@ -74,6 +74,7 @@ public class GridLayout extends Widget implements Layout {
 	}
 
 	@Override
+	@Deprecated
 	public GridLayout add(Component component) {
 		return add((Content) component);
 	}

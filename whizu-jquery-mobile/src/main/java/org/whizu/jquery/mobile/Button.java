@@ -23,8 +23,6 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.whizu.dom.Element;
 import org.whizu.dom.Markup;
 import org.whizu.html.Html;
@@ -55,8 +53,6 @@ public class Button extends Widget {
 		ANCHOR, BUTTON, ICON_ONLY, INPUT, RESET, SUBMIT;
 	};
 
-	private static final Logger log = LoggerFactory.getLogger(Button.class);;
-
 	public static ButtonBuilder builder(String title) {
 		return new ButtonBuilder(title);
 	}
@@ -85,11 +81,6 @@ public class Button extends Widget {
 		this.title = title;
 	}
 
-	/*
-	 * @Override public Button css(String clazz) { return (Button)
-	 * super.css(clazz); }
-	 */
-
 	public Button(String title, Type type, Inline inline, Mini mini) {
 		this.title = title;
 		this.type_ = type;
@@ -103,44 +94,12 @@ public class Button extends Widget {
 		} else {
 			//???? Button.this.id() ???
 		}
-
-		/*
-		jQuery(this).click(new Function() {
-			@Override
-			public void execute() {
-				JavaScript.preventDefault();
-
-				String listenerId = (listener_ == null) ? Button.this.id() : listener_.id();
-				String url = "/dev/whizu/event?id=" + listenerId;
-
-				Function data = new Function() {
-					@Override
-					public void execute() {
-						jQuery("$(this)").closest("form").serialize();
-					}
-				};
-
-				Function callback = new Function("data") {
-					@Override
-					public void execute() {
-					}
-				};
-
-				String type = "script";
-				jQuery("$").get(url, data, callback, type);
-			}
-		});
-		*/
 	}
 
 	private void addClickListener(ClickListener listener) {
 		listener_ = new ClickListenerImpl(listener);
 		getSession().addClickListener(listener_);
 	}
-
-//	public void appendTo(Page page) {
-//		((PageSelector) page).append(this);
-//	}
 
 	@Override
 	public Markup compile() {

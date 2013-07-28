@@ -57,11 +57,19 @@ class PageBuilder extends Widget implements Page {
 	}
 
 	@Override
+	public void append(Content content) {
+		content_.add(content);
+	}
+
+	@Override
+	public void append(String text) {
+		content_.add(text);
+	}
+
+	@Override
 	public Markup compile() {
 		content_ = Html.div().decorate(DataRole.CONTENT);
 		Element element = Html.div(this).decorate(DataRole.PAGE, this).add(header_, content_, footer_);
-		//jQuery("$.mobile.pageContainer").append(element);
-		//jQuery("$.mobile").call("changePage", "#"+id());
 		return element;
 	}
 
@@ -107,15 +115,5 @@ class PageBuilder extends Widget implements Page {
 		Element p = Html.p(text);
 		content_.add(Html.p(text));
 		return p;
-	}
-
-	@Override
-	public void append(Content content) {
-		content_.add(content);
-	}
-
-	@Override
-	public void append(String text) {
-		content_.add(text);
 	}
 }

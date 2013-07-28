@@ -21,11 +21,12 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.js;
+package org.whizu.dom;
+
+import org.whizu.util.Builder;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Compiler {
-
+public interface ContentBuilder extends Builder<Content> {
 }
