@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+group = 'org.whizu'
+version = '0.1-SNAPSHOT'
+description = 'Whizu'
+sourceCompatibility = 1.5
+targetCompatibility = 1.5
+
+repositories {
+     mavenRepo url: 'http://repo.maven.apache.org/maven2'
+}
+
+allprojects {
+    task hello << {task -> println "I'm $task.project.name" }
+}
+
+subprojects {
+    hello << {println " -- I depend on Whizu"}
+}
