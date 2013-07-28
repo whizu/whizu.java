@@ -17,10 +17,11 @@ public class ButtonBuilderTest extends AbstractJqmTest {
 			.build()
 			.appendTo(page);
 		*/
-		Button.builder("My button")
+		Button button = Button.builder("My button")
 		    .onClickOpen(next)
-		    .build()
-		    .appendTo(page);
+		    .build();
+		
+		page.append(button);
 		// @formatter:on
 
 		assertEquals(
@@ -33,10 +34,10 @@ public class ButtonBuilderTest extends AbstractJqmTest {
 		Page next = Jqm.addPage("next");
 
 		// @formatter:off
-		Jqm.createButton("My button")
+		Button button = Jqm.createButton("My button")
 			.onClickOpen(next)
-			.build()
-			.appendTo(page);
+			.build();
+		page.append(button);
 		// @formatter:on
 
 		assertEquals(

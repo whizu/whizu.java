@@ -138,9 +138,9 @@ public class Button extends Widget {
 		getSession().addClickListener(listener_);
 	}
 
-	public void appendTo(Page page) {
-		((PageSelector) page).append(this);
-	}
+//	public void appendTo(Page page) {
+//		((PageSelector) page).append(this);
+//	}
 
 	@Override
 	public Markup compile() {

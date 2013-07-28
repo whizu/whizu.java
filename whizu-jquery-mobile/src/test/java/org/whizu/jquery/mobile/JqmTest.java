@@ -10,9 +10,11 @@ public class JqmTest extends AbstractJqmTest {
 	public void testHeaders() {
 		Page next = Jqm.addPage("Next");
 		page.header("Huidige pagina");
-		Jqm.createButton("My button 1").onClickOpen(next).build().appendTo(page);
+		Button button1 = Jqm.createButton("My button 1").onClickOpen(next).build();
+		page.append(button1);
 		next.header("Volgende pagina");
-		Jqm.createButton("My button 2").onClickOpen(page).build().appendTo(next);
+		Button button2 = Jqm.createButton("My button 2").onClickOpen(page).build();
+		next.append(button2);
 		assertEquals(
 				"$p = $(\"<div data-role='page' id='Next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').prepend(\"<div data-role='header' id='c0'><h1>Huidige pagina</h1></div>\");$('#index').append(\"<a data-role='button' id='c1' data-inline='false' data-mini='false' href='#Next'>My button 1</a>\");$('#Next').prepend(\"<div data-role='header' id='c2'><h1>Volgende pagina</h1></div>\");$('#Next').append(\"<a data-role='button' id='c3' data-inline='false' data-mini='false' href='#index'>My button 2</a>\");",
 				theRequest.finish());
@@ -29,8 +31,10 @@ public class JqmTest extends AbstractJqmTest {
 		bar.header("Bars");
 		bar.p("I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is being clicked.");
 		bar.footer("Page Footer");
-		Jqm.createButton("foo").onClickOpen(foo).build().appendTo(page);
-		Jqm.createButton("bar").onClickOpen(bar).build().appendTo(page);
+		Button button1 = Jqm.createButton("foo").onClickOpen(foo).build();
+		page.append(button1);
+		Button button2 = Jqm.createButton("bar").onClickOpen(bar).build();
+		page.append(button2);
 		assertEquals(
 				"$('#index').prepend(\"<div data-role='header' id='c0'><h1>Welcome !</h1></div>\");$p = $(\"<div data-role='page' id='foo'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$p = $(\"<div data-role='page' id='bar'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#foo').prepend(\"<div data-role='header' id='c1'><h1>Foos</h1></div>\");$('#foo').find('div[data-role=content]').append(\"I'm first in the source order so I'm shown as the page.\");$('#foo').append(\"<div data-role='footer' id='c2' data-theme='e'><h4>Page Footer</h4></div>\");$('#bar').prepend(\"<div data-role='header' id='c3'><h1>Bars</h1></div>\");$('#bar').find('div[data-role=content]').append(\"I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is being clicked.\");$('#bar').append(\"<div data-role='footer' id='c4' data-theme='e'><h4>Page Footer</h4></div>\");$('#index').append(\"<a data-role='button' id='c5' data-inline='false' data-mini='false' href='#foo'>foo</a>\");$('#index').append(\"<a data-role='button' id='c6' data-inline='false' data-mini='false' href='#bar'>bar</a>\");",
 				theRequest.finish());
@@ -65,9 +69,11 @@ public class JqmTest extends AbstractJqmTest {
 		popup = Jqm.addPopup("popup").p("My second popup with same id").build();
 		//page.append(popup);
 		Header.builder().title("Popups").button("New").onClickOpen(popup).build().build().on(page);
-		Jqm.createButton("My button 1").onClickOpen(next).build().appendTo(page);
+		Button button1 = Jqm.createButton("My button 1").onClickOpen(next).build();
+		page.append(button1);
 		next.header("Volgende pagina");
-		Jqm.createButton("My button 2").onClickOpen(page).build().appendTo(next);
+		Button button2 = Jqm.createButton("My button 2").onClickOpen(page).build();
+		next.append(button2);
 		assertEquals(
 				"$p = $(\"<div data-role='page' id='Next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$.mobile.activePage.append(\"<div data-role='popup' id='popup'><p>My first text</p></div>\");$.mobile.activePage.append(\"<div data-role='popup' id='popup'><p>My second popup with same id</p></div>\");$('#index').prepend(\"<div data-role='header' id='c2'><h1>Popups</h1><a data-role='button' id='c3' data-inline='false' data-rel='popup' data-mini='true' href='#popup'>New</a></div>\");$('#index').append(\"<a data-role='button' id='c4' data-inline='false' data-mini='false' href='#Next'>My button 1</a>\");$('#Next').prepend(\"<div data-role='header' id='c5'><h1>Volgende pagina</h1></div>\");$('#Next').append(\"<a data-role='button' id='c6' data-inline='false' data-mini='false' href='#index'>My button 2</a>\");",
 				theRequest.finish());
