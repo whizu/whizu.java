@@ -26,7 +26,6 @@ package org.whizu.html;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Identity;
-import org.whizu.dom.Markup;
 import org.whizu.dom.Node;
 
 /**
@@ -56,7 +55,7 @@ public class Html {
 		return body().id(id);
 	}
 
-	public static Markup br() {
+	public static Content br() {
 		return new Node("br", true);
 	}
 

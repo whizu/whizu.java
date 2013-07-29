@@ -258,7 +258,7 @@ public class NodeTest extends AbstractTest {
 	public void testAfter() {
 		Node first = new Node("div");
 		Node second = new Node("table");
-		Markup result = second.after(first);
+		Content result = second.after(first);
 		equals("<div></div><table></table>", result);
 	}
 
@@ -487,7 +487,7 @@ public class NodeTest extends AbstractTest {
 	@Test
 	public void testWrap() {
 		Node first = new Node("div");
-		Markup result = first.wrap("table");
+		Content result = first.wrap("table");
 		equals("<table><div></div></table>", result);
 	}
 }

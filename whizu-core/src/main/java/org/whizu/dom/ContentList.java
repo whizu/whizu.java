@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * @author Rudy D'hauwe
  */
-public class ContentList implements Markup {
+public class ContentList implements Content {
 
 	private final List<Content> contentList_ = new ArrayList<Content>();
 

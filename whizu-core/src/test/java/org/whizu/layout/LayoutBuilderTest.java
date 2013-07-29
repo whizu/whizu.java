@@ -26,7 +26,7 @@ package org.whizu.layout;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.whizu.dom.Markup;
+import org.whizu.dom.Content;
 import org.whizu.widget.AbstractTest;
 
 /**
@@ -48,7 +48,7 @@ public class LayoutBuilderTest extends AbstractTest {
 		child1.css("myClass");
 		LayoutBuilder<?> child2 = new LayoutBuilder();
 		parent.add(child2);
-		Markup markup = parent.create("parent-css", "child-css");
+		Content markup = parent.create("parent-css", "child-css");
 		String expected = "<div id='c0' class='parent-css '><div id='c1' class='myClass child-css '></div><div id='c2' class='child-css '></div></div>";
 		assertEquals(expected, markup.render());
 	}

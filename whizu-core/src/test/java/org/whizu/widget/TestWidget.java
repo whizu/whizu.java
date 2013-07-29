@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.widget;
 
-import org.whizu.dom.Markup;
+import org.whizu.dom.Content;
 import org.whizu.html.Html;
 
 /**
@@ -32,7 +32,7 @@ import org.whizu.html.Html;
 public class TestWidget extends Widget {
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		return Html.div(this).decorate(this);
 	}
 }

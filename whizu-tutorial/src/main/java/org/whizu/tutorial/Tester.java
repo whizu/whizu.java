@@ -24,8 +24,6 @@
 package org.whizu.tutorial;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,6 +32,8 @@ import org.whizu.annotation.Markdown;
 import org.whizu.annotation.Style;
 import org.whizu.dom.Element;
 import org.whizu.html.Html;
+//import java.nio.file.Files;
+//import java.nio.file.Paths;
 
 /**
  * @author Rudy D'hauwe
@@ -65,9 +65,12 @@ class Tester {
 		Tester t = new Tester();
 		System.out.println(t.get().render());
 
+		/*
 		String filePath = "j:/git/whizu.java/whizu-tutorial/src/main/java/org/whizu/tutorial/Tester.java";
 		String content = new String(Files.readAllBytes(Paths.get(filePath)));
-
+		*/
+		String content = "...";
+		
 		System.out.println(content);
 
 		Pattern pattern = Pattern.compile("(/\\*\\*)[\\s]+[\\*]([\\w|[\\.\\s\\*/,!@#$%^&*()<>]]+)(\\*/)");

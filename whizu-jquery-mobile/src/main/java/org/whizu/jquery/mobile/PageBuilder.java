@@ -25,7 +25,6 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.widget.Widget;
 
@@ -67,7 +66,7 @@ class PageBuilder extends Widget implements Page {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		content_ = Html.div().decorate(DataRole.CONTENT);
 		Element element = Html.div(this).decorate(DataRole.PAGE, this).add(header_, content_, footer_);
 		return element;

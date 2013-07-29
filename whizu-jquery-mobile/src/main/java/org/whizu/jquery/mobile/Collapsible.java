@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Markup;
+import org.whizu.dom.Content;
 import org.whizu.html.Html;
 import org.whizu.widget.Container;
 
@@ -43,7 +43,7 @@ public class Collapsible extends Container {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		return Html.div(this).attr("data-role", "collapsible").add(Html.h3(title)).add(componentList);
 	}
 }

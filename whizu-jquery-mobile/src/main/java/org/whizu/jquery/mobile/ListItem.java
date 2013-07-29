@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Markup;
+import org.whizu.dom.Content;
 import org.whizu.html.Html;
 import org.whizu.value.DateValue;
 import org.whizu.value.StringValue;
@@ -46,8 +46,8 @@ public class ListItem extends Container {
 	}
 
 	@Override
-	public Markup compile() {
-		Markup markup = Html.li(this).decorate(this).add(componentList);
+	public Content compile() {
+		Content markup = Html.li(this).decorate(this).add(componentList);
 		return markup;
 	}
 

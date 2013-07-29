@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Markup;
+import org.whizu.dom.Content;
 import org.whizu.html.Html;
 import org.whizu.widget.Container;
 
@@ -33,8 +33,8 @@ import org.whizu.widget.Container;
 public class FieldContain extends Container {
 
 	@Override
-	public Markup compile() {
-		Markup markup = Html.div(this).attr("data-role", "fieldcontain").add(componentList);
+	public Content compile() {
+		Content markup = Html.div(this).attr("data-role", "fieldcontain").add(componentList);
 		return markup;
 	}
 }

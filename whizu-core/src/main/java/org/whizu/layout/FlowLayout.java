@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.layout;
 
-import org.whizu.dom.Markup;
+import org.whizu.dom.Content;
 
 /**
  * @author Rudy D'hauwe
@@ -31,7 +31,7 @@ import org.whizu.dom.Markup;
 public class FlowLayout extends LayoutBuilder<FlowLayout> implements Layout {
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		return create("flow-layout", "flow-layout-element");
 	}
 }

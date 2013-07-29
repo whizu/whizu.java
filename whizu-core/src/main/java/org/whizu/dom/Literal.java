@@ -27,7 +27,7 @@ package org.whizu.dom;
 /**
  * @author Rudy D'hauwe
  */
-public class Literal implements Markup {
+public class Literal implements Content {
 
 	private String text_;
 

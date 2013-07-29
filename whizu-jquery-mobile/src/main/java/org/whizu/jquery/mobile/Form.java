@@ -25,7 +25,6 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Component;
 import org.whizu.dom.Content;
-import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.ClickListenerImpl;
@@ -151,9 +150,9 @@ public class Form extends Container {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		// @formatter:off
-		Markup markup = Html.form(this)
+		Content markup = Html.form(this)
 			.attr("method", "post")
 			//.attr("action", "form.php")
 			.decorate(this)

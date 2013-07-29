@@ -23,10 +23,8 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Markup;
+import org.whizu.dom.Content;
 import org.whizu.html.Html;
-import org.whizu.jquery.mobile.Collapsible;
-import org.whizu.jquery.mobile.Theme;
 import org.whizu.widget.Widget;
 
 /**
@@ -49,7 +47,7 @@ public class Accordion extends Widget {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		return Html.div(this).attr("data-role", "collapsible-set").decorate(theme);
 	}
 }

@@ -27,7 +27,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.whizu.dom.Content;
-import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.ClickListenerImpl;
@@ -89,7 +88,7 @@ public class Label extends Widget {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		String script = "";
 		// JQuery jQuery = jQuery(this); //Don't do this, this generates a
 		// jQuery selection of this without any function on it

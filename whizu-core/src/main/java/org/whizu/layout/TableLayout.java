@@ -32,7 +32,6 @@ import org.whizu.dom.Component;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Foreach;
-import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.widget.Widget;
 
@@ -74,7 +73,7 @@ class TableLayout extends Widget {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		// isRendered = true;
 		jQuery(this).closest("div").trigger("create");
 

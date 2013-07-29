@@ -27,7 +27,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
-import org.whizu.dom.Markup;
+import org.whizu.dom.Content;
 import org.whizu.dom.Node;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
@@ -46,7 +46,7 @@ public class WidgetTest extends AbstractTest {
 		Widget widget = new Widget() {
 
 			@Override
-			public Markup compile() {
+			public Content compile() {
 				throw new UnsupportedOperationException();
 			}
 		};
@@ -234,7 +234,7 @@ public class WidgetTest extends AbstractTest {
 		Widget widget = new TestWidget();
 		widget.css("myClass");
 		widget.width("120px");
-		Markup markup = widget.compile();
+		Content markup = widget.compile();
 		assertEquals(false, widget.isRendered());
 		assertEquals("<div id='c0' style='width:120px;' class='myClass '></div>", markup.render());
 		assertEquals(false, widget.isRendered());

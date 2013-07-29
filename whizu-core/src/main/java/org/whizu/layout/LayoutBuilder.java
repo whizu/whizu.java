@@ -26,7 +26,6 @@ package org.whizu.layout;
 import org.whizu.dom.Component;
 import org.whizu.dom.Content;
 import org.whizu.dom.Foreach;
-import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.widget.Container;
 
@@ -40,7 +39,7 @@ class LayoutBuilder<T extends LayoutBuilder<T>> extends Container implements Lay
 		return getThis(super.add(impl));
 	}
 
-	protected Markup create(String css, final String itemClass) {
+	protected Content create(String css, final String itemClass) {
 		return Html.div(this).decorate(this).css(css).add(new Foreach<Content>(componentList) {
 
 			/*

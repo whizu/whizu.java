@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Content;
 import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.ClickListenerImpl;
@@ -102,7 +102,7 @@ public class Button extends Widget {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		// jQuery(this).trigger("create");
 		if (onClick_ != null) {
 			return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)

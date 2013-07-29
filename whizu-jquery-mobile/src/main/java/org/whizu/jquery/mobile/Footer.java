@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Content;
 import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.widget.Widget;
 
@@ -48,7 +48,7 @@ public class Footer extends Widget {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		//jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
 		return Html.div(this).decorate(DataRole.FOOTER, theme_).add(title_);
 	}

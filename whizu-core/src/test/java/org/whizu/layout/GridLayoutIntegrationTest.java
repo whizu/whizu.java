@@ -29,9 +29,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.whizu.dom.Component;
+import org.whizu.dom.Content;
 import org.whizu.dom.Identity;
 import org.whizu.dom.Literal;
-import org.whizu.dom.Markup;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.Input;
@@ -56,8 +56,8 @@ public class GridLayoutIntegrationTest {
 		Component myComponent = new Component() {
 
 			@Override
-			public Markup compile() {
-				return new Literal("myMarkup");
+			public Content compile() {
+				return new Literal("myContent");
 			}
 
 			@Override

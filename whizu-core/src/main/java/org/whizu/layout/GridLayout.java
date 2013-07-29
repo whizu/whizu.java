@@ -27,7 +27,6 @@ import org.whizu.dom.Component;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.dom.Literal;
-import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.html.Table;
 import org.whizu.html.Tbody;
@@ -69,7 +68,7 @@ public class GridLayout extends Widget implements Layout {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		return grid_;
 	}
 

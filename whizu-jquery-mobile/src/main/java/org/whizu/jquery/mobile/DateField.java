@@ -28,8 +28,8 @@ import java.beans.PropertyChangeListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.whizu.dom.Content;
 import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.jquery.Input;
 import org.whizu.value.DateValue;
@@ -61,7 +61,7 @@ class DateField extends Widget implements Input {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		Element input = Html.input(this).attr("type", "date").attr("name", id()).attr("value", "");
 		Element label = Html.tag("label").attr("for", input.id()).add(model_.name());
 		getSession().addInput(this);

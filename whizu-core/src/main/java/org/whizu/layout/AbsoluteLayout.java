@@ -23,12 +23,12 @@
  *******************************************************************************/
 package org.whizu.layout;
 
-import org.whizu.dom.Markup;
+import org.whizu.dom.Content;
 
 public class AbsoluteLayout extends LayoutBuilder<AbsoluteLayout> {
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		return create("absolute-layout", "absolute-layout-element");
 	}
 }

@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.layout;
 
-import org.whizu.dom.Markup;
+import org.whizu.dom.Content;
 
 /**
  * @author Rudy D'hauwe
@@ -31,7 +31,7 @@ import org.whizu.dom.Markup;
 public class HorizontalLayout extends LayoutBuilder<HorizontalLayout> {
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		return super.create("horizontal-layout", "horizontal-layout-element");
 	}
 }

@@ -28,10 +28,10 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.whizu.dom.Component;
+import org.whizu.dom.Content;
 import org.whizu.dom.Decorator;
 import org.whizu.dom.Element;
 import org.whizu.dom.Identity;
-import org.whizu.dom.Markup;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
@@ -126,11 +126,11 @@ public abstract class Widget implements Component, Decorator {
 			if (isRendered()) {
 				throw new IllegalStateException("This component is already rendered: " + this);
 			}
-			Markup markup = compile();
+			Content markup = compile();
 			if (markup == null) {
 				return "";
 			} else if (markup.equals(this)) { // TODO unnecessary code?
-				// (Component doesn't implement Markup anymore)
+				// (Component doesn't implement Content anymore)
 				throw new IllegalStateException("Widget.create() must not return this - causes infinite loop");
 			} else {
 				return markup.render();

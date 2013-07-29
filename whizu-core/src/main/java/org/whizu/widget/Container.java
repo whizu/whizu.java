@@ -29,7 +29,6 @@ import java.util.List;
 import org.whizu.dom.Component;
 import org.whizu.dom.Composite;
 import org.whizu.dom.Content;
-import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 
 /**
@@ -81,7 +80,7 @@ public class Container extends Widget implements Composite {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		return Html.div(this).decorate(this).add(componentList);
 	}
 

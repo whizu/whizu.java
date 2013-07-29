@@ -26,8 +26,8 @@ package org.whizu.jquery.mobile;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.whizu.dom.Content;
 import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.widget.Widget;
 
@@ -100,7 +100,7 @@ public class Header extends Widget {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		//jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate"); //necessary?
 		return Html.div(this).decorate(DataRole.HEADER, theme_, position_, fullscreen_).add(title_).add(buttonList_);
 	}

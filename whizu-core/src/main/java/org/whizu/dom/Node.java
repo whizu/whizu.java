@@ -136,7 +136,7 @@ public class Node implements Element {
 	}
 
 	@Override
-	public Markup after(Content element) {
+	public Content after(Content element) {
 		return new ContentList(element, this);
 	}
 

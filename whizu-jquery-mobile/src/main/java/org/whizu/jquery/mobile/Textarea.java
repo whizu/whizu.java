@@ -28,8 +28,8 @@ import java.beans.PropertyChangeListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.whizu.dom.Content;
 import org.whizu.dom.Element;
-import org.whizu.dom.Markup;
 import org.whizu.html.Html;
 import org.whizu.jquery.Input;
 import org.whizu.value.StringValue;
@@ -61,7 +61,7 @@ public class Textarea extends Widget implements Input {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content compile() {
 		Element field = Html.textarea(this).attr("name", id());
 		Element label = Html.tag("label").attr("for", field.id()).add(model_.name());
 		getSession().addInput(this);
