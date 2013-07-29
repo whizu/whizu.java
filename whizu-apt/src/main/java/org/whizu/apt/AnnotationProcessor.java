@@ -24,7 +24,9 @@
 package org.whizu.apt;
 
 import java.io.IOException;
-import java.io.Writer;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -43,18 +45,22 @@ import javax.tools.Diagnostic.Kind;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 
+import org.markdown4j.Markdown4jProcessor;
+
 /**
  * @author Rudy D'hauwe
  */
-@SupportedAnnotationTypes({ ProcessorImpl.MARKDOWN_TYPE })
+@SupportedAnnotationTypes({"org.whizu.annotation.Markdown"})
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
-public final class ProcessorImpl extends AbstractProcessor {
+public final class AnnotationProcessor extends AbstractProcessor {
 
-	//protected static final String HTML_TYPE = "org.whizu.annotation.Html";
+	private static final String FILENAME = "Markdown.properties";
 
-	protected static final String MARKDOWN_TYPE = "org.whizu.annotation.processing.Markdown";
+	private static final String PACKAGE = "org.whizu.apt";
 
-	private static final String PACKAGE = "org.whizu.annotation.processing";
+	private static boolean isModified_ = false;
+
+	private static Properties properties_;
 
 	private Elements elementUtils_;
 
@@ -62,17 +68,19 @@ public final class ProcessorImpl extends AbstractProcessor {
 
 	private Messager messager_;
 
-	/**
-	 * @param field
-	 * @return
-	 */
+	private Markdown4jProcessor processor_;
+
 	private String getFieldName(Element field) {
-		return (getPackageOf(field) + "." + field.getEnclosingElement().getSimpleName() + "." + field.getSimpleName())
-				.replace('.', '_');
+		return (getPackageOf(field) + "." + field.getEnclosingElement().getSimpleName() + "." + field.getSimpleName());
 	}
 
-	private String getFileName(TypeElement typeElement) {
-		return typeElement.getSimpleName() + ".properties";
+	private String getMarkdown(String value) {
+		try {
+			return processor_.process(value).replace("<br  />", " ");
+		} catch (IOException e) {
+			messager_.printMessage(Kind.ERROR, e.getMessage());
+			throw new RuntimeException(e);
+		}
 	}
 
 	private Name getPackageOf(Element field) {
@@ -80,52 +88,89 @@ public final class ProcessorImpl extends AbstractProcessor {
 	}
 
 	private String getValue(String comment) {
-		return comment.replace("\n", "\\n").replace("\r", "");
-	}
-
-	private Writer getWriter(String fileName) throws IOException {
-		FileObject file = filer_.createResource(StandardLocation.CLASS_OUTPUT, PACKAGE, fileName);
-		return file.openWriter();
+		return comment.replace("\r", "").replace("\n ", "\n");
 	}
 
 	@Override
 	public void init(final ProcessingEnvironment procEnv) {
+		messager_.printMessage(Kind.NOTE, "AptProcessor.init()");
 		super.init(procEnv);
 		elementUtils_ = procEnv.getElementUtils();
 		filer_ = procEnv.getFiler();
 		messager_ = procEnv.getMessager();
+		processor_ = new Markdown4jProcessor();
+		properties_ = readProperties();
 	}
 
 	@Override
 	public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
-		try {
-			for (TypeElement typeElement : annotations) {
-				process(typeElement, roundEnv.getElementsAnnotatedWith(typeElement));
-			}
-		} catch (IOException e) {
-			return false;
+		for (TypeElement typeElement : annotations) {
+			process(typeElement, roundEnv.getElementsAnnotatedWith(typeElement));
 		}
+
+		if (isModified_) {
+			
+			writeProperties();
+		}
+
 		return true;
 	}
 
-	private void process(TypeElement typeElement, Set<? extends Element> elementsAnnotatedWith) throws IOException {
-		messager_.printMessage(Kind.NOTE, "Start processing @" + typeElement);
+	private void process(TypeElement typeElement, Set<? extends Element> elementsAnnotatedWith) {
+		messager_.printMessage(Kind.NOTE, "Processing @" + typeElement);
 		if (elementsAnnotatedWith.size() > 0) {
-			Writer writer = null;
-			try {
-				String fileName = getFileName(typeElement);
-				writer = getWriter(fileName);
-				for (Element field : elementsAnnotatedWith) {
-					String docComment = elementUtils_.getDocComment(field);
-					if (docComment != null) {
-						String value = getValue(docComment);
-						String fieldName = getFieldName(field);
-						writer.append(fieldName + "=" + value + "\n");
+			for (Element field : elementsAnnotatedWith) {
+				String docComment = elementUtils_.getDocComment(field);
+				if (docComment != null) {
+					String value = getValue(docComment);
+					String fieldName = getFieldName(field);
+					String current = properties_.getProperty(fieldName);
+					if ((current == null) || (!current.equals(value))) {
+						properties_.setProperty(fieldName, value);
+						properties_.setProperty(fieldName + ".md", getMarkdown(value));
+						isModified_ = true;
 					}
 				}
+			}
+		}
+	}
+
+	private Properties readProperties() {
+		if (properties_ == null) {
+			properties_ = new Properties();
+			InputStream in = null;
+			try {
+				FileObject file = filer_.getResource(StandardLocation.CLASS_OUTPUT, PACKAGE, FILENAME);
+				in = file.openInputStream();
+				properties_.load(in);
+			} catch (IOException e) {
 			} finally {
-				if (writer != null) {
-					writer.close();
+				if (in != null) {
+					try {
+						in.close();
+					} catch (IOException e) {
+					}
+				}
+			}
+		}
+		return properties_;
+	}
+
+	private void writeProperties() {
+		OutputStream out = null;
+		try {
+			FileObject file = filer_.createResource(StandardLocation.CLASS_OUTPUT, PACKAGE, FILENAME);
+			out = file.openOutputStream();
+			properties_.store(out, FILENAME);
+			isModified_ = false;
+		} catch (IOException e) {
+			messager_.printMessage(Kind.ERROR, e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				} catch (IOException e1) {
 				}
 			}
 		}

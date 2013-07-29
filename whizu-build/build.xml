@@ -15,7 +15,7 @@
 	<property name="whizu-apt" location="${project.home}/whizu-apt" />
 
 	<path id="project.class.path">
-		<pathelement location="${maven.local.repository}/org/pegdown/pegdown/1.2.1/pegdown-1.2.1.jar" />
+		<pathelement location="${project.home}/whizu-apt/lib/markdown4j-2.2.jar" />
 		<pathelement location="${maven.local.repository}/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar" />
 		<pathelement location="${maven.local.repository}/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" />
 		<pathelement location="${maven.local.repository}/org/glassfish/javax.servlet/3.1/javax.servlet-3.1.jar" />
@@ -66,7 +66,9 @@
 		<mkdir dir="${dist}/lib" />
 
 		<jar jarfile="${dist}/whizu.jar" basedir="${build}" />
-		<jar jarfile="${dist}/whizu-apt.jar" basedir="${whizu-apt}/target/classes" />
+		<jar jarfile="${dist}/whizu-apt.jar" basedir="${whizu-apt}/target/classes" excludes="MarkdownTest/**">
+			<zipgroupfileset dir="${project.home}/whizu-apt/lib/" includes="markdown4j-2.2.jar"/>
+		</jar>
 
 		<copy todir="${dist}/lib" flatten="true">
 			<path refid="publish.class.path" />
@@ -86,19 +88,19 @@
 		<mkdir dir="${package}" />
 
 		<!-- Put everything in ${dist} into the whizu-snapshot.zip file -->
-		<zip destfile="${package}/whizu-snapshot.zip" basedir="${dist}" />
+		<zip destfile="${package}/whizu-snapshot-${project.version}.zip" basedir="${dist}" />
 
 		<!-- Put everything in ${dist} into the whizu-snapshot.tar.gz file -->
-		<tar destfile="${package}/whizu-snapshot.tar.gz" compression="gzip">
-			<zipfileset src="${package}/whizu-snapshot.zip" />
+		<tar destfile="${package}/whizu-snapshot-${project.version}.tar.gz" compression="gzip">
+			<zipfileset src="${package}/whizu-snapshot-${project.version}.zip" />
 		</tar>
 	</target>
 
 	<target name="publish" depends="clean, package" description="publish the package to the website">
 		<copy todir="${publish}/download">
 			<fileset dir="${package}">
-				<include name="whizu-snapshot.zip" />
-				<include name="whizu-snapshot.tar.gz" />
+				<include name="whizu-snapshot-${project.version}.zip" />
+				<include name="whizu-snapshot-${project.version}.tar.gz" />
 			</fileset>
 		</copy>
 		<copy todir="${publish}/api">
