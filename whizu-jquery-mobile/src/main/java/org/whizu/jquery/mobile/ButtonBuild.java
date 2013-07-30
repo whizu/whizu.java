@@ -28,6 +28,7 @@ import org.whizu.dom.Element;
 import org.whizu.html.Html;
 import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.ClickListenerImpl;
+import org.whizu.jquery.JQuery;
 import org.whizu.widget.Widget;
 
 /**
@@ -77,6 +78,8 @@ final class ButtonBuild extends Widget implements Button {
 
 	private Type type_ = Type.INPUT;
 
+	private Panel onClickPanel_;
+
 	public ButtonBuild(String title) {
 		this.title = title;
 	}
@@ -111,6 +114,11 @@ final class ButtonBuild extends Widget implements Button {
 			return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
 					.decorate(icon, theme_, mini, this).attr("data-rel", "popup")
 					.attr("href", "#" + onClickPopup_.id()).add(title);
+		} else if (onClickPanel_ != null) {
+			assureCreated((PanelProxy) onClickPanel_);
+			return Html.a(this).attr("data-role", "button").attr("data-inline", inline.value)
+					.decorate(icon, theme_, mini, this).attr("data-rel", "panel")
+					.attr("href", "#" + onClickPanel_.id()).add(title);
 		} else {
 
 			switch (type_) {
@@ -142,6 +150,11 @@ final class ButtonBuild extends Widget implements Button {
 		}
 	}
 
+	private void assureCreated(PanelProxy panel) {
+		JQuery page = jQuery(this).closest("div[data-role=page]");
+		panel.assureCreatedOn(page);
+	}
+
 	public void dataRel(DataRel dataRel) {
 		dataRel_ = dataRel;
 	}
@@ -171,5 +184,9 @@ final class ButtonBuild extends Widget implements Button {
 
 	public void type(Type type) {
 		type_ = type;
+	}
+
+	public void onClickOpen(Panel panel) {
+		onClickPanel_ = panel;
 	}
 }

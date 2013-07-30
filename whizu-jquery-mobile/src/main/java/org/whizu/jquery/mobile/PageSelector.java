@@ -1,5 +1,6 @@
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 import org.whizu.jquery.Selector;
 
@@ -30,6 +31,10 @@ class PageSelector extends Selector implements Page {
 		prepend(header);
 	}
 
+	public void append(Content content) {
+		query().find("div[data-role=content]").append(content);
+	}
+	
 	@Override
 	public Element p(String text) {
 		query().find("div[data-role=content]").append(text);

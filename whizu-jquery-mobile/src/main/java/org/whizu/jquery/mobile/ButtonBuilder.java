@@ -56,6 +56,11 @@ public class ButtonBuilder implements Builder<ButtonBuild> {
 		return this;
 	}
 
+	public ButtonBuilder onClickOpen(Panel panel) {
+		build_.onClickOpen(panel);
+		return this;
+	}
+
 	public ButtonBuilder onClickOpen(Popup popup) {
 		build_.onClick(popup);
 		return this;
