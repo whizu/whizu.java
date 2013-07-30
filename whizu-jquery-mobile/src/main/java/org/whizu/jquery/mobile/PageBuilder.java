@@ -39,7 +39,7 @@ import org.whizu.widget.Widget;
  * 
  * @author Rudy D'hauwe
  */
-class PageBuilder extends Widget implements Page {
+public class PageBuilder extends Widget implements Page {
 
 	private Element content_;
 
