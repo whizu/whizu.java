@@ -62,6 +62,9 @@ public final class Jqm {
 		return new Document();
 	}
 
+	/**
+	 * @return the index page of the jQuery Mobile application
+	 */
 	public static Page page() {
 		return document().page();
 	}
