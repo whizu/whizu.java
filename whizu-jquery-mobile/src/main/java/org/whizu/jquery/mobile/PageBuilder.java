@@ -56,7 +56,7 @@ public class PageBuilder extends Widget implements Page {
 	}
 
 	@Override
-	public void append(Content content) {
+	public void addContent(Content content) {
 		content_.add(content);
 	}
 

@@ -62,7 +62,7 @@ public class TournamentApp implements JQueryMobile {
 			.on(page);
 		// @formatter:on
 
-		page.append(playerList);
+		page.addContent(playerList);
 	}
 
 	private Popup addPlayerEvent() {

@@ -39,8 +39,8 @@ import org.whizu.dom.Element;
  */
 public interface Page {
 
-	public void append(Content content);
-
+	public void addContent(Content content);
+	
 	public void append(String html);
 
 	public Footer footer(String title);

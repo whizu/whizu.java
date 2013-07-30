@@ -53,7 +53,7 @@ public class Forms implements JQueryMobile {
 		Form form = new Form();
 		form.onSubmit(submit());
 		form.addText(name);
-		page.append(form);
+		page.addContent(form);
 	}
 
 	private ClickListener submit() {

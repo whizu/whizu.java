@@ -49,7 +49,9 @@ public class PopupBuilder implements Builder<Popup> {
 
 	@Override
 	public Popup build() {
-		Jqm.addPopup(build_);
+		//Jqm.addPopup(build_);
+		Jqm.document().activePage().addContent(build_); //TODO refactor, assureCreated(popup)
+		
 		return build_;
 	}
 

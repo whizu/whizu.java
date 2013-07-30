@@ -29,6 +29,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.whizu.annotation.App;
 import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.mobile.Button;
+import org.whizu.jquery.mobile.ButtonBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
@@ -51,17 +52,17 @@ public class Buttons  implements JQueryMobile {
 		page.header("Buttons");
 
 		// @formatter:off
-		Button button = Jqm.createButton("Register")
+		Button button = ButtonBuilder.createWithTitle("Register")
 		    .onClick(register())
 		    .build();
-		page.append(button);
+		page.addContent(button);
 		// @formatter:on
 
 		// @formatter:off
-		Button button2 = Jqm.createButton("Register 3")
+		Button button2 = ButtonBuilder.createWithTitle("Register 3")
 			    .onClick(register())
 			    .build();
-	    page.append(button2);
+	    page.addContent(button2);
 			// @formatter:on
 
 		// @formatter:off

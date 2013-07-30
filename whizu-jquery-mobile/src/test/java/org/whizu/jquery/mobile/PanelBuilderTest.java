@@ -74,7 +74,7 @@ public class PanelBuilderTest extends AbstractJqmTest {
 		Page page = Jqm.addPage("index");
 		Panel panel = PanelBuilder.createWithId("my-panel").add(Html.p("This is my first panel")).build();
 		Button button = ButtonBuilder.createWithTitle("Open panel").onClickOpen(panel).build();
-		page.append(button);
+		page.addContent(button);
 		assertResponse("$p = $(\"<div data-role='page' id='index'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c1' data-inline='false' data-rel='panel' data-mini='false' href='#my-panel'>Open panel</a>\");$(\"#c1\").closest(\"div[data-role=page]\").append(\"<div data-role='panel' id='my-panel'><p>This is my first panel</p></div>\");");
 	}
 	
@@ -87,7 +87,7 @@ public class PanelBuilderTest extends AbstractJqmTest {
 		Page page = Jqm.addPage("home");
 		Panel panel = PanelBuilder.createWithId("my-panel").add(Html.p("This is my first panel")).build();
 		Button button = ButtonBuilder.createWithTitle("Open panel").onClickOpen(panel).build();
-		page.append(button);
+		page.addContent(button);
 		assertResponse("$p = $(\"<div data-role='page' id='home'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#home').find('div[data-role=content]').append(\"<a data-role='button' id='c1' data-inline='false' data-rel='panel' data-mini='false' href='#my-panel'>Open panel</a>\");$(\"#c1\").closest(\"div[data-role=page]\").append(\"<div data-role='panel' id='my-panel'><p>This is my first panel</p></div>\");");
 	}
 

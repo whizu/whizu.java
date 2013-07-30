@@ -28,12 +28,12 @@ package org.whizu.jquery.mobile;
  */
 public final class Jqm {
 
+	/**
+	 * To be replaced by PageBuilder().create()...build()
+	 */
+	@Deprecated
 	public static Page addPage(String id) {
 		return document().addPage(id);
-	}
-
-	public static void addPopup(Popup popup) {
-		document().activePage().append(popup);
 	}
 
 	/*
@@ -41,22 +41,6 @@ public final class Jqm {
 		RequestContext.getRequest().addExpression("$.mobile.changePage('#" + id + "');");
 	}
 	*/
-
-	public static PopupBuilder addPopup(String id) {
-		return new PopupBuilder(id);
-	}
-
-	public static ButtonBuilder createButton(String caption) {
-		return new ButtonBuilder(caption);
-	}
-
-	public static Header createHeader(String caption) {
-		return new Header(caption);
-	}
-
-	public static ButtonBuild createHyperlink(String caption, Page target) {
-		return new ButtonBuild(caption).onClick(target);
-	}
 
 	public static Document document() {
 		return new Document();

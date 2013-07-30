@@ -25,11 +25,13 @@ package org.whizu.tutorial.jqm.api;
 
 import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.Button;
+import org.whizu.jquery.mobile.ButtonBuilder;
 import org.whizu.jquery.mobile.Header;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.jquery.mobile.Popup;
+import org.whizu.jquery.mobile.PopupBuilder;
 
 /**
  * @author Rudy D'hauwe
@@ -46,10 +48,10 @@ public class Popups implements JQueryMobile {
 		
 		Page next = Jqm.addPage("Next");
 		
-		Popup popup = Jqm.addPopup("popup").p("My first text").build();
+		Popup popup = PopupBuilder.createWithId("popup").p("My first text").build();
 		//page.append(popup);
 		
-		popup = Jqm.addPopup("popup").p("My second popup with same id").build();
+		popup = PopupBuilder.createWithId("popup").p("My second popup with same id").build();
 		//page.append(popup);
 		
 		//Jqm.createHeader("Popups").on(page);
@@ -66,15 +68,15 @@ public class Popups implements JQueryMobile {
 		    .on(page);
 		// @formatter:on
 		
-		Button button1 = Jqm.createButton("My button 1")
+		Button button1 = ButtonBuilder.createWithTitle("My button 1")
 			.onClickOpen(next)
 			.build();
-		page.append(button1);
+		page.addContent(button1);
 
 		next.header("Volgende pagina");
-		Button button2 = Jqm.createButton("My button 2")
+		Button button2 = ButtonBuilder.createWithTitle("My button 2")
 				.onClickOpen(page)
 				.build();
-		next.append(button2);
+		next.addContent(button2);
 	}
 }

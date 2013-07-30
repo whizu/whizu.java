@@ -25,7 +25,7 @@ public class HeaderBuilderTest extends AbstractJqmTest {
 		// @formatter:on
 
 		assertEquals(
-				"$p = $(\"<div data-role='page' id='next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$.mobile.activePage.append(\"<div data-role='popup' id='popup'></div>\");$('#index').prepend(\"<div data-role='header' id='c1'><h1>Popups</h1><a data-role='button' id='c2' data-inline='false' data-rel='popup' data-mini='true' href='#popup'>Popup</a><a data-role='button' id='c3' data-inline='false' data-mini='true' href='#next'>Next page</a></div>\");",
+				"$p = $(\"<div data-role='page' id='next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$.mobile.activePage.find('div[data-role=content]').append(\"<div data-role='popup' id='popup'></div>\");$('#index').prepend(\"<div data-role='header' id='c1'><h1>Popups</h1><a data-role='button' id='c2' data-inline='false' data-rel='popup' data-mini='true' href='#popup'>Popup</a><a data-role='button' id='c3' data-inline='false' data-mini='true' href='#next'>Next page</a></div>\");",
 				theRequest.finish());
 	}
 }

@@ -31,8 +31,12 @@ class PageSelector extends Selector implements Page {
 		prepend(header);
 	}
 
-	public void append(Content content) {
+	public void addContent(Content content) {
 		query().find("div[data-role=content]").append(content);
+	}
+	
+	public void append(Content content) {
+		query().append(content);
 	}
 	
 	@Override

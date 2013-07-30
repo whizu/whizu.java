@@ -25,6 +25,7 @@ package org.whizu.tutorial.jqm.api;
 
 import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.Button;
+import org.whizu.jquery.mobile.ButtonBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
@@ -43,17 +44,17 @@ public class Headers implements JQueryMobile /* implements JqmApp */{
 		next.header("Volgende pagina");
 
 		// @formatter:off
-		Button button = Jqm.createButton("My button 1")
+		Button button = ButtonBuilder.createWithTitle("My button 1")
 		    .onClickOpen(next)
 		    .build();
-		page.append(button);
+		page.addContent(button);
 		// @formatter:on
 
 		// @formatter:off
-		Button button2 = Jqm.createButton("My button 2")
+		Button button2 = ButtonBuilder.createWithTitle("My button 2")
 				.onClickOpen(page)
 				.build();
-		next.append(button2);
+		next.addContent(button2);
 		// @formatter:on
 
 		// Jqm.changePage("Nieuw");

@@ -24,6 +24,7 @@
 package org.whizu.tutorial.jqm.api;
 
 import org.whizu.annotation.App;
+import org.whizu.jquery.mobile.ButtonBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
@@ -51,8 +52,8 @@ public class MultiPage implements JQueryMobile {
 		//foo.p("Take me ").add(Jqm.createHyperlink("back to Foo", foo));
 		bar.footer("Page Footer");
 		
-		index.append(Jqm.createButton("foo").onClickOpen(foo).build());
-		index.append(Jqm.createButton("bar").onClickOpen(bar).build());
+		index.addContent(ButtonBuilder.createWithTitle("foo").onClickOpen(foo).build());
+		index.addContent(ButtonBuilder.createWithTitle("bar").onClickOpen(bar).build());
 		//Jqm.changePage("foo");
 	}
 }
