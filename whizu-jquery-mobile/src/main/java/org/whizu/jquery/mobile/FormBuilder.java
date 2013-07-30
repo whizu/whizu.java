@@ -68,4 +68,9 @@ public class FormBuilder implements Builder<Form> {
 		form_.onSubmit(listener);
 		return this;
 	}
+
+	public FormBuilder addButton(Button submit) {
+		form_.addButton(submit);
+		return this;
+	}
 }

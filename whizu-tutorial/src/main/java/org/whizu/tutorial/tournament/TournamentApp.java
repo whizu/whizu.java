@@ -27,6 +27,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.annotation.App;
 import org.whizu.jquery.ClickListener;
+import org.whizu.jquery.mobile.Button;
+import org.whizu.jquery.mobile.ButtonBuilder;
 import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.FormBuilder;
 import org.whizu.jquery.mobile.HeaderBuilder;
@@ -70,9 +72,13 @@ public class TournamentApp implements JQueryMobile {
 
 		final Player model = new Player();
 
+		Button submit = ButtonBuilder.createWithTitle("Create").build();
+		
 		// @formatter:off
 		Form form = FormBuilder.create()
 			.addText(model.name)
+			.addDate(model.birthdate)
+			.addButton(submit)
 			.onSubmit(_addPlayer(model))
 			.build();
 

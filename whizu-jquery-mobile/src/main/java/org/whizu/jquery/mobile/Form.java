@@ -167,4 +167,12 @@ public class Form extends Container {
 		handler_ = new ClickListenerImpl(handler);
 		getSession().addClickListener(handler_);
 	}
+
+	/**
+	 * @param submit
+	 */
+	public void addButton(Button submit) {
+		((ButtonBuild) submit).type(ButtonBuild.Type.SUBMIT);
+		super.add(submit);
+	}
 }
