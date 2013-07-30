@@ -56,7 +56,7 @@ public class GridLayoutIntegrationTest {
 		Component myComponent = new Component() {
 
 			@Override
-			public Content compile() {
+			public Content build() {
 				return new Literal("myContent");
 			}
 

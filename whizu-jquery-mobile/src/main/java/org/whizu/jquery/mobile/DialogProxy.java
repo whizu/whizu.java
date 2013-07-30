@@ -23,59 +23,32 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.html.Html;
-import org.whizu.jquery.Input;
-import org.whizu.value.DateValue;
-import org.whizu.value.Value;
-import org.whizu.widget.Widget;
+import org.whizu.proxy.Proxy;
 
 /**
  * @author Rudy D'hauwe
  */
-class DateField extends Widget implements Input {
+final class DialogProxy extends Proxy<Dialog> implements Dialog {
 
-	private static final Logger log = LoggerFactory.getLogger(DateField.class);
+	DialogProxy(Dialog impl) {
+		super(impl);
+	}
+
+	@Override
+	public final void title(String title) {
+		impl().title(title);
+	}
+
+	@Override
+	protected final Dialog createImpl() {
+		return new DialogImpl();
+	}
 	
-	private Value model_;
+	final class DialogImpl implements Dialog {
 
-	public DateField(String label) {
-		this(new DateValue(label));
-	}
-	
-	public DateField(Value model) {
-		model_ = model;
-		model_.addPropertyChangeListener(new PropertyChangeListener() {
-			
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				jQuery(DateField.this).val(""+model_.get());
-			}
-		});
-	}
-
-	@Override
-	public Content build() {
-		Element input = Html.input(this).attr("type", "date").attr("name", id()).attr("value", "");
-		Element label = Html.tag("label").attr("for", input.id()).add(model_.name());
-		getSession().addInput(this);
-		return input.after(label);
-	}
-
-	@Override
-	public void parseString(String value) {
-		log.debug("Incoming request value {}", value);
-		model_.set(value);
-	}
-
-	@Override
-	public void clear() {
-		model_.clear();
+		@Override
+		public final void title(String title) {
+			System.out.println("set title dynamically " + title);
+		}
 	}
 }

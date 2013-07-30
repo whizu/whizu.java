@@ -64,6 +64,10 @@ public abstract class Widget implements Component, Decorator {
 		id_ = id;
 	}
 
+	public final void id(String id) {
+		id_ = id;
+	}
+	
 	@Override
 	public Component css(String clazz) {
 		cssList.add(clazz);
@@ -126,7 +130,7 @@ public abstract class Widget implements Component, Decorator {
 			if (isRendered()) {
 				throw new IllegalStateException("This component is already rendered: " + this);
 			}
-			Content markup = compile();
+			Content markup = build();
 			if (markup == null) {
 				return "";
 			} else if (markup.equals(this)) { // TODO unnecessary code?

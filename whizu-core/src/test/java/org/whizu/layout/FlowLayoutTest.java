@@ -33,7 +33,7 @@ import org.whizu.widget.Container;
 public class FlowLayoutTest extends AbstractTest {
 
 	/**
-	 * Test method for {@link org.whizu.layout.FlowLayout#compile()}.
+	 * Test method for {@link org.whizu.layout.FlowLayout#build()}.
 	 */
 	@Test
 	public void testCompile() {

@@ -24,25 +24,25 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.jquery.ClickListener;
-import org.whizu.jquery.mobile.Button.Type;
+import org.whizu.jquery.mobile.ButtonBuild.Type;
 import org.whizu.util.Builder;
 
 /**
  * @author Rudy D'hauwe
  */
-public class ButtonBuilder implements Builder<Button> {
+public class ButtonBuilder implements Builder<ButtonBuild> {
 
 	public static ButtonBuilder createWithTitle(String title) {
 		return new ButtonBuilder(title);
 	}
 
-	private Button build_;
+	private ButtonBuild build_;
 
 	public ButtonBuilder(String title) {
-		build_ = new Button(title);
+		build_ = new ButtonBuild(title);
 	}
 
-	public Button build() {
+	public ButtonBuild build() {
 		return build_;
 	}
 

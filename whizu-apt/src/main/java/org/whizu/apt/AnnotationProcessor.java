@@ -93,11 +93,11 @@ public final class AnnotationProcessor extends AbstractProcessor {
 
 	@Override
 	public void init(final ProcessingEnvironment procEnv) {
-		messager_.printMessage(Kind.NOTE, "AptProcessor.init()");
 		super.init(procEnv);
 		elementUtils_ = procEnv.getElementUtils();
 		filer_ = procEnv.getFiler();
 		messager_ = procEnv.getMessager();
+		messager_.printMessage(Kind.NOTE, "AptProcessor.init()");
 		processor_ = new Markdown4jProcessor();
 		properties_ = readProperties();
 	}

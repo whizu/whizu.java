@@ -53,8 +53,8 @@ public class Form extends Container {
 		throw new UnsupportedOperationException();
 	}
 
-	public Button addButton(String title) {
-		Button button = new Button(title);
+	public ButtonBuild addButton(String title) {
+		ButtonBuild button = new ButtonBuild(title);
 		add(button);
 		return button;
 	}
@@ -150,7 +150,7 @@ public class Form extends Container {
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		// @formatter:off
 		Content markup = Html.form(this)
 			.attr("method", "post")

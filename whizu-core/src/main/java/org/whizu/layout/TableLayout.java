@@ -73,7 +73,7 @@ class TableLayout extends Widget {
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		// isRendered = true;
 		jQuery(this).closest("div").trigger("create");
 

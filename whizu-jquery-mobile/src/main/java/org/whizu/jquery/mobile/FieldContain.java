@@ -33,7 +33,7 @@ import org.whizu.widget.Container;
 public class FieldContain extends Container {
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		Content markup = Html.div(this).attr("data-role", "fieldcontain").add(componentList);
 		return markup;
 	}

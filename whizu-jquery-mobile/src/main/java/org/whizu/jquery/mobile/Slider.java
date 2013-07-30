@@ -56,7 +56,7 @@ public class Slider extends Widget {
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		// @formatter:off
 		Element field = Html.input(this)
 				.attr("type", "range")

@@ -32,7 +32,9 @@ import org.whizu.dom.Element;
 enum DataPosition implements Decorator {
 
 	// @formatter:off
-	FIXED("fixed");
+	FIXED("fixed"),
+	LEFT("left"),
+	RIGHT("right");
 	// @formatter:on
 
 	private static final String ATTRIBUTE_NAME = "data-position";

@@ -50,7 +50,7 @@ public class GridLayoutTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.layout.GridLayout#compile()}.
+	 * Test method for {@link org.whizu.layout.GridLayout#build()}.
 	 */
 	@Test
 	public void testCompile() {

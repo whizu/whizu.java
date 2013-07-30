@@ -68,7 +68,7 @@ public class GridLayout extends Widget implements Layout {
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		return grid_;
 	}
 

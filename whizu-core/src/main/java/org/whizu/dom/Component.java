@@ -26,14 +26,15 @@ package org.whizu.dom;
 /**
  * @author Rudy D'hauwe
  */
-//rename to ContentBuilder ?
-public interface Component extends Content, Identity {
+//Component extends ContentBuilder, Content, Identity ? 
+//Rename to ContentBuilder extends Builder<Content>, Content, Identity ?
+public interface Component extends ContentBuilder, Content, Identity {
 
 	/**
 	 * Initial creation and rendering of this component by compiling it into a
 	 * combination of static HTML markup and dynamic javascript.
 	 */
-	public Content compile(); //ContentBuilder.build()
+	//public Content build(); //public Content build();
 
 	public Component css(String clazz);
 

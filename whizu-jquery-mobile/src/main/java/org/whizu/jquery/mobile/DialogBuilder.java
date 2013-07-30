@@ -23,26 +23,54 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.util.Builder;
+import org.whizu.dom.Content;
+import org.whizu.html.Html;
+import org.whizu.proxy.ProxyBuilder;
+import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-public class DialogBuilder extends PageBuilder implements Builder<Dialog> {
+public final class DialogBuilder extends ProxyBuilder<Dialog, DialogBuilder.Build> {
 
 	public static DialogBuilder createWithId(String id) {
 		return new DialogBuilder(id);
 	}
 
-	// private Dialog build_;
-
-	protected DialogBuilder(String id) {
-		super(id);
+	private DialogBuilder(String id) {
+		build_.id(id);
 	}
 
 	@Override
-	public Dialog build() {
-		return new Dialog() {
-		};
+	protected Build createPrototype() {
+		return new Build();
+	}
+
+	@Override
+	protected Dialog createProxy(Build build) {
+		return new DialogProxy(build);
+	}
+
+    public DialogBuilder title(String title) {
+		build_.title(title);
+		return this;
+	}
+    
+	/***************************************************************************
+     * The prototype <code>Dialog</code> that is being built.
+	 */
+	final class Build extends Widget implements Dialog {
+
+		private String title_;
+
+		@Override
+		public Content build() {
+			return Html.div(this).add(Html.h1(title_));
+		}
+
+		@Override
+		public void title(String title) {
+			title_ = title;
+		}
 	}
 }

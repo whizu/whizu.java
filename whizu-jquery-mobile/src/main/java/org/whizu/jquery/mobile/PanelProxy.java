@@ -23,59 +23,64 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.html.Html;
-import org.whizu.jquery.Input;
-import org.whizu.value.DateValue;
-import org.whizu.value.Value;
-import org.whizu.widget.Widget;
+import org.whizu.dom.Identity;
+import org.whizu.jquery.JQuery;
+import org.whizu.jquery.RequestContext;
+import org.whizu.proxy.Proxy;
 
 /**
  * @author Rudy D'hauwe
  */
-class DateField extends Widget implements Input {
+final class PanelProxy extends Proxy<Panel> implements Panel {
 
-	private static final Logger log = LoggerFactory.getLogger(DateField.class);
+	PanelProxy(Panel impl) {
+		super(impl);
+	}
+
+	@Override
+	public void add(Content content) {
+		impl().add(content);
+	}
 	
-	private Value model_;
+	@Override
+	protected final Panel createImpl() {
+		return new PanelImpl(id());
+	}
 
-	public DateField(String label) {
-		this(new DateValue(label));
+	@Override
+	public String id() {
+		return impl().id();
 	}
 	
-	public DateField(Value model) {
-		model_ = model;
-		model_.addPropertyChangeListener(new PropertyChangeListener() {
-			
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				jQuery(DateField.this).val(""+model_.get());
-			}
-		});
-	}
+	/***************************************************************************
+     * The target <code>Panel</code> that has been rendered.
+	 */
+	final class PanelImpl implements Panel {
 
-	@Override
-	public Content build() {
-		Element input = Html.input(this).attr("type", "date").attr("name", id()).attr("value", "");
-		Element label = Html.tag("label").attr("for", input.id()).add(model_.name());
-		getSession().addInput(this);
-		return input.after(label);
-	}
+		private String id_;
+		
+		private PanelImpl(String id) {
+			id_ = id;
+		}
 
-	@Override
-	public void parseString(String value) {
-		log.debug("Incoming request value {}", value);
-		model_.set(value);
-	}
+		@Override
+		public void add(Content content) {
+			jQuery(this).append(content);
+			updateLayout();
+		}
 
-	@Override
-	public void clear() {
-		model_.clear();
+		@Override
+		public String id() {
+			return id_;
+		}
+
+		private JQuery jQuery(Identity identity) {
+			return RequestContext.getRequest().select(identity);
+		}
+
+		private void updateLayout() {
+			jQuery(this).trigger("updatelayout");
+		}
 	}
 }

@@ -28,4 +28,5 @@ package org.whizu.jquery.mobile;
  */
 public interface Dialog {
 
+	public void title(String title);
 }

@@ -48,7 +48,7 @@ public class Footer extends Widget {
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		//jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate");
 		return Html.div(this).decorate(DataRole.FOOTER, theme_).add(title_);
 	}

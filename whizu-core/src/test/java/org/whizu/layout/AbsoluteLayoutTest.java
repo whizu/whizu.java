@@ -34,7 +34,7 @@ import org.whizu.widget.Container;
 public class AbsoluteLayoutTest extends AbstractTest {
 
 	/**
-	 * Test method for {@link org.whizu.layout.AbsoluteLayout#compile()}.
+	 * Test method for {@link org.whizu.layout.AbsoluteLayout#build()}.
 	 */
 	@Test
 	public void testCompile() {

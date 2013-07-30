@@ -23,9 +23,13 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Content;
+import org.whizu.dom.Identity;
+
 /**
  * @author Rudy D'hauwe
  */
-public class Panel {
+public interface Panel extends Identity {
 
+	public void add(Content content);
 }

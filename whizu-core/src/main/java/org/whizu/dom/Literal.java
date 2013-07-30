@@ -36,11 +36,6 @@ public class Literal implements Content {
 	}
 
 	@Override
-	public Content css(String itemClass) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public String render() {
 		return text_;
 	}

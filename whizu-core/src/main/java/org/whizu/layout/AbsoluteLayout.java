@@ -28,7 +28,7 @@ import org.whizu.dom.Content;
 public class AbsoluteLayout extends LayoutBuilder<AbsoluteLayout> {
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		return create("absolute-layout", "absolute-layout-element");
 	}
 }

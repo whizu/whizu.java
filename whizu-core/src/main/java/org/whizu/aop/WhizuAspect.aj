@@ -31,6 +31,7 @@ import org.whizu.annotation.Css;
 import org.whizu.annotation.Style;
 import org.whizu.dom.Component;
 import org.whizu.dom.Content;
+import org.whizu.dom.Element;
 
 /**
  * @author Rudy D'hauwe
@@ -58,7 +59,7 @@ public aspect WhizuAspect {
 		MethodSignature signature = (MethodSignature) thisJoinPointStaticPart.getSignature();
 		Method method = signature.getMethod();
 		Css annotation = method.getAnnotation(Css.class);
-		Content content = (Content) result;
+		Element content = (Element) result;
 		content.css(annotation.value()[0]);
 		System.out.println("@Css(" + annotation.value() + ")");
 	}

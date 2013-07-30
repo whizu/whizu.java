@@ -46,7 +46,7 @@ public class ListItem extends Container {
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		Content markup = Html.li(this).decorate(this).add(componentList);
 		return markup;
 	}

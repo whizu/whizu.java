@@ -66,7 +66,7 @@ class PageBuilder extends Widget implements Page {
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		content_ = Html.div().decorate(DataRole.CONTENT);
 		Element element = Html.div(this).decorate(DataRole.PAGE, this).add(header_, content_, footer_);
 		return element;

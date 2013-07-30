@@ -31,7 +31,7 @@ import org.whizu.dom.Content;
 public class HorizontalLayout extends LayoutBuilder<HorizontalLayout> {
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		return super.create("horizontal-layout", "horizontal-layout-element");
 	}
 }

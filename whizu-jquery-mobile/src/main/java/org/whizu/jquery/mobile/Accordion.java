@@ -47,7 +47,7 @@ public class Accordion extends Widget {
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		return Html.div(this).attr("data-role", "collapsible-set").decorate(theme);
 	}
 }

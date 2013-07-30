@@ -31,7 +31,7 @@ import org.whizu.dom.Content;
 public class FlowLayout extends LayoutBuilder<FlowLayout> implements Layout {
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		return create("flow-layout", "flow-layout-element");
 	}
 }

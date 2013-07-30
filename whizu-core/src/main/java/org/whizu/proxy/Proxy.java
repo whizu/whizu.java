@@ -21,61 +21,33 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.proxy;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.html.Html;
-import org.whizu.jquery.Input;
-import org.whizu.value.DateValue;
-import org.whizu.value.Value;
-import org.whizu.widget.Widget;
+import org.whizu.util.Objects;
 
 /**
  * @author Rudy D'hauwe
  */
-class DateField extends Widget implements Input {
+public abstract class Proxy<T> implements Content {
 
-	private static final Logger log = LoggerFactory.getLogger(DateField.class);
+	private T target_;
 	
-	private Value model_;
+	protected Proxy(T target) {
+		target_ = target;
+	}
 
-	public DateField(String label) {
-		this(new DateValue(label));
+	protected abstract T createImpl();
+
+	@Override
+	public final String render() {
+		Content target = Objects.cast(target_);
+		String content = target.render();
+		target_ = createImpl();
+		return content;
 	}
 	
-	public DateField(Value model) {
-		model_ = model;
-		model_.addPropertyChangeListener(new PropertyChangeListener() {
-			
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				jQuery(DateField.this).val(""+model_.get());
-			}
-		});
-	}
-
-	@Override
-	public Content build() {
-		Element input = Html.input(this).attr("type", "date").attr("name", id()).attr("value", "");
-		Element label = Html.tag("label").attr("for", input.id()).add(model_.name());
-		getSession().addInput(this);
-		return input.after(label);
-	}
-
-	@Override
-	public void parseString(String value) {
-		log.debug("Incoming request value {}", value);
-		model_.set(value);
-	}
-
-	@Override
-	public void clear() {
-		model_.clear();
+	protected final T impl() {
+		return target_;
 	}
 }

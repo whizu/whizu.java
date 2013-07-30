@@ -54,8 +54,8 @@ public final class Jqm {
 		return new Header(caption);
 	}
 
-	public static Button createHyperlink(String caption, Page target) {
-		return new Button(caption).onClick(target);
+	public static ButtonBuild createHyperlink(String caption, Page target) {
+		return new ButtonBuild(caption).onClick(target);
 	}
 
 	public static Document document() {

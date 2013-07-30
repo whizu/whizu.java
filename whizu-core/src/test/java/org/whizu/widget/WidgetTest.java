@@ -46,7 +46,7 @@ public class WidgetTest extends AbstractTest {
 		Widget widget = new Widget() {
 
 			@Override
-			public Content compile() {
+			public Content build() {
 				throw new UnsupportedOperationException();
 			}
 		};
@@ -234,7 +234,7 @@ public class WidgetTest extends AbstractTest {
 		Widget widget = new TestWidget();
 		widget.css("myClass");
 		widget.width("120px");
-		Content markup = widget.compile();
+		Content markup = widget.build();
 		assertEquals(false, widget.isRendered());
 		assertEquals("<div id='c0' style='width:120px;' class='myClass '></div>", markup.render());
 		assertEquals(false, widget.isRendered());

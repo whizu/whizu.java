@@ -57,11 +57,6 @@ public class ContentList implements Content {
 	}
 
 	@Override
-	public Content css(String itemClass) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public String render() {
 		String markup = "";
 		for (Content element : contentList_) {

@@ -40,7 +40,7 @@ public class FlipSwitch extends Widget {
 	private Mini mini;
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		// @formatter:off
 		Element field = Html.select(this)
 				.attr("data-role", "slider")

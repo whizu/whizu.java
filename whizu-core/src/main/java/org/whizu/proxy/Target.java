@@ -21,61 +21,20 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.proxy;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.html.Html;
-import org.whizu.jquery.Input;
-import org.whizu.value.DateValue;
-import org.whizu.value.Value;
-import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
  */
-class DateField extends Widget implements Input {
+public class Target implements Content {
 
-	private static final Logger log = LoggerFactory.getLogger(DateField.class);
-	
-	private Value model_;
-
-	public DateField(String label) {
-		this(new DateValue(label));
-	}
-	
-	public DateField(Value model) {
-		model_ = model;
-		model_.addPropertyChangeListener(new PropertyChangeListener() {
-			
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				jQuery(DateField.this).val(""+model_.get());
-			}
-		});
-	}
-
+	/**
+	 * @throws IllegalStateException because this component is already rendered
+	 */
 	@Override
-	public Content build() {
-		Element input = Html.input(this).attr("type", "date").attr("name", id()).attr("value", "");
-		Element label = Html.tag("label").attr("for", input.id()).add(model_.name());
-		getSession().addInput(this);
-		return input.after(label);
-	}
-
-	@Override
-	public void parseString(String value) {
-		log.debug("Incoming request value {}", value);
-		model_.set(value);
-	}
-
-	@Override
-	public void clear() {
-		model_.clear();
+	public final String render() {
+		throw new IllegalStateException("This component is already rendered");
 	}
 }

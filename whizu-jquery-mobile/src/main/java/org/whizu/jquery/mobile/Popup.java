@@ -56,7 +56,7 @@ public class Popup extends Container {
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		// @formatter:off
 		Element popup = Html.div(this)
 						 .decorate(DataRole.POPUP)

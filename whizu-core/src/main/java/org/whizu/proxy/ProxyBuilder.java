@@ -21,17 +21,35 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.layout;
+package org.whizu.proxy;
 
-import org.whizu.dom.Content;
+import org.whizu.util.Builder;
 
 /**
  * @author Rudy D'hauwe
  */
-public class VerticalLayout extends LayoutBuilder<VerticalLayout> {
+public abstract class ProxyBuilder<T, Prototype extends T> implements Builder<T> {
+
+	protected final Prototype build_;
+	
+	private boolean isBuilt_ = false;
+	
+	protected ProxyBuilder() {
+		build_ = createPrototype();
+	}
 	
 	@Override
-	public Content build() {
-		return super.create("vertical-layout", "vertical-layout-element");
+	public final T build() {
+		if (isBuilt_) {
+			throw new IllegalStateException("Already built");
+		}
+		
+		T proxy = createProxy(build_);
+		isBuilt_ = true;
+		return proxy;
 	}
+
+	protected abstract Prototype createPrototype();
+	
+	protected abstract T createProxy(Prototype build);	
 }

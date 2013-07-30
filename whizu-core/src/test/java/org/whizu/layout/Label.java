@@ -88,7 +88,7 @@ public class Label extends Widget {
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		String script = "";
 		// JQuery jQuery = jQuery(this); //Don't do this, this generates a
 		// jQuery selection of this without any function on it

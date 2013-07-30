@@ -32,7 +32,4 @@ public interface Content {
 	 * Generates and returns the corresponding HTML markup.
 	 */
 	public String render();
-
-	@Deprecated
-	public Content css(String itemClass);
 }

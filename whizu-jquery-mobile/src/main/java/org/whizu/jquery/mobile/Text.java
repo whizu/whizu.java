@@ -61,7 +61,7 @@ public class Text extends Widget implements Input {
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		Element input = Html.input(this).attr("type", "text").attr("name", id()).attr("value", "");
 		Element label = Html.tag("label").attr("for", input.id()).add(model_.name());
 		getSession().addInput(this);

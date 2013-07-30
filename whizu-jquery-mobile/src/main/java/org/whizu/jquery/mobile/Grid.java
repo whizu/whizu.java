@@ -84,7 +84,7 @@ public class Grid extends Widget {
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		Element grid = Html.div(this).css(type.value);
 		return grid;
 	}

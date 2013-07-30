@@ -50,7 +50,7 @@ public class ContainerTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.widget.Container#compile()}.
+	 * Test method for {@link org.whizu.widget.Container#build()}.
 	 */
 	@Test
 	public void testCompile() {

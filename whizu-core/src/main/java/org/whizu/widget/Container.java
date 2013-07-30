@@ -80,7 +80,7 @@ public class Container extends Widget implements Composite {
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		return Html.div(this).decorate(this).add(componentList);
 	}
 

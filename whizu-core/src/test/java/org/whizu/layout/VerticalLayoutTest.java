@@ -33,7 +33,7 @@ import org.whizu.widget.Container;
 public class VerticalLayoutTest extends AbstractTest {
 
 	/**
-	 * Test method for {@link org.whizu.layout.VerticalLayout#compile()}.
+	 * Test method for {@link org.whizu.layout.VerticalLayout#build()}.
 	 */
 	@Test
 	public void testCompile() {

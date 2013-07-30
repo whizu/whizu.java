@@ -44,7 +44,7 @@ public class Header extends Widget {
 	
 	private static final String RIGHT = "ui-btn-right";
 
-	private List<Button> buttonList_ = new ArrayList<Button>();
+	private List<ButtonBuild> buttonList_ = new ArrayList<ButtonBuild>();
 
 	private DataFullscreen fullscreen_;
 
@@ -78,7 +78,7 @@ public class Header extends Widget {
 	/**
 	 * Adds a button to the right side of the header.
 	 */
-	public Header addButton(Button button) {
+	public Header addButton(ButtonBuild button) {
 		buttonList_.add(button);
 		return this;
 	}
@@ -86,7 +86,7 @@ public class Header extends Widget {
 	/**
 	 * Adds a button to the left side of the header.
 	 */
-	public Header addButtonLeft(Button button) {
+	public Header addButtonLeft(ButtonBuild button) {
 		button.css(LEFT);
 		return addButton(button);
 	}
@@ -94,13 +94,13 @@ public class Header extends Widget {
 	/**
 	 * Adds a button to the right side of the header.
 	 */
-	public Header addButtonRight(Button button) {
+	public Header addButtonRight(ButtonBuild button) {
 		button.css(RIGHT);
 		return addButton(button);
 	}
 
 	@Override
-	public Content compile() {
+	public Content build() {
 		//jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate"); //necessary?
 		return Html.div(this).decorate(DataRole.HEADER, theme_, position_, fullscreen_).add(title_).add(buttonList_);
 	}
