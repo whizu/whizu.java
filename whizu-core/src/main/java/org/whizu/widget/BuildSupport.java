@@ -28,7 +28,7 @@ import org.whizu.dom.ContentBuilder;
 import org.whizu.dom.Decorator;
 import org.whizu.dom.Element;
 import org.whizu.dom.Identity;
-import org.whizu.dom.Style;
+import org.whizu.dom.Stylable;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
@@ -37,7 +37,7 @@ import org.whizu.jquery.Session;
 /**
  * @author Rudy D'hauwe
  */
-public abstract class BuildSupport implements ContentBuilder, Style, Decorator {
+public abstract class BuildSupport implements ContentBuilder, Stylable, Decorator {
 
 	private String id_;
 

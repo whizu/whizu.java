@@ -77,4 +77,10 @@ public class Popup extends Container {
 	public void theme(Theme theme) {
 		theme_ = theme;
 	}
+	
+	public void close() {
+		if (isRendered()) {
+			jQuery(this).call("popup", "close");
+		}
+	}
 }

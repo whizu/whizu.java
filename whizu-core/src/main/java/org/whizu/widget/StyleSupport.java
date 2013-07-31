@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.whizu.dom.Decorator;
 import org.whizu.dom.Element;
-import org.whizu.dom.Style;
+import org.whizu.dom.Stylable;
 
-public class StyleSupport implements Style, Decorator {
+public class StyleSupport implements Stylable, Decorator {
 
 	private List<String> cssClassList_ = new ArrayList<String>();
 	

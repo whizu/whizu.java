@@ -1,6 +1,6 @@
 package org.whizu.dom;
 
-public interface Style {
+public interface Stylable {
 
 	public void css(String className);
 }

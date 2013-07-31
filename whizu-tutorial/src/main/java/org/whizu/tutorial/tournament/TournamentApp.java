@@ -51,14 +51,18 @@ public class TournamentApp implements JQueryMobile {
 	// private final ValueList<Player> playerList = new ValueList<Player>(Player.class);
 	private final ListView playerList = new ListView();
 
+	private Popup popup;
+
 	@Override
 	public void onLoad(Page page) {
 		// @formatter:off
+		popup = addPlayerEvent();
+		
 		HeaderBuilder.create()
 			.title("Tournament")
 			.button("Add player")
 			    .theme(Theme.E)
-			    .onClickOpen(addPlayerEvent())
+			    .onClickOpen(popup)
 				.build()
 			.build()
 			.on(page);
@@ -98,6 +102,7 @@ public class TournamentApp implements JQueryMobile {
 		item.p(player.birthdate);
 		playerList.addItem(item);
 		player.name.clear();
+		popup.close();
 	}
 
 	/**
