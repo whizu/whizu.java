@@ -51,7 +51,6 @@ final class PopupProxy extends Proxy<Popup> implements Popup {
 	
 	@Override
 	protected Popup createImpl() {
-		System.out.println("creating the target impl");
 		return new PopupImpl(id());
 	}
 
