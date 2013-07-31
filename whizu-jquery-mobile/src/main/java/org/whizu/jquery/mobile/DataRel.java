@@ -34,6 +34,7 @@ public enum DataRel implements Decorator {
 	// @formatter:off
 	CLOSE("close"),
 	DIALOG("dialog"),
+	PANEL("panel"),
 	POPUP("popup");
 	// @formatter:on
 

@@ -12,17 +12,17 @@ public class HeaderButtonBuilder<B extends Builder<?>> {
 
 	private ButtonBuilder builder_;
 
-	private Sink<ButtonBuild, B> sink_;
+	private Sink<Button, B> sink_;
 
-	public HeaderButtonBuilder(String title, Sink<ButtonBuild, B> sink) {
-		builder_ = ButtonBuild.builder(title);
-		builder_.type(ButtonBuild.Type.ANCHOR);
+	public HeaderButtonBuilder(String title, Sink<Button, B> sink) {
+		builder_ = ButtonBuilder.createWithTitle(title);
+		builder_.type(ButtonType.ANCHOR);
 		sink_ = sink;
 	}
 
 	public B build() {
-		ButtonBuild button = builder_.build();
-		button.mini = Mini.TRUE;
+		Button button = builder_.mini().build();
+		//button.mini = Mini.TRUE;
 		return sink_.done(button);
 	}
 

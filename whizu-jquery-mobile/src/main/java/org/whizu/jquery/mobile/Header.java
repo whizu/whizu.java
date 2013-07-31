@@ -44,7 +44,7 @@ public class Header extends Widget {
 	
 	private static final String RIGHT = "ui-btn-right";
 
-	private List<ButtonBuild> buttonList_ = new ArrayList<ButtonBuild>();
+	private List<Button> buttonList_ = new ArrayList<Button>();
 
 	private DataFullscreen fullscreen_;
 
@@ -78,7 +78,7 @@ public class Header extends Widget {
 	/**
 	 * Adds a button to the right side of the header.
 	 */
-	public Header addButton(ButtonBuild button) {
+	public Header addButton(Button button) {
 		buttonList_.add(button);
 		return this;
 	}
@@ -86,7 +86,7 @@ public class Header extends Widget {
 	/**
 	 * Adds a button to the left side of the header.
 	 */
-	public Header addButtonLeft(ButtonBuild button) {
+	public Header addButtonLeft(Button button) {
 		button.css(LEFT);
 		return addButton(button);
 	}
@@ -94,7 +94,7 @@ public class Header extends Widget {
 	/**
 	 * Adds a button to the right side of the header.
 	 */
-	public Header addButtonRight(ButtonBuild button) {
+	public Header addButtonRight(Button button) {
 		button.css(RIGHT);
 		return addButton(button);
 	}

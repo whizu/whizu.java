@@ -83,7 +83,7 @@ public class Label extends Widget {
 
 	public Label addClickListener(ClickListener listener) {
 		this.listener = new ClickListenerImpl(listener);
-		getSession().addClickListener(this.listener);
+		session().addClickListener(this.listener);
 		return this;
 	}
 

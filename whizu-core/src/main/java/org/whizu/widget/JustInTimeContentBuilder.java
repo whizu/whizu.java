@@ -21,45 +21,50 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.proxy;
+package org.whizu.widget;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.ContentBuilder;
+import org.whizu.dom.Identity;
 import org.whizu.jquery.JQuery;
-import org.whizu.util.Objects;
+import org.whizu.jquery.Request;
+import org.whizu.jquery.RequestContext;
+import org.whizu.jquery.Session;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class Proxy<T> implements Content {
+abstract class JustInTimeContentBuilder implements ContentBuilder /* , Decorator */{
 
-	private T impl_;
-
-	protected Proxy(T impl) {
-		assert(impl instanceof ContentBuilder);
-		impl_ = impl;
+	protected final JQuery jQuery() {
+		return request().select("$");
 	}
 
-	public final void assureExistsOnPage(JQuery page) {
-		if (impl_ instanceof ContentBuilder) {
-			String create = render();
-			page.append(create);
-		}
+	protected final JQuery jQuery(Identity... components) {
+		return request().select(components);
 	}
 
-	protected abstract T createImpl();
+	protected final JQuery jQuery(String selector) {
+		return request().select(selector);
+	}
 
-	@Override
+	protected final Request request() {
+		return RequestContext.getRequest();
+	}
+
+	protected final Session session() {
+		return request().session();
+	}
+
+	public final Content buildJustInTime() {
+		return new BuildOnDemand(this);
+	}
+	
+	/**
+	 * @throws UnsupportedOperationException
+	 */
 	public final String render() {
-		ContentBuilder builder = Objects.cast(impl_);
-		Content content = builder.build();
-		String markup = content.render();
-		impl_ = createImpl();
-		return markup;
-	}
-
-	//TODO make protected? see usage in Form.
-	public final T impl() {
-		return impl_;
+		throw new UnsupportedOperationException("Rendering of builders is explicitely denied in the architecture");
+		//return build().render();
 	}
 }

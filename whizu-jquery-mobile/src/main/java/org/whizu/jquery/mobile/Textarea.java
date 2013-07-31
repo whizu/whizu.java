@@ -64,7 +64,7 @@ public class Textarea extends Widget implements Input {
 	public Content build() {
 		Element field = Html.textarea(this).attr("name", id());
 		Element label = Html.tag("label").attr("for", field.id()).add(model_.name());
-		getSession().addInput(this);
+		session().addInput(this);
 		return field.after(label);
 	}
 

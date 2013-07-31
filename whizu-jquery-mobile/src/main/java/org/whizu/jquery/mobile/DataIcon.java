@@ -21,45 +21,49 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.proxy;
+package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentBuilder;
-import org.whizu.jquery.JQuery;
-import org.whizu.util.Objects;
+import org.whizu.dom.Decorator;
+import org.whizu.dom.Element;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class Proxy<T> implements Content {
+public enum DataIcon implements Decorator {
 
-	private T impl_;
+	// @formatter:off
+	ALERT("alert"), 
+	BACK("back"), 
+	BARS("bars"), 
+	CHECK("check"), 
+	DELETE("delete"), 
+	DOWN_ARROW("arrow-d"), 
+	EDIT("edit"), 
+	FORWARD("forward"), 
+	GEAR("gear"), 
+	GRID("grid"), 
+	HOME("home"), 
+	INFO("info"), 
+	LEFT_ARROW("arrow-l"), 
+	MINUS("minus"), 
+	PLUS("plus"), 
+	REFRESH("refresh"), 
+	RIGHT_ARROW("arrow-r"), 
+	SEARCH("search"), 
+	STAR("star"), 
+	UP_ARROW("arrow-u");
+	// @formatter:on
 
-	protected Proxy(T impl) {
-		assert(impl instanceof ContentBuilder);
-		impl_ = impl;
+	private static final String ATTRIBUTE_NAME = "data-icon";
+
+	private String value;
+
+	private DataIcon(String value) {
+		this.value = value;
 	}
-
-	public final void assureExistsOnPage(JQuery page) {
-		if (impl_ instanceof ContentBuilder) {
-			String create = render();
-			page.append(create);
-		}
-	}
-
-	protected abstract T createImpl();
 
 	@Override
-	public final String render() {
-		ContentBuilder builder = Objects.cast(impl_);
-		Content content = builder.build();
-		String markup = content.render();
-		impl_ = createImpl();
-		return markup;
-	}
-
-	//TODO make protected? see usage in Form.
-	public final T impl() {
-		return impl_;
+	public void decorate(Element element) {
+		element.attr(ATTRIBUTE_NAME, value);
 	}
 }

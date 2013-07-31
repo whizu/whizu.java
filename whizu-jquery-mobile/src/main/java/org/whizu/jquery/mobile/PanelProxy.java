@@ -42,16 +42,9 @@ final class PanelProxy extends Proxy<Panel> implements Panel {
 	public void add(Content content) {
 		impl().add(content);
 	}
-	
-	protected void assureCreatedOn(JQuery page) {
-		if (!(impl() instanceof PanelImpl)) {
-			String create = render();
-			page.append(create);
-		}
-	}
 
 	@Override
-	protected final Panel createImpl() {
+	protected Panel createImpl() {
 		return new PanelImpl(id());
 	}
 

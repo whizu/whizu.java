@@ -29,6 +29,7 @@ import org.whizu.dom.Element;
 import org.whizu.dom.Foreach;
 import org.whizu.html.Html;
 import org.whizu.widget.Container;
+import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
@@ -53,8 +54,8 @@ class LayoutBuilder<T extends LayoutBuilder<T>> extends Container implements Lay
 				if (item instanceof Element) {
 					return ((Element) item).css(itemClass);
 				}
-				if (item instanceof Component) {
-					return ((Component) item).css(itemClass);
+				if (item instanceof Widget) {
+					return ((Widget) item).css(itemClass);
 				}
 				//TODO do nothing or throw exception/warning ?
 				return item;

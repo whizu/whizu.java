@@ -166,4 +166,9 @@ public interface Element extends Content, Identity { //extends Component?
 	 * @return this
 	 */
 	public void style(String style);
+
+	/**
+	 * @return this;
+	 */
+	public Element href(String href);
 }

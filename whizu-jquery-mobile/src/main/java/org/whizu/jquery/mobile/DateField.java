@@ -64,7 +64,7 @@ class DateField extends Widget implements Input {
 	public Content build() {
 		Element input = Html.input(this).attr("type", "date").attr("name", id()).attr("value", "");
 		Element label = Html.tag("label").attr("for", input.id()).add(model_.name());
-		getSession().addInput(this);
+		session().addInput(this);
 		return input.after(label);
 	}
 

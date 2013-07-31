@@ -102,12 +102,12 @@ public class WidgetTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.widget.Widget#getRequest()}.
+	 * Test method for {@link org.whizu.widget.Widget#request()}.
 	 */
 	@Test
 	public void testGetRequest() {
 		Widget widget = new TestWidget();
-		Request request = widget.getRequest();
+		Request request = widget.request();
 		assertNotNull(request);
 		assertEquals(true, (request instanceof TestRequest));
 	}
@@ -122,12 +122,12 @@ public class WidgetTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.widget.Widget#getSession()}.
+	 * Test method for {@link org.whizu.widget.Widget#session()}.
 	 */
 	@Test
 	public void testGetSession() {
 		Widget widget = new TestWidget();
-		Session session = widget.getSession();
+		Session session = widget.session();
 		assertNotNull(session);
 		assertEquals(true, (session instanceof TestSession));
 	}

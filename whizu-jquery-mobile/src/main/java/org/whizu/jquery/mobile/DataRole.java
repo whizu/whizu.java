@@ -32,6 +32,7 @@ import org.whizu.dom.Element;
 public enum DataRole implements Decorator {
 
 	// @formatter:off
+	BUTTON("button"),
 	COLLAPSIBLE("collapsible"),
 	CONTENT("content"),
 	FOOTER("footer"), 

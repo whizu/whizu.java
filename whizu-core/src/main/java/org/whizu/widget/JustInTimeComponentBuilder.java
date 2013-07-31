@@ -21,45 +21,32 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.proxy;
-
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentBuilder;
-import org.whizu.jquery.JQuery;
-import org.whizu.util.Objects;
+package org.whizu.widget;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class Proxy<T> implements Content {
+abstract class JustInTimeComponentBuilder extends JustInTimeContentBuilder /* , Decorator */{
 
-	private T impl_;
+	private String id_;
 
-	protected Proxy(T impl) {
-		assert(impl instanceof ContentBuilder);
-		impl_ = impl;
+	protected JustInTimeComponentBuilder() {
+		id_ = session().next();
 	}
 
-	public final void assureExistsOnPage(JQuery page) {
-		if (impl_ instanceof ContentBuilder) {
-			String create = render();
-			page.append(create);
-		}
+	protected JustInTimeComponentBuilder(String id) {
+		id_ = id;
 	}
 
-	protected abstract T createImpl();
-
-	@Override
-	public final String render() {
-		ContentBuilder builder = Objects.cast(impl_);
-		Content content = builder.build();
-		String markup = content.render();
-		impl_ = createImpl();
-		return markup;
+	public final String id() {
+		return id_;
 	}
 
-	//TODO make protected? see usage in Form.
-	public final T impl() {
-		return impl_;
+	public final void id(String id) {
+		id_ = id;
+	}
+
+	protected final String selector() {
+		return "$(\"#" + id() + "\")";
 	}
 }

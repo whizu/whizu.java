@@ -21,45 +21,86 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.proxy;
+package org.whizu.widget;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.ContentBuilder;
+import org.whizu.dom.Decorator;
+import org.whizu.dom.Element;
+import org.whizu.dom.Identity;
+import org.whizu.dom.Style;
 import org.whizu.jquery.JQuery;
-import org.whizu.util.Objects;
+import org.whizu.jquery.Request;
+import org.whizu.jquery.RequestContext;
+import org.whizu.jquery.Session;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class Proxy<T> implements Content {
+public abstract class BuildSupport implements ContentBuilder, Style, Decorator {
 
-	private T impl_;
+	private String id_;
 
-	protected Proxy(T impl) {
-		assert(impl instanceof ContentBuilder);
-		impl_ = impl;
+	private StyleSupport style_ = new StyleSupport();
+
+	protected BuildSupport() {
+		id_ = session().next();
 	}
 
-	public final void assureExistsOnPage(JQuery page) {
-		if (impl_ instanceof ContentBuilder) {
-			String create = render();
-			page.append(create);
-		}
+	protected BuildSupport(String id) {
+		id_ = id;
 	}
 
-	protected abstract T createImpl();
+	public final Content buildJustInTime() {
+		return new BuildOnDemand(this);
+	}
 
 	@Override
-	public final String render() {
-		ContentBuilder builder = Objects.cast(impl_);
-		Content content = builder.build();
-		String markup = content.render();
-		impl_ = createImpl();
-		return markup;
+	public void css(String className) {
+		style_.css(className);
 	}
 
-	//TODO make protected? see usage in Form.
-	public final T impl() {
-		return impl_;
+	@Override
+	public final void decorate(Element element) {
+		style_.decorate(element);
+	}
+
+	public final String id() {
+		return id_;
+	}
+
+	public final void id(String id) {
+		id_ = id;
+	}
+
+	protected final JQuery jQuery() {
+		return request().select("$");
+	}
+
+	protected final JQuery jQuery(Identity... components) {
+		return request().select(components);
+	}
+
+	protected final JQuery jQuery(String selector) {
+		return request().select(selector);
+	}
+
+	/**
+	 * @see {@link org.whizu.dom.Content#render()}.
+	 */
+	public final String render() {
+		return build().render();
+	}
+
+	protected final Request request() {
+		return RequestContext.getRequest();
+	}
+
+	protected final String selector() {
+		return "$(\"#" + id() + "\")";
+	}
+
+	protected final Session session() {
+		return request().session();
 	}
 }

@@ -191,8 +191,12 @@ public class Node implements Element {
 	}
 
 	public Element height(String height) {
-		// attr("height", height);
 		return style("height", height);
+	}
+
+	@Override
+	public Element href(String href) {
+		return attr("href", href);
 	}
 
 	@Override

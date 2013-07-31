@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
+import org.whizu.dom.Identity;
 import org.whizu.html.Html;
 import org.whizu.jquery.Input;
 import org.whizu.value.StringValue;
@@ -39,7 +40,7 @@ import org.whizu.widget.Widget;
 /**
  * @author Rudy D'hauwe
  */
-public class Text extends Widget implements Input {
+public class Text extends Widget implements Input, Identity {
 
 	private static final Logger log = LoggerFactory.getLogger(Text.class);
 	
@@ -64,7 +65,7 @@ public class Text extends Widget implements Input {
 	public Content build() {
 		Element input = Html.input(this).attr("type", "text").attr("name", id()).attr("value", "");
 		Element label = Html.tag("label").attr("for", input.id()).add(model_.name());
-		getSession().addInput(this);
+		session().addInput(this);
 		return input.after(label);
 	}
 

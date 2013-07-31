@@ -27,7 +27,7 @@ import org.whizu.dom.Content;
 import org.whizu.dom.ContentList;
 import org.whizu.html.Html;
 import org.whizu.proxy.ProxyBuilder;
-import org.whizu.widget.Widget;
+import org.whizu.widget.BuildSupport;
 
 /**
  * @author Rudy D'hauwe
@@ -157,7 +157,7 @@ public final class PanelBuilder extends ProxyBuilder<Panel, PanelBuilder.Build> 
 	/***************************************************************************
 	 * The <code>Panel</code> that is being built.
 	 */
-	final class Build extends Widget implements Panel {
+	final class Build extends BuildSupport implements Panel {
 
 		private DataAnimate animate_;
 

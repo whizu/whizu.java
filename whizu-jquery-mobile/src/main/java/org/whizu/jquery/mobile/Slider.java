@@ -37,7 +37,7 @@ public class Slider extends Widget {
 
 	private String min;
 	
-	private Mini mini;
+	private DataMini mini;
 
 	private String step;
 
@@ -83,7 +83,7 @@ public class Slider extends Widget {
 		return min;
 	}
 
-	public Mini getMini() {
+	public DataMini getMini() {
 		return mini;
 	}
 
@@ -107,7 +107,7 @@ public class Slider extends Widget {
 		this.min = min;
 	}
 
-	public void setMini(Mini mini) {
+	public void setMini(DataMini mini) {
 		this.mini = mini;
 	}
 

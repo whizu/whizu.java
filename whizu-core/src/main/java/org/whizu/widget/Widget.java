@@ -29,6 +29,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.whizu.dom.Component;
 import org.whizu.dom.Content;
+import org.whizu.dom.ContentBuilder;
 import org.whizu.dom.Decorator;
 import org.whizu.dom.Element;
 import org.whizu.dom.Identity;
@@ -40,7 +41,7 @@ import org.whizu.jquery.Session;
 /**
  * @author Rudy D'hauwe
  */
-public abstract class Widget implements Component, Decorator {
+public abstract class Widget implements ContentBuilder, Component, Decorator {
 
 	protected enum State {
 		NEW, RENDERED
@@ -53,13 +54,13 @@ public abstract class Widget implements Component, Decorator {
 	private List<String> cssList = new ArrayList<String>();
 
 	protected String width = null;
-	
+
 	private StringBuffer style = new StringBuffer();
-	
+
 	protected Widget() {
-		id_ = getSession().next();
+		id_ = session().next();
 	}
-	
+
 	protected Widget(String id) {
 		id_ = id;
 	}
@@ -67,8 +68,7 @@ public abstract class Widget implements Component, Decorator {
 	public final void id(String id) {
 		id_ = id;
 	}
-	
-	@Override
+
 	public Component css(String clazz) {
 		cssList.add(clazz);
 
@@ -78,8 +78,7 @@ public abstract class Widget implements Component, Decorator {
 
 		return this;
 	}
-	
-	@Override
+
 	public void style(String style) {
 		this.style.append(style);
 		if (!StringUtils.endsWith(style, ";")) {
@@ -91,7 +90,7 @@ public abstract class Widget implements Component, Decorator {
 		}
 	}
 
-	protected Request getRequest() {
+	protected Request request() {
 		return RequestContext.getRequest();
 	}
 
@@ -99,8 +98,8 @@ public abstract class Widget implements Component, Decorator {
 		return "$(\"#" + id() + "\")";
 	}
 
-	protected Session getSession() {
-		return getRequest().session();
+	protected Session session() {
+		return request().session();
 	}
 
 	@Override
@@ -113,15 +112,15 @@ public abstract class Widget implements Component, Decorator {
 	}
 
 	protected JQuery jQuery() {
-		return getRequest().select("$");
+		return request().select("$");
 	}
 
 	protected JQuery jQuery(Identity... components) {
-		return getRequest().select(components);
+		return request().select(components);
 	}
 
 	protected JQuery jQuery(String selector) {
-		return getRequest().select(selector);
+		return request().select(selector);
 	}
 
 	@Override
@@ -144,20 +143,14 @@ public abstract class Widget implements Component, Decorator {
 		}
 	}
 
-	@Override
 	public void width(String width) {
-		this.width = width; 
-		
+		this.width = width;
+
 		if (this.isRendered()) {
 			jQuery(this).width(width);
 		}
 	}
 
-//	@Deprecated
-//	public final Script compile(Function function) {
-//		return getRequest().compile(function);
-//	}
-	
 	@Override
 	public void decorate(Element element) {
 		if (isRendered()) {
@@ -166,7 +159,7 @@ public abstract class Widget implements Component, Decorator {
 
 		element.css(cssList).width(width).style(style.toString());
 	}
-	
+
 	protected void init() {
 	}
 }

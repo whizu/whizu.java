@@ -25,6 +25,7 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
+import org.whizu.dom.Identity;
 
 /**
  * The page is the primary unit of interaction in jQuery Mobile and is used to
@@ -37,7 +38,7 @@ import org.whizu.dom.Element;
  * 
  * @author Rudy D'hauwe
  */
-public interface Page {
+public interface Page extends Identity {
 
 	public void addContent(Content content);
 	
@@ -46,8 +47,6 @@ public interface Page {
 	public Footer footer(String title);
 
 	public Header header(String title);
-
-	public String id();
 
 	public Element p(String text);
 }

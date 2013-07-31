@@ -37,7 +37,7 @@ public class FlipSwitch extends Widget {
 	
 //	private Theme track;
 	
-	private Mini mini;
+	private DataMini mini;
 
 	@Override
 	public Content build() {

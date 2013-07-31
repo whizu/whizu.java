@@ -29,7 +29,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.whizu.annotation.Css;
 import org.whizu.annotation.Style;
-import org.whizu.dom.Component;
 import org.whizu.dom.Content;
 import org.whizu.dom.Element;
 
@@ -44,13 +43,13 @@ public aspect WhizuAspect {
 	@Pointcut("execution(@org.whizu.annotation.Css * *.* (..))")
 	public void cssAnnotatedMethods() {}
 	
-	after() returning (Component result) : styleAnnotatedMethods() {
+	after() returning (Content result) : styleAnnotatedMethods() {
 		MethodSignature signature = (MethodSignature) thisJoinPointStaticPart.getSignature();
 		Method method = signature.getMethod();
 		System.out.println("getting method " + method);
 		Style annotation = method.getAnnotation(Style.class);
 		System.out.println("getting style annotation " + annotation);
-		Component content = (Component) result;
+		Element content = (Element) result;
 		content.style(annotation.value()[0]);
 		System.out.println("@Style(" + annotation.value()[0] + ")");
 	}

@@ -29,9 +29,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.whizu.dom.Component;
-import org.whizu.dom.Content;
 import org.whizu.dom.Identity;
-import org.whizu.dom.Literal;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.Function;
 import org.whizu.jquery.Input;
@@ -56,16 +54,6 @@ public class GridLayoutIntegrationTest {
 		Component myComponent = new Component() {
 
 			@Override
-			public Content build() {
-				return new Literal("myContent");
-			}
-
-			@Override
-			public Component css(String clazz) {
-				return this;
-			}
-
-			@Override
 			public String id() {
 				return "myID";
 			}
@@ -73,16 +61,6 @@ public class GridLayoutIntegrationTest {
 			@Override
 			public String render() {
 				return "myComponent";
-			}
-
-			@Override
-			public void width(String width) {
-			}
-
-			@Override
-			public void style(String style) {
-				// TODO Auto-generated method stub
-				
 			}
 		};
 		return myComponent;

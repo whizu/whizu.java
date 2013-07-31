@@ -2,6 +2,7 @@ package org.whizu.jquery.mobile;
 
 import org.junit.Test;
 import org.whizu.proxy.Proxy;
+import org.whizu.util.Objects;
 
 public class DialogBuilderTest extends AbstractJqmTest {
 
@@ -15,7 +16,8 @@ public class DialogBuilderTest extends AbstractJqmTest {
 		//state of dialog must be now be non-rendered
 		
 		//render dialog... how?
-		System.out.println(((Proxy<Dialog>)dialog).render());
+		Proxy<Dialog> proxy = Objects.cast(dialog);
+		System.out.println(proxy.render());
 		
 		dialog.title("qvw");
 		dialog.title("svw");

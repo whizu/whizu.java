@@ -16,16 +16,16 @@ public class HeaderBuilder implements Builder<Header> {
 		return build_;
 	}
 
-	public HeaderBuilder button(ButtonBuild button) {
+	public HeaderBuilder button(Button button) {
 		build_.addButton(button);
 		return this;
 	}
 	
 	public HeaderButtonBuilder<HeaderBuilder> button(String title) {
-		return new HeaderButtonBuilder<HeaderBuilder>(title, new Sink<ButtonBuild, HeaderBuilder>() {
+		return new HeaderButtonBuilder<HeaderBuilder>(title, new Sink<Button, HeaderBuilder>() {
 
 			@Override
-			public HeaderBuilder done(ButtonBuild build) {
+			public HeaderBuilder done(Button build) {
 				build_.addButton(build);
 				return HeaderBuilder.this;
 			}

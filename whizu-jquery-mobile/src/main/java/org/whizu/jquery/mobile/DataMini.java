@@ -21,45 +21,31 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.proxy;
+package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentBuilder;
-import org.whizu.jquery.JQuery;
-import org.whizu.util.Objects;
+import org.whizu.dom.Decorator;
+import org.whizu.dom.Element;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class Proxy<T> implements Content {
+public enum DataMini implements Decorator {
 
-	private T impl_;
+	// @formatter:off
+	TRUE("true"), 
+	FALSE("false");
+	// @formatter:on
 
-	protected Proxy(T impl) {
-		assert(impl instanceof ContentBuilder);
-		impl_ = impl;
+	private static final String ATTRIBUTE_NAME = "data-mini";
+
+	//TODO make private
+	public String value;
+
+	private DataMini(String value) {
+		this.value = value;
 	}
 
-	public final void assureExistsOnPage(JQuery page) {
-		if (impl_ instanceof ContentBuilder) {
-			String create = render();
-			page.append(create);
-		}
-	}
-
-	protected abstract T createImpl();
-
-	@Override
-	public final String render() {
-		ContentBuilder builder = Objects.cast(impl_);
-		Content content = builder.build();
-		String markup = content.render();
-		impl_ = createImpl();
-		return markup;
-	}
-
-	//TODO make protected? see usage in Form.
-	public final T impl() {
-		return impl_;
+	public void decorate(Element element) {
+		element.attr(ATTRIBUTE_NAME, value);
 	}
 }

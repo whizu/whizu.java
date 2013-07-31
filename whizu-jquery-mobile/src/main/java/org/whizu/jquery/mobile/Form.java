@@ -29,6 +29,8 @@ import org.whizu.html.Html;
 import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.ClickListenerImpl;
 import org.whizu.jquery.Input;
+import org.whizu.proxy.Proxy;
+import org.whizu.util.Objects;
 import org.whizu.value.DateValue;
 import org.whizu.value.PasswordValue;
 import org.whizu.value.StringValue;
@@ -53,8 +55,8 @@ public class Form extends Container {
 		throw new UnsupportedOperationException();
 	}
 
-	public ButtonBuild addButton(String title) {
-		ButtonBuild button = new ButtonBuild(title);
+	public Button addButton(String title) {
+		Button button = ButtonBuilder.createWithTitle(title).build();
 		add(button);
 		return button;
 	}
@@ -165,14 +167,16 @@ public class Form extends Container {
 	
 	public void onSubmit(ClickListener handler) {
 		handler_ = new ClickListenerImpl(handler);
-		getSession().addClickListener(handler_);
+		session().addClickListener(handler_);
 	}
 
 	/**
 	 * @param submit
 	 */
 	public void addButton(Button submit) {
-		((ButtonBuild) submit).type(ButtonBuild.Type.SUBMIT);
+		Proxy<Button> proxy = Objects.cast(submit);
+		ButtonBuilder.Build build = Objects.cast(proxy.impl());
+		build.type(ButtonType.SUBMIT);
 		super.add(submit);
 	}
 }
