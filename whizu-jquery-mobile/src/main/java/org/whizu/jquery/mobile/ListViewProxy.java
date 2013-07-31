@@ -25,43 +25,67 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.ContentBuilder;
-import org.whizu.dom.ContentList;
+import org.whizu.dom.Element;
 import org.whizu.html.Html;
-import org.whizu.value.DateValue;
-import org.whizu.value.StringValue;
+import org.whizu.proxy.Proxy;
+import org.whizu.proxy.ProxySupport;
+import org.whizu.widget.BuildOnDemand;
 
 /**
  * @author Rudy D'hauwe
  */
-public class ListItem implements ContentBuilder {
+final class ListViewProxy extends Proxy<ListView> implements ListView {
 
-	private ContentList contents_ = new ContentList();
-	
-	public ListItem() {
-	}
-
-	public ListItem(String title) {
-		contents_.add(Html.h2(title));
-	}
-
-	public ListItem(StringValue title) {
-		this(title.get());
+	protected ListViewProxy(ListView impl) {
+		super(impl);
 	}
 
 	@Override
-	public Content build() {
-		return contents_;
+	public void addItem(Content item) {
+		impl().addItem(item);
 	}
 
-	public void p(String text) {
-		contents_.add(Html.p(text));
+	@Override
+	public void addItem(ContentBuilder builder) {
+		impl().addItem(builder);
 	}
 
-	public void p(StringValue value) {
-		p(value.get());
+	@Override
+	protected ListView createImpl() {
+		return new ListViewImpl(id());
 	}
 
-	public void p(DateValue value) {
-		p("" + value.get());
+	@Override
+	public String id() {
+		return impl().id();
+	}
+	
+	/***************************************************************************
+	 * The target <code>Popup</code> that has been rendered.
+	 */
+	final class ListViewImpl extends ProxySupport implements ListView {
+
+		private String id_;
+
+		public ListViewImpl(String id) {
+			id_ = id;
+		}
+
+		@Override
+		public void addItem(Content item) {
+			Element li = Html.li().add(item);
+			jQuery(this).append(li).call("listview", "refresh");
+		}
+
+		@Override
+		public void addItem(ContentBuilder builder) {
+			Content item = new BuildOnDemand(builder);
+			addItem(item);
+		}
+		
+		@Override
+		public String id() {
+			return id_;
+		}
 	}
 }

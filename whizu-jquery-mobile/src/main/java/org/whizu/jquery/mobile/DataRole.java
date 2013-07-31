@@ -37,6 +37,7 @@ public enum DataRole implements Decorator {
 	CONTENT("content"),
 	FOOTER("footer"), 
 	HEADER("header"), 
+	LISTVIEW("listview"),
 	PAGE("page"),
 	PANEL("panel"),
 	POPUP("popup"); 

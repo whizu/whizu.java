@@ -26,6 +26,7 @@ package org.whizu.tutorial.tournament;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.annotation.App;
+import org.whizu.dom.ContentBuilder;
 import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.mobile.Button;
 import org.whizu.jquery.mobile.ButtonBuilder;
@@ -35,6 +36,7 @@ import org.whizu.jquery.mobile.HeaderBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.ListItem;
 import org.whizu.jquery.mobile.ListView;
+import org.whizu.jquery.mobile.ListViewBuilder;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.jquery.mobile.Popup;
 import org.whizu.jquery.mobile.PopupBuilder;
@@ -49,7 +51,7 @@ public class TournamentApp implements JQueryMobile {
 	private static final Logger log = LoggerFactory.getLogger(TournamentApp.class);
 
 	// private final ValueList<Player> playerList = new ValueList<Player>(Player.class);
-	private final ListView playerList = new ListView();
+	private final ListView playerList = ListViewBuilder.create().build();
 
 	private Popup popup;
 

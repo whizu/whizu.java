@@ -82,7 +82,7 @@ public class Form extends Container {
 	}
 
 	public void addListView() {
-		Content list = new ListView();
+		Content list = ListViewBuilder.create().build();
 		add(list);
 	}
 

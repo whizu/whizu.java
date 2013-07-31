@@ -3,7 +3,7 @@ package org.whizu.widget;
 import org.whizu.dom.Content;
 import org.whizu.dom.ContentBuilder;
 
-class BuildOnDemand implements Content {
+public class BuildOnDemand implements Content {
 
 	private ContentBuilder builder_;
 

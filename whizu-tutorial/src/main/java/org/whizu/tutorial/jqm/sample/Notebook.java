@@ -25,6 +25,7 @@ package org.whizu.tutorial.jqm.sample;
 
 import org.whizu.annotation.App;
 import org.whizu.annotation.Style;
+import org.whizu.dom.ContentBuilder;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.mobile.Button;
@@ -32,6 +33,7 @@ import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.ListItem;
 import org.whizu.jquery.mobile.ListView;
+import org.whizu.jquery.mobile.ListViewBuilder;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.layout.CssLayout;
 import org.whizu.layout.HorizontalLayout;
@@ -48,7 +50,7 @@ public class Notebook implements JQueryMobile {
 
 	private StringValue description = new StringValue("Description");
 
-	private ListView notebook = new ListView();
+	private ListView notebook = ListViewBuilder.create().build();
 
 	@Override
 	public void onLoad(Page page) {

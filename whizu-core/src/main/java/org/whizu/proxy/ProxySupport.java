@@ -21,47 +21,22 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.proxy;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentBuilder;
-import org.whizu.dom.ContentList;
-import org.whizu.html.Html;
-import org.whizu.value.DateValue;
-import org.whizu.value.StringValue;
+import org.whizu.dom.Identity;
+import org.whizu.jquery.JQuery;
+import org.whizu.jquery.RequestContext;
 
 /**
  * @author Rudy D'hauwe
  */
-public class ListItem implements ContentBuilder {
+public class ProxySupport {
 
-	private ContentList contents_ = new ContentList();
-	
-	public ListItem() {
+	protected final JQuery jQuery(Identity identity) {
+		return RequestContext.getRequest().select(identity);
 	}
 
-	public ListItem(String title) {
-		contents_.add(Html.h2(title));
-	}
-
-	public ListItem(StringValue title) {
-		this(title.get());
-	}
-
-	@Override
-	public Content build() {
-		return contents_;
-	}
-
-	public void p(String text) {
-		contents_.add(Html.p(text));
-	}
-
-	public void p(StringValue value) {
-		p(value.get());
-	}
-
-	public void p(DateValue value) {
-		p("" + value.get());
+	public final String render() {
+		throw new IllegalStateException("This component is already rendered");
 	}
 }
