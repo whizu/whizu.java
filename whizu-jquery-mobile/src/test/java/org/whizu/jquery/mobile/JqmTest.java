@@ -3,6 +3,7 @@ package org.whizu.jquery.mobile;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.whizu.util.Objects;
 
 public class JqmTest extends AbstractJqmTest {
 
@@ -58,24 +59,29 @@ public class JqmTest extends AbstractJqmTest {
 	@Test
 	public void testPopup() {
 		Popup popup = PopupBuilder.createWithId("popup").p("My second popup with same id").build();
-		equals("<div data-role='popup' id='popup'><p>My second popup with same id</p></div>", popup);
+		String actual = "<div data-role='popup' id='popup'><p>My second popup with same id</p></div>";
+		PopupProxy proxy = Objects.cast(popup);
+		assertEquals(actual, proxy.render());
 	}
 
 	@Test
 	public void testPopups() {
 		Page next = Jqm.addPage("Next");
 		Popup popup = PopupBuilder.createWithId("popup").p("My first text").build();
-		//page.append(popup);
+		// page.append(popup);
 		popup = PopupBuilder.createWithId("popup").p("My second popup with same id").build();
-		//page.append(popup);
+		// page.append(popup);
 		Header.builder().title("Popups").button("New").onClickOpen(popup).build().build().on(page);
 		Button button1 = ButtonBuilder.createWithTitle("My button 1").onClickOpen(next).build();
 		page.addContent(button1);
 		next.header("Volgende pagina");
 		Button button2 = ButtonBuilder.createWithTitle("My button 2").onClickOpen(page).build();
 		next.addContent(button2);
+		
+		String actual = "$p = $(\"<div data-role='page' id='Next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').prepend(\"<div data-role='header' id='c2'><h1>Popups</h1><a data-role='button' id='c3' data-rel='popup' data-mini='true' href='#popup'>New</a></div>\");$(\"#c3\").closest(\"div[data-role=page]\").find('div[data-role=content]').append(\"<div data-role='popup' id='popup'><p>My second popup with same id</p></div>\");$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c4' href='#Next'>My button 1</a>\");$('#Next').prepend(\"<div data-role='header' id='c5'><h1>Volgende pagina</h1></div>\");$('#Next').find('div[data-role=content]').append(\"<a data-role='button' id='c6' href='#index'>My button 2</a>\");";
+		String werkte_vroeger = "$p = $(\"<div data-role='page' id='Next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$.mobile.activePage.find('div[data-role=content]').append(\"<div data-role='popup' id='popup'><p>My first text</p></div>\");$.mobile.activePage.find('div[data-role=content]').append(\"<div data-role='popup' id='popup'><p>My second popup with same id</p></div>\");$('#index').prepend(\"<div data-role='header' id='c2'><h1>Popups</h1><a data-role='button' id='c3' data-rel='popup' data-mini='true' href='#popup'>New</a></div>\");$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c4' href='#Next'>My button 1</a>\");$('#Next').prepend(\"<div data-role='header' id='c5'><h1>Volgende pagina</h1></div>\");$('#Next').find('div[data-role=content]').append(\"<a data-role='button' id='c6' href='#index'>My button 2</a>\");";
 		assertEquals(
-				"$p = $(\"<div data-role='page' id='Next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$.mobile.activePage.find('div[data-role=content]').append(\"<div data-role='popup' id='popup'><p>My first text</p></div>\");$.mobile.activePage.find('div[data-role=content]').append(\"<div data-role='popup' id='popup'><p>My second popup with same id</p></div>\");$('#index').prepend(\"<div data-role='header' id='c2'><h1>Popups</h1><a data-role='button' id='c3' data-rel='popup' data-mini='true' href='#popup'>New</a></div>\");$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c4' href='#Next'>My button 1</a>\");$('#Next').prepend(\"<div data-role='header' id='c5'><h1>Volgende pagina</h1></div>\");$('#Next').find('div[data-role=content]').append(\"<a data-role='button' id='c6' href='#index'>My button 2</a>\");",
+				actual,
 				theRequest.finish());
 	}
 }

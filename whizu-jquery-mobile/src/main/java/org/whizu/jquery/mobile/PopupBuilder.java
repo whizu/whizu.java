@@ -24,35 +24,38 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Content;
+import org.whizu.dom.ContentList;
+import org.whizu.dom.Element;
 import org.whizu.html.Html;
-import org.whizu.util.Builder;
+import org.whizu.proxy.ProxyBuilder;
+import org.whizu.widget.BuildSupport;
 
 /**
  * @author Rudy D'hauwe
  */
-public class PopupBuilder implements Builder<Popup> {
+public final class PopupBuilder extends ProxyBuilder<Popup, PopupBuilder.Build> {
 
 	public static PopupBuilder createWithId(String id) {
 		return new PopupBuilder(id);
 	}
 
-	private Popup build_;
-
 	public PopupBuilder(String id) {
-		build_ = new Popup(id);
+		build_.id(id);
 	}
 
-	public PopupBuilder append(Content content) {
+	public PopupBuilder add(Content content) {
 		build_.add(content);
 		return this;
 	}
 
 	@Override
-	public Popup build() {
-		//Jqm.addPopup(build_);
-		Jqm.document().activePage().addContent(build_); //TODO refactor, assureCreated(popup)
-		
-		return build_;
+	protected Build createPrototype() {
+		return new Build();
+	}
+
+	@Override
+	protected Popup createProxy(Build build) {
+		return new PopupProxy(build);
 	}
 
 	public PopupBuilder p(String text) {
@@ -66,7 +69,7 @@ public class PopupBuilder implements Builder<Popup> {
 	}
 
 	public PopupBuilder padding(String px) {
-		build_.style("padding:"+px);
+		build_.style("padding:" + px);
 		return this;
 	}
 
@@ -74,9 +77,55 @@ public class PopupBuilder implements Builder<Popup> {
 		build_.add(Html.h3(title));
 		return this;
 	}
-	
+
 	public PopupBuilder theme(Theme theme) {
 		build_.theme(theme);
 		return this;
+	}
+
+	/***************************************************************************
+	 * The <code>Popup</code> that is being built.
+	 */
+	final class Build extends BuildSupport implements Popup {
+
+		private ContentList contents_ = new ContentList();
+		
+		private DataPositionTo positionTo_;
+
+		private Theme theme_;
+
+		@Override
+		public void add(Content content) {
+			contents_.add(content);
+		}
+		
+		@Override
+		public Content build() {
+			// @formatter:off
+			Element popup = Html.div(this)
+				 .decorate(DataRole.POPUP)
+				 .decorate(theme_, positionTo_, this)
+				 .add(contents_);
+			// @formatter:on 
+			return popup;
+		}
+		
+		@Override
+		public void close() {
+			jQuery(this).call("popup", "close");
+		}
+		
+		@Override
+		public void open() {
+			jQuery(this).call("popup", "open");
+		}
+
+		private void positionToWindow() {
+			positionTo_ = DataPositionTo.WINDOW;
+		}
+
+		private void theme(Theme theme) {
+			theme_ = theme;
+		}
 	}
 }

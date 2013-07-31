@@ -90,7 +90,7 @@ public class TournamentApp implements JQueryMobile {
 			.theme(Theme.B)
 			.h3("Add a new player")
 			.padding("10px")
-			.append(form)
+			.add(form)
 			.center()
 			.build();
 		// @formatter:on

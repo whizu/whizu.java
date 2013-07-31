@@ -172,6 +172,12 @@ public final class ButtonBuilder extends ProxyBuilder<Button, ButtonBuilder.Buil
 				JQuery page = jQuery(this).closest("div[data-role=page]");
 				proxy.assureExistsOnPage(page);
 			}
+			
+			if (identity instanceof PopupProxy) {
+				PopupProxy proxy = Objects.cast(identity);
+				JQuery page = jQuery(this).closest("div[data-role=page]").find("div[data-role=content]");
+				proxy.assureExistsOnPage(page);
+			}
 		}
 
 		@Override

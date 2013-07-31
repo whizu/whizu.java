@@ -21,91 +21,96 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.widget;
+package org.whizu.jquery.mobile;
 
 import org.whizu.dom.Content;
 import org.whizu.dom.ContentBuilder;
-import org.whizu.dom.Decorator;
-import org.whizu.dom.Element;
 import org.whizu.dom.Identity;
-import org.whizu.dom.Stylable;
 import org.whizu.jquery.JQuery;
-import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
-import org.whizu.jquery.Session;
+import org.whizu.proxy.Proxy;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class BuildSupport implements ContentBuilder, Stylable, Decorator {
+final class PopupProxy extends Proxy<Popup> implements Popup {
 
-	private String id_;
-
-	private StyleSupport style_ = new StyleSupport();
-
-	protected BuildSupport() {
-		id_ = session().next();
+	protected PopupProxy(Popup impl) {
+		super(impl);
 	}
 
-	protected BuildSupport(String id) {
-		id_ = id;
+	@Override
+	public void add(Content content) {
+		impl().add(content);
+	}
+	
+	@Override
+	public void close() {
+		impl().close();
+	}
+	
+	@Override
+	protected Popup createImpl() {
+		System.out.println("creating the target impl");
+		return new PopupImpl(id());
 	}
 
-	public final Content buildJustInTime() {
-		return new BuildOnDemand(this);
+	@Override
+	public String id() {
+		return impl().id();
 	}
 
 	@Override
 	public void css(String className) {
-		style_.css(className);
-	}
-
-	@Override
-	public final void decorate(Element element) {
-		style_.decorate(element);
-	}
-
-	public final String id() {
-		return id_;
-	}
-
-	public final void id(String id) {
-		id_ = id;
-	}
-
-	protected final JQuery jQuery() {
-		return request().select("$");
-	}
-
-	protected final JQuery jQuery(Identity... components) {
-		return request().select(components);
-	}
-
-	protected final JQuery jQuery(String selector) {
-		return request().select(selector);
-	}
-
-	/**
-	 * @see {@link org.whizu.dom.Content#render()}.
-	 */
-	public final String render() {
-		return build().render();
-	}
-
-	protected final Request request() {
-		return RequestContext.getRequest();
-	}
-
-	protected final String selector() {
-		return "$(\"#" + id() + "\")";
-	}
-
-	protected final Session session() {
-		return request().session();
+		impl().css(className);
 	}
 	
 	@Override
-	public void style(String style) {
-		style_.style(style);
+	public void open() {
+		if (impl() instanceof ContentBuilder) {
+			jQuery("$.mobile.activePage").append(render()).trigger("pagecreate");
+		}
+		impl().open();
+	}
+
+	/***************************************************************************
+	 * The target <code>Popup</code> that has been rendered.
+	 */
+	final class PopupImpl implements Popup {
+
+		private String id_;
+
+		public PopupImpl(String id) {
+			id_ = id;
+		}
+
+		@Override
+		public void add(Content content) {
+			jQuery(this).append(content);
+		}
+		
+		@Override
+		public void close() {
+			jQuery(this).call("popup", "close");
+		}
+
+		@Override
+		public void css(String className) {
+			jQuery(this).addClass(className);
+		}
+
+		@Override
+		public String id() {
+			return id_;
+		}
+
+		private JQuery jQuery(Identity identity) {
+			return RequestContext.getRequest().select(identity);
+		}
+		
+		@Override
+		public void open() {
+			jQuery(this).call("popup", "open");
+		}
 	}
 }

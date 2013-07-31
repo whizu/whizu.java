@@ -26,6 +26,7 @@ package org.whizu.proxy;
 import org.whizu.dom.Content;
 import org.whizu.dom.ContentBuilder;
 import org.whizu.jquery.JQuery;
+import org.whizu.jquery.RequestContext;
 import org.whizu.util.Objects;
 
 /**
@@ -40,7 +41,7 @@ public abstract class Proxy<T> implements Content {
 		impl_ = impl;
 	}
 
-	public final void assureExistsOnPage(JQuery page) {
+	public void assureExistsOnPage(JQuery page) {
 		if (impl_ instanceof ContentBuilder) {
 			String create = render();
 			page.append(create);
@@ -49,6 +50,15 @@ public abstract class Proxy<T> implements Content {
 
 	protected abstract T createImpl();
 
+	//TODO make protected? see usage in Form.
+	public final T impl() {
+		return impl_;
+	}
+
+	protected JQuery jQuery(String selector) {
+		return RequestContext.getRequest().select(selector);
+	}
+
 	@Override
 	public final String render() {
 		ContentBuilder builder = Objects.cast(impl_);
@@ -56,10 +66,5 @@ public abstract class Proxy<T> implements Content {
 		String markup = content.render();
 		impl_ = createImpl();
 		return markup;
-	}
-
-	//TODO make protected? see usage in Form.
-	public final T impl() {
-		return impl_;
 	}
 }

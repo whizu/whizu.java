@@ -42,19 +42,19 @@ public class Popups implements JQueryMobile {
 	@Override
 	public void onLoad(Page page) {
 		/*
-		HeaderBuilder header = page.header("Popups");
-		header.addButton(new Button("hello"));
-		*/
-		
+		 * HeaderBuilder header = page.header("Popups"); header.addButton(new
+		 * Button("hello"));
+		 */
+
 		Page next = Jqm.addPage("Next");
-		
+
 		Popup popup = PopupBuilder.createWithId("popup").p("My first text").build();
-		//page.append(popup);
-		
+		// page.append(popup);
+
 		popup = PopupBuilder.createWithId("popup").p("My second popup with same id").build();
-		//page.append(popup);
-		
-		//Jqm.createHeader("Popups").on(page);
+		// page.append(popup);
+
+		// Jqm.createHeader("Popups").on(page);
 		// @formatter:off
 		Header.builder()
 		    .title("Popups")
@@ -67,16 +67,15 @@ public class Popups implements JQueryMobile {
 		    .build()
 		    .on(page);
 		// @formatter:on
-		
-		Button button1 = ButtonBuilder.createWithTitle("My button 1")
-			.onClickOpen(next)
-			.build();
+
+		Button button1 = ButtonBuilder.createWithTitle("My button 1").onClickOpen(next).build();
 		page.addContent(button1);
 
+		Button button3 = ButtonBuilder.createWithTitle("My button 3 opens popup").onClickOpen(popup).build();
+		page.addContent(button3);
+
 		next.header("Volgende pagina");
-		Button button2 = ButtonBuilder.createWithTitle("My button 2")
-				.onClickOpen(page)
-				.build();
+		Button button2 = ButtonBuilder.createWithTitle("My button 2").onClickOpen(page).build();
 		next.addContent(button2);
 	}
 }

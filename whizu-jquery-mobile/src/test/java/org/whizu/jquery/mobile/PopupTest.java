@@ -23,19 +23,23 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Identity;
+import static org.junit.Assert.*;
+
+import org.junit.Test;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Popup extends Identity {
+public class PopupTest extends AbstractJqmTest {
 
-	public void add(Content content);
-	
-	public void css(String className);
+	/**
+	 * Test method for {@link org.whizu.jquery.mobile.Popup#open()}.
+	 */
+	@Test
+	public void testOpen() {
+		Popup popup = PopupBuilder.createWithId("popup").p("Text").build();
+		popup.open();
+		assertEquals("$.mobile.activePage.append(\"<div data-role='popup' id='popup'><p>Text</p></div>\").trigger(\"pagecreate\");$(\"#popup\").popup(\"open\");", theRequest.finish());
+	}
 
-	public void close();
-
-	public void open();
 }

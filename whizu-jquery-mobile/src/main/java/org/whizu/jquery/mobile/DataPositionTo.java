@@ -23,19 +23,29 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Identity;
+import org.whizu.dom.Decorator;
+import org.whizu.dom.Element;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Popup extends Identity {
+public enum DataPositionTo implements Decorator {
 
-	public void add(Content content);
-	
-	public void css(String className);
+	// @formatter:off
+	ORIGIN("origin"), 
+	WINDOW("window");
+	// @formatter:on
 
-	public void close();
+	private static final String ATTRIBUTE_NAME = "data-position-to";
 
-	public void open();
+	//TODO make private
+	public String value;
+
+	private DataPositionTo(String value) {
+		this.value = value;
+	}
+
+	public void decorate(Element element) {
+		element.attr(ATTRIBUTE_NAME, value);
+	}
 }

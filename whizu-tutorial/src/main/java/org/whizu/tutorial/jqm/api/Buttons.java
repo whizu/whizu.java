@@ -33,6 +33,8 @@ import org.whizu.jquery.mobile.ButtonBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
+import org.whizu.jquery.mobile.Popup;
+import org.whizu.jquery.mobile.PopupBuilder;
 
 /**
  * @author Rudy D'hauwe
@@ -89,6 +91,9 @@ public class Buttons  implements JQueryMobile {
 				y++;
 				Page page = Jqm.page();
 				page.append("<p>Button clicked! Starting the registration process... " + z + "," + x + "," + y + "</p>");
+				
+				Popup popup1 = PopupBuilder.createWithId("myotherpopup").p("My second text").build();
+				popup1.open();
 			}
 		};
 	}
