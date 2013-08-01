@@ -40,9 +40,7 @@ import org.whizu.jquery.mobile.Page;
 import org.whizu.jquery.mobile.Popup;
 import org.whizu.jquery.mobile.PopupBuilder;
 import org.whizu.jquery.mobile.Theme;
-import org.whizu.util.Objects;
 import org.whizu.value.ValueList;
-import org.whizu.value.ValueObject;
 
 /**
  * @author Rudy D'hauwe
@@ -79,8 +77,7 @@ public class Tournament2App implements JQueryMobile {
 			.on(page);
 		// @formatter:on
 
-		ValueList<ValueObject> vl = Objects.cast(playerList);
-		ListView listView = ListViewBuilder.createWith(vl).onItemClick(onPlayerClickListener()).build();
+		ListView listView = ListViewBuilder.createWith(playerList).onItemClick(onPlayerClickListener()).build();
 		page.add(listView);
 	}
 

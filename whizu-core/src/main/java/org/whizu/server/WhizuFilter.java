@@ -63,7 +63,7 @@ public class WhizuFilter implements Filter {
 		 * query string in the first line of the HTTP request. The web container
 		 * does not decode this string.
 		 */
-		//log.debug("HttpServletRequest.requestURI {}", request.getRequestURI());
+		log.debug("HttpServletRequest.requestURI {}", request.getRequestURI());
 
 		/**
 		 * Returns the portion of the request URI that indicates the context of the

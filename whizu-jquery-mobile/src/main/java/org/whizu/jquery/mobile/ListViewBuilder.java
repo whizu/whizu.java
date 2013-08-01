@@ -31,8 +31,6 @@ import org.whizu.dom.ContentBuilder;
 import org.whizu.dom.ContentList;
 import org.whizu.dom.Element;
 import org.whizu.html.Html;
-import org.whizu.jquery.ClickListener;
-import org.whizu.jquery.ClickListenerImpl;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.OnItemClickListener;
 import org.whizu.jquery.RequestContext;
@@ -42,8 +40,6 @@ import org.whizu.value.ValueList;
 import org.whizu.value.ValueObject;
 import org.whizu.widget.BuildOnDemand;
 import org.whizu.widget.BuildSupport;
-
-import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 /**
  * A listview is coded as a simple unordered list containing linked list items
@@ -65,9 +61,9 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 		return builder;
 	}
 
-	private ValueList<ValueObject> valueList_;
+	private ValueList<? extends ValueObject> valueList_;
 
-	public static ListViewBuilder createWith(ValueList<ValueObject> list) {
+	public static <T extends ValueObject> ListViewBuilder createWith(ValueList<T> list) {
 		final ListViewBuilder builder = create();
 		builder.valueList_ = list;
 
