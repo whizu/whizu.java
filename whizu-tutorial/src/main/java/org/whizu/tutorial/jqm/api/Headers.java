@@ -47,14 +47,14 @@ public class Headers implements JQueryMobile /* implements JqmApp */{
 		Button button = ButtonBuilder.createWithTitle("My button 1")
 		    .onClickOpen(next)
 		    .build();
-		page.addContent(button);
+		page.add(button);
 		// @formatter:on
 
 		// @formatter:off
 		Button button2 = ButtonBuilder.createWithTitle("My button 2")
 				.onClickOpen(page)
 				.build();
-		next.addContent(button2);
+		next.add(button2);
 		// @formatter:on
 
 		// Jqm.changePage("Nieuw");

@@ -31,11 +31,11 @@ class PageSelector extends Selector implements Page {
 		prepend(header);
 	}
 
-	public void addContent(Content content) {
+	public void add(Content content) {
 		query().find("div[data-role=content]").append(content);
 	}
 	
-	public void append(Content content) {
+	public void jQueryAppend(Content content) {
 		query().append(content);
 	}
 	
@@ -48,7 +48,7 @@ class PageSelector extends Selector implements Page {
 	@Override
 	public Footer footer(String title) {
 		Footer footer = new Footer(title);
-		append(footer);
+		jQueryAppend(footer);
 		return footer;
 	}
 

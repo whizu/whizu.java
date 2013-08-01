@@ -23,18 +23,42 @@
  *******************************************************************************/
 package org.whizu.tutorial.tournament;
 
+import org.whizu.dom.Content;
+import org.whizu.html.Html;
+import org.whizu.value.AbstractValueObject;
 import org.whizu.value.DateValue;
 import org.whizu.value.IntegerValue;
 import org.whizu.value.StringValue;
+import org.whizu.value.Value;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Player {
+public class Player extends AbstractValueObject {
 
-	public final StringValue name = new StringValue("Name");
-	
 	public final DateValue birthdate = new DateValue("Birth date");
 	
 	public final IntegerValue level = new IntegerValue("Level");
+	
+	public final StringValue name = new StringValue("Name");
+
+	@Override
+	public Content build() {
+		return Html.h2(name.get());
+	}
+
+	public void clear() {
+		name.clear();
+		birthdate.clear();
+	}
+
+	@Override
+	public Value[] getColumns() {
+		return new Value[] { name, birthdate };
+	}
+
+	public void refresh(Player player) {
+		name.refresh(player.name);
+		birthdate.refresh(player.birthdate);
+	}
 }

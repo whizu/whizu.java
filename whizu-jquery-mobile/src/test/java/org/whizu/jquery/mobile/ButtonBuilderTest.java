@@ -21,7 +21,7 @@ public class ButtonBuilderTest extends AbstractJqmTest {
 		    .onClickOpen(next)
 		    .build();
 		
-		page.addContent(button);
+		page.add(button);
 		// @formatter:on
 
 		assertEquals(
@@ -37,7 +37,7 @@ public class ButtonBuilderTest extends AbstractJqmTest {
 		Button button = ButtonBuilder.createWithTitle("My button")
 			.onClickOpen(next)
 			.build();
-		page.addContent(button);
+		page.add(button);
 		// @formatter:on
 
 		assertEquals(

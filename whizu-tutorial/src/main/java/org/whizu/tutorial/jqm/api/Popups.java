@@ -69,13 +69,13 @@ public class Popups implements JQueryMobile {
 		// @formatter:on
 
 		Button button1 = ButtonBuilder.createWithTitle("My button 1").onClickOpen(next).build();
-		page.addContent(button1);
+		page.add(button1);
 
 		Button button3 = ButtonBuilder.createWithTitle("My button 3 opens popup").onClickOpen(popup).build();
-		page.addContent(button3);
+		page.add(button3);
 
 		next.header("Volgende pagina");
 		Button button2 = ButtonBuilder.createWithTitle("My button 2").onClickOpen(page).build();
-		next.addContent(button2);
+		next.add(button2);
 	}
 }

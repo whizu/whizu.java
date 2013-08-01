@@ -23,12 +23,18 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import org.whizu.dom.Content;
 import org.whizu.dom.ContentBuilder;
 import org.whizu.dom.ContentList;
 import org.whizu.dom.Element;
 import org.whizu.html.Html;
 import org.whizu.proxy.ProxyBuilder;
+import org.whizu.util.Objects;
+import org.whizu.value.ValueList;
+import org.whizu.value.ValueObject;
 import org.whizu.widget.BuildOnDemand;
 import org.whizu.widget.BuildSupport;
 
@@ -50,6 +56,29 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 		return new ListViewBuilder();
 	}
 
+	public static <T extends ValueObject> ListViewBuilder createWith(ValueList<T> list) {
+		final ListViewBuilder builder = create();
+		for (ValueObject vo : list) {
+			builder.addItem(vo);
+		}
+		builder.proxy_ = new ListViewProxy(builder.build_);
+		list.addPropertyChangeListener(new PropertyChangeListener() {
+			
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				T vo = Objects.cast(evt.getNewValue());
+				builder.proxy_.addItem(vo);
+			}
+		});
+		return builder;
+	}
+
+	private ListView proxy_;
+
+	private void addItem(ValueObject vo) {
+		build_.addItem(vo);
+	}
+
 	@Override
 	protected Build createPrototype() {
 		return new Build();
@@ -57,7 +86,7 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 
 	@Override
 	protected ListView createProxy(Build build) {
-		return new ListViewProxy(build);
+		return proxy_;
 	}
 
 	/**

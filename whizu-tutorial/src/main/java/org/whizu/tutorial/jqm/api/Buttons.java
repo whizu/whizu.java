@@ -57,14 +57,14 @@ public class Buttons  implements JQueryMobile {
 		Button button = ButtonBuilder.createWithTitle("Register")
 		    .onClick(register())
 		    .build();
-		page.addContent(button);
+		page.add(button);
 		// @formatter:on
 
 		// @formatter:off
 		Button button2 = ButtonBuilder.createWithTitle("Register 3")
 			    .onClick(register())
 			    .build();
-	    page.addContent(button2);
+	    page.add(button2);
 			// @formatter:on
 
 		// @formatter:off

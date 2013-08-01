@@ -64,7 +64,7 @@ public class Notebook implements JQueryMobile {
 		layout.add(left);
 		layout.add(right);
 		//layout.appendTo(page);
-		page.addContent(layout);
+		page.add(layout);
 		page.footer("jQuery Mobile by Whizu");
 	}
 

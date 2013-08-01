@@ -69,7 +69,7 @@ public class Document {
 	}
 	
 	public Document append(Content content) {
-		body.append(content);
+		body.jQueryAppend(content);
 		return this;
 	}
 

@@ -44,12 +44,12 @@ public class Panels implements JQueryMobile {
 		index.header("Welcome !");
 		Panel panel = PanelBuilder.createWithId("my-panel").add(Html.p("This is my first panel")).build();
 		Button openPanel = ButtonBuilder.createWithTitle("Open panel").onClickOpen(panel).build();
-		index.addContent(openPanel);
+		index.add(openPanel);
 		Page next = Jqm.addPage("next");
-		index.addContent(ButtonBuilder.createWithTitle("Next page").onClickOpen(next).build());
+		index.add(ButtonBuilder.createWithTitle("Next page").onClickOpen(next).build());
 		panel = PanelBuilder.createWithId("other-panel").add(Html.p("This is my second panel")).right().build();
 		Button button = ButtonBuilder.createWithTitle("Open second panel").onClickOpen(panel).build();
-		next.addContent(button);
-		next.addContent(ButtonBuilder.createWithTitle("Back to home page").onClickOpen(index).build());
+		next.add(button);
+		next.add(ButtonBuilder.createWithTitle("Back to home page").onClickOpen(index).build());
 	}
 }

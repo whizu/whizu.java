@@ -36,7 +36,7 @@ public class Selector {
 		selector_ = selector;
 	}
 	
-	public void append(Content content) {
+	public void jQueryAppend(Content content) {
 		query().append(content);
 	}
 	

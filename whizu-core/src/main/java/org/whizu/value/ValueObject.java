@@ -23,10 +23,12 @@
  *******************************************************************************/
 package org.whizu.value;
 
+import org.whizu.dom.ContentBuilder;
+
 /**
  * @author Rudy D'hauwe
  */
-public interface ValueObject {
+public interface ValueObject extends ContentBuilder {
 	
 	public Value[] getColumns();
 }

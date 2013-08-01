@@ -40,7 +40,7 @@ import org.whizu.dom.Identity;
  */
 public interface Page extends Identity {
 
-	public void addContent(Content content);
+	public void add(Content content);
 	
 	public void append(String html);
 

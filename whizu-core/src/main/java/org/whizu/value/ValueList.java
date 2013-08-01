@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * @author Rudy D'hauwe
  */
-public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> {
+public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> implements Iterable<VO> {
 
 	private final Class<VO> clazz_;
 

@@ -33,29 +33,36 @@ import org.whizu.jquery.mobile.Form;
 import org.whizu.jquery.mobile.FormBuilder;
 import org.whizu.jquery.mobile.HeaderBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
-import org.whizu.jquery.mobile.ListItem;
 import org.whizu.jquery.mobile.ListView;
 import org.whizu.jquery.mobile.ListViewBuilder;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.jquery.mobile.Popup;
 import org.whizu.jquery.mobile.PopupBuilder;
 import org.whizu.jquery.mobile.Theme;
+import org.whizu.value.ValueList;
 
 /**
  * @author Rudy D'hauwe
  */
-@App("/whizu/tournament")
-public class TournamentApp implements JQueryMobile {
+@App("/whizu/tournament2")
+public class Tournament2App implements JQueryMobile {
 
-	private static final Logger log = LoggerFactory.getLogger(TournamentApp.class);
+	private static final Logger log = LoggerFactory.getLogger(Tournament2App.class);
 
-	// private final ValueList<Player> playerList = new ValueList<Player>(Player.class);
-	private final ListView playerList = ListViewBuilder.create().build();
+	private final ValueList<Player> playerList = new ValueList<Player>(Player.class);
+//	private final ListView playerList = ListViewBuilder.create().build();
 
 	private Popup popup;
 
 	@Override
 	public void onLoad(Page page) {
+		Player player1 = new Player();
+		player1.name.set("Mark");
+		playerList.add(player1);
+		Player player2 = new Player();
+		player2.name.set("Rudy");
+		playerList.add(player2);
+		
 		// @formatter:off
 		popup = addPlayerEvent();
 		
@@ -69,7 +76,8 @@ public class TournamentApp implements JQueryMobile {
 			.on(page);
 		// @formatter:on
 
-		page.add(playerList);
+		ListView listView = ListViewBuilder.createWith(playerList).build();
+		page.add(listView);
 	}
 
 	private Popup addPlayerEvent() {
@@ -99,10 +107,10 @@ public class TournamentApp implements JQueryMobile {
 
 	private void addPlayer(Player player) {
 		log.debug("this::addPlayer()");
-		ListItem item = new ListItem(player.name);
-		item.p(player.birthdate);
-		playerList.addItem(item);
-		player.name.clear();
+		Player item = new Player();
+		item.refresh(player);
+		playerList.add(item);
+		player.clear();
 		popup.close();
 	}
 

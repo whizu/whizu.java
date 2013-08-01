@@ -12,10 +12,10 @@ public class JqmTest extends AbstractJqmTest {
 		Page next = Jqm.addPage("Next");
 		page.header("Huidige pagina");
 		Button button1 = ButtonBuilder.createWithTitle("My button 1").onClickOpen(next).build();
-		page.addContent(button1);
+		page.add(button1);
 		next.header("Volgende pagina");
 		Button button2 = ButtonBuilder.createWithTitle("My button 2").onClickOpen(page).build();
-		next.addContent(button2);
+		next.add(button2);
 		assertEquals(
 				"$p = $(\"<div data-role='page' id='Next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').prepend(\"<div data-role='header' id='c0'><h1>Huidige pagina</h1></div>\");$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c1' href='#Next'>My button 1</a>\");$('#Next').prepend(\"<div data-role='header' id='c2'><h1>Volgende pagina</h1></div>\");$('#Next').find('div[data-role=content]').append(\"<a data-role='button' id='c3' href='#index'>My button 2</a>\");",
 				theRequest.finish());
@@ -33,9 +33,9 @@ public class JqmTest extends AbstractJqmTest {
 		bar.p("I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is being clicked.");
 		bar.footer("Page Footer");
 		Button button1 = ButtonBuilder.createWithTitle("foo").onClickOpen(foo).build();
-		page.addContent(button1);
+		page.add(button1);
 		Button button2 = ButtonBuilder.createWithTitle("bar").onClickOpen(bar).build();
-		page.addContent(button2);
+		page.add(button2);
 		assertEquals(
 				"$('#index').prepend(\"<div data-role='header' id='c0'><h1>Welcome !</h1></div>\");$p = $(\"<div data-role='page' id='foo'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$p = $(\"<div data-role='page' id='bar'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#foo').prepend(\"<div data-role='header' id='c1'><h1>Foos</h1></div>\");$('#foo').find('div[data-role=content]').append(\"I'm first in the source order so I'm shown as the page.\");$('#foo').append(\"<div data-role='footer' id='c2' data-theme='e'><h4>Page Footer</h4></div>\");$('#bar').prepend(\"<div data-role='header' id='c3'><h1>Bars</h1></div>\");$('#bar').find('div[data-role=content]').append(\"I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is being clicked.\");$('#bar').append(\"<div data-role='footer' id='c4' data-theme='e'><h4>Page Footer</h4></div>\");$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c5' href='#foo'>foo</a>\");$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c6' href='#bar'>bar</a>\");",
 				theRequest.finish());
@@ -73,10 +73,10 @@ public class JqmTest extends AbstractJqmTest {
 		// page.append(popup);
 		Header.builder().title("Popups").button("New").onClickOpen(popup).build().build().on(page);
 		Button button1 = ButtonBuilder.createWithTitle("My button 1").onClickOpen(next).build();
-		page.addContent(button1);
+		page.add(button1);
 		next.header("Volgende pagina");
 		Button button2 = ButtonBuilder.createWithTitle("My button 2").onClickOpen(page).build();
-		next.addContent(button2);
+		next.add(button2);
 		
 		String actual = "$p = $(\"<div data-role='page' id='Next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').prepend(\"<div data-role='header' id='c2'><h1>Popups</h1><a data-role='button' id='c3' data-rel='popup' data-mini='true' href='#popup'>New</a></div>\");$(\"#c3\").closest(\"div[data-role=page]\").find('div[data-role=content]').append(\"<div data-role='popup' id='popup'><p>My second popup with same id</p></div>\");$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c4' href='#Next'>My button 1</a>\");$('#Next').prepend(\"<div data-role='header' id='c5'><h1>Volgende pagina</h1></div>\");$('#Next').find('div[data-role=content]').append(\"<a data-role='button' id='c6' href='#index'>My button 2</a>\");";
 		String werkte_vroeger = "$p = $(\"<div data-role='page' id='Next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$.mobile.activePage.find('div[data-role=content]').append(\"<div data-role='popup' id='popup'><p>My first text</p></div>\");$.mobile.activePage.find('div[data-role=content]').append(\"<div data-role='popup' id='popup'><p>My second popup with same id</p></div>\");$('#index').prepend(\"<div data-role='header' id='c2'><h1>Popups</h1><a data-role='button' id='c3' data-rel='popup' data-mini='true' href='#popup'>New</a></div>\");$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c4' href='#Next'>My button 1</a>\");$('#Next').prepend(\"<div data-role='header' id='c5'><h1>Volgende pagina</h1></div>\");$('#Next').find('div[data-role=content]').append(\"<a data-role='button' id='c6' href='#index'>My button 2</a>\");";
