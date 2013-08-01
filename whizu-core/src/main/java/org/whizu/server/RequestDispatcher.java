@@ -92,7 +92,7 @@ class RequestDispatcher {
 		Map<String, String[]> parameterMap = request.getParameterMap();
 		Set<String> keys = parameterMap.keySet();
 		for (String key : keys) {
-			//log.debug("Incoming request parameter {} equals {}", key, parameterMap.get(key)[0]);
+			log.debug("Incoming request parameter {} equals {}", key, parameterMap.get(key)[0]);
 			Input editable = userSession.getInput(key);
 			if (editable != null) {
 				editable.parseString(parameterMap.get(key)[0]);
@@ -110,6 +110,7 @@ class RequestDispatcher {
 			session.setAttribute(WHIZU_SESSION, userSession);
 		}
 		RequestImpl.get().session(userSession);
+		RequestImpl.get().wrap(request);
 		return userSession;
 	}
 }

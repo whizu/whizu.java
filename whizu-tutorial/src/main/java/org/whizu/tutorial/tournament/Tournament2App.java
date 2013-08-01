@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.annotation.App;
 import org.whizu.jquery.ClickListener;
+import org.whizu.jquery.OnItemClickListener;
 import org.whizu.jquery.mobile.Button;
 import org.whizu.jquery.mobile.ButtonBuilder;
 import org.whizu.jquery.mobile.Form;
@@ -76,8 +77,20 @@ public class Tournament2App implements JQueryMobile {
 			.on(page);
 		// @formatter:on
 
-		ListView listView = ListViewBuilder.createWith(playerList).build();
+		ListView listView = ListViewBuilder.createWith(playerList).onItemClick(onPlayerClickListener()).build();
 		page.add(listView);
+	}
+
+	private OnItemClickListener<Player> onPlayerClickListener() {
+		return new OnItemClickListener<Player>() {
+
+			@Override
+			public void click(Player item) {
+				System.out.println("list item clicked " + item);
+				Popup popup = PopupBuilder.createWithId("edit-player").h3(item.name.get()).build();
+				popup.open();
+			}
+		};
 	}
 
 	private Popup addPlayerEvent() {

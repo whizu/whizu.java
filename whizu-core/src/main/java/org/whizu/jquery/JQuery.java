@@ -361,5 +361,7 @@ public interface JQuery {
 
 	public abstract JQuery click(EventHandler eventHandler);
 
+	public abstract JQuery clickListItem(EventHandler eventHandler);
+	
 	public abstract JQuery submit(EventHandler eventHandler);
 }

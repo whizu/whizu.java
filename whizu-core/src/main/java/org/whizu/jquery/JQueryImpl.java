@@ -152,7 +152,15 @@ class JQueryImpl extends Expression implements JQuery {
 		}
 		return this;
 	}
-	
+
+	@Override
+	public JQuery clickListItem(EventHandler eventHandler) {
+		if (eventHandler != null) {
+			click(getItemHandlerFunction(eventHandler));
+		}
+		return this;
+	}
+
 	@Override
 	public JQuery click(Function function) {
 		Script script = RequestContext.getRequest().compile(function);
@@ -218,6 +226,38 @@ class JQueryImpl extends Expression implements JQuery {
 					@Override
 					public void execute() {
 						jQuery("$(this)").closest("form").serialize();
+					}
+				};
+
+				Function callback = new Function("data") {
+					@Override
+					public void execute() {
+					}
+				};
+
+				String type = "script";
+				jQuery("$").get(url, data, callback, type);
+				
+				JavaScript.script("return false;");
+			}
+		};
+	}
+
+	private Function getItemHandlerFunction(final EventHandler eventHandler) {
+		return new Function() {
+			@Override
+			public void execute() {
+				JavaScript.preventDefault();
+				//JavaScript.script("alert(this.getAttribute('data-id'));");
+				//JavaScript.script("alert('index ' + $('a').index(this));");
+
+				String url = getContextPath() + "/whizu/event?id=" + eventHandler.id();
+
+				Function data = new Function() {
+					@Override
+					public void execute() {
+						String script = "'data-id='+$(this).attr('data-id')+'&data-index='+$('a').index(this)";  //closest("form").serialize();
+						JavaScript.script(script);
 					}
 				};
 

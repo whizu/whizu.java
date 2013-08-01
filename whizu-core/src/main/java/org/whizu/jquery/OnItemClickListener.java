@@ -21,26 +21,12 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
-
-import org.whizu.jquery.AbstractRequest;
-import org.whizu.jquery.Request;
-import org.whizu.jquery.Session;
+package org.whizu.jquery;
 
 /**
  * @author Rudy D'hauwe
  */
-public class TestRequest extends AbstractRequest implements Request {
+public interface OnItemClickListener<T> {
 
-	Session theSession = new TestSession();
-	
-	@Override
-	public Session session() {
-		return theSession;
-	}
-
-	@Override
-	public String getParameter(String name) {
-		throw new UnsupportedOperationException();
-	}
+	public void click(T item);
 }

@@ -44,4 +44,6 @@ public interface Request {
 	public String define(Function f);
 	
 	public String evaluate(Function f);
+
+	public String getParameter(String name);
 }

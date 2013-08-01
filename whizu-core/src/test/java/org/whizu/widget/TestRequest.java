@@ -38,4 +38,9 @@ public class TestRequest extends AbstractRequest implements Request {
 	public Session session() {
 		return theSession;
 	}
+
+	@Override
+	public String getParameter(String name) {
+		throw new UnsupportedOperationException();
+	}
 }

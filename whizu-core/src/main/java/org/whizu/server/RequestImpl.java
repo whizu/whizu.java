@@ -23,6 +23,8 @@
  *******************************************************************************/
 package org.whizu.server;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.whizu.jquery.AbstractRequest;
 import org.whizu.jquery.Request;
 
@@ -42,6 +44,8 @@ final class RequestImpl extends AbstractRequest implements Request {
 	static RequestImpl get() {
 		return request.get();
 	}
+
+	private HttpServletRequest request_;
 	
 	private RequestImpl() {
 	}
@@ -52,6 +56,16 @@ final class RequestImpl extends AbstractRequest implements Request {
 			return super.finish();
 		} finally {
 			request.remove();
+			request_ = null;
 		}
+	}
+
+	@Override
+	public String getParameter(String name) {
+		return request_.getParameter(name);
+	}
+
+	public void wrap(HttpServletRequest request) {
+		request_ = request;
 	}
 }

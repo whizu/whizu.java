@@ -169,6 +169,11 @@ public class GridLayoutIntegrationTest {
 						// TODO Auto-generated method stub
 						return null;
 					}
+
+					@Override
+					public String getParameter(String name) {
+						throw new UnsupportedOperationException();
+					}
 				};
 			}
 

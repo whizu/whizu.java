@@ -31,6 +31,11 @@ import org.whizu.dom.ContentBuilder;
 import org.whizu.dom.ContentList;
 import org.whizu.dom.Element;
 import org.whizu.html.Html;
+import org.whizu.jquery.ClickListener;
+import org.whizu.jquery.ClickListenerImpl;
+import org.whizu.jquery.EventHandler;
+import org.whizu.jquery.OnItemClickListener;
+import org.whizu.jquery.RequestContext;
 import org.whizu.proxy.ProxyBuilder;
 import org.whizu.util.Objects;
 import org.whizu.value.ValueList;
@@ -53,20 +58,26 @@ import org.whizu.widget.BuildSupport;
 public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Build> {
 
 	public static ListViewBuilder create() {
-		return new ListViewBuilder();
+		ListViewBuilder builder = new ListViewBuilder();
+		builder.proxy_ = new ListViewProxy(builder.build_);
+		return builder;
 	}
 
-	public static <T extends ValueObject> ListViewBuilder createWith(ValueList<T> list) {
+	private ValueList<ValueObject> valueList_;
+
+	public static ListViewBuilder createWith(ValueList<ValueObject> list) {
 		final ListViewBuilder builder = create();
+		builder.valueList_ = list;
+
 		for (ValueObject vo : list) {
 			builder.addItem(vo);
 		}
-		builder.proxy_ = new ListViewProxy(builder.build_);
+
 		list.addPropertyChangeListener(new PropertyChangeListener() {
-			
+
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				T vo = Objects.cast(evt.getNewValue());
+				ValueObject vo = Objects.cast(evt.getNewValue());
 				builder.proxy_.addItem(vo);
 			}
 		});
@@ -89,6 +100,11 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 		return proxy_;
 	}
 
+	public <T extends ValueObject> ListViewBuilder onItemClick(OnItemClickListener onItemClickListener) {
+		build_.onItemClickListener_ = onItemClickListener;
+		return this;
+	}
+
 	/**
 	 * A listview can be configured to automatically generate dividers for its
 	 * items by adding a data-autodividers="true" attribute to any listview. By
@@ -98,18 +114,16 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 	 * feature is designed to work seamlessly with the filter.
 	 * 
 	 * @throws UnsupportedOperationException
-	public void setAutodividers(boolean autodividers) {
-		throw new UnsupportedOperationException();
-	}
+	 *             public void setAutodividers(boolean autodividers) { throw new
+	 *             UnsupportedOperationException(); }
 	 */
 
 	/**
 	 * Adds a search filter bar to the listview.
 	 * 
 	 * @throws UnsupportedOperationException
-	public void setFilter(boolean filter) {
-		throw new UnsupportedOperationException();
-	}
+	 *             public void setFilter(boolean filter) { throw new
+	 *             UnsupportedOperationException(); }
 	 */
 
 	/**
@@ -118,9 +132,8 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 	 * it will auto-hide all the list items when the search field is blank.
 	 * 
 	 * @throws UnsupportedOperationException
-	public void setFilterReveal(boolean filterReveal) {
-		throw new UnsupportedOperationException();
-	}
+	 *             public void setFilterReveal(boolean filterReveal) { throw new
+	 *             UnsupportedOperationException(); }
 	 */
 
 	/**
@@ -128,9 +141,8 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 	 * which is useful for mixing a listview with other content on a page.
 	 * 
 	 * @throws UnsupportedOperationException
-	public void setInset(boolean inset) {
-		throw new UnsupportedOperationException();
-	}
+	 *             public void setInset(boolean inset) { throw new
+	 *             UnsupportedOperationException(); }
 	 */
 
 	/***************************************************************************
@@ -138,11 +150,16 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 	 */
 	final class Build extends BuildSupport implements ListView {
 
+		private OnItemClickListener<ValueObject> onItemClickListener_;
+
+		int id = 0;
+
 		private ContentList contents_ = new ContentList();
 
 		@Override
 		public void addItem(Content item) {
-			Element li = Html.li().add(item);
+			Element a = Html.a().href("#").attr("data-id", ("" + id++)).add(item);
+			Element li = a.wrap("li");
 			contents_.add(li);
 		}
 
@@ -154,7 +171,27 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 
 		@Override
 		public Content build() {
-			return Html.ul(this).decorate(DataRole.LISTVIEW, this).add(contents_);
+			Element element = Html.ul(this).decorate(DataRole.LISTVIEW, this).add(contents_);
+
+			if (onItemClickListener_ != null) {
+				EventHandler eh = new EventHandler() {
+					String id_ = session().next();
+					@Override
+					public String id() {
+						return id_;
+					}
+
+					@Override
+					public void handleEvent() {
+						int index = Integer.parseInt(RequestContext.getRequest().getParameter("data-index"));
+						ValueObject obj = valueList_.get(index-1);
+						onItemClickListener_.click(obj);
+					}};
+				session().addClickListener(eh);
+				jQuery(this).find("li a").clickListItem(eh);
+			}
+
+			return element;
 		}
 	}
 }
