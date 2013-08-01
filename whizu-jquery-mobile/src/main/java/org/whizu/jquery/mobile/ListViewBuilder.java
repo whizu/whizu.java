@@ -43,6 +43,8 @@ import org.whizu.value.ValueObject;
 import org.whizu.widget.BuildOnDemand;
 import org.whizu.widget.BuildSupport;
 
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
+
 /**
  * A listview is coded as a simple unordered list containing linked list items
  * with a data-role="listview" attribute. jQuery Mobile will apply all the
@@ -184,11 +186,15 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 					@Override
 					public void handleEvent() {
 						int index = Integer.parseInt(RequestContext.getRequest().getParameter("data-index"));
+						System.out.println("DATA-INDEX = " + index);
+						System.out.println("LIST-SIZE = " + valueList_.size());
 						ValueObject obj = valueList_.get(index-1);
 						onItemClickListener_.click(obj);
 					}};
 				session().addClickListener(eh);
-				jQuery(this).find("li a").clickListItem(eh);
+				//jQuery(this).find("li a").onClickItem(eh);
+				String thiz = jQuery(this).toJavaScript();
+				jQuery("$(document)").on("click", "#" + id() + " li a", eh);
 			}
 
 			return element;

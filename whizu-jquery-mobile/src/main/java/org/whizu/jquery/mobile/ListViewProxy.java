@@ -73,7 +73,8 @@ final class ListViewProxy extends Proxy<ListView> implements ListView {
 
 		@Override
 		public void addItem(Content item) {
-			Element li = Html.li().add(item);
+			Element a = Html.a().href("#").attr("data-id", "newid").add(item);
+			Element li = a.wrap("li");
 			jQuery(this).append(li).call("listview", "refresh");
 		}
 

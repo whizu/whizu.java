@@ -154,11 +154,23 @@ class JQueryImpl extends Expression implements JQuery {
 	}
 
 	@Override
-	public JQuery clickListItem(EventHandler eventHandler) {
+	public JQuery onClickItem(EventHandler eventHandler) {
 		if (eventHandler != null) {
-			click(getItemHandlerFunction(eventHandler));
+			on("click", getItemHandlerFunction(eventHandler));
 		}
 		return this;
+	}
+
+	public JQuery on(String events, Function handler) {
+		Script script = RequestContext.getRequest().compile(handler);
+		return concat(".", "on", "('", events, "', function(event) { ", script.toJavaScript(), " })");
+	}
+
+	@Override
+	public JQuery on(String events, String selector, EventHandler eventHandler) {
+		Script script = RequestContext.getRequest().compile( getItemHandlerFunction(eventHandler));
+		return concat(".", "on", "('", events, "', '", selector, "', function(event) { ", script.toJavaScript(), " })");
+		//return concat(".", "on", "('", events, "', ", selector, ", function(event) { ", script.toJavaScript(), " })");
 	}
 
 	@Override
@@ -171,7 +183,7 @@ class JQueryImpl extends Expression implements JQuery {
 	public JQuery closest(String name) {
 		return call("closest", name);
 	}
-
+	
 	@Override
 	public JQuery concat(String... js) {
 
