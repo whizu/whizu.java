@@ -51,7 +51,7 @@ public class Tournament2App implements JQueryMobile {
 	private static final Logger log = LoggerFactory.getLogger(Tournament2App.class);
 
 	private final ValueList<Player> playerList = new ValueList<Player>(Player.class);
-//	private final ListView playerList = ListViewBuilder.create().build();
+	// private final ListView playerList = ListViewBuilder.create().build();
 
 	private Popup popup;
 
@@ -63,7 +63,7 @@ public class Tournament2App implements JQueryMobile {
 		Player player2 = new Player();
 		player2.name.set("Rudy");
 		playerList.add(player2);
-		
+
 		// @formatter:off
 		popup = addPlayerEvent();
 		
@@ -77,18 +77,46 @@ public class Tournament2App implements JQueryMobile {
 			.on(page);
 		// @formatter:on
 
-		ListView listView = ListViewBuilder.createWith(playerList).onItemClick(onPlayerClickListener()).build();
+		ListView listView = ListViewBuilder.createWith(playerList).onItemClick(onPlayerClickListener2()).build();
 		page.add(listView);
 	}
 
+	private OnItemClickListener<Player> onPlayerClickListener2() {
+		return new OnItemClickListener<Player>() {
+
+			public void click(Player model) {
+				System.out.println("de speler is " + model.name.get());
+				final Button submitButton = ButtonBuilder.createWithTitle("Update").onClick(closePopup()).build();
+
+				final Form form = FormBuilder.create().addText(model.name).addDate(model.birthdate)
+						.addButton(submitButton).build();
+
+				Popup popup = PopupBuilder.createWithId("update-player-popup"+model.name.get()).center().h3("Messages.UPDATE_PLAYER")
+						.padding("10px").add(form).build();
+				System.out.println("de speler is " + model.name.get());
+				popup.open();
+			}
+
+			private ClickListener closePopup() {
+				return new ClickListener() {
+
+					public void click() {
+						popup.close();
+					}
+				};
+			}
+		};
+
+	}
+
 	private OnItemClickListener<Player> onPlayerClickListener() {
-		
+
 		return new OnItemClickListener<Player>() {
 
 			@Override
 			public void click(Player item) {
 				System.out.println("list item clicked " + item.name);
-				Popup popup = PopupBuilder.createWithId("edit-player-"+item.name.get()).h3(item.name.get()).build();
+				Popup popup = PopupBuilder.createWithId("edit-player-" + item.name.get()).h3(item.name.get()).build();
 				popup.open();
 			}
 		};
@@ -100,7 +128,7 @@ public class Tournament2App implements JQueryMobile {
 		final Player model = new Player();
 
 		Button submit = ButtonBuilder.createWithTitle("Create").build();
-		
+
 		// @formatter:off
 		Form form = FormBuilder.create()
 			.addText(model.name)

@@ -63,7 +63,7 @@ public class Text extends Widget implements Input, Identity {
 
 	@Override
 	public Content build() {
-		Element input = Html.input(this).attr("type", "text").attr("name", id()).attr("value", "");
+		Element input = Html.input(this).attr("type", "text").attr("name", id()).attr("value", ""+model_.get());
 		Element label = Html.tag("label").attr("for", input.id()).add(model_.name());
 		session().addInput(this);
 		return input.after(label);

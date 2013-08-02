@@ -182,14 +182,10 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 					@Override
 					public void handleEvent() {
 						int index = Integer.parseInt(RequestContext.getRequest().getParameter("data-index"));
-						System.out.println("DATA-INDEX = " + index);
-						System.out.println("LIST-SIZE = " + valueList_.size());
 						ValueObject obj = valueList_.get(index-1);
 						onItemClickListener_.click(obj);
 					}};
 				session().addClickListener(eh);
-				//jQuery(this).find("li a").onClickItem(eh);
-				String thiz = jQuery(this).toJavaScript();
 				jQuery("$(document)").on("click", "#" + id() + " li a", eh);
 			}
 
