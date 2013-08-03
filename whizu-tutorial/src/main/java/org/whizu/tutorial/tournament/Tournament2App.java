@@ -84,6 +84,8 @@ public class Tournament2App implements JQueryMobile {
 	private OnItemClickListener<Player> onPlayerClickListener2() {
 		return new OnItemClickListener<Player>() {
 
+			private Popup popup2;
+
 			public void click(Player model) {
 				System.out.println("de speler is " + model.name.get());
 				final Button submitButton = ButtonBuilder.createWithTitle("Update").onClick(closePopup()).build();
@@ -91,17 +93,17 @@ public class Tournament2App implements JQueryMobile {
 				final Form form = FormBuilder.create().addText(model.name).addDate(model.birthdate)
 						.addButton(submitButton).build();
 
-				Popup popup = PopupBuilder.createWithId("update-player-popup"+model.name.get()).center().h3("Messages.UPDATE_PLAYER")
+				popup2 = PopupBuilder.createWithId("update-player-popup"+model.name.get()).center().h3("Messages.UPDATE_PLAYER")
 						.padding("10px").add(form).build();
 				System.out.println("de speler is " + model.name.get());
-				popup.open();
+				popup2.open();
 			}
 
 			private ClickListener closePopup() {
 				return new ClickListener() {
 
 					public void click() {
-						popup.close();
+						popup2.close();
 					}
 				};
 			}
