@@ -19,17 +19,17 @@
 		<pathelement location="${maven.local.repository}/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar" />
 		<pathelement location="${maven.local.repository}/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" />
 		<pathelement location="${maven.local.repository}/org/glassfish/javax.servlet/3.1/javax.servlet-3.1.jar" />
-		<pathelement location="${maven.local.repository}/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar" />	
+		<pathelement location="${maven.local.repository}/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar" />
 	</path>
 
 	<path id="publish.class.path">
 		<pathelement location="${maven.local.repository}/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar" />
 		<pathelement location="${maven.local.repository}/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" />
 	</path>
-			
+
 	<path id="project.src">
 		<pathelement location="${project.home}/whizu-core/src/main/java" />
-		<pathelement location="${project.home}/whizu-apt/src/main/java" /> 
+		<pathelement location="${project.home}/whizu-apt/src/main/java" />
 		<pathelement location="${project.home}/whizu-jquery-ui/src/main/java" />
 		<pathelement location="${project.home}/whizu-jquery-mobile/src/main/java" />
 	</path>
@@ -67,7 +67,7 @@
 
 		<jar jarfile="${dist}/whizu.jar" basedir="${build}" />
 		<jar jarfile="${dist}/whizu-apt.jar" basedir="${whizu-apt}/target/classes" excludes="MarkdownTest/**">
-			<zipgroupfileset dir="${project.home}/whizu-apt/lib/" includes="markdown4j-2.2.jar"/>
+			<zipgroupfileset dir="${project.home}/whizu-apt/lib/" includes="markdown4j-2.2.jar" />
 		</jar>
 
 		<copy todir="${dist}/lib" flatten="true">
@@ -108,7 +108,7 @@
 		</copy>
 	</target>
 
-	
+
 	<target name="clean" description="clean up">
 		<!-- Delete the ${build} and ${dist} directory trees -->
 		<delete dir="${build}" />
@@ -120,7 +120,7 @@
 		<!-- Create the javadoc directory -->
 		<mkdir dir="${docs}/api" />
 
-		<javadoc packagenames="org.whizu.*" excludepackagenames="org.whizu.apt,org.whizu.jquery.ui,org.whizu.mvc,org.whizu.panel,org.whizu.context,org.whizu.aop,org.whizu.annotation.processing" sourcepath="${toString:project.src}" defaultexcludes="yes" destdir="${docs}/api" author="true" version="true" use="true" windowtitle="Whizu API">
+		<javadoc packagenames="org.whizu.*" excludepackagenames="org.whizu.apt,org.whizu.jquery.ui,org.whizu.mvc,org.whizu.panel,org.whizu.context,org.whizu.aop,org.whizu.annotation.processing" sourcepath="${toString:project.src}" defaultexcludes="yes"  destdir="${docs}/api" author="true" version="true" use="true" windowtitle="Whizu API">
 			<doctitle>
 				<![CDATA[Whizu ${project.version} API]]>
 			</doctitle>

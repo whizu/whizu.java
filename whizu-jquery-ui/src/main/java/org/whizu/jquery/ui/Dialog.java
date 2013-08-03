@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.ui;
 
-import org.whizu.dom.Markup;
+import org.whizu.dom.Content;
 import org.whizu.html.Html;
 import org.whizu.widget.Container;
 
@@ -36,7 +36,7 @@ public class Dialog extends Container {
 	}
 
 	@Override
-	public Markup compile() {
+	public Content build() {
 		String script = null;
 		if (width == null) {
 			script = ".popup('open');";

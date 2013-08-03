@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.ui;
 
-import org.whizu.dom.Markup;
+import org.whizu.dom.Content;
 import org.whizu.widget.Widget;
 
 /**
@@ -32,7 +32,7 @@ import org.whizu.widget.Widget;
 public class Tabs extends Widget {
 
 	@Override
-	public Markup compile() {
+	public Content build() {
 		throw new UnsupportedOperationException();
 	}
 }

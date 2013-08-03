@@ -98,8 +98,8 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 		return proxy_;
 	}
 
-	public <T extends ValueObject> ListViewBuilder onItemClick(OnItemClickListener onItemClickListener) {
-		build_.onItemClickListener_ = onItemClickListener;
+	public <T extends ValueObject> ListViewBuilder onItemClick(OnItemClickListener<T> onItemClickListener) {
+		build_.onItemClickListener_ = Objects.cast(onItemClickListener);
 		return this;
 	}
 
@@ -148,7 +148,7 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 	 */
 	final class Build extends BuildSupport implements ListView {
 
-		private OnItemClickListener<ValueObject> onItemClickListener_;
+		private OnItemClickListener<Object> onItemClickListener_;
 
 		int id = 0;
 
