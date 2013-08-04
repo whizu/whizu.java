@@ -120,7 +120,7 @@
 		<!-- Create the javadoc directory -->
 		<mkdir dir="${docs}/api" />
 
-		<javadoc packagenames="org.whizu.*" excludepackagenames="org.whizu.apt,org.whizu.jquery.ui,org.whizu.mvc,org.whizu.panel,org.whizu.context,org.whizu.aop,org.whizu.annotation.processing" sourcepath="${toString:project.src}" defaultexcludes="yes"  destdir="${docs}/api" author="true" version="true" use="true" windowtitle="Whizu API">
+		<javadoc packagenames="org.whizu.*" excludepackagenames="org.whizu.apt,org.whizu.jquery.ui,org.whizu.mvc,org.whizu.panel,org.whizu.context,org.whizu.widget,org.whizu.aop,org.whizu.annotation.processing" sourcepath="${toString:project.src}" defaultexcludes="yes"  destdir="${docs}/api" author="true" version="true" use="true" windowtitle="Whizu API">
 			<doctitle>
 				<![CDATA[Whizu ${project.version} API]]>
 			</doctitle>
