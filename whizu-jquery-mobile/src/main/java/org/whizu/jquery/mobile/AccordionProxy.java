@@ -23,12 +23,45 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Component;
+import org.whizu.proxy.Proxy;
+import org.whizu.proxy.ProxySupport;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Accordion extends Component {
+final class AccordionProxy extends Proxy<Accordion> implements Accordion {
 
-	public void addCollapsible(Collapsible collapsible);
+	protected AccordionProxy(Accordion impl) {
+		super(impl);
+	}
+
+	@Override
+	public void addCollapsible(Collapsible collapsible) {
+		impl().addCollapsible(collapsible);
+	}
+
+	@Override
+	protected Accordion createImpl() {
+		return new AccordionImpl(id());
+	}
+	
+	@Override
+	public String id() {
+		return impl().id();
+	}
+
+	/***************************************************************************
+     * The target <code>Accordion</code> that has been rendered.
+	 */
+	final class AccordionImpl extends ProxySupport implements Accordion {
+
+		private AccordionImpl(String id) {
+			super(id);
+		}
+
+		@Override
+		public void addCollapsible(Collapsible collapsible) {
+			jQuery(this).append(collapsible);
+		}
+	}
 }

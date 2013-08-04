@@ -7,7 +7,7 @@ import org.whizu.proxy.Proxy;
 
 final class ButtonProxy extends Proxy<Button> implements Button {
 
-	ButtonProxy(Button impl) {
+	protected ButtonProxy(Button impl) {
 		super(impl);
 	}
 
@@ -33,7 +33,7 @@ final class ButtonProxy extends Proxy<Button> implements Button {
 
 		private String id_;
 		
-		public ButtonImpl(String id) {
+		private ButtonImpl(String id) {
 			id_ = id;
 		}
 

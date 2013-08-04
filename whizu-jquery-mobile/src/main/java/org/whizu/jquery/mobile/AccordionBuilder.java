@@ -23,12 +23,44 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Component;
+import org.whizu.dom.Content;
+import org.whizu.dom.ContentList;
+import org.whizu.html.Html;
+import org.whizu.proxy.ProxyBuilder;
+import org.whizu.widget.BuildSupport;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Accordion extends Component {
+public final class AccordionBuilder extends ProxyBuilder<Accordion, AccordionBuilder.Build> {
 
-	public void addCollapsible(Collapsible collapsible);
+	@Override
+	protected Build createPrototype() {
+		return new Build();
+	}
+
+	@Override
+	protected Accordion createProxy(Build build) {
+		return new AccordionProxy(build);
+	}
+
+	/***************************************************************************
+	 * The <code>Accordion</code> that is being built.
+	 */
+	final class Build extends BuildSupport implements Accordion {
+
+		private ContentList contents_ = new ContentList();
+		
+		private Theme theme_;
+
+		@Override
+		public void addCollapsible(Collapsible collapsible) {
+			contents_.add(collapsible);
+		}
+
+		@Override
+		public Content build() {
+			return Html.div(this).decorate(DataRole.COLLAPSIBLE_SET, this, theme_).add(contents_);
+		}
+	}
 }

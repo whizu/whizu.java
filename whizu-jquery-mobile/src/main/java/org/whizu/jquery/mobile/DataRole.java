@@ -34,6 +34,7 @@ public enum DataRole implements Decorator {
 	// @formatter:off
 	BUTTON("button"),
 	COLLAPSIBLE("collapsible"),
+	COLLAPSIBLE_SET("collapsible-set"),
 	CONTENT("content"),
 	FOOTER("footer"), 
 	HEADER("header"), 

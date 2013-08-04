@@ -134,7 +134,7 @@ final class FormProxy extends Proxy<Form> implements Form {
 
 	@Override
 	protected Form createImpl() {
-		return new FormImpl();
+		return new FormImpl(id());
 	}
 
 	@Override
@@ -151,6 +151,10 @@ final class FormProxy extends Proxy<Form> implements Form {
      * The target <code>Form</code> that has been rendered.
 	 */
 	class FormImpl extends ProxySupport implements Form {
+
+		private FormImpl(String id) {
+			super(id);
+		}
 
 		@Override
 		public void add(Content content) {
