@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Identity;
+import org.whizu.content.Content;
+import org.whizu.content.Identity;
 
 /**
  * @author Rudy D'hauwe

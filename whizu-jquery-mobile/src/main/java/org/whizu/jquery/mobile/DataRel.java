@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Decorator;
-import org.whizu.dom.Element;
+import org.whizu.content.Decorator;
+import org.whizu.content.Element;
 
 /**
  * @author Rudy D'hauwe

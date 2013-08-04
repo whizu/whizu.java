@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Component;
+import org.whizu.content.Component;
 
 /**
  * Buttons are core widgets in jQuery Mobile and are used within a wide range of

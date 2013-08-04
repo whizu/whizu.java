@@ -23,10 +23,10 @@
  *******************************************************************************/
 package org.whizu.html;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.dom.Identity;
-import org.whizu.dom.Node;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
+import org.whizu.content.Identity;
+import org.whizu.content.Node;
 
 /**
  * A bunch of convenience methods for generating HTML content.

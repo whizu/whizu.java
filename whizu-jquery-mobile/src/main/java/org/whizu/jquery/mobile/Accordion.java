@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Component;
+import org.whizu.content.Component;
 
 /**
  * @author Rudy D'hauwe

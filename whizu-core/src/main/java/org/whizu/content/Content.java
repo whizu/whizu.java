@@ -21,12 +21,15 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.dom;
+package org.whizu.content;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Decorator {
-
-	public void decorate(Element element);
+public interface Content {
+	
+	/**
+	 * Generates and returns the corresponding HTML markup.
+	 */
+	public String render();
 }

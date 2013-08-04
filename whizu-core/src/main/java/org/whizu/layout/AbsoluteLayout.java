@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.layout;
 
-import org.whizu.dom.Content;
+import org.whizu.content.Content;
 
 public class AbsoluteLayout extends LayoutBuilder<AbsoluteLayout> {
 

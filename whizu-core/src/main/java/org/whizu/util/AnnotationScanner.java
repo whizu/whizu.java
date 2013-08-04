@@ -32,18 +32,18 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Rudy D'hauwe
  */
-public class AnnotationScanner {
+class AnnotationScanner<T extends Annotation> implements Scanner<T> {
 
 	private static Logger log = LoggerFactory.getLogger(AnnotationScanner.class);
-	
+
 	private static <T extends Annotation> AnnotationDetector.TypeReporter createTypeReporter(final Class<T> clazz,
-			final TypeReporter<T> reporter) {
+			final Reporter<T> reporter) {
 		return new AnnotationDetector.TypeReporter() {
 
 			@SuppressWarnings("unchecked")
 			@Override
 			public Class<? extends Annotation>[] annotations() {
-				return new Class[]{ clazz };
+				return new Class[] { clazz };
 			}
 
 			private Class<?> getClass(String className) {
@@ -63,20 +63,24 @@ public class AnnotationScanner {
 		};
 	}
 
+	private Class<T> annotationClass_;
+
 	private String[] packagesToScan_;
 
-	public AnnotationScanner() {
+	public AnnotationScanner(Class<T> annotationClass) {
+		annotationClass_ = annotationClass;
 		packagesToScan_ = null;
 	}
-	
-	public AnnotationScanner(String packageName) {
+
+	public AnnotationScanner(Class<T> annotationClass, String packageName) {
+		annotationClass_ = annotationClass;
 		if (!Strings.isBlank(packageName)) {
-		  packagesToScan_ = new String[] { packageName };
+			packagesToScan_ = new String[] { packageName };
 		}
 	}
-	
-	public AnnotationScanner(String... packages) {
-		System.out.println("packages" + packages);
+
+	public AnnotationScanner(Class<T> annotationClass, String... packages) {
+		annotationClass_ = annotationClass;
 		packagesToScan_ = packages;
 	}
 
@@ -87,17 +91,26 @@ public class AnnotationScanner {
 				log.debug("Scanning the full classpath for {}", (Object[]) reporter.annotations());
 				new AnnotationDetector(reporter).detect();
 			} else {
-				log.debug("Scanning the classpath for @{} within packages {}", (Object[]) reporter.annotations(), packagesToScan_);
+				log.debug("Scanning the classpath for @{} within packages {}", (Object[]) reporter.annotations(),
+						packagesToScan_);
 				new AnnotationDetector(reporter).detect(packagesToScan_);
 			}
-			log.debug("Scanned the classpath for @{} annotations in {}ms", (Object[]) reporter.annotations(), chrono.stop());
+			log.debug("Scanned the classpath for @{} annotations in {}ms", (Object[]) reporter.annotations(),
+					chrono.stop());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public <T extends Annotation> void scan(final Class<T> clazz, final TypeReporter<T> reporter) {
-		AnnotationDetector.TypeReporter typeReporter = createTypeReporter(clazz, reporter);
+	// public void scan(final Class<T> clazz, final Reporter<T> reporter) {
+	// AnnotationDetector.TypeReporter typeReporter = createTypeReporter(clazz,
+	// reporter);
+	// scan(typeReporter);
+	// }
+
+	@Override
+	public void scan(Reporter<T> reporter) {
+		AnnotationDetector.TypeReporter typeReporter = createTypeReporter(annotationClass_, reporter);
 		scan(typeReporter);
 	}
 }

@@ -27,12 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.whizu.dom.Component;
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentBuilder;
-import org.whizu.dom.Decorator;
-import org.whizu.dom.Element;
-import org.whizu.dom.Identity;
+import org.whizu.content.Component;
+import org.whizu.content.Content;
+import org.whizu.content.ContentBuilder;
+import org.whizu.content.Decorator;
+import org.whizu.content.Element;
+import org.whizu.content.Identity;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
@@ -41,6 +41,7 @@ import org.whizu.jquery.Session;
 /**
  * @author Rudy D'hauwe
  */
+@Deprecated
 public abstract class Widget implements ContentBuilder, Component, Decorator {
 
 	protected enum State {

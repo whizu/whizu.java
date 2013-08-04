@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.html;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.dom.Node;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
+import org.whizu.content.Node;
 
 /**
  * Base class for HTML tags with support for easy method chaining.

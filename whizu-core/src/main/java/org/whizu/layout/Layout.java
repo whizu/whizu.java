@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.layout;
 
-import org.whizu.dom.Composite;
+import org.whizu.content.Composite;
 
 /**
  * @author Rudy D'hauwe

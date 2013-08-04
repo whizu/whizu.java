@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery;
 
-import org.whizu.dom.Element;
+import org.whizu.content.Element;
 
 /**
  * jQuery's event system normalizes the event object according to W3C standards.

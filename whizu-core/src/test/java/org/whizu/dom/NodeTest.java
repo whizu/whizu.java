@@ -30,6 +30,12 @@ import java.util.Collection;
 import java.util.List;
 
 import org.junit.Test;
+import org.whizu.content.Content;
+import org.whizu.content.Decorator;
+import org.whizu.content.Element;
+import org.whizu.content.Foreach;
+import org.whizu.content.Literal;
+import org.whizu.content.Node;
 
 /**
  * @author Rudy D'hauwe
@@ -46,7 +52,7 @@ public class NodeTest extends AbstractTest {
 	}
 	
 	/**
-	 * Test method for {@link org.whizu.dom.Node#Node(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#Node(java.lang.String)}.
 	 */
 	@Test
 	public void testNodeString() {
@@ -56,7 +62,7 @@ public class NodeTest extends AbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link org.whizu.dom.Node#Node(java.lang.String, boolean)}.
+	 * {@link org.whizu.content.Node#Node(java.lang.String, boolean)}.
 	 */
 	@Test
 	public void testNodeStringBoolean() {
@@ -67,7 +73,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#add(org.whizu.dom.Content)}.
+	 * Test method for {@link org.whizu.content.Node#add(org.whizu.content.Content)}.
 	 */
 	@Test
 	public void testAddContent() {
@@ -100,7 +106,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#add(org.whizu.dom.Content[])}.
+	 * Test method for {@link org.whizu.content.Node#add(org.whizu.content.Content[])}.
 	 */
 	@Test
 	public void testAddContentArray() {
@@ -136,7 +142,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#add(org.whizu.dom.Foreach)}.
+	 * Test method for {@link org.whizu.content.Node#add(org.whizu.content.Foreach)}.
 	 */
 	@Test
 	public void testAddForeachOfT() {
@@ -146,7 +152,7 @@ public class NodeTest extends AbstractTest {
 		Foreach<TestClass> foreach = new Foreach<TestClass>(list) {
 
 			@Override
-			public Content compile(TestClass item) {
+			public Content build(TestClass item) {
 				return new Literal("A-" + item.name);
 			}
 		};
@@ -166,7 +172,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#add(java.util.List)}.
+	 * Test method for {@link org.whizu.content.Node#add(java.util.List)}.
 	 */
 	@Test
 	public void testAddListOfT() {
@@ -188,7 +194,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#add(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#add(java.lang.String)}.
 	 */
 	@Test
 	public void testAddString() {
@@ -221,7 +227,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#addCss(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#addCss(java.lang.String)}.
 	 */
 	@Test
 	public void testAddCss() {
@@ -237,7 +243,7 @@ public class NodeTest extends AbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link org.whizu.dom.Node#addStyle(java.lang.String, java.lang.String)}.
+	 * {@link org.whizu.content.Node#addStyle(java.lang.String, java.lang.String)}.
 	 */
 	@Test
 	public void testAddStyle() {
@@ -252,7 +258,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#after(org.whizu.dom.Content)}.
+	 * Test method for {@link org.whizu.content.Node#after(org.whizu.content.Content)}.
 	 */
 	@Test
 	public void testAfter() {
@@ -264,7 +270,7 @@ public class NodeTest extends AbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link org.whizu.dom.Node#attr(java.lang.String, java.lang.String)}.
+	 * {@link org.whizu.content.Node#attr(java.lang.String, java.lang.String)}.
 	 */
 	@Test
 	public void testAttr() {
@@ -279,7 +285,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#border(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#border(java.lang.String)}.
 	 */
 	@Test
 	public void testBorder() {
@@ -289,7 +295,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#css(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#css(java.lang.String)}.
 	 */
 	@Test
 	public void testCss() {
@@ -304,7 +310,7 @@ public class NodeTest extends AbstractTest {
 	}
 	
 	/**
-	 * Test method for {@link org.whizu.dom.Node#css(java.util.List)}.
+	 * Test method for {@link org.whizu.content.Node#css(java.util.List)}.
 	 */
 	@Test
 	public void testCssList() {
@@ -323,7 +329,7 @@ public class NodeTest extends AbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link org.whizu.dom.Node#decorate(org.whizu.dom.Decorator[])}.
+	 * {@link org.whizu.content.Node#decorate(org.whizu.content.Decorator[])}.
 	 */
 	@Test
 	public void testDecorateDecoratorArray() {
@@ -353,7 +359,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#id()}.
+	 * Test method for {@link org.whizu.content.Node#id()}.
 	 */
 	@Test
 	public void testId() {
@@ -363,7 +369,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#height(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#height(java.lang.String)}.
 	 */
 	@Test
 	public void testHeight() {
@@ -373,7 +379,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#id(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#id(java.lang.String)}.
 	 */
 	@Test
 	public void testIdString() {
@@ -383,7 +389,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#margin(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#margin(java.lang.String)}.
 	 */
 	@Test
 	public void testMargin() {
@@ -393,7 +399,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#padding(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#padding(java.lang.String)}.
 	 */
 	@Test
 	public void testPadding() {
@@ -403,7 +409,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#size(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#size(java.lang.String)}.
 	 */
 	@Test
 	public void testSize() {
@@ -413,7 +419,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#src(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#src(java.lang.String)}.
 	 */
 	@Test
 	public void testSrc() {
@@ -424,7 +430,7 @@ public class NodeTest extends AbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link org.whizu.dom.Node#style(java.lang.String, java.lang.String)}.
+	 * {@link org.whizu.content.Node#style(java.lang.String, java.lang.String)}.
 	 */
 	@Test
 	public void testStyle() {
@@ -440,7 +446,7 @@ public class NodeTest extends AbstractTest {
 	
 	/**
 	 * Test method for
-	 * {@link org.whizu.dom.Node#style(java.lang.String)}.
+	 * {@link org.whizu.content.Node#style(java.lang.String)}.
 	 */
 	@Test
 	public void testStyleString() {
@@ -448,7 +454,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#title(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#title(java.lang.String)}.
 	 */
 	@Test
 	public void testTitle() {
@@ -458,7 +464,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#render()}.
+	 * Test method for {@link org.whizu.content.Node#render()}.
 	 */
 	@Test
 	public void testRender() {
@@ -472,7 +478,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#width(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#width(java.lang.String)}.
 	 */
 	@Test
 	public void testWidth() {
@@ -482,7 +488,7 @@ public class NodeTest extends AbstractTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Node#wrap(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Node#wrap(java.lang.String)}.
 	 */
 	@Test
 	public void testWrap() {

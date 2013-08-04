@@ -25,8 +25,8 @@ package org.whizu.tutorial.panel;
 
 import java.util.Collection;
 
-import org.whizu.dom.Component;
-import org.whizu.dom.Composite;
+import org.whizu.content.Component;
+import org.whizu.content.Composite;
 import org.whizu.html.Html;
 import org.whizu.jquery.Callback;
 import org.whizu.value.Value;

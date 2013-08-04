@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
+import org.whizu.content.Content;
 import org.whizu.value.DateValue;
 import org.whizu.value.IntegerValue;
 import org.whizu.value.PasswordValue;

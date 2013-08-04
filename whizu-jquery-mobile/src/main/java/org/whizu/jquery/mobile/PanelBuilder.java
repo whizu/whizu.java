@@ -23,11 +23,11 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentList;
+import org.whizu.content.Content;
+import org.whizu.content.ContentList;
 import org.whizu.html.Html;
+import org.whizu.proxy.BuildSupport;
 import org.whizu.proxy.ProxyBuilder;
-import org.whizu.widget.BuildSupport;
 
 /**
  * @author Rudy D'hauwe

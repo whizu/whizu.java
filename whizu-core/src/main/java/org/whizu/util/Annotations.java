@@ -21,53 +21,24 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.dom;
+package org.whizu.util;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.lang.annotation.Annotation;
 
 /**
  * @author Rudy D'hauwe
  */
-public class ContentList implements Content, Iterable<Content> {
+public class Annotations {
 
-	private final List<Content> contentList_ = new ArrayList<Content>();
-
-	public ContentList() {
+	public static <T extends Annotation> Scanner<T> scanner(Class<T> annotationClass) {
+		return new AnnotationScanner<T>(annotationClass);
 	}
 
-	public ContentList(Content... content) {
-		for (Content c : content) {
-			add(c);
-		}
+	public static <T extends Annotation> Scanner<T> scanner(Class<T> annotationClass, String packageName) {
+		return new AnnotationScanner<T>(annotationClass, packageName);
 	}
 
-	/**
-	 * @return this
-	 */
-	public ContentList add(Content content) {
-		assert (content != null);
-		contentList_.add(content);
-		return this;
-	}
-
-	public <T extends Content> ContentList add(List<T> content) {
-		contentList_.addAll(content);
-		return this;
-	}
-
-	@Override
-	public Iterator<Content> iterator() {
-		return contentList_.iterator();
-	}
-
-	@Override
-	public String render() {
-		String markup = "";
-		for (Content element : contentList_) {
-			markup += element.render();
-		}
-		return markup;
+	public static <T extends Annotation> Scanner<T> scanner(Class<T> annotationClass, String... packageNames) {
+		return new AnnotationScanner<T>(annotationClass, packageNames);
 	}
 }

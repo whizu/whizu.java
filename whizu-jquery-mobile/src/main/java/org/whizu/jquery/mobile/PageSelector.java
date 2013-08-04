@@ -1,7 +1,7 @@
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
 import org.whizu.jquery.Selector;
 
 /**

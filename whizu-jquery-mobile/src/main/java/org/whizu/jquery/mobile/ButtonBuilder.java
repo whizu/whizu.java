@@ -23,16 +23,16 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.dom.Identity;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
+import org.whizu.content.Identity;
 import org.whizu.html.Html;
 import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.ClickListenerImpl;
 import org.whizu.jquery.JQuery;
+import org.whizu.proxy.BuildSupport;
 import org.whizu.proxy.ProxyBuilder;
 import org.whizu.util.Objects;
-import org.whizu.widget.BuildSupport;
 
 /**
  * @author Rudy D'hauwe

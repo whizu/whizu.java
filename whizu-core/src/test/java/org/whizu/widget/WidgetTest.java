@@ -27,8 +27,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
-import org.whizu.dom.Content;
-import org.whizu.dom.Node;
+import org.whizu.content.Content;
+import org.whizu.content.Node;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.Session;
@@ -171,7 +171,7 @@ public class WidgetTest extends AbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link org.whizu.widget.Widget#jQuery(org.whizu.dom.Identity[])}.
+	 * {@link org.whizu.widget.Widget#jQuery(org.whizu.content.Identity[])}.
 	 */
 	@Test
 	public void testJQueryIdentityArray() {
@@ -227,7 +227,7 @@ public class WidgetTest extends AbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link org.whizu.widget.Widget#compile(org.whizu.jquery.Function)}.
+	 * {@link org.whizu.widget.Widget#build(org.whizu.jquery.Function)}.
 	 */
 	@Test
 	public void testCompile() {

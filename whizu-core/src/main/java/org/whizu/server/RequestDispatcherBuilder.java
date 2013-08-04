@@ -32,9 +32,10 @@ import javax.servlet.ServletContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.annotation.App;
-import org.whizu.util.AnnotationScanner;
+import org.whizu.util.Annotations;
+import org.whizu.util.Scanner;
 import org.whizu.util.Strings;
-import org.whizu.util.TypeReporter;
+import org.whizu.util.Reporter;
 
 /**
  * @author Rudy D'hauwe
@@ -64,7 +65,7 @@ class RequestDispatcherBuilder {
 		// @formatter:on
 	}
 
-	private AnnotationScanner classpathAnnotationScanner_;
+	private Scanner<App> classpathAnnotationScanner_;
 
 	private String servletContextPath_;
 
@@ -73,7 +74,7 @@ class RequestDispatcherBuilder {
 		final List<Server> serverList = getServerList();
 
 		if (classpathAnnotationScanner_ != null) {
-			classpathAnnotationScanner_.scan(App.class, new TypeReporter<App>() {
+			classpathAnnotationScanner_.scan(new Reporter<App>() {
 
 				@Override
 				public void report(App app, Class<?> appClass) {
@@ -153,11 +154,11 @@ class RequestDispatcherBuilder {
 	}
 
 	private void enableAnnotationScanning() {
-		classpathAnnotationScanner_ = new AnnotationScanner();
+		classpathAnnotationScanner_ = Annotations.scanner(App.class);
 	}
 
 	private void enableAnnotationScanning(String[] packages) {
-		classpathAnnotationScanner_ = new AnnotationScanner(packages);
+		classpathAnnotationScanner_ = Annotations.scanner(App.class, packages);
 	}
 
 	private RequestDispatcherBuilder servletContext(ServletContext servletContext) {

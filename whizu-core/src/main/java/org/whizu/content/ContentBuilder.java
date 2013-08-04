@@ -21,50 +21,12 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.widget;
+package org.whizu.content;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentBuilder;
-import org.whizu.dom.Identity;
-import org.whizu.jquery.JQuery;
-import org.whizu.jquery.Request;
-import org.whizu.jquery.RequestContext;
-import org.whizu.jquery.Session;
+import org.whizu.util.Builder;
 
 /**
  * @author Rudy D'hauwe
  */
-abstract class JustInTimeContentBuilder implements ContentBuilder /* , Decorator */{
-
-	protected final JQuery jQuery() {
-		return request().select("$");
-	}
-
-	protected final JQuery jQuery(Identity... components) {
-		return request().select(components);
-	}
-
-	protected final JQuery jQuery(String selector) {
-		return request().select(selector);
-	}
-
-	protected final Request request() {
-		return RequestContext.getRequest();
-	}
-
-	protected final Session session() {
-		return request().session();
-	}
-
-	public final Content buildJustInTime() {
-		return new BuildOnDemand(this);
-	}
-	
-	/**
-	 * @throws UnsupportedOperationException
-	 */
-	public final String render() {
-		throw new UnsupportedOperationException("Rendering of builders is explicitely denied in the architecture");
-		//return build().render();
-	}
+public interface ContentBuilder extends Builder<Content> {
 }

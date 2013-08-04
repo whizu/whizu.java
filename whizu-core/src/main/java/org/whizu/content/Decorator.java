@@ -21,15 +21,12 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.dom;
+package org.whizu.content;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Identity {
+public interface Decorator {
 
-	/**
-	 * @return the id
-	 */
-	public String id();
+	public void decorate(Element element);
 }

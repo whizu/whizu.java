@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.panel;
 
-import org.whizu.dom.Composite;
+import org.whizu.content.Composite;
 
 /**
  * @author Rudy D'hauwe

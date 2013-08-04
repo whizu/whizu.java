@@ -1,13 +1,16 @@
-package org.whizu.widget;
+package org.whizu.proxy;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.whizu.dom.Decorator;
-import org.whizu.dom.Element;
-import org.whizu.dom.Stylable;
+import org.whizu.content.Decorator;
+import org.whizu.content.Element;
+import org.whizu.content.Stylable;
 
+/**
+ * @author Rudy D'hauwe
+ */
 public class StyleSupport implements Stylable, Decorator {
 
 	private List<String> cssClassList_ = new ArrayList<String>();

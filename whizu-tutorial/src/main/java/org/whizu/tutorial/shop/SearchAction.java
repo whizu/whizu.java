@@ -26,7 +26,7 @@ package org.whizu.tutorial.shop;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
-import org.whizu.dom.Component;
+import org.whizu.content.Component;
 import org.whizu.html.Html;
 import org.whizu.jquery.Callback;
 import org.whizu.jquery.JQuery;

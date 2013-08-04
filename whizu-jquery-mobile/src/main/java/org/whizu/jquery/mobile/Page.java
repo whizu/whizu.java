@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.dom.Identity;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
+import org.whizu.content.Identity;
 
 /**
  * The page is the primary unit of interaction in jQuery Mobile and is used to

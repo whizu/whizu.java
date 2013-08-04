@@ -1,4 +1,4 @@
-package org.whizu.dom;
+package org.whizu.content;
 
 public interface Stylable {
 

@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentBuilder;
-import org.whizu.dom.ContentList;
+import org.whizu.content.Content;
+import org.whizu.content.ContentBuilder;
+import org.whizu.content.ContentList;
 import org.whizu.html.Html;
 import org.whizu.value.DateValue;
 import org.whizu.value.StringValue;

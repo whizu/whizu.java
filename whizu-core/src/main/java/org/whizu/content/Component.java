@@ -21,12 +21,11 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.dom;
-
-import org.whizu.util.Builder;
+package org.whizu.content;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface ContentBuilder extends Builder<Content> {
+public interface Component extends Content, Identity {
+
 }

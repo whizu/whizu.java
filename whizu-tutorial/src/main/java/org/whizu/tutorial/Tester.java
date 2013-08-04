@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 import org.whizu.annotation.Css;
 import org.whizu.annotation.Markdown;
 import org.whizu.annotation.Style;
-import org.whizu.dom.Element;
+import org.whizu.content.Element;
 import org.whizu.html.Html;
 //import java.nio.file.Files;
 //import java.nio.file.Paths;

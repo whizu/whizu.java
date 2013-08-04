@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.ui;
 
-import org.whizu.dom.Content;
+import org.whizu.content.Content;
 import org.whizu.html.Html;
 import org.whizu.widget.Container;
 

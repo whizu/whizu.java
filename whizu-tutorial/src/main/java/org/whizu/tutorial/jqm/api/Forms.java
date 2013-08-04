@@ -26,6 +26,7 @@ package org.whizu.tutorial.jqm.api;
 import org.whizu.annotation.App;
 import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.mobile.Form;
+import org.whizu.jquery.mobile.FormBuilder;
 import org.whizu.jquery.mobile.Header;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
@@ -50,9 +51,7 @@ public class Forms implements JQueryMobile {
 		    .on(page);
 		// @formatter:on
 		
-		Form form = new Form();
-		form.onSubmit(submit());
-		form.addText(name);
+		Form form = FormBuilder.create().onSubmit(submit()).addText(name).build();
 		page.add(form);
 	}
 

@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.tutorial.tournament;
 
-import org.whizu.dom.Content;
+import org.whizu.content.Content;
 import org.whizu.html.Html;
 import org.whizu.value.AbstractValueObject;
 import org.whizu.value.DateValue;

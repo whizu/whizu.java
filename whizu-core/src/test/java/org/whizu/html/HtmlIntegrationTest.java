@@ -29,9 +29,9 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.dom.Foreach;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
+import org.whizu.content.Foreach;
 
 /**
  * @author Rudy D'hauwe
@@ -144,7 +144,7 @@ public class HtmlIntegrationTest extends AbstractTest {
 			),
 			Html.tbody().add(new Foreach<String>(list) {
 				@Override
-				public Content compile(String item) {	return 
+				public Content build(String item) {	return 
 						Html.tr(
 							Html.td().add(item),
 							Html.td().add(item)

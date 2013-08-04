@@ -21,7 +21,7 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.dom;
+package org.whizu.content;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,7 +98,7 @@ public class Node implements Element {
 		Iterator<E> it = factory.iterator();
 		while (it.hasNext()) {
 			E item = it.next();
-			add(factory.compile(item));
+			add(factory.build(item));
 		}
 		return this;
 	}

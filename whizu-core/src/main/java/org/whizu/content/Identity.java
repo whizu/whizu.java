@@ -21,26 +21,15 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.dom;
-
+package org.whizu.content;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Literal implements Content {
+public interface Identity {
 
-	private String text_;
-
-	public Literal(String text) {
-		this.text_ = text;
-	}
-
-	@Override
-	public String render() {
-		return text_;
-	}
-
-	public String text() {
-		return text_;
-	}
+	/**
+	 * @return the id
+	 */
+	public String id();
 }

@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentBuilder;
-import org.whizu.dom.Identity;
+import org.whizu.content.Content;
+import org.whizu.content.ContentBuilder;
+import org.whizu.content.Identity;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.RequestContext;
 import org.whizu.proxy.Proxy;

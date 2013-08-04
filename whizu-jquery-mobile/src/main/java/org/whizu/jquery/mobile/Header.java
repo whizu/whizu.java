@@ -26,8 +26,8 @@ package org.whizu.jquery.mobile;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
 import org.whizu.html.Html;
 import org.whizu.widget.Widget;
 

@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery;
 
-import org.whizu.dom.Content;
+import org.whizu.content.Content;
 
 /**
  * @author Rudy D'hauwe

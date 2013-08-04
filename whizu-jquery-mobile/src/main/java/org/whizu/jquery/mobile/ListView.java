@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Component;
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentBuilder;
+import org.whizu.content.Component;
+import org.whizu.content.Content;
+import org.whizu.content.ContentBuilder;
 
 /**
  * A listview is coded as a simple unordered list containing linked list items with

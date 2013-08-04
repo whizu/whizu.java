@@ -25,6 +25,9 @@ package org.whizu.dom;
 
 import static org.junit.Assert.assertEquals;
 
+import org.whizu.content.Content;
+import org.whizu.content.Identity;
+
 /**
  * @author Rudy D'hauwe
  */

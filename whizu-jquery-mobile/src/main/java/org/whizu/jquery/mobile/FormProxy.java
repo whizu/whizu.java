@@ -23,8 +23,8 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Component;
-import org.whizu.dom.Content;
+import org.whizu.content.Component;
+import org.whizu.content.Content;
 import org.whizu.jquery.ClickListener;
 import org.whizu.proxy.Proxy;
 import org.whizu.proxy.ProxySupport;

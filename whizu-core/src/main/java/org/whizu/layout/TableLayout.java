@@ -28,10 +28,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.whizu.dom.Component;
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.dom.Foreach;
+import org.whizu.content.Component;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
+import org.whizu.content.Foreach;
 import org.whizu.html.Html;
 import org.whizu.widget.Widget;
 
@@ -92,7 +92,7 @@ class TableLayout extends Widget {
 								.add(new Foreach<String>(columnList) {
 
 									@Override
-									public Content compile(String item) {
+									public Content build(String item) {
 										return Html.th(item);
 									}
 								})
@@ -101,7 +101,7 @@ class TableLayout extends Widget {
 				     	.add(new Foreach<Component[]>(rows.values()) {
 
 				     		@Override
-				     		public Content compile(Component[] item) {
+				     		public Content build(Component[] item) {
 				     			Element tr = Html.tr()
 				     							.width(width)
 				     							.style("word-wrap", "break-word");

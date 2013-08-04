@@ -30,6 +30,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.junit.Test;
+import org.whizu.content.Content;
+import org.whizu.content.Foreach;
+import org.whizu.content.Literal;
 
 /**
  * @author Rudy D'hauwe
@@ -46,7 +49,7 @@ public class ForeachTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Foreach#compile(java.lang.Object)}.
+	 * Test method for {@link org.whizu.content.Foreach#build(java.lang.Object)}.
 	 */
 	@Test
 	public void testCompile() {
@@ -56,22 +59,22 @@ public class ForeachTest {
 		Foreach<TestClass> foreach = new Foreach<TestClass>(list) {
 
 			@Override
-			public Content compile(TestClass item) {
+			public Content build(TestClass item) {
 				return new Literal("A-" + item.name);
 			}
 		};
 
 		Iterator<TestClass> it = foreach.iterator();
 		TestClass obj = it.next();
-		assertEquals("A-first", foreach.compile(obj).render());
+		assertEquals("A-first", foreach.build(obj).render());
 		obj = it.next();
-		assertEquals("A-second", foreach.compile(obj).render());
+		assertEquals("A-second", foreach.build(obj).render());
 		assertEquals(false, it.hasNext());
 	}
 
 	/**
 	 * Test method for
-	 * {@link org.whizu.dom.Foreach#Foreach(java.util.Collection)}.
+	 * {@link org.whizu.content.Foreach#Foreach(java.util.Collection)}.
 	 */
 	@Test
 	public void testForeach() {
@@ -81,20 +84,20 @@ public class ForeachTest {
 		Foreach<TestClass> foreach = new Foreach<TestClass>(list) {
 
 			@Override
-			public Content compile(TestClass item) {
+			public Content build(TestClass item) {
 				return new Literal(item.name);
 			}
 		};
 
 		Iterator<TestClass> it = foreach.iterator();
 		TestClass obj = it.next();
-		assertEquals("first", foreach.compile(obj).render());
+		assertEquals("first", foreach.build(obj).render());
 		obj = it.next();
-		assertEquals("second", foreach.compile(obj).render());
+		assertEquals("second", foreach.build(obj).render());
 		assertEquals(false, it.hasNext());
 	}
 	/**
-	 * Test method for {@link org.whizu.dom.Foreach#iterator()}.
+	 * Test method for {@link org.whizu.content.Foreach#iterator()}.
 	 */
 	@Test
 	public void testIterator() {
@@ -106,7 +109,7 @@ public class ForeachTest {
 		Foreach<TestClass> foreach = new Foreach<TestClass>(list) {
 
 			@Override
-			public Content compile(TestClass item) {
+			public Content build(TestClass item) {
 				return new Literal(item.name);
 			}
 		};

@@ -21,14 +21,15 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.widget;
+package org.whizu.proxy;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentBuilder;
-import org.whizu.dom.Decorator;
-import org.whizu.dom.Element;
-import org.whizu.dom.Identity;
-import org.whizu.dom.Stylable;
+import org.whizu.content.JustInTime;
+import org.whizu.content.Content;
+import org.whizu.content.ContentBuilder;
+import org.whizu.content.Decorator;
+import org.whizu.content.Element;
+import org.whizu.content.Identity;
+import org.whizu.content.Stylable;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;
 import org.whizu.jquery.RequestContext;
@@ -52,7 +53,7 @@ public abstract class BuildSupport implements ContentBuilder, Stylable, Decorato
 	}
 
 	public final Content buildJustInTime() {
-		return new BuildOnDemand(this);
+		return new JustInTime(this);
 	}
 
 	@Override
@@ -86,7 +87,7 @@ public abstract class BuildSupport implements ContentBuilder, Stylable, Decorato
 	}
 
 	/**
-	 * @see {@link org.whizu.dom.Content#render()}.
+	 * @see {@link org.whizu.content.Content#render()}.
 	 */
 	public final String render() {
 		return build().render();

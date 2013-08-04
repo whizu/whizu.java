@@ -26,8 +26,8 @@ package org.whizu.tutorial.shop;
 import java.lang.reflect.Field;
 
 import org.apache.commons.lang.reflect.FieldUtils;
-import org.whizu.dom.Component;
-import org.whizu.dom.Content;
+import org.whizu.content.Component;
+import org.whizu.content.Content;
 import org.whizu.html.Html;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.RequestContext;

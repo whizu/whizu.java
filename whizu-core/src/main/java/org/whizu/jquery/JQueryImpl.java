@@ -24,8 +24,8 @@
 package org.whizu.jquery;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import org.whizu.dom.Content;
-import org.whizu.dom.Identity;
+import org.whizu.content.Content;
+import org.whizu.content.Identity;
 import org.whizu.js.Expression;
 import org.whizu.js.JavaScript;
 import org.whizu.js.Script;

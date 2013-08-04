@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Content;
+import org.whizu.content.Content;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Selector;
 

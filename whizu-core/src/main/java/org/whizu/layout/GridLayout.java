@@ -23,10 +23,10 @@
  *******************************************************************************/
 package org.whizu.layout;
 
-import org.whizu.dom.Component;
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.dom.Literal;
+import org.whizu.content.Component;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
+import org.whizu.content.Literal;
 import org.whizu.html.Html;
 import org.whizu.html.Table;
 import org.whizu.html.Tbody;

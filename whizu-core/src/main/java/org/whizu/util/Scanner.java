@@ -21,32 +21,14 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.widget;
+package org.whizu.util;
+
+import java.lang.annotation.Annotation;
 
 /**
  * @author Rudy D'hauwe
  */
-abstract class JustInTimeComponentBuilder extends JustInTimeContentBuilder /* , Decorator */{
+public interface Scanner<T extends Annotation> {
 
-	private String id_;
-
-	protected JustInTimeComponentBuilder() {
-		id_ = session().next();
-	}
-
-	protected JustInTimeComponentBuilder(String id) {
-		id_ = id;
-	}
-
-	public final String id() {
-		return id_;
-	}
-
-	public final void id(String id) {
-		id_ = id;
-	}
-
-	protected final String selector() {
-		return "$(\"#" + id() + "\")";
-	}
+	public void scan(Reporter<T> reporter);
 }

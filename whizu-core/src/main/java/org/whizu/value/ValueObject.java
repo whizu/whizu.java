@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.value;
 
-import org.whizu.dom.ContentBuilder;
+import org.whizu.content.ContentBuilder;
 
 /**
  * @author Rudy D'hauwe

@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.proxy;
 
-import org.whizu.dom.Identity;
+import org.whizu.content.Identity;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.RequestContext;
 

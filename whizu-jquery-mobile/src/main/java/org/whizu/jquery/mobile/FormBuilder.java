@@ -23,13 +23,14 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.dom.Component;
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentList;
+import org.whizu.content.Component;
+import org.whizu.content.Content;
+import org.whizu.content.ContentList;
 import org.whizu.html.Html;
 import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.ClickListenerImpl;
 import org.whizu.jquery.Input;
+import org.whizu.proxy.BuildSupport;
 import org.whizu.proxy.Proxy;
 import org.whizu.proxy.ProxyBuilder;
 import org.whizu.util.Objects;
@@ -37,7 +38,6 @@ import org.whizu.value.DateValue;
 import org.whizu.value.PasswordValue;
 import org.whizu.value.StringValue;
 import org.whizu.value.Value;
-import org.whizu.widget.BuildSupport;
 
 /**
  * @author Rudy D'hauwe

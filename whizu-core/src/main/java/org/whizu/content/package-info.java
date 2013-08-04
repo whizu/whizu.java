@@ -1,5 +1,5 @@
 /**
-  The core Document Object Model.
+  The core Document Content Model.
   <p/>
   Copyright (c) 2013 Rudy D'hauwe @ Whizu<br/>
   Licensed under the EUPL V.1.1
@@ -24,4 +24,4 @@
   Contributors:
       2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  */
-package org.whizu.dom;
+package org.whizu.content;

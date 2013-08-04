@@ -23,9 +23,9 @@
  *******************************************************************************/
 package org.whizu.js;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentList;
-import org.whizu.dom.Literal;
+import org.whizu.content.Content;
+import org.whizu.content.ContentList;
+import org.whizu.content.Literal;
 
 /**
  * @author Rudy D'hauwe

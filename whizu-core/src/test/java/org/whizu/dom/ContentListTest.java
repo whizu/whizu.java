@@ -29,6 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.whizu.content.Content;
+import org.whizu.content.ContentList;
+import org.whizu.content.Literal;
 
 /**
  * @author Rudy D'hauwe
@@ -36,7 +39,7 @@ import org.junit.Test;
 public class ContentListTest {
 
 	/**
-	 * Test method for {@link org.whizu.dom.ContentList#ContentList()}.
+	 * Test method for {@link org.whizu.content.ContentList#ContentList()}.
 	 */
 	@Test
 	public void testContentList() {
@@ -46,7 +49,7 @@ public class ContentListTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.ContentList#ContentList(org.whizu.dom.Content[])}.
+	 * Test method for {@link org.whizu.content.ContentList#ContentList(org.whizu.content.Content[])}.
 	 */
 	@Test
 	public void testContentListContentArray() {
@@ -58,7 +61,7 @@ public class ContentListTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.ContentList#add(org.whizu.dom.Content)}.
+	 * Test method for {@link org.whizu.content.ContentList#add(org.whizu.content.Content)}.
 	 */
 	@Test
 	public void testAddContent() {
@@ -75,7 +78,7 @@ public class ContentListTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.ContentList#add(java.util.List)}.
+	 * Test method for {@link org.whizu.content.ContentList#add(java.util.List)}.
 	 */
 	@Test
 	public void testAddListOfT() {
@@ -93,7 +96,7 @@ public class ContentListTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.ContentList#render()}.
+	 * Test method for {@link org.whizu.content.ContentList#render()}.
 	 */
 	@Test
 	public void testRender() {

@@ -26,7 +26,7 @@ package org.whizu.layout;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.whizu.dom.Content;
+import org.whizu.content.Content;
 import org.whizu.widget.AbstractTest;
 
 /**

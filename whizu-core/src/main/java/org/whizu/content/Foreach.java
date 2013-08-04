@@ -21,20 +21,25 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.proxy;
+package org.whizu.content;
 
-import org.whizu.dom.Content;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * @author Rudy D'hauwe
  */
-public class Target implements Content {
+public abstract class Foreach<T> implements Iterable<T> {
+	
+	private Collection<T> list_;
 
-	/**
-	 * @throws IllegalStateException because this component is already rendered
-	 */
-	@Override
-	public final String render() {
-		throw new IllegalStateException("This component is already rendered");
+	public Foreach(Collection<T> list) {
+		list_ = list;
 	}
+
+	public Iterator<T> iterator() {
+		return list_.iterator();
+	}
+
+	public abstract Content build(T item);
 }

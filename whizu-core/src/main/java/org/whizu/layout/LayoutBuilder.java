@@ -23,10 +23,10 @@
  *******************************************************************************/
 package org.whizu.layout;
 
-import org.whizu.dom.Component;
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
-import org.whizu.dom.Foreach;
+import org.whizu.content.Component;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
+import org.whizu.content.Foreach;
 import org.whizu.html.Html;
 import org.whizu.widget.Container;
 import org.whizu.widget.Widget;
@@ -50,7 +50,7 @@ class LayoutBuilder<T extends LayoutBuilder<T>> extends Container implements Lay
 			 */
 
 			@Override
-			public Content compile(Content item) {
+			public Content build(Content item) {
 				if (item instanceof Element) {
 					return ((Element) item).css(itemClass);
 				}

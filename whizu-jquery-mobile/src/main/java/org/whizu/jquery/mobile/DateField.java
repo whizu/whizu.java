@@ -28,8 +28,8 @@ import java.beans.PropertyChangeListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
 import org.whizu.html.Html;
 import org.whizu.jquery.Input;
 import org.whizu.value.DateValue;

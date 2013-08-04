@@ -29,8 +29,8 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.whizu.annotation.Css;
 import org.whizu.annotation.Style;
-import org.whizu.dom.Content;
-import org.whizu.dom.Element;
+import org.whizu.content.Content;
+import org.whizu.content.Element;
 
 /**
  * @author Rudy D'hauwe

@@ -25,11 +25,11 @@ package org.whizu.tutorial.jqm.notebook;
 
 import org.whizu.annotation.App;
 import org.whizu.annotation.Style;
-import org.whizu.dom.ContentBuilder;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.mobile.Button;
 import org.whizu.jquery.mobile.Form;
+import org.whizu.jquery.mobile.FormBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.ListItem;
 import org.whizu.jquery.mobile.ListView;
@@ -81,8 +81,7 @@ public class Notebook implements JQueryMobile {
 
 	@Style("margin:25px")
 	Form createForm() {
-		form = new Form();
-		form.addText(title);
+		form = FormBuilder.create().addText(title).build();
 		form.addTextarea(description);
 		Button button = form.addButton("Add note");
 		addClickListener(button);

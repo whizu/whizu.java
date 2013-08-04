@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery;
 
-import org.whizu.dom.Identity;
+import org.whizu.content.Identity;
 import org.whizu.js.Expression;
 import org.whizu.js.Script;
 

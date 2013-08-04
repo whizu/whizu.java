@@ -21,21 +21,14 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.dom;
+package org.whizu.util;
+
+import java.lang.annotation.Annotation;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Composite extends Component {
-
-	@Deprecated //replace by add(Content)
-	public Composite add(Component component);
-
-	public Composite add(Content content);
+public interface Reporter<T extends Annotation> {
 	
-    public void empty();
-
-    public void prepend(Component component);
-
-	public void remove(Component component);
+	public void report(T annotation, Class<?> annotatedClass);
 }

@@ -21,11 +21,21 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.dom;
+package org.whizu.content;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Component extends Content, Identity {
+public interface Composite extends Component {
 
+	@Deprecated //replace by add(Content)
+	public Composite add(Component component);
+
+	public Composite add(Content content);
+	
+    public void empty();
+
+    public void prepend(Component component);
+
+	public void remove(Component component);
 }

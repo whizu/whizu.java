@@ -26,7 +26,7 @@ package org.whizu.layout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.whizu.dom.Content;
+import org.whizu.content.Content;
 import org.whizu.html.Html;
 import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.ClickListenerImpl;

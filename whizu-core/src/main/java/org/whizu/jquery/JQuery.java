@@ -23,7 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery;
 
-import org.whizu.dom.Content;
+import org.whizu.content.Content;
 
 /**
  * A jQuery object contains a collection of Document Object Model (DOM) elements

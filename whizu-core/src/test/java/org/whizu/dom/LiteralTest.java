@@ -26,6 +26,7 @@ package org.whizu.dom;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.whizu.content.Literal;
 
 /**
  * @author Rudy D'hauwe
@@ -33,7 +34,7 @@ import org.junit.Test;
 public class LiteralTest {
 
 	/**
-	 * Test method for {@link org.whizu.dom.Literal#render()}.
+	 * Test method for {@link org.whizu.content.Literal#render()}.
 	 */
 	@Test
 	public void testRender() {
@@ -42,7 +43,7 @@ public class LiteralTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Literal#Literal(java.lang.String)}.
+	 * Test method for {@link org.whizu.content.Literal#Literal(java.lang.String)}.
 	 */
 	@Test
 	public void testLiteral() {
@@ -51,7 +52,7 @@ public class LiteralTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.dom.Literal#text()}.
+	 * Test method for {@link org.whizu.content.Literal#text()}.
 	 */
 	@Test
 	public void testGetText() {

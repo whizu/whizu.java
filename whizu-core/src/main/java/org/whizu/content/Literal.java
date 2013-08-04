@@ -21,25 +21,25 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.dom;
-
-import java.util.Collection;
-import java.util.Iterator;
+package org.whizu.content;
 
 /**
  * @author Rudy D'hauwe
  */
-public abstract class Foreach<T> {
-	
-	private Collection<T> list_;
+public class Literal implements Content {
 
-	public Foreach(Collection<T> list) {
-		list_ = list;
+	private String text_;
+
+	public Literal(String text) {
+		this.text_ = text;
 	}
 
-	public Iterator<T> iterator() {
-		return list_.iterator();
+	@Override
+	public String render() {
+		return text_;
 	}
 
-	public abstract Content compile(T item);
+	public String text() {
+		return text_;
+	}
 }

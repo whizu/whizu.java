@@ -26,20 +26,20 @@ package org.whizu.jquery.mobile;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.whizu.dom.Content;
-import org.whizu.dom.ContentBuilder;
-import org.whizu.dom.ContentList;
-import org.whizu.dom.Element;
+import org.whizu.content.JustInTime;
+import org.whizu.content.Content;
+import org.whizu.content.ContentBuilder;
+import org.whizu.content.ContentList;
+import org.whizu.content.Element;
 import org.whizu.html.Html;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.OnItemClickListener;
 import org.whizu.jquery.RequestContext;
+import org.whizu.proxy.BuildSupport;
 import org.whizu.proxy.ProxyBuilder;
 import org.whizu.util.Objects;
 import org.whizu.value.ValueList;
 import org.whizu.value.ValueObject;
-import org.whizu.widget.BuildOnDemand;
-import org.whizu.widget.BuildSupport;
 
 /**
  * A listview is coded as a simple unordered list containing linked list items
@@ -163,7 +163,7 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 
 		@Override
 		public void addItem(ContentBuilder builder) {
-			Content item = new BuildOnDemand(builder);
+			Content item = new JustInTime(builder);
 			addItem(item);
 		}
 

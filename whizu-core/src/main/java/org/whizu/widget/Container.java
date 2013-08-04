@@ -26,14 +26,15 @@ package org.whizu.widget;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.whizu.dom.Component;
-import org.whizu.dom.Composite;
-import org.whizu.dom.Content;
+import org.whizu.content.Component;
+import org.whizu.content.Composite;
+import org.whizu.content.Content;
 import org.whizu.html.Html;
 
 /**
  * @author Rudy D'hauwe
  */
+@Deprecated
 public class Container extends Widget implements Composite {
 
 	protected List<Content> componentList = new ArrayList<Content>();
