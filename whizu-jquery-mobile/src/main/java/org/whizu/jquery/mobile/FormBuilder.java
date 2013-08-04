@@ -23,17 +23,26 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.dom.Component;
 import org.whizu.dom.Content;
+import org.whizu.dom.ContentList;
+import org.whizu.html.Html;
 import org.whizu.jquery.ClickListener;
-import org.whizu.util.Builder;
+import org.whizu.jquery.ClickListenerImpl;
+import org.whizu.jquery.Input;
+import org.whizu.proxy.Proxy;
+import org.whizu.proxy.ProxyBuilder;
+import org.whizu.util.Objects;
 import org.whizu.value.DateValue;
+import org.whizu.value.PasswordValue;
 import org.whizu.value.StringValue;
 import org.whizu.value.Value;
+import org.whizu.widget.BuildSupport;
 
 /**
  * @author Rudy D'hauwe
  */
-public class FormBuilder implements Builder<Form> {
+public final class FormBuilder extends ProxyBuilder<Form, FormBuilder.Build> {
 
 	private ValueRenderer valueRenderer_ = new ValueRenderer();
 	
@@ -41,36 +50,200 @@ public class FormBuilder implements Builder<Form> {
 		return new FormBuilder();
 	}
 
-	private Form form_ = new Form();
-
 	public FormBuilder addDate(DateValue date) {
-		form_.addDate(date);
+		build_.addDate(date);
 		return this;
 	}
 
 	public FormBuilder addText(StringValue name) {
-		form_.addText(name);
+		build_.addText(name);
 		return this;
 	}
 	
 	public FormBuilder addField(Value value) {
 		Content view = valueRenderer_.visit(value);
-		form_.add(view);
-		return this;
-	}
-
-	@Override
-	public Form build() {
-		return form_;
-	}
-
-	public FormBuilder onSubmit(ClickListener listener) {
-		form_.onSubmit(listener);
+		build_.add(view);
 		return this;
 	}
 
 	public FormBuilder addButton(Button submit) {
-		form_.addButton(submit);
+		build_.addButton(submit);
 		return this;
+	}
+	
+	@Override
+	protected Build createPrototype() {
+		return new Build();
+	}
+
+	@Override
+	protected Form createProxy(Build build) {
+		return new FormProxy(build);
+	}
+
+	public FormBuilder onSubmit(ClickListener listener) {
+		build_.onSubmit(listener);
+		return this;
+	}
+	
+	/***************************************************************************
+	 * The <code>Form</code> that is being built.
+	 */
+	class Build extends BuildSupport implements Form {
+
+		private ClickListenerImpl handler_;
+		
+		private ValueRenderer valueRenderer_ = new ValueRenderer();
+		
+		private ContentList contents_ = new ContentList();
+
+		@Override
+		public void add(Content field) {
+			contents_.add(field);
+		}
+
+		@Override
+		public void add(PasswordValue value) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public Button addButton(String title) {
+			Button button = ButtonBuilder.createWithTitle(title).build();
+			add(button);
+			return button;
+		}
+
+		@Override
+		public void addDate(DateValue date) {
+			add(new DateField(date));
+		}
+
+		@Override
+		public void addField(Value value) {
+			Content view = valueRenderer_.visit(value);
+			add(view);
+		}
+
+		@Override
+		public void addFieldContain(Component component) {
+			FieldContain fc = new FieldContain();
+			fc.add(component);
+			add(fc);
+		}
+
+		@Override
+		public void addFlipSwitch() {
+			Content field = new FlipSwitch();
+			add(field);
+		}
+
+		@Override
+		public void addListView() {
+			Content list = ListViewBuilder.create().build();
+			add(list);
+		}
+
+		@Override
+		public void addSlider(int min, int max) {
+			Content slider = new Slider(min, max);
+			add(slider);
+		}
+
+		@Override
+		public void addSlider(int min, int max, Theme theme) {
+			Content slider = new Slider(min, max, theme);
+			add(slider);
+		}
+
+		private void addSubmitHandler() {
+			jQuery(this).submit(handler_);
+		}
+
+		@Override
+		public void addText(String label) {
+			Content text = new Text(label);
+			add(text);
+		}
+
+		@Override
+		public void addText(StringValue value) {
+			addText(value, false);
+		}
+
+		@Override
+		public void addText(StringValue value, boolean fieldContain) {
+			if (fieldContain) {
+				FieldContain fc = new FieldContain();
+				Text text = new Text(value);
+				fc.add(text);
+				add(fc);
+			} else {
+				Text text = new Text(value);
+				add(text);
+			}
+		}
+
+		@Override
+		public void addTextarea(String label) {
+			Content text = new Textarea(label);
+			add(text);
+		}
+
+		@Override
+		public void addTextarea(StringValue value) {
+			addTextarea(value, false);
+		}
+
+		@Override
+		public void addTextarea(StringValue value, boolean fieldContain) {
+			if (fieldContain) {
+				FieldContain fc = new FieldContain();
+				Textarea text = new Textarea(value);
+				fc.add(text);
+				add(fc);
+			} else {
+				Textarea text = new Textarea(value);
+				add(text);
+			}
+		}
+
+		@Override
+		public void clear() {
+			for (Content c : contents_) {
+				if (c instanceof Input) {
+					Input i = (Input) c;
+					i.clear();
+				}
+			}
+		}
+
+		@Override
+		public Content build() {
+			// @formatter:off
+			Content markup = Html.form(this)
+				.attr("method", "post")
+				//.attr("action", "form.php")
+				.decorate(this)
+				.add(contents_);
+			// @formatter:on
+			addSubmitHandler();
+
+			return markup;
+		}
+		
+		@Override
+		public void onSubmit(ClickListener handler) {
+			handler_ = new ClickListenerImpl(handler);
+			session().addClickListener(handler_);
+		}
+
+		@Override
+		public void addButton(Button submit) {
+			Proxy<Button> proxy = Objects.cast(submit);
+			ButtonBuilder.Build build = Objects.cast(proxy.impl());
+			build.type(ButtonType.SUBMIT);
+			add(submit);
+		}
 	}
 }

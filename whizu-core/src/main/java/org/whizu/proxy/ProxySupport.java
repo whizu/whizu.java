@@ -32,6 +32,23 @@ import org.whizu.jquery.RequestContext;
  */
 public class ProxySupport {
 
+	private String id_;
+	
+	protected ProxySupport() {
+	}
+
+	protected ProxySupport(String id) {
+		id_ = id;
+	}
+
+	public final String id() {
+		return id_;
+	}
+	
+	public final void id(String id) {
+		id_ = id;
+	}
+	
 	protected final JQuery jQuery(Identity identity) {
 		return RequestContext.getRequest().select(identity);
 	}

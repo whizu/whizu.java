@@ -65,10 +65,8 @@ final class ListViewProxy extends Proxy<ListView> implements ListView {
 	 */
 	final class ListViewImpl extends ProxySupport implements ListView {
 
-		private String id_;
-
 		public ListViewImpl(String id) {
-			id_ = id;
+			super(id);
 		}
 
 		@Override
@@ -82,11 +80,6 @@ final class ListViewProxy extends Proxy<ListView> implements ListView {
 		public void addItem(ContentBuilder builder) {
 			Content item = new BuildOnDemand(builder);
 			addItem(item);
-		}
-		
-		@Override
-		public String id() {
-			return id_;
 		}
 	}
 }

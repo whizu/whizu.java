@@ -24,12 +24,13 @@
 package org.whizu.dom;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * @author Rudy D'hauwe
  */
-public class ContentList implements Content {
+public class ContentList implements Content, Iterable<Content> {
 
 	private final List<Content> contentList_ = new ArrayList<Content>();
 
@@ -54,6 +55,11 @@ public class ContentList implements Content {
 	public <T extends Content> ContentList add(List<T> content) {
 		contentList_.addAll(content);
 		return this;
+	}
+
+	@Override
+	public Iterator<Content> iterator() {
+		return contentList_.iterator();
 	}
 
 	@Override

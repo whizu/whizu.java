@@ -108,7 +108,6 @@ public class Tournament2App implements JQueryMobile {
 				};
 			}
 		};
-
 	}
 
 	private OnItemClickListener<Player> onPlayerClickListener() {
