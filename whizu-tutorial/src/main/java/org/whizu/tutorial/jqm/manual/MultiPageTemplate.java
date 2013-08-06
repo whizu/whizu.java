@@ -23,7 +23,6 @@ public class MultiPageTemplate implements JQueryMobile {
 
 	private Page createBar(Page foo) {
 		// @formatter:off
-		//Document document = foo.document();
 		Page bar = PageBuilder
 				.createWithId("bar")
 				.header("Bar")
@@ -31,7 +30,6 @@ public class MultiPageTemplate implements JQueryMobile {
 				.p("Back to {}", foo)
 				.footer("Page footer")
 				.build();
-		//document.add(bar);
 		return bar;
 		// @formatter:on
 	}
