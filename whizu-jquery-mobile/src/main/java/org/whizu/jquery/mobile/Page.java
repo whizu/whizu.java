@@ -50,4 +50,6 @@ public interface Page extends Identity {
 	public void header(String title);
 
 	public void p(String text);
+
+	public void p(String text, Object... args);
 }

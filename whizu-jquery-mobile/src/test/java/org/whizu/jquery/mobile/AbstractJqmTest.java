@@ -59,7 +59,7 @@ public abstract class AbstractJqmTest {
 	@Before
 	public void setUp() throws Exception {
 		this.theRequest = new TestRequest();
-		this.page = Jqm.document().page();
+		this.page = Jqm.document().index();
 		
 		RequestContext.setInstance(new RequestContext() {
 			

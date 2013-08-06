@@ -30,6 +30,7 @@ import org.whizu.jquery.mobile.ButtonBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
+import org.whizu.jquery.mobile.PageBuilder;
 import org.whizu.jquery.mobile.Panel;
 import org.whizu.jquery.mobile.PanelBuilder;
 
@@ -45,7 +46,7 @@ public class Panels implements JQueryMobile {
 		Panel panel = PanelBuilder.createWithId("my-panel").add(Html.p("This is my first panel")).build();
 		Button openPanel = ButtonBuilder.createWithTitle("Open panel").onClickOpen(panel).build();
 		index.add(openPanel);
-		Page next = Jqm.createPage("next");
+		Page next = PageBuilder.createWithId("next").build();
 		index.add(ButtonBuilder.createWithTitle("Next page").onClickOpen(next).build());
 		panel = PanelBuilder.createWithId("other-panel").add(Html.p("This is my second panel")).right().build();
 		Button button = ButtonBuilder.createWithTitle("Open second panel").onClickOpen(panel).build();

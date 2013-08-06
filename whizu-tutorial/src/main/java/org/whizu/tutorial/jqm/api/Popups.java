@@ -30,6 +30,7 @@ import org.whizu.jquery.mobile.Header;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
+import org.whizu.jquery.mobile.PageBuilder;
 import org.whizu.jquery.mobile.Popup;
 import org.whizu.jquery.mobile.PopupBuilder;
 
@@ -46,7 +47,7 @@ public class Popups implements JQueryMobile {
 		 * Button("hello"));
 		 */
 
-		Page next = Jqm.createPage("Next");
+		Page next = PageBuilder.createWithId("Next").build();
 
 		Popup popup = PopupBuilder.createWithId("popup").p("My first text").build();
 		// page.append(popup);

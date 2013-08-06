@@ -25,8 +25,8 @@ package org.whizu.tutorial.jqm.api;
 
 import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.JQueryMobile;
-import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
+import org.whizu.jquery.mobile.PageBuilder;
 
 /**
  * @author Rudy D'hauwe
@@ -40,11 +40,9 @@ public class SinglePage implements JQueryMobile {
 		page.header("Page Title Do it Now");
 		page.p("Page content goes here. <a href='#first'>first page</a> <a href='#second'>second page</a>");
 		page.footer("Page Footer");
-	
-		page = Jqm.createPage("second");
+		page = PageBuilder.createWithId("second").build();
 		page.header("my second header");
-		
-		page = Jqm.createPage("first");
+		page = PageBuilder.createWithId("first").build();
 		page.p("hello <a href='#'>home</a> <a href='#index'>index</a>");
 		page.header("Cool");
 	}

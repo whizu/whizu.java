@@ -115,12 +115,14 @@ public final class ButtonBuilder extends ProxyBuilder<Button, ButtonBuilder.Buil
 		return this;
 	}
 
-	public void theme(Theme theme) {
+	public ButtonBuilder theme(Theme theme) {
 		build_.theme(theme);
+		return this;
 	}
 
-	public void type(ButtonType type) {
+	public ButtonBuilder type(ButtonType type) {
 		build_.type(type);
+		return this;
 	}
 
 	/***************************************************************************

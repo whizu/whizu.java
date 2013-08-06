@@ -8,7 +8,7 @@ public class ButtonBuilderTest extends AbstractJqmTest {
 
 	@Test
 	public void testButtonBuilder() {
-		Page next = Jqm.createPage("next");
+		Page next = PageBuilder.createWithId("next").build();
 
 		// @formatter:off
 		/*
@@ -25,13 +25,13 @@ public class ButtonBuilderTest extends AbstractJqmTest {
 		// @formatter:on
 
 		assertEquals(
-				"$p = $(\"<div data-role='page' id='next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c1' href='#next'>My button</a>\");",
+				"$p = $(\"<div data-role='page' id='next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer);$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c1' href='#next'>My button</a>\");",
 				theRequest.finish());
 	}
 
 	@Test
 	public void testJqmBuilder() {
-		Page next = Jqm.createPage("next");
+		Page next = PageBuilder.createWithId("next").build();
 
 		// @formatter:off
 		Button button = ButtonBuilder.createWithTitle("My button")
@@ -41,7 +41,7 @@ public class ButtonBuilderTest extends AbstractJqmTest {
 		// @formatter:on
 
 		assertEquals(
-				"$p = $(\"<div data-role='page' id='next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer); ;$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c1' href='#next'>My button</a>\");",
+				"$p = $(\"<div data-role='page' id='next'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer);$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c1' href='#next'>My button</a>\");",
 				theRequest.finish());
 	}
 }

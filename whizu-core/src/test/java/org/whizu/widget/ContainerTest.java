@@ -63,12 +63,12 @@ public class ContainerTest extends AbstractTest {
 		assertEquals(false, part.isRendered());
 		part.css("myClass");
 		assertEquals(false, part.isRendered());
-		assertEquals("$(\"#c0\").append(\"<div id='c1' class='myClass '></div>\");", request.finish());
+		assertEquals("$('#c0').append(\"<div id='c1' class='myClass '></div>\");", request.finish());
 		assertEquals(true, parent.isRendered());
 		Container child2 = new Container();
 		parent.add(child2);
 		assertEquals(2, parent.componentList.size());
-		assertEquals("$(\"#c0\").append(\"<div id='c2'></div>\");", theRequest.finish());
+		assertEquals("$('#c0').append(\"<div id='c2'></div>\");", theRequest.finish());
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class ContainerTest extends AbstractTest {
 		equals("<div id='c1' class='myClass myOtherClass '></div>", container);
 		assertEquals(true, container.isRendered());
 		container.css("nextClass");
-		assertEquals("$(\"#c1\").addClass(\"nextClass\");", theRequest.finish());
+		assertEquals("$('#c1').addClass(\"nextClass\");", theRequest.finish());
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class ContainerTest extends AbstractTest {
 		assertEquals(true, container.isRendered());
 		container.empty();
 		assertEquals(0, container.componentList.size());
-		assertEquals("$(\"#c0\").empty();", theRequest.finish());
+		assertEquals("$('#c0').empty();", theRequest.finish());
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class ContainerTest extends AbstractTest {
 		Container child3 = new Container();
 		container.prepend(child3);
 		assertEquals(3, container.componentList.size());
-		assertEquals("$(\"#c0\").prepend(\"<div id='c3'></div>\");", theRequest.finish());
+		assertEquals("$('#c0').prepend(\"<div id='c3'></div>\");", theRequest.finish());
 	}
 
 	/**
@@ -155,6 +155,6 @@ public class ContainerTest extends AbstractTest {
 		assertEquals(true, container.isRendered());
 		container.remove(child2);
 		assertEquals(0, container.componentList.size());
-		assertEquals("$(\"#c2\").remove();", theRequest.finish());
+		assertEquals("$('#c2').remove();", theRequest.finish());
 	}
 }

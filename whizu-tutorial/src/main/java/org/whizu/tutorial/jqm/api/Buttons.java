@@ -89,7 +89,7 @@ public class Buttons  implements JQueryMobile {
 			public void click() {
 				x++;
 				y++;
-				Page page = Jqm.page();
+				Page page = Jqm.index();
 				page.add("<p>Button clicked! Starting the registration process... " + z + "," + x + "," + y + "</p>");
 				
 				Popup popup1 = PopupBuilder.createWithId("myotherpopup").p("My second text").build();
@@ -107,7 +107,7 @@ public class Buttons  implements JQueryMobile {
 		public void click() {
 			x++;
 			y++;
-			Page page = Jqm.page();
+			Page page = Jqm.index();
 			page.add("<p>Starting the registration process... " + x + "," + y + "</p>");
 		}
 

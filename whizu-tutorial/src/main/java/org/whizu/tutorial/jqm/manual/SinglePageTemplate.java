@@ -6,10 +6,10 @@ import org.whizu.annotation.Title;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Page;
 
-@App("/whizu/page/url")
+@App("/whizu/singlepage")
 @Title("My page title")
 @Description("My page description")
-public class BasicSinglePageTemplate implements JQueryMobile {
+public class SinglePageTemplate implements JQueryMobile {
 
     @Override
     public void onLoad(Page page) {

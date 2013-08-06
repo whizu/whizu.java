@@ -23,9 +23,6 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.jquery.RequestContext;
-import org.whizu.util.Objects;
-
 /**
  * @author Rudy D'hauwe
  */
@@ -46,21 +43,21 @@ public class Document {
 	// body.append(string);
 	// }
 
-	@Deprecated
-	public Page createPage(String id) {
-		// PageBuild page = new PageBuild(id);
-		// String ex = "$p = $(\"" + page.render() + "\");";
-		// RequestContext.getRequest().addExpression(ex +
-		// " $p.appendTo($.mobile.pageContainer); "); //
-		// $.mobile.changePage($('#second'));");
-		// return page(id); // return page
-
-		Page page = PageBuilder.createWithId(id).build();
-		PageProxy proxy = Objects.cast(page);
-		String ex = "$p = $(\"" + proxy.render() + "\");";
-		RequestContext.getRequest().addExpression(ex + " $p.appendTo($.mobile.pageContainer); "); // $.mobile.changePage($('#second'));");
-		return page;
-	}
+//	@Deprecated
+//	public Page createPage(String id) {
+//		// PageBuild page = new PageBuild(id);
+//		// String ex = "$p = $(\"" + page.render() + "\");";
+//		// RequestContext.getRequest().addExpression(ex +
+//		// " $p.appendTo($.mobile.pageContainer); "); //
+//		// $.mobile.changePage($('#second'));");
+//		// return page(id); // return page
+//
+//		Page page = PageBuilder.createWithId(id).build();
+//		PageProxy proxy = Objects.cast(page);
+//		String ex = "$p = $(\"" + proxy.render() + "\");";
+//		RequestContext.getRequest().addExpression(ex + " $p.appendTo($.mobile.pageContainer); "); // $.mobile.changePage($('#second'));");
+//		return page;
+//	}
 
 	// // verified
 	// public Page allPages() {
@@ -92,13 +89,12 @@ public class Document {
 	// }
 
 	// verified
-	public Page page() {
+	public Page index() {
 		return page("index");
 	}
 
 	// verified
 	private Page page(String id) {
-		//return new PageImpl(id, "$('#" + id + "')");
 		return PageBuilder.jQueryById(id);
 	}
 }

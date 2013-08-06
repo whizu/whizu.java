@@ -28,6 +28,7 @@ import org.whizu.jquery.mobile.ButtonBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
+import org.whizu.jquery.mobile.PageBuilder;
 
 /**
  * @author Rudy D'hauwe
@@ -39,8 +40,8 @@ public class Dialogs implements JQueryMobile {
 	public void onLoad(Page index) {
 		index.header("Welcome !");
 		
-		Page foo = Jqm.createPage("foo");
-		Page bar = Jqm.createPage("bar");
+		Page foo = PageBuilder.createWithId("foo").build();
+		Page bar = PageBuilder.createWithId("bar").build();
 
 		foo.header("Foos");
 		foo.p("I'm first in the source order so I'm shown as the page.");

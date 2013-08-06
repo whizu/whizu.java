@@ -28,6 +28,8 @@ import org.whizu.content.Literal;
 import org.whizu.html.Html;
 import org.whizu.proxy.Proxy;
 import org.whizu.proxy.ProxySupport;
+import org.whizu.util.Objects;
+import org.whizu.util.Strings;
 
 /**
  * @author Rudy D'hauwe
@@ -87,6 +89,11 @@ final class PageProxy extends Proxy<Page> implements Page {
 		impl().p(content);
 	}
 
+	@Override
+	public void p(String text, Object... args) {
+		impl().p(text, args);
+	}
+
 	/***************************************************************************
 	 * The target <code>Page</code> that has been rendered.
 	 */
@@ -129,6 +136,17 @@ final class PageProxy extends Proxy<Page> implements Page {
 		@Override
 		public void p(String text) {
 			add(Html.p(text));
+		}
+
+		@Override
+		public void p(String pattern, Object... args) {
+			Page page = Objects.cast(args[0]);
+			String link = "<a href='#" + page.id() + "'>" + page.id() + "</a>";
+			System.out.println(pattern);
+			System.out.println(link);
+			String text = Strings.format(pattern, link);
+			System.out.println(text);
+			p(text);
 		}
 	}
 }

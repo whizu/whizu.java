@@ -53,7 +53,7 @@ class JQueryMobileAjaxServer implements RequestProcessor {
 			throws IOException {
 		try {
 			JQueryMobile app = Objects.newInstance(appClass_);
-			app.onLoad(Jqm.document().page());
+			app.onLoad(Jqm.document().index());
 			// works:RequestContext.getRequest().addExpression("$('#whizu').closest(\":jqmData(role='page')\").trigger('pagecreate');");
 			RequestContext.getRequest().addExpression("$('#whizu').parent().trigger('pagecreate');");
 			response.setHeader("X-Robots-Tag", "noindex");

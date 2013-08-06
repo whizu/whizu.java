@@ -17,7 +17,7 @@ public class MultiPageTemplate implements JQueryMobile {
 		Page bar = createBar(foo);
 		foo.header("Foo");
 		foo.p("I'm first in the source order so I'm shown as the page.");
-		//foo.p("View internal page called {}", bar);
+		foo.p("View internal page called {}", bar);
 		foo.footer("My Page Footer");
 	}
 
@@ -28,7 +28,7 @@ public class MultiPageTemplate implements JQueryMobile {
 				.createWithId("bar")
 				.header("Bar")
 				.p("I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is being clicked.")
-		//		.p(foo)
+				.p("Back to {}", foo)
 				.footer("Page footer")
 				.build();
 		//document.add(bar);

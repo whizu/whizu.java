@@ -28,14 +28,6 @@ package org.whizu.jquery.mobile;
  */
 public final class Jqm {
 
-	/**
-	 * To be replaced by PageBuilder().create()...build()
-	 */
-	@Deprecated
-	public static Page createPage(String id) {
-		return document().createPage(id);
-	}
-
 	/*
 	public static void changePage(String id) {
 		RequestContext.getRequest().addExpression("$.mobile.changePage('#" + id + "');");
@@ -49,7 +41,7 @@ public final class Jqm {
 	/**
 	 * @return the index page of the jQuery Mobile application
 	 */
-	public static Page page() {
-		return document().page();
+	public static Page index() {
+		return document().index();
 	}
 }

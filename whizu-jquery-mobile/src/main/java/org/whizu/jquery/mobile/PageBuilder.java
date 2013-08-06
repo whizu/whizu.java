@@ -27,8 +27,11 @@ import org.whizu.content.Content;
 import org.whizu.content.ContentList;
 import org.whizu.content.Literal;
 import org.whizu.html.Html;
+import org.whizu.jquery.RequestContext;
 import org.whizu.proxy.BuildSupport;
 import org.whizu.proxy.ProxyBuilder;
+import org.whizu.util.Objects;
+import org.whizu.util.Strings;
 
 /**
  * @author Rudy D'hauwe
@@ -38,7 +41,7 @@ public final class PageBuilder extends ProxyBuilder<Page, PageBuilder.Build> {
 	public static PageBuilder createWithId(String id) {
 		return new PageBuilder(id);
 	}
-	
+
 	protected static Page jQueryById(String id) {
 		return new PageProxy(id);
 	}
@@ -64,7 +67,10 @@ public final class PageBuilder extends ProxyBuilder<Page, PageBuilder.Build> {
 
 	@Override
 	protected Page createProxy(Build build) {
-		return new PageProxy(build);
+		PageProxy proxy = new PageProxy(build);
+		String ex = "$p = $(\"" + proxy.render() + "\");";
+		RequestContext.getRequest().addExpression(ex + " $p.appendTo($.mobile.pageContainer);");
+		return proxy;
 	}
 
 	public PageBuilder footer(String title) {
@@ -79,6 +85,11 @@ public final class PageBuilder extends ProxyBuilder<Page, PageBuilder.Build> {
 
 	public PageBuilder p(String content) {
 		build_.p(content);
+		return this;
+	}
+
+	public PageBuilder p(String pattern, Object... args) {
+		build_.p(pattern, args);
 		return this;
 	}
 
@@ -114,7 +125,6 @@ public final class PageBuilder extends ProxyBuilder<Page, PageBuilder.Build> {
 			footer_ = new Footer(title); // FooterBuilder.create().title(title).build();
 		}
 
-		
 		@Override
 		public void header(Header header) {
 			header_ = header;
@@ -128,6 +138,14 @@ public final class PageBuilder extends ProxyBuilder<Page, PageBuilder.Build> {
 		@Override
 		public void p(String content) {
 			add(Html.p(content));
+		}
+
+		@Override
+		public void p(String pattern, Object... args) {
+			Page page = Objects.cast(args[0]);
+			String link = "<a href='#" + page.id() + "'>" + page.id() + "</a>";
+			String text = Strings.format(pattern, link);
+			p(text);
 		}
 	}
 }

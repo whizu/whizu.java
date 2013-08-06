@@ -29,6 +29,7 @@ import org.whizu.jquery.mobile.ButtonBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
+import org.whizu.jquery.mobile.PageBuilder;
 
 /**
  * @author Rudy D'hauwe
@@ -40,7 +41,7 @@ public class Headers implements JQueryMobile /* implements JqmApp */{
 	public void onLoad(Page page) {
 		page.header("Huidige pagina");
 
-		Page next = Jqm.createPage("Next");
+		Page next = PageBuilder.createWithId("Next").build();
 		next.header("Volgende pagina");
 
 		// @formatter:off

@@ -28,6 +28,7 @@ import org.whizu.jquery.mobile.ButtonBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
+import org.whizu.jquery.mobile.PageBuilder;
 
 /**
  * @author Rudy D'hauwe
@@ -38,22 +39,23 @@ public class MultiPage implements JQueryMobile {
 	@Override
 	public void onLoad(Page index) {
 		index.header("Welcome !");
-		
-		Page foo = Jqm.createPage("foo");
-		Page bar = Jqm.createPage("bar");
+
+		Page foo = PageBuilder.createWithId("foo").build(); // Jqm.createPage("foo");
+		Page bar = PageBuilder.createWithId("bar").build(); // Jqm.createPage("bar");
 
 		foo.header("Foos");
 		foo.p("I'm first in the source order so I'm shown as the page.");
-		//foo.p("View internal page called ").add(Jqm.createHyperlink("bar", bar));
+		// foo.p("View internal page called ").add(Jqm.createHyperlink("bar",
+		// bar));
 		foo.footer("Page Footer");
 
 		bar.header("Bars");
 		bar.p("I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is being clicked.");
-		//foo.p("Take me ").add(Jqm.createHyperlink("back to Foo", foo));
+		// foo.p("Take me ").add(Jqm.createHyperlink("back to Foo", foo));
 		bar.footer("Page Footer");
-		
+
 		index.add(ButtonBuilder.createWithTitle("foo").onClickOpen(foo).build());
 		index.add(ButtonBuilder.createWithTitle("bar").onClickOpen(bar).build());
-		//Jqm.changePage("foo");
+		// Jqm.changePage("foo");
 	}
 }

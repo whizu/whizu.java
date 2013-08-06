@@ -34,7 +34,7 @@ public class RegistrationListener implements ClickListener {
 
 	@Override
 	public void click() {
-		Page page = Jqm.page();
+		Page page = Jqm.index();
 		page.add("<p>Starting the RegistrationListener process...</p>");
 	}
 }

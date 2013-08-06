@@ -45,10 +45,24 @@ public class Strings {
 	}
 
 	/**
+	 * Substitutes the {} in the pattern by the argument.
+	 */
+	public static String format(String pattern, Object arg) {
+		return MessageFormatter.format(pattern, arg).getMessage();
+	}
+	
+	/**
+	 * Substitutes each {} in the pattern by the arguments.
+	 */
+	public static String format(String pattern, Object arg1, Object arg2) {
+		return MessageFormatter.format(pattern, arg1, arg2).getMessage();
+	}
+	
+	/**
 	 * Substitutes each {} in the pattern by the next argument.
 	 */
 	public static String format(String pattern, Object... args) {
-		return MessageFormatter.format(pattern, args).getMessage();
+		return MessageFormatter.arrayFormat(pattern, args).getMessage();
 	}
 	
 	public static boolean isBlank(String str) {

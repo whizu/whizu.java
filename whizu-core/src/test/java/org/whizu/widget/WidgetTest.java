@@ -69,7 +69,7 @@ public class WidgetTest extends AbstractTest {
 		equals("<div id='c1' class='myClass myOtherClass '></div>", widget);
 		assertEquals(true, widget.isRendered());
 		widget.css("nextClass");
-		assertEquals("$(\"#c1\").addClass(\"nextClass\");", theRequest.finish());
+		assertEquals("$('#c1').addClass(\"nextClass\");", theRequest.finish());
 	}
 
 	/**
@@ -177,10 +177,10 @@ public class WidgetTest extends AbstractTest {
 	public void testJQueryIdentityArray() {
 		Widget widget = new TestWidget();
 		JQuery jQuery = widget.jQuery(widget);
-		assertEquals("$(\"#c0\")", jQuery.toJavaScript());
+		assertEquals("$('#c0')", jQuery.toJavaScript());
 		Widget otherWidget = new TestWidget();
 		jQuery = widget.jQuery(widget, otherWidget);
-		assertEquals("$(\"#c0,#c1\")", jQuery.toJavaScript());
+		assertEquals("$('#c0,#c1')", jQuery.toJavaScript());
 	}
 
 	/**
@@ -222,7 +222,7 @@ public class WidgetTest extends AbstractTest {
 		equals("<div id='c1' style='width:120px;' class='myClass '></div>", widget);
 		assertEquals(true, widget.isRendered());
 		widget.width("150px");
-		assertEquals("$(\"#c1\").width(\"150px\");", theRequest.finish());
+		assertEquals("$('#c1').width(\"150px\");", theRequest.finish());
 	}
 
 	/**
