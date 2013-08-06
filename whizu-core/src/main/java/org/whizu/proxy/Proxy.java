@@ -37,8 +37,13 @@ public abstract class Proxy<T> implements Content {
 	private T impl_;
 
 	protected Proxy(T impl) {
-		assert(impl instanceof ContentBuilder);
+		assert (impl instanceof ContentBuilder);
 		impl_ = impl;
+	}
+
+	protected Proxy(String id) {
+		assert (id != null);
+		impl_ = jQueryById(id);
 	}
 
 	public void assureExistsOnPage(JQuery page) {
@@ -49,14 +54,18 @@ public abstract class Proxy<T> implements Content {
 	}
 
 	protected abstract T createImpl();
-
-	//TODO make protected? see usage in Form.
+	
+	// TODO make protected? see usage in Form.
 	public final T impl() {
 		return impl_;
 	}
 
-	protected JQuery jQuery(String selector) {
+	protected final JQuery jQuery(String selector) {
 		return RequestContext.getRequest().select(selector);
+	}
+
+	protected T jQueryById(String id) {
+		throw new UnsupportedOperationException("Overwrite this method if necessary");
 	}
 
 	@Override

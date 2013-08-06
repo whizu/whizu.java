@@ -24,110 +24,111 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.content.Content;
-import org.whizu.content.ContentList;
 import org.whizu.content.Literal;
 import org.whizu.html.Html;
-import org.whizu.proxy.BuildSupport;
-import org.whizu.proxy.ProxyBuilder;
+import org.whizu.proxy.Proxy;
+import org.whizu.proxy.ProxySupport;
 
 /**
  * @author Rudy D'hauwe
  */
-public final class PageBuilder extends ProxyBuilder<Page, PageBuilder.Build> {
+final class PageProxy extends Proxy<Page> implements Page {
 
-	public static PageBuilder createWithId(String id) {
-		return new PageBuilder(id);
+	protected PageProxy(Page impl) {
+		super(impl);
 	}
 	
-	protected static Page jQueryById(String id) {
-		return new PageProxy(id);
-	}
-
-	private PageBuilder(String id) {
-		build_.id(id);
-	}
-
-	public PageBuilder add(Content content) {
-		build_.add(content);
-		return this;
-	}
-
-	public PageBuilder add(String content) {
-		build_.add(content);
-		return this;
+	protected PageProxy(String id) {
+		super(id);
 	}
 
 	@Override
-	protected Build createPrototype() {
-		return new Build();
+	public void add(Content content) {
+		impl().add(content);
 	}
 
 	@Override
-	protected Page createProxy(Build build) {
-		return new PageProxy(build);
+	public void add(String content) {
+		impl().add(content);
 	}
 
-	public PageBuilder footer(String title) {
-		build_.footer(title);
-		return this;
+	@Override
+	protected Page createImpl() {
+		return new PageImpl(id());
 	}
 
-	public PageBuilder header(String title) {
-		build_.header(title);
-		return this;
+	@Override
+	public void footer(String title) {
+		impl().footer(title);
 	}
 
-	public PageBuilder p(String content) {
-		build_.p(content);
-		return this;
+	@Override
+	public void header(Header header) {
+		impl().header(header);
+	}
+
+	@Override
+	public void header(String title) {
+		impl().header(title);
+	}
+
+	@Override
+	public String id() {
+		return impl().id();
+	}
+
+	@Override
+	protected Page jQueryById(String id) {
+		return new PageImpl(id);
+	}
+
+	@Override
+	public void p(String content) {
+		impl().p(content);
 	}
 
 	/***************************************************************************
-	 * The <code>Page</code> that is being built.
+	 * The target <code>Page</code> that has been rendered.
 	 */
-	final class Build extends BuildSupport implements Page {
+	final class PageImpl extends ProxySupport implements Page {
 
-		private ContentList contents_ = new ContentList();
-
-		private Footer footer_;
-
-		private Header header_;
+		private PageImpl(String id) {
+			super(id);
+		}
 
 		@Override
 		public void add(Content content) {
-			contents_.add(content);
+			jQuery(this).find("div[data-role=content]").append(content);
 		}
 
 		@Override
-		public void add(String content) {
-			add(new Literal(content));
-		}
-
-		@Override
-		public Content build() {
-			Content content = Html.div().decorate(DataRole.CONTENT).add(contents_);
-			return Html.div(this).decorate(DataRole.PAGE, this).add(header_, content, footer_);
+		public void add(String text) {
+			add(new Literal(text));
 		}
 
 		@Override
 		public void footer(String title) {
-			footer_ = new Footer(title); // FooterBuilder.create().title(title).build();
+			// TODO Footer footer = FooterBuilder.create().title(title).build();
+			Footer footer = new Footer(title);
+			jQuery(this).append(footer);
 		}
-
 		
 		@Override
 		public void header(Header header) {
-			header_ = header;
+			// jQuery("$.mobile.activePage").append(header_);
+			jQuery(this).prepend(header);
 		}
 
 		@Override
 		public void header(String title) {
-			header_ = HeaderBuilder.create().title(title).build();
+			Header header = HeaderBuilder.create().title(title).build();
+			// jQuery("$.mobile.activePage").append(header_);
+			jQuery(this).prepend(header);
 		}
 
 		@Override
-		public void p(String content) {
-			add(Html.p(content));
+		public void p(String text) {
+			add(Html.p(text));
 		}
 	}
 }

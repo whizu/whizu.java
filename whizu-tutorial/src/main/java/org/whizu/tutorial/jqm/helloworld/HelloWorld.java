@@ -30,11 +30,11 @@ import org.whizu.jquery.mobile.Page;
 /**
  * @author Rudy D'hauwe
  */
-@App("/whizu/jqm/helloworld")
+@App("/whizu/helloworld")
 public class HelloWorld implements JQueryMobile {
 
 	@Override
 	public void onLoad(Page page) {
-		page.header("Hello world");
+		page.header("Hello world!");
 	}
 }

@@ -32,8 +32,8 @@ public final class Jqm {
 	 * To be replaced by PageBuilder().create()...build()
 	 */
 	@Deprecated
-	public static Page addPage(String id) {
-		return document().addPage(id);
+	public static Page createPage(String id) {
+		return document().createPage(id);
 	}
 
 	/*

@@ -41,10 +41,10 @@ public class SinglePage implements JQueryMobile {
 		page.p("Page content goes here. <a href='#first'>first page</a> <a href='#second'>second page</a>");
 		page.footer("Page Footer");
 	
-		page = Jqm.addPage("second");
+		page = Jqm.createPage("second");
 		page.header("my second header");
 		
-		page = Jqm.addPage("first");
+		page = Jqm.createPage("first");
 		page.p("hello <a href='#'>home</a> <a href='#index'>index</a>");
 		page.header("Cool");
 	}

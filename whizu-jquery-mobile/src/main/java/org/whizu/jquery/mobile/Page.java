@@ -24,29 +24,30 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.content.Content;
-import org.whizu.content.Element;
 import org.whizu.content.Identity;
 
 /**
  * The page is the primary unit of interaction in jQuery Mobile and is used to
  * group content into logical views that can be animated in and out of view with
- * page transitions. A HTML document may start with a single Page and the AJAX
- * navigation system will load additional pages on demand into the DOM as users
- * navigate around. Alternatively, a HTML document can be built with multiple
- * Pages inside it and the framework will transition between these local views
- * with no need to request content from the server.
+ * page transitions. A basic HTML document may start with a single Page and the
+ * AJAX navigation system will load additional pages on demand into the DOM as
+ * users navigate around. Alternatively, a HTML document can be built with
+ * multiple Pages inside it and the framework will transition between these
+ * local views with no need to request content from the server.
  * 
  * @author Rudy D'hauwe
  */
 public interface Page extends Identity {
 
 	public void add(Content content);
-	
-	public void append(String html);
 
-	public Footer footer(String title);
+	public void add(String html);
 
-	public Header header(String title);
+	public void footer(String title);
 
-	public Element p(String text);
+	public void header(Header header);
+
+	public void header(String title);
+
+	public void p(String text);
 }

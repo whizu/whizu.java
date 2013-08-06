@@ -40,7 +40,7 @@ public class Headers implements JQueryMobile /* implements JqmApp */{
 	public void onLoad(Page page) {
 		page.header("Huidige pagina");
 
-		Page next = Jqm.addPage("Next");
+		Page next = Jqm.createPage("Next");
 		next.header("Volgende pagina");
 
 		// @formatter:off

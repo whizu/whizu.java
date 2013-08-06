@@ -26,9 +26,15 @@ package org.whizu.jquery.mobile;
 import org.whizu.content.Component;
 
 /**
+ * An accordion is created in jQuery Mobile by grouping a series of individual
+ * collapsibles into a set.
+ * 
  * @author Rudy D'hauwe
  */
 public interface Accordion extends Component {
 
+	/**
+	 * Add a collapsible to the accordion.
+	 */
 	public void addCollapsible(Collapsible collapsible);
 }

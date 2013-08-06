@@ -60,7 +60,7 @@ public class Forms implements JQueryMobile {
 			
 			@Override
 			public void click() {
-				Jqm.page().append("Name entered " + name.get());				
+				Jqm.page().add("Name entered " + name.get());				
 			}
 		};
 	}

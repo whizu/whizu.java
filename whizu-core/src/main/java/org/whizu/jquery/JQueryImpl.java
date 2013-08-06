@@ -292,7 +292,7 @@ class JQueryImpl extends Expression implements JQuery {
 	}
 
 	private String getSelector(Identity... objs) {
-		String selector = "$(\"";
+		String selector = "$('";
 		int i = 0;
 		for (Identity component : objs) {
 			if (i > 0) {
@@ -301,7 +301,7 @@ class JQueryImpl extends Expression implements JQuery {
 			selector += "#" + component.id();
 			i++;
 		}
-		selector += "\")";
+		selector += "')";
 		return selector;
 	}
 

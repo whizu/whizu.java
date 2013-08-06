@@ -46,7 +46,7 @@ public class Popups implements JQueryMobile {
 		 * Button("hello"));
 		 */
 
-		Page next = Jqm.addPage("Next");
+		Page next = Jqm.createPage("Next");
 
 		Popup popup = PopupBuilder.createWithId("popup").p("My first text").build();
 		// page.append(popup);

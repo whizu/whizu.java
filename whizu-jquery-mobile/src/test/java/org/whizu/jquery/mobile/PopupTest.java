@@ -39,6 +39,6 @@ public class PopupTest extends AbstractJqmTest {
 	public void testOpen() {
 		Popup popup = PopupBuilder.createWithId("popup").p("Text").build();
 		popup.open();
-		assertEquals("$.mobile.activePage.append(\"<div data-role='popup' id='popup'><p>Text</p></div>\").trigger(\"pagecreate\");$(\"#popup\").popup(\"open\");", theRequest.finish());
+		assertEquals("$.mobile.activePage.append(\"<div data-role='popup' id='popup'><p>Text</p></div>\").trigger(\"pagecreate\");$('#popup').popup(\"open\");", theRequest.finish());
 	}
 }

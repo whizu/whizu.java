@@ -39,7 +39,7 @@ public final class PopupBuilder extends ProxyBuilder<Popup, PopupBuilder.Build> 
 		return new PopupBuilder(id);
 	}
 
-	public PopupBuilder(String id) {
+	private PopupBuilder(String id) {
 		build_.id(id);
 	}
 

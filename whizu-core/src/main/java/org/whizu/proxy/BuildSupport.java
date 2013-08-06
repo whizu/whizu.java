@@ -106,7 +106,7 @@ public abstract class BuildSupport implements ContentBuilder, Stylable, Decorato
 	}
 	
 	@Override
-	public void style(String style) {
+	public final void style(String style) {
 		style_.style(style);
 	}
 }

@@ -43,6 +43,6 @@ public class MarkdownExample implements JQueryMobile {
 	@Override
 	public void onLoad(Page page) {
 		page.header("Basic Page Template");
-		page.append(title);
+		page.add(title);
 	}
 }

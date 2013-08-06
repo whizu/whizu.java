@@ -23,77 +23,82 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.content.Content;
 import org.whizu.jquery.RequestContext;
-import org.whizu.jquery.Selector;
+import org.whizu.util.Objects;
 
 /**
  * @author Rudy D'hauwe
  */
 public class Document {
 
-	private Selector body = new Selector("$(\"#whizu\")"); // private JQuery
-															// body = new
-															// Selector("$('body')");
-															// //Selector
-															// implements JQuery
+	// private Selector body = new Selector("$(\"#whizu\")"); // private JQuery
+	// body = new
+	// Selector("$('body')");
+	// //Selector
+	// implements JQuery
 
-	// verified
-	public Page activePage() {
-		return new PageSelector("$.mobile.activePage");
-	}
+	// // verified
+	// public Page activePage() {
+	// return new PageImpl("$.mobile.activePage");
+	// }
 
-	public void add(String string) {
-		body.append(string);
-	}
+	// public void add(String string) {
+	// body.append(string);
+	// }
 
-	public Page addPage(String id) {
-		PageBuilder page = new PageBuilder(id);
-		// body.append(page);
-		String ex = "$p = $(\"" + page.render() + "\");";
+	@Deprecated
+	public Page createPage(String id) {
+		// PageBuild page = new PageBuild(id);
+		// String ex = "$p = $(\"" + page.render() + "\");";
+		// RequestContext.getRequest().addExpression(ex +
+		// " $p.appendTo($.mobile.pageContainer); "); //
+		// $.mobile.changePage($('#second'));");
+		// return page(id); // return page
+
+		Page page = PageBuilder.createWithId(id).build();
+		PageProxy proxy = Objects.cast(page);
+		String ex = "$p = $(\"" + proxy.render() + "\");";
 		RequestContext.getRequest().addExpression(ex + " $p.appendTo($.mobile.pageContainer); "); // $.mobile.changePage($('#second'));");
-
-		// jQuery("$.mobile.pageContainer").append(p);
-		// jQuery("$.mobile").call("changePage", "#"+id);
-		return page(id); // return page
+		return page;
 	}
 
-	// verified
-	public Page allPages() {
-		return new PageSelector("$(\"div:jqmData(role='page')\")");
-	}
+	// // verified
+	// public Page allPages() {
+	// return new PageImpl("$(\"div:jqmData(role='page')\")");
+	// }
 
-	public Document append(String content) {
-		body.append(content);
-		return this;
-	}
-	
-	public Document append(Content content) {
-		body.jQueryAppend(content);
-		return this;
-	}
+	// public Document append(String content) {
+	// body.append(content);
+	// return this;
+	// }
 
-	// verified
-	public Page first() {
-		return new PageSelector("$(\"div:jqmData(role='page')\").first()");
-	}
+	// public Document append(Content content) {
+	// body.jQueryAppend(content);
+	// return this;
+	// }
+
+	// // verified
+	// public Page first() {
+	// return new PageImpl("$(\"div:jqmData(role='page')\").first()");
+	// }
 
 	// verified
-	public Page index() {
-		return page("index");
-	}
+	// private Page index() {
+	// return page("index");
+	// }
 
-//	private JQuery jQuery(String selector) {
-//		return new Selector(selector).query();
-//	}
+	// private JQuery jQuery(String selector) {
+	// return new Selector(selector).query();
+	// }
 
 	// verified
 	public Page page() {
-		return index();
+		return page("index");
 	}
 
 	// verified
-	public Page page(String id) {
-		return new PageSelector(id, "$('#" + id + "')");
+	private Page page(String id) {
+		//return new PageImpl(id, "$('#" + id + "')");
+		return PageBuilder.jQueryById(id);
 	}
 }

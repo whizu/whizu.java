@@ -39,8 +39,8 @@ public class Dialogs implements JQueryMobile {
 	public void onLoad(Page index) {
 		index.header("Welcome !");
 		
-		Page foo = Jqm.addPage("foo");
-		Page bar = Jqm.addPage("bar");
+		Page foo = Jqm.createPage("foo");
+		Page bar = Jqm.createPage("bar");
 
 		foo.header("Foos");
 		foo.p("I'm first in the source order so I'm shown as the page.");

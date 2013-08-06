@@ -88,19 +88,19 @@
 		<mkdir dir="${package}" />
 
 		<!-- Put everything in ${dist} into the whizu-snapshot.zip file -->
-		<zip destfile="${package}/whizu-snapshot-${project.version}.zip" basedir="${dist}" />
+		<zip destfile="${package}/whizu-${project.version}.zip" basedir="${dist}" />
 
 		<!-- Put everything in ${dist} into the whizu-snapshot.tar.gz file -->
-		<tar destfile="${package}/whizu-snapshot-${project.version}.tar.gz" compression="gzip">
-			<zipfileset src="${package}/whizu-snapshot-${project.version}.zip" />
+		<tar destfile="${package}/whizu-${project.version}.tar.gz" compression="gzip">
+			<zipfileset src="${package}/whizu-${project.version}.zip" />
 		</tar>
 	</target>
 
 	<target name="publish" depends="clean, package" description="publish the package to the website">
 		<copy todir="${publish}/download">
 			<fileset dir="${package}">
-				<include name="whizu-snapshot-${project.version}.zip" />
-				<include name="whizu-snapshot-${project.version}.tar.gz" />
+				<include name="whizu-${project.version}.zip" />
+				<include name="whizu-${project.version}.tar.gz" />
 			</fileset>
 		</copy>
 		<copy todir="${publish}/api">
@@ -127,7 +127,7 @@
 			<bottom>
 				<![CDATA[<div style='font-size:16px;margin:10px;padding:20px;position:relative;top:20px;'>
 				<a href='http://www.whizu.org'>Whizu<sup>&#0153;</sup>
-				</a> is copyright &copy; 2013 by <a href='http://www.whizu.org/about.jsp' rel='author'>Rudy D'hauwe</a> | All rights reserved | <a href='http://www.whizu.org'>www.whizu.org</a>
+				</a> is copyright &copy; 2013 by <a href='http://www.whizu.org/about.whizu?rel=author' rel='author'>Rudy D'hauwe</a> | All rights reserved | <a href='http://www.whizu.org'>www.whizu.org</a>
 			</div>]]></bottom>
 		<tag name="todo" scope="all" description="To do:" />
 		<link href="http://download.oracle.com/javase/7/docs/api/" />
