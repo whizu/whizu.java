@@ -44,4 +44,8 @@ public interface ListView extends Component {
 	public void addItem(Content item);
 	
 	public void addItem(ContentBuilder builder);
+
+	public void replaceItem(int index, ContentBuilder item);
+
+	public void on(Page page);
 }

@@ -25,8 +25,8 @@ package org.whizu.jquery.mobile;
 
 import org.whizu.content.Content;
 import org.whizu.html.Html;
+import org.whizu.proxy.BuildSupport;
 import org.whizu.proxy.ProxyBuilder;
-import org.whizu.widget.Widget;
 
 /**
  * @author Rudy D'hauwe
@@ -59,7 +59,7 @@ public final class DialogBuilder extends ProxyBuilder<Dialog, DialogBuilder.Buil
 	/***************************************************************************
      * The prototype <code>Dialog</code> that is being built.
 	 */
-	final class Build extends Widget implements Dialog {
+	final class Build extends BuildSupport implements Dialog {
 
 		private String title_;
 

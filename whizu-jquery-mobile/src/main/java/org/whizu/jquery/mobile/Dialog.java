@@ -23,10 +23,12 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import org.whizu.content.Identity;
+
 /**
  * @author Rudy D'hauwe
  */
-public interface Dialog {
+public interface Dialog extends Identity {
 
 	public void title(String title);
 }

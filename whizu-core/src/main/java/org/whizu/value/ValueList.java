@@ -27,11 +27,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.whizu.jquery.ClickListener;
+import org.whizu.jquery.OnItemClickListener;
+import org.whizu.util.Callback;
+import org.whizu.util.Objects;
+
 /**
  * @author Rudy D'hauwe
  */
 public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> implements Iterable<VO> {
-
+				//implements ListManager (default behavior)
+	
 	private final Class<VO> clazz_;
 
 	public ValueList(Class<VO> clazz) {
@@ -41,7 +47,7 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 
 	public void add(VO element) {
 		value().add(element);
-		fireIndexedPropertyChange(value().size() - 1, null, element);
+		fireIndexedPropertyChange(value().size(), null, element);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -92,5 +98,34 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 	@Override
 	public <T> T visit(Visitor<T> visitor) {
 		return visitor.accept(this);
+	}
+
+	public void update(VO model) {
+		int index = value().indexOf(model);
+		System.out.println("notify update of item no " + index);
+		fireIndexedPropertyChange(index, null, model);
+	}
+
+	public final void update(ValueObject obj) {
+		VO vo = Objects.cast(obj);
+		update(vo);
+	}
+
+	public final ClickListener add(final OnItemClickListener<VO> itemListener) {
+		return new ClickListener() {
+
+			@Override
+			public void click() {
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!clicking");
+				final VO model = createNew();
+				itemListener.click(model, new Callback() {
+
+					@Override
+					public void success() {
+						add(model);
+					}
+				});
+			}
+		};
 	}
 }

@@ -59,7 +59,17 @@ final class ListViewProxy extends Proxy<ListView> implements ListView {
 	public String id() {
 		return impl().id();
 	}
+
+	@Override
+	public void on(Page page) {
+		page.add(this);
+	}
 	
+	@Override
+	public void replaceItem(int index, ContentBuilder item) {
+		impl().replaceItem(index, item);
+	}
+
 	/***************************************************************************
 	 * The target <code>Popup</code> that has been rendered.
 	 */
@@ -80,6 +90,18 @@ final class ListViewProxy extends Proxy<ListView> implements ListView {
 		public void addItem(ContentBuilder builder) {
 			Content item = new JustInTime(builder);
 			addItem(item);
+		}
+
+		@Override
+		public void on(Page page) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public void replaceItem(int index, ContentBuilder item) {
+			System.out.println("replace item");
+			jQuery(this).find("li:eq("+index+") a").empty().append(item.build());
+			jQuery(this).call("listview", "refresh");
 		}
 	}
 }

@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
+import java.beans.IndexedPropertyChangeEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -37,6 +38,7 @@ import org.whizu.jquery.OnItemClickListener;
 import org.whizu.jquery.RequestContext;
 import org.whizu.proxy.BuildSupport;
 import org.whizu.proxy.ProxyBuilder;
+import org.whizu.util.Callback;
 import org.whizu.util.Objects;
 import org.whizu.value.ValueList;
 import org.whizu.value.ValueObject;
@@ -75,8 +77,17 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				ValueObject vo = Objects.cast(evt.getNewValue());
-				builder.proxy_.addItem(vo);
+				IndexedPropertyChangeEvent ce = Objects.cast(evt);
+				System.out.println("property change event " + ce.getIndex() + " size " + builder.valueList_.size());
+				int index = ce.getIndex();
+				int max = builder.valueList_.size();
+				if (index == max) {
+					ValueObject vo = Objects.cast(evt.getNewValue());
+					builder.proxy_.addItem(vo);
+				} else {
+					ValueObject vo = Objects.cast(evt.getNewValue());
+					builder.proxy_.replaceItem(index, vo);
+				}
 			}
 		});
 		return builder;
@@ -174,6 +185,7 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 			if (onItemClickListener_ != null) {
 				EventHandler eh = new EventHandler() {
 					String id_ = session().next();
+
 					@Override
 					public String id() {
 						return id_;
@@ -182,14 +194,35 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 					@Override
 					public void handleEvent() {
 						int index = Integer.parseInt(RequestContext.getRequest().getParameter("data-index"));
-						ValueObject obj = valueList_.get(index-1);
-						onItemClickListener_.click(obj);
-					}};
+						String dataId = RequestContext.getRequest().getParameter("data-id");
+						final ValueObject obj = valueList_.get(index - 1);
+						onItemClickListener_.click(obj, new Callback() {
+							
+							@Override
+							public void success() {
+								valueList_.update(obj);
+							}
+						});
+						// now update list with obj
+						System.out.println("now udpate data id " + dataId);
+
+					}
+				};
 				session().addClickListener(eh);
 				jQuery("$(document)").on("click", "#" + id() + " li a", eh);
 			}
 
 			return element;
+		}
+
+		@Override
+		public void replaceItem(int index, ContentBuilder item) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public void on(Page page) {
+			throw new UnsupportedOperationException();
 		}
 	}
 }

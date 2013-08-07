@@ -23,12 +23,12 @@
  *******************************************************************************/
 package org.whizu.tutorial.shop;
 
-import org.whizu.jquery.Callback;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Select;
 import org.whizu.tutorial.panel.Action;
 import org.whizu.tutorial.panel.Panel;
+import org.whizu.util.Callback;
 import org.whizu.widget.Container;
 
 /**

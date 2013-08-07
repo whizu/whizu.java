@@ -1,8 +1,8 @@
 package org.whizu.tutorial.shop;
 
-import org.whizu.jquery.Callback;
 import org.whizu.jquery.RequestContext;
 import org.whizu.tutorial.panel.Action;
+import org.whizu.util.Callback;
 
 public abstract class AbstractAction implements Action {
 
@@ -25,7 +25,7 @@ public abstract class AbstractAction implements Action {
 	
 	public void callback() {
 		if (callback != null) {
-			callback.handleEvent();
+			callback.success();
 		}
 	}
 }

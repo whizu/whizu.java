@@ -21,14 +21,11 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
-
-import org.whizu.util.Callback;
+package org.whizu.jquery.mobile;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface OnItemClickListener<T> {
+public interface ListEditor {
 
-	public void click(T item, Callback callback);
 }

@@ -134,7 +134,6 @@ public class Header extends Widget {
 		return this;
 	}
 
-	@Deprecated
 	public void on(Page page) {
 		page.header(this);
 		//((PageImpl) page).header(this);

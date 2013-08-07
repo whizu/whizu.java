@@ -23,22 +23,11 @@
  *******************************************************************************/
 package org.whizu.tutorial.tournament;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.whizu.annotation.App;
-import org.whizu.jquery.ClickListener;
-import org.whizu.jquery.OnItemClickListener;
-import org.whizu.jquery.mobile.Button;
-import org.whizu.jquery.mobile.ButtonBuilder;
-import org.whizu.jquery.mobile.Form;
-import org.whizu.jquery.mobile.FormBuilder;
 import org.whizu.jquery.mobile.HeaderBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
-import org.whizu.jquery.mobile.ListView;
 import org.whizu.jquery.mobile.ListViewBuilder;
 import org.whizu.jquery.mobile.Page;
-import org.whizu.jquery.mobile.Popup;
-import org.whizu.jquery.mobile.PopupBuilder;
 import org.whizu.jquery.mobile.Theme;
 import org.whizu.value.ValueList;
 
@@ -48,12 +37,7 @@ import org.whizu.value.ValueList;
 @App("/whizu/tournament2")
 public class Tournament2App implements JQueryMobile {
 
-	private static final Logger log = LoggerFactory.getLogger(Tournament2App.class);
-
 	private final ValueList<Player> playerList = new ValueList<Player>(Player.class);
-	// private final ListView playerList = ListViewBuilder.create().build();
-
-	private Popup popup;
 
 	@Override
 	public void onLoad(Page page) {
@@ -65,47 +49,64 @@ public class Tournament2App implements JQueryMobile {
 		playerList.add(player2);
 
 		// @formatter:off
-		popup = addPlayerEvent();
-		
 		HeaderBuilder.create()
 			.title("Tournament")
 			.button("Add player")
 			    .theme(Theme.E)
-			    .onClickOpen(popup)
+			    .onClick(new AddPlayerAction(playerList))
 				.build()
 			.build()
 			.on(page);
-		// @formatter:on
 
-		ListView listView = ListViewBuilder.createWith(playerList).onItemClick(onPlayerClickListener2()).build();
-		page.add(listView);
+		ListViewBuilder.createWith(playerList)
+			.onItemClick(new UpdatePlayerAction())
+			.build()
+			.on(page);
+		// @formatter:on
 	}
 
-	private OnItemClickListener<Player> onPlayerClickListener2() {
+	/*
+	public OnItemClickListener<Player> onPlayerClickListener2() {
 		return new OnItemClickListener<Player>() {
 
 			private Popup popup2;
 
 			public void click(Player model) {
 				System.out.println("de speler is " + model.name.get());
-				final Button submitButton = ButtonBuilder.createWithTitle("Update").onClick(closePopup()).build();
+				// final Button submitButton =
+				// ButtonBuilder.createWithTitle("Update").onClick(closePopup(model)).build();
+				final Button submitButton = ButtonBuilder.createWithTitle("Update")
+						.onClick(call(this, "submitForm", model)).build();
 
-				final Form form = FormBuilder.create().addText(model.name).addDate(model.birthdate)
-						.addButton(submitButton).build();
+				// @formatter:off
+				final Form form = FormBuilder.create()
+						.addText(model.name)
+						.addDate(model.birthdate)
+						.addButton(submitButton)
+						.build();
+				// @formatter:on
 
-				popup2 = PopupBuilder.createWithId("update-player-popup"+model.name.get()).center().h3("Messages.UPDATE_PLAYER")
-						.padding("10px").add(form).build();
+				popup2 = PopupBuilder.createWithId("update-player-popup" + model.name.get()).center()
+						.h3("Messages.UPDATE_PLAYER").padding("10px").add(form).build();
 				System.out.println("de speler is " + model.name.get());
 				popup2.open();
 			}
 
-			private ClickListener closePopup() {
+			public ClickListener closePopup(final Player model) {
 				return new ClickListener() {
 
 					public void click() {
+						System.out.println("close popup " + model);
 						popup2.close();
+						playerList.update(model);
 					}
 				};
+			}
+
+			public void submitForm(final Player model) {
+				System.out.println("close popup " + model);
+				popup2.close();
+				playerList.update(model);
 			}
 		};
 	}
@@ -122,7 +123,9 @@ public class Tournament2App implements JQueryMobile {
 			}
 		};
 	}
+	*/
 
+	/*
 	private Popup addPlayerEvent() {
 		log.debug("TournamentApp.this::addPlayerEvent()");
 
@@ -156,10 +159,12 @@ public class Tournament2App implements JQueryMobile {
 		player.clear();
 		popup.close();
 	}
+	*/
 
 	/**
 	 * Java 8 should obsolete this method by calling "this::addPlayer()".
 	 */
+	/*
 	@Deprecated
 	private ClickListener _addPlayer(final Player player) {
 		return new ClickListener() {
@@ -170,4 +175,5 @@ public class Tournament2App implements JQueryMobile {
 			}
 		};
 	}
+	*/
 }

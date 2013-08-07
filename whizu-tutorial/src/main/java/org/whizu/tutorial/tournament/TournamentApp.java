@@ -49,7 +49,8 @@ public class TournamentApp implements JQueryMobile {
 
 	private static final Logger log = LoggerFactory.getLogger(TournamentApp.class);
 
-	// private final ValueList<Player> playerList = new ValueList<Player>(Player.class);
+	// private final ValueList<Player> playerList = new
+	// ValueList<Player>(Player.class);
 	private final ListView playerList = ListViewBuilder.create().build();
 
 	private Popup popup;
@@ -78,7 +79,7 @@ public class TournamentApp implements JQueryMobile {
 		final Player model = new Player();
 
 		Button submit = ButtonBuilder.createWithTitle("Create").build();
-		
+
 		// @formatter:off
 		Form form = FormBuilder.create()
 			.addText(model.name)
@@ -98,12 +99,22 @@ public class TournamentApp implements JQueryMobile {
 	}
 
 	private void addPlayer(Player player) {
-		log.debug("this::addPlayer()");
-		ListItem item = new ListItem(player.name);
-		item.p(player.birthdate);
-		playerList.addItem(item);
-		player.name.clear();
-		popup.close();
+		// validate
+		// if not ok, show validation messages and don't add item and don't
+		// close popup
+		if (validate(player)) {
+			log.debug("this::addPlayer()");
+			ListItem item = new ListItem(player.name);
+			item.p(player.birthdate);
+			playerList.addItem(item);
+			player.name.clear();
+			popup.close();
+			
+		}
+	}
+
+	private boolean validate(Player player) {
+		return (!player.name.get().equals(""));
 	}
 
 	/**

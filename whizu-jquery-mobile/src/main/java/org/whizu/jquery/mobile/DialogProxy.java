@@ -24,6 +24,7 @@
 package org.whizu.jquery.mobile;
 
 import org.whizu.proxy.Proxy;
+import org.whizu.proxy.ProxySupport;
 
 /**
  * @author Rudy D'hauwe
@@ -35,16 +36,28 @@ final class DialogProxy extends Proxy<Dialog> implements Dialog {
 	}
 
 	@Override
-	public final void title(String title) {
-		impl().title(title);
+	protected final Dialog createImpl() {
+		return new DialogImpl(id());
 	}
 
 	@Override
-	protected final Dialog createImpl() {
-		return new DialogImpl();
+	public String id() {
+		return impl().id();
 	}
 	
-	final class DialogImpl implements Dialog {
+	@Override
+	public final void title(String title) {
+		impl().title(title);
+	}
+	
+	/***************************************************************************
+     * The target <code>Dialog</code> that has been rendered.
+	 */
+	final class DialogImpl extends ProxySupport implements Dialog {
+
+		private DialogImpl(String id) {
+			super(id);
+		}
 
 		@Override
 		public final void title(String title) {

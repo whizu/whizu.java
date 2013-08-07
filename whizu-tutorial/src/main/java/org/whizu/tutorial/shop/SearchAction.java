@@ -28,11 +28,11 @@ import java.util.Collection;
 
 import org.whizu.content.Component;
 import org.whizu.html.Html;
-import org.whizu.jquery.Callback;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.Select;
 import org.whizu.tutorial.panel.Action;
+import org.whizu.util.Callback;
 import org.whizu.value.Value;
 
 //@Action
@@ -136,7 +136,7 @@ public abstract class SearchAction<T> extends AbstractAction {
 		return new Callback() {
 
 			@Override
-			public void handleEvent() {
+			public void success() {
 				refresh();
 			}
 		};
@@ -152,7 +152,7 @@ public abstract class SearchAction<T> extends AbstractAction {
 		return new Callback() {
 
 			@Override
-			public void handleEvent() {
+			public void success() {
 				refresh();
 			}
 		};

@@ -28,7 +28,7 @@ import java.util.Collection;
 import org.whizu.content.Component;
 import org.whizu.content.Composite;
 import org.whizu.html.Html;
-import org.whizu.jquery.Callback;
+import org.whizu.util.Callback;
 import org.whizu.value.Value;
 
 /**
@@ -107,7 +107,7 @@ public abstract class SearchPanel<T> implements Panel {
 		return new Callback() {
 
 			@Override
-			public void handleEvent() {
+			public void success() {
 				refresh(parent);
 			}
 		};
@@ -123,7 +123,7 @@ public abstract class SearchPanel<T> implements Panel {
 		return new Callback() {
 
 			@Override
-			public void handleEvent() {
+			public void success() {
 				refresh(parent);
 			}
 		};

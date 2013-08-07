@@ -23,10 +23,80 @@
  *******************************************************************************/
 package org.whizu.util;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import org.whizu.jquery.ClickListener;
+
 /**
  * @author Rudy D'hauwe
  */
 public class Objects {
+
+	public static ClickListener call(final Object obj, String methodName, final Object... args) {
+		try {
+			Class<?>[] parameterTypes = getParameterTypes(args);
+			final Method method = obj.getClass().getDeclaredMethod(methodName, parameterTypes);
+			return new ClickListener() {
+				
+				@Override
+				public void click() {
+					try {
+						if (!method.isAccessible()) {
+							method.setAccessible(true);
+						}
+						method.invoke(obj,  args);
+					} catch (IllegalAccessException e) {
+						throw new RuntimeException(e);
+					} catch (IllegalArgumentException e) {
+						throw new RuntimeException(e);
+					} catch (InvocationTargetException e) {
+						throw new RuntimeException(e);
+					}
+				}
+			};
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		} catch (SecurityException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static ClickListener call(final Object obj, String methodName) {
+		try {
+			final Method method = obj.getClass().getMethod(methodName);
+			return new ClickListener() {
+				
+				@Override
+				public void click() {
+					try {
+						if (!method.isAccessible()) {
+							method.setAccessible(true);
+						}
+						method.invoke(obj);
+					} catch (IllegalAccessException e) {
+						throw new RuntimeException(e);
+					} catch (IllegalArgumentException e) {
+						throw new RuntimeException(e);
+					} catch (InvocationTargetException e) {
+						throw new RuntimeException(e);
+					}
+				}
+			};
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		} catch (SecurityException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	private static Class<?>[] getParameterTypes(Object[] args) {
+		Class<?>[] parameterTypes = new Class[args.length];
+		for (int i=0; i<args.length; i++) {
+			parameterTypes[i] = args[i].getClass();
+		}
+		return parameterTypes;
+	}
 
 	@SuppressWarnings("unchecked")
 	public static <T> T cast(Object obj) {

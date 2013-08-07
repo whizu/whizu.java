@@ -21,12 +21,26 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery;
+package org.whizu.tutorial.tournament;
 
-/**
- * @author Rudy D'hauwe
- */
-public interface Callback {
+import org.whizu.jquery.mobile.FormBuilder;
+import org.whizu.util.Strings;
+import org.whizu.value.ValueList;
 
-	public void handleEvent();
+public class AddPlayerAction extends FormItemActionHelper<Player> {
+
+	public AddPlayerAction(ValueList<Player> list) {
+		super(list);
+	}
+
+	@Override
+	protected void createForm(FormBuilder builder) {
+		builder.addText(model().name);
+		builder.addDate(model().birthdate);
+	}
+
+	@Override
+	protected boolean validate(Player model) {
+		return !Strings.isBlank(model.name.get());
+	}
 }
