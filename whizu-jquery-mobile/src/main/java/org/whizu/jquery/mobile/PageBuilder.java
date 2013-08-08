@@ -66,7 +66,7 @@ public final class PageBuilder extends ProxyBuilder<Page, PageBuilder.Build> {
 	}
 
 	@Override
-	protected Page createProxy(Build build) {
+	protected Page createProxy(Page build) {
 		PageProxy proxy = new PageProxy(build);
 		String ex = "$p = $(\"" + proxy.render() + "\");";
 		RequestContext.getRequest().addExpression(ex + " $p.appendTo($.mobile.pageContainer);");

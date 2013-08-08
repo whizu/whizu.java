@@ -1,10 +1,11 @@
 package org.whizu.tutorial.tournament;
 
 import org.whizu.jquery.mobile.FormBuilder;
+import org.whizu.jquery.mobile.ListSupport;
 import org.whizu.util.Strings;
 
 //extends ListEditor (or: ListManager)
-public class UpdatePlayerAction extends FormItemActionHelper<Player> {
+public class UpdatePlayerAction extends ListSupport<Player> {
 
 	@Override
 	protected void createForm(FormBuilder builder) {

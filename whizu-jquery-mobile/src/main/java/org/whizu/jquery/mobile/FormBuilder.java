@@ -77,7 +77,7 @@ public final class FormBuilder extends ProxyBuilder<Form, FormBuilder.Build> {
 	}
 
 	@Override
-	protected Form createProxy(Build build) {
+	protected Form createProxy(Form build) {
 		return new FormProxy(build);
 	}
 

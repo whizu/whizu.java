@@ -45,9 +45,22 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 		clazz_ = clazz;
 	}
 
+	//ButttonBuilder.create().onSubmit(list.addEvent());
+	public final ClickListener addEvent() {
+		return new ClickListener() {
+
+			@Override
+			public void click() {
+				fireIndexedPropertyChange("ADD-EVENT", 0, null, null);
+				//or: getListControl().addEvent(); 
+				//(or listcontrol should have registered as propertychangelistener) and respond to the ADD-EVENT notification!
+			}
+		};
+	}
+	
 	public void add(VO element) {
 		value().add(element);
-		fireIndexedPropertyChange(value().size(), null, element);
+		fireIndexedPropertyChange("ADD", value().size(), null, element);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -116,7 +129,7 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 
 			@Override
 			public void click() {
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!clicking");
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!clicking on ADD");
 				final VO model = createNew();
 				itemListener.click(model, new Callback() {
 

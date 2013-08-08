@@ -53,7 +53,7 @@ public final class ButtonBuilder extends ProxyBuilder<Button, ButtonBuilder.Buil
 	}
 
 	@Override
-	protected Button createProxy(Build build) {
+	protected Button createProxy(Button build) {
 		return new ButtonProxy(build);
 	}
 	

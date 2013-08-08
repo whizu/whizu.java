@@ -24,10 +24,11 @@
 package org.whizu.tutorial.tournament;
 
 import org.whizu.jquery.mobile.FormBuilder;
+import org.whizu.jquery.mobile.ListSupport;
 import org.whizu.util.Strings;
 import org.whizu.value.ValueList;
 
-public class AddPlayerAction extends FormItemActionHelper<Player> {
+public class AddPlayerAction extends ListSupport<Player> {
 
 	public AddPlayerAction(ValueList<Player> list) {
 		super(list);

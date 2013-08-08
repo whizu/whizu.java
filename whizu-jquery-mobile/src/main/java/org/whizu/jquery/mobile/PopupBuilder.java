@@ -54,7 +54,7 @@ public final class PopupBuilder extends ProxyBuilder<Popup, PopupBuilder.Build> 
 	}
 
 	@Override
-	protected Popup createProxy(Build build) {
+	protected Popup createProxy(Popup build) {
 		return new PopupProxy(build);
 	}
 

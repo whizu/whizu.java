@@ -63,6 +63,10 @@ public abstract class AbstractValue<T> implements Value {
 		firePropertyChange(VALUE, index, oldValue, newValue);
 	}
 
+	protected void fireIndexedPropertyChange(String name, int index, Object oldValue, Object newValue) {
+		firePropertyChange(name, index, oldValue, newValue);
+	}
+	
 	private void firePropertyChange(String propertyName, int index, Object oldValue, Object newValue) {
 		if (changeSupport_ != null) {
 			changeSupport_.fireIndexedPropertyChange(propertyName, index, oldValue, newValue);

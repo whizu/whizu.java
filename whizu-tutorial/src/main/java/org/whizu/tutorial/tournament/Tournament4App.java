@@ -21,31 +21,54 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.tutorial.tournament;
 
-import org.whizu.content.Component;
-import org.whizu.content.Content;
-import org.whizu.content.ContentBuilder;
+import org.whizu.annotation.App;
+import org.whizu.jquery.mobile.HeaderBuilder;
+import org.whizu.jquery.mobile.JQueryMobile;
+import org.whizu.jquery.mobile.Page;
+import org.whizu.jquery.mobile.Theme;
+import org.whizu.jquery.mobile.list.DefaultValueListControl;
+import org.whizu.jquery.mobile.list.ListControl;
+import org.whizu.jquery.mobile.list.ListViewBuilderNg;
+import org.whizu.value.ValueList;
 
 /**
- * A listview is coded as a simple unordered list containing linked list items with
- * a data-role="listview" attribute. jQuery Mobile will apply all the necessary
- * styles to transform the list into a mobile-friendly listview with right arrow
- * indicator that fills the full width of the browser window. When you tap on the
- * list item, the framework will trigger a click on the first link inside the list
- * item, issue an Ajax request for the URL in the link, create the new page in the
- * DOM, then kick off a page transition.
- * 
- * 
  * @author Rudy D'hauwe
  */
-public interface ListView extends Component {
+@App("/whizu/tournament4")
+public class Tournament4App implements JQueryMobile {
 
-	public void addItem(Content content);
-	
-	public void addItem(ContentBuilder builder);
+	private final ValueList<Player> playerList = new ValueList<Player>(Player.class);
 
-	public void replaceItem(int index, Content content);
+	private final ListControl<Player> listControl = new DefaultValueListControl<Player>(playerList);
 
-	public void on(Page page);
+	@Override
+	public void onLoad(Page page) {
+		initListData();
+
+		// @formatter:off
+		HeaderBuilder.create()
+			.title("Tournament")
+			.button("Add player")
+			    .theme(Theme.E)
+			    .onClick(listControl.addEvent())
+			    .build()
+			.build()
+			.on(page);
+
+		ListViewBuilderNg.createWith(listControl)  
+			.build()
+			.on(page);
+		// @formatter:on
+	}
+
+	private void initListData() {
+		Player player1 = new Player();
+		player1.name.set("Mark");
+		playerList.add(player1);
+		Player player2 = new Player();
+		player2.name.set("Rudy");
+		playerList.add(player2);
+	}
 }

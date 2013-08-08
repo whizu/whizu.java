@@ -40,7 +40,7 @@ public final class AccordionBuilder extends ProxyBuilder<Accordion, AccordionBui
 	}
 
 	@Override
-	protected Accordion createProxy(Build build) {
+	protected Accordion createProxy(Accordion build) {
 		return new AccordionProxy(build);
 	}
 

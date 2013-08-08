@@ -86,7 +86,7 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 					builder.proxy_.addItem(vo);
 				} else {
 					ValueObject vo = Objects.cast(evt.getNewValue());
-					builder.proxy_.replaceItem(index, vo);
+					builder.proxy_.replaceItem(index, vo.build());
 				}
 			}
 		});
@@ -105,7 +105,7 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 	}
 
 	@Override
-	protected ListView createProxy(Build build) {
+	protected ListView createProxy(ListView build) {
 		return proxy_;
 	}
 
@@ -184,7 +184,7 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 
 			if (onItemClickListener_ != null) {
 				EventHandler eh = new EventHandler() {
-					String id_ = session().next();
+					private String id_ = session().next();
 
 					@Override
 					public String id() {
@@ -216,7 +216,7 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 		}
 
 		@Override
-		public void replaceItem(int index, ContentBuilder item) {
+		public void replaceItem(int index, Content item) {
 			throw new UnsupportedOperationException();
 		}
 

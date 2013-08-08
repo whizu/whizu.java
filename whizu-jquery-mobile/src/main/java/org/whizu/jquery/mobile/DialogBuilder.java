@@ -47,7 +47,7 @@ public final class DialogBuilder extends ProxyBuilder<Dialog, DialogBuilder.Buil
 	}
 
 	@Override
-	protected Dialog createProxy(Build build) {
+	protected Dialog createProxy(Dialog build) {
 		return new DialogProxy(build);
 	}
 

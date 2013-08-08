@@ -23,29 +23,32 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.content.Component;
-import org.whizu.content.Content;
-import org.whizu.content.ContentBuilder;
+import org.whizu.value.Value;
+import org.whizu.value.ValueList;
+import org.whizu.value.ValueObject;
 
 /**
- * A listview is coded as a simple unordered list containing linked list items with
- * a data-role="listview" attribute. jQuery Mobile will apply all the necessary
- * styles to transform the list into a mobile-friendly listview with right arrow
- * indicator that fills the full width of the browser window. When you tap on the
- * list item, the framework will trigger a click on the first link inside the list
- * item, issue an Ajax request for the URL in the link, create the new page in the
- * DOM, then kick off a page transition.
- * 
- * 
  * @author Rudy D'hauwe
  */
-public interface ListView extends Component {
+public class DefaultListSupport<T extends ValueObject> extends ListSupport<T> {
 
-	public void addItem(Content content);
-	
-	public void addItem(ContentBuilder builder);
+	public DefaultListSupport() {
+	}
 
-	public void replaceItem(int index, Content content);
+	public DefaultListSupport(ValueList<T> list) {
+		super(list);
+	}
 
-	public void on(Page page);
+	@Override
+	protected void createForm(FormBuilder builder) {
+		T vo = model();
+		for (Value value : vo.getColumns()) {
+			builder.addField(value);
+		}
+	}
+
+	@Override
+	protected boolean validate(T model) {
+		return model.validate();
+	}
 }

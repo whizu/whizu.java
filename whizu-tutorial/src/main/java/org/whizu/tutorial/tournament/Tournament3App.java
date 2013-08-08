@@ -25,49 +25,52 @@ package org.whizu.tutorial.tournament;
 
 import org.whizu.annotation.App;
 import org.whizu.jquery.ClickListener;
-import org.whizu.jquery.OnItemClickListener;
-import org.whizu.jquery.mobile.DefaultListSupport;
 import org.whizu.jquery.mobile.HeaderBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
-import org.whizu.jquery.mobile.ListViewBuilder;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.jquery.mobile.Theme;
+import org.whizu.jquery.mobile.list.DefaultValueListControl;
+import org.whizu.jquery.mobile.list.ListControl;
+import org.whizu.jquery.mobile.list.ListViewBuilderNg;
 import org.whizu.value.ValueList;
 
 /**
  * @author Rudy D'hauwe
  */
-@App("/whizu/tournament2")
-public class Tournament2App implements JQueryMobile {
+@App("/whizu/tournament3")
+public class Tournament3App implements JQueryMobile {
 
 	private final ValueList<Player> playerList = new ValueList<Player>(Player.class);
+
+	private final ListControl<Player> listControl = new DefaultValueListControl<Player>(playerList);
 
 	@Override
 	public void onLoad(Page page) {
 		initListData();
 
+		//EventHandler onItemClickHandler = listControl.editEvent();
 		//ListManager manager = ...;
 		//ListAdmin admin = ...;
 		//ListControl control = ...; //playerList.getControl() //playerList.setControl()
 		
 		// @formatter:off
-		ClickListener addPlayerEventHandler = new DefaultListSupport<Player>(playerList);
-		//EventHandler addPlayerEventHandler = listControl.addEvent();
+		ClickListener addPlayerEventHandler = listControl.addEvent();
+		
 		HeaderBuilder.create()
 			.title("Tournament")
 			.button("Add player")
 			    .theme(Theme.E)
 			    //.onClick(new AddPlayerAction(playerList)) //manager.add(), or, playerList.add() for default behavior
-				.onClick(new DefaultListSupport<Player>(playerList))
+				//.onClick(new DefaultListSupport<Player>(playerList))
+			    .onClick(addPlayerEventHandler)
 			    .build()
 			.build()
 			.on(page);
 
-		OnItemClickListener<Player> onItemClickListener = new DefaultListSupport<Player>();
-		//EventHandler onItemClickHandler = listControl.editEvent();
-		ListViewBuilder.createWith(playerList)  //or: createWith(manager) so next line is unnecessary
+		ListViewBuilderNg.createWith(listControl)  //or: createWith(manager) so next line is unnecessary
+		
 			//.onItemClick(new UpdatePlayerAction()) //manager.update()
-		    .onItemClick(onItemClickListener)
+		    //.onItemClick(onItemClickListener)
 			.build()
 			.on(page);
 		// @formatter:on

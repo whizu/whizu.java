@@ -21,27 +21,30 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.jquery.mobile;
+package org.whizu.jquery.mobile.list;
 
-import org.whizu.content.JustInTime;
 import org.whizu.content.Content;
 import org.whizu.content.ContentBuilder;
 import org.whizu.content.Element;
+import org.whizu.content.JustInTime;
 import org.whizu.html.Html;
+import org.whizu.jquery.mobile.ListView;
+import org.whizu.jquery.mobile.Page;
 import org.whizu.proxy.Proxy;
 import org.whizu.proxy.ProxySupport;
 
 /**
  * @author Rudy D'hauwe
  */
-final class ListViewProxy extends Proxy<ListView> implements ListView {
+final class ListViewProxyNg<T> extends Proxy<ListView> implements ListView {
 
-	protected ListViewProxy(ListView impl) {
+	protected ListViewProxyNg(ListView impl) {
 		super(impl);
 	}
 
 	@Override
 	public void addItem(Content item) {
+		System.out.println("adding item***");
 		impl().addItem(item);
 	}
 
@@ -81,6 +84,7 @@ final class ListViewProxy extends Proxy<ListView> implements ListView {
 
 		@Override
 		public void addItem(Content item) {
+			System.out.println("adding item***");
 			Element a = Html.a().href("#").attr("data-id", "newid").add(item);
 			Element li = a.wrap("li");
 			jQuery(this).append(li).call("listview", "refresh");

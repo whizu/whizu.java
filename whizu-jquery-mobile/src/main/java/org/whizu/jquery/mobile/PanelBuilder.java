@@ -53,7 +53,7 @@ public final class PanelBuilder extends ProxyBuilder<Panel, PanelBuilder.Build> 
 	}
 
 	@Override
-	protected Panel createProxy(Build build) {
+	protected Panel createProxy(Panel build) {
 		return new PanelProxy(build);
 	}
 

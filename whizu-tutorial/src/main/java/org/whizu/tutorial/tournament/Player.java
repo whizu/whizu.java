@@ -25,6 +25,7 @@ package org.whizu.tutorial.tournament;
 
 import org.whizu.content.Content;
 import org.whizu.html.Html;
+import org.whizu.util.Strings;
 import org.whizu.value.AbstractValueObject;
 import org.whizu.value.DateValue;
 import org.whizu.value.IntegerValue;
@@ -60,5 +61,10 @@ public class Player extends AbstractValueObject {
 	public void refresh(Player player) {
 		name.refresh(player.name);
 		birthdate.refresh(player.birthdate);
+	}
+
+	@Override
+	public boolean validate() {
+		return !Strings.isBlank(name.get());
 	}
 }

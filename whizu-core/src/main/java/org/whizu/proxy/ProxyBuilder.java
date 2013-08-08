@@ -51,5 +51,5 @@ public abstract class ProxyBuilder<T, Prototype extends T> implements Builder<T>
 
 	protected abstract Prototype createPrototype();
 	
-	protected abstract T createProxy(Prototype build);	
+	protected abstract T createProxy(T build);	
 }
