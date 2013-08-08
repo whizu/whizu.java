@@ -10,6 +10,7 @@ import org.whizu.value.ValueObject;
 /**
  * @author Rudy D'hauwe
  */
+@Deprecated
 public abstract class ListSupport<T extends ValueObject> implements OnItemClickListener<T>, ClickListener {
 
 	private Callback callback_;
@@ -31,6 +32,7 @@ public abstract class ListSupport<T extends ValueObject> implements OnItemClickL
 		list_ = list;
 	}
 
+	@Deprecated
 	@Override
 	public void click() { //add
 		list_.add(this).click();

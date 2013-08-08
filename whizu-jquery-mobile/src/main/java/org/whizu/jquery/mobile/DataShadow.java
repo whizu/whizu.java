@@ -29,7 +29,7 @@ import org.whizu.content.Element;
 /**
  * @author Rudy D'hauwe
  */
-enum DataShadow implements Decorator {
+public enum DataShadow implements Decorator {
 
 	// @formatter:off
 	TRUE("true"),

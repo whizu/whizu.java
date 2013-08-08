@@ -154,6 +154,10 @@ public class Html {
 		return li().id(element.id());
 	}
 
+	public static Element ol(Identity identity) {
+		return tag("ol").id(identity.id());
+	}
+
 	public static Element p(String text) {
 		return tag("p").add(text);
 	}

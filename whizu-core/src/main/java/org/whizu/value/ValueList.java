@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.whizu.jquery.ClickListener;
 import org.whizu.jquery.OnItemClickListener;
 import org.whizu.util.Callback;
@@ -37,6 +39,8 @@ import org.whizu.util.Objects;
  */
 public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> implements Iterable<VO> {
 				//implements ListManager (default behavior)
+	
+	private static final Logger log = LoggerFactory.getLogger(ValueList.class);
 	
 	private final Class<VO> clazz_;
 
@@ -124,11 +128,15 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 		update(vo);
 	}
 
+	@Deprecated
 	public final ClickListener add(final OnItemClickListener<VO> itemListener) {
+		log.debug("Creating an ADD event listener {}", itemListener);
+		
 		return new ClickListener() {
 
 			@Override
 			public void click() {
+				log.debug("Handling the ADD event");
 				System.out.println("!!!!!!!!!!!!!!!!!!!!!clicking on ADD");
 				final VO model = createNew();
 				itemListener.click(model, new Callback() {

@@ -27,9 +27,6 @@ import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.HeaderBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Page;
-import org.whizu.jquery.mobile.Theme;
-import org.whizu.jquery.mobile.list.DefaultValueListControl;
-import org.whizu.jquery.mobile.list.ListControl;
 import org.whizu.jquery.mobile.list.ListViewBuilderNg;
 import org.whizu.value.ValueList;
 
@@ -41,8 +38,6 @@ public class Tournament4App implements JQueryMobile {
 
 	private final ValueList<Player> playerList = new ValueList<Player>(Player.class);
 
-	private final ListControl<Player> listControl = new DefaultValueListControl<Player>(playerList);
-
 	@Override
 	public void onLoad(Page page) {
 		initListData();
@@ -51,16 +46,13 @@ public class Tournament4App implements JQueryMobile {
 		HeaderBuilder.create()
 			.title("Tournament")
 			.button("Add player")
-			    .theme(Theme.E)
-			    .onClick(listControl.addEvent())
-			    .build()
-			.build()
-			.on(page);
-
-		ListViewBuilderNg.createWith(listControl)  
+				.onClick(playerList.addEvent())
+				.build()
 			.build()
 			.on(page);
 		// @formatter:on
+
+		ListViewBuilderNg.createWith(playerList).ordered().build().on(page);
 	}
 
 	private void initListData() {

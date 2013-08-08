@@ -34,7 +34,6 @@ import org.whizu.content.Element;
 import org.whizu.content.JustInTime;
 import org.whizu.html.Html;
 import org.whizu.jquery.EventHandler;
-import org.whizu.jquery.OnItemClickListener;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.mobile.DataRole;
 import org.whizu.jquery.mobile.ListView;
@@ -42,6 +41,8 @@ import org.whizu.jquery.mobile.Page;
 import org.whizu.proxy.BuildSupport;
 import org.whizu.proxy.ProxyBuilder;
 import org.whizu.util.Objects;
+import org.whizu.value.ValueList;
+import org.whizu.value.ValueObject;
 
 /**
  * A listview is coded as a simple unordered list containing linked list items
@@ -52,10 +53,54 @@ import org.whizu.util.Objects;
  * link inside the list item, issue an Ajax request for the URL in the link,
  * create the new page in the DOM, then kick off a page transition.
  * 
- * 
  * @author Rudy D'hauwe
  */
 public class ListViewBuilderNg<T> extends ProxyBuilder<ListView, ListViewBuilderNg<T>.Build> {
+
+	public static <T extends ListElement> ListViewBuilderNg<T> create() {
+		return createWith(new DefaultListControl<T>());
+	}
+
+	public static <T> ListViewBuilderNg<T> createWith(ListControl<T> list) {
+		return new ListViewBuilderNg<T>(list);
+	}
+
+	public static <T extends ValueObject> ListViewBuilderNg<T> createWith(ValueList<T> list) {
+		ListControl<T> listControl = new DefaultValueListControl<T>(list);
+		return createWith(listControl);
+	}
+
+	private ListControl<T> list_;
+
+	private ListView proxy_;
+
+	private ListViewBuilderNg(ListControl<T> list) {
+		list_ = list;
+		build_.add(list);
+		proxy_ = new ListViewProxyNg<T>(build_);
+	}
+
+	@Override
+	protected Build createPrototype() {
+		return new Build();
+	}
+
+	@Override
+	protected ListView createProxy(ListView build) {
+		return proxy_;
+	}
+
+	public ListViewBuilderNg<T> ordered() {
+		build_.ordered();
+		return this;
+	}
+
+	//
+	// public ListViewBuilderNg<T> onItemClick(OnItemClickListener<T>
+	// onItemClickListener) {
+	// build_.onItemClickListener_ = Objects.cast(onItemClickListener);
+	// return this;
+	// }
 
 	/***************************************************************************
 	 * The <code>ListView</code> that is being built.
@@ -64,7 +109,15 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView, ListViewBuilder
 
 		private ContentList contents_ = new ContentList();
 
-		private OnItemClickListener<Object> onItemClickListener_;
+		private boolean ordered_ = false;;
+
+		private void add(ListControl<T> list) {
+			contents_.add(new JustInTime(getContentBuilder(list)));
+		}
+
+		public void ordered() {
+			ordered_ = true;
+		}
 
 		/**
 		 * Add a custom content item to the list, behave differently that items
@@ -85,9 +138,56 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView, ListViewBuilder
 			addItem(item);
 		}
 
+		private void addPropertyChangeListener(final ListControl<T> list) {
+			list.addPropertyChangeListener(new PropertyChangeListener() {
+
+				private boolean isAdd(IndexedPropertyChangeEvent changeEvent, ListControl<T> list) {
+					return ("ADD".equals(changeEvent.getPropertyName()));
+					// int index = changeEvent.getIndex();
+					// int max = list.size();
+					// return (index == max);
+				}
+
+				private boolean isDelete(IndexedPropertyChangeEvent changeEvent, ListControl<T> list) {
+					throw new UnsupportedOperationException();
+				}
+
+				private boolean isUpdate(IndexedPropertyChangeEvent changeEvent, ListControl<T> list) {
+					int index = changeEvent.getIndex();
+					int max = list.size();
+					return (index < max);
+				}
+
+				@Override
+				public void propertyChange(PropertyChangeEvent evt) {
+					IndexedPropertyChangeEvent changeEvent = Objects.cast(evt);
+					System.out.println("propertychange " + changeEvent.getPropertyName());
+					if ("ADD-EVENT".equals(changeEvent.getPropertyName())) {
+						list_.handleAddEvent();
+					} else if (isAdd(changeEvent, list)) {
+						System.out.println("propertychange ADD");
+						T vo = Objects.cast(changeEvent.getNewValue());
+						Content itemContent = list_.build(vo);
+						proxy_.addItem(itemContent);
+					} else if (isUpdate(changeEvent, list)) {
+						int index = changeEvent.getIndex();
+						System.out.println("propertychange UPDATE");
+						T vo = Objects.cast(evt.getNewValue());
+						Content itemContent = list_.build(vo);
+						proxy_.replaceItem(index, itemContent);
+					} else if (isDelete(changeEvent, list)) {
+						throw new UnsupportedOperationException();
+					} else {
+						throw new UnsupportedOperationException();
+					}
+				}
+			});
+		}
+
 		@Override
 		public Content build() {
-			Element element = Html.ul(this).decorate(DataRole.LISTVIEW, this).add(contents_);
+			Element element = ordered_ ? Html.ol(this) : Html.ul(this);
+			element.decorate(DataRole.LISTVIEW, this).add(contents_);
 			addPropertyChangeListener(list_);
 			if (list_.isClickable()) {
 				EventHandler eh = new EventHandler() {
@@ -123,64 +223,6 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView, ListViewBuilder
 			return element;
 		}
 
-		private void addPropertyChangeListener(final ListControl<T> list) {
-			list.addPropertyChangeListener(new PropertyChangeListener() {
-
-				@Override
-				public void propertyChange(PropertyChangeEvent evt) {
-					IndexedPropertyChangeEvent changeEvent = Objects.cast(evt);
-					int index = changeEvent.getIndex();
-					System.out.println("propertychange " + changeEvent.getPropertyName());
-					if (isAdd(changeEvent, list)) {
-						System.out.println("propertychange ADD");
-						T vo = Objects.cast(changeEvent.getNewValue());
-						Content itemContent = list_.build(vo);
-						proxy_.addItem(itemContent);
-					} else if (isUpdate(changeEvent, list)) {
-						System.out.println("propertychange UPDATE");
-						T vo = Objects.cast(evt.getNewValue());
-						Content itemContent = list_.build(vo);
-						proxy_.replaceItem(index, itemContent);
-					} else if (isDelete(changeEvent, list)) {
-						throw new UnsupportedOperationException();
-					} else {
-						throw new UnsupportedOperationException();
-					}
-				}
-
-				private boolean isDelete(IndexedPropertyChangeEvent changeEvent, ListControl<T> list) {
-					throw new UnsupportedOperationException();
-				}
-
-				private boolean isUpdate(IndexedPropertyChangeEvent changeEvent, ListControl<T> list) {
-					int index = changeEvent.getIndex();
-					int max = list.size();
-					return (index < max);
-				}
-
-				private boolean isAdd(IndexedPropertyChangeEvent changeEvent, ListControl<T> list) {
-					return ("ADD".equals(changeEvent.getPropertyName()));
-					// int index = changeEvent.getIndex();
-					// int max = list.size();
-					// return (index == max);
-				}
-			});
-		}
-
-		@Override
-		public void on(Page page) {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public void replaceItem(int index, Content item) {
-			throw new UnsupportedOperationException();
-		}
-
-		private void add(ListControl<T> list) {
-			contents_.add(new JustInTime(getContentBuilder(list)));
-		}
-
 		private ContentBuilder getContentBuilder(final ListControl<T> list) {
 			return new ContentBuilder() {
 
@@ -203,38 +245,15 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView, ListViewBuilder
 				}
 			};
 		}
-	}
 
-	public static <T extends ListElement> ListViewBuilderNg<T> create() {
-		return createWith(new DefaultListControl<T>());
-	}
+		@Override
+		public void on(Page page) {
+			throw new UnsupportedOperationException();
+		}
 
-	public static <T> ListViewBuilderNg<T> createWith(ListControl<T> list) {
-		return new ListViewBuilderNg<T>(list);
-	}
-
-	private ListControl<T> list_;
-
-	private ListView proxy_;
-
-	private ListViewBuilderNg(ListControl<T> list) {
-		list_ = list;
-		build_.add(list);
-		proxy_ = new ListViewProxyNg<T>(build_);
-	}
-
-	@Override
-	protected Build createPrototype() {
-		return new Build();
-	}
-
-	@Override
-	protected ListView createProxy(ListView build) {
-		return proxy_;
-	}
-
-	public ListViewBuilderNg<T> onItemClick(OnItemClickListener<T> onItemClickListener) {
-		build_.onItemClickListener_ = Objects.cast(onItemClickListener);
-		return this;
+		@Override
+		public void replaceItem(int index, Content item) {
+			throw new UnsupportedOperationException();
+		}
 	}
 }

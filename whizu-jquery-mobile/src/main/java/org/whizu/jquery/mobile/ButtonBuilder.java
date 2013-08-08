@@ -39,12 +39,15 @@ import org.whizu.util.Objects;
  */
 public final class ButtonBuilder extends ProxyBuilder<Button, ButtonBuilder.Build> {
 
+	public static ButtonBuilder create() {
+		return new ButtonBuilder();
+	}
+	
 	public static ButtonBuilder createWithTitle(String title) {
-		return new ButtonBuilder(title);
+		return new ButtonBuilder().title(title);
 	}
 
-	private ButtonBuilder(String title) {
-		build_.title(title);
+	private ButtonBuilder() {
 	}
 
 	@Override
@@ -56,12 +59,12 @@ public final class ButtonBuilder extends ProxyBuilder<Button, ButtonBuilder.Buil
 	protected Button createProxy(Button build) {
 		return new ButtonProxy(build);
 	}
-	
+
 	public ButtonBuilder disable() {
 		build_.disable();
 		return this;
 	}
-
+	
 	public ButtonBuilder icon(DataIcon icon) {
 		build_.icon(icon);
 		return this;
@@ -117,6 +120,11 @@ public final class ButtonBuilder extends ProxyBuilder<Button, ButtonBuilder.Buil
 
 	public ButtonBuilder theme(Theme theme) {
 		build_.theme(theme);
+		return this;
+	}
+
+	private ButtonBuilder title(String title) {
+		build_.title(title);
 		return this;
 	}
 
