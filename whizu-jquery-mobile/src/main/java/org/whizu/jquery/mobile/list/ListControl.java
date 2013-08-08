@@ -13,6 +13,7 @@ public interface ListControl<T> extends Iterable<T> {
 	
 	public T get(int index);
 
+	
 	public void handleAddEvent();
 	
 	public void handleClickEvent(T element);
