@@ -23,10 +23,10 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.content.JustInTime;
 import org.whizu.content.Content;
 import org.whizu.content.ContentBuilder;
 import org.whizu.content.Element;
+import org.whizu.content.JustInTime;
 import org.whizu.html.Html;
 import org.whizu.proxy.Proxy;
 import org.whizu.proxy.ProxySupport;

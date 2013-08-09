@@ -33,9 +33,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whizu.annotation.App;
 import org.whizu.util.Annotations;
+import org.whizu.util.Reporter;
 import org.whizu.util.Scanner;
 import org.whizu.util.Strings;
-import org.whizu.util.Reporter;
 
 /**
  * @author Rudy D'hauwe

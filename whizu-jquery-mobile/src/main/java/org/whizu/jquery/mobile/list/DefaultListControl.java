@@ -17,7 +17,7 @@ public class DefaultListControl<T extends ListElement> implements ListControl<T>
 	private transient PropertyChangeSupport changeSupport_;
 	
 	public DefaultListControl() {	
-		list_ = new ArrayList<>();
+		list_ = new ArrayList<T>();
 	}
 	
 	public DefaultListControl(List<T> list) {

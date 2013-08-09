@@ -26,7 +26,6 @@ package org.whizu.tutorial.jqm.api;
 import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.ButtonBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
-import org.whizu.jquery.mobile.Jqm;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.jquery.mobile.PageBuilder;
 

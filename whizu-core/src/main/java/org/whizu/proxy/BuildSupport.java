@@ -23,12 +23,12 @@
  *******************************************************************************/
 package org.whizu.proxy;
 
-import org.whizu.content.JustInTime;
 import org.whizu.content.Content;
 import org.whizu.content.ContentBuilder;
 import org.whizu.content.Decorator;
 import org.whizu.content.Element;
 import org.whizu.content.Identity;
+import org.whizu.content.JustInTime;
 import org.whizu.content.Stylable;
 import org.whizu.jquery.JQuery;
 import org.whizu.jquery.Request;

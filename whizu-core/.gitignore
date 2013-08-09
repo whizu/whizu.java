@@ -1,5 +1,5 @@
+/.gradle
+/bin
+/build
 /target
 release.properties
-/gradle
-/build
-/.gradle

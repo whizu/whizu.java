@@ -1,5 +1,4 @@
-
-description = "Whizu Core"
+description = "Whizu Tutorial"
 
 configurations {
 	compile.extendsFrom configurations.common
@@ -8,4 +7,5 @@ configurations {
  
 dependencies {
 	//no additional dependencies needed now
+	compile 'org.eclipse.jetty.aggregate:jetty-all-server:8.1.10.v20130312'
 }

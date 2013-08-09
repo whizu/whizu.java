@@ -1,19 +1,46 @@
-apply plugin: 'java'
-
-group = 'org.whizu'
-version = '0.1-SNAPSHOT'
 description = 'Whizu'
-sourceCompatibility = 1.5
-targetCompatibility = 1.5
 
-repositories {
-     mavenRepo url: 'http://repo.maven.apache.org/maven2'
-}
-
+//specify all projects (modules) should use maven central for repositories
 allprojects {
-    task hello << {task -> println "I'm $task.project.name" }
+	repositories {
+		mavenCentral()
+	}
+}
+ 
+//add the following configuration to all sub-projects
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+
+	group = 'org.whizu'
+	version = '0.1-SNAPSHOT'
+	sourceCompatibility = 1.7
+	targetCompatibility = 1.7
+
+	configurations {
+		commonTest
+		common
+	}
+	 
+	dependencies {
+		//common test dependencies
+		commonTest 'junit:junit:4+'
+		 
+		//common dependencies
+		common "org.slf4j:slf4j-api:1.7.5"
+		common "commons-lang:commons-lang:2.6"
+		common 'org.glassfish:javax.servlet:3.1'
+	}
 }
 
-subprojects {
-    hello << {println " -- I depend on Whizu"}
+project(':whizu-jquery-mobile') {
+    dependencies {
+        compile project(':whizu-core')
+    }
+}
+
+project(':whizu-tutorial') {
+    dependencies {
+        compile project(':whizu-jquery-mobile')
+    }
 }

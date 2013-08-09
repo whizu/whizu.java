@@ -27,11 +27,11 @@ import java.beans.IndexedPropertyChangeEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.whizu.content.JustInTime;
 import org.whizu.content.Content;
 import org.whizu.content.ContentBuilder;
 import org.whizu.content.ContentList;
 import org.whizu.content.Element;
+import org.whizu.content.JustInTime;
 import org.whizu.html.Html;
 import org.whizu.jquery.EventHandler;
 import org.whizu.jquery.OnItemClickListener;

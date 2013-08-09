@@ -1,5 +1,4 @@
-
-description = "Whizu Core"
+description = "Whizu jQuery Mobile"
 
 configurations {
 	compile.extendsFrom configurations.common

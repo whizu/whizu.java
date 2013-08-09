@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>whizu-jquery-mobile</name>
-	<comment>Whizu jQuery Mobile</comment>
+	<name>whizu</name>
+	<comment>Whizu</comment>
 	<projects/>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
