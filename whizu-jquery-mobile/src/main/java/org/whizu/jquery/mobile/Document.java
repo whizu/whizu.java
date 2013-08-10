@@ -95,6 +95,6 @@ public class Document {
 
 	// verified
 	private Page page(String id) {
-		return PageBuilder.jQueryById(id);
+		return PageBuilder.findById(id);
 	}
 }

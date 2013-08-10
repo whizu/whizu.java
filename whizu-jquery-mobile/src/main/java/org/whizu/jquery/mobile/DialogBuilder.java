@@ -31,24 +31,22 @@ import org.whizu.proxy.ProxyBuilder;
 /**
  * @author Rudy D'hauwe
  */
-public final class DialogBuilder extends ProxyBuilder<Dialog, DialogBuilder.Build> {
+public final class DialogBuilder extends ProxyBuilder<Dialog> {
 
 	public static DialogBuilder createWithId(String id) {
 		return new DialogBuilder(id);
 	}
 
+	private Build build_;
+
 	private DialogBuilder(String id) {
+		build_ = new Build();
 		build_.id(id);
 	}
 
 	@Override
-	protected Build createPrototype() {
-		return new Build();
-	}
-
-	@Override
-	protected Dialog createProxy(Dialog build) {
-		return new DialogProxy(build);
+	public Dialog build() {
+		return buildOnce(new DialogProxy(build_));
 	}
 
     public DialogBuilder title(String title) {

@@ -37,8 +37,8 @@ import org.whizu.util.Objects;
 /**
  * @author Rudy D'hauwe
  */
-public final class ButtonBuilder extends ProxyBuilder<Button, ButtonBuilder.Build> {
-
+public final class ButtonBuilder extends ProxyBuilder<Button> {
+	
 	public static ButtonBuilder create() {
 		return new ButtonBuilder();
 	}
@@ -46,25 +46,34 @@ public final class ButtonBuilder extends ProxyBuilder<Button, ButtonBuilder.Buil
 	public static ButtonBuilder createWithTitle(String title) {
 		return new ButtonBuilder().title(title);
 	}
+	
+	public static ButtonBuilder createAnchorButton() {
+		return create();
+	}
+	
+	public static ButtonBuilder createInputButton() {
+		return new ButtonBuilder().type(ButtonType.INPUT);
+	}
+	
+	public static ButtonBuilder createInputButton(String title) {
+		return createInputButton().title(title);
+	}
+
+	private Build build_ = new Build();
 
 	private ButtonBuilder() {
 	}
 
 	@Override
-	protected Build createPrototype() {
-		return new Build();
+	public Button build() {
+		return buildOnce(new ButtonProxy(build_));
 	}
-
-	@Override
-	protected Button createProxy(Button build) {
-		return new ButtonProxy(build);
-	}
-
+	
 	public ButtonBuilder disable() {
 		build_.disable();
 		return this;
 	}
-	
+
 	public ButtonBuilder icon(DataIcon icon) {
 		build_.icon(icon);
 		return this;

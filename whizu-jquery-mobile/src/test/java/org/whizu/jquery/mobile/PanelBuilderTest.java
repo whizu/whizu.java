@@ -57,7 +57,7 @@ public class PanelBuilderTest extends AbstractJqmTest {
 
 	/**
 	 * Test method for
-	 * {@link org.whizu.jquery.mobile.PanelBuilder#createProxy(org.whizu.jquery.mobile.PanelBuilder.Build)}
+	 * {@link org.whizu.jquery.mobile.PanelBuilder#createProxy()}
 	 * .
 	 */
 	@Test
@@ -75,7 +75,7 @@ public class PanelBuilderTest extends AbstractJqmTest {
 		Panel panel = PanelBuilder.createWithId("my-panel").add(Html.p("This is my first panel")).build();
 		Button button = ButtonBuilder.createWithTitle("Open panel").onClickOpen(panel).build();
 		page.add(button);
-		String expected = "$p = $(\"<div data-role='page' id='index'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer);$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c2' data-rel='panel' href='#my-panel'>Open panel</a>\");$('#c2').closest(\"div[data-role=page]\").append(\"<div data-role='panel' id='my-panel'><p>This is my first panel</p></div>\");";
+		String expected = "$p = $(\"<div data-role='page' id='index'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer);$('#index').find('div[data-role=content]').append(\"<a data-role='button' id='c1' data-rel='panel' href='#my-panel'>Open panel</a>\");$('#c1').closest(\"div[data-role=page]\").append(\"<div data-role='panel' id='my-panel'><p>This is my first panel</p></div>\");";
 		assertResponse(expected);
 	}
 	
@@ -89,7 +89,7 @@ public class PanelBuilderTest extends AbstractJqmTest {
 		Panel panel = PanelBuilder.createWithId("my-panel").add(Html.p("This is my first panel")).build();
 		Button button = ButtonBuilder.createWithTitle("Open panel").onClickOpen(panel).build();
 		page.add(button);
-		String expected = "$p = $(\"<div data-role='page' id='home'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer);$('#home').find('div[data-role=content]').append(\"<a data-role='button' id='c2' data-rel='panel' href='#my-panel'>Open panel</a>\");$('#c2').closest(\"div[data-role=page]\").append(\"<div data-role='panel' id='my-panel'><p>This is my first panel</p></div>\");";
+		String expected = "$p = $(\"<div data-role='page' id='home'><div data-role='content'></div></div>\"); $p.appendTo($.mobile.pageContainer);$('#home').find('div[data-role=content]').append(\"<a data-role='button' id='c1' data-rel='panel' href='#my-panel'>Open panel</a>\");$('#c1').closest(\"div[data-role=page]\").append(\"<div data-role='panel' id='my-panel'><p>This is my first panel</p></div>\");";
 		assertResponse(expected);
 	}
 

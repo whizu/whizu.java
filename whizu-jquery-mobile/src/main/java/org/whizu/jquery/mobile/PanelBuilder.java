@@ -32,14 +32,16 @@ import org.whizu.proxy.ProxyBuilder;
 /**
  * @author Rudy D'hauwe
  */
-public final class PanelBuilder extends ProxyBuilder<Panel, PanelBuilder.Build> {
+public final class PanelBuilder extends ProxyBuilder<Panel> {
 
 	public static PanelBuilder createWithId(String id) {
 		return new PanelBuilder(id);
 	}
+	
+	private Build build_;
 
 	private PanelBuilder(String id) {
-		build_.id(id);
+		build_ = new Build(id);
 	}
 
 	public PanelBuilder add(Content content) {
@@ -48,13 +50,8 @@ public final class PanelBuilder extends ProxyBuilder<Panel, PanelBuilder.Build> 
 	}
 
 	@Override
-	protected Build createPrototype() {
-		return new Build();
-	}
-
-	@Override
-	protected Panel createProxy(Panel build) {
-		return new PanelProxy(build);
+	public Panel build() {
+		return buildOnce(new PanelProxy(build_));
 	}
 
 	/**
@@ -173,6 +170,10 @@ public final class PanelBuilder extends ProxyBuilder<Panel, PanelBuilder.Build> 
 
 		private DataSwipeToClose swipeToClose_;
 
+		private Build(String id) {
+			super(id);
+		}
+		
 		@Override
 		public Content build() {
 			// @formatter:off

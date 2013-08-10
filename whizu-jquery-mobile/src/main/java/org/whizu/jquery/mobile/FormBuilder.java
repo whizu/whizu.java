@@ -42,8 +42,10 @@ import org.whizu.value.Value;
 /**
  * @author Rudy D'hauwe
  */
-public final class FormBuilder extends ProxyBuilder<Form, FormBuilder.Build> {
+public final class FormBuilder extends ProxyBuilder<Form> {
 
+	private Build build_ = new Build();
+	
 	private ValueRenderer valueRenderer_ = new ValueRenderer();
 	
 	public static FormBuilder create() {
@@ -70,15 +72,10 @@ public final class FormBuilder extends ProxyBuilder<Form, FormBuilder.Build> {
 		build_.addButton(submit);
 		return this;
 	}
-	
-	@Override
-	protected Build createPrototype() {
-		return new Build();
-	}
 
 	@Override
-	protected Form createProxy(Form build) {
-		return new FormProxy(build);
+	public Form build() {
+		return buildOnce(new FormProxy(build_));
 	}
 
 	public FormBuilder onSubmit(ClickListener listener) {

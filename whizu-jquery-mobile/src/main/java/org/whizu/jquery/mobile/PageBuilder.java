@@ -36,15 +36,17 @@ import org.whizu.util.Strings;
 /**
  * @author Rudy D'hauwe
  */
-public final class PageBuilder extends ProxyBuilder<Page, PageBuilder.Build> {
+public final class PageBuilder extends ProxyBuilder<Page> {
 
 	public static PageBuilder createWithId(String id) {
 		return new PageBuilder(id);
 	}
 
-	protected static Page jQueryById(String id) {
+	protected static Page findById(String id) {
 		return new PageProxy(id);
 	}
+	
+	private Build build_ = new Build();
 
 	private PageBuilder(String id) {
 		build_.id(id);
@@ -61,13 +63,8 @@ public final class PageBuilder extends ProxyBuilder<Page, PageBuilder.Build> {
 	}
 
 	@Override
-	protected Build createPrototype() {
-		return new Build();
-	}
-
-	@Override
-	protected Page createProxy(Page build) {
-		PageProxy proxy = new PageProxy(build);
+	public Page build() {
+		PageProxy proxy = new PageProxy(build_);
 		String ex = "$p = $(\"" + proxy.render() + "\");";
 		RequestContext.getRequest().addExpression(ex + " $p.appendTo($.mobile.pageContainer);");
 		return proxy;

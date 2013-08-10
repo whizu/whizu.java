@@ -28,28 +28,16 @@ import org.whizu.util.Builder;
 /**
  * @author Rudy D'hauwe
  */
-public abstract class ProxyBuilder<T, Prototype extends T> implements Builder<T> {
+public abstract class ProxyBuilder<T> implements Builder<T> {
 
-	protected final Prototype build_;
-	
 	private boolean isBuilt_ = false;
-	
-	protected ProxyBuilder() {
-		build_ = createPrototype();
-	}
-	
-	@Override
-	public final T build() {
+
+	protected final T buildOnce(T proxy) {
 		if (isBuilt_) {
 			throw new IllegalStateException("Already built");
 		}
-		
-		T proxy = createProxy(build_);
+
 		isBuilt_ = true;
 		return proxy;
 	}
-
-	protected abstract Prototype createPrototype();
-	
-	protected abstract T createProxy(T build);	
 }

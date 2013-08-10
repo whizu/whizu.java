@@ -33,12 +33,14 @@ import org.whizu.proxy.ProxyBuilder;
 /**
  * @author Rudy D'hauwe
  */
-public final class PopupBuilder extends ProxyBuilder<Popup, PopupBuilder.Build> {
+public final class PopupBuilder extends ProxyBuilder<Popup> {
 
 	public static PopupBuilder createWithId(String id) {
 		return new PopupBuilder(id);
 	}
 
+	private Build build_ = new Build();
+	
 	private PopupBuilder(String id) {
 		build_.id(id);
 	}
@@ -49,13 +51,8 @@ public final class PopupBuilder extends ProxyBuilder<Popup, PopupBuilder.Build> 
 	}
 
 	@Override
-	protected Build createPrototype() {
-		return new Build();
-	}
-
-	@Override
-	protected Popup createProxy(Popup build) {
-		return new PopupProxy(build);
+	public Popup build() {
+		return buildOnce(new PopupProxy(build_));
 	}
 
 	public PopupBuilder p(String text) {

@@ -55,7 +55,7 @@ import org.whizu.value.ValueObject;
  * 
  * @author Rudy D'hauwe
  */
-public class ListViewBuilderNg<T> extends ProxyBuilder<ListView, ListViewBuilderNg<T>.Build> {
+public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 
 	public static <T extends ListElement> ListViewBuilderNg<T> create() {
 		return createWith(new DefaultListControl<T>());
@@ -70,6 +70,8 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView, ListViewBuilder
 		return createWith(listControl);
 	}
 
+	private Build build_ = new Build();
+	
 	private ListControl<T> list_;
 
 	private ListView proxy_;
@@ -81,13 +83,8 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView, ListViewBuilder
 	}
 
 	@Override
-	protected Build createPrototype() {
-		return new Build();
-	}
-
-	@Override
-	protected ListView createProxy(ListView build) {
-		return proxy_;
+	public ListView build() {
+		return buildOnce(proxy_);
 	}
 
 	public ListViewBuilderNg<T> ordered() {

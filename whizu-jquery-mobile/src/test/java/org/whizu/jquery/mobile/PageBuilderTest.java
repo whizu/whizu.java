@@ -54,11 +54,11 @@ public class PageBuilderTest extends AbstractJqmTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.jquery.mobile.PageBuilder#jQueryById(java.lang.String)}.
+	 * Test method for {@link org.whizu.jquery.mobile.PageBuilder#findById(java.lang.String)}.
 	 */
 	@Test
 	public void testJQueryById() {
-		Page page = PageBuilder.jQueryById("my-page-id");
+		Page page = PageBuilder.findById("my-page-id");
 		assertEquals("my-page-id", page.id());
 		assertTrue(page instanceof Proxy<?>);
 		Proxy<Page> proxy = Objects.cast(page);
@@ -124,8 +124,6 @@ public class PageBuilderTest extends AbstractJqmTest {
 	@Test
 	public void testCreatePrototype() {
 		PageBuilder builder = PageBuilder.createWithId("my-page-id");
-		PageBuilder.Build build = builder.createPrototype();
-		assertEquals("c1", build.id());
 		Page page = builder.build();
 		assertTrue(page instanceof Proxy<?>);
 		Proxy<Page> proxy = Objects.cast(page);
@@ -134,13 +132,12 @@ public class PageBuilderTest extends AbstractJqmTest {
 	}
 
 	/**
-	 * Test method for {@link org.whizu.jquery.mobile.PageBuilder#createProxy(org.whizu.jquery.mobile.PageBuilder.Build)}.
+	 * Test method for {@link org.whizu.jquery.mobile.PageBuilder#createProxy()}.
 	 */
 	@Test
 	public void testCreateProxyBuild() {
 		PageBuilder builder = PageBuilder.createWithId("my-page-id");
-		PageBuilder.Build build = builder.createPrototype();
-		Page page = builder.createProxy(build);
+		Page page = builder.build();
 		assertTrue(page instanceof Proxy<?>);
 		Proxy<Page> proxy = Objects.cast(page);
 		Page impl = proxy.impl();
@@ -194,7 +191,7 @@ public class PageBuilderTest extends AbstractJqmTest {
 	 */
 	@Test
 	public void testPStringObjectArray() {
-		Page foo = PageBuilder.jQueryById("foo");
+		Page foo = PageBuilder.findById("foo");
 		assertEquals("foo", foo.id());
 		PageBuilder builder = PageBuilder.createWithId("my-page-id");
 		builder.p("Return to {}", foo);

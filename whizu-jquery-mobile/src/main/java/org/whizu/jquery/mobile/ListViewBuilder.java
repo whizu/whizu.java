@@ -55,7 +55,7 @@ import org.whizu.value.ValueObject;
  * 
  * @author Rudy D'hauwe
  */
-public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Build> {
+public class ListViewBuilder extends ProxyBuilder<ListView> {
 
 	public static ListViewBuilder create() {
 		ListViewBuilder builder = new ListViewBuilder();
@@ -63,6 +63,8 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 		return builder;
 	}
 
+	private Build build_ = new Build();
+	
 	private ValueList<? extends ValueObject> valueList_;
 
 	public static <T extends ValueObject> ListViewBuilder createWith(ValueList<T> list) {
@@ -100,13 +102,8 @@ public class ListViewBuilder extends ProxyBuilder<ListView, ListViewBuilder.Buil
 	}
 
 	@Override
-	protected Build createPrototype() {
-		return new Build();
-	}
-
-	@Override
-	protected ListView createProxy(ListView build) {
-		return proxy_;
+	public ListView build() {
+		return buildOnce(proxy_);
 	}
 
 	public <T extends ValueObject> ListViewBuilder onItemClick(OnItemClickListener<T> onItemClickListener) {

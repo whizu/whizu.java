@@ -32,16 +32,13 @@ import org.whizu.proxy.ProxyBuilder;
 /**
  * @author Rudy D'hauwe
  */
-public final class AccordionBuilder extends ProxyBuilder<Accordion, AccordionBuilder.Build> {
+public final class AccordionBuilder extends ProxyBuilder<Accordion> {
 
+	private Build build_ = new Build();
+	
 	@Override
-	protected Build createPrototype() {
-		return new Build();
-	}
-
-	@Override
-	protected Accordion createProxy(Accordion build) {
-		return new AccordionProxy(build);
+	public Accordion build() {
+		return buildOnce(new AccordionProxy(build_));
 	}
 
 	/***************************************************************************
