@@ -43,12 +43,16 @@ public final class ButtonBuilder extends ProxyBuilder<Button> {
 		return new ButtonBuilder();
 	}
 	
-	public static ButtonBuilder createWithTitle(String title) {
-		return new ButtonBuilder().title(title);
-	}
-	
 	public static ButtonBuilder createAnchorButton() {
 		return create();
+	}
+	
+	public static ButtonBuilder createAnchorButton(String title) {
+		return createAnchorButton().title(title);
+	}
+
+	public static ButtonBuilder createButtonButton() {
+		return new ButtonBuilder().type(ButtonType.BUTTON);
 	}
 	
 	public static ButtonBuilder createInputButton() {
@@ -57,6 +61,26 @@ public final class ButtonBuilder extends ProxyBuilder<Button> {
 	
 	public static ButtonBuilder createInputButton(String title) {
 		return createInputButton().title(title);
+	}
+	
+	public static ButtonBuilder createResetButton() {
+		return new ButtonBuilder().type(ButtonType.RESET);
+	}
+	
+	public static ButtonBuilder createResetButton(String title) {
+		return createResetButton().title(title);
+	}
+
+	public static ButtonBuilder createSubmitButton() {
+		return new ButtonBuilder().type(ButtonType.SUBMIT);
+	}
+	
+	public static ButtonBuilder createSubmitButton(String title) {
+		return createSubmitButton().title(title);
+	}
+	
+	public static ButtonBuilder createWithTitle(String title) {
+		return new ButtonBuilder().title(title);
 	}
 
 	private Build build_ = new Build();
@@ -78,14 +102,34 @@ public final class ButtonBuilder extends ProxyBuilder<Button> {
 		build_.icon(icon);
 		return this;
 	}
+	
+	public ButtonBuilder iconOnly(DataIcon icon) {
+		build_.iconOnly(icon);
+		return this;
+	}
+	
+	public ButtonBuilder iconPosition(DataIconPosition position) {
+		build_.iconPosition(position);
+		return this;
+	}
 
-	public ButtonBuilder iconShadow(DataIconShadow shadow) {
-		build_.iconShadow(shadow);
+	public ButtonBuilder inline() {
+		build_.inline(DataInline.TRUE);
 		return this;
 	}
 
 	public ButtonBuilder mini() {
 		build_.mini(DataMini.TRUE);
+		return this;
+	}
+	
+	public ButtonBuilder noIconShadow() {
+		build_.iconShadow(DataIconShadow.FALSE);
+		return this;
+	}
+
+	public ButtonBuilder noShadow() {
+		build_.shadow(DataShadow.FALSE);
 		return this;
 	}
 
@@ -117,11 +161,6 @@ public final class ButtonBuilder extends ProxyBuilder<Button> {
 		return this;
 	}
 
-	public ButtonBuilder shadow(DataShadow shadow) {
-		build_.shadow(shadow);
-		return this;
-	}
-
 	public ButtonBuilder square() {
 		build_.corners(DataCorners.SQUARE);
 		return this;
@@ -132,7 +171,7 @@ public final class ButtonBuilder extends ProxyBuilder<Button> {
 		return this;
 	}
 
-	private ButtonBuilder title(String title) {
+	public ButtonBuilder title(String title) {
 		build_.title(title);
 		return this;
 	}
@@ -152,6 +191,8 @@ public final class ButtonBuilder extends ProxyBuilder<Button> {
 		private DataDisabled disabled_;
 
 		private DataIcon icon_;
+
+		private DataIconPosition iconPosition_;
 
 		private DataIconShadow iconShadow_;
 
@@ -202,7 +243,7 @@ public final class ButtonBuilder extends ProxyBuilder<Button> {
 		@Override
 		public Content build() {
 			// @formatter:off
-			Element button = create().decorate(icon_, theme_, mini_, rel_, inline_, corners_, shadow_, iconShadow_,	this);
+			Element button = create().decorate(icon_, iconPosition_, theme_, mini_, rel_, inline_, corners_, shadow_, iconShadow_,	this);
 			// @formatter:on
 
 			if (onClick_ != null) {
@@ -243,7 +284,7 @@ public final class ButtonBuilder extends ProxyBuilder<Button> {
 		private void dataRel(DataRel dataRel) {
 			rel_ = dataRel;
 		}
-		
+
 		private void disable() {
 			disabled_ = DataDisabled.TRUE;
 		}
@@ -251,11 +292,24 @@ public final class ButtonBuilder extends ProxyBuilder<Button> {
 		private void icon(DataIcon icon) {
 			icon_ = icon;
 		}
+		
+		private void iconOnly(DataIcon icon) {
+			icon_ = icon;
+			iconPosition_ = DataIconPosition.NO_TEXT;
+		}
 
-		public void iconShadow(DataIconShadow shadow) {
+		private void iconPosition(DataIconPosition position) {
+			iconPosition_ = position;
+		}
+
+		private void iconShadow(DataIconShadow shadow) {
 			iconShadow_ = shadow;
 		}
 
+		private void inline(DataInline inline) {
+			inline_ = inline;
+		}
+		
 		private void mini(DataMini mini) {
 			mini_ = mini;
 		}
@@ -268,7 +322,7 @@ public final class ButtonBuilder extends ProxyBuilder<Button> {
 			onClick_ = identity;
 		}
 
-		public void shadow(DataShadow shadow) {
+		private void shadow(DataShadow shadow) {
 			shadow_ = shadow;
 		}
 
