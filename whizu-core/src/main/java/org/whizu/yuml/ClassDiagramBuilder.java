@@ -21,57 +21,72 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.content;
+package org.whizu.yuml;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.whizu.content.Content;
+import org.whizu.html.Html;
+import org.whizu.proxy.BuildSupport;
+import org.whizu.proxy.ProxyBuilder;
+
 /**
  * @author Rudy D'hauwe
  */
-public class ContentList implements Content, Iterable<Content> {
+public final class ClassDiagramBuilder extends ProxyBuilder<ClassDiagram> {
 
-	private final List<Content> contentList_ = new ArrayList<Content>();
-
-	public ContentList() {
+	public static ClassDiagramBuilder create() {
+		return new ClassDiagramBuilder();
 	}
 
-	public ContentList(Content... content) {
-		for (Content c : content) {
-			add(c);
-		}
-	}
+	private Build build_ = new Build();
 
-	/**
-	 * @return this
-	 */
-	public ContentList add(Content content) {
-		assert (content != null);
-		contentList_.add(content);
+	public ClassDiagramBuilder addClass(Type clazz) {
+		build_.addModel(clazz);
 		return this;
 	}
 
-	public <T extends Content> ContentList add(List<T> content) {
-		contentList_.addAll(content);
+	public ClassDiagramBuilder addNote(Note note) {
+		build_.addModel(note);
 		return this;
 	}
 
-	public boolean isEmpty() {
-		return contentList_.isEmpty();
+	@Override
+	public ClassDiagram build() {
+		return buildOnce(build_);
 	}
 
-	@Override
-	public Iterator<Content> iterator() {
-		return contentList_.iterator();
-	}
+	private final class Build extends BuildSupport implements ClassDiagram {
 
-	@Override
-	public String render() {
-		String markup = "";
-		for (Content element : contentList_) {
-			markup += element.render();
+		private List<Artifact> contentList_ = new ArrayList<Artifact>();
+
+		private void addModel(Artifact content) {
+			contentList_.add(content);
 		}
-		return markup;
+
+		@Override
+		public Content build() {
+			String specs = getSpecs();
+			String url = "http://yuml.me/diagram/scruffy/class/" + specs;
+			System.out.println(url);
+			return Html.img(id()).href(url);
+
+		}
+
+		private String getSpecs() {
+			if (contentList_.isEmpty()) {
+				return "";
+			}
+
+			Iterator<Artifact> it = contentList_.iterator();
+			String attributes = it.next().render();
+			while (it.hasNext()) {
+				attributes = attributes + "," + it.next().render();
+			}
+
+			return attributes;
+		}
 	}
 }

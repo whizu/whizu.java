@@ -21,57 +21,58 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.content;
+package org.whizu.yuml;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import org.whizu.content.Content;
+import org.whizu.content.Literal;
+import org.whizu.proxy.BuildSupport;
+import org.whizu.proxy.ProxyBuilder;
 
 /**
  * @author Rudy D'hauwe
  */
-public class ContentList implements Content, Iterable<Content> {
+public final class NoteBuilder extends ProxyBuilder<Note> {
 
-	private final List<Content> contentList_ = new ArrayList<Content>();
-
-	public ContentList() {
+	public static NoteBuilder create(String note) {
+		return new NoteBuilder().text(note);
 	}
 
-	public ContentList(Content... content) {
-		for (Content c : content) {
-			add(c);
-		}
-	}
+	private Build build_ = new Build();
 
-	/**
-	 * @return this
-	 */
-	public ContentList add(Content content) {
-		assert (content != null);
-		contentList_.add(content);
+	public NoteBuilder background(String color) {
+		build_.background(color);
 		return this;
 	}
 
-	public <T extends Content> ContentList add(List<T> content) {
-		contentList_.addAll(content);
+	@Override
+	public Note build() {
+		return buildOnce(build_);
+	}
+
+	private NoteBuilder text(String text) {
+		build_.text_ = text;
 		return this;
 	}
 
-	public boolean isEmpty() {
-		return contentList_.isEmpty();
-	}
+	private class Build extends BuildSupport implements Note {
 
-	@Override
-	public Iterator<Content> iterator() {
-		return contentList_.iterator();
-	}
+		private String background_;
 
-	@Override
-	public String render() {
-		String markup = "";
-		for (Content element : contentList_) {
-			markup += element.render();
+		private String text_;
+
+		private void background(String color) {
+			background_ = color;
 		}
-		return markup;
+
+		@Override
+		public Content build() {
+			String background = buildBackground();
+			String markup = "[note:" + text_ + background + "]";
+			return new Literal(markup);
+		}
+
+		private String buildBackground() {
+			return (background_ == null) ? "" : "{bg:" + background_ + "}";
+		}
 	}
 }

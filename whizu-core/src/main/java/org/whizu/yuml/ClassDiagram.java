@@ -21,57 +21,10 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.content;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+package org.whizu.yuml;
 
 /**
  * @author Rudy D'hauwe
  */
-public class ContentList implements Content, Iterable<Content> {
-
-	private final List<Content> contentList_ = new ArrayList<Content>();
-
-	public ContentList() {
-	}
-
-	public ContentList(Content... content) {
-		for (Content c : content) {
-			add(c);
-		}
-	}
-
-	/**
-	 * @return this
-	 */
-	public ContentList add(Content content) {
-		assert (content != null);
-		contentList_.add(content);
-		return this;
-	}
-
-	public <T extends Content> ContentList add(List<T> content) {
-		contentList_.addAll(content);
-		return this;
-	}
-
-	public boolean isEmpty() {
-		return contentList_.isEmpty();
-	}
-
-	@Override
-	public Iterator<Content> iterator() {
-		return contentList_.iterator();
-	}
-
-	@Override
-	public String render() {
-		String markup = "";
-		for (Content element : contentList_) {
-			markup += element.render();
-		}
-		return markup;
-	}
+public interface ClassDiagram extends Diagram {
 }
