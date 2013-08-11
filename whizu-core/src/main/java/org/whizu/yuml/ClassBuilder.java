@@ -59,6 +59,11 @@ public final class ClassBuilder extends ProxyBuilder<Type> {
 		return this;
 	}
 
+	public ClassBuilder background(Color color) {
+		build_.background(color.name());
+		return this;
+	}
+	
 	public ClassBuilder background(String color) {
 		build_.background(color);
 		return this;
@@ -94,7 +99,7 @@ public final class ClassBuilder extends ProxyBuilder<Type> {
 	}
 
 	/***************************************************************************
-	 * The <code>IClass</code> being build.
+	 * The class <code>Type</code> being build.
 	 */
 	private class Build extends BuildSupport implements Type {
 
@@ -105,6 +110,8 @@ public final class ClassBuilder extends ProxyBuilder<Type> {
 		private List<Type> dependsOnList_ = new ArrayList<Type>();
 
 		private List<Type> extendList_ = new ArrayList<Type>();
+		
+		private List<Type> implementList_ = new ArrayList<Type>();
 
 		private List<String> methodList_ = new ArrayList<String>();
 
@@ -140,8 +147,8 @@ public final class ClassBuilder extends ProxyBuilder<Type> {
 					+ methods + background + "]";
 			Iterator<Type> dependsOnIterator = dependsOnList_.iterator();
 			if (dependsOnIterator.hasNext()) {
-				Build depends = Objects.cast(dependsOnIterator.next());
-				thisClass = thisClass + "-.->" + depends.getClassDef();
+				Type depends = Objects.cast(dependsOnIterator.next());
+				thisClass = thisClass + "-.->" + depends.getTypeMarkup();
 			}
 
 			if (note_ != null) {
@@ -152,6 +159,11 @@ public final class ClassBuilder extends ProxyBuilder<Type> {
 			if (!extendList_.isEmpty()) {
 				String extendsRef = buildExtends();
 				thisClass = thisClass + "," + extendsRef;
+			}
+			
+			if (!implementList_.isEmpty()) {
+				String markup = buildImplements();
+				thisClass = thisClass + "," + markup;
 			}
 
 			return new Literal(thisClass);
@@ -191,6 +203,23 @@ public final class ClassBuilder extends ProxyBuilder<Type> {
 
 			return markup;
 		}
+		
+		private String buildImplements() {
+			if (implementList_.isEmpty()) {
+				return "";
+			}
+
+			Iterator<Type> it = implementList_.iterator();
+			String markup = ((Type) it.next()).getTypeMarkup() + "^-.-"
+					+ getTypeMarkup();
+
+			while (it.hasNext()) {
+				markup = markup + "," + ((Type) it.next()).getTypeMarkup()
+						+ "^-.-" + getTypeMarkup();
+			}
+
+			return markup;
+		}
 
 		private String buildMethods() {
 			if (methodList_.isEmpty()) {
@@ -225,5 +254,19 @@ public final class ClassBuilder extends ProxyBuilder<Type> {
 		private void stereotype(String name) {
 			stereotype_ = name;
 		}
+
+		public void implement(Type type) {
+			implementList_.add(type);
+		}
+
+		@Override
+		public String getTypeMarkup() {
+			return getClassDef();
+		}
+	}
+
+	public ClassBuilder implement(Type type) {
+		build_.implement(type);
+		return this;
 	}
 }

@@ -53,6 +53,11 @@ public final class ClassDiagramBuilder extends ProxyBuilder<ClassDiagram> {
 		return this;
 	}
 
+	public ClassDiagramBuilder addType(Type type) {
+		build_.addModel(type);
+		return this;
+	}
+
 	@Override
 	public ClassDiagram build() {
 		return buildOnce(build_);
