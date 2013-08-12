@@ -61,11 +61,11 @@ public class ClassDiagramBuilderTest extends AbstractTest {
 
 	@Test 
 	public void testClassDiagram() {
-		Type builder = InterfaceBuilder.createWithName("Builder<Button>")
+		Type builder = TypeBuilder.createInterface("Builder<Button>")
 		        .background(Color.white)
 		        .build();
 
-		Type button = InterfaceBuilder.createWithName("Button")
+		Type button = TypeBuilder.createInterface("Button")
 		        .background(Color.orange)
 		        .build();
 
@@ -82,7 +82,7 @@ public class ClassDiagramBuilderTest extends AbstractTest {
 		        .addType(button)
 		        .build();
 		
-		equals("<img id='c3' href='http://yuml.me/diagram/scruffy/class/[ButtonBuilder|build(){bg:green}]-.->[Button],[Builder<Button>]^-.-[ButtonBuilder],[Builder<Button>{bg:white}],[Button{bg:orange}]'></img>",
+		equals("<img id='c3' href='http://yuml.me/diagram/scruffy/class/[ButtonBuilder|build(){bg:green}]-.->[&laquo;&laquo;Button&raquo;&raquo;],[&laquo;&laquo;Builder<Button>&raquo;&raquo;]^-.-[ButtonBuilder],[&laquo;&laquo;Builder<Button>&raquo;&raquo;{bg:white}],[&laquo;&laquo;Button&raquo;&raquo;{bg:orange}]'></img>",
 				diagram);
 	}
 }
