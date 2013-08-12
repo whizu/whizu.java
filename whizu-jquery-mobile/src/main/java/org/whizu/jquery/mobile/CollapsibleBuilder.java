@@ -35,33 +35,62 @@ import org.whizu.proxy.ProxyBuilder;
  * 
  * @author Rudy D'hauwe
  */
-public final class AccordionBuilder extends ProxyBuilder<Accordion> {
+public final class CollapsibleBuilder extends ProxyBuilder<Collapsible> {
 
-	public static AccordionBuilder create() {
-		return new AccordionBuilder();
+	public static CollapsibleBuilder createWithH1(String title) {
+		return new CollapsibleBuilder(Html.h1(title));
+	}
+	
+	public static CollapsibleBuilder createWithH2(String title) {
+		return new CollapsibleBuilder(Html.h2(title));
+	}
+	
+	public static CollapsibleBuilder createWithH3(String title) {
+		return new CollapsibleBuilder(Html.h3(title));
+	}
+	
+	public static CollapsibleBuilder createWithH4(String title) {
+		return new CollapsibleBuilder(Html.h4(title));
+	}
+	
+	public static CollapsibleBuilder createWithH5(String title) {
+		return new CollapsibleBuilder(Html.h5(title));
+	}
+	
+	public static CollapsibleBuilder createWithH6(String title) {
+		return new CollapsibleBuilder(Html.h6(title));
+	}
+	
+	public static CollapsibleBuilder createWithTitle(String title) {
+		return new CollapsibleBuilder(title);
 	}
 
 	private Build build_ = new Build();
 
-	private AccordionBuilder() {
+	public CollapsibleBuilder(Content heading) {
+		build_.title(heading);
+	}
+
+	private CollapsibleBuilder(String title) {
+		this(Html.h3(title));
 	}
 
 	@Override
-	public Accordion build() {
-		return buildOnce(new AccordionProxy(build_));
+	public Collapsible build() {
+		return buildOnce(new CollapsibleProxy(build_));
 	}
 
-	public AccordionBuilder contentTheme(Theme theme) {
+	public CollapsibleBuilder contentTheme(Theme theme) {
 		build_.contentTheme(theme);
 		return this;
 	}
 
-	public AccordionBuilder iconCollapsed(DataIcon icon) {
+	public CollapsibleBuilder iconCollapsed(DataIcon icon) {
 		build_.iconCollapsed(icon);
 		return this;
 	}
 
-	public AccordionBuilder iconExpanded(DataIcon icon) {
+	public CollapsibleBuilder iconExpanded(DataIcon icon) {
 		build_.iconExpanded(icon);
 		return this;
 	}
@@ -71,7 +100,7 @@ public final class AccordionBuilder extends ProxyBuilder<Accordion> {
 	 * using the data-iconpos attribute, either at the collapsible-set level or
 	 * on any of its collapsibles individually.
 	 */
-	public AccordionBuilder iconPosition(DataIconPosition position) {
+	public CollapsibleBuilder iconPosition(DataIconPosition position) {
 		build_.iconPosition(position);
 		return this;
 	}
@@ -80,7 +109,7 @@ public final class AccordionBuilder extends ProxyBuilder<Accordion> {
 	 * For a more compact version that is useful in tight spaces, add the
 	 * data-mini="true" attribute to the set.
 	 */
-	public AccordionBuilder mini() {
+	public CollapsibleBuilder mini() {
 		build_.mini();
 		return this;
 	}
@@ -90,7 +119,7 @@ public final class AccordionBuilder extends ProxyBuilder<Accordion> {
 	 * data-inset="false" attribute to the set. This makes the collapsible set
 	 * look more like an expandable <code>Listview</code>.
 	 */
-	public AccordionBuilder noCorners() {
+	public CollapsibleBuilder noCorners() {
 		build_.noCorners();
 		return this;
 	}
@@ -99,12 +128,12 @@ public final class AccordionBuilder extends ProxyBuilder<Accordion> {
 	 * Add the data-corners="false" attribute to get an inset collapsible set
 	 * without rounded corners.
 	 */
-	public AccordionBuilder square() {
+	public CollapsibleBuilder square() {
 		build_.square();
 		return this;
 	}
 
-	public AccordionBuilder theme(Theme theme) {
+	public CollapsibleBuilder theme(Theme theme) {
 		build_.theme(theme);
 		return this;
 	}
@@ -112,13 +141,15 @@ public final class AccordionBuilder extends ProxyBuilder<Accordion> {
 	/***************************************************************************
 	 * The <code>Accordion</code> that is being built.
 	 */
-	private final class Build extends BuildSupport implements Accordion {
+	private final class Build extends BuildSupport implements Collapsible {
 
 		private ContentList contents_ = new ContentList();
 
 		private DataContentTheme contentTheme_;
 
 		private DataCorners dataCorners_;
+
+		private Content heading_;
 
 		private DataCollapsedIcon iconCollapsed_;
 
@@ -133,18 +164,18 @@ public final class AccordionBuilder extends ProxyBuilder<Accordion> {
 		private Theme theme_;
 
 		@Override
-		public void addCollapsible(Collapsible collapsible) {
-			contents_.add(collapsible);
+		public void addContent(Content content) {
+			contents_.add(content);
 		}
-
+		
 		@Override
 		public Content build() {
 			return Html
 					.div(this)
-					.decorate(DataRole.COLLAPSIBLE_SET, this, theme_,
+					.decorate(DataRole.COLLAPSIBLE, this, theme_,
 							contentTheme_, inset_, mini_, iconCollapsed_,
 							iconExpanded_, iconPosition_, dataCorners_)
-					.add(contents_);
+					.add(heading_).add(contents_);
 		}
 
 		private void contentTheme(Theme theme) {
@@ -177,6 +208,10 @@ public final class AccordionBuilder extends ProxyBuilder<Accordion> {
 
 		private void theme(Theme theme) {
 			theme_ = theme;
+		}
+
+		private void title(Content heading) {
+			heading_ = heading;
 		}
 	}
 }

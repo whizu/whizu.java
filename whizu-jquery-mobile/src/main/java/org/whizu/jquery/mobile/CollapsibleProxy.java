@@ -23,17 +23,46 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile;
 
-import org.whizu.content.Component;
 import org.whizu.content.Content;
+import org.whizu.proxy.Proxy;
+import org.whizu.proxy.ProxySupport;
 
 /**
- * Collapsibles are simple widgets that allow you to expand or collapse content
- * when tapped and are useful in mobile to provide a compact presentation of
- * content.
- * 
  * @author Rudy D'hauwe
  */
-public interface Collapsible extends Component {
+final class CollapsibleProxy extends Proxy<Collapsible> implements Collapsible {
+
+	protected CollapsibleProxy(Collapsible impl) {
+		super(impl);
+	}
+
+	@Override
+	public void addContent(Content content) {
+		impl().addContent(content);
+	}
+
+	@Override
+	protected Collapsible createImpl() {
+		return new CollapsibleImpl(id());
+	}
 	
-	public void addContent(Content content);
+	@Override
+	public String id() {
+		return impl().id();
+	}
+
+	/***************************************************************************
+     * The target <code>Accordion</code> that has been rendered.
+	 */
+	private final class CollapsibleImpl extends ProxySupport implements Collapsible {
+
+		private CollapsibleImpl(String id) {
+			super(id);
+		}
+		
+		@Override
+		public void addContent(Content content) {
+			jQuery(this).append(content);
+		}
+	}
 }

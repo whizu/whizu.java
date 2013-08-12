@@ -121,6 +121,22 @@ public class Html {
 	public static Element h4(String text) {
 		return h4().add(text);
 	}
+	
+	public static Element h5() {
+		return tag("h5");
+	}
+
+	public static Element h5(String text) {
+		return h5().add(text);
+	}
+	
+	public static Element h6() {
+		return tag("h6");
+	}
+
+	public static Element h6(String text) {
+		return h6().add(text);
+	}
 
 	public static Element hr() {
 		return new Node("hr", true);
