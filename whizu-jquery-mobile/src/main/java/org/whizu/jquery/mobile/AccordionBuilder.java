@@ -34,20 +34,99 @@ import org.whizu.proxy.ProxyBuilder;
  */
 public final class AccordionBuilder extends ProxyBuilder<Accordion> {
 
+	public static AccordionBuilder create() {
+		return new AccordionBuilder();
+	}
+
 	private Build build_ = new Build();
-	
+
+	private AccordionBuilder() {
+	}
+
 	@Override
 	public Accordion build() {
 		return buildOnce(new AccordionProxy(build_));
 	}
 
+	public AccordionBuilder contentTheme(Theme theme) {
+		build_.contentTheme(theme);
+		return this;
+	}
+
+	public AccordionBuilder iconCollapsed(DataIcon icon) {
+		build_.iconCollapsed(icon);
+		return this;
+	}
+
+	public AccordionBuilder iconExpanded(DataIcon icon) {
+		build_.iconExpanded(icon);
+		return this;
+	}
+
+	/**
+	 * The default icon positioning of collapsible headings can be overridden by
+	 * using the data-iconpos attribute, either at the collapsible-set level or
+	 * on any of its collapsibles individually.
+	 */
+	public AccordionBuilder iconPosition(DataIconPosition position) {
+		build_.iconPosition(position);
+		return this;
+	}
+
+	/**
+	 * For a more compact version that is useful in tight spaces, add the
+	 * data-mini="true" attribute to the set.
+	 */
+	public AccordionBuilder mini() {
+		build_.mini();
+		return this;
+	}
+
+	/**
+	 * For full width collapsibles without corner styling add the
+	 * data-inset="false" attribute to the set. This makes the collapsible set
+	 * look more like an expandable <code>Listview</code>.
+	 */
+	public AccordionBuilder noCorners() {
+		build_.noCorners();
+		return this;
+	}
+
+	/**
+	 * Add the data-corners="false" attribute to get an inset collapsible set
+	 * without rounded corners.
+	 */
+	public AccordionBuilder suare() {
+		build_.square();
+		return this;
+	}
+
+	public AccordionBuilder theme(Theme theme) {
+		build_.theme(theme);
+		return this;
+	}
+
 	/***************************************************************************
 	 * The <code>Accordion</code> that is being built.
 	 */
-	final class Build extends BuildSupport implements Accordion {
+	private final class Build extends BuildSupport implements Accordion {
 
 		private ContentList contents_ = new ContentList();
-		
+
+		private DataContentTheme contentTheme_;
+
+		private DataCorners dataCorners_;
+
+		private DataCollapsedIcon iconCollapsed_;
+
+		private DataIcon iconExpanded_;
+
+		private DataIconPosition iconPosition_;
+
+		private DataInset inset_;
+
+		private DataMini mini_;
+
 		private Theme theme_;
 
 		@Override
@@ -57,7 +136,44 @@ public final class AccordionBuilder extends ProxyBuilder<Accordion> {
 
 		@Override
 		public Content build() {
-			return Html.div(this).decorate(DataRole.COLLAPSIBLE_SET, this, theme_).add(contents_);
+			return Html
+					.div(this)
+					.decorate(DataRole.COLLAPSIBLE_SET, this, theme_,
+							contentTheme_, inset_, mini_, iconCollapsed_,
+							iconExpanded_, iconPosition_, dataCorners_)
+					.add(contents_);
+		}
+
+		private void contentTheme(Theme theme) {
+			contentTheme_ = new DataContentTheme(theme);
+		}
+
+		private void iconCollapsed(DataIcon icon) {
+			iconCollapsed_ = new DataCollapsedIcon(icon);
+		}
+
+		private void iconExpanded(DataIcon icon) {
+			iconExpanded_ = icon;
+		}
+
+		private void iconPosition(DataIconPosition position) {
+			iconPosition_ = position;
+		}
+
+		private void mini() {
+			mini_ = DataMini.TRUE;
+		}
+
+		private void noCorners() {
+			inset_ = DataInset.FALSE;
+		}
+
+		private void square() {
+			dataCorners_ = DataCorners.SQUARE;
+		}
+
+		private void theme(Theme theme) {
+			theme_ = theme;
 		}
 	}
 }

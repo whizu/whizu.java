@@ -41,6 +41,11 @@ public final class ClassDiagramBuilder extends ProxyBuilder<ClassDiagram> {
 		return new ClassDiagramBuilder();
 	}
 
+	public static <T> ClassDiagramBuilder createFrom(Class<T> type) {
+		// TODO implement this feature
+		return new ClassDiagramBuilder();
+	}
+
 	private Build build_ = new Build();
 
 	public ClassDiagramBuilder addClass(Type clazz) {

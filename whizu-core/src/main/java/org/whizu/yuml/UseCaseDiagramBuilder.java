@@ -7,6 +7,16 @@ import org.whizu.proxy.ProxyBuilder;
  */
 public final class UseCaseDiagramBuilder extends ProxyBuilder<UseCaseDiagram> {
 
+	public UseCaseDiagramBuilder addActor(Actor actor) {
+		// TODO implement this
+		return this;
+	}
+	
+	public UseCaseDiagramBuilder addUseCase(UseCase useCase) {
+		// TODO implement this
+		return this;
+	}
+
 	public static UseCaseDiagramBuilder create() {
 		return new UseCaseDiagramBuilder();
 	}

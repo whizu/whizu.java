@@ -53,7 +53,7 @@ final class AccordionProxy extends Proxy<Accordion> implements Accordion {
 	/***************************************************************************
      * The target <code>Accordion</code> that has been rendered.
 	 */
-	final class AccordionImpl extends ProxySupport implements Accordion {
+	private final class AccordionImpl extends ProxySupport implements Accordion {
 
 		private AccordionImpl(String id) {
 			super(id);

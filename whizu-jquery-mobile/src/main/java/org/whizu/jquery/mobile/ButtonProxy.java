@@ -29,7 +29,7 @@ final class ButtonProxy extends Proxy<Button> implements Button {
 	/***************************************************************************
      * The target <code>Button</code> that has been rendered.
 	 */
-	final class ButtonImpl implements Button {
+	private final class ButtonImpl implements Button {
 
 		private String id_;
 		

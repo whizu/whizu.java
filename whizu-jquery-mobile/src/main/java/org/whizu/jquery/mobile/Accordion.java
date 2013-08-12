@@ -34,7 +34,7 @@ import org.whizu.content.Component;
 public interface Accordion extends Component {
 
 	/**
-	 * Add a collapsible to the accordion.
+	 * Add a <code>Collapsible</code> to the accordion.
 	 */
 	public void addCollapsible(Collapsible collapsible);
 }

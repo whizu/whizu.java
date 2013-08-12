@@ -29,45 +29,23 @@ import org.whizu.content.Element;
 /**
  * @author Rudy D'hauwe
  */
-public enum DataIcon implements Decorator {
+enum DataInset implements Decorator {
 
 	// @formatter:off
-	ALERT("alert"), 
-	BACK("back"), 
-	BARS("bars"), 
-	CHECK("check"), 
-	DELETE("delete"), 
-	DOWN_ARROW("arrow-d"), 
-	EDIT("edit"), 
-	FORWARD("forward"), 
-	GEAR("gear"), 
-	GRID("grid"), 
-	HOME("home"), 
-	INFO("info"), 
-	LEFT_ARROW("arrow-l"), 
-	MINUS("minus"), 
-	PLUS("plus"), 
-	REFRESH("refresh"), 
-	RIGHT_ARROW("arrow-r"), 
-	SEARCH("search"), 
-	STAR("star"), 
-	UP_ARROW("arrow-u");
+	TRUE("true"),
+	FALSE("false");
 	// @formatter:on
 
-	private static final String ATTRIBUTE_NAME = "data-icon";
+	private static final String ATTRIBUTE_NAME = "data-inset";
 
 	private String value_;
 
-	private DataIcon(String value) {
+	private DataInset(String value) {
 		value_ = value;
 	}
 
 	@Override
 	public void decorate(Element element) {
 		element.attr(ATTRIBUTE_NAME, value_);
-	}
-
-	protected String value() {
-		return value_;
 	}
 }
