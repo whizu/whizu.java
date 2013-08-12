@@ -23,21 +23,21 @@ public class ClassDiagramBuilderTest extends AbstractTest {
 		// @formatter:off
 		Note note = NoteBuilder.create("This is my cool yUML ButtonBuilder").build();
 		
-		Type builder = ClassBuilder.createWithName("Builder")
+		Type builder = TypeBuilder.createInterface("Builder")
 				.background("white")
 				.build();
 		
-		Type content = ClassBuilder.createWithName("Content")
+		Type content = TypeBuilder.createInterface("Content")
 				.build();
 
-		Type button = ClassBuilder.createWithName("Button")
+		Type button = TypeBuilder.createInterface("Button")
 				.background("green")
 				.addMethod("render()")
 				.dependsOn(builder)
 				.extend(content)
 				.build();
 	
-		Type buttonBuilder = ClassBuilder.createWithName("ButtonBuilder")
+		Type buttonBuilder = TypeBuilder.createClass("ButtonBuilder")
 				.addNote(note)
 				.stereotype("Builder")
 				.background("orange")
@@ -55,7 +55,7 @@ public class ClassDiagramBuilderTest extends AbstractTest {
 				.build();
 		// @formatter:on
 		
-		equals("<img id='c5' href='http://yuml.me/diagram/scruffy/class/[&laquo;&laquo;Builder&raquo;&raquo;;ButtonBuilder|logger;title|build(){bg:orange}]-.->[Button],[ButtonBuilder]-[note:This is my cool yUML ButtonBuilder],[Button|render(){bg:green}]-.->[Builder],[Content]^-[Button],[Builder{bg:white}]'></img>",
+		equals("<img id='c5' href='http://yuml.me/diagram/scruffy/class/[&laquo;&laquo;Builder&raquo;&raquo;;ButtonBuilder|logger;title|build(){bg:orange}]-.->[&laquo;&laquo;Button&raquo;&raquo;],[ButtonBuilder]-[note:This is my cool yUML ButtonBuilder],[&laquo;&laquo;Button&raquo;&raquo;|render(){bg:green}]-.->[&laquo;&laquo;Builder&raquo;&raquo;],[&laquo;&laquo;Content&raquo;&raquo;]^-[&laquo;&laquo;Button&raquo;&raquo;],[&laquo;&laquo;Builder&raquo;&raquo;{bg:white}]'></img>",
 				diagram);
 	}
 
@@ -69,7 +69,7 @@ public class ClassDiagramBuilderTest extends AbstractTest {
 		        .background(Color.orange)
 		        .build();
 
-		Type buttonBuilder = ClassBuilder.createWithName("ButtonBuilder")
+		Type buttonBuilder = TypeBuilder.createClass("ButtonBuilder")
 		        .implement(builder)
 		        .dependsOn(button)
 		        .addMethod("build()")

@@ -7,7 +7,7 @@ import org.whizu.proxy.BuildSupport;
 /**
  * @author Rudy D'hauwe
  */
-public final class InterfaceBuilder extends TypeBuilder<InterfaceBuilder> {
+public final class InterfaceBuilder extends AbstractTypeBuilder<InterfaceBuilder> {
 
 	public static InterfaceBuilder createWithName(String name) {
 		return new InterfaceBuilder().name(name);
