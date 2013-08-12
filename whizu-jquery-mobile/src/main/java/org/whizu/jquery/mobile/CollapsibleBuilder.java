@@ -38,6 +38,7 @@ import org.whizu.proxy.ProxyBuilder;
  */
 public final class CollapsibleBuilder extends ProxyBuilder<Collapsible> {
 
+	/*
 	public static CollapsibleBuilder createWithH1(String title) {
 		return new CollapsibleBuilder(Html.h1(title));
 	}
@@ -61,6 +62,7 @@ public final class CollapsibleBuilder extends ProxyBuilder<Collapsible> {
 	public static CollapsibleBuilder createWithH6(String title) {
 		return new CollapsibleBuilder(Html.h6(title));
 	}
+	*/
 
 	/**
 	 * @return CollapsibleBuilder.createWithH3(title)
