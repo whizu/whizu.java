@@ -30,8 +30,9 @@ import org.whizu.proxy.BuildSupport;
 import org.whizu.proxy.ProxyBuilder;
 
 /**
- * An accordion is created in jQuery Mobile by grouping a series of individual
- * <code>Collapsible<code> widgets into a set.
+ * Collapsibles are simple widgets that allow you to expand or collapse content
+ * when tapped and are useful in mobile to provide a compact presentation of
+ * content. Collapsibles can be grouped in an <code>Accordion</code>.
  * 
  * @author Rudy D'hauwe
  */
@@ -40,27 +41,30 @@ public final class CollapsibleBuilder extends ProxyBuilder<Collapsible> {
 	public static CollapsibleBuilder createWithH1(String title) {
 		return new CollapsibleBuilder(Html.h1(title));
 	}
-	
+
 	public static CollapsibleBuilder createWithH2(String title) {
 		return new CollapsibleBuilder(Html.h2(title));
 	}
-	
+
 	public static CollapsibleBuilder createWithH3(String title) {
 		return new CollapsibleBuilder(Html.h3(title));
 	}
-	
+
 	public static CollapsibleBuilder createWithH4(String title) {
 		return new CollapsibleBuilder(Html.h4(title));
 	}
-	
+
 	public static CollapsibleBuilder createWithH5(String title) {
 		return new CollapsibleBuilder(Html.h5(title));
 	}
-	
+
 	public static CollapsibleBuilder createWithH6(String title) {
 		return new CollapsibleBuilder(Html.h6(title));
 	}
-	
+
+	/**
+	 * @return CollapsibleBuilder.createWithH3(title)
+	 */
 	public static CollapsibleBuilder createWithTitle(String title) {
 		return new CollapsibleBuilder(title);
 	}
@@ -139,7 +143,7 @@ public final class CollapsibleBuilder extends ProxyBuilder<Collapsible> {
 	}
 
 	/***************************************************************************
-	 * The <code>Accordion</code> that is being built.
+	 * The <code>Collapsible</code> that is being built.
 	 */
 	private final class Build extends BuildSupport implements Collapsible {
 
@@ -167,7 +171,7 @@ public final class CollapsibleBuilder extends ProxyBuilder<Collapsible> {
 		public void addContent(Content content) {
 			contents_.add(content);
 		}
-		
+
 		@Override
 		public Content build() {
 			return Html
