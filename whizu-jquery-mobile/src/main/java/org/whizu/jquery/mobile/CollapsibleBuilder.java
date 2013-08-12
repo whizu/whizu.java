@@ -39,30 +39,24 @@ import org.whizu.proxy.ProxyBuilder;
 public final class CollapsibleBuilder extends ProxyBuilder<Collapsible> {
 
 	/*
-	public static CollapsibleBuilder createWithH1(String title) {
-		return new CollapsibleBuilder(Html.h1(title));
-	}
-
-	public static CollapsibleBuilder createWithH2(String title) {
-		return new CollapsibleBuilder(Html.h2(title));
-	}
-
-	public static CollapsibleBuilder createWithH3(String title) {
-		return new CollapsibleBuilder(Html.h3(title));
-	}
-
-	public static CollapsibleBuilder createWithH4(String title) {
-		return new CollapsibleBuilder(Html.h4(title));
-	}
-
-	public static CollapsibleBuilder createWithH5(String title) {
-		return new CollapsibleBuilder(Html.h5(title));
-	}
-
-	public static CollapsibleBuilder createWithH6(String title) {
-		return new CollapsibleBuilder(Html.h6(title));
-	}
-	*/
+	 * public static CollapsibleBuilder createWithH1(String title) { return new
+	 * CollapsibleBuilder(Html.h1(title)); }
+	 * 
+	 * public static CollapsibleBuilder createWithH2(String title) { return new
+	 * CollapsibleBuilder(Html.h2(title)); }
+	 * 
+	 * public static CollapsibleBuilder createWithH3(String title) { return new
+	 * CollapsibleBuilder(Html.h3(title)); }
+	 * 
+	 * public static CollapsibleBuilder createWithH4(String title) { return new
+	 * CollapsibleBuilder(Html.h4(title)); }
+	 * 
+	 * public static CollapsibleBuilder createWithH5(String title) { return new
+	 * CollapsibleBuilder(Html.h5(title)); }
+	 * 
+	 * public static CollapsibleBuilder createWithH6(String title) { return new
+	 * CollapsibleBuilder(Html.h6(title)); }
+	 */
 
 	/**
 	 * @return CollapsibleBuilder.createWithH3(title)
@@ -88,6 +82,11 @@ public final class CollapsibleBuilder extends ProxyBuilder<Collapsible> {
 
 	public CollapsibleBuilder contentTheme(Theme theme) {
 		build_.contentTheme(theme);
+		return this;
+	}
+
+	public CollapsibleBuilder expandOnLoad() {
+		build_.expandOnLoad();
 		return this;
 	}
 
@@ -155,6 +154,8 @@ public final class CollapsibleBuilder extends ProxyBuilder<Collapsible> {
 
 		private DataCorners dataCorners_;
 
+		private DataCollapsed expandOnLoad_;
+
 		private Content heading_;
 
 		private DataCollapsedIcon iconCollapsed_;
@@ -180,12 +181,16 @@ public final class CollapsibleBuilder extends ProxyBuilder<Collapsible> {
 					.div(this)
 					.decorate(DataRole.COLLAPSIBLE, this, theme_,
 							contentTheme_, inset_, mini_, iconCollapsed_,
-							iconExpanded_, iconPosition_, dataCorners_)
-					.add(heading_).add(contents_);
+							iconExpanded_, iconPosition_, dataCorners_,
+							expandOnLoad_).add(heading_).add(contents_);
 		}
 
 		private void contentTheme(Theme theme) {
 			contentTheme_ = new DataContentTheme(theme);
+		}
+
+		private void expandOnLoad() {
+			expandOnLoad_ = DataCollapsed.FALSE;
 		}
 
 		private void iconCollapsed(DataIcon icon) {
