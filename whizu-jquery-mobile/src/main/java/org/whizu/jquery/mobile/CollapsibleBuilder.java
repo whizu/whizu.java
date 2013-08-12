@@ -125,8 +125,8 @@ public final class CollapsibleBuilder extends ProxyBuilder<Collapsible> {
 	 * data-inset="false" attribute to the set. This makes the collapsible set
 	 * look more like an expandable <code>Listview</code>.
 	 */
-	public CollapsibleBuilder noCorners() {
-		build_.noCorners();
+	public CollapsibleBuilder noCornerStyling() {
+		build_.noCornerStyling();
 		return this;
 	}
 
@@ -204,7 +204,7 @@ public final class CollapsibleBuilder extends ProxyBuilder<Collapsible> {
 			mini_ = DataMini.TRUE;
 		}
 
-		private void noCorners() {
+		private void noCornerStyling() {
 			inset_ = DataInset.FALSE;
 		}
 
