@@ -67,7 +67,7 @@ public final class CollapsibleBuilder extends ProxyBuilder<Collapsible> {
 
 	private Build build_ = new Build();
 
-	public CollapsibleBuilder(Content heading) {
+	private CollapsibleBuilder(Content heading) {
 		build_.title(heading);
 	}
 

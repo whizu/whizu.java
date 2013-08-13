@@ -5,7 +5,7 @@ import org.whizu.jquery.mobile.ListSupport;
 import org.whizu.util.Strings;
 
 //extends ListEditor (or: ListManager)
-public class UpdatePlayerAction extends ListSupport<Player> {
+public class UpdatePlayerAction extends ListSupport<PlayerVO> {
 
 	@Override
 	protected void createForm(FormBuilder builder) {
@@ -14,7 +14,7 @@ public class UpdatePlayerAction extends ListSupport<Player> {
 	}
 
 	@Override
-	protected boolean validate(Player model) {
+	protected boolean validate(PlayerVO model) {
 		return !Strings.isBlank(model.name.get());
 	}
 }

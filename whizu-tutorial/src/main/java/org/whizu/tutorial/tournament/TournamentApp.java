@@ -76,7 +76,7 @@ public class TournamentApp implements JQueryMobile {
 	private Popup addPlayerEvent() {
 		log.debug("TournamentApp.this::addPlayerEvent()");
 
-		final Player model = new Player();
+		final PlayerVO model = new PlayerVO();
 
 		Button submit = ButtonBuilder.createWithTitle("Create").build();
 
@@ -98,7 +98,7 @@ public class TournamentApp implements JQueryMobile {
 		// @formatter:on
 	}
 
-	private void addPlayer(Player player) {
+	private void addPlayer(PlayerVO player) {
 		// validate
 		// if not ok, show validation messages and don't add item and don't
 		// close popup
@@ -113,7 +113,7 @@ public class TournamentApp implements JQueryMobile {
 		}
 	}
 
-	private boolean validate(Player player) {
+	private boolean validate(PlayerVO player) {
 		return (!player.name.get().equals(""));
 	}
 
@@ -121,7 +121,7 @@ public class TournamentApp implements JQueryMobile {
 	 * Java 8 should obsolete this method by calling "this::addPlayer()".
 	 */
 	@Deprecated
-	private ClickListener _addPlayer(final Player player) {
+	private ClickListener _addPlayer(final PlayerVO player) {
 		return new ClickListener() {
 
 			@Override

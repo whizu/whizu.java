@@ -48,18 +48,6 @@ public class Container extends Widget implements Composite {
 	}
 
 	@Override
-	@Deprecated
-	public Container add(Component impl) {
-		this.componentList.add(impl);
-
-		if (this.isRendered()) {
-			jQuery(this).append(impl);
-		}
-
-		return this;
-	}
-
-	@Override
 	public Composite add(Content content) {
 		this.componentList.add(content);
 

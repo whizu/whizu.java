@@ -28,9 +28,9 @@ import org.whizu.jquery.mobile.ListSupport;
 import org.whizu.util.Strings;
 import org.whizu.value.ValueList;
 
-public class AddPlayerAction extends ListSupport<Player> {
+public class AddPlayerAction extends ListSupport<PlayerVO> {
 
-	public AddPlayerAction(ValueList<Player> list) {
+	public AddPlayerAction(ValueList<PlayerVO> list) {
 		super(list);
 	}
 
@@ -41,7 +41,7 @@ public class AddPlayerAction extends ListSupport<Player> {
 	}
 
 	@Override
-	protected boolean validate(Player model) {
+	protected boolean validate(PlayerVO model) {
 		return !Strings.isBlank(model.name.get());
 	}
 }

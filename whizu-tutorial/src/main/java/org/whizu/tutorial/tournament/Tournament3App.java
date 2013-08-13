@@ -40,9 +40,9 @@ import org.whizu.value.ValueList;
 @App("/whizu/tournament3")
 public class Tournament3App implements JQueryMobile {
 
-	private final ValueList<Player> playerList = new ValueList<Player>(Player.class);
+	private final ValueList<PlayerVO> playerList = new ValueList<PlayerVO>(PlayerVO.class);
 
-	private final ListControl<Player> listControl = new DefaultValueListControl<Player>(playerList);
+	private final ListControl<PlayerVO> listControl = new DefaultValueListControl<PlayerVO>(playerList);
 
 	@Override
 	public void onLoad(Page page) {
@@ -77,10 +77,10 @@ public class Tournament3App implements JQueryMobile {
 	}
 
 	private void initListData() {
-		Player player1 = new Player();
+		PlayerVO player1 = new PlayerVO();
 		player1.name.set("Mark");
 		playerList.add(player1);
-		Player player2 = new Player();
+		PlayerVO player2 = new PlayerVO();
 		player2.name.set("Rudy");
 		playerList.add(player2);
 	}

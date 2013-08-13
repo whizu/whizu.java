@@ -37,7 +37,7 @@ import org.whizu.widget.Widget;
 class LayoutBuilder<T extends LayoutBuilder<T>> extends Container implements Layout {
 
 	@Override
-	public T add(Component impl) {
+	public T add(Content impl) {
 		return getThis(super.add(impl));
 	}
 

@@ -35,7 +35,7 @@ import org.whizu.value.Value;
 /**
  * @author Rudy D'hauwe
  */
-public class Player extends AbstractValueObject {
+public class PlayerVO extends AbstractValueObject {
 
 	public final DateValue birthdate = new DateValue("Birth date");
 	
@@ -58,7 +58,7 @@ public class Player extends AbstractValueObject {
 		return new Value[] { name, birthdate };
 	}
 
-	public void refresh(Player player) {
+	public void refresh(PlayerVO player) {
 		name.refresh(player.name);
 		birthdate.refresh(player.birthdate);
 	}

@@ -50,6 +50,8 @@ public class GridLayout extends Widget implements Layout {
 
 	private Element row_;
 
+	private String[] widths_;
+
 	public GridLayout() {
 		this(1);
 	}
@@ -59,9 +61,15 @@ public class GridLayout extends Widget implements Layout {
 		init();
 	}
 
+	public GridLayout(String... widths) {
+		numberOfColumns_ = widths.length;
+		widths_ = widths;
+		init();
+	}
+
 	protected void init() {
 		super.init();
-		grid_ = Html.table(this).attr("cellspacing", "0").attr("cellpadding", "0");
+		grid_ = Html.table(this).attr("cellspacing", "0").attr("cellpadding", "10").width("100%");
 		tbody_ = grid_.tbody();
 		row_ = null;
 		column_ = 0;
@@ -72,12 +80,6 @@ public class GridLayout extends Widget implements Layout {
 		return grid_;
 	}
 
-	@Override
-	@Deprecated
-	public GridLayout add(Component component) {
-		return add((Content) component);
-	}
-	
 	@Override
 	public GridLayout add(Content component) {
 		if (isRendered()) {
@@ -101,7 +103,8 @@ public class GridLayout extends Widget implements Layout {
 				column_++;
 			}
 
-			Td td = Html.td().add(component);
+			Element td = Html.td().style("min-width", widths_[column_-1]).style("vertical-align","top").add(component);
+			
 			row_.add(td);
 		}
 

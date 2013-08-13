@@ -40,7 +40,7 @@ import org.whizu.value.ValueList;
 @App("/whizu/tournament2")
 public class Tournament2App implements JQueryMobile {
 
-	private final ValueList<Player> playerList = new ValueList<Player>(Player.class);
+	private final ValueList<PlayerVO> playerList = new ValueList<PlayerVO>(PlayerVO.class);
 
 	@Override
 	public void onLoad(Page page) {
@@ -51,19 +51,19 @@ public class Tournament2App implements JQueryMobile {
 		//ListControl control = ...; //playerList.getControl() //playerList.setControl()
 		
 		// @formatter:off
-		ClickListener addPlayerEventHandler = new DefaultListSupport<Player>(playerList);
+		ClickListener addPlayerEventHandler = new DefaultListSupport<PlayerVO>(playerList);
 		//EventHandler addPlayerEventHandler = listControl.addEvent();
 		HeaderBuilder.create()
 			.title("Tournament")
 			.button("Add player")
 			    .theme(Theme.E)
 			    //.onClick(new AddPlayerAction(playerList)) //manager.add(), or, playerList.add() for default behavior
-				.onClick(new DefaultListSupport<Player>(playerList))
+				.onClick(new DefaultListSupport<PlayerVO>(playerList))
 			    .build()
 			.build()
 			.on(page);
 
-		OnItemClickListener<Player> onItemClickListener = new DefaultListSupport<Player>();
+		OnItemClickListener<PlayerVO> onItemClickListener = new DefaultListSupport<PlayerVO>();
 		//EventHandler onItemClickHandler = listControl.editEvent();
 		ListViewBuilder.createWith(playerList)  //or: createWith(manager) so next line is unnecessary
 			//.onItemClick(new UpdatePlayerAction()) //manager.update()
@@ -74,10 +74,10 @@ public class Tournament2App implements JQueryMobile {
 	}
 
 	private void initListData() {
-		Player player1 = new Player();
+		PlayerVO player1 = new PlayerVO();
 		player1.name.set("Mark");
 		playerList.add(player1);
-		Player player2 = new Player();
+		PlayerVO player2 = new PlayerVO();
 		player2.name.set("Rudy");
 		playerList.add(player2);
 	}

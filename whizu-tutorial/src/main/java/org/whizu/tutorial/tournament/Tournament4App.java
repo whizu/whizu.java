@@ -24,10 +24,16 @@
 package org.whizu.tutorial.tournament;
 
 import org.whizu.annotation.App;
+import org.whizu.jquery.mobile.Button;
+import org.whizu.jquery.mobile.ButtonBuilder;
 import org.whizu.jquery.mobile.HeaderBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
+import org.whizu.jquery.mobile.ListView;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.jquery.mobile.list.ListViewBuilderNg;
+import org.whizu.layout.GridLayout;
+import org.whizu.layout.HorizontalLayout;
+import org.whizu.layout.Layout;
 import org.whizu.value.ValueList;
 
 /**
@@ -36,7 +42,7 @@ import org.whizu.value.ValueList;
 @App("/whizu/tournament4")
 public class Tournament4App implements JQueryMobile {
 
-	private final ValueList<Player> playerList = new ValueList<Player>(Player.class);
+	private final ValueList<PlayerVO> playerList = new ValueList<PlayerVO>(PlayerVO.class);
 
 	@Override
 	public void onLoad(Page page) {
@@ -50,16 +56,30 @@ public class Tournament4App implements JQueryMobile {
 				.build()
 			.build()
 			.on(page);
-		// @formatter:on
 
-		ListViewBuilderNg.createWith(playerList).ordered().build().on(page);
+		Button addPlayer = ButtonBuilder.createWithTitle("Add player")
+				.onClick(playerList.addEvent())
+				.inline()
+				.build();
+		
+		ListView listView = ListViewBuilderNg.createWith(playerList)
+				.ordered()
+				.build();
+		// @formatter:on
+		
+		Layout layout = new GridLayout("150px", "99%");
+		//Layout layout = new HorizontalLayout();
+		layout.add(addPlayer);
+		layout.add(listView);
+		page.add(layout);
+		//.on(page);
 	}
 
 	private void initListData() {
-		Player player1 = new Player();
+		PlayerVO player1 = new PlayerVO();
 		player1.name.set("Mark");
 		playerList.add(player1);
-		Player player2 = new Player();
+		PlayerVO player2 = new PlayerVO();
 		player2.name.set("Rudy");
 		playerList.add(player2);
 	}
