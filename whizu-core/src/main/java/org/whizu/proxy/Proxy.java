@@ -70,6 +70,7 @@ public abstract class Proxy<T> implements Content {
 
 	@Override
 	public final String render() {
+		System.out.println("Rendering proxy " + this);
 		ContentBuilder builder = Objects.cast(impl_);
 		Content content = builder.build();
 		String markup = content.render();

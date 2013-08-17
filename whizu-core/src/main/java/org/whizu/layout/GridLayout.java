@@ -69,7 +69,7 @@ public class GridLayout extends Widget implements Layout {
 
 	protected void init() {
 		super.init();
-		grid_ = Html.table(this).attr("cellspacing", "0").attr("cellpadding", "10").width("100%");
+		grid_ = Html.table(this).attr("cellspacing", "0").attr("cellpadding", "0");
 		tbody_ = grid_.tbody();
 		row_ = null;
 		column_ = 0;
@@ -103,7 +103,14 @@ public class GridLayout extends Widget implements Layout {
 				column_++;
 			}
 
-			Element td = Html.td().style("min-width", widths_[column_-1]).style("vertical-align","top").add(component);
+			
+			Element td = Html.td();
+			
+			if (widths_ != null) {
+				td.style("min-width", widths_[column_-1]).style("vertical-align","top").add(component);
+			} else {
+				td.add(component);
+			}
 			
 			row_.add(td);
 		}

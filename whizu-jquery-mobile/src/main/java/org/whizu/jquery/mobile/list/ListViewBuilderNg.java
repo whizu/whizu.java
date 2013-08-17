@@ -197,7 +197,7 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 						System.out.println("data-index " + index);
 						String dataId = RequestContext.getRequest().getParameter("data-id");
 						System.out.println("data-id " + dataId);
-						final T obj = list_.get(index - 1);
+						final T obj = list_.get(index);
 						list_.handleClickEvent(obj);
 						// onItemClickListener_.click(obj, new Callback() {
 						//

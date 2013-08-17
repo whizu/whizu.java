@@ -7,6 +7,53 @@ import org.junit.Test;
 public class HeaderBuilderTest extends AbstractJqmTest {
 
 	@Test
+	public void testHeaderWithMultipleButtons() {
+		Page page = Jqm.index();
+		
+		Header header = HeaderBuilder.create()
+			.title("Heading")
+			.button("button 1").build()
+			.button("button 2").onClickOpen(page).build()
+			.button("button 3").build()
+			.build();
+		
+		assertEquals("<div data-role='header' id='c0'><h1>Heading</h1><a data-role='button' id='c1' data-mini='true'>button 1</a><a data-role='button' id='c2' data-mini='true' href='#index'>button 2</a><a data-role='button' id='c3' data-mini='true'>button 3</a></div>", header.render());
+	}
+	
+	@Test
+	public void testHeaderWithMultipleButtons2() {
+		Button b1 = ButtonBuilder.createAnchorButton("button 1").build();
+		Button b2 = ButtonBuilder.createAnchorButton("button 2").onClickOpen(page).build();
+		Button b3 = ButtonBuilder.createAnchorButton("button 3").build();
+		
+		Header header = HeaderBuilder.create()
+			.title("Heading")
+			.button(b1)
+			.button(b2)
+			.button(b3)
+			.build();
+		
+		assertEquals("<div data-role='header' id='c3'><h1>Heading</h1><a data-role='button' id='c0'>button 1</a><a data-role='button' id='c1' href='#index'>button 2</a><a data-role='button' id='c2'>button 3</a></div>", header.render());
+	}
+	
+	@Test
+	public void testHeaderWithMultipleButtons3() {
+		Button b1 = ButtonBuilder.createAnchorButton("button 1").build();
+		Button b2 = ButtonBuilder.createAnchorButton("button 2").onClickOpen(page).build();
+		Button b3 = ButtonBuilder.createAnchorButton("button 3").build();
+		
+		Header header = HeaderBuilder.create()
+			.title("Heading")
+			.button(b1)
+			.button(b2)
+			.button("Mijn button").onClickOpen(page).build()
+			.button(b3)
+			.build();
+		
+		assertEquals("<div data-role='header' id='c3'><h1>Heading</h1><a data-role='button' id='c0'>button 1</a><a data-role='button' id='c1' href='#index'>button 2</a><a data-role='button' id='c4' data-mini='true' href='#index'>Mijn button</a><a data-role='button' id='c2'>button 3</a></div>", header.render());
+	}
+	
+	@Test
 	public void testButtons() {
 		Page next = PageBuilder.createWithId("next").build();
 		Popup popup = PopupBuilder.createWithId("popup").build();

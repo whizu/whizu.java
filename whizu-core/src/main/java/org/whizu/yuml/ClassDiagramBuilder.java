@@ -82,7 +82,6 @@ public final class ClassDiagramBuilder extends ProxyBuilder<ClassDiagram> {
 			String url = "http://yuml.me/diagram/scruffy/class/" + specs;
 			System.out.println(url);
 			return Html.img(id()).href(url);
-
 		}
 
 		private String getSpecs() {

@@ -32,7 +32,6 @@ import org.whizu.jquery.mobile.ListView;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.jquery.mobile.list.ListViewBuilderNg;
 import org.whizu.layout.GridLayout;
-import org.whizu.layout.HorizontalLayout;
 import org.whizu.layout.Layout;
 import org.whizu.value.ValueList;
 
@@ -48,9 +47,15 @@ public class Tournament4App implements JQueryMobile {
 	public void onLoad(Page page) {
 		initListData();
 
+		Button b = ButtonBuilder.createWithTitle("my button").inline().onClickOpen(page).build();
+//		
+		Button c = ButtonBuilder.createWithTitle("my c").inline().onClick(playerList.addEvent()).build();
+//		
 		// @formatter:off
 		HeaderBuilder.create()
 			.title("Tournament")
+			.button(b)
+			.button(c)
 			.button("Add player")
 				.onClick(playerList.addEvent())
 				.build()
@@ -63,12 +68,11 @@ public class Tournament4App implements JQueryMobile {
 				.build();
 		
 		ListView listView = ListViewBuilderNg.createWith(playerList)
-				.ordered()
+//				.ordered()
 				.build();
 		// @formatter:on
 		
-		Layout layout = new GridLayout("150px", "99%");
-		//Layout layout = new HorizontalLayout();
+		Layout layout = new GridLayout("180px", "99%");
 		layout.add(addPlayer);
 		layout.add(listView);
 		page.add(layout);

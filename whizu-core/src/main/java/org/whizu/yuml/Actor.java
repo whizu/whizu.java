@@ -5,4 +5,6 @@ package org.whizu.yuml;
  */
 public interface Actor extends Artifact {
 
+	public String name();
+
 }

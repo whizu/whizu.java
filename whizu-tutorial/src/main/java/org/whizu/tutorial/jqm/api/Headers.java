@@ -26,6 +26,7 @@ package org.whizu.tutorial.jqm.api;
 import org.whizu.annotation.App;
 import org.whizu.jquery.mobile.Button;
 import org.whizu.jquery.mobile.ButtonBuilder;
+import org.whizu.jquery.mobile.HeaderBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.jquery.mobile.PageBuilder;
@@ -41,6 +42,8 @@ public class Headers implements JQueryMobile /* implements JqmApp */{
 		page.header("Huidige pagina");
 
 		Page next = PageBuilder.createWithId("Next").build();
+		Page more = PageBuilder.createWithId("more").build();
+		
 		next.header("Volgende pagina");
 
 		// @formatter:off
@@ -55,8 +58,27 @@ public class Headers implements JQueryMobile /* implements JqmApp */{
 				.onClickOpen(page)
 				.build();
 		next.add(button2);
+		
+		Button button3 = ButtonBuilder.createWithTitle("More")
+				.onClickOpen(more)
+				.build();
+		next.add(button3);
 		// @formatter:on
 
+		Button b1 = ButtonBuilder.createWithTitle("button 1").inline().onClickOpen(page).build();
+		Button b2 = ButtonBuilder.createAnchorButton("button 2").onClickOpen(page).build();
+		Button b3 = ButtonBuilder.createAnchorButton("button 3").build();
+		
+		HeaderBuilder.create()
+			.title("Heading")
+			.button(b1)
+			.button(b2)
+			.button(b3)
+			.build()
+			.on(more);
+		
+		//more.header(header);
+		
 		// Jqm.changePage("Nieuw");
 		// RequestContext.getRequest().addExpression("$idd = $(\"div:jqmData(role='page')\").eq(1).attr('id'); $.mobile.changePage('#'+$idd);");
 	}
