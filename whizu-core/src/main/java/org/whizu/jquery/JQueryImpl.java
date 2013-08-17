@@ -249,10 +249,10 @@ class JQueryImpl extends Expression implements JQuery {
 			@Override
 			public void execute() {
 				JavaScript.preventDefault();
-				System.out.println("executing");
-				JavaScript.script("alert(this.getAttribute('data-id'));");
-				JavaScript.script("alert($(this).closest('ul[data-role=listview]').find('li').length);");
-				JavaScript.script("list = $(this).closest('ul[data-role=listview]').find('li'); item = $(this).closest('li'); alert('index ' + list.index(item));");
+//				System.out.println("executing");
+//				JavaScript.script("alert(this.getAttribute('data-id'));");
+//				JavaScript.script("alert($(this).closest('ul[data-role=listview]').find('li').length);");
+//				JavaScript.script("list = $(this).closest('ul[data-role=listview]').find('li'); item = $(this).closest('li'); alert('index ' + list.index(item));");
 
 				String url = getContextPath() + "/whizu/event?id=" + eventHandler.id();
 
