@@ -104,7 +104,7 @@ final class ListViewProxyNg<T> extends Proxy<ListView> implements ListView {
 		@Override
 		public void replaceItem(int index, Content item) {
 			System.out.println("replace item");
-			jQuery(this).find("li:eq("+index+") a").empty().append(item);
+			jQuery(this).find("li:eq("+index+") a").first().empty().append(item);
 			jQuery(this).call("listview", "refresh");
 		}
 	}

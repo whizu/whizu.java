@@ -154,26 +154,6 @@ class JQueryImpl extends Expression implements JQuery {
 	}
 
 	@Override
-	public JQuery onClickItem(EventHandler eventHandler) {
-		if (eventHandler != null) {
-			on("click", getItemHandlerFunction(eventHandler));
-		}
-		return this;
-	}
-
-	public JQuery on(String events, Function handler) {
-		Script script = RequestContext.getRequest().compile(handler);
-		return concat(".", "on", "('", events, "', function(event) { ", script.toJavaScript(), " })");
-	}
-
-	@Override
-	public JQuery on(String events, String selector, EventHandler eventHandler) {
-		Script script = RequestContext.getRequest().compile( getItemHandlerFunction(eventHandler));
-		return concat(".", "on", "('", events, "', '", selector, "', function(event) { ", script.toJavaScript(), " })");
-		//return concat(".", "on", "('", events, "', ", selector, ", function(event) { ", script.toJavaScript(), " })");
-	}
-
-	@Override
 	public JQuery click(Function function) {
 		Script script = RequestContext.getRequest().compile(function);
 		return concat(".", "click", "(function(event) { ", script.toJavaScript(), " })");
@@ -183,7 +163,7 @@ class JQueryImpl extends Expression implements JQuery {
 	public JQuery closest(String name) {
 		return call("closest", name);
 	}
-	
+
 	@Override
 	public JQuery concat(String... js) {
 
@@ -203,7 +183,7 @@ class JQueryImpl extends Expression implements JQuery {
 	public JQuery empty() {
 		return call("empty");
 	}
-
+	
 	@Override
 	public JQuery fadeTo(int i, int j) {
 		return call("fadeTo", i, j);
@@ -212,6 +192,11 @@ class JQueryImpl extends Expression implements JQuery {
 	@Override
 	public JQuery find(String selector) {
 		return concat(".", "find(", quote(selector), ")");
+	}
+
+	@Override
+	public JQuery first() {
+		return concat(".", "first()");
 	}
 
 	@Override
@@ -224,6 +209,10 @@ class JQueryImpl extends Expression implements JQuery {
 	public JQuery get(String url, Function data, Function callback, String type) {
 		return concat(".", "get(", quote(url), ", ", RequestContext.getRequest().evaluate(data), ", ", RequestContext
 				.getRequest().define(callback), ", ", quote(type), ")");
+	}
+
+	private String getContextPath() {
+		return RequestContext.getContextPath();
 	}
 
 	private Function getEventHandlerFunction(final EventHandler eventHandler) {
@@ -290,10 +279,6 @@ class JQueryImpl extends Expression implements JQuery {
 		};
 	}
 
-	private String getContextPath() {
-		return RequestContext.getContextPath();
-	}
-
 	private String getSelector(Identity... objs) {
 		String selector = "$('";
 		int i = 0;
@@ -333,6 +318,38 @@ class JQueryImpl extends Expression implements JQuery {
 	public JQuery live(String event, Function function) {
 		Script script = RequestContext.getRequest().compile(function);
 		return concat(".", "live", "('" + event + "', function(event) { ", script.toJavaScript(), " })");
+	}
+
+	public JQuery on(String events, Function handler) {
+		Script script = RequestContext.getRequest().compile(handler);
+		return concat(".", "on", "('", events, "', function(event) { ", script.toJavaScript(), " })");
+	}
+
+	@Override
+	public JQuery on(String event, EventHandler eventHandler) {
+		Script script = RequestContext.getRequest().compile( getItemHandlerFunction(eventHandler));
+		return concat(".", "on", "('", event, "', function(event) { ", script.toJavaScript(), " })");
+	}
+
+	@Override
+	public JQuery on(String events, String selector, EventHandler eventHandler) {
+		Script script = RequestContext.getRequest().compile( getItemHandlerFunction(eventHandler));
+		return concat(".", "on", "('", events, "', '", selector, "', function(event) { ", script.toJavaScript(), " })");
+		//return concat(".", "on", "('", events, "', ", selector, ", function(event) { ", script.toJavaScript(), " })");
+	}
+	
+	@Override
+	public JQuery on(String events, JQuery selector, EventHandler eventHandler) {
+		Script script = RequestContext.getRequest().compile( getItemHandlerFunction(eventHandler));
+		return concat(".", "on", "('", events, "', ", selector.toJavaScript(), ", function(event) { ", script.toJavaScript(), " })");
+	}
+
+	@Override
+	public JQuery onClickItem(EventHandler eventHandler) {
+		if (eventHandler != null) {
+			on("click", getItemHandlerFunction(eventHandler));
+		}
+		return this;
 	}
 
 	@Override

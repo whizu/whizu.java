@@ -24,8 +24,10 @@
 package org.whizu.tutorial.tournament;
 
 import org.whizu.annotation.App;
+import org.whizu.jquery.OnItemClickListener;
 import org.whizu.jquery.mobile.Button;
 import org.whizu.jquery.mobile.ButtonBuilder;
+import org.whizu.jquery.mobile.DataIcon;
 import org.whizu.jquery.mobile.HeaderBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.ListView;
@@ -34,6 +36,7 @@ import org.whizu.jquery.mobile.Theme;
 import org.whizu.jquery.mobile.list.ListViewBuilderNg;
 import org.whizu.layout.GridLayout;
 import org.whizu.layout.Layout;
+import org.whizu.util.Callback;
 import org.whizu.value.ValueList;
 
 /**
@@ -70,6 +73,15 @@ public class Tournament4App implements JQueryMobile {
 		
 		ListView listView = ListViewBuilderNg.createWith(playerList)
 //				.ordered()
+				.splitButtonIcon(DataIcon.DELETE)
+				.splitButtonTheme(Theme.B)
+				.onSplitButtonClick(new OnItemClickListener<PlayerVO>() {
+					
+					@Override
+					public void click(PlayerVO item, Callback callback) {
+						System.out.println("Split button click on " + item);
+					}
+				})
 				.build();
 		// @formatter:on
 		

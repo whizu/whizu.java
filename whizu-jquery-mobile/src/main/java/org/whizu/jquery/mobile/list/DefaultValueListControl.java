@@ -59,6 +59,7 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 			
 			@Override
 			public void click() {
+				System.out.println("on submit button on form");
 				ifValidatePerformCallback();
 			}
 		});

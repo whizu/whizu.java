@@ -31,15 +31,22 @@ import org.whizu.content.Content;
 import org.whizu.content.ContentBuilder;
 import org.whizu.content.ContentList;
 import org.whizu.content.Element;
+import org.whizu.content.Identity;
 import org.whizu.content.JustInTime;
 import org.whizu.html.Html;
 import org.whizu.jquery.EventHandler;
+import org.whizu.jquery.JQuery;
+import org.whizu.jquery.OnItemClickListener;
 import org.whizu.jquery.RequestContext;
+import org.whizu.jquery.mobile.DataIcon;
 import org.whizu.jquery.mobile.DataRole;
 import org.whizu.jquery.mobile.ListView;
 import org.whizu.jquery.mobile.Page;
+import org.whizu.jquery.mobile.Popup;
+import org.whizu.jquery.mobile.Theme;
 import org.whizu.proxy.BuildSupport;
 import org.whizu.proxy.ProxyBuilder;
+import org.whizu.util.Callback;
 import org.whizu.util.Objects;
 import org.whizu.value.ValueList;
 import org.whizu.value.ValueObject;
@@ -65,19 +72,20 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 		return new ListViewBuilderNg<T>(list);
 	}
 
-	public static <T extends ValueObject> ListViewBuilderNg<T> createWith(ValueList<T> list) {
+	public static <T extends ValueObject> ListViewBuilderNg<T> createWith(
+			ValueList<T> list) {
 		ListControl<T> listControl = new DefaultValueListControl<T>(list);
 		return createWith(listControl);
 	}
 
 	private Build build_ = new Build();
-	
-	private ListControl<T> list_;
+
+	private ListControl<T> listControl_;
 
 	private ListView proxy_;
 
 	private ListViewBuilderNg(ListControl<T> list) {
-		list_ = list;
+		listControl_ = list;
 		build_.add(list);
 		proxy_ = new ListViewProxyNg<T>(build_);
 	}
@@ -87,8 +95,14 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 		return buildOnce(proxy_);
 	}
 
-	public ListViewBuilderNg<T> ordered() {
-		build_.ordered();
+	public ListViewBuilderNg<T> onSplitButtonClick(
+			OnItemClickListener<T> listener) {
+		build_.onSplitButtonClick(listener);
+		return this;
+	}
+
+	public ListViewBuilderNg<T> onSplitButtonClickOpen(Page page) {
+		build_.onSplitButtonClickOpen(page);
 		return this;
 	}
 
@@ -99,6 +113,26 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 	// return this;
 	// }
 
+	public ListViewBuilderNg<T> onSplitButtonClickOpen(Popup popup) {
+		build_.onSplitButtonClickOpen(popup);
+		return this;
+	}
+
+	public ListViewBuilderNg<T> ordered() {
+		build_.ordered();
+		return this;
+	}
+
+	public ListViewBuilderNg<T> splitButtonIcon(DataIcon icon) {
+		build_.splitButtonIcon(icon);
+		return this;
+	}
+
+	public ListViewBuilderNg<T> splitButtonTheme(Theme theme) {
+		build_.splitButtonTheme(theme);
+		return this;
+	}
+
 	/***************************************************************************
 	 * The <code>ListView</code> that is being built.
 	 */
@@ -106,14 +140,18 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 
 		private ContentList contents_ = new ContentList();
 
-		private boolean ordered_ = false;;
+		private OnItemClickListener<T> onSplitButtonClickListener_;
+
+		private Identity onSplitButtonClickOpen_;
+
+		private boolean ordered_ = false;
+
+		private DataIcon splitButtonIcon_;
+
+		private Theme splitButtonTheme_;
 
 		private void add(ListControl<T> list) {
 			contents_.add(new JustInTime(getContentBuilder(list)));
-		}
-
-		public void ordered() {
-			ordered_ = true;
 		}
 
 		/**
@@ -138,18 +176,23 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 		private void addPropertyChangeListener(final ListControl<T> list) {
 			list.addPropertyChangeListener(new PropertyChangeListener() {
 
-				private boolean isAdd(IndexedPropertyChangeEvent changeEvent, ListControl<T> list) {
+				private boolean isAdd(IndexedPropertyChangeEvent changeEvent,
+						ListControl<T> list) {
 					return ("ADD".equals(changeEvent.getPropertyName()));
 					// int index = changeEvent.getIndex();
 					// int max = list.size();
 					// return (index == max);
 				}
 
-				private boolean isDelete(IndexedPropertyChangeEvent changeEvent, ListControl<T> list) {
+				private boolean isDelete(
+						IndexedPropertyChangeEvent changeEvent,
+						ListControl<T> list) {
 					throw new UnsupportedOperationException();
 				}
 
-				private boolean isUpdate(IndexedPropertyChangeEvent changeEvent, ListControl<T> list) {
+				private boolean isUpdate(
+						IndexedPropertyChangeEvent changeEvent,
+						ListControl<T> list) {
 					int index = changeEvent.getIndex();
 					int max = list.size();
 					return (index < max);
@@ -158,19 +201,27 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 				@Override
 				public void propertyChange(PropertyChangeEvent evt) {
 					IndexedPropertyChangeEvent changeEvent = Objects.cast(evt);
-					System.out.println("propertychange " + changeEvent.getPropertyName());
+					System.out.println("propertychange "
+							+ changeEvent.getPropertyName());
 					if ("ADD-EVENT".equals(changeEvent.getPropertyName())) {
-						list_.handleAddEvent();
+						listControl_.handleAddEvent();
 					} else if (isAdd(changeEvent, list)) {
 						System.out.println("propertychange ADD");
 						T vo = Objects.cast(changeEvent.getNewValue());
-						Content itemContent = list_.build(vo);
-						proxy_.addItem(itemContent);
+						Content itemContent = listControl_.build(vo);
+						if (splitButtonIcon_ != null) {
+							ContentList cl = new ContentList();
+							cl.add(itemContent);
+							cl.add(getSplitButtonLink());
+							proxy_.addItem(cl);
+						} else {
+							proxy_.addItem(itemContent);
+						}
 					} else if (isUpdate(changeEvent, list)) {
 						int index = changeEvent.getIndex();
 						System.out.println("propertychange UPDATE");
 						T vo = Objects.cast(evt.getNewValue());
-						Content itemContent = list_.build(vo);
+						Content itemContent = listControl_.build(vo);
 						proxy_.replaceItem(index, itemContent);
 					} else if (isDelete(changeEvent, list)) {
 						throw new UnsupportedOperationException();
@@ -185,20 +236,30 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 		public Content build() {
 			Element element = ordered_ ? Html.ol(this) : Html.ul(this);
 			element.decorate(DataRole.LISTVIEW, this).add(contents_);
-			addPropertyChangeListener(list_);
-			if (list_.isClickable()) {
+			addPropertyChangeListener(listControl_);
+			final JQuery selector = jQuery(this).find("li a[data-role=splitbutton]"); //find("li").
+					//"$('#" + Build.this.id() + "').find('li a[datarole=splitbutton]')";
+			if (listControl_.isClickable()) {
+				
 				EventHandler eh = new EventHandler() {
 					private String id_ = session().next();
 
 					@Override
 					public void handleEvent() {
-						System.out.println("handling event click on item");
-						int index = Integer.parseInt(RequestContext.getRequest().getParameter("data-index"));
+						//JavaScript.preventDefault();
+						System.out.println("handling event click on item ");
+						
+						//String script = "alert('hello ' + " + selector.toJavaScript()  + ".length);";
+						//System.out.println(script);
+						//JavaScript.script(script);
+						int index = Integer.parseInt(RequestContext
+								.getRequest().getParameter("data-index"));
 						System.out.println("data-index " + index);
-						String dataId = RequestContext.getRequest().getParameter("data-id");
+						String dataId = RequestContext.getRequest()
+								.getParameter("data-id");
 						System.out.println("data-id " + dataId);
-						final T obj = list_.get(index);
-						list_.handleClickEvent(obj);
+						final T obj = listControl_.get(index);
+						listControl_.handleClickEvent(obj);
 						// onItemClickListener_.click(obj, new Callback() {
 						//
 						// @Override
@@ -217,7 +278,69 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 				jQuery("$(document)").on("click", "#" + id() + " li a", eh);
 			}
 
+			if (splitButtonIcon_ != null) {
+				element.attr("data-split-icon", splitButtonIcon_.value());
+				if (splitButtonTheme_ != null) {
+					element.attr("data-split-theme", splitButtonTheme_.value());
+				}
+
+				jQuery(this).find("li").append(getSplitButtonLink());
+
+				if (onSplitButtonClickListener_ != null) {
+					System.out.println("adding split button click listener");
+					EventHandler splitButtonEventHandler = new EventHandler() {
+						private String id_ = session().next();
+
+						@Override
+						public void handleEvent() {
+							System.out
+									.println("handling split button event click on item");
+							int index = Integer.parseInt(RequestContext
+									.getRequest().getParameter("data-index"));
+							System.out.println("data-index " + index);
+							String dataId = RequestContext.getRequest()
+									.getParameter("data-id");
+							System.out.println("data-id " + dataId);
+							final T obj = listControl_.get(index);
+							onSplitButtonClickListener_.click(obj, new Callback(){
+
+								@Override
+								public void success() {
+									// TODO Auto-generated catch block
+									throw new UnsupportedOperationException();
+								}});
+							// onItemClickListener_.click(obj, new Callback() {
+							//
+							// @Override
+							// public void success() {
+							// list_.update(obj);
+							// }
+							// });
+						}
+
+						@Override
+						public String id() {
+							return id_;
+						}
+					};
+
+					session().addClickListener(splitButtonEventHandler);
+					//System.out.println("onclick split selector " + selector.toJavaScript());
+					selector.on("click", splitButtonEventHandler);
+				}
+			}
+
 			return element;
+		}
+
+		private Content getSplitButtonLink() {
+			Element a = Html.a().attr("data-role", "splitbutton");
+			if (onSplitButtonClickOpen_ != null) {
+				a.href("#" + onSplitButtonClickOpen_.id());
+			} else {
+				a.href("#");
+			}
+			return a;
 		}
 
 		private ContentBuilder getContentBuilder(final ListControl<T> list) {
@@ -238,7 +361,9 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 				}
 
 				private Content link(T item, Content content) {
-					return Html.a().href("#").attr("data-id", list_.id(item)).add(content);
+					return Html.a().href("#")
+							.attr("data-id", listControl_.id(item))
+							.add(content);
 				}
 			};
 		}
@@ -248,9 +373,29 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 			throw new UnsupportedOperationException();
 		}
 
+		private void onSplitButtonClick(OnItemClickListener<T> listener) {
+			onSplitButtonClickListener_ = listener;
+		}
+
+		private void onSplitButtonClickOpen(Identity identity) {
+			onSplitButtonClickOpen_ = identity;
+		}
+
+		public void ordered() {
+			ordered_ = true;
+		}
+
 		@Override
 		public void replaceItem(int index, Content item) {
 			throw new UnsupportedOperationException();
+		}
+
+		private void splitButtonIcon(DataIcon icon) {
+			splitButtonIcon_ = icon;
+		}
+
+		private void splitButtonTheme(Theme theme) {
+			splitButtonTheme_ = theme;
 		}
 	}
 }

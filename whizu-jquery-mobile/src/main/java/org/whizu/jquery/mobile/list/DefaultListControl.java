@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.whizu.content.Content;
 import org.whizu.jquery.ClickListener;
+import org.whizu.jquery.mobile.DataIcon;
 
 //= new ValueList<T>() ?
 public class DefaultListControl<T extends ListElement> implements ListControl<T> {

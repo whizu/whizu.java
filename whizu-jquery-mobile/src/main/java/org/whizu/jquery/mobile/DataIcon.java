@@ -67,7 +67,7 @@ public enum DataIcon implements Decorator {
 		element.attr(ATTRIBUTE_NAME, value_);
 	}
 
-	protected String value() {
+	public String value() {
 		return value_;
 	}
 }
