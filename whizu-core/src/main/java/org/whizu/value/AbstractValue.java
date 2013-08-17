@@ -134,7 +134,7 @@ public abstract class AbstractValue<T> implements Value {
 		value((T) value);
 	}
 
-	public final T value() {
+	public T value() {
 		return value_;
 	}
 

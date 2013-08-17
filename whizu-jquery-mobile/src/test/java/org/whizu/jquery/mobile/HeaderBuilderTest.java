@@ -17,7 +17,7 @@ public class HeaderBuilderTest extends AbstractJqmTest {
 			.button("button 3").build()
 			.build();
 		
-		assertEquals("<div data-role='header' id='c0'><h1>Heading</h1><a data-role='button' id='c1' data-mini='true'>button 1</a><a data-role='button' id='c2' data-mini='true' href='#index'>button 2</a><a data-role='button' id='c3' data-mini='true'>button 3</a></div>", header.render());
+		assertEquals("<div data-role='header' id='c0'><h1>Heading</h1><div class='ui-btn-right '><a data-role='button' id='c1' data-inline='true' data-mini='true'>button 1</a><a data-role='button' id='c2' data-inline='true' data-mini='true' href='#index'>button 2</a><a data-role='button' id='c3' data-inline='true' data-mini='true'>button 3</a></div></div>", header.render());
 	}
 	
 	@Test
@@ -33,7 +33,7 @@ public class HeaderBuilderTest extends AbstractJqmTest {
 			.button(b3)
 			.build();
 		
-		assertEquals("<div data-role='header' id='c3'><h1>Heading</h1><a data-role='button' id='c0'>button 1</a><a data-role='button' id='c1' href='#index'>button 2</a><a data-role='button' id='c2'>button 3</a></div>", header.render());
+		assertEquals("<div data-role='header' id='c3'><h1>Heading</h1><div class='ui-btn-right '><a data-role='button' id='c0' data-inline='true'>button 1</a><a data-role='button' id='c1' data-inline='true' href='#index'>button 2</a><a data-role='button' id='c2' data-inline='true'>button 3</a></div></div>", header.render());
 	}
 	
 	@Test
@@ -50,7 +50,7 @@ public class HeaderBuilderTest extends AbstractJqmTest {
 			.button(b3)
 			.build();
 		
-		assertEquals("<div data-role='header' id='c3'><h1>Heading</h1><a data-role='button' id='c0'>button 1</a><a data-role='button' id='c1' href='#index'>button 2</a><a data-role='button' id='c4' data-mini='true' href='#index'>Mijn button</a><a data-role='button' id='c2'>button 3</a></div>", header.render());
+		assertEquals("<div data-role='header' id='c3'><h1>Heading</h1><div class='ui-btn-right '><a data-role='button' id='c0' data-inline='true'>button 1</a><a data-role='button' id='c1' data-inline='true' href='#index'>button 2</a><a data-role='button' id='c4' data-inline='true' data-mini='true' href='#index'>Mijn button</a><a data-role='button' id='c2' data-inline='true'>button 3</a></div></div>", header.render());
 	}
 	
 	@Test

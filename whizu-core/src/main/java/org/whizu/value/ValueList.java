@@ -24,6 +24,7 @@
 package org.whizu.value;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -49,6 +50,44 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 		clazz_ = clazz;
 	}
 
+	@Deprecated
+	public final ClickListener add(final OnItemClickListener<VO> itemListener) {
+		log.debug("Creating an ADD event listener {}", itemListener);
+		
+		return new ClickListener() {
+
+			@Override
+			public void click() {
+				log.debug("Handling the ADD event");
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!clicking on ADD");
+				final VO model = createNew();
+				itemListener.click(model, new Callback() {
+
+					@Override
+					public void success() {
+						add(model);
+					}
+				});
+			}
+		};
+	}
+	
+	public void add(VO element) {
+		value().add(element);
+		fireIndexedPropertyChange("ADD", value().size(), null, element);
+	}
+	
+	public void addAll(List<VO> elements) {
+		for (VO vo : elements) {
+			add(vo);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public void addElement(ValueObject element) {
+		add((VO) element);
+	}
+
 	//ButttonBuilder.create().onSubmit(list.addEvent());
 	public final ClickListener addEvent() {
 		return new ClickListener() {
@@ -60,16 +99,6 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 				//(or listcontrol should have registered as propertychangelistener) and respond to the ADD-EVENT notification!
 			}
 		};
-	}
-	
-	public void add(VO element) {
-		value().add(element);
-		fireIndexedPropertyChange("ADD", value().size(), null, element);
-	}
-
-	@SuppressWarnings("unchecked")
-	public void addElement(ValueObject element) {
-		add((VO) element);
 	}
 
 	/**
@@ -112,9 +141,9 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 		return value().size();
 	}
 
-	@Override
-	public <T> T visit(Visitor<T> visitor) {
-		return visitor.accept(this);
+	public final void update(ValueObject obj) {
+		VO vo = Objects.cast(obj);
+		update(vo);
 	}
 
 	public void update(VO model) {
@@ -123,30 +152,16 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 		fireIndexedPropertyChange(index, null, model);
 	}
 
-	public final void update(ValueObject obj) {
-		VO vo = Objects.cast(obj);
-		update(vo);
+	/**
+	 * @return Collections.unmodifiableList(List<VO>)
+	 */
+	@Override
+	public final List<VO> value() {
+		return Collections.unmodifiableList(super.value());
 	}
 
-	@Deprecated
-	public final ClickListener add(final OnItemClickListener<VO> itemListener) {
-		log.debug("Creating an ADD event listener {}", itemListener);
-		
-		return new ClickListener() {
-
-			@Override
-			public void click() {
-				log.debug("Handling the ADD event");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!clicking on ADD");
-				final VO model = createNew();
-				itemListener.click(model, new Callback() {
-
-					@Override
-					public void success() {
-						add(model);
-					}
-				});
-			}
-		};
+	@Override
+	public <T> T visit(Visitor<T> visitor) {
+		return visitor.accept(this);
 	}
 }

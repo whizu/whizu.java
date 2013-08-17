@@ -12,7 +12,6 @@ import org.whizu.jquery.mobile.FormBuilder;
 import org.whizu.jquery.mobile.Popup;
 import org.whizu.jquery.mobile.PopupBuilder;
 import org.whizu.util.Callback;
-import org.whizu.util.Objects;
 import org.whizu.value.Value;
 import org.whizu.value.ValueList;
 import org.whizu.value.ValueObject;
@@ -55,7 +54,14 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 		createForm(builder);
 		Button submit = ButtonBuilder.createWithTitle("OK").build();
 		builder.addButton(submit);
-		builder.onSubmit(Objects.call(this, "ifValidatePerformCallback"));
+		//builder.onSubmit(Objects.call(this, "ifValidatePerformCallback"));
+		builder.onSubmit(new ClickListener() {
+			
+			@Override
+			public void click() {
+				ifValidatePerformCallback();
+			}
+		});
 		return builder.build();
 	}
 

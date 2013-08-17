@@ -30,6 +30,7 @@ import org.whizu.jquery.mobile.HeaderBuilder;
 import org.whizu.jquery.mobile.JQueryMobile;
 import org.whizu.jquery.mobile.ListView;
 import org.whizu.jquery.mobile.Page;
+import org.whizu.jquery.mobile.Theme;
 import org.whizu.jquery.mobile.list.ListViewBuilderNg;
 import org.whizu.layout.GridLayout;
 import org.whizu.layout.Layout;
@@ -47,7 +48,7 @@ public class Tournament4App implements JQueryMobile {
 	public void onLoad(Page page) {
 		initListData();
 
-		Button b = ButtonBuilder.createWithTitle("my button").inline().onClickOpen(page).build();
+		Button b = ButtonBuilder.createWithTitle("my button").inline().onClickOpen(page).theme(Theme.E).build();
 //		
 		Button c = ButtonBuilder.createWithTitle("my c").inline().onClick(playerList.addEvent()).build();
 //		

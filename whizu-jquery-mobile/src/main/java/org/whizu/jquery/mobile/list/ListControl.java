@@ -5,6 +5,9 @@ import java.beans.PropertyChangeListener;
 import org.whizu.content.Content;
 import org.whizu.jquery.ClickListener;
 
+/**
+ * @author Rudy D'hauwe
+ */
 public interface ListControl<T> extends BeanControl<T>, Iterable<T> {
 
 	public ClickListener addEvent();
