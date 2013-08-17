@@ -73,7 +73,7 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 	}
 	
 	public void add(VO element) {
-		value().add(element);
+		super.value().add(element);
 		fireIndexedPropertyChange("ADD", value().size(), null, element);
 	}
 	
