@@ -6,6 +6,6 @@ configurations {
 }
  
 dependencies {
-	//no additional dependencies needed now
 	compile 'org.eclipse.jetty.aggregate:jetty-all-server:8.1.10.v20130312'
+	compile 'org.slf4j:slf4j-jdk14:1.7.5'
 }

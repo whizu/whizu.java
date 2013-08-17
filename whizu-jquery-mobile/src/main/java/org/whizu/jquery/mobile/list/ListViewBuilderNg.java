@@ -44,6 +44,7 @@ import org.whizu.jquery.mobile.ListView;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.jquery.mobile.Popup;
 import org.whizu.jquery.mobile.Theme;
+import org.whizu.js.JavaScript;
 import org.whizu.proxy.BuildSupport;
 import org.whizu.proxy.ProxyBuilder;
 import org.whizu.util.Callback;
@@ -293,6 +294,7 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 
 						@Override
 						public void handleEvent() {
+							JavaScript.preventDefault();
 							System.out
 									.println("handling split button event click on item");
 							int index = Integer.parseInt(RequestContext
