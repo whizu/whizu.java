@@ -40,15 +40,15 @@ public class GridLayout extends Widget implements Layout {
 
 	// private Log log = LogFactory.getLog(GridLayout.class);
 
-	private final int numberOfColumns_;
-
 	private int column_;
 
 	private Table grid_;
 
-	private Tbody tbody_;
+	private final int numberOfColumns_;
 
 	private Element row_;
+
+	private Tbody tbody_;
 
 	private String[] widths_;
 
@@ -65,19 +65,6 @@ public class GridLayout extends Widget implements Layout {
 		numberOfColumns_ = widths.length;
 		widths_ = widths;
 		init();
-	}
-
-	protected void init() {
-		super.init();
-		grid_ = Html.table(this).attr("cellspacing", "0").attr("cellpadding", "0");
-		tbody_ = grid_.tbody();
-		row_ = null;
-		column_ = 0;
-	}
-
-	@Override
-	public Content build() {
-		return grid_;
 	}
 
 	@Override
@@ -118,6 +105,15 @@ public class GridLayout extends Widget implements Layout {
 		return this;
 	}
 
+	public void addEmpty() {
+		skip();
+	}
+
+	@Override
+	public Content build() {
+		return grid_;
+	}
+
 	@Override
 	public void empty() {
 		init();
@@ -125,6 +121,14 @@ public class GridLayout extends Widget implements Layout {
 		if (isRendered()) {
 			jQuery("$(\"table > tbody\")").empty();
 		}
+	}
+
+	protected void init() {
+		super.init();
+		grid_ = Html.table(this).attr("cellspacing", "0").attr("cellpadding", "0");
+		tbody_ = grid_.tbody();
+		row_ = null;
+		column_ = 0;
 	}
 
 	@Override
@@ -136,7 +140,7 @@ public class GridLayout extends Widget implements Layout {
 	public void remove(Component component) {
 		throw new UnsupportedOperationException();
 	}
-
+	
 	public void skip() {
 		add(new Literal("")); //TODO refactor
 	}
