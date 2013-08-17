@@ -29,6 +29,7 @@ import java.util.List;
 import org.whizu.content.Content;
 import org.whizu.content.Element;
 import org.whizu.html.Html;
+import org.whizu.util.Objects;
 import org.whizu.widget.Widget;
 
 /**
@@ -102,7 +103,21 @@ public class Header extends Widget {
 	@Override
 	public Content build() {
 		//jQuery(this).closest(":jqmData(role='page')").trigger("pagecreate"); //necessary?
-		return Html.div(this).decorate(DataRole.HEADER, theme_, position_, fullscreen_).add(title_).add(buttonList_);
+		Element header = Html.div(this).decorate(DataRole.HEADER, theme_, position_, fullscreen_).add(title_);
+		if (buttonList_.size() <= 2) {
+			header.add(buttonList_);
+		} else {
+			for (Button b : buttonList_) {
+				System.out.println(b.getClass());
+				ButtonProxy proxy = Objects.cast(b);
+				ButtonBuilder.Build btn = Objects.cast(proxy.impl());
+				System.out.println(btn);
+				btn.inline(DataInline.TRUE);
+			}
+			Element div = Html.div().css("ui-btn-right").add(buttonList_);
+			header.add(div);
+		}
+		return header;
 	}
 
 	/**

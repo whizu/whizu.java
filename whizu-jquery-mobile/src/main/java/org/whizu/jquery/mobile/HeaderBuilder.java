@@ -3,6 +3,9 @@ package org.whizu.jquery.mobile;
 import org.whizu.util.Builder;
 import org.whizu.util.Sink;
 
+/**
+ * @author Rudy D'hauwe
+ */
 public class HeaderBuilder implements Builder<Header> {
 
 	private Header build_ = new Header();

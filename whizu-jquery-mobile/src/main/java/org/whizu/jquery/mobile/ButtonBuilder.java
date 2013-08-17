@@ -306,7 +306,7 @@ public final class ButtonBuilder extends ProxyBuilder<Button> {
 			iconShadow_ = shadow;
 		}
 
-		private void inline(DataInline inline) {
+		void inline(DataInline inline) {
 			inline_ = inline;
 		}
 		
