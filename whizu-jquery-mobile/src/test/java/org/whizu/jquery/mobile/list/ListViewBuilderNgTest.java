@@ -162,6 +162,42 @@ public class ListViewBuilderNgTest extends AbstractJqmTest {
 	}
 
 	@Test
+	public void testOnSplitButtonClickDeleteItem() {
+		final ValueList<TestVO> list = new ValueList<TestVO>(TestVO.class);
+		TestVO v1 = new TestVO();
+		v1.name.set("v1");
+		list.add(v1);
+		TestVO v2 = new TestVO();
+		v2.name.set("v2");
+		list.add(v2);
+
+		Page page = Jqm.index();
+
+		// @formatter:off
+		ListView view = ListViewBuilderNg.createWith(list)
+			.splitButtonIcon(DataIcon.DELETE)
+			.onSplitButtonClick(new OnItemClickListener<TestVO>() {
+				
+				@Override
+				public void click(TestVO item, Callback callback) {
+					list.remove(item);
+				}
+			})
+			.build(); 
+		// @formatter:on
+
+		page.add(view);
+		assertEquals(
+				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c0' data-split-icon='delete'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v1</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$(document).on('click', '#c0 li a[data-role=splitbutton]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c2', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });$('#c0').find('li').append(\"<a data-role='splitbutton' href='#'></a>\");$(document).on('click', '#c0 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c1', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
+				theRequest.finish());
+		
+		TestVO itemToDelete = list.get(1);
+		list.remove(itemToDelete);
+		
+		assertEquals("$('#c0').find('li:eq(1)').remove();$('#c0').listview(\"refresh\");", theRequest.finish());
+	}
+	
+	@Test
 	public void testOnSplitButtonClickOpenPage() {
 		ValueList<TestVO> list = new ValueList<TestVO>(TestVO.class);
 		TestVO v1 = new TestVO();
