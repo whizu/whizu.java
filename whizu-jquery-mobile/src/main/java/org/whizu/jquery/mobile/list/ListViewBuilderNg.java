@@ -218,16 +218,17 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 						} else {
 							proxy_.addItem(itemContent);
 						}
+					} else if (isDelete(changeEvent, list)) {
+						int index = changeEvent.getIndex();
+						System.out.println("propertychange DELETE of INDEX "
+								+ index);
+						proxy_.removeItem(index);
 					} else if (isUpdate(changeEvent, list)) {
 						int index = changeEvent.getIndex();
 						System.out.println("propertychange UPDATE");
 						T vo = Objects.cast(evt.getNewValue());
 						Content itemContent = listControl_.build(vo);
 						proxy_.replaceItem(index, itemContent);
-					} else if (isDelete(changeEvent, list)) {
-						int index = changeEvent.getIndex();
-						System.out.println("propertychange DELETE of INDEX " + index);
-						proxy_.removeItem(index);
 					} else {
 						throw new UnsupportedOperationException();
 					}
@@ -240,24 +241,30 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 			Element element = ordered_ ? Html.ol(this) : Html.ul(this);
 			element.decorate(DataRole.LISTVIEW, this).add(contents_);
 			addPropertyChangeListener(listControl_);
-			final JQuery selector = jQuery(this).find("li a[data-role=splitbutton]"); //find("li").
-			final JQuery itemSelector_ = jQuery(this).find("li a[data-role=list-anchor]"); //find("li").
-			final String itemSelector = "#" + id() + " li a[data-role=splitbutton]";
-			final String itemSelector2 = "#" + id() + " li a[data-role=list-anchor]"; //find("li").
-					//"$('#" + Build.this.id() + "').find('li a[datarole=splitbutton]')";
+			final JQuery selector = jQuery(this).find(
+					"li a[data-role=splitbutton]"); // find("li").
+			final JQuery itemSelector_ = jQuery(this).find(
+					"li a[data-role=list-anchor]"); // find("li").
+			final String itemSelector = "#" + id()
+					+ " li a[data-role=splitbutton]";
+			final String itemSelector2 = "#" + id()
+					+ " li a[data-role=list-anchor]"; // find("li").
+			// "$('#" + Build.this.id() +
+			// "').find('li a[datarole=splitbutton]')";
 			if (listControl_.isClickable()) {
-				
+
 				EventHandler eh = new EventHandler() {
 					private String id_ = session().next();
 
 					@Override
 					public void handleEvent() {
-						//JavaScript.preventDefault();
+						// JavaScript.preventDefault();
 						System.out.println("handling event click on item ");
-						
-						//String script = "alert('hello ' + " + selector.toJavaScript()  + ".length);";
-						//System.out.println(script);
-						//JavaScript.script(script);
+
+						// String script = "alert('hello ' + " +
+						// selector.toJavaScript() + ".length);";
+						// System.out.println(script);
+						// JavaScript.script(script);
 						int index = Integer.parseInt(RequestContext
 								.getRequest().getParameter("data-index"));
 						System.out.println("data-index " + index);
@@ -281,9 +288,9 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 					}
 				};
 				session().addClickListener(eh);
-				//jQuery("$(document)").on("click", "#" + id() + " li a", eh);
+				// jQuery("$(document)").on("click", "#" + id() + " li a", eh);
 				jQuery("$(document)").on("click", itemSelector2, eh);
-				//itemSelector.on("click", eh);
+				// itemSelector.on("click", eh);
 			}
 
 			if (splitButtonIcon_ != null) {
@@ -310,13 +317,15 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 									.getParameter("data-id");
 							System.out.println("data-id " + dataId);
 							final T obj = listControl_.get(index);
-							onSplitButtonClickListener_.click(obj, new Callback(){
+							onSplitButtonClickListener_.click(obj,
+									new Callback() {
 
-								@Override
-								public void success() {
-									// TODO Auto-generated catch block
-									throw new UnsupportedOperationException();
-								}});
+										@Override
+										public void success() {
+											// TODO Auto-generated catch block
+											throw new UnsupportedOperationException();
+										}
+									});
 							// onItemClickListener_.click(obj, new Callback() {
 							//
 							// @Override
@@ -333,9 +342,11 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 					};
 
 					session().addClickListener(splitButtonEventHandler);
-					//System.out.println("onclick split selector " + selector.toJavaScript());
-					//selector.on("click", splitButtonEventHandler);
-					jQuery("$(document)").on("click", itemSelector, splitButtonEventHandler);
+					// System.out.println("onclick split selector " +
+					// selector.toJavaScript());
+					// selector.on("click", splitButtonEventHandler);
+					jQuery("$(document)").on("click", itemSelector,
+							splitButtonEventHandler);
 				}
 			}
 
@@ -360,8 +371,7 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 				}
 
 				private Content link(T item, Content content) {
-					return Html.a().href("#")
-							.attr("data-role", "list-anchor")
+					return Html.a().href("#").attr("data-role", "list-anchor")
 							.attr("data-id", listControl_.id(item))
 							.add(content);
 				}

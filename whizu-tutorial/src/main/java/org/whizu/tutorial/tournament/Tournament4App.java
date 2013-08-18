@@ -72,14 +72,11 @@ public class Tournament4App implements JQueryMobile {
 				.build();
 		
 		ListView listView = ListViewBuilderNg.createWith(playerList)
-				.ordered()
 				.splitButtonIcon(DataIcon.DELETE)
-				.splitButtonTheme(Theme.B)
 				.onSplitButtonClick(new OnItemClickListener<PlayerVO>() {
 					
 					@Override
 					public void click(PlayerVO item, Callback callback) {
-						System.out.println("Split button click on " + item);
 						playerList.remove(item);
 					}
 				})

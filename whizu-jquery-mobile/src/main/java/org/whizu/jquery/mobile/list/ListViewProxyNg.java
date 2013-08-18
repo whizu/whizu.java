@@ -30,7 +30,6 @@ import org.whizu.content.JustInTime;
 import org.whizu.html.Html;
 import org.whizu.jquery.mobile.ListView;
 import org.whizu.jquery.mobile.Page;
-import org.whizu.js.JavaScript;
 import org.whizu.proxy.Proxy;
 import org.whizu.proxy.ProxySupport;
 
