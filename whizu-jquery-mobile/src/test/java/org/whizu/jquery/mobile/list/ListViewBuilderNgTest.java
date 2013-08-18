@@ -79,7 +79,7 @@ public class ListViewBuilderNgTest extends AbstractJqmTest {
 		Page page = Jqm.index();
 		page.add(view);
 		assertEquals(
-				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c0'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v2</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$(document).on('click', '#c0 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c1', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
+				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c0'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v1</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$(document).on('click', '#c0 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c1', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
 				theRequest.finish());
 	}
 
@@ -116,6 +116,39 @@ public class ListViewBuilderNgTest extends AbstractJqmTest {
 	}
 	
 	@Test
+	public void testUpdateEventOnNonEmptyValueListOfT() {
+		@SuppressWarnings("deprecation")
+		Date date = new Date(2012, 7, 22);
+		ValueList<TestVO> list = new ValueList<TestVO>(TestVO.class);
+		TestVO v1 = new TestVO();
+		v1.name.set("v1");
+		v1.date.set(date);
+		list.add(v1);
+		TestVO v2 = new TestVO();
+		v2.name.set("v2");
+		v2.date.set(date);
+		list.add(v2);
+
+		ListViewBuilderNg<TestVO> builder = ListViewBuilderNg.createWith(list);
+		ListView view = builder.build();
+
+		Page page = Jqm.index();
+		page.add(view);
+		assertEquals(
+				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c0'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v1</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$(document).on('click', '#c0 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c1', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
+				theRequest.finish());
+		
+		DefaultValueListControl<TestVO> control = Objects.cast(builder.getControl());
+		TestVO elementToUpdate = list.get(1);
+		control.handleClickEvent(elementToUpdate);
+		assertEquals("$.mobile.activePage.append(\"<div data-role='popup' id='org_whizu_jquery_mobile_list_DefaultValueListControl2' style='padding:10px;'><form id='c2' method='post'><label for='c3'>name</label><input id='c3' name='c3' value='v2' type='text'/><input id='c4' value='OK' type='submit'/></form></div>\").trigger(\"pagecreate\");$('#c2').submit(function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c5', $(this).closest(\"form\").serialize(), function(data) {  }, 'script');return false; });$('#org_whizu_jquery_mobile_list_DefaultValueListControl2').popup(\"open\");", theRequest.finish());
+		
+		control.model().name.set("nieuwe naam");
+		control.ifValidatePerformCallback();
+		assertEquals("$('#c3').val(\"nieuwe naam\");$('#c0').find('li:eq(1) a').first().empty().append(\"<h2>nieuwe naam</h2>\");$('#c0').listview(\"refresh\");$('#org_whizu_jquery_mobile_list_DefaultValueListControl2').popup(\"close\");", theRequest.finish());
+	}
+	
+	@Test
 	public void testBuild() {
 		ValueList<TestVO> list = new ValueList<TestVO>(TestVO.class);
 		TestVO v1 = new TestVO();
@@ -126,7 +159,7 @@ public class ListViewBuilderNgTest extends AbstractJqmTest {
 		list.add(v2);
 
 		ListView view = ListViewBuilderNg.createWith(list).build();
-		equals("<ul data-role='listview' id='c0'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v2</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>",
+		equals("<ul data-role='listview' id='c0'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v1</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>",
 				view);
 	}
 
@@ -157,7 +190,7 @@ public class ListViewBuilderNgTest extends AbstractJqmTest {
 
 		page.add(view);
 		assertEquals(
-				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c0' data-split-icon='delete'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v2</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$(document).on('click', '#c0 li a[data-role=splitbutton]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c2', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });$('#c0').find('li').append(\"<a data-role='splitbutton' href='#'></a>\");$(document).on('click', '#c0 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c1', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
+				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c0' data-split-icon='delete'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v1</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$(document).on('click', '#c0 li a[data-role=splitbutton]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c2', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });$('#c0').find('li').append(\"<a data-role='splitbutton' href='#'></a>\");$(document).on('click', '#c0 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c1', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
 				theRequest.finish());
 	}
 
@@ -218,7 +251,7 @@ public class ListViewBuilderNgTest extends AbstractJqmTest {
 
 		page.add(view);
 		assertEquals(
-				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c0' data-split-icon='delete'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v2</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$('#c0').find('li').append(\"<a data-role='splitbutton' href='#index'></a>\");$(document).on('click', '#c0 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c1', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
+				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c0' data-split-icon='delete'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v1</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$('#c0').find('li').append(\"<a data-role='splitbutton' href='#index'></a>\");$(document).on('click', '#c0 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c1', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
 				theRequest.finish());
 	}
 
@@ -245,7 +278,7 @@ public class ListViewBuilderNgTest extends AbstractJqmTest {
 
 		page.add(view);
 		assertEquals(
-				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c1' data-split-icon='delete'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v2</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$('#c1').find('li').append(\"<a data-role='splitbutton' href='#popup'></a>\");$(document).on('click', '#c1 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c2', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
+				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c1' data-split-icon='delete'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v1</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$('#c1').find('li').append(\"<a data-role='splitbutton' href='#popup'></a>\");$(document).on('click', '#c1 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c2', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
 				theRequest.finish());	}
 
 	@Test
@@ -271,7 +304,7 @@ public class ListViewBuilderNgTest extends AbstractJqmTest {
 		Page page = Jqm.index();
 		page.add(view);
 		assertEquals(
-				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c0' data-split-icon='delete'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v2</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$('#c0').find('li').append(\"<a data-role='splitbutton' href='#'></a>\");$(document).on('click', '#c0 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c1', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
+				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c0' data-split-icon='delete'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v1</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$('#c0').find('li').append(\"<a data-role='splitbutton' href='#'></a>\");$(document).on('click', '#c0 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c1', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
 				theRequest.finish());
 	}
 
@@ -295,7 +328,7 @@ public class ListViewBuilderNgTest extends AbstractJqmTest {
 		Page page = Jqm.index();
 		page.add(view);
 		assertEquals(
-				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c0' data-split-icon='delete' data-split-theme='b'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v2</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$('#c0').find('li').append(\"<a data-role='splitbutton' href='#'></a>\");$(document).on('click', '#c0 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c1', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
+				"$('#index').find('div[data-role=content]').append(\"<ul data-role='listview' id='c0' data-split-icon='delete' data-split-theme='b'><li><a data-role='list-anchor' data-id='generated-id0' href='#'><h2>v1</h2></a></li><li><a data-role='list-anchor' data-id='generated-id1' href='#'><h2>v2</h2></a></li></ul>\");$('#c0').find('li').append(\"<a data-role='splitbutton' href='#'></a>\");$(document).on('click', '#c0 li a[data-role=list-anchor]', function(event) { event.preventDefault();$.get('/dev/whizu/event?id=c1', 'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li')), function(data) {  }, 'script');return false; });",
 				theRequest.finish());
 	}
 }
