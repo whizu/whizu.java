@@ -1,26 +1,26 @@
-/* FileIterator.java
- * 
- ******************************************************************************
+/*******************************************************************************
+ * Copyright (c) 2013 Rudy D'hauwe @ Whizu
+ * Licensed under the EUPL V.1.1
+ *   
+ * This Software is provided to You under the terms of the European 
+ * Union Public License (the "EUPL") version 1.1 as published by the 
+ * European Union. Any use of this Software, other than as authorized 
+ * under this License is strictly prohibited (to the extent such use 
+ * is covered by a right of the copyright holder of this Software).
  *
- * Created: Oct 10, 2011
- * Character encoding: UTF-8
- * 
- * Copyright (c) 2011 - XIAM Solutions B.V. The Netherlands, http://www.xiam.nl
- * 
- ********************************* LICENSE ************************************
+ * This Software is provided under the License on an "AS IS" basis and 
+ * without warranties of any kind concerning the Software, including 
+ * without limitation merchantability, fitness for a particular purpose, 
+ * absence of defects or errors, accuracy, and non-infringement of 
+ * intellectual property rights other than copyright. This disclaimer 
+ * of warranty is an essential part of the License and a condition for 
+ * the grant of any rights to this Software.
+ *   
+ * For more details, see http://joinup.ec.europa.eu/software/page/eupl.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+ * Contributors:
+ *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
+ *******************************************************************************/
 package org.whizu.util;
 
 import java.io.File;

@@ -44,7 +44,6 @@ import org.whizu.jquery.mobile.ListView;
 import org.whizu.jquery.mobile.Page;
 import org.whizu.jquery.mobile.Popup;
 import org.whizu.jquery.mobile.Theme;
-import org.whizu.js.JavaScript;
 import org.whizu.proxy.BuildSupport;
 import org.whizu.proxy.ProxyBuilder;
 import org.whizu.util.Callback;
@@ -96,6 +95,10 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 		return buildOnce(proxy_);
 	}
 
+	protected ListControl<T> getControl() {
+		return listControl_;
+	}
+	
 	public ListViewBuilderNg<T> onSplitButtonClick(
 			OnItemClickListener<T> listener) {
 		build_.onSplitButtonClick(listener);
@@ -241,10 +244,10 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 			Element element = ordered_ ? Html.ol(this) : Html.ul(this);
 			element.decorate(DataRole.LISTVIEW, this).add(contents_);
 			addPropertyChangeListener(listControl_);
-			final JQuery selector = jQuery(this).find(
-					"li a[data-role=splitbutton]"); // find("li").
-			final JQuery itemSelector_ = jQuery(this).find(
-					"li a[data-role=list-anchor]"); // find("li").
+//			final JQuery selector = jQuery(this).find(
+//					"li a[data-role=splitbutton]"); // find("li").
+//			final JQuery itemSelector_ = jQuery(this).find(
+//					"li a[data-role=list-anchor]"); // find("li").
 			final String itemSelector = "#" + id()
 					+ " li a[data-role=splitbutton]";
 			final String itemSelector2 = "#" + id()

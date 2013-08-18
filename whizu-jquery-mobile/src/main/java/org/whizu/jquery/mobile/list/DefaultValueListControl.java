@@ -40,6 +40,17 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 	}
 
 	@Override
+	public ClickListener addEvent() {
+		return new ClickListener() {
+			
+			@Override
+			public void click() {
+				handleAddEvent();
+			}
+		};
+	}
+
+	@Override
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		list_.addPropertyChangeListener(listener);
 	}
@@ -77,17 +88,6 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 	@Override
 	public T get(int index) {
 		return list_.get(index);
-	}
-
-	@Override
-	public ClickListener addEvent() {
-		return new ClickListener() {
-			
-			@Override
-			public void click() {
-				handleAddEvent();
-			}
-		};
 	}
 
 	@Override
@@ -129,6 +129,14 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 		return "generated-id" + (i++); // item.id();
 	}
 
+	public void ifValidatePerformCallback() {
+		System.out.println("updating " + model_.getColumns()[0]);
+		if (validate(model_)) {
+			callback_.success();
+			popup.close();
+		}
+	}
+
 	@Override
 	public boolean isClickable() {
 		return true;
@@ -144,6 +152,10 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 		return list_.iterator();
 	}
 
+	protected T model() {
+		return model_;
+	}
+
 	private void openPopup(Form form) {
 		// @formatter:off
 		popup = PopupBuilder.createWithId(getClass().getName().replace('.',  '_')+(i++))
@@ -157,14 +169,6 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 	@Override
 	public int size() {
 		return list_.size();
-	}
-
-	public void ifValidatePerformCallback() {
-		System.out.println("updating " + model_.getColumns()[0]);
-		if (validate(model_)) {
-			callback_.success();
-			popup.close();
-		}
 	}
 
 	// @Override

@@ -21,14 +21,36 @@
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.util;
+package org.whizu.jquery.mobile.list;
 
-import java.lang.annotation.Annotation;
+import org.whizu.content.Content;
+import org.whizu.html.Html;
+import org.whizu.value.AbstractValueObject;
+import org.whizu.value.DateValue;
+import org.whizu.value.StringValue;
+import org.whizu.value.Value;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Scanner<T extends Annotation> {
+public class TestVO extends AbstractValueObject {
 
-	public void scan(Reporter<T> reporter);
+	public final StringValue name = new StringValue("name");
+	
+	public final DateValue date = new DateValue("date");
+	
+	@Override
+	public boolean validate() {
+		return true;
+	}
+
+	@Override
+	public Content build() {
+		return Html.h2(name.get());
+	}
+
+	@Override
+	public Value[] getColumns() {
+		return new Value[] { name };
+	}
 }

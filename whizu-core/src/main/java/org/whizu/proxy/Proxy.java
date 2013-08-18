@@ -71,6 +71,10 @@ public abstract class Proxy<T> implements Content {
 	@Override
 	public final String render() {
 		System.out.println("Rendering proxy " + this);
+		if (!(impl_ instanceof ContentBuilder)) {
+			throw new IllegalStateException("Already rendered: " + impl_);
+		}
+		
 		ContentBuilder builder = Objects.cast(impl_);
 		Content content = builder.build();
 		String markup = content.render();

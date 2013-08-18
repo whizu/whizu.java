@@ -23,12 +23,9 @@
  *******************************************************************************/
 package org.whizu.util;
 
-import java.lang.annotation.Annotation;
-
 /**
  * @author Rudy D'hauwe
  */
-public interface Scanner<T extends Annotation> {
+public interface ListChangeListener {
 
-	public void scan(Reporter<T> reporter);
 }

@@ -16,7 +16,7 @@
  * of warranty is an essential part of the License and a condition for 
  * the grant of any rights to this Software.
  *   
- * For more  details, see <http://joinup.ec.europa.eu/software/page/eupl>.
+ * For more details, see http://joinup.ec.europa.eu/software/page/eupl.
  *
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
