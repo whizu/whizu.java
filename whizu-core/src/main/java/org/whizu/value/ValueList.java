@@ -164,4 +164,10 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 	public <T> T visit(Visitor<T> visitor) {
 		return visitor.accept(this);
 	}
+
+	public void remove(VO model) {
+		int index = super.value().indexOf(model);
+		super.value().remove(model);
+		fireIndexedPropertyChange("DEL", index, model, null);
+	}
 }

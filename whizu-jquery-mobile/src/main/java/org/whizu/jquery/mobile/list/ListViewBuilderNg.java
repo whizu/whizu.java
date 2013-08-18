@@ -188,7 +188,7 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 				private boolean isDelete(
 						IndexedPropertyChangeEvent changeEvent,
 						ListControl<T> list) {
-					throw new UnsupportedOperationException();
+					return ("DEL".equals(changeEvent.getPropertyName()));
 				}
 
 				private boolean isUpdate(
@@ -225,7 +225,9 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 						Content itemContent = listControl_.build(vo);
 						proxy_.replaceItem(index, itemContent);
 					} else if (isDelete(changeEvent, list)) {
-						throw new UnsupportedOperationException();
+						int index = changeEvent.getIndex();
+						System.out.println("propertychange DELETE of INDEX " + index);
+						proxy_.removeItem(index);
 					} else {
 						throw new UnsupportedOperationException();
 					}
@@ -299,7 +301,6 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 
 						@Override
 						public void handleEvent() {
-							JavaScript.preventDefault();
 							System.out
 									.println("handling split button event click on item");
 							int index = Integer.parseInt(RequestContext
@@ -341,16 +342,6 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 			return element;
 		}
 
-		private Content getSplitButtonLink() {
-			Element a = Html.a().attr("data-role", "splitbutton");
-			if (onSplitButtonClickOpen_ != null) {
-				a.href("#" + onSplitButtonClickOpen_.id());
-			} else {
-				a.href("#");
-			}
-			return a;
-		}
-
 		private ContentBuilder getContentBuilder(final ListControl<T> list) {
 			return new ContentBuilder() {
 
@@ -377,6 +368,16 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 			};
 		}
 
+		private Content getSplitButtonLink() {
+			Element a = Html.a().attr("data-role", "splitbutton");
+			if (onSplitButtonClickOpen_ != null) {
+				a.href("#" + onSplitButtonClickOpen_.id());
+			} else {
+				a.href("#");
+			}
+			return a;
+		}
+
 		@Override
 		public void on(Page page) {
 			throw new UnsupportedOperationException();
@@ -392,6 +393,11 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 
 		public void ordered() {
 			ordered_ = true;
+		}
+
+		@Override
+		public void removeItem(int index) {
+			throw new UnsupportedOperationException();
 		}
 
 		@Override

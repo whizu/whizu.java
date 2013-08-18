@@ -80,6 +80,7 @@ public class Tournament4App implements JQueryMobile {
 					@Override
 					public void click(PlayerVO item, Callback callback) {
 						System.out.println("Split button click on " + item);
+						playerList.remove(item);
 					}
 				})
 				.build();

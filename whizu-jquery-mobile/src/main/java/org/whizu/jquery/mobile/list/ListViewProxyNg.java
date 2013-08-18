@@ -30,6 +30,7 @@ import org.whizu.content.JustInTime;
 import org.whizu.html.Html;
 import org.whizu.jquery.mobile.ListView;
 import org.whizu.jquery.mobile.Page;
+import org.whizu.js.JavaScript;
 import org.whizu.proxy.Proxy;
 import org.whizu.proxy.ProxySupport;
 
@@ -69,12 +70,17 @@ final class ListViewProxyNg<T> extends Proxy<ListView> implements ListView {
 	}
 	
 	@Override
+	public void removeItem(int index) {
+		impl().removeItem(index);
+	}
+
+	@Override
 	public void replaceItem(int index, Content item) {
 		impl().replaceItem(index, item);
 	}
 
 	/***************************************************************************
-	 * The target <code>Popup</code> that has been rendered.
+	 * The target <code>ListView</code> that has been rendered.
 	 */
 	final class ListViewImpl extends ProxySupport implements ListView {
 
@@ -99,6 +105,13 @@ final class ListViewProxyNg<T> extends Proxy<ListView> implements ListView {
 		@Override
 		public void on(Page page) {
 			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public void removeItem(int index) {
+			System.out.println("remove item");
+			jQuery(this).find("li:eq("+index+")").remove();
+			jQuery(this).call("listview", "refresh");
 		}
 
 		@Override

@@ -221,5 +221,11 @@ public class ListViewBuilder extends ProxyBuilder<ListView> {
 		public void on(Page page) {
 			throw new UnsupportedOperationException();
 		}
+
+		@Override
+		public void removeItem(int index) {
+			// TODO Auto-generated catch block
+			throw new UnsupportedOperationException();
+		}
 	}
 }

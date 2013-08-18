@@ -66,6 +66,11 @@ final class ListViewProxy extends Proxy<ListView> implements ListView {
 	}
 	
 	@Override
+	public void removeItem(int index) {
+		impl().removeItem(index);
+	}
+
+	@Override
 	public void replaceItem(int index, Content item) {
 		impl().replaceItem(index, item);
 	}
@@ -95,6 +100,12 @@ final class ListViewProxy extends Proxy<ListView> implements ListView {
 		@Override
 		public void on(Page page) {
 			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public void removeItem(int index) {
+			jQuery(this).find("li:eq("+index+")").remove();
+			jQuery(this).call("listview", "refresh");
 		}
 
 		@Override
