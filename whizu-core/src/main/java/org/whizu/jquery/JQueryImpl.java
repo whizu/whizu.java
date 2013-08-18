@@ -260,7 +260,7 @@ class JQueryImpl extends Expression implements JQuery {
 					@Override
 					public void execute() {
 						
-						String script = "'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul[data-role=listview]').find('li').index($(this).closest('li'))";  //closest("form").serialize();
+						String script = "'data-id='+$(this).attr('data-id')+'&data-index='+$(this).closest('ul,ol[data-role=listview]').find('li').index($(this).closest('li'))";  //closest("form").serialize();
 						//System.out.println("script is " + script);
 						JavaScript.script(script);
 					}

@@ -239,6 +239,9 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 			element.decorate(DataRole.LISTVIEW, this).add(contents_);
 			addPropertyChangeListener(listControl_);
 			final JQuery selector = jQuery(this).find("li a[data-role=splitbutton]"); //find("li").
+			final JQuery itemSelector_ = jQuery(this).find("li a[data-role=list-anchor]"); //find("li").
+			final String itemSelector = "#" + id() + " li a[data-role=splitbutton]";
+			final String itemSelector2 = "#" + id() + " li a[data-role=list-anchor]"; //find("li").
 					//"$('#" + Build.this.id() + "').find('li a[datarole=splitbutton]')";
 			if (listControl_.isClickable()) {
 				
@@ -276,7 +279,9 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 					}
 				};
 				session().addClickListener(eh);
-				jQuery("$(document)").on("click", "#" + id() + " li a", eh);
+				//jQuery("$(document)").on("click", "#" + id() + " li a", eh);
+				jQuery("$(document)").on("click", itemSelector2, eh);
+				//itemSelector.on("click", eh);
 			}
 
 			if (splitButtonIcon_ != null) {
@@ -328,7 +333,8 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 
 					session().addClickListener(splitButtonEventHandler);
 					//System.out.println("onclick split selector " + selector.toJavaScript());
-					selector.on("click", splitButtonEventHandler);
+					//selector.on("click", splitButtonEventHandler);
+					jQuery("$(document)").on("click", itemSelector, splitButtonEventHandler);
 				}
 			}
 
@@ -364,6 +370,7 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 
 				private Content link(T item, Content content) {
 					return Html.a().href("#")
+							.attr("data-role", "list-anchor")
 							.attr("data-id", listControl_.id(item))
 							.add(content);
 				}
