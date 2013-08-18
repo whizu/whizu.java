@@ -47,23 +47,28 @@ public final class FormBuilder extends ProxyBuilder<Form> {
 	private Build build_ = new Build();
 	
 	private ValueRenderer valueRenderer_ = new ValueRenderer();
+
+	private boolean fieldContain_;
 	
 	public static FormBuilder create() {
 		return new FormBuilder();
 	}
 
-	public FormBuilder addDate(DateValue date) {
-		build_.addDate(date);
+	public FormBuilder addDate(DateValue value) {
+		addField(value);
 		return this;
 	}
 
-	public FormBuilder addText(StringValue name) {
-		build_.addText(name);
+	public FormBuilder addText(StringValue value) {
+		addField(value);
 		return this;
 	}
 	
 	public FormBuilder addField(Value value) {
 		Content view = valueRenderer_.visit(value);
+		if (fieldContain_) {
+			view = new FieldContain().add(view);
+		}
 		build_.add(view);
 		return this;
 	}
@@ -76,6 +81,11 @@ public final class FormBuilder extends ProxyBuilder<Form> {
 	@Override
 	public Form build() {
 		return buildOnce(new FormProxy(build_));
+	}
+	
+	public FormBuilder fieldContain() {
+		fieldContain_ = true;
+		return this;
 	}
 
 	public FormBuilder onSubmit(ClickListener listener) {
