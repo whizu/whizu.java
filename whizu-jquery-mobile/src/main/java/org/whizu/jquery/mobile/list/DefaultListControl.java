@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.whizu.content.Content;
 import org.whizu.jquery.ClickListener;
-import org.whizu.jquery.mobile.DataIcon;
+import org.whizu.util.ListChangeListener;
 
 //= new ValueList<T>() ?
 public class DefaultListControl<T extends ListElement> implements ListControl<T> {
@@ -88,13 +88,18 @@ public class DefaultListControl<T extends ListElement> implements ListControl<T>
 
 	@Override
 	public void handleAddEvent() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public ClickListener addEvent() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addChangeListener(ListChangeListener<T> listener) {
+		// TODO Auto-generated catch block
+		//throw new UnsupportedOperationException();
 	}
 }

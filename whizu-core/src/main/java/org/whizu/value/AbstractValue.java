@@ -143,7 +143,5 @@ public abstract class AbstractValue<T> implements Value {
 	}
 
 	@Override
-	public void clear() {
-		set(null);
-	}
+	public abstract void clear();
 }

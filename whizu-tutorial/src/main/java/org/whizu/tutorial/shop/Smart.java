@@ -57,4 +57,9 @@ public class Smart<T> extends AbstractValue<T> {
 	public <T> T visit(Visitor<T> visitor) {
 		return null;
 	}
+
+	@Override
+	public void clear() {
+		set(null);
+	}
 }

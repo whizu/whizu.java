@@ -16,28 +16,30 @@
  * of warranty is an essential part of the License and a condition for 
  * the grant of any rights to this Software.
  *   
- * For more details, see http://joinup.ec.europa.eu/software/page/eupl.
+ * For more  details, see <http://joinup.ec.europa.eu/software/page/eupl>.
  *
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
-package org.whizu.tutorial.tournament;
+package org.whizu.value;
 
-import org.whizu.jquery.mobile.FormBuilder;
-import org.whizu.jquery.mobile.ListSupport;
-import org.whizu.util.Strings;
+import java.util.List;
 
-//extends ListEditor (or: ListManager)
-public class UpdatePlayerAction extends ListSupport<PlayerVO> {
+/**
+ * @author Rudy D'hauwe
+ */
+abstract class ValueListBuilder<T extends ValueListBuilder<T, V>, V> extends AbstractValueList<V> {
 
-	@Override
-	protected void createForm(FormBuilder builder) {
-		builder.addText(model().name);
-		builder.addDate(model().birthdate);
+	public ValueListBuilder(String name) {
+		super(name);
 	}
 
-	@Override
-	protected boolean validate(PlayerVO model) {
-		return !Strings.isBlank(model.name.get());
+	public ValueListBuilder(String name, List<V> value) {
+		super(name, value);
+	}
+
+	@SuppressWarnings("unchecked")
+	protected T getThis() {
+		return (T) this;
 	}
 }

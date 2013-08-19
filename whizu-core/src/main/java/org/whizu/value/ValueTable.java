@@ -113,4 +113,9 @@ public class ValueTable<TVO extends ValueObject> extends ValueBuilder<ValueTable
 	public <T> T visit(Visitor<T> visitor) {
 		return visitor.accept(this);
 	}
+
+	@Override
+	public void clear() {
+		super.value().clear();
+	}
 }

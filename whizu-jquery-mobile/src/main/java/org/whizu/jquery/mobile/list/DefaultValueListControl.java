@@ -12,6 +12,7 @@ import org.whizu.jquery.mobile.FormBuilder;
 import org.whizu.jquery.mobile.Popup;
 import org.whizu.jquery.mobile.PopupBuilder;
 import org.whizu.util.Callback;
+import org.whizu.util.ListChangeListener;
 import org.whizu.value.Value;
 import org.whizu.value.ValueList;
 import org.whizu.value.ValueObject;
@@ -40,6 +41,11 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 	}
 
 	@Override
+	public void addChangeListener(ListChangeListener<T> listener) {
+		list_.addChangeListener(listener);
+	}
+
+	@Override
 	public ClickListener addEvent() {
 		return new ClickListener() {
 			
@@ -51,6 +57,7 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 	}
 
 	@Override
+	@Deprecated
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		list_.addPropertyChangeListener(listener);
 	}

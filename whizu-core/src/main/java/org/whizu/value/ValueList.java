@@ -24,24 +24,17 @@
 package org.whizu.value;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.whizu.jquery.ClickListener;
-import org.whizu.jquery.OnItemClickListener;
-import org.whizu.util.Callback;
 import org.whizu.util.Objects;
 
 /**
  * @author Rudy D'hauwe
  */
-public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> implements Iterable<VO> {
+public class ValueList<VO> extends ValueListBuilder<ValueList<VO>, VO> {
 				//implements ListManager (default behavior)
 	
-	private static final Logger log = LoggerFactory.getLogger(ValueList.class);
+	//private static final Logger log = LoggerFactory.getLogger(ValueList.class);
 	
 	private final Class<VO> clazz_;
 
@@ -50,55 +43,9 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 		clazz_ = clazz;
 	}
 
-	@Deprecated
-	public final ClickListener add(final OnItemClickListener<VO> itemListener) {
-		log.debug("Creating an ADD event listener {}", itemListener);
-		
-		return new ClickListener() {
-
-			@Override
-			public void click() {
-				log.debug("Handling the ADD event");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!clicking on ADD");
-				final VO model = createNew();
-				itemListener.click(model, new Callback() {
-
-					@Override
-					public void success() {
-						add(model);
-					}
-				});
-			}
-		};
-	}
-	
-	public void add(VO element) {
-		super.value().add(element);
-		fireIndexedPropertyChange("ADD", value().size(), null, element);
-	}
-	
-	public void addAll(List<VO> elements) {
-		for (VO vo : elements) {
-			add(vo);
-		}
-	}
-
 	@SuppressWarnings("unchecked")
 	public void addElement(ValueObject element) {
 		add((VO) element);
-	}
-
-	//ButttonBuilder.create().onSubmit(list.addEvent());
-	public final ClickListener addEvent() {
-		return new ClickListener() {
-
-			@Override
-			public void click() {
-				fireIndexedPropertyChange("ADD-EVENT", 0, null, null);
-				//or: getListControl().addEvent(); 
-				//(or listcontrol should have registered as propertychangelistener) and respond to the ADD-EVENT notification!
-			}
-		};
 	}
 
 	/**
@@ -116,29 +63,9 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 		}
 	}
 
-	public VO get(int index) {
-		return value().get(index);
-	}
-
 	@Override
 	protected List<VO> getDefaultValue() {
 		return new ArrayList<VO>();
-	}
-
-	public Iterator<VO> iterator() {
-		return value().iterator();
-	}
-
-	/**
-	 * @throws UnsupportedOperationException
-	 */
-	@Override
-	public void parse(String s) {
-		throw new UnsupportedOperationException();
-	}
-
-	public int size() {
-		return value().size();
 	}
 
 	public final void update(ValueObject obj) {
@@ -146,28 +73,8 @@ public class ValueList<VO> extends ValueBuilder<ValueList<VO>, List<VO>> impleme
 		update(vo);
 	}
 
-	public void update(VO model) {
-		int index = value().indexOf(model);
-		System.out.println("notify update of item no " + index);
-		fireIndexedPropertyChange(index, null, model);
-	}
-
-	/**
-	 * @return Collections.unmodifiableList(List<VO>)
-	 */
 	@Override
-	public final List<VO> value() {
-		return Collections.unmodifiableList(super.value());
-	}
-
-	@Override
-	public <T> T visit(Visitor<T> visitor) {
+	public final <T> T visit(Visitor<T> visitor) {
 		return visitor.accept(this);
-	}
-
-	public void remove(VO model) {
-		int index = super.value().indexOf(model);
-		super.value().remove(model);
-		fireIndexedPropertyChange("DEL", index, model, null);
 	}
 }

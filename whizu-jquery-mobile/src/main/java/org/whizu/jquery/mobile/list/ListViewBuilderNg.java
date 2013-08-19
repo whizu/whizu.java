@@ -23,9 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile.list;
 
-import java.beans.IndexedPropertyChangeEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.util.List;
 
 import org.whizu.content.Content;
 import org.whizu.content.ContentBuilder;
@@ -35,7 +33,6 @@ import org.whizu.content.Identity;
 import org.whizu.content.JustInTime;
 import org.whizu.html.Html;
 import org.whizu.jquery.EventHandler;
-import org.whizu.jquery.JQuery;
 import org.whizu.jquery.OnItemClickListener;
 import org.whizu.jquery.RequestContext;
 import org.whizu.jquery.mobile.DataIcon;
@@ -47,7 +44,7 @@ import org.whizu.jquery.mobile.Theme;
 import org.whizu.proxy.BuildSupport;
 import org.whizu.proxy.ProxyBuilder;
 import org.whizu.util.Callback;
-import org.whizu.util.Objects;
+import org.whizu.util.ListChangeListener;
 import org.whizu.value.ValueList;
 import org.whizu.value.ValueObject;
 
@@ -177,8 +174,60 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 			addItem(item);
 		}
 
-		private void addPropertyChangeListener(final ListControl<T> list) {
-			list.addPropertyChangeListener(new PropertyChangeListener() {
+		private void addPropertyChangeListener(final ListControl<T> listControl) {
+			listControl.addChangeListener(new ListChangeListener<T>() {
+
+				@Override
+				public void fireAdd(T vo) {
+					System.out.println("propertychange ADD");
+					Content itemContent = listControl_.build(vo);
+					if (splitButtonIcon_ != null) {
+						ContentList cl = new ContentList();
+						cl.add(itemContent);
+						cl.add(getSplitButtonLink());
+						proxy_.addItem(cl);
+					} else {
+						proxy_.addItem(itemContent);
+					}
+				}
+
+				@Override
+				public void fireAddAll(List<T> elements) {
+					// TODO Auto-generated catch block
+					throw new UnsupportedOperationException();
+				}
+
+				@Override
+				public void fireAddEvent() {
+					listControl_.handleAddEvent();
+				}
+
+				@Override
+				public void fireClear() {
+					// TODO Auto-generated catch block
+					throw new UnsupportedOperationException();
+				}
+
+				@Override
+				public void fireRemove(int index, T model) {
+					proxy_.removeItem(index);
+				}
+
+				@Override
+				public void fireRetainAll(List<T> items) {
+					// TODO Auto-generated catch block
+					throw new UnsupportedOperationException();
+				}
+
+				@Override
+				public void fireUpdate(int index, T vo) {
+					System.out.println("propertychange UPDATE");
+					Content itemContent = listControl_.build(vo);
+					proxy_.replaceItem(index, itemContent);
+				}
+			});
+/*			
+			listControl.addPropertyChangeListener(new PropertyChangeListener() {
 
 				private boolean isAdd(IndexedPropertyChangeEvent changeEvent,
 						ListControl<T> list) {
@@ -209,7 +258,7 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 							+ changeEvent.getPropertyName());
 					if ("ADD-EVENT".equals(changeEvent.getPropertyName())) {
 						listControl_.handleAddEvent();
-					} else if (isAdd(changeEvent, list)) {
+					} else if (isAdd(changeEvent, listControl)) {
 						System.out.println("propertychange ADD");
 						T vo = Objects.cast(changeEvent.getNewValue());
 						Content itemContent = listControl_.build(vo);
@@ -221,12 +270,12 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 						} else {
 							proxy_.addItem(itemContent);
 						}
-					} else if (isDelete(changeEvent, list)) {
+					} else if (isDelete(changeEvent, listControl)) {
 						int index = changeEvent.getIndex();
 						System.out.println("propertychange DELETE of INDEX "
 								+ index);
 						proxy_.removeItem(index);
-					} else if (isUpdate(changeEvent, list)) {
+					} else if (isUpdate(changeEvent, listControl)) {
 						int index = changeEvent.getIndex();
 						System.out.println("propertychange UPDATE");
 						T vo = Objects.cast(evt.getNewValue());
@@ -237,6 +286,8 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 					}
 				}
 			});
+		*/
+
 		}
 
 		@Override

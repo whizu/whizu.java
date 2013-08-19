@@ -55,4 +55,9 @@ public class DateValue extends ValueBuilder<DateValue, Date> {
 	public <T> T visit(Visitor<T> visitor) {
 		return visitor.accept(this);
 	}
+
+	@Override
+	public void clear() {
+		set(null);
+	}
 }

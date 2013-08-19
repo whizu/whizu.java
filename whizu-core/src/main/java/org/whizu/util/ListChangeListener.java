@@ -23,9 +23,24 @@
  *******************************************************************************/
 package org.whizu.util;
 
+import java.util.List;
+
 /**
  * @author Rudy D'hauwe
  */
-public interface ListChangeListener {
+public interface ListChangeListener<T> {
 
+	public void fireAdd(T model);
+
+	public void fireAddAll(List<T> elements);
+
+	public void fireAddEvent();
+
+	public void fireClear();
+
+	public void fireRemove(int index, T model);
+	
+	public void fireRetainAll(List<T> items);
+
+	public void fireUpdate(int index, T model);
 }

@@ -23,6 +23,8 @@
  *******************************************************************************/
 package org.whizu.value;
 
+import org.whizu.util.Objects;
+
 /**
  * @author Rudy D'hauwe
  */
@@ -36,8 +38,7 @@ abstract class ValueBuilder<T extends ValueBuilder<T, V>, V> extends AbstractVal
 		super(name, value);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected T getThis() {
-		return (T) this;
+		return Objects.cast(this);
 	}
 }
