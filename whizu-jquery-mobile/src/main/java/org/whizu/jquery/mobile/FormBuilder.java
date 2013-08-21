@@ -64,7 +64,7 @@ public final class FormBuilder extends ProxyBuilder<Form> {
 		return this;
 	}
 	
-	public FormBuilder addField(Value value) {
+	public FormBuilder addField(Value<?> value) {
 		Content view = valueRenderer_.visit(value);
 		if (fieldContain_) {
 			view = new FieldContain().add(view);

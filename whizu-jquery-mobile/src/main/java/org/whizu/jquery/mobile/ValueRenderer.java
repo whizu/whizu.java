@@ -69,7 +69,7 @@ class ValueRenderer implements Visitor<Content> {
 		throw new UnsupportedOperationException();
 	}
 
-	public Content visit(Value value) {
+	public Content visit(Value<?> value) {
 		return value.visit(this);
 	}
 }

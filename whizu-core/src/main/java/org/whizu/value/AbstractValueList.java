@@ -35,7 +35,7 @@ import org.whizu.util.Objects;
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractValueList<T> implements Value, Iterable<T> {
+public abstract class AbstractValueList<T> implements Value<List<T>>, Iterable<T> {
 
 	private ValueListChangeSupport<T> changeSupport_;
 
@@ -71,13 +71,23 @@ public abstract class AbstractValueList<T> implements Value, Iterable<T> {
 		getChangeSupport().addChangeListener(listener);
 	}
 
+	public final ClickListener addEvent() {
+		return new ClickListener() {
+
+			@Override
+			public void click() {
+				getChangeSupport().fireAddEvent();
+			}
+		};
+	}
+	
 	/**
 	 * throw new UnsupportedOperationException();
 	 */
 	public final void addPropertyChangeListener(PropertyChangeListener listener) {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	@Override
 	public final void clear() {
 		value_.clear();
@@ -86,6 +96,10 @@ public abstract class AbstractValueList<T> implements Value, Iterable<T> {
 
 	public final List<T> get() {
 		return value();
+	}
+	
+	public final T get(int index) {
+		return value_.get(index);
 	}
 
 	private ValueListChangeSupport<T> getChangeSupport() {
@@ -98,10 +112,6 @@ public abstract class AbstractValueList<T> implements Value, Iterable<T> {
 	
 	protected abstract List<T> getDefaultValue();
 
-	public final T get(int index) {
-		return value_.get(index);
-	}
-	
 	@Override
 	public final Iterator<T> iterator() {
 		return value_.iterator();
@@ -125,20 +135,15 @@ public abstract class AbstractValueList<T> implements Value, Iterable<T> {
 		return readOnly_;
 	}
 
+	
 	@Override
 	public final void readOnly(boolean readOnly) {
 		readOnly_ = readOnly;
 	}
 
 	@Override
-	public final void refresh(Object obj) {
-		if (obj instanceof AbstractValueList) {
-			AbstractValueList<T> valueList = Objects.cast(obj);
-			set(valueList.get());
-		} else if (obj instanceof List)  {
-			List<T> list = Objects.cast(obj);
-			set(list);
-		}
+	public void refresh(Value<List<T>> value) {
+		set(value.get());
 	}
 
 	public final void remove(T model) {
@@ -146,32 +151,22 @@ public abstract class AbstractValueList<T> implements Value, Iterable<T> {
 		value_.remove(model);
 		getChangeSupport().fireRemove(index, model);
 	}
-
-	public final void set(Object value) {
+	
+	public final void set(List<T> value) {
 		List<T> items = Objects.cast(value);
 		if (value_.retainAll(items)) {
 			getChangeSupport().fireRetainAll(items);
 		}
 	}
-	
+
 	public final int size() {
 		return value_.size();
 	}
+	
 
 	public final void update(T model) {
 		int index = value_.indexOf(model);
 		getChangeSupport().fireUpdate(index, model);
-	}
-	
-
-	public final ClickListener addEvent() {
-		return new ClickListener() {
-
-			@Override
-			public void click() {
-				getChangeSupport().fireAddEvent();
-			}
-		};
 	}
 	
 	/**

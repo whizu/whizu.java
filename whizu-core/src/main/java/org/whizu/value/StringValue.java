@@ -39,7 +39,7 @@ public class StringValue extends ValueBuilder<StringValue, String> {
 
 	@Override
 	public void clear() {
-		value("");
+		set("");
 	}
 
 	@Override
@@ -49,12 +49,12 @@ public class StringValue extends ValueBuilder<StringValue, String> {
 
 	@Override
 	public void parse(String s) {
-		value(s);
+		set(s);
 	}
 	
 	@Override
 	public String toString() {
-		return value();
+		return get();
 	}
 
 	@Override

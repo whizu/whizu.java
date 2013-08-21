@@ -16,37 +16,25 @@
  * of warranty is an essential part of the License and a condition for 
  * the grant of any rights to this Software.
  *   
- * For more  details, see <http://joinup.ec.europa.eu/software/page/eupl>.
+ * For more details, see http://joinup.ec.europa.eu/software/page/eupl.
  *
  * Contributors:
  *     2013 - Rudy D'hauwe @ Whizu - initial API and implementation
  *******************************************************************************/
 package org.whizu.value;
 
-import java.beans.PropertyChangeListener;
+import org.junit.Test;
 
 /**
  * @author Rudy D'hauwe
  */
-public interface Value<T> {
+public class IntegerValueTest {
 
-	public void addPropertyChangeListener(PropertyChangeListener listener);
-	
-	public String name();
-	
-	public T get();
-	
-	public void set(T value);
-	
-	public boolean readOnly();
-
-	public void parse(String s);
-	
-	public void readOnly(boolean readonly);
-
-	public void refresh(Value<T> value);
-
-	public void clear();
-	
-	public <V> V visit(Visitor<V> visitor);
+	@Test
+	public void testGet() {
+		 IntegerValue v = new IntegerValue("");
+	        System.out.println(v.get().getClass());
+	        v.set(0);
+	        System.out.println(v.get().getClass());
+	}
 }

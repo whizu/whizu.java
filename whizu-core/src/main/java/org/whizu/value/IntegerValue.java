@@ -23,7 +23,6 @@
  *******************************************************************************/
 package org.whizu.value;
 
-
 /**
  * @author Rudy D'hauwe
  */
@@ -38,26 +37,26 @@ public class IntegerValue extends ValueBuilder<IntegerValue, Integer> {
 	}
 
 	public void clear() {
-		value(null);
-	}
-
-	public void increment() {
-		value(value() + 1);
-	}
-
-	@Override
-	public void parse(String s) {
-		value(Integer.parseInt(s));
-	}
-
-	@Override
-	public String toString() {
-		return "" + value();
+		set(null);
 	}
 
 	@Override
 	protected Integer getDefaultValue() {
 		return 0;
+	}
+
+	public void increment() {
+		set(get() + 1);
+	}
+
+	@Override
+	public void parse(String s) {
+		set(Integer.parseInt(s));
+	}
+
+	@Override
+	public String toString() {
+		return "" + get();
 	}
 
 	@Override

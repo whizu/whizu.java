@@ -30,7 +30,7 @@ import org.whizu.content.ContentBuilder;
  */
 public interface ValueObject extends ContentBuilder {
 	
-	public Value[] getColumns();
+	public Value<?>[] getColumns();
 	
 	public boolean validate();
 }

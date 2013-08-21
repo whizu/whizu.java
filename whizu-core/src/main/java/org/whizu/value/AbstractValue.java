@@ -29,7 +29,7 @@ import java.beans.PropertyChangeSupport;
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractValue<T> implements Value {
+public abstract class AbstractValue<T> implements Value<T> {
 
 	private static final String VALUE = "value_";
 
@@ -59,14 +59,17 @@ public abstract class AbstractValue<T> implements Value {
 		getPropertyChangeSupport().addPropertyChangeListener(propertyName, listener);
 	}
 
+	@Override
+	public abstract void clear();
+
 	protected void fireIndexedPropertyChange(int index, Object oldValue, Object newValue) {
 		firePropertyChange(VALUE, index, oldValue, newValue);
 	}
-
+	
 	protected void fireIndexedPropertyChange(String name, int index, Object oldValue, Object newValue) {
 		firePropertyChange(name, index, oldValue, newValue);
 	}
-	
+
 	private void firePropertyChange(String propertyName, int index, Object oldValue, Object newValue) {
 		if (changeSupport_ != null) {
 			changeSupport_.fireIndexedPropertyChange(propertyName, index, oldValue, newValue);
@@ -80,7 +83,7 @@ public abstract class AbstractValue<T> implements Value {
 	}
 
 	public final T get() {
-		return value();
+		return value_;
 	}
 
 	protected abstract T getDefaultValue();
@@ -109,12 +112,8 @@ public abstract class AbstractValue<T> implements Value {
 	}
 
 	@Override
-	public void refresh(Object obj) {
-		if (obj instanceof Value) {
-			set(((Value) obj).get());
-		} else {
-			set(obj);
-		}
+	public void refresh(Value<T> obj) {
+		set(obj.get());
 	}
 
 	public final void removePropertyChangeListener(PropertyChangeListener listener) {
@@ -129,19 +128,7 @@ public abstract class AbstractValue<T> implements Value {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public final void set(Object value) {
-		value((T) value);
-	}
-
-	public T value() {
-		return value_;
-	}
-
-	public void value(T value) {
+	public final void set(T value) {
 		firePropertyChange(VALUE, value_, value_ = value);
 	}
-
-	@Override
-	public abstract void clear();
 }

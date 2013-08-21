@@ -37,7 +37,7 @@ public class OfficeDAO extends Dao<Office> {
 		Office obj = new Office();
 		obj.id(id);
 		obj.naam.set(naam);
-		obj.address.value(adres);
+		obj.address.set(adres);
 		add(obj);
 	}
 }
