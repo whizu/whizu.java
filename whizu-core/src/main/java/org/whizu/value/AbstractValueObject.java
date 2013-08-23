@@ -23,10 +23,35 @@
  *******************************************************************************/
 package org.whizu.value;
 
+import java.lang.reflect.Field;
+
+import org.whizu.util.Objects;
+
 /**
  * @author Rudy D'hauwe
  */
-public abstract class AbstractValueObject implements ValueObject {
+public abstract class AbstractValueObject<T extends ValueObject<T>> implements ValueObject<T> {
 
 	public abstract Value<?>[] getColumns();
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public final void refresh(T vo) {
+		Field[] fields = getClass().getFields();
+		for (Field field : fields) {
+			if (Value.class.isAssignableFrom(field.getType())) {
+				try {
+					Value<?> fieldValue = Objects.cast(field.get(this));
+					Value voValue = Objects.cast(field.get(vo));
+					fieldValue.refresh(voValue);
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					throw new UnsupportedOperationException(e);
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					throw new UnsupportedOperationException(e);
+				}
+			}
+		}
+	}
 }

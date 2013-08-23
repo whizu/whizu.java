@@ -44,13 +44,13 @@ public class Text extends Widget implements Input, Identity {
 
 	private static final Logger log = LoggerFactory.getLogger(Text.class);
 	
-	private Value model_;
+	private Value<?> model_;
 
 	public Text(String label) {
 		this(new StringValue(label));
 	}
 	
-	public Text(Value model) {
+	public Text(Value<?> model) {
 		model_ = model;
 		model_.addPropertyChangeListener(new PropertyChangeListener() {
 			
@@ -72,7 +72,7 @@ public class Text extends Widget implements Input, Identity {
 	@Override
 	public void parseString(String value) {
 		log.debug("Incoming request value {}", value);
-		model_.set(value);
+		model_.parse(value);
 	}
 
 	@Override

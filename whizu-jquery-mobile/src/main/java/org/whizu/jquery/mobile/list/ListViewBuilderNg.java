@@ -69,7 +69,7 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 		return new ListViewBuilderNg<T>(list);
 	}
 
-	public static <T extends ValueObject> ListViewBuilderNg<T> createWith(
+	public static <T extends ValueObject<T>> ListViewBuilderNg<T> createWith(
 			ValueList<T> list) {
 		ListControl<T> listControl = new DefaultValueListControl<T>(list);
 		return createWith(listControl);

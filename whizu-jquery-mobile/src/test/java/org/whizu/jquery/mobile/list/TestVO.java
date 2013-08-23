@@ -33,7 +33,7 @@ import org.whizu.value.Value;
 /**
  * @author Rudy D'hauwe
  */
-public class TestVO extends AbstractValueObject {
+public class TestVO extends AbstractValueObject<TestVO> {
 
 	public final StringValue name = new StringValue("name");
 	
@@ -50,7 +50,7 @@ public class TestVO extends AbstractValueObject {
 	}
 
 	@Override
-	public Value[] getColumns() {
+	public Value<?>[] getColumns() {
 		return new Value[] { name };
 	}
 }

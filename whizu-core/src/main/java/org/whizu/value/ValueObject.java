@@ -28,9 +28,11 @@ import org.whizu.content.ContentBuilder;
 /**
  * @author Rudy D'hauwe
  */
-public interface ValueObject extends ContentBuilder {
+public interface ValueObject<T extends ValueObject<T>> extends ContentBuilder {
 	
 	public Value<?>[] getColumns();
 	
 	public boolean validate();
+	
+	public void refresh(T vo);
 }

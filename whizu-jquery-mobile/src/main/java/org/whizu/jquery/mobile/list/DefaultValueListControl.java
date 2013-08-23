@@ -18,7 +18,8 @@ import org.whizu.value.ValueList;
 import org.whizu.value.ValueObject;
 
 //= new ValueList<T>().getListControl() ?
-public class DefaultValueListControl<T extends ValueObject> implements ListControl<T> {
+public class DefaultValueListControl<T extends ValueObject<T>> implements
+		ListControl<T> {
 
 	private Callback callback_;
 
@@ -34,21 +35,21 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 		list_ = list;
 	}
 
-	public void add(T element) {
+	public final void add(T element) {
 		list_.add(element);
 		// getPropertyChangeSupport().fireIndexedPropertyChange("ADD",
 		// list_.size()-1, null, element);
 	}
 
 	@Override
-	public void addChangeListener(ListChangeListener<T> listener) {
+	public final void addChangeListener(ListChangeListener<T> listener) {
 		list_.addChangeListener(listener);
 	}
 
 	@Override
-	public ClickListener addEvent() {
+	public final ClickListener addEvent() {
 		return new ClickListener() {
-			
+
 			@Override
 			public void click() {
 				handleAddEvent();
@@ -58,10 +59,15 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 
 	@Override
 	@Deprecated
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
+	public final void addPropertyChangeListener(PropertyChangeListener listener) {
 		list_.addPropertyChangeListener(listener);
 	}
 
+	/**
+	 * Override this method to build the HTML view for an item in the list.
+	 * 
+	 * @return the generated HTML content
+	 */
 	@Override
 	public Content build(T item) {
 		return item.build();
@@ -72,40 +78,46 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 		createForm(builder);
 		Button submit = ButtonBuilder.createWithTitle("OK").build();
 		builder.addButton(submit);
-		//builder.onSubmit(Objects.call(this, "ifValidatePerformCallback"));
+		// builder.onSubmit(Objects.call(this, "ifValidatePerformCallback"));
 		builder.onSubmit(new ClickListener() {
-			
+
 			@Override
 			public void click() {
-				System.out.println("on submit button on form");
 				ifValidatePerformCallback();
 			}
 		});
 		return builder.build();
 	}
 
-	// @Override
+	/**
+	 * Override this method to create the add and update form.
+	 */
 	protected void createForm(FormBuilder builder) {
 		T vo = model_;
-		for (Value value : vo.getColumns()) {
+		for (Value<?> value : vo.getColumns()) {
 			builder.addField(value);
 		}
 	}
 
 	@Override
-	public T get(int index) {
+	public final T get(int index) {
 		return list_.get(index);
 	}
 
 	@Override
-	public void handleAddEvent() {
-		System.out.println("now handle addEvent");
+	public final void handleAddEvent() {
 		model_ = list_.createNew();
 		callback_ = new Callback() {
 
 			@Override
 			public void success() {
-				list_.add(model_);
+				try {
+					T addedObject = performAdd(model_);
+					model_.refresh(addedObject);
+					list_.add(model_);
+				} catch (ValidationException e) {
+					e.printStackTrace();
+				}
 			}
 		};
 		Form form = createForm();
@@ -118,13 +130,18 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 			throw new IllegalStateException();
 		}
 
-		System.out.println("now handle clickEvent for " + element.getColumns()[0]);
 		model_ = element;
 		callback_ = new Callback() {
 
 			@Override
 			public void success() {
-				list_.update(model_);
+				try {
+					T updatedObject = performUpdate(model_);
+					model_.refresh(updatedObject);
+					list_.update(model_);
+				} catch (ValidationException e) {
+					e.printStackTrace();
+				}
 			}
 		};
 		Form form = createForm();
@@ -137,7 +154,6 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 	}
 
 	public void ifValidatePerformCallback() {
-		System.out.println("updating " + model_.getColumns()[0]);
 		if (validate(model_)) {
 			callback_.success();
 			popup.close();
@@ -155,11 +171,11 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 	}
 
 	@Override
-	public Iterator<T> iterator() {
+	public final Iterator<T> iterator() {
 		return list_.iterator();
 	}
 
-	protected T model() {
+	protected final T model() {
 		return model_;
 	}
 
@@ -173,12 +189,34 @@ public class DefaultValueListControl<T extends ValueObject> implements ListContr
 		popup.open();
 	}
 
+	/**
+	 * Override this method to add the object to the database.
+	 * 
+	 * @return the added object
+	 */
+	protected T performAdd(T model) {
+		return model;
+	}
+
+	/**
+	 * Override this method to update the object to the database.
+	 * 
+	 * @return the updated object
+	 */
+	protected T performUpdate(T model) {
+		return model;
+	}
+	
 	@Override
-	public int size() {
+	public final int size() {
 		return list_.size();
 	}
 
-	// @Override
+	/**
+	 * Override this method to validate the form input.
+
+	 * @return true if the form input is ready for server side processing
+	 */
 	protected boolean validate(T model) {
 		return model.validate();
 	}
