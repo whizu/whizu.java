@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.util;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public interface ListChangeListener<T> {
 
 	public void fireAdd(T model);
 
-	public void fireAddAll(List<T> elements);
+	public void fireAddAll(Collection<T> elements);
 
 	public void fireAddEvent();
 

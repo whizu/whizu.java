@@ -24,6 +24,7 @@
 package org.whizu.value;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.whizu.util.ListChangeListener;
@@ -48,7 +49,7 @@ class ValueListChangeSupport<T> {
 		}
 	}
 
-	public void fireAddAll(List<T> elements) {
+	public void fireAddAll(Collection<T> elements) {
 		for (ListChangeListener<T> listener : listenerList_) {
 			listener.fireAddAll(elements);
 		}

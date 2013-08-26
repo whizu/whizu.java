@@ -23,6 +23,7 @@
  *******************************************************************************/
 package org.whizu.jquery.mobile.list;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.whizu.content.Content;
@@ -179,7 +180,6 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 
 				@Override
 				public void fireAdd(T vo) {
-					System.out.println("propertychange ADD");
 					Content itemContent = listControl_.build(vo);
 					if (splitButtonIcon_ != null) {
 						ContentList cl = new ContentList();
@@ -192,9 +192,10 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 				}
 
 				@Override
-				public void fireAddAll(List<T> elements) {
-					// TODO Auto-generated catch block
-					throw new UnsupportedOperationException();
+				public void fireAddAll(Collection<T> elements) {
+					for (T vo : elements) {
+						fireAdd(vo);
+					}
 				}
 
 				@Override
@@ -204,8 +205,7 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 
 				@Override
 				public void fireClear() {
-					// TODO Auto-generated catch block
-					throw new UnsupportedOperationException();
+					proxy_.clear();
 				}
 
 				@Override
@@ -405,6 +405,11 @@ public class ListViewBuilderNg<T> extends ProxyBuilder<ListView> {
 			}
 
 			return element;
+		}
+
+		@Override
+		public void clear() {
+			contents_.clear();
 		}
 
 		private ContentBuilder getContentBuilder(final ListControl<T> list) {

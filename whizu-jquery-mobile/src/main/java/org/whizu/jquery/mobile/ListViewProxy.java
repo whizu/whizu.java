@@ -51,6 +51,11 @@ final class ListViewProxy extends Proxy<ListView> implements ListView {
 	}
 
 	@Override
+	public void clear() {
+		impl().clear();
+	}
+
+	@Override
 	protected ListView createImpl() {
 		return new ListViewImpl(id());
 	}
@@ -59,12 +64,12 @@ final class ListViewProxy extends Proxy<ListView> implements ListView {
 	public String id() {
 		return impl().id();
 	}
-
+	
 	@Override
 	public void on(Page page) {
 		page.add(this);
 	}
-	
+
 	@Override
 	public void removeItem(int index) {
 		impl().removeItem(index);
@@ -95,6 +100,11 @@ final class ListViewProxy extends Proxy<ListView> implements ListView {
 		public void addItem(ContentBuilder builder) {
 			Content item = new JustInTime(builder);
 			addItem(item);
+		}
+
+		@Override
+		public void clear() {
+			jQuery(this).empty();
 		}
 
 		@Override

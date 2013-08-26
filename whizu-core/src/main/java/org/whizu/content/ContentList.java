@@ -57,6 +57,10 @@ public class ContentList implements Content, Iterable<Content> {
 		return this;
 	}
 
+	public void clear() {
+		contentList_.clear();
+	}
+
 	public boolean isEmpty() {
 		return contentList_.isEmpty();
 	}

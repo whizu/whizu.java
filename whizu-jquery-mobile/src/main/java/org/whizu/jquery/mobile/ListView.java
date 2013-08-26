@@ -50,4 +50,6 @@ public interface ListView extends Component {
 	public void removeItem(int index);
 
 	public void replaceItem(int index, Content content);
+
+	public void clear();
 }

@@ -24,6 +24,7 @@
 package org.whizu.value;
 
 import java.beans.PropertyChangeListener;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -60,7 +61,7 @@ public abstract class AbstractValueList<T> implements Value<List<T>>, Iterable<T
 		getChangeSupport().fireAdd(element);
 	}
 
-	public final void addAll(List<T> elements) {
+	public final void addAll(Collection<T> elements) {
 		for (T vo : elements) {
 			value_.add(vo);
 		}

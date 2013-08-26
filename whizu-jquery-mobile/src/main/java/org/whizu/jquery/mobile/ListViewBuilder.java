@@ -63,10 +63,6 @@ public class ListViewBuilder extends ProxyBuilder<ListView> {
 		return builder;
 	}
 
-	private Build build_ = new Build();
-	
-	private ValueList<? extends ValueObject<?>> valueList_;
-
 	public static <T extends ValueObject<T>> ListViewBuilder createWith(ValueList<T> list) {
 		final ListViewBuilder builder = create();
 		builder.valueList_ = list;
@@ -94,8 +90,12 @@ public class ListViewBuilder extends ProxyBuilder<ListView> {
 		});
 		return builder;
 	}
+	
+	private Build build_ = new Build();
 
 	private ListView proxy_;
+
+	private ValueList<? extends ValueObject<?>> valueList_;
 
 	private void addItem(ValueObject<?> vo) {
 		build_.addItem(vo);
@@ -156,11 +156,11 @@ public class ListViewBuilder extends ProxyBuilder<ListView> {
 	 */
 	final class Build extends BuildSupport implements ListView {
 
-		private OnItemClickListener<Object> onItemClickListener_;
+		private ContentList contents_ = new ContentList();
 
 		int id = 0;
 
-		private ContentList contents_ = new ContentList();
+		private OnItemClickListener<Object> onItemClickListener_;
 
 		@Override
 		public void addItem(Content item) {
@@ -184,11 +184,6 @@ public class ListViewBuilder extends ProxyBuilder<ListView> {
 					private String id_ = session().next();
 
 					@Override
-					public String id() {
-						return id_;
-					}
-
-					@Override
 					public void handleEvent() {
 						int index = Integer.parseInt(RequestContext.getRequest().getParameter("data-index"));
 						String dataId = RequestContext.getRequest().getParameter("data-id");
@@ -201,6 +196,11 @@ public class ListViewBuilder extends ProxyBuilder<ListView> {
 							}
 						});
 					}
+
+					@Override
+					public String id() {
+						return id_;
+					}
 				};
 				session().addClickListener(eh);
 				jQuery("$(document)").on("click", "#" + id() + " li a", eh);
@@ -210,8 +210,8 @@ public class ListViewBuilder extends ProxyBuilder<ListView> {
 		}
 
 		@Override
-		public void replaceItem(int index, Content item) {
-			throw new UnsupportedOperationException();
+		public void clear() {
+			contents_.clear();
 		}
 
 		@Override
@@ -222,6 +222,11 @@ public class ListViewBuilder extends ProxyBuilder<ListView> {
 		@Override
 		public void removeItem(int index) {
 			// TODO Auto-generated catch block
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public void replaceItem(int index, Content item) {
 			throw new UnsupportedOperationException();
 		}
 	}
