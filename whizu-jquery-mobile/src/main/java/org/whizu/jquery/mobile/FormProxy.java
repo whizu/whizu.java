@@ -68,7 +68,7 @@ final class FormProxy extends Proxy<Form> implements Form {
 	}
 
 	@Override
-	public void addField(Value value) {
+	public void addField(Value<?> value) {
 		impl().addField(value);
 	}
 
@@ -182,7 +182,7 @@ final class FormProxy extends Proxy<Form> implements Form {
 		}
 
 		@Override
-		public void addField(Value value) {
+		public void addField(Value<?> value) {
 			throw new UnsupportedOperationException();
 		}
 

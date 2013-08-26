@@ -48,7 +48,7 @@ class LayoutBuilder<T extends LayoutBuilder<T>> extends Container implements Lay
 			 * @Override public Content compile(Component item) { return
 			 * item.css(itemClass); }
 			 */
-
+ 
 			@Override
 			public Content build(Content item) {
 				if (item instanceof Element) {

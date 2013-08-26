@@ -65,13 +65,13 @@ public class ListViewBuilder extends ProxyBuilder<ListView> {
 
 	private Build build_ = new Build();
 	
-	private ValueList<? extends ValueObject> valueList_;
+	private ValueList<? extends ValueObject<?>> valueList_;
 
-	public static <T extends ValueObject> ListViewBuilder createWith(ValueList<T> list) {
+	public static <T extends ValueObject<T>> ListViewBuilder createWith(ValueList<T> list) {
 		final ListViewBuilder builder = create();
 		builder.valueList_ = list;
 
-		for (ValueObject vo : list) {
+		for (ValueObject<T> vo : list) {
 			builder.addItem(vo);
 		}
 
@@ -84,10 +84,10 @@ public class ListViewBuilder extends ProxyBuilder<ListView> {
 				int index = ce.getIndex();
 				int max = builder.valueList_.size();
 				if (index == max) {
-					ValueObject vo = Objects.cast(evt.getNewValue());
+					ValueObject<?> vo = Objects.cast(evt.getNewValue());
 					builder.proxy_.addItem(vo);
 				} else {
-					ValueObject vo = Objects.cast(evt.getNewValue());
+					ValueObject<?> vo = Objects.cast(evt.getNewValue());
 					builder.proxy_.replaceItem(index, vo.build());
 				}
 			}
@@ -97,7 +97,7 @@ public class ListViewBuilder extends ProxyBuilder<ListView> {
 
 	private ListView proxy_;
 
-	private void addItem(ValueObject vo) {
+	private void addItem(ValueObject<?> vo) {
 		build_.addItem(vo);
 	}
 
@@ -106,7 +106,7 @@ public class ListViewBuilder extends ProxyBuilder<ListView> {
 		return buildOnce(proxy_);
 	}
 
-	public <T extends ValueObject> ListViewBuilder onItemClick(OnItemClickListener<T> onItemClickListener) {
+	public <T extends ValueObject<T>> ListViewBuilder onItemClick(OnItemClickListener<T> onItemClickListener) {
 		build_.onItemClickListener_ = Objects.cast(onItemClickListener);
 		return this;
 	}
@@ -192,17 +192,14 @@ public class ListViewBuilder extends ProxyBuilder<ListView> {
 					public void handleEvent() {
 						int index = Integer.parseInt(RequestContext.getRequest().getParameter("data-index"));
 						String dataId = RequestContext.getRequest().getParameter("data-id");
-						final ValueObject obj = valueList_.get(index - 1);
+						final ValueObject<?> obj = valueList_.get(index - 1);
 						onItemClickListener_.click(obj, new Callback() {
 							
 							@Override
 							public void success() {
-								valueList_.update(obj);
+								valueList_.updateElement(obj);
 							}
 						});
-						// now update list with obj
-						System.out.println("now udpate data id " + dataId);
-
 					}
 				};
 				session().addClickListener(eh);

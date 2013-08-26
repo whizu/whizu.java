@@ -31,7 +31,7 @@ import org.whizu.util.Objects;
 /**
  * @author Rudy D'hauwe
  */
-public class ValueList<VO> extends ValueListBuilder<ValueList<VO>, VO> {
+public class ValueList<VO extends ValueObject<VO>> extends ValueListBuilder<ValueList<VO>, VO> {
 				//implements ListManager (default behavior)
 	
 	//private static final Logger log = LoggerFactory.getLogger(ValueList.class);
@@ -43,9 +43,8 @@ public class ValueList<VO> extends ValueListBuilder<ValueList<VO>, VO> {
 		clazz_ = clazz;
 	}
 
-	@SuppressWarnings("unchecked")
-	public void addElement(ValueObject element) {
-		add((VO) element);
+	public void addElement(VO element) {
+		add(element);
 	}
 
 	/**
@@ -68,7 +67,7 @@ public class ValueList<VO> extends ValueListBuilder<ValueList<VO>, VO> {
 		return new ArrayList<VO>();
 	}
 
-	public final void update(ValueObject obj) {
+	public final void updateElement(Object obj) {
 		VO vo = Objects.cast(obj);
 		update(vo);
 	}

@@ -43,13 +43,13 @@ class DateField extends Widget implements Input {
 
 	private static final Logger log = LoggerFactory.getLogger(DateField.class);
 	
-	private Value model_;
+	private Value<?> model_;
 
 	public DateField(String label) {
 		this(new DateValue(label));
 	}
 	
-	public DateField(Value model) {
+	public DateField(Value<?> model) {
 		model_ = model;
 		model_.addPropertyChangeListener(new PropertyChangeListener() {
 			
@@ -71,7 +71,7 @@ class DateField extends Widget implements Input {
 	@Override
 	public void parseString(String value) {
 		log.debug("Incoming request value {}", value);
-		model_.set(value);
+		model_.parse(value);
 	}
 
 	@Override

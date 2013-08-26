@@ -44,7 +44,7 @@ public interface Form extends Component {
 
 	public void addDate(DateValue date);
 
-	public void addField(Value value);
+	public void addField(Value<?> value);
 
 	public void addFieldContain(Component component);
 

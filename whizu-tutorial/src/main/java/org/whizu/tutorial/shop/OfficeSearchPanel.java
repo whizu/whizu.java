@@ -23,8 +23,8 @@ public class OfficeSearchPanel extends SearchPanel<Office> {
 	}
 
 	@Override
-	protected Value[] getColumns(Office model) {
-		return new Value[] { model.naam, model.address };
+	protected Value<?>[] getColumns(Office model) {
+		return new Value<?>[] { model.naam, model.address };
 	}
 
 	@Override

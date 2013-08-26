@@ -43,13 +43,13 @@ public class Textarea extends Widget implements Input {
 	
 	private Logger logger = LoggerFactory.getLogger(Textarea.class);
 	
-	private Value model_;
+	private Value<?> model_;
 
 	public Textarea(String label) {
 		this(new StringValue(label));
 	}
 	
-	public Textarea(Value model) {
+	public Textarea(Value<?> model) {
 		model_ = model;
 		model_.addPropertyChangeListener(new PropertyChangeListener() {
 			
@@ -71,7 +71,7 @@ public class Textarea extends Widget implements Input {
 	@Override
 	public void parseString(String value) {
 		logger.debug("Incoming request value {}", value);
-		model_.set(value);
+		model_.parse(value);
 	}
 	
 	@Override

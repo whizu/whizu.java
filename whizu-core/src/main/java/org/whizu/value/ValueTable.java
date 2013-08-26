@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * @author Rudy D'hauwe
  */
-public class ValueTable<TVO extends ValueObject> extends ValueBuilder<ValueTable<TVO>, List<TVO>> {
+public class ValueTable<TVO extends ValueObject<TVO>> extends ValueBuilder<ValueTable<TVO>, List<TVO>> {
 
 	private Class<TVO> clazz_;
 
@@ -57,7 +57,7 @@ public class ValueTable<TVO extends ValueObject> extends ValueBuilder<ValueTable
 	}
 
 	@SuppressWarnings("unchecked")
-	public void addElement(ValueObject element) {
+	public void addElement(ValueObject<TVO> element) {
 		add((TVO) element);
 	}
 

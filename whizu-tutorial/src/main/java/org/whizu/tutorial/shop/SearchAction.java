@@ -178,7 +178,7 @@ public abstract class SearchAction<T> extends AbstractAction {
 		}
 	}
 
-	protected Value[] getColumns(T model) {
+	protected Value<?>[] getColumns(T model) {
 		return null;
 	}
 }

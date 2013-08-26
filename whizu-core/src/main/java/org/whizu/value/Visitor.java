@@ -36,7 +36,7 @@ public interface Visitor<T> {
 	
 	public T accept(PasswordValue value);
 	
-	public <VO> T accept(ValueList<VO> list);
+	public <VO extends ValueObject<VO>> T accept(ValueList<VO> list);
 
-	public <VO extends ValueObject> T accept(ValueTable<VO> table);
+	public <VO extends ValueObject<VO>> T accept(ValueTable<VO> table);
 }

@@ -46,7 +46,7 @@ public abstract class UpdateAction<T> extends AbstractAction {
 		this.model = model;
 	}
 
-	private Content createUpdateForm(Value[] columns) {
+	private Content createUpdateForm(Value<?>[] columns) {
 		/* uncomment 
 		FormBuilder form = new FormBuilder();
 		for (Value value : columns) {
@@ -154,7 +154,7 @@ public abstract class UpdateAction<T> extends AbstractAction {
 
 	protected abstract T performUpdate();
 
-	protected Value[] getColumns(T model) {
+	protected Value<?>[] getColumns(T model) {
 		return null;
 	}
 }

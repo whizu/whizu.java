@@ -60,12 +60,12 @@ class ValueRenderer implements Visitor<Content> {
 	}
 
 	@Override
-	public <VO> Content accept(ValueList<VO> list) {
+	public <VO extends ValueObject<VO>> Content accept(ValueList<VO> list) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public <VO extends ValueObject> Content accept(ValueTable<VO> table) {
+	public <VO extends ValueObject<VO>> Content accept(ValueTable<VO> table) {
 		throw new UnsupportedOperationException();
 	}
 

@@ -127,7 +127,7 @@ public final class FormBuilder extends ProxyBuilder<Form> {
 		}
 
 		@Override
-		public void addField(Value value) {
+		public void addField(Value<?> value) {
 			Content view = valueRenderer_.visit(value);
 			add(view);
 		}

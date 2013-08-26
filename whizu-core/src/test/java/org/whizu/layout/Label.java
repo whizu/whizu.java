@@ -44,7 +44,7 @@ public class Label extends Widget {
 
 	private String text_;
 
-	private Value value;
+	private Value<?> value;
 
 	public Label(String text) {
 		this.text_ = text;
@@ -55,7 +55,7 @@ public class Label extends Widget {
 		addClickListener(clickListener);
 	}
 
-	public Label(Value value) {
+	public Label(Value<?> value) {
 		this(value.toString());
 		this.value = value;
 		value.addPropertyChangeListener(new PropertyChangeListener() {
